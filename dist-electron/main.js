@@ -9,12 +9,12 @@ const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 path.join(process.env.APP_ROOT, "dist-electron");
 const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, "public") : RENDERER_DIST;
-let win;
 function createWindow() {
-  win = new BrowserWindow({
+  const win = new BrowserWindow({
     width: 1200,
     height: 800,
     frame: true,
+    // or false if you want custom frame
     transparent: true,
     hasShadow: false,
     titleBarStyle: "hiddenInset",
