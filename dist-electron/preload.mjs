@@ -3,6 +3,10 @@ const electron = require("electron");
 const translations = {
   requestTranslations: async () => {
     return await electron.ipcRenderer.invoke("loadTranslations");
+  },
+  // Add a new translation entry (write)
+  addTranslation: async (entry) => {
+    return await electron.ipcRenderer.invoke("addTranslation", entry);
   }
 };
 const endpoints = Object.assign(

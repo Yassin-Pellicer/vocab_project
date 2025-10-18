@@ -1,22 +1,20 @@
+import { TranslationEntry } from "@/types/translation-entry";
+import { TranslationEntryResult } from "@/types/translation-entry-result";
 import { useEffect, useRef, useState } from "react";
 
 export default function useTranslationHooks() {
-  const [list, setList] = useState<Record<string, string>>({});
-  const [pair, setPair] = useState<{ article?: string; word: string; translation: string }>({
-    article: "",
-    word: "",
-    translation: "",
-  });
-  const [history, setHistory] = useState<{ article?: string; word: string; translation: string }[]>([]);
+  const [list, setList] = useState<TranslationEntry[]>([]);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const [word, setWord] = useState<TranslationEntry | null>(null);
+  const [history, setHistory] = useState<TranslationEntryResult[]>([]);
 
   useEffect(() => {
     loadTranslations();
   }, []);
 
   useEffect(() => {
-    if (Object.keys(list).length > 0) {
-      selectRandom();
+    if (list.length > 0) {
+      selectRandom()
     }
   }, [list]);
 
@@ -32,24 +30,17 @@ export default function useTranslationHooks() {
   };
 
   const selectRandom = () => {
-    const keys = Object.keys(list);
-    if (keys.length === 0) return;
-    const randomKey = keys[Math.floor(Math.random() * keys.length)];
-    const [article, word, translation] = split(randomKey, list[randomKey]);
-    setPair({ article, word, translation });
-    setHistory((prev) => [...prev, { article, word, translation }]);
-  };
-
-  const split = (key: string, value: string) => {
-    const [article, word] = key.split(" ");
-    return [article, word, value];
+    if (!Array.isArray(list) || list.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * list.length);
+    setWord(list[randomIndex])
   };
 
   return {
     list,
-    pair,
     history,
+    word,
     selectRandom,
+    setHistory,
     buttonRef,
   };
 }
