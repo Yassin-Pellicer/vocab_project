@@ -11,10 +11,11 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Pencil, Trash } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import useWordModalHooks from "./hook";
 import { TranslationEntry } from "@/types/translation-entry";
+import DeleteWordModal from "../delete-word-modal";
 export default function EditTranslationModal({word} : {word: TranslationEntry}) {
   const {
     handleChange,
@@ -142,7 +143,7 @@ export default function EditTranslationModal({word} : {word: TranslationEntry}) 
           </div>
           <DialogFooter>
             <Button onClick={handleSubmit} variant="outline" className="!bg-blue-600 !text-white">Save Entry</Button>
-            <Button onClick={handleSubmit} variant="outline" className="!bg-red-600 !text-white"><Trash></Trash></Button>
+            <DeleteWordModal word={word}></DeleteWordModal>
             <DialogClose asChild>
               <Button variant="outline" >Cancel</Button>
             </DialogClose>

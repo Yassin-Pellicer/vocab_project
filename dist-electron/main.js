@@ -36,7 +36,7 @@ function createWindow() {
 function addTranslation() {
   ipcMain.handle(
     "addTranslation",
-    async (_event, entry, _word, _dictionary) => {
+    async (_event, entry, _word) => {
       try {
         const filePath = path$1.join(
           process.env.APP_ROOT || __dirname,

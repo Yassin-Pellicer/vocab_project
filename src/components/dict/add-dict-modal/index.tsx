@@ -1,5 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Book } from "lucide-react";
@@ -16,19 +25,23 @@ export default function AddDictModal() {
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
+            <DialogTitle>Add Dictionary</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
+              Add a new dictionary on the specified route and with the desired
+              language/topic
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4">
             <div className="grid gap-3">
-              <Label htmlFor="name-1">Name</Label>
-              <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
+              <Label htmlFor="name-1">Route</Label>
+              <Input
+                type="file"
+                placeholder="Choose a folder"
+                className="mt-2"
+              />
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="username-1">Username</Label>
+              <Label htmlFor="username-1">Name</Label>
               <Input id="username-1" name="username" defaultValue="@peduarte" />
             </div>
           </div>
@@ -36,7 +49,7 @@ export default function AddDictModal() {
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit">Save changes</Button>
+            <Button variant="outline" className="!bg-blue-600 !text-white">Create</Button>
           </DialogFooter>
         </DialogContent>
       </form>

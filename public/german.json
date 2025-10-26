@@ -107,19 +107,6 @@
     "dateAdded": "2025-10-14"
   },
   {
-    "original": "cautela",
-    "translation": "Vorsicht / Umsicht",
-    "gender": "f",
-    "number": "sing",
-    "definitions": [
-      "Precaución, cuidado",
-      "Actuar con reserva para evitar daños"
-    ],
-    "type": "sustantivo",
-    "observations": "",
-    "dateAdded": "2025-10-14"
-  },
-  {
     "original": "cebolla",
     "translation": "Zwiebel",
     "gender": "f",
@@ -599,32 +586,6 @@
     "dateAdded": "2025-10-14"
   },
   {
-    "original": "andar",
-    "translation": "gehen / laufen",
-    "gender": "-",
-    "number": "-",
-    "definitions": [
-      "Caminar o desplazarse",
-      "Estar en funcionamiento (máquina, sistema)"
-    ],
-    "type": "verbo",
-    "observations": "Verbo frecuente, muchas acepciones",
-    "dateAdded": "2025-10-14"
-  },
-  {
-    "original": "amor",
-    "translation": "Liebe",
-    "gender": "m",
-    "number": "sing",
-    "definitions": [
-      "Sentimiento intenso del ser humano que, partiendo de su propia insuficiencia, necesita y busca el encuentro y unión con otro ser",
-      "Sentimiento hacia otra persona que naturalmente nos atrae y que, procurando reciprocidad en el deseo de unión, nos completa, alegra y da energía para convivir, comunicarnos y crear"
-    ],
-    "type": "sustantivo",
-    "observations": "Muy usado",
-    "dateAdded": "2025-10-14"
-  },
-  {
     "original": "amigo",
     "translation": "freund",
     "gender": "masculino",
@@ -637,5 +598,19 @@
     "type": "sustantivo",
     "observations": "Palabra muy bonita!",
     "dateAdded": "2025-10-26"
+  },
+  {
+    "original": "amor",
+    "translation": "Liebe",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Sentimiento intenso del ser humano que, partiendo de su propia insuficiencia, necesita y busca el encuentro y unión con otro ser",
+      "Sentimiento hacia otra persona que naturalmente nos atrae y que, procurando reciprocidad en el deseo de unión, nos completa, alegra y da energía para convivir, comunicarnos y crear",
+      "Sentimiento de afecto, inclinación y entrega a alguien o algo."
+    ],
+    "type": "sustantivo",
+    "observations": "Muy usado",
+    "dateAdded": "2025-10-14"
   }
 ]

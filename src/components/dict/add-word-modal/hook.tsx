@@ -40,7 +40,7 @@ export default function useWordModalHooks() {
     e.preventDefault();
     try {
       if(!formData.original || !formData.translation) return;
-      await (window.api as any).addTranslation(formData);
+      await (window.api).addTranslation(formData);
     }
     catch (error) {
       console.error("Failed to add translation:", error);

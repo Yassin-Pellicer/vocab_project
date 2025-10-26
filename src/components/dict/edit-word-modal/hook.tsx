@@ -31,7 +31,7 @@ export default function useWordModalHooks(word: TranslationEntry) {
     e.preventDefault();
     try {
       if(!formData.original || !formData.translation) return;
-      await (window.api as any).addTranslation(formData, word);
+      await (window.api).addTranslation(formData, word);
     }
     catch (error) {
       console.error("Failed to add translation:", error);

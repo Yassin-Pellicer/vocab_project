@@ -6,7 +6,7 @@ import type { TranslationEntry } from "@/types/translation-entry";
 export default function addTranslation() {
   ipcMain.handle(
     "addTranslation",
-    async (_event, entry: TranslationEntry, _word: TranslationEntry, _dictionary) => {
+    async (_event, entry: TranslationEntry, _word: TranslationEntry) => {
       try {
         const filePath = path.join(
           process.env.APP_ROOT || __dirname,

@@ -50,7 +50,7 @@ export default function useTranslationHooks() {
     e.preventDefault();
     if (!word) return;
 
-    let historyEntry = word as TranslationEntryResult;
+    const historyEntry = word as TranslationEntryResult;
 
     if (userInput.trim().toLowerCase() === word.original.toLowerCase()) {
       setScore((prev) =>
@@ -81,7 +81,7 @@ export default function useTranslationHooks() {
 
   const loadTranslations = async () => {
     try {
-      const data = await (window.api as any).requestTranslations();
+      const data = await (window.api).requestTranslations();
       if (data) {
         setList(data);
       }
