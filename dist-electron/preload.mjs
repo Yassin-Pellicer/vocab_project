@@ -4,9 +4,11 @@ const translations = {
   requestTranslations: async () => {
     return await electron.ipcRenderer.invoke("loadTranslations");
   },
-  // Add a new translation entry (write)
-  addTranslation: async (entry) => {
-    return await electron.ipcRenderer.invoke("addTranslation", entry);
+  addTranslation: async (entry, word, dictionary) => {
+    return await electron.ipcRenderer.invoke("addTranslation", entry, word, dictionary);
+  },
+  deleteTranslation: async (word) => {
+    return await electron.ipcRenderer.invoke("deleteTranslation", word);
   }
 };
 const endpoints = Object.assign(

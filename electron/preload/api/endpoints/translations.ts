@@ -7,8 +7,11 @@ export const translations = {
     return await ipcRenderer.invoke('loadTranslations');
   },
 
-  // Add a new translation entry (write)
-  addTranslation: async (entry: TranslationEntry) => {
-    return await ipcRenderer.invoke('addTranslation', entry);
+  addTranslation: async (entry: TranslationEntry, word: string, dictionary: string) => {
+    return await ipcRenderer.invoke('addTranslation', entry, word, dictionary);
+  },
+
+  deleteTranslation: async (word: TranslationEntry) => {
+    return await ipcRenderer.invoke('deleteTranslation', word);
   }
 };

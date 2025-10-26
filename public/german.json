@@ -18,7 +18,10 @@
     "translation": "gehen / wandern",
     "gender": "-",
     "number": "-",
-    "definitions": ["Andar a pie", "Transitar despacio, moverse con paso normal"],
+    "definitions": [
+      "Andar a pie",
+      "Transitar despacio, moverse con paso normal"
+    ],
     "type": "verbo",
     "observations": "",
     "dateAdded": "2025-10-14"
@@ -68,7 +71,10 @@
     "translation": "Haus",
     "gender": "f",
     "number": "sing",
-    "definitions": ["Edificio destinado a vivienda", "Hogar, lugar de residencia"],
+    "definitions": [
+      "Edificio destinado a vivienda",
+      "Hogar, lugar de residencia"
+    ],
     "type": "sustantivo",
     "observations": "",
     "dateAdded": "2025-10-14"
@@ -131,7 +137,10 @@
     "translation": "feiern",
     "gender": "-",
     "number": "-",
-    "definitions": ["Festejar, conmemorar", "Realizar actos con motivo de algo"],
+    "definitions": [
+      "Festejar, conmemorar",
+      "Realizar actos con motivo de algo"
+    ],
     "type": "verbo",
     "observations": "",
     "dateAdded": "2025-10-14"
@@ -180,7 +189,10 @@
     "translation": "Gewissheit / Sicherheit",
     "gender": "f",
     "number": "sing",
-    "definitions": ["Seguridad, convicción firme", "Ausencia de duda"],
+    "definitions": [
+      "Seguridad, convicción firme",
+      "Ausencia de duda"
+    ],
     "type": "sustantivo",
     "observations": "",
     "dateAdded": "2025-10-14"
@@ -216,7 +228,10 @@
     "translation": "gewiss / richtig",
     "gender": "m",
     "number": "sing",
-    "definitions": ["Que es verdad; verdadero", "Determinado, definido"],
+    "definitions": [
+      "Que es verdad; verdadero",
+      "Determinado, definido"
+    ],
     "type": "adjetivo / pronombre",
     "observations": "",
     "dateAdded": "2025-10-14"
@@ -259,36 +274,6 @@
     ],
     "type": "sustantivo",
     "observations": "",
-    "dateAdded": "2025-10-14"
-  },
-  {
-    "original": "amor",
-    "translation": "Liebe",
-    "gender": "m",
-    "number": "sing",
-    "definitions": [
-      "Sentimiento intenso del ser humano que, partiendo de su propia insuficiencia, necesita y busca el encuentro y unión con otro ser",
-      "Sentimiento hacia otra persona que naturalmente nos atrae y que, procurando reciprocidad en el deseo de unión, nos completa, alegra y da energía para convivir, comunicarnos y crear",
-      "Sentimiento de afecto, inclinación y entrega a alguien o algo",
-      "Tendencia a la unión sexual",
-      "Blandura, suavidad (trato con amor)"
-    ],
-    "type": "sustantivo",
-    "observations": "Muy usado",
-    "dateAdded": "2025-10-14"
-  },
-  {
-    "original": "andar",
-    "translation": "gehen / laufen",
-    "gender": "-",
-    "number": "-",
-    "definitions": [
-      "Caminar o desplazarse",
-      "Estar en funcionamiento (máquina, sistema)",
-      "Ir o estar en algún estado o condición"
-    ],
-    "type": "verbo",
-    "observations": "Verbo frecuente, muchas acepciones",
     "dateAdded": "2025-10-14"
   },
   {
@@ -385,7 +370,11 @@
     "translation": "Leute",
     "gender": "f",
     "number": "plur",
-    "definitions": ["Conjunto de personas", "Público", "Personas en general"],
+    "definitions": [
+      "Conjunto de personas",
+      "Público",
+      "Personas en general"
+    ],
     "type": "sustantivo",
     "observations": "",
     "dateAdded": "2025-10-14"
@@ -526,7 +515,7 @@
     ],
     "type": "sustantivo",
     "observations": "",
-"dateAdded": "2025-10-14"
+    "dateAdded": "2025-10-14"
   },
   {
     "original": "roto",
@@ -608,5 +597,45 @@
     "type": "verbo",
     "observations": "",
     "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "andar",
+    "translation": "gehen / laufen",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Caminar o desplazarse",
+      "Estar en funcionamiento (máquina, sistema)"
+    ],
+    "type": "verbo",
+    "observations": "Verbo frecuente, muchas acepciones",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "amor",
+    "translation": "Liebe",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Sentimiento intenso del ser humano que, partiendo de su propia insuficiencia, necesita y busca el encuentro y unión con otro ser",
+      "Sentimiento hacia otra persona que naturalmente nos atrae y que, procurando reciprocidad en el deseo de unión, nos completa, alegra y da energía para convivir, comunicarnos y crear"
+    ],
+    "type": "sustantivo",
+    "observations": "Muy usado",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "amigo",
+    "translation": "freund",
+    "gender": "masculino",
+    "number": "singular",
+    "definitions": [
+      "Que tiene relación de amistad. Usado también como sustantivo.",
+      "amistoso (‖ perteneciente a la amistad).",
+      "Usado para dirigirse a una persona, aunque no se conozca o no haya relación de amistad."
+    ],
+    "type": "sustantivo",
+    "observations": "Palabra muy bonita!",
+    "dateAdded": "2025-10-26"
   }
 ]

@@ -33,6 +33,72 @@ function createWindow() {
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
 }
+function addTranslation() {
+  ipcMain.handle(
+    "addTranslation",
+    async (_event, entry, _word, _dictionary) => {
+      try {
+        const filePath = path$1.join(
+          process.env.APP_ROOT || __dirname,
+          "public",
+          "german.json"
+        );
+        if (!fs.existsSync(filePath)) {
+          fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
+        }
+        console.log(_word);
+        const data = fs.readFileSync(filePath, "utf-8");
+        const json = JSON.parse(data);
+        let translations = Array.isArray(json) ? json : [];
+        translations = translations.filter(
+          (t) => t.original !== _word.original
+        );
+        translations.push(entry);
+        fs.writeFileSync(
+          filePath,
+          JSON.stringify(translations, null, 2),
+          "utf-8"
+        );
+        return { success: true, message: "Translation added successfully." };
+      } catch (error) {
+        console.error("Error adding translation:", error);
+        throw new Error("Failed to add translation.");
+      }
+    }
+  );
+}
+function deleteTranslation() {
+  ipcMain.handle(
+    "deleteTranslation",
+    async (_event, _word) => {
+      try {
+        const filePath = path$1.join(
+          process.env.APP_ROOT || __dirname,
+          "public",
+          "german.json"
+        );
+        if (!fs.existsSync(filePath)) {
+          fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
+        }
+        const data = fs.readFileSync(filePath, "utf-8");
+        const json = JSON.parse(data);
+        let translations = Array.isArray(json) ? json : [];
+        translations = translations.filter(
+          (t) => t.original !== _word.original
+        );
+        fs.writeFileSync(
+          filePath,
+          JSON.stringify(translations, null, 2),
+          "utf-8"
+        );
+        return { success: true, message: "Translation added successfully." };
+      } catch (error) {
+        console.error("Error adding translation:", error);
+        throw new Error("Failed to add translation.");
+      }
+    }
+  );
+}
 function loadTranslations() {
   ipcMain.handle("loadTranslations", async (_event, _arg) => {
     try {
@@ -52,6 +118,8 @@ function loadTranslations() {
 }
 function registerIpcHandlers() {
   loadTranslations();
+  addTranslation();
+  deleteTranslation();
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

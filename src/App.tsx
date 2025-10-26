@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import TranslationGame from "./components/translationGame";
-import DictionaryPage from "./pages/DictionaryPage";
+import DictionaryPage from "./pages/dictionary-page";
+import TranslationGamePage from "./pages/translation-game-page";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<DictionaryPage />} />
           <Route path="dictionary" element={<DictionaryPage />} />
-          <Route path="translation" element={<TranslationGame />} />
+          <Route path="translation" element={<TranslationGamePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

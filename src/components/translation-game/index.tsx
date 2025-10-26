@@ -1,79 +1,30 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
 import useTranslationHooks from "./hook";
 import { BookCheck, Calendar, Check } from "lucide-react";
-import { TranslationEntryResult } from "@/types/translation-entry-result";
 
 export default function TranslationGame() {
-  const { list, selectRandom, word, history, setHistory } = useTranslationHooks();
-  const [userInput, setUserInput] = useState("");
-  const [score, setScore] = useState(0);
-  const [message, setMessage] = useState("");
-  const lastHistoryRef = useRef<HTMLDivElement>(null);
-  const [hint, setHint] = useState<string | null>(null);
-  const [hintIndex, setHintIndex] = useState(0);
-  const [maxHints, setMaxHints] = useState(false);
-
-  const showHint = () => {
-    if (!word || !word.definitions || word.definitions.length === 0) { setHint("No definitions found."); return; }
-    setHint(word.definitions[hintIndex]);
-    if (hintIndex === word.definitions.length - 1) setMaxHints(true);
-    setHintIndex((prev) => (prev + 1) % word.definitions.length);
-  };
-
-  useEffect(() => {
-    if (word && list.length > 0) {
-      setMessage("");
-    }
-  }, [word]);
-
-  useEffect(() => {
-    if (lastHistoryRef.current) {
-      lastHistoryRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [history]);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!word) return;
-
-    let historyEntry = word as TranslationEntryResult;
-
-    if (userInput.trim().toLowerCase() === word.original.toLowerCase()) {
-      setScore((prev) =>
-        prev + (1 - ((hintIndex || 0) / (word.definitions.length || 1)))
-      );
-      setMessage("✔️ Correct!");
-      historyEntry.message = "✔️";
-      historyEntry.status = "correct";
-    } else {
-      setMessage(`❌ Incorrect.`);
-      historyEntry.message = `❌`;
-      historyEntry.status = "incorrect";
-    }
-
-    historyEntry.hintsUsed = hintIndex;
-    if (maxHints) historyEntry.hintsUsed = word.definitions.length;
-
-    setTimeout(() => {
-      setUserInput("");
-      setMessage("");
-      setHint(null);
-      setMaxHints(false);
-      setHintIndex(0);
-      setHistory([...history, historyEntry]);
-      selectRandom();
-    }, 1000);
-  };
+  const {
+    list,
+    word,
+    history,
+    score,
+    message,
+    hint,
+    userInput,
+    setUserInput,
+    lastHistoryRef,
+    handleSubmit,
+    showHint
+  } = useTranslationHooks();
 
   if (!word || Object.keys(list).length === 0) {
-    return <p style={{ textAlign: "center", marginTop: "4rem" }}>Loading...</p>;
+    return <p>Loading...</p>;
   }
 
   return (
     <div className="flex flex-col overflow-y-auto h-[calc(100vh-130px)] gap-4 pb-16">
       <div className="flex flex-row justify-between sticky top-0 bg-white p-2 shadow-sm z-[50]">
-        <p className="font-extrabold italic text-4xl mb-2">Translate!</p>
+        <p className="font-extrabold italic text-4xl ml-1">Translate!</p>
         <p className="flex flex-row gap-2 mr-2 text-xl items-center justify-center"> <BookCheck></BookCheck>{score.toFixed(2)}</p>
       </div>
       {history.length > 0 && history.map((word, _index) => (
@@ -121,7 +72,6 @@ export default function TranslationGame() {
         </div>
       ))
       }
-
       <form className="px-4" onSubmit={handleSubmit}>
         <div className="flex align-center justify-between items-center ">
           <div className="flex flex-row gap-2 items-center">
