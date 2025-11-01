@@ -13,5 +13,13 @@ export const translations = {
 
   deleteTranslation: async (word: TranslationEntry) => {
     return await ipcRenderer.invoke('deleteTranslation', word);
+  },
+
+  createDictionary: async (route: string, name: string) => {
+    return await ipcRenderer.invoke('createDictionary', route, name);
+  },
+
+  selectFolder: async (): Promise<string | null> => {
+    return await ipcRenderer.invoke('selectFolder');
   }
 };

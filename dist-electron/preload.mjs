@@ -9,6 +9,12 @@ const translations = {
   },
   deleteTranslation: async (word) => {
     return await electron.ipcRenderer.invoke("deleteTranslation", word);
+  },
+  createDictionary: async (route, name) => {
+    return await electron.ipcRenderer.invoke("createDictionary", route, name);
+  },
+  selectFolder: async () => {
+    return await electron.ipcRenderer.invoke("selectFolder");
   }
 };
 const endpoints = Object.assign(

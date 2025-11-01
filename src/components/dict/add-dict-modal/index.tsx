@@ -11,19 +11,22 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Book } from "lucide-react";
+import { Book, FolderOpen } from "lucide-react";
+import useDictModalHooks from "./hook";
 
 export default function AddDictModal() {
+  const hook = useDictModalHooks();
+
   return (
     <Dialog>
-      <form>
-        <DialogTrigger asChild>
-          <div className="bg-black rounded-lg px-2 flex h-8 items-center justify-center cursor-pointer">
-            <Book color="white" size={18} />
-            <p className="text-lg text-white leading-none pb-1">+</p>
-          </div>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+      <DialogTrigger asChild>
+        <div className="bg-black rounded-lg px-2 flex h-8 items-center justify-center cursor-pointer">
+          <Book color="white" size={18} />
+          <p className="text-lg text-white leading-none pb-1">+</p>
+        </div>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <form onSubmit={hook.handleSubmit}>
           <DialogHeader>
             <DialogTitle>Add Dictionary</DialogTitle>
             <DialogDescription>
@@ -31,28 +34,57 @@ export default function AddDictModal() {
               language/topic
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4">
+          <div className="grid gap-4 my-4">
             <div className="grid gap-3">
-              <Label htmlFor="name-1">Route</Label>
-              <Input
-                type="file"
-                placeholder="Choose a folder"
-                className="mt-2"
-              />
+              <Label htmlFor="route">Route</Label>
+              <div className="flex gap-2">
+                <Input
+                  id="route"
+                  type="text"
+                  placeholder="Select a folder..."
+                  value={hook.route}
+                  readOnly
+                  required
+                  className="flex-1"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={hook.handleFolderSelect}
+                  className="px-3"
+                >
+                  <FolderOpen size={18} />
+                </Button>
+              </div>
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="username-1">Name</Label>
-              <Input id="username-1" name="username" defaultValue="@peduarte" />
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                type="text"
+                placeholder="e.g., Spanish Dictionary"
+                value={hook.name}
+                onChange={(e) => hook.setName(e.target.value)}
+                required
+              />
             </div>
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button type="button" variant="outline">
+                Cancel
+              </Button>
             </DialogClose>
-            <Button variant="outline" className="!bg-blue-600 !text-white">Create</Button>
+            <Button
+              type="submit"
+              variant="outline"
+              className="!bg-blue-600 !text-white"
+            >
+              Create
+            </Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }

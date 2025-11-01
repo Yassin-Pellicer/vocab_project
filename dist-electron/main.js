@@ -1,4 +1,4 @@
-import { BrowserWindow, Menu, ipcMain, app } from "electron";
+import { BrowserWindow, Menu, ipcMain, dialog, app } from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import path$1 from "path";
@@ -67,6 +67,26 @@ function addTranslation() {
     }
   );
 }
+function createDictionary() {
+  ipcMain.handle("createDictionary", async (_event, _route, _name) => {
+    try {
+      if (!fs.existsSync(_route)) {
+        throw new Error(`The folder ${_route} does not exist.`);
+      }
+      fs.writeFileSync(
+        path$1.join(_route, `${_name}.json`),
+        JSON.stringify([], null, 2),
+        "utf-8"
+      );
+      return {
+        success: true
+      };
+    } catch (error) {
+      console.error("Error creating dictionary:", error);
+      throw new Error("Failed to create dictionary.");
+    }
+  });
+}
 function deleteTranslation() {
   ipcMain.handle(
     "deleteTranslation",
@@ -116,10 +136,28 @@ function loadTranslations() {
     }
   });
 }
+function selectFolder() {
+  ipcMain.handle("selectFolder", async () => {
+    try {
+      const result = await dialog.showOpenDialog({
+        properties: ["openDirectory"]
+      });
+      if (result.canceled) {
+        return null;
+      }
+      return result.filePaths[0];
+    } catch (error) {
+      console.error("Error selecting folder:", error);
+      throw new Error("Failed to select folder.");
+    }
+  });
+}
 function registerIpcHandlers() {
   loadTranslations();
   addTranslation();
   deleteTranslation();
+  createDictionary();
+  selectFolder();
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
