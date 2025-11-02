@@ -15,14 +15,14 @@ import { WholeWord } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import useWordModalHooks from "./hook";
 
-export default function AddTranslationModal() {
+export default function AddTranslationModal({ route, name }: { route: string, name: string }) {
   const {
     handleChange,
     addDefinition,
     removeDefinition,
     handleSubmit,
     formData
-  } = useWordModalHooks();
+  } = useWordModalHooks({ route, name });
 
   return (
     <Dialog>
@@ -126,9 +126,11 @@ export default function AddTranslationModal() {
                   )}
                 </div>
               ))}
-              <Button type="button" variant="outline" className="!bg-black !text-white" onClick={addDefinition}>
-                + Add Definition
-              </Button>
+              <DialogClose asChild>
+                <Button variant="outline" className="!bg-black !text-white" onClick={addDefinition}>
+                  + Add Definition
+                </Button>
+              </DialogClose>
             </div>
             <div className="grid gap-2">
               <Label htmlFor="observations">Observations</Label>

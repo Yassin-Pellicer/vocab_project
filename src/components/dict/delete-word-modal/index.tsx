@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { TranslationEntry } from "@/types/translation-entry";
 import { Trash } from "lucide-react";
-import deletewordModalHooks from "./hook";
+import deleteWordModalHooks from "./hook";
 
-export default function DeleteWordModal({word} : {word: TranslationEntry}) {
-  const { handleSubmit } = deletewordModalHooks(word);
+export default function DeleteWordModal({word, route, name} : {word: TranslationEntry, route: string, name: string}) {
+  const { handleSubmit } = deleteWordModalHooks({word, route, name});
   return (
     <Dialog>
       <form>

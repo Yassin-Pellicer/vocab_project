@@ -36,69 +36,90 @@ function createWindow() {
 function addTranslation() {
   ipcMain.handle(
     "addTranslation",
-    async (_event, entry, _word) => {
+    async (_event, entry, _word, _route, _name) => {
       try {
-        const filePath = path$1.join(
-          process.env.APP_ROOT || __dirname,
-          "public",
-          "german.json"
-        );
+        const filePath = path$1.join(_route, `${_name}.json`);
         if (!fs.existsSync(filePath)) {
-          fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
+          throw new Error(`The file ${filePath} does not exist.`);
         }
-        console.log(_word);
-        const data = fs.readFileSync(filePath, "utf-8");
-        const json = JSON.parse(data);
+        const json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
         let translations = Array.isArray(json) ? json : [];
-        translations = translations.filter(
-          (t) => t.original !== _word.original
-        );
+        if (_word) {
+          translations = translations.filter(
+            (t) => t.original !== _word.original
+          );
+        }
         translations.push(entry);
         fs.writeFileSync(
           filePath,
           JSON.stringify(translations, null, 2),
           "utf-8"
         );
-        return { success: true, message: "Translation added successfully." };
+        return { success: true };
       } catch (error) {
         console.error("Error adding translation:", error);
-        throw new Error("Failed to add translation.");
+        throw new Error(`Failed to add translation. ${error}`);
       }
     }
   );
 }
 function createDictionary() {
-  ipcMain.handle("createDictionary", async (_event, _route, _name) => {
-    try {
-      if (!fs.existsSync(_route)) {
-        throw new Error(`The folder ${_route} does not exist.`);
+  ipcMain.handle(
+    "createDictionary",
+    async (_event, _route, _name) => {
+      try {
+        if (!fs.existsSync(_route)) {
+          throw new Error(`The folder ${_route} does not exist.`);
+        }
+        fs.writeFileSync(
+          path$1.join(_route, `${_name}.json`),
+          JSON.stringify([], null, 2),
+          "utf-8"
+        );
+        const config = JSON.parse(
+          fs.readFileSync(
+            path$1.join(
+              process.env.APP_ROOT || __dirname,
+              "public",
+              "user-config.json"
+            ),
+            "utf-8"
+          )
+        );
+        config.dictionaries = config.dictionaries.filter(
+          (t) => t.name !== _name
+        );
+        config.dictionaries.push({
+          name: _name,
+          path: _route
+        });
+        fs.writeFileSync(
+          path$1.join(
+            process.env.APP_ROOT || __dirname,
+            "public",
+            "user-config.json"
+          ),
+          JSON.stringify(config, null, 2),
+          "utf-8"
+        );
+        return {
+          success: true
+        };
+      } catch (error) {
+        console.error("Error creating dictionary:", error);
+        throw new Error("Failed to create dictionary.");
       }
-      fs.writeFileSync(
-        path$1.join(_route, `${_name}.json`),
-        JSON.stringify([], null, 2),
-        "utf-8"
-      );
-      return {
-        success: true
-      };
-    } catch (error) {
-      console.error("Error creating dictionary:", error);
-      throw new Error("Failed to create dictionary.");
     }
-  });
+  );
 }
 function deleteTranslation() {
   ipcMain.handle(
     "deleteTranslation",
-    async (_event, _word) => {
+    async (_event, _word, _route, _name) => {
       try {
-        const filePath = path$1.join(
-          process.env.APP_ROOT || __dirname,
-          "public",
-          "german.json"
-        );
+        const filePath = path$1.join(_route, `${_name}.json`);
         if (!fs.existsSync(filePath)) {
-          fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
+          throw new Error(`The file ${filePath} does not exist.`);
         }
         const data = fs.readFileSync(filePath, "utf-8");
         const json = JSON.parse(data);
@@ -114,19 +135,15 @@ function deleteTranslation() {
         return { success: true, message: "Translation added successfully." };
       } catch (error) {
         console.error("Error adding translation:", error);
-        throw new Error("Failed to add translation.");
+        throw new Error(`Failed to delete translation. ${error}`);
       }
     }
   );
 }
 function loadTranslations() {
-  ipcMain.handle("loadTranslations", async (_event, _arg) => {
+  ipcMain.handle("loadTranslations", async (_event, _route, _name) => {
     try {
-      const filePath = path$1.join(
-        process.env.APP_ROOT || __dirname,
-        "public",
-        "german.json"
-      );
+      const filePath = path$1.join(_route, `${_name}.json`);
       const data = fs.readFileSync(filePath, "utf-8");
       const json = JSON.parse(data);
       return json;

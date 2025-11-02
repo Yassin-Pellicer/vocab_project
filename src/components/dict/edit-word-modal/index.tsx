@@ -16,14 +16,14 @@ import { Textarea } from "@/components/ui/textarea";
 import useWordModalHooks from "./hook";
 import { TranslationEntry } from "@/types/translation-entry";
 import DeleteWordModal from "../delete-word-modal";
-export default function EditTranslationModal({word} : {word: TranslationEntry}) {
+export default function EditTranslationModal({ word, route, name }: { word: TranslationEntry, route: string, name: string }) {
   const {
     handleChange,
     addDefinition,
     removeDefinition,
     handleSubmit,
     formData
-  } = useWordModalHooks(word);
+  } = useWordModalHooks({ word, route, name });
 
   return (
     <Dialog>
@@ -142,10 +142,12 @@ export default function EditTranslationModal({word} : {word: TranslationEntry}) 
             </div>
           </div>
           <DialogFooter>
-            <Button onClick={handleSubmit} variant="outline" className="!bg-blue-600 !text-white">Save Entry</Button>
-            <DeleteWordModal word={word}></DeleteWordModal>
             <DialogClose asChild>
-              <Button variant="outline" >Cancel</Button>
+              <Button onClick={handleSubmit} variant="outline" className="!bg-blue-600 !text-white">Save Entry</Button>
+            </DialogClose>
+            <DeleteWordModal word={word} route={route} name={name}></DeleteWordModal>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

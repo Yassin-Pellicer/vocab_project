@@ -6,16 +6,12 @@ import type { TranslationEntry } from "@/types/translation-entry";
 export default function deleteTranslation() {
   ipcMain.handle(
     "deleteTranslation",
-    async (_event, _word) => {
+    async (_event, _word: TranslationEntry, _route: string, _name: string) => {
       try {
-        const filePath = path.join(
-          process.env.APP_ROOT || __dirname,
-          "public",
-          "german.json"
-        );
+        const filePath = path.join(_route, `${_name}.json`);
 
         if (!fs.existsSync(filePath)) {
-          fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
+          throw new Error(`The file ${filePath} does not exist.`);
         }
 
         const data = fs.readFileSync(filePath, "utf-8");
@@ -36,7 +32,7 @@ export default function deleteTranslation() {
         return { success: true, message: "Translation added successfully." };
       } catch (error) {
         console.error("Error adding translation:", error);
-        throw new Error("Failed to add translation.");
+        throw new Error(`Failed to delete translation. ${error}`);
       }
     }
   );

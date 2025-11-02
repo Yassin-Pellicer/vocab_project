@@ -586,20 +586,6 @@
     "dateAdded": "2025-10-14"
   },
   {
-    "original": "amigo",
-    "translation": "freund",
-    "gender": "masculino",
-    "number": "singular",
-    "definitions": [
-      "Que tiene relación de amistad. Usado también como sustantivo.",
-      "amistoso (‖ perteneciente a la amistad).",
-      "Usado para dirigirse a una persona, aunque no se conozca o no haya relación de amistad."
-    ],
-    "type": "sustantivo",
-    "observations": "Palabra muy bonita!",
-    "dateAdded": "2025-10-26"
-  },
-  {
     "original": "amor",
     "translation": "Liebe",
     "gender": "m",
@@ -612,5 +598,20 @@
     "type": "sustantivo",
     "observations": "Muy usado",
     "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "amigo",
+    "translation": "freund",
+    "gender": "masculino",
+    "number": "singular",
+    "definitions": [
+      "Que tiene relación de amistad. Usado también como sustantivo.",
+      "amistoso (‖ perteneciente a la amistad).",
+      "Usado para dirigirse a una persona, aunque no se conozca o no haya relación de amistad.",
+      "HOLA"
+    ],
+    "type": "sustantivo",
+    "observations": "Palabra muy bonita!",
+    "dateAdded": "2025-10-26"
   }
 ]

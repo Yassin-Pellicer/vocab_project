@@ -1,7 +1,7 @@
 import { TranslationEntry } from "@/types/translation-entry";
 import { useState } from "react";
 
-export default function useWordModalHooks() {
+export default function useWordModalHooks({route, name} : {route: string, name: string}) {
   const [formData, setFormData] = useState<TranslationEntry>({
     original: "",
     translation: "",
@@ -40,7 +40,7 @@ export default function useWordModalHooks() {
     e.preventDefault();
     try {
       if(!formData.original || !formData.translation) return;
-      await (window.api).addTranslation(formData);
+      await (window.api).addTranslation(formData, null, route, name);
     }
     catch (error) {
       console.error("Failed to add translation:", error);

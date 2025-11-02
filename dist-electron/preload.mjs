@@ -1,20 +1,23 @@
 "use strict";
 const electron = require("electron");
 const translations = {
-  requestTranslations: async () => {
-    return await electron.ipcRenderer.invoke("loadTranslations");
+  requestTranslations: async (route, name) => {
+    return await electron.ipcRenderer.invoke("loadTranslations", route, name);
   },
-  addTranslation: async (entry, word, dictionary) => {
-    return await electron.ipcRenderer.invoke("addTranslation", entry, word, dictionary);
+  addTranslation: async (entry, word, route, name) => {
+    return await electron.ipcRenderer.invoke("addTranslation", entry, word, route, name);
   },
-  deleteTranslation: async (word) => {
-    return await electron.ipcRenderer.invoke("deleteTranslation", word);
+  deleteTranslation: async (word, route, name) => {
+    return await electron.ipcRenderer.invoke("deleteTranslation", word, route, name);
   },
   createDictionary: async (route, name) => {
     return await electron.ipcRenderer.invoke("createDictionary", route, name);
   },
   selectFolder: async () => {
     return await electron.ipcRenderer.invoke("selectFolder");
+  },
+  loadConfig: async () => {
+    return await electron.ipcRenderer.invoke("loadConfig");
   }
 };
 const endpoints = Object.assign(

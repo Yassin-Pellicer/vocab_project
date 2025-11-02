@@ -3,23 +3,27 @@ import { TranslationEntry } from '@/types/translation-entry';
 import { ipcRenderer } from 'electron';
 
 export const translations = {
-  requestTranslations: async (): Promise<Array<TranslationEntry> | undefined> => {
-    return await ipcRenderer.invoke('loadTranslations');
+  requestTranslations: async (route: string, name: string): Promise<Array<TranslationEntry> | undefined> => {
+    return await ipcRenderer.invoke('loadTranslations', route, name);
   },
 
-  addTranslation: async (entry: TranslationEntry, word: string, dictionary: string) => {
-    return await ipcRenderer.invoke('addTranslation', entry, word, dictionary);
+  addTranslation: async (entry: TranslationEntry, word: string, route: string, name: string) => {
+    return await ipcRenderer.invoke('addTranslation', entry, word, route, name);
   },
 
-  deleteTranslation: async (word: TranslationEntry) => {
-    return await ipcRenderer.invoke('deleteTranslation', word);
+  deleteTranslation: async (word: TranslationEntry, route: string, name: string) => {
+    return await ipcRenderer.invoke('deleteTranslation', word, route, name);
   },
-
+  
   createDictionary: async (route: string, name: string) => {
     return await ipcRenderer.invoke('createDictionary', route, name);
   },
 
   selectFolder: async (): Promise<string | null> => {
     return await ipcRenderer.invoke('selectFolder');
+  },
+
+  loadConfig: async () => {
+    return await ipcRenderer.invoke('loadConfig');
   }
 };

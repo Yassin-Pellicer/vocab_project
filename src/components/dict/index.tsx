@@ -5,8 +5,7 @@ import AddWordModal from "./add-word-modal";
 import AddDictModal from "./add-dict-modal";
 import EditWordModal from "./edit-word-modal";
 
-
-export default function DictionaryComponent() {
+export default function DictionaryComponent({ route, name }: { route: string, name: string }): JSX.Element {
   const {
     selectedLetter,
     currentPage,
@@ -16,7 +15,7 @@ export default function DictionaryComponent() {
     handlePrevPage,
     handleNextPage,
     handleLetterClick,
-    scrollRef } = useTranslationHooks();
+    scrollRef } = useTranslationHooks({ route, name });
 
   const leftColumn = paginatedWords.filter((_, idx) => idx % 2 === 0);
   const rightColumn = paginatedWords.filter((_, idx) => idx % 2 === 1);
@@ -29,7 +28,7 @@ export default function DictionaryComponent() {
           <p className="text-2xl">⇔</p>
           <p className="italic mt-1">{word.translation}</p>
         </div>
-        <EditWordModal word={word}></EditWordModal>
+        <EditWordModal word={word} route={route} name={name}></EditWordModal>
       </div>
       <div className="flex flex-row justify-between">
         <p className="text-gray-400 text-sm pb-1">
@@ -67,7 +66,7 @@ export default function DictionaryComponent() {
         </div>
         <div className="flex flex-row gap-4 items-center">
           <div className="flex flex-row items-center gap-4">
-            <AddWordModal></AddWordModal>
+            <AddWordModal route={route} name={name}></AddWordModal>
             <AddDictModal></AddDictModal>
             <div className="bg-gray-100 flex flex-row items-center py-2 rounded-xl px-2 gap-2">
               <Book size={16} />

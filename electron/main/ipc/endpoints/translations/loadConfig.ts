@@ -2,10 +2,14 @@ import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
 
-export default function loadTranslations() {
-  ipcMain.handle("loadTranslations", async (_event, _route, _name) => {
+export default function loadConfig() {
+  ipcMain.handle("loadConfig", async (_event) => {
     try {
-        const filePath = path.join(_route, `${_name}.json`);
+      const filePath = path.join(
+        process.env.APP_ROOT || __dirname,
+        "public",
+        "user-config.json"
+      );
 
       const data = fs.readFileSync(filePath, "utf-8");
       const json = JSON.parse(data);

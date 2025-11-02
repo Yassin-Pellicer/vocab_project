@@ -2,7 +2,7 @@ import { TranslationEntry } from "@/types/translation-entry";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-export default function useTranslationHooks() {
+export default function useTranslationHooks( {route, name} : {route: string, name: string}) {
   const ITEMS_PER_PAGE = 10;
 
   const [list, setList] = useState<TranslationEntry[]>([]);
@@ -44,7 +44,7 @@ export default function useTranslationHooks() {
   };
 
   useEffect(() => {
-    loadTranslations();
+    loadTranslations(route, name);
   }, []);
 
   useEffect(() => {
@@ -53,9 +53,9 @@ export default function useTranslationHooks() {
     }
   }, [list]);
 
-  const loadTranslations = async () => {
+  const loadTranslations = async (route: string, name: string) => {
     try {
-      const data = await (window.api as any).requestTranslations();
+      const data = await (window.api as any).requestTranslations(route, name);
       if (data) {
         setList(data);
       }
