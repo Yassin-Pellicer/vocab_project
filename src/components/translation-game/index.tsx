@@ -2,7 +2,7 @@
 import useTranslationHooks from "./hook";
 import { BookCheck, Calendar, Check } from "lucide-react";
 
-export default function TranslationGame() {
+export default function TranslationGame({ route, name }: { route: string, name: string }) {
   const {
     list,
     word,
@@ -15,7 +15,7 @@ export default function TranslationGame() {
     lastHistoryRef,
     handleSubmit,
     showHint
-  } = useTranslationHooks();
+  } = useTranslationHooks({ route, name });
 
   if (!word || Object.keys(list).length === 0) {
     return <p>Loading...</p>;

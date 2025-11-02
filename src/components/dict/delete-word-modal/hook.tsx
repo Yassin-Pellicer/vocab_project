@@ -5,6 +5,7 @@ export default function deleteWordModalHooks({word, route, name} : {word: Transl
     e.preventDefault();
     try {
       await (window.api).deleteTranslation(word, route, name);
+      window.location.reload();
     } catch (error) {
       console.error("Failed to delete translation:", error);
     }
