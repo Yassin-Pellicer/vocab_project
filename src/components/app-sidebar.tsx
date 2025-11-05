@@ -13,46 +13,12 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
-
-// This is sample data.
-const data = {
-  navMain: [
-    {
-      title: "Home",
-      url: "#",
-    },
-    {
-      title: "Dictionaries",
-      url: "",
-      items: [
-        {
-          title: "German",
-          url: "/dictionary",
-        },
-        {
-          title: "Spanish",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Practice",
-      url: "#",
-      items: [
-        {
-          title: "Translate!",
-          url: "/translation",
-        },
-        {
-          title: "Flashcards",
-          url: "",
-        },
-      ],
-    }
-  ],
-}
+import useConfigStore from "@/context/dictionary-context";
+import { Link } from "react-router-dom";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data } = useConfigStore();
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -78,15 +44,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             {data.navMain.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild>
-                  <a href={item.url} className="font-medium">
+                  <Link to={item.url} className="font-medium">
                     {item.title}
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
                 {item.items?.length ? (
                   <SidebarMenuSub>
                     {item.items.map((item) => (
                       <SidebarMenuSubItem key={item.title}>
-                        <SidebarMenuSubButton asChild isActive={item.isActive}>
+                        <SidebarMenuSubButton asChild>
                           <a href={item.url}>{item.title}</a>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>

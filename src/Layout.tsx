@@ -1,39 +1,27 @@
-import "./App.css";
+// Layout.tsx
 import { AppSidebar } from "@/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Separator } from "@/components/ui/separator";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { NavUser } from "./components/nav-user";
-import { Search, WholeWord, Book, MoreVertical } from "lucide-react";
-import { Outlet } from "react-router-dom";
 
-export default function Layout() {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        {/* --- HEADER --- */}
-        <header className="bg-background sticky justify-between top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4">
+        <header style={{ WebkitAppRegion: "drag" } as React.CSSProperties} className="bg-background sticky justify-between top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <div className="flex flex-row items-center">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="ml-3 h-4" />
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
+                  <BreadcrumbLink href="#">Building Your Application</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
@@ -53,13 +41,7 @@ export default function Layout() {
             />
           </div>
         </header>
-
-        
-
-        {/* --- MAIN CONTENT --- */}
-        <main className="overflow-auto">
-          <Outlet /> {/* 👈 This is where pages load */}
-        </main>
+        <main className="overflow-auto">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

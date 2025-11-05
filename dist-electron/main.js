@@ -13,11 +13,14 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
-    frame: true,
-    // or false if you want custom frame
-    transparent: true,
-    hasShadow: false,
-    titleBarStyle: "hiddenInset",
+    frame: false,
+    // 🔹 Removes top bar (frameless)
+    resizable: true,
+    // 🔹 Allows resizing
+    transparent: false,
+    // ✅ Use false for normal background (true = see-through)
+    hasShadow: true,
+    // ✅ Add subtle window shadow
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
       preload: path.join(__dirname$1, "preload.mjs")
@@ -140,6 +143,23 @@ function deleteTranslation() {
     }
   );
 }
+function loadConfig() {
+  ipcMain.handle("loadConfig", async (_event) => {
+    try {
+      const filePath = path$1.join(
+        process.env.APP_ROOT || __dirname,
+        "public",
+        "user-config.json"
+      );
+      const data = fs.readFileSync(filePath, "utf-8");
+      const json = JSON.parse(data);
+      return json;
+    } catch (error) {
+      console.error("Error reading JSON file:", error);
+      throw new Error("Failed to load JSON file.");
+    }
+  });
+}
 function loadTranslations() {
   ipcMain.handle("loadTranslations", async (_event, _route, _name) => {
     try {
@@ -175,6 +195,7 @@ function registerIpcHandlers() {
   deleteTranslation();
   createDictionary();
   selectFolder();
+  loadConfig();
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

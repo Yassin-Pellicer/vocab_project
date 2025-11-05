@@ -1,14 +1,14 @@
-import { TranslationEntry } from "@/types/translation-entry";
+import useConfigStore from "@/context/dictionary-context";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-export default function useTranslationHooks( {route, name} : {route: string, name: string}) {
+export default function useTranslationHooks({ route, name }: { route: string, name: string }) {
   const ITEMS_PER_PAGE = 10;
 
-  const [list, setList] = useState<TranslationEntry[]>([]);
-  const [word, setWord] = useState<TranslationEntry | null>(null);
+  const { list, loadTranslations } = useConfigStore();
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
   const [selectedLetter, setSelectedLetter] = useState("A");
+  const [searchField, setSearchField] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -17,10 +17,22 @@ export default function useTranslationHooks( {route, name} : {route: string, nam
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const filteredWords = useMemo(() => {
-    return list
-      .filter((word) => word.original.toUpperCase().startsWith(selectedLetter))
-      .sort((a, b) => a.original.localeCompare(b.original));
-  }, [list, selectedLetter]);
+    if (!list) return [];
+
+    let results = [];
+
+    if (searchField.trim() === "") {
+      results = list.filter((word) =>
+        word.original?.toUpperCase().startsWith(selectedLetter?.toUpperCase?.() || "")
+      );
+    } else {
+      results = list.filter((word) =>
+        word.original?.toLowerCase().includes(searchField.toLowerCase())
+      );
+    }
+    
+    return results.sort((a, b) => a.original.localeCompare(b.original));
+  }, [list, selectedLetter, searchField]);
 
   const totalPages = Math.ceil(filteredWords.length / ITEMS_PER_PAGE);
   const paginatedWords = filteredWords.slice(
@@ -47,34 +59,9 @@ export default function useTranslationHooks( {route, name} : {route: string, nam
     loadTranslations(route, name);
   }, []);
 
-  useEffect(() => {
-    if (list.length > 0) {
-      selectRandom()
-    }
-  }, [list]);
-
-  const loadTranslations = async (route: string, name: string) => {
-    try {
-      const data = await (window.api as any).requestTranslations(route, name);
-      if (data) {
-        setList(data);
-      }
-    } catch (error) {
-      console.error("Failed to load JSON:", error);
-    }
-  };
-
-  const selectRandom = () => {
-    if (!Array.isArray(list) || list.length === 0) return null;
-    const randomIndex = Math.floor(Math.random() * list.length);
-    setWord(list[randomIndex])
-  };
-
   return {
     list,
     history,
-    word,
-    selectRandom,
     setHistory,
     buttonRef,
     selectedLetter,
@@ -87,6 +74,8 @@ export default function useTranslationHooks( {route, name} : {route: string, nam
     paginatedWords,
     handlePrevPage,
     handleNextPage,
+    searchField,
+    setSearchField,
     handleLetterClick,
     scrollRef,
   };

@@ -14,22 +14,21 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
   ? path.join(process.env.APP_ROOT, "public")
   : RENDERER_DIST;
 
-
 export default function createWindow() {
-const win = new BrowserWindow({
-  width: 1200,
-  height: 800,
-  frame: true, // or false if you want custom frame
-  transparent: true,
-  hasShadow: false,
-  titleBarStyle: "hiddenInset",
-  icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
-  webPreferences: {
-    preload: path.join(__dirname, "preload.mjs"),
-  },
-});
+  const win = new BrowserWindow({
+    width: 1200,
+    height: 800,
+    frame: false,            // 🔹 Removes top bar (frameless)
+    resizable: true,         // 🔹 Allows resizing
+    transparent: false,      // ✅ Use false for normal background (true = see-through)
+    hasShadow: true,         // ✅ Add subtle window shadow
+    icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+    webPreferences: {
+      preload: path.join(__dirname, "preload.mjs"),
+    },
+  });
 
-
+  // 🔹 Remove default menu
   Menu.setApplicationMenu(null);
 
   win.webContents.on("did-finish-load", () => {

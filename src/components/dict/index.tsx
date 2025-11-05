@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Calendar, MoreVertical, Book, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar, MoreVertical, Book, Search, X } from "lucide-react";
 import { TranslationEntry } from "@/types/translation-entry";
 import useTranslationHooks from "./hook";
 import AddWordModal from "./add-word-modal";
@@ -15,6 +15,8 @@ export default function DictionaryComponent({ route, name }: { route: string, na
     handlePrevPage,
     handleNextPage,
     handleLetterClick,
+    searchField,
+    setSearchField,
     scrollRef } = useTranslationHooks({ route, name });
 
   const leftColumn = paginatedWords.filter((_, idx) => idx % 2 === 0);
@@ -56,12 +58,15 @@ export default function DictionaryComponent({ route, name }: { route: string, na
       <div className="bg-background flex justify-between items-center h-16 border-b p-4">
         <div className="flex flex-row gap-2 items-center">
           <div className="relative w-full max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
+              value={searchField}
+              onChange={(e) => setSearchField(e.target.value)}
               placeholder="Search for a word"
-              className="w-full border-2 border-gray-300 py-1 pl-10 pr-4 rounded-lg text-gray-700 focus:outline-none focus:border-blue-400"
+              className="w-full border-2 text-sm border-gray-300 py-2 pl-10 pr-4 rounded-xl text-gray-700 focus:outline-none focus:border-blue-400"
             />
+            {searchField && <X onClick={() => { setSearchField("")}} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />}
           </div>
         </div>
         <div className="flex flex-row gap-4 items-center">
@@ -94,7 +99,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
         <div className="flex-1 flex flex-col px-4 py-2 min-w-0 h-full">
           <div className="flex-1 overflow-y-auto pr-2" ref={scrollRef}>
             {currentPage <= 1 && (
-              <div className="mb-2 flex-shrink-0">
+              <div className={`mb-2 flex-shrink-0 ${searchField ? "hidden" : ""}`} >
                 <p className="text-8xl font-bold text-gray-900 mb-4">
                   {selectedLetter}
                 </p>
@@ -103,7 +108,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
             )}
             {paginatedWords.length === 0 ? (
               <div className="py-12 text-gray-500 text-center">
-                No list found starting with "{selectedLetter}"
+                { searchField ? `No results found for "${searchField}"` : `No list found starting with ${selectedLetter}`}
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-8">

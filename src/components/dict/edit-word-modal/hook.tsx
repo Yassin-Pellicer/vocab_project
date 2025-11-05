@@ -1,8 +1,10 @@
+import useConfigStore from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useState } from "react";
 
 export default function useWordModalHooks({ word, route, name }: { word: TranslationEntry, route: string, name: string }) {
   const [formData, setFormData] = useState<TranslationEntry>(word);
+  const { loadTranslations } = useConfigStore();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -32,7 +34,7 @@ export default function useWordModalHooks({ word, route, name }: { word: Transla
     try {
       if (!formData.original || !formData.translation) return;
       await (window.api).addTranslation(formData, word, route, name);
-      window.location.reload();
+      loadTranslations(route, name);
     }
     catch (error) {
       console.error("Failed to add translation:", error);
