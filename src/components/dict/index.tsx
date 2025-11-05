@@ -17,6 +17,8 @@ export default function DictionaryComponent({ route, name }: { route: string, na
     handleLetterClick,
     searchField,
     setSearchField,
+    searchRef,
+    addWordButtonRef,
     scrollRef } = useTranslationHooks({ route, name });
 
   const leftColumn = paginatedWords.filter((_, idx) => idx % 2 === 0);
@@ -60,18 +62,19 @@ export default function DictionaryComponent({ route, name }: { route: string, na
           <div className="relative w-full max-w-sm">
             <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
+              ref={searchRef}
               type="text"
               value={searchField}
               onChange={(e) => setSearchField(e.target.value)}
               placeholder="Search for a word"
               className="w-full border-2 text-sm border-gray-300 py-2 pl-10 pr-4 rounded-xl text-gray-700 focus:outline-none focus:border-blue-400"
             />
-            {searchField && <X onClick={() => { setSearchField("")}} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />}
+            {searchField && <X onClick={() => { setSearchField("") }} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />}
           </div>
         </div>
         <div className="flex flex-row gap-4 items-center">
           <div className="flex flex-row items-center gap-4">
-            <AddWordModal route={route} name={name}></AddWordModal>
+            <AddWordModal ref={addWordButtonRef} route={route} name={name}></AddWordModal>
             <AddDictModal></AddDictModal>
             <div className="bg-gray-100 flex flex-row items-center py-2 rounded-xl px-2 gap-2">
               <Book size={16} />
@@ -108,7 +111,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
             )}
             {paginatedWords.length === 0 ? (
               <div className="py-12 text-gray-500 text-center">
-                { searchField ? `No results found for "${searchField}"` : `No list found starting with ${selectedLetter}`}
+                {searchField ? `No results found for "${searchField}"` : `No list found starting with ${selectedLetter}`}
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-8">

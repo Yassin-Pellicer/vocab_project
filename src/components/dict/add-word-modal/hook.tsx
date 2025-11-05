@@ -2,8 +2,9 @@ import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useState } from "react";
 
-export default function useWordModalHooks({route, name} : {route: string, name: string}) {
+export default function useWordModalHooks({ route, name }: { route: string, name: string }) {
   const { loadTranslations } = useConfigStore();
+  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState<TranslationEntry>({
     original: "",
     translation: "",
@@ -38,10 +39,9 @@ export default function useWordModalHooks({route, name} : {route: string, name: 
     setFormData({ ...formData, definitions: newDefs });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
-      if(!formData.original || !formData.translation) return;
+      if (!formData.original || !formData.translation) return;
       await (window.api).addTranslation(formData, null, route, name);
       loadTranslations(route, name);
     }
@@ -51,6 +51,8 @@ export default function useWordModalHooks({route, name} : {route: string, name: 
   };
 
   return {
+    open,
+    setOpen,
     handleChange,
     addDefinition,
     removeDefinition,

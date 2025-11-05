@@ -29,8 +29,7 @@ export default function useWordModalHooks({ word, route, name }: { word: Transla
     setFormData({ ...formData, definitions: newDefs });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       if (!formData.original || !formData.translation) return;
       await (window.api).addTranslation(formData, word, route, name);

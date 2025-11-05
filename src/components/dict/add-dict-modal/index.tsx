@@ -75,13 +75,15 @@ export default function AddDictModal() {
                 Cancel
               </Button>
             </DialogClose>
-            <Button
-              type="submit"
-              variant="outline"
-              className="!bg-blue-600 !text-white"
-            >
-              Create
-            </Button>
+            <DialogClose asChild>
+              <Button
+                type="submit"
+                variant="outline"
+                className="!bg-blue-600 !text-white"
+              >
+                Create
+              </Button>
+            </DialogClose>
           </DialogFooter>
         </form>
       </DialogContent>
