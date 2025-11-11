@@ -7,4 +7,5 @@ export interface TranslationEntry {
   type: string;
   observations: string;
   dateAdded: string;
+  markdownRoute: string;
 }

@@ -189,3 +189,17 @@ h1 {
   overflow-y: auto;
   scrollbar-gutter: stable overlay;
 }
+
+.markdown > * {
+  all: revert;
+}
+
+.markdown {
+  width: 100%;
+}
+
+.markdown pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

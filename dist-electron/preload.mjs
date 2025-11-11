@@ -1,5 +1,10 @@
 "use strict";
 const electron = require("electron");
+const markdown = {
+  fetchMarkdown: async (route, name) => {
+    return await electron.ipcRenderer.invoke("fetchMarkdown", route, name);
+  }
+};
 const translations = {
   requestTranslations: async (route, name) => {
     return await electron.ipcRenderer.invoke("loadTranslations", route, name);
@@ -22,7 +27,8 @@ const translations = {
 };
 const endpoints = Object.assign(
   {},
-  translations
+  translations,
+  markdown
 );
 electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   on(...args) {

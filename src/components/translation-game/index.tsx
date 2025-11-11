@@ -22,7 +22,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
   }
 
   return (
-    <div className="flex flex-col overflow-y-auto h-[calc(100vh-130px)] gap-4 pb-16">
+    <div className="flex flex-col overflow-y-auto h-[calc(100vh-80px)] gap-4 pb-16">
       <div className="flex flex-row justify-between sticky top-0 bg-white p-2 shadow-sm z-[50]">
         <p className="font-extrabold italic text-4xl ml-1">Translate!</p>
         <p className="flex flex-row gap-2 mr-2 text-xl items-center justify-center"> <BookCheck></BookCheck>{score.toFixed(2)}</p>

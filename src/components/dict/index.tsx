@@ -4,8 +4,14 @@ import useTranslationHooks from "./hook";
 import AddWordModal from "./add-word-modal";
 import AddDictModal from "./add-dict-modal";
 import EditWordModal from "./edit-word-modal";
+import { useNavigate } from "react-router-dom";
+import useConfigStore from "@/context/dictionary-context";
 
 export default function DictionaryComponent({ route, name }: { route: string, name: string }): JSX.Element {
+
+  const navigate = useNavigate();
+  const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
+
   const {
     selectedLetter,
     currentPage,
@@ -28,7 +34,15 @@ export default function DictionaryComponent({ route, name }: { route: string, na
     <div className={`p-2 ${isLeft ? "mr-2" : "ml-2"}`}>
       <div className="flex items-start justify-between">
         <div className="flex flex-row gap-2 items-center">
-          <h3 className="text-2xl font-bold text-gray-900">{word.original}</h3>
+          <h3
+            className="text-2xl font-bold text-gray-900 cursor-pointer"
+            onClick={() => {
+              setSelectedWord(word);
+              navigate("/markdown");
+            }}
+          >
+            {word.original}
+          </h3>
           <p className="text-2xl">⇔</p>
           <p className="italic mt-1">{word.translation}</p>
         </div>

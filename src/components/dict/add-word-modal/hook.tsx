@@ -14,6 +14,7 @@ export default function useWordModalHooks({ route, name }: { route: string, name
     type: "",
     observations: "",
     dateAdded: new Date().toISOString().split("T")[0],
+    markdownRoute: "",
   });
 
   const handleChange = (

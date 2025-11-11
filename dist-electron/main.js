@@ -14,18 +14,15 @@ function createWindow() {
     width: 1200,
     height: 800,
     frame: false,
-    // 🔹 Removes top bar (frameless)
     resizable: true,
-    // 🔹 Allows resizing
     transparent: false,
-    // ✅ Use false for normal background (true = see-through)
     hasShadow: true,
-    // ✅ Add subtle window shadow
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
       preload: path.join(__dirname$1, "preload.mjs")
     }
   });
+  win.webContents.openDevTools();
   Menu.setApplicationMenu(null);
   win.webContents.on("did-finish-load", () => {
     win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
@@ -35,6 +32,18 @@ function createWindow() {
   } else {
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
+}
+function fetchMarkdown() {
+  ipcMain.handle("fetchMarkdown", async (_event, _route, _name) => {
+    try {
+      const filePath = path$1.join(_route, `${_name}.md`);
+      const data = fs.readFileSync(filePath, "utf-8");
+      return data;
+    } catch (error) {
+      console.error("Error reading markdown file:", error);
+      throw new Error("Failed to load markdown file.");
+    }
+  });
 }
 function addTranslation() {
   ipcMain.handle(
@@ -196,6 +205,7 @@ function registerIpcHandlers() {
   createDictionary();
   selectFolder();
   loadConfig();
+  fetchMarkdown();
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

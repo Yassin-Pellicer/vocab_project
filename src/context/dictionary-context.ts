@@ -14,26 +14,29 @@ interface NavItem {
 
 interface ConfigState {
   list: TranslationEntry[];
+  selectedWord: TranslationEntry | null; 
   data: {
     navMain: NavItem[];
   };
   loadConfig: () => Promise<void>;
   setList: (list: TranslationEntry[]) => void;
   loadTranslations: (route: string, name: string) => Promise<void>;
+  setSelectedWord: (word: TranslationEntry | null) => void;
 }
 
 export const useConfigStore = create<ConfigState>()((set) => {
-  const list = [] as TranslationEntry[];
+  const list: TranslationEntry[] = [];
+
   const setList = (list: TranslationEntry[]) => set({ list });
+
+  const setSelectedWord = (word: TranslationEntry | null) => set({ selectedWord: word });
 
   const loadConfig = async () => {
     try {
       const config = await window.api.loadConfig();
       const dictItems = (config.dictionaries || []).map((dict: Dictionary) => ({
         title: dict.name,
-        url: `/dictionary?name=${encodeURIComponent(
-          dict.name
-        )}&path=${encodeURIComponent(dict.path)}`,
+        url: `/dictionary?name=${encodeURIComponent(dict.name)}&path=${encodeURIComponent(dict.path)}`,
       }));
 
       set((state) => ({
@@ -71,14 +74,17 @@ export const useConfigStore = create<ConfigState>()((set) => {
           items: [
             { title: "Translate!", url: "/translation" },
             { title: "Flashcards", url: "" },
+            { title: "Translate!", url: "/markdown" },
           ],
         },
       ],
     },
+    list,
+    selectedWord: null,           
+    setSelectedWord,             
     loadConfig,
     loadTranslations,
-    list,
-    setList: (list: TranslationEntry[]) => set({ list }),
+    setList,
   };
 });
 

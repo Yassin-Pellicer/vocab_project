@@ -1,3 +1,4 @@
+import fetchMarkdown from "./endpoints/markdown/fetchMarkdown";
 import addTranslation from "./endpoints/translations/addTranslation";
 import createDictionary from "./endpoints/translations/createDictionary";
 import deleteTranslation from "./endpoints/translations/deleteTranslation";
@@ -12,4 +13,5 @@ export default function registerIpcHandlers() {
   createDictionary();
   selectFolder();
   loadConfig();
+  fetchMarkdown();
 }
