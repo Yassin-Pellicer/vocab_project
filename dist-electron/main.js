@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import path$1 from "path";
 import fs from "fs";
+import { randomFillSync, randomUUID } from "node:crypto";
 const __dirname$1 = path.dirname(fileURLToPath(import.meta.url));
 process.env.APP_ROOT = path.join(__dirname$1, "..");
 const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
@@ -13,7 +14,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
-    frame: false,
+    frame: true,
     resizable: true,
     transparent: false,
     hasShadow: true,
@@ -37,6 +38,9 @@ function fetchMarkdown() {
   ipcMain.handle("fetchMarkdown", async (_event, _route, _name) => {
     try {
       const filePath = path$1.join(_route, `${_name}.md`);
+      if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, "", "utf-8");
+      }
       const data = fs.readFileSync(filePath, "utf-8");
       return data;
     } catch (error) {
@@ -44,6 +48,51 @@ function fetchMarkdown() {
       throw new Error("Failed to load markdown file.");
     }
   });
+}
+function saveMarkdown() {
+  ipcMain.handle("saveMarkdown", async (_event, _route, _name, markdown) => {
+    try {
+      const filePath = path$1.join(_route, `${_name}.md`);
+      fs.writeFileSync(filePath, markdown);
+    } catch (error) {
+      console.error("Error saving markdown file:", error);
+      throw new Error("Failed to save markdown file.");
+    }
+  });
+}
+const byteToHex = [];
+for (let i = 0; i < 256; ++i) {
+  byteToHex.push((i + 256).toString(16).slice(1));
+}
+function unsafeStringify(arr, offset = 0) {
+  return (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
+}
+const rnds8Pool = new Uint8Array(256);
+let poolPtr = rnds8Pool.length;
+function rng() {
+  if (poolPtr > rnds8Pool.length - 16) {
+    randomFillSync(rnds8Pool);
+    poolPtr = 0;
+  }
+  return rnds8Pool.slice(poolPtr, poolPtr += 16);
+}
+const native = { randomUUID };
+function _v4(options, buf, offset) {
+  var _a;
+  options = options || {};
+  const rnds = options.random ?? ((_a = options.rng) == null ? void 0 : _a.call(options)) ?? rng();
+  if (rnds.length < 16) {
+    throw new Error("Random bytes length must be >= 16");
+  }
+  rnds[6] = rnds[6] & 15 | 64;
+  rnds[8] = rnds[8] & 63 | 128;
+  return unsafeStringify(rnds);
+}
+function v4(options, buf, offset) {
+  if (native.randomUUID && true && !options) {
+    return native.randomUUID();
+  }
+  return _v4(options);
 }
 function addTranslation() {
   ipcMain.handle(
@@ -61,6 +110,7 @@ function addTranslation() {
             (t) => t.original !== _word.original
           );
         }
+        entry.uuid = v4();
         translations.push(entry);
         fs.writeFileSync(
           filePath,
@@ -80,45 +130,42 @@ function createDictionary() {
     "createDictionary",
     async (_event, _route, _name) => {
       try {
+        const folderName = v4();
+        const folderPath = path$1.resolve(_route, folderName);
+        const filePath = path$1.join(folderPath, `${folderName}.json`);
+        const mdPath = path$1.join(folderPath, "MD-" + folderName);
         if (!fs.existsSync(_route)) {
           throw new Error(`The folder ${_route} does not exist.`);
         }
-        fs.writeFileSync(
-          path$1.join(_route, `${_name}.json`),
-          JSON.stringify([], null, 2),
-          "utf-8"
+        if (!fs.existsSync(folderPath)) {
+          fs.mkdirSync(folderPath, { recursive: true });
+        }
+        fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
+        fs.mkdirSync(mdPath, { recursive: true });
+        const configPath = path$1.join(
+          process.env.APP_ROOT || __dirname,
+          "public",
+          "user-config.json"
         );
-        const config = JSON.parse(
-          fs.readFileSync(
-            path$1.join(
-              process.env.APP_ROOT || __dirname,
-              "public",
-              "user-config.json"
-            ),
-            "utf-8"
-          )
-        );
-        config.dictionaries = config.dictionaries.filter(
-          (t) => t.name !== _name
-        );
-        config.dictionaries.push({
+        if (!fs.existsSync(configPath)) {
+          fs.writeFileSync(configPath, JSON.stringify({ dictionaries: {} }, null, 2), "utf-8");
+        }
+        const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+        if (!config.dictionaries) {
+          config.dictionaries = {};
+        }
+        config.dictionaries[folderName] = {
           name: _name,
-          path: _route
-        });
-        fs.writeFileSync(
-          path$1.join(
-            process.env.APP_ROOT || __dirname,
-            "public",
-            "user-config.json"
-          ),
-          JSON.stringify(config, null, 2),
-          "utf-8"
-        );
+          route: folderPath
+        };
+        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
         return {
-          success: true
+          success: true,
+          folderName,
+          folderPath
         };
       } catch (error) {
-        console.error("Error creating dictionary:", error);
+        console.error("❌ Error creating dictionary:", error);
         throw new Error("Failed to create dictionary.");
       }
     }
@@ -206,6 +253,7 @@ function registerIpcHandlers() {
   selectFolder();
   loadConfig();
   fetchMarkdown();
+  saveMarkdown();
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

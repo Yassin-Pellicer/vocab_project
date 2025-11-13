@@ -3,6 +3,9 @@ const electron = require("electron");
 const markdown = {
   fetchMarkdown: async (route, name) => {
     return await electron.ipcRenderer.invoke("fetchMarkdown", route, name);
+  },
+  saveMarkdown: async (route, name, markdown2) => {
+    return await electron.ipcRenderer.invoke("saveMarkdown", route, name, markdown2);
   }
 };
 const translations = {

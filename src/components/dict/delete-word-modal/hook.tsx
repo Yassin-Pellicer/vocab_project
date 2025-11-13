@@ -1,7 +1,7 @@
 import useConfigStore from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 
-export default function deleteWordModalHooks({word, route, name} : {word: TranslationEntry, route: string, name: string} ) {
+export default function deleteWordModalHooks({ word, route, name }: { word: TranslationEntry, route: string, name: string }) {
   const { loadTranslations } = useConfigStore();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

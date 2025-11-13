@@ -38,7 +38,9 @@ export default function DictionaryComponent({ route, name }: { route: string, na
             className="text-2xl font-bold text-gray-900 cursor-pointer"
             onClick={() => {
               setSelectedWord(word);
-              navigate("/markdown");
+              navigate(
+                `/markdown?path=${encodeURIComponent(route)}&name=${encodeURIComponent(name)}`,
+              );
             }}
           >
             {word.original}
@@ -81,7 +83,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
               value={searchField}
               onChange={(e) => setSearchField(e.target.value)}
               placeholder="Search for a word"
-              className="w-full border-2 text-sm border-gray-300 py-2 pl-10 pr-4 rounded-xl text-gray-700 focus:outline-none focus:border-blue-400"
+              className="w-full text-sm pl-14 pr-14 text-gray-700 focus:outline-none focus:border-blue-400 transition duration-150 ease-in-out"
             />
             {searchField && <X onClick={() => { setSearchField("") }} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />}
           </div>

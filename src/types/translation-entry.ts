@@ -1,4 +1,5 @@
 export interface TranslationEntry {
+  uuid?: string;
   original: string;
   translation: string;
   gender: string;
@@ -7,5 +8,4 @@ export interface TranslationEntry {
   type: string;
   observations: string;
   dateAdded: string;
-  markdownRoute: string;
 }

@@ -1,14 +1,16 @@
 import useConfigStore from "@/context/dictionary-context";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function useTranslationHooks({ route, name }: { route: string; name: string }) {
   const ITEMS_PER_PAGE = 10;
-  const { list, loadTranslations } = useConfigStore();
+  const { list, loadTranslations, selectedLetter, setSelectedLetter, searchField, setSearchField } = useConfigStore();
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
-  const [selectedLetter, setSelectedLetter] = useState("A");
-  const [searchField, setSearchField] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
+
+  const navigate = useNavigate();
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -53,60 +55,64 @@ export default function useTranslationHooks({ route, name }: { route: string; na
     setCurrentPage(1);
   };
 
-useEffect(() => {
-  const handleKeyDown = (e: KeyboardEvent) => {
-    const isLetter = /^[a-zA-Z]$/.test(e.key);
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const isLetter = /^[a-zA-Z]$/.test(e.key);
 
-    // Alt + Letter → select alphabet letter
-    if (e.altKey && isLetter) {
-      e.preventDefault();
-      setSelectedLetter(e.key.toUpperCase());
-      setCurrentPage(1);
-      return;
-    }
+      if (e.key === "F1") {
+        setSelectedWord(filteredWords?.length ? filteredWords[0] : paginatedWords?.[0] || null);
+        navigate(
+          `/markdown?path=${encodeURIComponent(route)}&name=${encodeURIComponent(name)}`,
+        );
+      }
 
-    // Enter → trigger Add Word modal
-    if (e.key === "Enter" && !e.altKey && !e.ctrlKey && !e.metaKey) {
-      e.preventDefault();
-      addWordButtonRef.current?.click();
-      return;
-    }
+      if (e.altKey && isLetter) {
+        e.preventDefault();
+        setSelectedLetter(e.key.toUpperCase());
+        setCurrentPage(1);
+        return;
+      }
 
-    // Typing → focus search field (only if not in dialog or input)
-    const dialogOpen = !!document.querySelector('[role="dialog"][data-state="open"]');
-    const active = document.activeElement;
-    const search = searchRef.current;
+      if (e.key === "Enter" && !e.altKey && e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        addWordButtonRef.current?.click();
+        return;
+      }
 
-    if (
-      isLetter &&
-      !e.altKey &&
-      !e.ctrlKey &&
-      !e.metaKey &&
-      !dialogOpen &&
-      active !== search &&
-      active?.tagName !== "INPUT" &&
-      active?.tagName !== "TEXTAREA" &&
-      active?.getAttribute("contenteditable") !== "true"
-    ) {
-      e.preventDefault();
-      search?.focus();
-      setSearchField((prev) => prev + e.key);
-    }
+      const dialogOpen = !!document.querySelector('[role="dialog"][data-state="open"]');
+      const active = document.activeElement;
+      const search = searchRef.current;
 
-    // Escape → blur active element
-    if (e.key === "Escape") {
-      e.preventDefault();
-      document.activeElement instanceof HTMLElement &&
-        document.activeElement.blur();
-    }
-  };
+      if (
+        isLetter &&
+        !e.altKey &&
+        !e.ctrlKey &&
+        !e.metaKey &&
+        !dialogOpen &&
+        active !== search &&
+        active?.tagName !== "INPUT" &&
+        active?.tagName !== "TEXTAREA" &&
+        active?.getAttribute("contenteditable") !== "true"
+      ) {
+        e.preventDefault();
+        search?.focus();
+        setSearchField(searchField + e.key);
+      }
 
-  window.addEventListener("keydown", handleKeyDown);
-  return () => window.removeEventListener("keydown", handleKeyDown);
-}, []);
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setSearchField("");
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+        return;
+      }
+    };
 
-
-
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [searchField]);
+  
   useEffect(() => {
     loadTranslations(route, name);
   }, []);

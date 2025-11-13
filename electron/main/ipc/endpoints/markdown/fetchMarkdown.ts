@@ -6,6 +6,11 @@ export default function fetchMarkdown() {
   ipcMain.handle("fetchMarkdown", async (_event, _route, _name) => {
     try {
       const filePath = path.join(_route, `${_name}.md`);
+
+      if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, "", "utf-8");
+      }
+
       const data = fs.readFileSync(filePath, "utf-8");
 
       return data;
@@ -15,3 +20,4 @@ export default function fetchMarkdown() {
     }
   });
 }
+

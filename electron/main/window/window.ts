@@ -18,7 +18,7 @@ export default function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
-    frame: false,
+    frame: true,
     resizable: true,
     transparent: false,
     hasShadow: true,

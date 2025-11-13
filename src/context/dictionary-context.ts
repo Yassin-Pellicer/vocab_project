@@ -18,6 +18,10 @@ interface ConfigState {
   data: {
     navMain: NavItem[];
   };
+  selectedLetter: string;
+  setSelectedLetter: (letter: string) => void;
+  searchField: string;
+  setSearchField: (field: string) => void;
   loadConfig: () => Promise<void>;
   setList: (list: TranslationEntry[]) => void;
   loadTranslations: (route: string, name: string) => Promise<void>;
@@ -26,17 +30,19 @@ interface ConfigState {
 
 export const useConfigStore = create<ConfigState>()((set) => {
   const list: TranslationEntry[] = [];
-
+const selectedLetter = "A";
+const searchField = "";
   const setList = (list: TranslationEntry[]) => set({ list });
-
+  const setSelectedLetter = (letter: string) => set({ selectedLetter: letter });
+  const setSearchField = (field: string) => set({ searchField: field });
   const setSelectedWord = (word: TranslationEntry | null) => set({ selectedWord: word });
 
   const loadConfig = async () => {
     try {
       const config = await window.api.loadConfig();
-      const dictItems = (config.dictionaries || []).map((dict: Dictionary) => ({
+      const dictItems = Object.entries(config.dictionaries || {}).map(([_key, dict]: [any, any]) => ({
         title: dict.name,
-        url: `/dictionary?name=${encodeURIComponent(dict.name)}&path=${encodeURIComponent(dict.path)}`,
+        url: `/dictionary?name=${encodeURIComponent(_key)}&path=${encodeURIComponent(dict.route)}`,
       }));
 
       set((state) => ({
@@ -74,16 +80,19 @@ export const useConfigStore = create<ConfigState>()((set) => {
           items: [
             { title: "Translate!", url: "/translation" },
             { title: "Flashcards", url: "" },
-            { title: "Translate!", url: "/markdown" },
           ],
         },
       ],
     },
     list,
-    selectedWord: null,           
+    selectedWord: null,    
+    selectedLetter,       
     setSelectedWord,             
     loadConfig,
     loadTranslations,
+    setSelectedLetter,
+    setSearchField,
+    searchField,
     setList,
   };
 });

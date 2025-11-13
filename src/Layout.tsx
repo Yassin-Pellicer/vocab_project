@@ -12,7 +12,7 @@ import { NavUser } from "./components/nav-user";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar/>
       <SidebarInset>
         <header style={{ WebkitAppRegion: "drag" } as React.CSSProperties} className="bg-background sticky justify-between top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <div className="flex flex-row items-center">

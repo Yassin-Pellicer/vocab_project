@@ -1,6 +1,7 @@
 import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
+import { v4 as uuid } from "uuid";
 import type { TranslationEntry } from "@/types/translation-entry";
 
 export default function addTranslation() {
@@ -30,6 +31,7 @@ export default function addTranslation() {
           );
         }
 
+        entry.uuid = uuid();
         translations.push(entry);
 
         fs.writeFileSync(
@@ -46,3 +48,4 @@ export default function addTranslation() {
     }
   );
 }
+

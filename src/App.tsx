@@ -15,6 +15,7 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
+          <Route path="/" element={<DictionaryPage />} />
           <Route path="/dictionary" element={<DictionaryPage />} />
           <Route path="/markdown" element={<MarkdownPage />} />
           <Route path="/translation" element={<TranslationGamePage />} />
