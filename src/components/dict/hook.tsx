@@ -23,7 +23,6 @@ export default function useTranslationHooks({ route, name }: { route: string; na
     let results = [];
 
     if (searchField.trim() === "") {
-      // In addition order mode, show all words; otherwise filter by selected letter
       if (isAdditionOrder) {
         results = list;
       } else {
@@ -33,11 +32,10 @@ export default function useTranslationHooks({ route, name }: { route: string; na
       }
     } else {
       results = list.filter((word) =>
-        word.original?.toLowerCase().includes(searchField.toLowerCase())
+        word.original?.toLowerCase().includes(searchField.toLowerCase()) || word.translation?.toLowerCase().includes(searchField.toLowerCase())
       );
     }
 
-    // Sort alphabetically unless addition order is enabled
     if (!isAdditionOrder) {
       return results.sort((a, b) => a.original.localeCompare(b.original));
     }
