@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 
 export default function loadConfig() {
-  ipcMain.handle("loadConfig", async (_event) => {
+  ipcMain.handle("loadConfig", async () => {
     try {
       const filePath = path.join(
         process.env.APP_ROOT || __dirname,

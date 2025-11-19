@@ -1,8 +1,7 @@
-import { ChevronLeft, ChevronRight, Calendar, MoreVertical, Book, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar, Search, X, ArrowLeftRight, ListOrdered } from "lucide-react";
 import { TranslationEntry } from "@/types/translation-entry";
 import useTranslationHooks from "./hook";
 import AddWordModal from "./add-word-modal";
-import AddDictModal from "./add-dict-modal";
 import EditWordModal from "./edit-word-modal";
 import { useNavigate } from "react-router-dom";
 import useConfigStore from "@/context/dictionary-context";
@@ -14,7 +13,9 @@ export default function DictionaryComponent({ route, name }: { route: string, na
 
   const {
     selectedLetter,
+    setSelectedLetter,
     currentPage,
+    setCurrentPage,
     alphabet,
     totalPages,
     paginatedWords,
@@ -25,7 +26,11 @@ export default function DictionaryComponent({ route, name }: { route: string, na
     setSearchField,
     searchRef,
     addWordButtonRef,
-    scrollRef } = useTranslationHooks({ route, name });
+    scrollRef,
+    isFlipped,
+    setIsFlipped,
+    isAdditionOrder,
+    setIsAdditionOrder } = useTranslationHooks({ route, name });
 
   const leftColumn = paginatedWords.filter((_, idx) => idx % 2 === 0);
   const rightColumn = paginatedWords.filter((_, idx) => idx % 2 === 1);
@@ -43,10 +48,10 @@ export default function DictionaryComponent({ route, name }: { route: string, na
               );
             }}
           >
-            {word.original}
+            {isFlipped ? word.translation : word.original}
           </h3>
           <p className="text-2xl">⇔</p>
-          <p className="italic mt-1">{word.translation}</p>
+          <p className="italic mt-1">{isFlipped ? word.original : word.translation}</p>
         </div>
         <EditWordModal word={word} route={route} name={name}></EditWordModal>
       </div>
@@ -89,14 +94,38 @@ export default function DictionaryComponent({ route, name }: { route: string, na
           </div>
         </div>
         <div className="flex flex-row gap-4 items-center">
-          <div className="flex flex-row items-center gap-4">
+          <div className="flex flex-row items-center gap-2">
+            <button
+              onClick={() => setIsFlipped(!isFlipped)}
+              className={`p-2 rounded-lg border transition-colors ${
+                isFlipped 
+                  ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700" 
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+              }`}
+              title="Flip translations"
+            >
+              <ArrowLeftRight size={18} />
+            </button>
+            <button
+              onClick={() => {
+                setIsAdditionOrder(!isAdditionOrder);
+                if (!isAdditionOrder) {
+                  setSelectedLetter("");
+                } else {
+                  setSelectedLetter("A");
+                }
+                setCurrentPage(1);
+              }}
+              className={`p-2 rounded-lg border transition-colors ${
+                isAdditionOrder 
+                  ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700" 
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+              }`}
+              title="Show in addition order"
+            >
+              <ListOrdered size={18} />
+            </button>
             <AddWordModal ref={addWordButtonRef} route={route} name={name}></AddWordModal>
-            <AddDictModal></AddDictModal>
-            <div className="bg-gray-100 flex flex-row items-center py-2 rounded-xl px-2 gap-2">
-              <Book size={16} />
-              <p className="text-sm">German</p>
-              <MoreVertical size={18} className="ml-2" />
-            </div>
           </div>
         </div>
       </div>
@@ -107,7 +136,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
               key={letter}
               onClick={() => handleLetterClick(letter)}
               className={`w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors flex-shrink-0 ${selectedLetter === letter
-                ? "bg-blue-600 text-black"
+                ? "bg-blue-600 text-white"
                 : "text-gray-400 hover:text-black"
                 }`}
             >
@@ -118,7 +147,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
         <div className="flex-1 flex flex-col px-4 py-2 min-w-0 h-full">
           <div className="flex-1 overflow-y-auto pr-2" ref={scrollRef}>
             {currentPage <= 1 && (
-              <div className={`mb-2 flex-shrink-0 ${searchField ? "hidden" : ""}`} >
+              <div className={`mb-2 flex-shrink-0 ${(searchField || isAdditionOrder) ? "hidden" : ""}`} >
                 <p className="text-8xl font-bold text-gray-900 mb-4">
                   {selectedLetter}
                 </p>

@@ -9,12 +9,13 @@ interface Dictionary {
 interface NavItem {
   title: string;
   url: string;
+  icon?: string;
   items?: NavItem[];
 }
 
 interface ConfigState {
   list: TranslationEntry[];
-  selectedWord: TranslationEntry | null; 
+  selectedWord: TranslationEntry | null;
   data: {
     navMain: NavItem[];
   };
@@ -22,6 +23,8 @@ interface ConfigState {
   setSelectedLetter: (letter: string) => void;
   searchField: string;
   setSearchField: (field: string) => void;
+  isFlipped: boolean;
+  setIsFlipped: (flipped: boolean) => void;
   loadConfig: () => Promise<void>;
   setList: (list: TranslationEntry[]) => void;
   loadTranslations: (route: string, name: string) => Promise<void>;
@@ -30,27 +33,48 @@ interface ConfigState {
 
 export const useConfigStore = create<ConfigState>()((set) => {
   const list: TranslationEntry[] = [];
-const selectedLetter = "A";
-const searchField = "";
+  const selectedLetter = "A";
+  const searchField = "";
+  const isFlipped = false;
   const setList = (list: TranslationEntry[]) => set({ list });
   const setSelectedLetter = (letter: string) => set({ selectedLetter: letter });
   const setSearchField = (field: string) => set({ searchField: field });
-  const setSelectedWord = (word: TranslationEntry | null) => set({ selectedWord: word });
+  const setIsFlipped = (flipped: boolean) => set({ isFlipped: flipped });
+  const setSelectedWord = (word: TranslationEntry | null) =>
+    set({ selectedWord: word });
 
   const loadConfig = async () => {
     try {
       const config = await window.api.loadConfig();
-      const dictItems = Object.entries(config.dictionaries || {}).map(([_key, dict]: [any, any]) => ({
-        title: dict.name,
-        url: `/dictionary?name=${encodeURIComponent(_key)}&path=${encodeURIComponent(dict.route)}`,
-      }));
+      const languageItems = Object.entries(config.dictionaries || {}).map(
+        ([_key, dict]: [any, any]) => ({
+          title: dict.name,
+          url: "",
+          items: [
+            {
+              title: "Dictionary",
+              icon: "BookOpen",
+              url: `/dictionary?name=${encodeURIComponent(
+                _key
+              )}&path=${encodeURIComponent(dict.route)}`,
+            },
+            {
+              title: "Translate",
+              icon: "Languages",
+              url: `/translation?name=${encodeURIComponent(
+                _key
+              )}&path=${encodeURIComponent(dict.route)}`,
+            },
+          ],
+        })
+      );
 
-      set((state) => ({
+      set(() => ({
         data: {
-          ...state.data,
-          navMain: state.data.navMain.map((item) =>
-            item.title === "Dictionaries" ? { ...item, items: dictItems } : item
-          ),
+          navMain: [
+            { title: "Home", url: "/" },
+            ...languageItems,
+          ],
         },
       }));
     } catch (err) {
@@ -71,29 +95,20 @@ const searchField = "";
 
   return {
     data: {
-      navMain: [
-        { title: "Home", url: "#" },
-        { title: "Dictionaries", url: "", items: [] },
-        {
-          title: "Practice",
-          url: "#",
-          items: [
-            { title: "Translate!", url: "/translation" },
-            { title: "Flashcards", url: "" },
-          ],
-        },
-      ],
+      navMain: [],
     },
     list,
-    selectedWord: null,    
-    selectedLetter,       
-    setSelectedWord,             
+    selectedWord: null,
+    selectedLetter,
+    setSelectedWord,
     loadConfig,
     loadTranslations,
     setSelectedLetter,
     setSearchField,
     searchField,
     setList,
+    isFlipped,
+    setIsFlipped,
   };
 });
 

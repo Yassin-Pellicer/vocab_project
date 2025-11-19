@@ -120,7 +120,7 @@ function addTranslation() {
         return { success: true };
       } catch (error) {
         console.error("Error adding translation:", error);
-        throw new Error(`Failed to add translation. ${error}`);
+        throw new Error(`Failed to add translation. ${_route}, ${error}`);
       }
     }
   );
@@ -200,7 +200,7 @@ function deleteTranslation() {
   );
 }
 function loadConfig() {
-  ipcMain.handle("loadConfig", async (_event) => {
+  ipcMain.handle("loadConfig", async () => {
     try {
       const filePath = path$1.join(
         process.env.APP_ROOT || __dirname,

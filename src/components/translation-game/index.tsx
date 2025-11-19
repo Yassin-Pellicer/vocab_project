@@ -18,13 +18,21 @@ export default function TranslationGame({ route, name }: { route: string, name: 
   } = useTranslationHooks({ route, name });
 
   if (!word || Object.keys(list).length === 0) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex flex-col items-center justify-center h-[calc(100vh-64px)] px-4">
+        <BookCheck size={64} className="text-gray-300 mb-4" />
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">No Words Available</h2>
+        <p className="text-gray-500 text-center">
+          No words have been added to this dictionary yet. Add some words to start practicing!
+        </p>
+      </div>
+    );
   }
 
   return (
     <div className="flex flex-col overflow-y-auto h-[calc(100vh-80px)] gap-4 pb-16">
       <div className="flex flex-row justify-between sticky top-0 bg-white p-2 shadow-sm z-[50]">
-        <p className="font-extrabold italic text-4xl ml-1">Translate!</p>
+        <p className="font-extrabold italic text-4xl ml-1 p-2">Translate!</p>
         <p className="flex flex-row gap-2 mr-2 text-xl items-center justify-center"> <BookCheck></BookCheck>{score.toFixed(2)}</p>
       </div>
       {history.length > 0 && history.map((word, _index) => (
@@ -83,7 +91,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
               onChange={(e) => setUserInput(e.target.value)}
               placeholder="Type the translation..."
               autoFocus
-              className="mt-1 border border-gray-300 rounded-sm p-2 text-sm"
+              className="mt-1 focus:outline-none border border-gray-300 rounded-xl pl-4 py-2 text-sm"
             />
             <button type="submit" className="rounded-full p-1 !bg-blue-500 text-white hover:!bg-blue-600 cursor-pointer !text-sm"><Check></Check></button>
           </div>

@@ -13,7 +13,7 @@ export default function useDictModalHooks() {
     }
   };
 
-  const handleSubmit = async (_e: any) => {
+  const handleSubmit = async () => {
     await (window.api).createDictionary(route, name);
     setRoute("");
     setName("");

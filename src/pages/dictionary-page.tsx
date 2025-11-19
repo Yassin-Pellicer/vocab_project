@@ -1,9 +1,10 @@
 import Dictionary from "@/components/dict";
+import { useSearchParams } from "react-router-dom";
 
 export default function DictionaryPage() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const path = urlParams.get('path') || "";
-  const name = urlParams.get('name') || "";
+  const [searchParams] = useSearchParams();
+  const path = searchParams.get('path') || "";
+  const name = searchParams.get('name') || "";
 
-  return <Dictionary route={path} name={name} />;
+  return <Dictionary key={`${path}-${name}`} route={path} name={name} />;
 }

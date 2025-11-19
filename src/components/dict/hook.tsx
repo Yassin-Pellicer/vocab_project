@@ -4,10 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function useTranslationHooks({ route, name }: { route: string; name: string }) {
-  const ITEMS_PER_PAGE = 10;
-  const { list, loadTranslations, selectedLetter, setSelectedLetter, searchField, setSearchField } = useConfigStore();
+  const ITEMS_PER_PAGE = 15;
+  const { list, loadTranslations, selectedLetter, setSelectedLetter, searchField, setSearchField, isFlipped, setIsFlipped } = useConfigStore();
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAdditionOrder, setIsAdditionOrder] = useState(!useConfigStore.getState().selectedLetter);
   const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
 
   const navigate = useNavigate();
@@ -22,17 +23,27 @@ export default function useTranslationHooks({ route, name }: { route: string; na
     let results = [];
 
     if (searchField.trim() === "") {
-      results = list.filter((word) =>
-        word.original?.toUpperCase().startsWith(selectedLetter?.toUpperCase?.() || "")
-      );
+      // In addition order mode, show all words; otherwise filter by selected letter
+      if (isAdditionOrder) {
+        results = list;
+      } else {
+        results = list.filter((word) =>
+          word.original?.toUpperCase().startsWith(selectedLetter?.toUpperCase?.() || "")
+        );
+      }
     } else {
       results = list.filter((word) =>
         word.original?.toLowerCase().includes(searchField.toLowerCase())
       );
     }
 
-    return results.sort((a, b) => a.original.localeCompare(b.original));
-  }, [list, selectedLetter, searchField]);
+    // Sort alphabetically unless addition order is enabled
+    if (!isAdditionOrder) {
+      return results.sort((a, b) => a.original.localeCompare(b.original));
+    }
+    
+    return results;
+  }, [list, selectedLetter, searchField, isAdditionOrder]);
 
   const totalPages = Math.ceil(filteredWords.length / ITEMS_PER_PAGE);
   const paginatedWords = filteredWords.slice(
@@ -53,6 +64,9 @@ export default function useTranslationHooks({ route, name }: { route: string; na
   const handleLetterClick = (letter: string) => {
     setSelectedLetter(letter);
     setCurrentPage(1);
+    if (isAdditionOrder) {
+      setIsAdditionOrder(false);
+    }
   };
 
   useEffect(() => {
@@ -68,8 +82,7 @@ export default function useTranslationHooks({ route, name }: { route: string; na
 
       if (e.altKey && isLetter) {
         e.preventDefault();
-        setSelectedLetter(e.key.toUpperCase());
-        setCurrentPage(1);
+        handleLetterClick(e.key.toUpperCase());
         return;
       }
 
@@ -117,6 +130,10 @@ export default function useTranslationHooks({ route, name }: { route: string; na
     loadTranslations(route, name);
   }, []);
 
+  useEffect(() => {
+    setSearchField("");
+  }, [selectedLetter]);
+
   return {
     list,
     history,
@@ -137,5 +154,9 @@ export default function useTranslationHooks({ route, name }: { route: string; na
     scrollRef,
     searchRef,
     addWordButtonRef,
+    isFlipped,
+    setIsFlipped,
+    isAdditionOrder,
+    setIsAdditionOrder,
   };
 }

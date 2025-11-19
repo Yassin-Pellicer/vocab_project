@@ -43,7 +43,7 @@ export default function addTranslation() {
         return { success: true };
       } catch (error) {
         console.error("Error adding translation:", error);
-        throw new Error(`Failed to add translation. ${error}`);
+        throw new Error(`Failed to add translation. ${_route}, ${error}`);
       }
     }
   );
