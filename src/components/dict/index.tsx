@@ -76,6 +76,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
       )}
     </div>
   );
+  
   return (
     <div>
       <div className="bg-background flex justify-between items-center h-16 border-b p-4">

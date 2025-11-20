@@ -100,12 +100,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Breadcrumb>
             )}
           </div>
-          <div className="flex flex-row gap-4 items-center">
-            <div className="flex flex-row items-center gap-4">
-              <AddDictModal></AddDictModal>
-              <div className="bg-black flex flex-row items-center py-2 rounded-xl px-2 gap-2">
-                <Settings size={18} className="!text-white" />
-              </div>
+          <div className="flex flex-row items-center gap-2">
+            <AddDictModal></AddDictModal>
+            <div className="bg-black flex flex-row items-center py-2 rounded-xl px-2 gap-2">
+              <Settings size={18} className="!text-white" />
             </div>
           </div>
         </header>

@@ -1,6 +1,8 @@
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from 'remark-breaks';
 import "highlight.js/styles/github.css";
 import {
   Calendar,
@@ -84,33 +86,30 @@ export default function MarkdownEditor({
             <div className="flex flex-row gap-2 text-sm">
               <button
                 onClick={() => setMode("edit")}
-                className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${
-                  mode === "edit"
+                className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${mode === "edit"
                     ? "!bg-black text-white"
                     : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
-                } `}
+                  } `}
               >
                 <Edit3 size={16} />
                 Edit
               </button>
               <button
                 onClick={() => setMode("split")}
-                className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${
-                  mode === "split"
+                className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${mode === "split"
                     ? "!bg-black text-white"
                     : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
-                } `}
+                  } `}
               >
                 <Split size={16} />
                 Split
               </button>
               <button
                 onClick={() => setMode("preview")}
-                className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${
-                  mode === "preview"
+                className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${mode === "preview"
                     ? "!bg-black text-white"
                     : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
-                } `}
+                  } `}
               >
                 <Eye size={16} />
                 Preview
@@ -126,15 +125,13 @@ export default function MarkdownEditor({
           </div>
           <div className="flex justify-center">
             <button onClick={() => setCollapsed(!collapsed)} className="">
-              {collapsed ? (
-                <ChevronDown></ChevronDown>
-              ) : (
-                <ChevronUp></ChevronUp>
-              )}
+              {collapsed ? <ChevronDown /> : <ChevronUp />}
             </button>
           </div>
         </div>
       </div>
+
+      {/* Editor + Preview */}
       <div className="mt-4 border-t-1 border-gray-200 w-full" />
       <div className="flex-1 flex overflow-hidden justify-center mt-4 max-w-[800px] px-4 w-full">
         {(mode === "edit" || mode === "split") && (
@@ -151,15 +148,25 @@ export default function MarkdownEditor({
             />
           </div>
         )}
+
         {(mode === "preview" || mode === "split") && (
           <div
             ref={previewRef}
-            className={`${
-              mode === "split" ? "w-1/2" : "w-full"
-            } overflow-y-auto`}
+            className={`${mode === "split" ? "w-1/2" : "w-full"
+              } overflow-y-auto`}
           >
             <div className="border-l mt-[-20px] border-gray-300 px-4 markdown mx-auto">
-              <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeHighlight]}>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm, remarkBreaks]}
+                rehypePlugins={[rehypeRaw, rehypeHighlight]}
+                components={{
+                  p: ({ node, ...props }) => <p className="mb-2" {...props} />,
+                  // Ensure proper table styling
+                  table: ({ node, ...props }) => <table className="border-collapse border border-gray-300 my-4" {...props} />,
+                  th: ({ node, ...props }) => <th className="border border-gray-300 px-4 py-2 bg-gray-100" {...props} />,
+                  td: ({ node, ...props }) => <td className="border border-gray-300 px-4 py-2" {...props} />,
+                }}
+              >
                 {markdown}
               </ReactMarkdown>
             </div>
