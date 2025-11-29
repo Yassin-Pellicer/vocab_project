@@ -107,7 +107,7 @@ function addTranslation() {
         let translations = Array.isArray(json) ? json : [];
         if (_word) {
           translations = translations.filter(
-            (t) => t.original !== _word.original
+            (t) => t.uuid !== _word.uuid
           );
         }
         entry.uuid = v4();

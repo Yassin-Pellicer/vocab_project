@@ -27,7 +27,7 @@ export default function addTranslation() {
 
         if (_word) {
           translations = translations.filter(
-            (t: TranslationEntry) => t.original !== _word.original
+            (t: TranslationEntry) => t.uuid !== _word.uuid
           );
         }
 
