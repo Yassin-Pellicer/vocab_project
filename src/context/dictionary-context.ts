@@ -86,6 +86,7 @@ export const useConfigStore = create<ConfigState>()((set) => {
     try {
       const data = await (window.api as any).requestTranslations(route, name);
       if (data) {
+        console.log("Translations loaded:", data);
         setList(data);
       }
     } catch (error) {

@@ -1,5 +1,5 @@
-import { forwardRef } from "react"
-import { Trash, WholeWord } from "lucide-react"
+import { forwardRef } from "react";
+import { Trash, WholeWord } from "lucide-react";
 import {
   Dialog,
   DialogClose,
@@ -9,13 +9,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import useWordModalHooks from "./hook"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+} from "@/components/ui/dialog";
+import useWordModalHooks from "./hook";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const AddTranslationModal = forwardRef<
   HTMLButtonElement,
@@ -33,7 +38,7 @@ const AddTranslationModal = forwardRef<
     addDefinitionToPair,
     removeDefinitionFromPair,
     handleSubmit,
-  } = useWordModalHooks({ route, name })
+  } = useWordModalHooks({ route, name });
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -57,30 +62,34 @@ const AddTranslationModal = forwardRef<
             </DialogDescription>
           </DialogHeader>
 
-          <div className="grid divide-y gap-4">
+          <div className="flex flex-col w-full gap-4">
             {formData.pair.map((pair, pairIndex) => (
-              <div
-                key={pairIndex}
-                className=" bg-muted/20 relative"
-              >
-                <p className="font-semibold text-sm mb-2">
-                  Pair {pairIndex + 1}
+              <div key={pairIndex} className="bg-muted/20 relative">
+                <p className="font-semibold text-lg border rounded-t-xl p-2 flex items-center gap-2">
+                  <WholeWord size={24} className="" /> Pair {pairIndex + 1}
+                  {pairIndex === 0 && (
+                    <span className="text-sm italic text-muted-foreground ml-4">
+                      (this one will be the first one to appear in the dictionary)
+                    </span>
+                  )}
                 </p>
 
-                {/* Remove whole pair */}
-                  <Button
-                    variant="destructive"
-                    size="xs"
-                    className="absolute rounded-xl p-2 top-0 right-0"
-                    type="button"
-                    onClick={() => removePair(pairIndex)}
-                  >
-                    <Trash></Trash>
-                  </Button>
+                <Button
+                  variant="destructive"
+                  size="xs"
+                  className="absolute rounded-xl p-4 top-0 right-0 !bg-transparent !text-black hover:!text-red-600 hover:!cursor-pointer"
+                  type="button"
+                  onClick={() => removePair(pairIndex)}
+                >
+                  <Trash></Trash>
+                </Button>
 
-                <div className="flex flex-row gap-4 items-center">
+                <div className="flex flex-row border-x gap-6 p-4 items-center">
                   <div className="flex flex-col">
-                    <Label htmlFor="original" className="mb-2 text-sm font-medium">
+                    <Label
+                      htmlFor="original"
+                      className="mb-2 text-sm font-medium"
+                    >
                       Original
                     </Label>
                     <Input
@@ -98,7 +107,9 @@ const AddTranslationModal = forwardRef<
                         value={pair.original.gender || "none"}
                         onValueChange={(val) =>
                           handlePairChange(
-                            { target: { value: val === "none" ? "" : val } } as any,
+                            {
+                              target: { value: val === "none" ? "" : val },
+                            } as any,
                             pairIndex,
                             "original.gender"
                           )
@@ -119,7 +130,9 @@ const AddTranslationModal = forwardRef<
                         value={pair.original.gender || "none"}
                         onValueChange={(val) =>
                           handlePairChange(
-                            { target: { value: val === "none" ? "" : val } } as any,
+                            {
+                              target: { value: val === "none" ? "" : val },
+                            } as any,
                             pairIndex,
                             "original.gender"
                           )
@@ -135,28 +148,30 @@ const AddTranslationModal = forwardRef<
                           <SelectItem value="n">Neuter</SelectItem>
                         </SelectContent>
                       </Select>
-
                     </div>
                   </div>
                   <p className="text-4xl mt-6 text-muted-foreground">⇔</p>
                   <div className="flex flex-col">
-                    <Label htmlFor="translation" className="mb-2 text-sm font-medium">
+                    <Label
+                      htmlFor="translation"
+                      className="mb-2 text-sm font-medium"
+                    >
                       Translation
                     </Label>
                     <div className="gap-2 flex flex-col">
-                    {pair.translations.map((t, tIndex) => (
-                      <div key={tIndex} className="flex gap-2">
-                        <Input
-                          placeholder="translation"
-                          value={t.word}
-                          onChange={(e) =>
-                            handlePairChange(
-                              e,
-                              pairIndex,
-                              `translations.${tIndex}.word`
-                            )
-                          }
-                        />
+                      {pair.translations.map((t, tIndex) => (
+                        <div key={tIndex} className="flex gap-2">
+                          <Input
+                            placeholder="translation"
+                            value={t.word}
+                            onChange={(e) =>
+                              handlePairChange(
+                                e,
+                                pairIndex,
+                                `translations.${tIndex}.word`
+                              )
+                            }
+                          />
                           <Button
                             size="sm"
                             variant="outline"
@@ -167,8 +182,8 @@ const AddTranslationModal = forwardRef<
                           >
                             ✕
                           </Button>
-                      </div>
-                    ))}
+                        </div>
+                      ))}
                     </div>
                     <Button
                       variant="outline"
@@ -180,9 +195,8 @@ const AddTranslationModal = forwardRef<
                     </Button>
                   </div>
                 </div>
-
                 {/* DEFINITIONS */}
-                <div className="grid gap-2 mt-4 mb-8">
+                <div className="grid border p-3 gap-2 rounded-b-xl">
                   <Label className="font-medium">Definitions</Label>
 
                   {pair.definitions.map((d, dIndex) => (
@@ -198,16 +212,16 @@ const AddTranslationModal = forwardRef<
                           )
                         }
                       />
-                        <Button
-                          size="sm"
-                          type="button"
-                          variant="outline"
-                          onClick={() =>
-                            removeDefinitionFromPair(pairIndex, dIndex)
-                          }
-                        >
-                          ✕
-                        </Button>
+                      <Button
+                        size="sm"
+                        type="button"
+                        variant="outline"
+                        onClick={() =>
+                          removeDefinitionFromPair(pairIndex, dIndex)
+                        }
+                      >
+                        ✕
+                      </Button>
                     </div>
                   ))}
 
@@ -222,7 +236,6 @@ const AddTranslationModal = forwardRef<
               </div>
             ))}
 
-            {/* ADD NEW PAIR */}
             <Button
               variant="outline"
               type="button"
@@ -250,8 +263,8 @@ const AddTranslationModal = forwardRef<
         </DialogContent>
       </form>
     </Dialog>
-  )
-})
+  );
+});
 
-AddTranslationModal.displayName = "AddTranslationModal"
-export default AddTranslationModal
+AddTranslationModal.displayName = "AddTranslationModal";
+export default AddTranslationModal;
