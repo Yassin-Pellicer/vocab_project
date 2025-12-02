@@ -1,4 +1,5 @@
 import { useConfigStore } from "@/context/dictionary-context";
+import { OriginalTranslationPair } from "@/types/original-translation-pair";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useState } from "react";
 
@@ -6,6 +7,22 @@ export default function useWordModalHooks({word, route, name }: { word: Translat
 
   const { loadTranslations } = useConfigStore();
   const [formData, setFormData] = useState<TranslationEntry>(structuredClone(word));
+
+  const emptyPair: OriginalTranslationPair = {
+    original: {
+      word: "",
+      gender: "",
+      number: "",
+    },
+    translations: [
+      {
+        word: "",
+        gender: "",
+        number: "",
+      },
+    ],
+    definitions: [],
+  };
 
   const handlePairChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -28,7 +45,7 @@ export default function useWordModalHooks({word, route, name }: { word: Translat
   const addPair = () => {
     setFormData({
       ...formData,
-      pair: [...formData.pair, structuredClone(word.pair[0])],
+      pair: [...formData.pair, structuredClone(emptyPair)],
     });
   };
 

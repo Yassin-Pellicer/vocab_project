@@ -113,13 +113,13 @@ export default function DictionaryComponent({ route, name }: { route: string, na
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-8">
                 <div className="space-y-4 p-2">
                   {leftColumn.map((word, idx) => (
-                    <WordCard key={`left-${idx}`} word={word} route={route} name={name} />
+                    <WordCard key={`left-${idx}-${word.uuid}`} word={word} route={route} name={name} />
                   ))}
                 </div>
 
                 <div className="space-y-4">
                   {rightColumn.map((word, idx) => (
-                    <WordCard key={`right-${idx}`} word={word} route={route} name={name} />
+                    <WordCard key={`right-${idx}-${word.uuid}`} word={word} route={route} name={name} />
                   ))}
                 </div>
               </div>
