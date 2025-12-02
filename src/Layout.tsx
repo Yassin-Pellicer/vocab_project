@@ -39,7 +39,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const getCurrentPage = () => {
     if (location.pathname === "/dictionary") return "Dictionary";
     if (location.pathname === "/translation") return "Translate";
-    if (location.pathname === "/markdown" && selectedWord) return selectedWord.original;
+    if (location.pathname === "/markdown" && selectedWord) return selectedWord.pair[0].original.word;
     return null;
   };
 

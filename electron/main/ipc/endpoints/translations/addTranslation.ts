@@ -10,7 +10,7 @@ export default function addTranslation() {
     async (
       _event,
       entry: TranslationEntry,
-      _word: TranslationEntry,
+      _word: string,
       _route: string,
       _name: string
     ) => {
@@ -27,7 +27,7 @@ export default function addTranslation() {
 
         if (_word) {
           translations = translations.filter(
-            (t: TranslationEntry) => t.uuid !== _word.uuid
+            (t: TranslationEntry) => t.uuid !== _word
           );
         }
 

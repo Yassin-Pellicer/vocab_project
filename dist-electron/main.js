@@ -107,7 +107,7 @@ function addTranslation() {
         let translations = Array.isArray(json) ? json : [];
         if (_word) {
           translations = translations.filter(
-            (t) => t.uuid !== _word.uuid
+            (t) => t.uuid !== _word
           );
         }
         entry.uuid = v4();
@@ -184,7 +184,7 @@ function deleteTranslation() {
         const json = JSON.parse(data);
         let translations = Array.isArray(json) ? json : [];
         translations = translations.filter(
-          (t) => t.original !== _word.original
+          (t) => t.uuid !== _word
         );
         fs.writeFileSync(
           filePath,

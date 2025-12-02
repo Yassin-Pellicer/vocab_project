@@ -1,50 +1,90 @@
-import useConfigStore from "@/context/dictionary-context";
+import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useState } from "react";
 
-export default function useWordModalHooks({ word, route, name }: { word: TranslationEntry, route: string, name: string }) {
-  const [formData, setFormData] = useState<TranslationEntry>(word);
+export default function useWordModalHooks({word, route, name }: { word: TranslationEntry, route: string; name: string }) {
+
   const { loadTranslations } = useConfigStore();
+  const [formData, setFormData] = useState<TranslationEntry>(structuredClone(word));
 
-  const handleChange = (
+  const handlePairChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    index?: number
+    pairIndex: number,
+    path: string
   ) => {
-    const { name, value } = e.target;
-    if (name === "definition" && typeof index === "number") {
-      const newDefs = [...formData.definitions];
-      newDefs[index] = value;
-      setFormData({ ...formData, definitions: newDefs });
-    } else {
-      setFormData({ ...formData, [name]: value });
+    const newPairs = [...formData.pair];
+    const parts = path.split(".");
+    let obj: any = newPairs[pairIndex];
+
+    for (let i = 0; i < parts.length - 1; i++) {
+      obj = obj[parts[i]];
     }
+
+    obj[parts[parts.length - 1]] = e.target.value;
+
+    setFormData({ ...formData, pair: newPairs });
   };
 
-  const addDefinition = () => {
-    setFormData({ ...formData, definitions: [...formData.definitions, ""] });
+  const addPair = () => {
+    setFormData({
+      ...formData,
+      pair: [...formData.pair, structuredClone(word.pair[0])],
+    });
   };
 
-  const removeDefinition = (index: number) => {
-    const newDefs = formData.definitions.filter((_, i) => i !== index);
-    setFormData({ ...formData, definitions: newDefs });
+  const removePair = (pairIndex: number) => {
+    const updated = formData.pair.filter((_, idx) => idx !== pairIndex);
+    setFormData({ ...formData, pair: updated });
+  };
+
+  const addTranslationToPair = (pairIndex: number) => {
+    const updated = [...formData.pair];
+    updated[pairIndex].translations.push({ word: "", gender: "", number: "" });
+    setFormData({ ...formData, pair: updated });
+  };
+
+  const removeTranslationFromPair = (pairIndex: number, tIndex: number) => {
+    const updated = [...formData.pair];
+    updated[pairIndex].translations = updated[pairIndex].translations.filter(
+      (_, i) => i !== tIndex
+    );
+    setFormData({ ...formData, pair: updated });
+  };
+
+  const addDefinitionToPair = (pairIndex: number) => {
+    const updated = [...formData.pair];
+    updated[pairIndex].definitions.push("");
+    setFormData({ ...formData, pair: updated });
+  };
+
+  const removeDefinitionFromPair = (pairIndex: number, dIndex: number) => {
+    const updated = [...formData.pair];
+    updated[pairIndex].definitions = updated[pairIndex].definitions.filter(
+      (_, i) => i !== dIndex
+    );
+    setFormData({ ...formData, pair: updated });
   };
 
   const handleSubmit = async () => {
     try {
-      if (!formData.original || !formData.translation) return;
-      await (window.api).addTranslation(formData, word, route, name);
+      if (formData.pair.length === 0) return;
+
+      await (window.api).addTranslation(formData, word.uuid, route, name);
       loadTranslations(route, name);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Failed to add translation:", error);
     }
   };
 
   return {
-    handleChange,
-    addDefinition,
-    removeDefinition,
-    handleSubmit,
     formData,
+    handlePairChange,
+    addPair,
+    removePair,
+    addTranslationToPair,
+    removeTranslationFromPair,
+    addDefinitionToPair,
+    removeDefinitionFromPair,
+    handleSubmit,
   };
 }

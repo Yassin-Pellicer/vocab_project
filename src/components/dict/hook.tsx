@@ -27,17 +27,17 @@ export default function useTranslationHooks({ route, name }: { route: string; na
         results = list;
       } else {
         results = list.filter((word) =>
-          word.original?.toUpperCase().startsWith(selectedLetter?.toUpperCase?.() || "")
+          word.pair.some((p) => p.original?.word.toUpperCase().startsWith(selectedLetter?.toUpperCase?.()))
         );
       }
     } else {
       results = list.filter((word) =>
-        word.original?.toLowerCase().includes(searchField.toLowerCase()) || word.translation?.toLowerCase().includes(searchField.toLowerCase())
+        word.pair.some((p) => p.original?.word.toLowerCase().includes(searchField.toLowerCase()) || p.translations?.some(t => t.word.toLowerCase().includes(searchField.toLowerCase())))
       );
     }
 
     if (!isAdditionOrder) {
-      return results.sort((a, b) => a.original.localeCompare(b.original));
+      return results.sort((a, b) => a.pair[0].original.word.localeCompare(b.pair[0].original.word));
     }
     
     return results;

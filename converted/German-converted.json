@@ -1,0 +1,601 @@
+[
+  {
+    "original": "caminar",
+    "translation": "gehen / wandern",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Andar a pie",
+      "Transitar despacio, moverse con paso normal"
+    ],
+    "type": "verbo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "cantar",
+    "translation": "singen",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Producir sonidos musicales con la voz",
+      "Expresar algo con poesía, música o melodía"
+    ],
+    "type": "verbo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "capturar",
+    "translation": "fangen / erfassen",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Hacer preso, prender",
+      "Tomar, captar (imagen, sonido)",
+      "Aprehender"
+    ],
+    "type": "verbo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "carro",
+    "translation": "Wagen / Auto",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Vehículo de ruedas para transporte terrestre",
+      "Carreta, vehículo ligero tirado por animales"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "casa",
+    "translation": "Haus",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Edificio destinado a vivienda",
+      "Hogar, lugar de residencia"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "caso",
+    "translation": "Fall / Fall (Sache)",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Suceso, acontecimiento",
+      "Situación, circunstancia",
+      "Instancia de algo"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "causa",
+    "translation": "Ursache / Grund",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Motivo por el cual sucede algo",
+      "Razón, razón principal de algo"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "celebrar",
+    "translation": "feiern",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Festejar, conmemorar",
+      "Realizar actos con motivo de algo"
+    ],
+    "type": "verbo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "cemento",
+    "translation": "Zement",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Material aglutinante usado en construcción",
+      "Polvo gris que, al mezclarse con agua, fragua"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "cena",
+    "translation": "Abendessen",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Comida que se hace por la noche",
+      "Momento de alimentación vespertina"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "cerrar",
+    "translation": "schließen / zumachen",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Hacer que algo deje de estar abierto",
+      "Terminar algo, concluir"
+    ],
+    "type": "verbo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "certeza",
+    "translation": "Gewissheit / Sicherheit",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Seguridad, convicción firme",
+      "Ausencia de duda"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "cielo",
+    "translation": "Himmel",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Espacio que aparece sobre la tierra; atmósfera visible",
+      "Suma en que se valora lo que se pagan las cuentas (cielo contable, figuradamente)"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "cierta",
+    "translation": "gewisse / gewisse",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Indefinida, no especificada completamente",
+      "Que tiene seguridad"
+    ],
+    "type": "adjetivo / pronombre",
+    "observations": "Forma femenina pero se usa también 'cierto' (m)",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "cierto",
+    "translation": "gewiss / richtig",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Que es verdad; verdadero",
+      "Determinado, definido"
+    ],
+    "type": "adjetivo / pronombre",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "circular",
+    "translation": "zirkulieren / kreisförmig",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Moverse en forma de circunferencia",
+      "Difundir, dar a conocer algo",
+      "Que tiene forma de círculo"
+    ],
+    "type": "verbo / adjetivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "cisne",
+    "translation": "Schwan",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Ave acuática de cuello largo y plumaje blanco",
+      "Metáfora de la elegancia"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "ciudad",
+    "translation": "Stadt",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Concentración de población, núcleo urbano",
+      "Municipio grande y con servicios"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "árbol",
+    "translation": "Baum",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Planta leñosa de tronco elevado que se ramifica",
+      "Representación gráfica de lineamientos (árbol genealógico, árbol de decisiones)"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "banco",
+    "translation": "Bank",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Asiento largo para varias personas",
+      "Entidad financiera",
+      "Conjunto de peces agrupados (banco de peces)",
+      "Institución donde se depositan valores o moneda"
+    ],
+    "type": "sustantivo",
+    "observations": "Múltiples acepciones",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "correr",
+    "translation": "laufen / rennen",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Andar rápidamente, con tanto impulso que, entre un paso y el siguiente, los pies quedan por un momento en el aire",
+      "Hacer algo con rapidez, darse prisa",
+      "Dicho de un fluido: moverse progresivamente de una parte a otra (flujo)",
+      "Ir, pasar o extenderse de una parte a otra",
+      "Discurrir (tiempo, eventos)",
+      "Administrar, operar (un negocio, proyecto)"
+    ],
+    "type": "verbo",
+    "observations": "Verbo muy usado, con muchos usos literales y figurados",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "dulce",
+    "translation": "süß / Süßigkeit",
+    "gender": "-",
+    "number": "sing",
+    "definitions": [
+      "Que tiene sabor a azúcar",
+      "Confección azucarada (postre, golosina)",
+      "Tierno, cariñoso en modo de comportarse",
+      "Que es amable, grato al oído o al gusto"
+    ],
+    "type": "adjetivo / sustantivo",
+    "observations": "Puede usarse como sustantivo o adjetivo",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "estrella",
+    "translation": "Stern",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Cuerpo celeste que brilla en el cielo nocturno",
+      "Persona famosa o destacada en su ámbito",
+      "Objeto o adorno en forma de estrella"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "fuerte",
+    "translation": "stark / fest",
+    "gender": "-",
+    "number": "sing",
+    "definitions": [
+      "Que tiene gran fuerza física o moral",
+      "Sólido, resistente",
+      "Intenso, vigoroso (por ejemplo, viento fuerte)",
+      "Persona que resiste adversidades"
+    ],
+    "type": "adjetivo / sustantivo",
+    "observations": "Puede tener distintos matices en alemán y en español",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "hogar",
+    "translation": "Heim",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Lugar de residencia familiar",
+      "Fuego doméstico, chimenea",
+      "Ámbito íntimo y afectivo de la vivienda"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "ira",
+    "translation": "Zorn / Wut",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Sentimiento de enojo intenso",
+      "Cólera violenta",
+      "Ira contra alguien o algo"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "jugar",
+    "translation": "spielen",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Participar en un juego o deporte",
+      "Desempeñar un rol o función",
+      "Actuar con ligereza, bromear"
+    ],
+    "type": "verbo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "camino",
+    "translation": "Weg / Pfad",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Vía o sendero por donde se transita",
+      "Método o procedimiento para lograr algo",
+      "Curso de la vida (camino que uno toma)"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "cruzar",
+    "translation": "überqueren / kreuzen",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Pasar de un lado a otro (calle, río)",
+      "Intersecarse (carreteras que cruzan)",
+      "Cruzar brazos, cruzar mirada"
+    ],
+    "type": "verbo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "esperanza",
+    "translation": "Hoffnung",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Confianza en que ocurrirá algo deseado",
+      "Expectativa de alcanzar algo que se desea"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "llama",
+    "translation": "Flamme / Llamada",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Lengua de fuego",
+      "Llamada telefónica o convocatoria",
+      "Acción de llamar"
+    ],
+    "type": "sustantivo / verbo",
+    "observations": "Homónima de 'llamar' en formas verbales",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "mirar",
+    "translation": "schauen / ansehen",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Dirigir la vista hacia algo",
+      "Observar con cuidado",
+      "Considerar, evaluar"
+    ],
+    "type": "verbo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "roto",
+    "translation": "kaputt / gebrochen",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Que está quebrado o no funciona",
+      "Desgastado o rasgado por el uso"
+    ],
+    "type": "adjetivo / participio",
+    "observations": "Participio de 'romper'",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "sombra",
+    "translation": "Schatten",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Oscuridad proyectada por un cuerpo que impide el paso de la luz",
+      "Lugar protegido del sol",
+      "Representación borrosa o indistinta de algo"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "tierra",
+    "translation": "Erde / Boden",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Superficie del planeta donde vivimos",
+      "Material del suelo",
+      "Territorio o país"
+    ],
+    "type": "sustantivo",
+    "observations": "Puede referirse tanto al planeta como al material físico",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "valiente",
+    "translation": "mutig / tapfer",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Que tiene valor ante el peligro o la adversidad",
+      "Que actúa con decisión y coraje"
+    ],
+    "type": "adjetivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "viento",
+    "translation": "Wind",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Corriente de aire producida en la atmósfera",
+      "Movimiento rápido del aire",
+      "Metáfora de algo que pasa sin dejar huella"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "viajar",
+    "translation": "reisen",
+    "gender": "-",
+    "number": "-",
+    "definitions": [
+      "Trasladarse de un lugar a otro, generalmente a larga distancia",
+      "Recorrer distintos lugares por placer o trabajo"
+    ],
+    "type": "verbo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "cosa",
+    "translation": "Dinge",
+    "gender": "neutro",
+    "number": "singular",
+    "definitions": [
+      "cosa, cualquier cosa inmaterial"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-11-02"
+  },
+  {
+    "original": "cambio",
+    "translation": "Wechsel / Wandel",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Acción y efecto de cambiar",
+      "Variación de estado, condición o propiedad"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "gente",
+    "translation": "Leute",
+    "gender": "f",
+    "number": "plur",
+    "definitions": [
+      "Conjunto de personas",
+      "Público",
+      "Personas en general",
+      "Mucha gente"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "paz",
+    "translation": "Frieden",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Situación de tranquilidad sin guerra ni conflicto",
+      "Quietud interior",
+      "Lo que dijo Jesús de Nazaret una vez"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "noche",
+    "translation": "Nacht",
+    "gender": "f",
+    "number": "sing",
+    "definitions": [
+      "Parte del día entre el ocaso y el alba",
+      "Oscuridad",
+      "Tiempo de dormir",
+      "A dormir la mona"
+    ],
+    "type": "sustantivo",
+    "observations": "",
+    "dateAdded": "2025-10-14"
+  },
+  {
+    "original": "Amor",
+    "translation": "Liebe",
+    "gender": "m",
+    "number": "sing",
+    "definitions": [
+      "Sentimiento intenso del ser humano que, partiendo de su propia insuficiencia, necesita y busca el encuentro y unión con otro ser"
+    ],
+    "type": "sustantivo",
+    "observations": "Muy usado",
+    "dateAdded": "2025-10-14"
+  }
+]

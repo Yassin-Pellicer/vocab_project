@@ -51,8 +51,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
           </div>
           <div className="flex flex-row justify-between">
             <p className="text-gray-400 text-sm pb-1">
-              <b>{word?.type}, </b>
-              {word?.gender}., {word?.number}.
+              <b>{word?.type}</b>
             </p>
             <span className="flex flex-row items-center align-center gap-2 text-gray-600 text-sm">
               <Calendar size="14"></Calendar> {word?.dateAdded}{" "}
@@ -64,9 +63,6 @@ export default function TranslationGame({ route, name }: { route: string, name: 
               <sup>{index + 1}</sup> {definition}.
             </div>
           ))}
-          {word.observations && (
-            <p className="text-gray-600 italic text-xs mt-2">{word.observations}</p>
-          )}
           <div className="flex flex-row gap-1 align-center items-center mt-2">
             {word.message && <p className="">{word.message}</p>}
             {word.status === "correct" && word.hintsUsed ? (
@@ -83,7 +79,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
       <form className="px-4" onSubmit={handleSubmit}>
         <div className="flex align-center justify-between items-center ">
           <div className="flex flex-row gap-2 items-center">
-            <h3 className="text-2xl font-bold text-gray-900">{word.translation}</h3>
+            <h3 className="text-2xl font-bold text-gray-900">{word.pair[word.selectedPairIndex].translations[0].word}</h3>
             <p className="text-2xl">⇔</p>
             <input
               type="text"
@@ -99,7 +95,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
         <div className="flex flex-row justify-between">
           <p className="text-gray-400 text-sm pb-1">
             <b>{word?.type}, </b>
-            {word?.gender}., {word?.number}.
+            {word?.pair[word.selectedPairIndex].original.gender}., {word?.pair[word.selectedPairIndex].original.number}.
           </p>
           <span className="flex flex-row items-center align-center gap-2 text-gray-400 text-sm">
             <Calendar size="14"></Calendar> {word?.dateAdded}{" "}
@@ -116,9 +112,6 @@ export default function TranslationGame({ route, name }: { route: string, name: 
           </button>
           {hint && <p className="italic text-gray-600 text-sm ml-2">{hint}</p>}
         </div>
-        {word.observations && (
-          <p className="text-gray-600 italic text-xs mt-2">{word.observations}</p>
-        )}
         {message && <p className="mt-2">{message}</p>}
       </form>
     </div>

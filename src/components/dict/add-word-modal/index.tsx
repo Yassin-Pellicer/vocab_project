@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { OriginalTranslationPair } from "@/types/original-translation-pair";
 
 const AddTranslationModal = forwardRef<
   HTMLButtonElement,
@@ -63,7 +64,7 @@ const AddTranslationModal = forwardRef<
           </DialogHeader>
 
           <div className="flex flex-col w-full gap-4">
-            {formData.pair.map((pair, pairIndex) => (
+            {formData.pair.map((pair: OriginalTranslationPair, pairIndex: number) => (
               <div key={pairIndex} className="bg-muted/20 relative">
                 <p className="font-semibold text-lg border rounded-t-xl p-2 flex items-center gap-2">
                   <WholeWord size={24} className="" /> Pair {pairIndex + 1}
@@ -76,7 +77,6 @@ const AddTranslationModal = forwardRef<
 
                 <Button
                   variant="destructive"
-                  size="xs"
                   className="absolute rounded-xl p-4 top-0 right-0 !bg-transparent !text-black hover:!text-red-600 hover:!cursor-pointer"
                   type="button"
                   onClick={() => removePair(pairIndex)}
@@ -159,8 +159,8 @@ const AddTranslationModal = forwardRef<
                       Translation
                     </Label>
                     <div className="gap-2 flex flex-col">
-                      {pair.translations.map((t, tIndex) => (
-                        <div key={tIndex} className="flex gap-2">
+                      {pair.translations.map((t: { word: string, gender?: string, number?: string }, _tIndex: number) => (
+                        <div key={_tIndex} className="flex gap-2">
                           <Input
                             placeholder="translation"
                             value={t.word}
@@ -168,7 +168,7 @@ const AddTranslationModal = forwardRef<
                               handlePairChange(
                                 e,
                                 pairIndex,
-                                `translations.${tIndex}.word`
+                                `translations.${_tIndex}.word`
                               )
                             }
                           />
@@ -177,7 +177,7 @@ const AddTranslationModal = forwardRef<
                             variant="outline"
                             type="button"
                             onClick={() =>
-                              removeTranslationFromPair(pairIndex, tIndex)
+                              removeTranslationFromPair(pairIndex, _tIndex)
                             }
                           >
                             ✕
@@ -195,20 +195,19 @@ const AddTranslationModal = forwardRef<
                     </Button>
                   </div>
                 </div>
-                {/* DEFINITIONS */}
+
                 <div className="grid border p-3 gap-2 rounded-b-xl">
                   <Label className="font-medium">Definitions</Label>
-
-                  {pair.definitions.map((d, dIndex) => (
-                    <div key={dIndex} className="flex gap-2">
+                  {pair.definitions.map((d: string, _dIndex: number) => (
+                    <div key={_dIndex} className="flex gap-2">
                       <Input
-                        placeholder={`Definition ${dIndex + 1}`}
+                        placeholder={`Definition ${_dIndex + 1}`}
                         value={d}
                         onChange={(e) =>
                           handlePairChange(
                             e,
                             pairIndex,
-                            `definitions.${dIndex}`
+                            `definitions.${_dIndex}`
                           )
                         }
                       />
@@ -217,7 +216,7 @@ const AddTranslationModal = forwardRef<
                         type="button"
                         variant="outline"
                         onClick={() =>
-                          removeDefinitionFromPair(pairIndex, dIndex)
+                          removeDefinitionFromPair(pairIndex, _dIndex)
                         }
                       >
                         ✕

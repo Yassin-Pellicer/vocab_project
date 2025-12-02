@@ -1,8 +1,9 @@
 import { OriginalTranslationPair } from "./original-translation-pair";
 
-export interface TranslationEntry {
+export type TranslationEntry = {
   uuid?: string;
-  pair: OriginalTranslationPair | OriginalTranslationPair[];
+  pair: OriginalTranslationPair[];
   dateAdded: string;
   type: string;
 }
+

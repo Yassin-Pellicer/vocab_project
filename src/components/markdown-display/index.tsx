@@ -5,17 +5,16 @@ import remarkGfm from "remark-gfm";
 import remarkBreaks from 'remark-breaks';
 import "highlight.js/styles/github.css";
 import {
-  Calendar,
   Eye,
   Edit3,
   Split,
   Save,
   ChevronDown,
   ChevronUp,
-  ArrowLeft,
 } from "lucide-react";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useMarkdown } from "./hook";
+import WordCard from "../word-card";
 
 export default function MarkdownEditor({
   route,
@@ -44,43 +43,7 @@ export default function MarkdownEditor({
     <div className="flex overflow-hidden h-[calc(100vh-100px)] items-center flex-col mx-auto mt-4">
       {/* Header */}
       <div className="px-4 max-w-[800px] w-full">
-        <div className="flex items-start justify-between">
-          <div className="flex flex-row gap-2 items-center">
-            <button
-              onClick={() => { saveMarkdown(); window.history.back(); }}
-              className="px-1 py-1 mt-2 hover:cursor-pointer"
-            >
-              <ArrowLeft size={24} />
-            </button>
-            <h3 className="text-4xl font-bold text-gray-900">
-              {word.original}
-            </h3>
-            <p className="text-4xl">⇔</p>
-            <p className="italic mt-1 text-2xl">{word.translation}</p>
-          </div>
-        </div>
-        <div className={`${collapsed ? "hidden" : "block"} mt-2`}>
-          <div className="flex flex-row justify-between">
-            <p className="text-gray-400 text-lg pb-1 mt-1">
-              <b>{word?.type}, </b>
-              {word?.gender}., {word?.number}.
-            </p>
-            <span className="flex flex-row items-center gap-2 text-gray-400 text-lg">
-              <Calendar size="14" /> {word?.dateAdded}
-            </span>
-          </div>
-          <hr className="my-2" />
-          {word.definitions.map((definition: string, index: number) => (
-            <div key={index} className="text-xl">
-              <sup>{index + 1}</sup> {definition}.
-            </div>
-          ))}
-          {word.observations && (
-            <p className="text-gray-600 italic text-md mt-2">
-              {word.observations}
-            </p>
-          )}
-        </div>
+        <WordCard word={word} />
         <div className="flex flex-col justify-between mt-4">
           <div className="flex flex-row justify-between mt-4">
             <div className="flex flex-row gap-2 text-sm">

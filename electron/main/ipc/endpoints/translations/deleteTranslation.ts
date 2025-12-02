@@ -1,12 +1,11 @@
 import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
-import type { TranslationEntry } from "@/types/translation-entry";
 
 export default function deleteTranslation() {
   ipcMain.handle(
     "deleteTranslation",
-    async (_event, _word: TranslationEntry, _route: string, _name: string) => {
+    async (_event, _word: string, _route: string, _name: string) => {
       try {
         const filePath = path.join(_route, `${_name}.json`);
 
@@ -20,7 +19,7 @@ export default function deleteTranslation() {
         let translations = Array.isArray(json) ? json : [];
 
         translations = translations.filter(
-          (t: TranslationEntry) => t.original !== _word.original
+          (t: any) => t.uuid !== _word
         );
 
         fs.writeFileSync(

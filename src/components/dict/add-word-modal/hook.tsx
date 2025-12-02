@@ -1,5 +1,6 @@
 import { useConfigStore } from "@/context/dictionary-context";
-import { TranslationEntry, OriginalTranslationPair } from "@/types/translation-entry";
+import { OriginalTranslationPair } from "@/types/original-translation-pair";
+import { TranslationEntry } from "@/types/translation-entry";
 import { useState } from "react";
 
 export default function useWordModalHooks({
@@ -26,7 +27,6 @@ export default function useWordModalHooks({
       },
     ],
     definitions: [],
-    observations: "",
   };
 
   const [formData, setFormData] = useState<TranslationEntry>({
@@ -104,7 +104,6 @@ export default function useWordModalHooks({
   const handleSubmit = async () => {
     try {
       if (formData.pair.length === 0) return;
-
       await (window.api).addTranslation(formData, null, route, name);
       loadTranslations(route, name);
     } catch (error) {
