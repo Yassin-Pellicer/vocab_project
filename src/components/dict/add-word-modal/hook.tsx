@@ -115,6 +115,7 @@ export default function useWordModalHooks({
     open,
     setOpen,
     formData,
+    setFormData,
     handlePairChange,
     addPair,
     removePair,

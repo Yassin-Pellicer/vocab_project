@@ -16,7 +16,13 @@ import useWordModalHooks from "./hook";
 import { TranslationEntry } from "@/types/translation-entry";
 import DeleteWordModal from "../delete-word-modal";
 import { OriginalTranslationPair } from "@/types/original-translation-pair";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@radix-ui/react-select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function EditTranslationModal({ word, route, name }: { word: TranslationEntry, route: string, name: string }) {
   const {
@@ -28,6 +34,7 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
     addDefinitionToPair,
     removeDefinitionFromPair,
     handleSubmit,
+    setFormData,
     formData
   } = useWordModalHooks({ word, route, name });
 
@@ -36,7 +43,7 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
       <form>
         <DialogTrigger asChild>
           <div className="bg-gray-200 rounded-full flex h-6 w-6 items-center justify-center cursor-pointer">
-            <Pencil color="white" className="!fill-black" size={16} />
+            <Pencil color="black" className="" size={14} />
           </div>
         </DialogTrigger>
 
@@ -53,7 +60,7 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
                 <p className="font-semibold text-lg border rounded-t-xl p-2 flex items-center gap-2">
                   <WholeWord size={24} className="" /> Pair {pairIndex + 1}
                   {pairIndex === 0 && (
-                    <span className="text-sm italic text-muted-foreground ml-4">
+                    <span className="text-sm italic text-muted-foreground ml-4 md:block hidden">
                       (this one will be the first one to appear in the dictionary)
                     </span>
                   )}
@@ -61,15 +68,15 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
 
                 <Button
                   variant="destructive"
-                  className="absolute rounded-xl p-4 top-0 right-0 !bg-transparent !text-black hover:!text-red-600 hover:!cursor-pointer"
+                  className="absolute rounded-xl p-4 top-1 right-0 !bg-transparent !text-black hover:!text-red-600 hover:!cursor-pointer"
                   type="button"
                   onClick={() => removePair(pairIndex)}
                 >
                   <Trash></Trash>
                 </Button>
 
-                <div className="flex flex-row border-x gap-6 p-4 items-center">
-                  <div className="flex flex-col">
+                <div className="flex flex-col md:flex-row md:gap-6 justify-between border-x gap-2 p-4 items-center">
+                  <div className="flex flex-col w-full">
                     <Label
                       htmlFor="original"
                       className="mb-2 text-sm font-medium"
@@ -88,22 +95,22 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
                     />
                     <div className="flex flex-row gap-2 mt-2">
                       <Select
-                        value={pair.original.gender || "none"}
+                        value={pair.original.gender || "-"}
                         onValueChange={(val) =>
                           handlePairChange(
                             {
-                              target: { value: val === "none" ? "" : val },
+                              target: { value: val === "-" ? "-" : val },
                             } as any,
                             pairIndex,
                             "original.gender"
                           )
                         }
                       >
-                        <SelectTrigger className="w-[120px]">
-                          <SelectValue placeholder="Gender" />
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select gender" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="none">None</SelectItem>
+                          <SelectItem value="-">None</SelectItem>
                           <SelectItem value="m">Masculine</SelectItem>
                           <SelectItem value="f">Feminine</SelectItem>
                           <SelectItem value="n">Neuter</SelectItem>
@@ -111,31 +118,30 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
                       </Select>
 
                       <Select
-                        value={pair.original.gender || "none"}
+                        value={pair.original.number || "-"}
                         onValueChange={(val) =>
                           handlePairChange(
                             {
-                              target: { value: val === "none" ? "" : val },
+                              target: { value: val === "-" ? "-" : val },
                             } as any,
                             pairIndex,
-                            "original.gender"
+                            "original.number"
                           )
                         }
                       >
-                        <SelectTrigger className="w-[120px]">
-                          <SelectValue placeholder="Gender" />
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select number" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="none">None</SelectItem>
-                          <SelectItem value="m">Masculine</SelectItem>
-                          <SelectItem value="f">Feminine</SelectItem>
-                          <SelectItem value="n">Neuter</SelectItem>
+                          <SelectItem value="-">None</SelectItem>
+                          <SelectItem value="sing">Singular</SelectItem>
+                          <SelectItem value="plural">Plural</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
                   <p className="text-4xl mt-6 text-muted-foreground">⇔</p>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col w-full">
                     <Label
                       htmlFor="translation"
                       className="mb-2 text-sm font-medium"
@@ -228,6 +234,28 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
               + Add New Pair
             </Button>
           </div>
+
+          <Select
+            value={formData.type || "noun"}
+            onValueChange={(val) => setFormData({
+              ...formData,
+              type: val === "none" ? "" : val,
+            })}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="noun">Sustantivo</SelectItem>
+              <SelectItem value="verb">Verbo</SelectItem>
+              <SelectItem value="adjective">Adjetivo</SelectItem>
+              <SelectItem value="adverb">Adverbio</SelectItem>
+              <SelectItem value="preposition">Preposición</SelectItem>
+              <SelectItem value="determiner">Determinante</SelectItem>
+              <SelectItem value="pronoun">Pronombre</SelectItem>
+              <SelectItem value="conjunction">Conjunción</SelectItem>
+            </SelectContent>
+          </Select>
 
           <DialogFooter>
             <DialogClose asChild>

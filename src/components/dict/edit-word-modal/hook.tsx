@@ -95,6 +95,7 @@ export default function useWordModalHooks({word, route, name }: { word: Translat
 
   return {
     formData,
+    setFormData,
     handlePairChange,
     addPair,
     removePair,

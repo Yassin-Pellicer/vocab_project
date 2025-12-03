@@ -23,8 +23,8 @@ export default function WordCard({ word, route, name }: { word: any, route?: str
   return (
     <div className="">
       <div className="flex items-start justify-between">
-        <div className="flex flex-row gap-2 items-center">
-          <h3 className={`text-3xl font-bold text-gray-900 ${name && route ? "cursor-pointer" : ""} `}
+        <div className="flex flex-wrap gap-2 items-center">
+          <h3 className={`text-xl tracking-tight font-bold text-gray-900 ${name && route ? "cursor-pointer" : ""} `}
             onClick={() => {
               if (!route || !name) return;
               setSelectedWord(word);
@@ -39,13 +39,13 @@ export default function WordCard({ word, route, name }: { word: any, route?: str
         </div>
         {name && route && <EditWordModal word={word} route={route} name={name}></EditWordModal>}
       </div>
-      <div className="flex flex-row justify-between mt-2 mb-2">
+      <div className="flex flex-wrap justify-between mt-2 mb-2">
         <p className="text-gray-400 text-sm">
           <b>{word?.type}, </b>
           {gender}., {number}.
         </p>
-        <div className="flex flex-row mb-2 gap-6 items-center">
-          <span className="flex flex-row items-center gap-2 text-gray-400 text-sm">
+        <div className="flex flex-wrap gap-3 items-center">
+          <span className="flex flex-row items-center gap-2 text-gray-400 text-xs">
             <Calendar size={12} /> {word?.dateAdded}
           </span>
           {pairs.length > 1 && (
@@ -53,7 +53,7 @@ export default function WordCard({ word, route, name }: { word: any, route?: str
               <button
                 onClick={() => setPairIdx((idx: number) => Math.max(0, idx - 1))}
                 disabled={pairIdx === 0}
-                className="p-1 rounded border border-gray-300 bg-white text-black disabled:opacity-50"
+                className="rounded border border-gray-300 bg-white text-black disabled:opacity-50"
                 title="Previous pair"
               >
                 <ChevronLeft size={18} />
@@ -62,7 +62,7 @@ export default function WordCard({ word, route, name }: { word: any, route?: str
               <button
                 onClick={() => setPairIdx((idx: number) => Math.min(pairs.length - 1, idx + 1))}
                 disabled={pairIdx === pairs.length - 1}
-                className="p-1 rounded border border-gray-300 bg-white text-black disabled:opacity-50"
+                className="rounded border border-gray-300 bg-white text-black disabled:opacity-50"
                 title="Next pair"
               >
                 <ChevronRight size={18} />
@@ -71,18 +71,13 @@ export default function WordCard({ word, route, name }: { word: any, route?: str
           )}
         </div>
       </div>
-      <hr className="mb-3" />
+      <hr className="mb-2" />
 
-      {definitions.slice(0, 3).map((definition: string, index: number) => (
-        <div key={index}>
+      {definitions.map((definition: string, index: number) => (
+        <div className="text-sm" key={index}>
           <sup>{index + 1}</sup> {definition}
         </div>
       ))}
-      {definitions.length > 3 && (
-        <p className="text-xs text-gray-400 italic mt-1 ml-4">
-          +{definitions.length - 3} more definitions
-        </p>
-      )}
     </div>
   );
 }

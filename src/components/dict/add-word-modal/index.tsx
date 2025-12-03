@@ -39,6 +39,7 @@ const AddTranslationModal = forwardRef<
     addDefinitionToPair,
     removeDefinitionFromPair,
     handleSubmit,
+    setFormData,
   } = useWordModalHooks({ route, name });
 
   return (
@@ -77,15 +78,15 @@ const AddTranslationModal = forwardRef<
 
                 <Button
                   variant="destructive"
-                  className="absolute rounded-xl p-4 top-0 right-0 !bg-transparent !text-black hover:!text-red-600 hover:!cursor-pointer"
+                  className="absolute rounded-xl p-2 top-2 right-0 !bg-transparent !text-black hover:!text-red-600 hover:!cursor-pointer"
                   type="button"
                   onClick={() => removePair(pairIndex)}
                 >
                   <Trash></Trash>
                 </Button>
 
-                <div className="flex flex-row border-x gap-6 p-4 items-center">
-                  <div className="flex flex-col">
+                <div className="flex flex-row justify-between border-x gap-6 p-4 items-center">
+                  <div className="flex flex-col w-full">
                     <Label
                       htmlFor="original"
                       className="mb-2 text-sm font-medium"
@@ -103,23 +104,23 @@ const AddTranslationModal = forwardRef<
                       required
                     />
                     <div className="flex flex-row gap-2 mt-2">
-                      <Select
-                        value={pair.original.gender || "none"}
+                    <Select
+                        value={pair.original.gender}
                         onValueChange={(val) =>
                           handlePairChange(
                             {
-                              target: { value: val === "none" ? "" : val },
+                              target: { value: val === "-" ? "-" : val },
                             } as any,
                             pairIndex,
                             "original.gender"
                           )
                         }
                       >
-                        <SelectTrigger className="w-[120px]">
-                          <SelectValue placeholder="Gender" />
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select gender" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="none">None</SelectItem>
+                          <SelectItem value="-">None</SelectItem>
                           <SelectItem value="m">Masculine</SelectItem>
                           <SelectItem value="f">Feminine</SelectItem>
                           <SelectItem value="n">Neuter</SelectItem>
@@ -127,31 +128,30 @@ const AddTranslationModal = forwardRef<
                       </Select>
 
                       <Select
-                        value={pair.original.gender || "none"}
+                        value={pair.original.number}
                         onValueChange={(val) =>
                           handlePairChange(
                             {
-                              target: { value: val === "none" ? "" : val },
+                              target: { value: val === "-" ? "-" : val },
                             } as any,
                             pairIndex,
-                            "original.gender"
+                            "original.number"
                           )
                         }
                       >
-                        <SelectTrigger className="w-[120px]">
-                          <SelectValue placeholder="Gender" />
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select number"/>
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="none">None</SelectItem>
-                          <SelectItem value="m">Masculine</SelectItem>
-                          <SelectItem value="f">Feminine</SelectItem>
-                          <SelectItem value="n">Neuter</SelectItem>
+                          <SelectItem value="-">None</SelectItem>
+                          <SelectItem value="sing">Singular</SelectItem>
+                          <SelectItem value="plural">Plural</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
                   <p className="text-4xl mt-6 text-muted-foreground">⇔</p>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col w-full">
                     <Label
                       htmlFor="translation"
                       className="mb-2 text-sm font-medium"
@@ -244,6 +244,29 @@ const AddTranslationModal = forwardRef<
               + Add New Pair
             </Button>
           </div>
+
+          
+          <Select
+            value={formData.type || "noun"}
+            onValueChange={(val) => setFormData({
+              ...formData,
+              type: val === "none" ? "" : val,
+            })}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="noun">Sustantivo</SelectItem>
+              <SelectItem value="verb">Verbo</SelectItem>
+              <SelectItem value="adjective">Adjetivo</SelectItem>
+              <SelectItem value="adverb">Adverbio</SelectItem>
+              <SelectItem value="preposition">Preposición</SelectItem>
+              <SelectItem value="determiner">Determinante</SelectItem>
+              <SelectItem value="pronoun">Pronombre</SelectItem>
+              <SelectItem value="conjunction">Conjunción</SelectItem>
+            </SelectContent>
+          </Select>
 
           <DialogFooter>
             <DialogClose asChild>
