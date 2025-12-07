@@ -96,13 +96,13 @@ export default function DictionaryComponent({ route, name }: { route: string, na
           ))}
         </div>
         <div className="flex-1 flex flex-col min-w-0 h-full">
-          <div className="flex-1 overflow-y-auto px-2" ref={scrollRef}>
+          <div className="flex-1 overflow-y-auto px-2 pt-4" ref={scrollRef}>
             {currentPage <= 1 && (
-              <div className={`mb-2 ml-4 flex-shrink-0 ${(searchField || isAdditionOrder) ? "hidden" : ""}`} >
+              <div className={`mb-4 mx-2 flex-shrink-0 ${(searchField || isAdditionOrder) ? "hidden" : ""}`} >
                 <p className="text-8xl font-bold text-gray-900 mb-4">
                   {selectedLetter}
                 </p>
-                <hr />
+                <hr/>
               </div>
             )}
             {paginatedWords.length === 0 ? (
@@ -110,15 +110,15 @@ export default function DictionaryComponent({ route, name }: { route: string, na
                 {searchField ? `No results found for "${searchField}"` : `No list found starting with ${selectedLetter}`}
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-8">
-                <div className="py-4 pl-2 pb-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 pb-8">
+                <div className="sm:pl-2 px-2">
                   {leftColumn.map((word, idx) => (
                     <div className="shadow-md p-4 mb-4 rounded-2xl outline outline-gray-200">
                       <WordCard key={`left-${idx}-${word.uuid}`} word={word} route={route} name={name} />
                     </div>
                   ))}
                 </div>
-                <div className="py-4 pr-2">
+                <div className="sm:pr-2 px-2">
                   {rightColumn.map((word, idx) => (
                     <div className="shadow-md mb-4 p-4 rounded-2xl outline outline-gray-200">
                       <WordCard key={`left-${idx}-${word.uuid}`} word={word} route={route} name={name} />
