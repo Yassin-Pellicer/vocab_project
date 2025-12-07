@@ -31,7 +31,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
 
   return (
     <div>
-      <div className="bg-background flex justify-between items-center h-16 border-b p-4">
+      <div className="bg-background flex justify-between items-center h-16 border-b pr-4 pl-1">
         <div className="flex flex-row gap-2 items-center">
           <div className="relative w-full max-w-sm">
             <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -50,9 +50,9 @@ export default function DictionaryComponent({ route, name }: { route: string, na
           <div className="flex flex-row items-center gap-2">
             <button
               onClick={() => setIsFlipped(!isFlipped)}
-              className={`p-2 rounded-lg border transition-colors ${isFlipped
-                  ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+              className={`p-2 rounded-2xl border transition-colors ${isFlipped
+                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
+                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                 }`}
               title="Flip translations"
             >
@@ -68,9 +68,9 @@ export default function DictionaryComponent({ route, name }: { route: string, na
                 }
                 setCurrentPage(1);
               }}
-              className={`p-2 rounded-lg border transition-colors ${isAdditionOrder
-                  ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+              className={`p-2 rounded-2xl border transition-colors ${isAdditionOrder
+                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
+                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                 }`}
               title="Show in addition order"
             >
@@ -81,7 +81,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
         </div>
       </div>
       <div className="flex flex-row-reverse overflow-hidden h-[calc(100vh-130px)]">
-        <div className="border-r flex flex-col items-center divide-y overflow-y-auto h-full flex-shrink-0">
+        <div className=" flex border-l flex-col items-center divide-y overflow-y-auto h-full flex-shrink-0">
           {alphabet.map((letter) => (
             <button
               key={letter}
@@ -95,10 +95,10 @@ export default function DictionaryComponent({ route, name }: { route: string, na
             </button>
           ))}
         </div>
-        <div className="flex-1 flex flex-col px-4 py-2 min-w-0 h-full">
-          <div className="flex-1 overflow-y-auto pr-2" ref={scrollRef}>
+        <div className="flex-1 flex flex-col min-w-0 h-full">
+          <div className="flex-1 overflow-y-auto px-2" ref={scrollRef}>
             {currentPage <= 1 && (
-              <div className={`mb-2 flex-shrink-0 ${(searchField || isAdditionOrder) ? "hidden" : ""}`} >
+              <div className={`mb-2 ml-4 flex-shrink-0 ${(searchField || isAdditionOrder) ? "hidden" : ""}`} >
                 <p className="text-8xl font-bold text-gray-900 mb-4">
                   {selectedLetter}
                 </p>
@@ -111,15 +111,18 @@ export default function DictionaryComponent({ route, name }: { route: string, na
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-8">
-                <div className="space-y-4 p-2">
+                <div className="py-4 pl-2 pb-2">
                   {leftColumn.map((word, idx) => (
-                    <WordCard key={`left-${idx}-${word.uuid}`} word={word} route={route} name={name} />
+                    <div className="shadow-md p-4 mb-4 rounded-2xl outline outline-gray-200">
+                      <WordCard key={`left-${idx}-${word.uuid}`} word={word} route={route} name={name} />
+                    </div>
                   ))}
                 </div>
-
-                <div className="space-y-4">
+                <div className="py-4 pr-2">
                   {rightColumn.map((word, idx) => (
-                    <WordCard key={`right-${idx}-${word.uuid}`} word={word} route={route} name={name} />
+                    <div className="shadow-md mb-4 p-4 rounded-2xl outline outline-gray-200">
+                      <WordCard key={`left-${idx}-${word.uuid}`} word={word} route={route} name={name} />
+                    </div>
                   ))}
                 </div>
               </div>

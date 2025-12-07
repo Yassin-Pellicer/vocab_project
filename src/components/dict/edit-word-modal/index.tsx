@@ -59,11 +59,6 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
               <div key={pairIndex} className="bg-muted/20 relative">
                 <p className="font-semibold text-lg border rounded-t-xl p-2 flex items-center gap-2">
                   <WholeWord size={24} className="" /> Pair {pairIndex + 1}
-                  {pairIndex === 0 && (
-                    <span className="text-sm italic text-muted-foreground ml-4 md:block hidden">
-                      (this one will be the first one to appear in the dictionary)
-                    </span>
-                  )}
                 </p>
 
                 <Button

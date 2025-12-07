@@ -23,7 +23,7 @@ export default function WordCard({ word, route, name }: { word: any, route?: str
   return (
     <div className="">
       <div className="flex items-start justify-between">
-        <div className="flex flex-wrap gap-2 items-center">
+        <div className="flex flex-wrap gap-1 items-center">
           <h3 className={`text-xl tracking-tight font-bold text-gray-900 ${name && route ? "cursor-pointer" : ""} `}
             onClick={() => {
               if (!route || !name) return;
@@ -73,7 +73,7 @@ export default function WordCard({ word, route, name }: { word: any, route?: str
       </div>
       <hr className="mb-2" />
 
-      {definitions.map((definition: string, index: number) => (
+      {definitions?.map((definition: string, index: number) => (
         <div className="text-sm" key={index}>
           <sup>{index + 1}</sup> {definition}
         </div>

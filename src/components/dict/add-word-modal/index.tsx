@@ -49,7 +49,7 @@ const AddTranslationModal = forwardRef<
           <button
             ref={ref}
             onClick={() => setOpen(true)}
-            className="!bg-blue-600 !rounded-lg !px-2 !flex !h-8 !items-center !justify-center !cursor-pointer"
+            className="!bg-blue-600 !rounded-xl !px-2 py-4.5 !flex !h-8 !items-center !justify-center !cursor-pointer"
           >
             <WholeWord color="white" size={18} />
             <p className="text-lg text-white leading-none pb-1">+</p>
