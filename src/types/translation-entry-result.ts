@@ -6,5 +6,6 @@ export type TranslationEntryResult = TranslationEntry & {
   definitions: string[]
   status: string
   message: string
+  selectedPairIndex: number
   hintsUsed: number
 }

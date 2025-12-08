@@ -66,7 +66,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
           </div>
           <div className="flex flex-row justify-between">
             <p className="text-gray-400 text-sm pb-1">
-              <b>{word?.type}</b>
+              <b>{word?.type}</b>, {word.pair[word.selectedPairIndex].original.gender}., {word.pair[word.selectedPairIndex].original.number}.
             </p>
             <span className="flex flex-row items-center align-center gap-2 text-gray-600 text-sm">
               <Calendar size="14"></Calendar> {word?.dateAdded}{" "}
@@ -78,7 +78,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
               <sup>{index + 1}</sup> {definition}.
             </div>
           ))}
-          <div className="flex flex-row gap-1 align-center items-center mt-2">
+          <div className="flex flex-col gap-1 mt-2">
             {word.message && <p className="">{word.message}</p>}
             {word.status === "correct" && word.hintsUsed ? (
               <p className="italic text-xs">

@@ -78,6 +78,7 @@ export default function useTranslationHooks({ route, name }: { route: string, na
       original: originalWord,
       translation: translations.map(t => t.word).join(", "),
       definitions: definitions,
+      selectedPairIndex: word.selectedPairIndex,
       hintsUsed: maxHints ? definitions.length : hintIndex,
       status: "incorrect",
       message: "❌"
@@ -87,11 +88,11 @@ export default function useTranslationHooks({ route, name }: { route: string, na
       const pointsEarned = 1 - ((hintIndex || 0) / (definitions.length || 1));
       setScore((prev) => prev + pointsEarned);
       setMessage("✔️ Correct!");
-      historyEntry.message = "✔️";
+      historyEntry.message = "✔️ Correct!";
       historyEntry.status = "correct";
     } else {
-      setMessage(`❌ Incorrect. The answer was: ${correctAnswers.join(", ")}`);
-      historyEntry.message = `❌ Correct answer: ${correctAnswers.join(", ")}`;
+      historyEntry.message = `❌ Incorrect answer: ${correctAnswers.join(", ")}; \t Your answer: ${userAnswer || "🤔"}.`;
+      setMessage(`❌ Incorrect. The answer was: ${correctAnswers.join(", ")}.`);
       historyEntry.status = "incorrect";
     }
 
