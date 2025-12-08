@@ -1,3 +1,4 @@
+import useConfigStore from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
 import { useEffect, useRef, useState } from "react";
@@ -19,7 +20,8 @@ export default function useTranslationHooks({ route, name }: { route: string, na
   const buttonRef = useRef<HTMLButtonElement>(null);
   const lastHistoryRef = useRef<HTMLDivElement>(null);
 
-  // Get the selected pair's data
+  const { isFlipped } = useConfigStore();
+
   const selectedPair = word?.pair[word.selectedPairIndex];
   const originalWord = selectedPair?.original.word || "";
   const translations = selectedPair?.translations || [];
@@ -52,13 +54,13 @@ export default function useTranslationHooks({ route, name }: { route: string, na
       setHint("No definitions found.");
       return;
     }
-    
+
     setHint(definitions[hintIndex]);
-    
+
     if (hintIndex === definitions.length - 1) {
       setMaxHints(true);
     }
-    
+
     setHintIndex((prev) => (prev + 1) % definitions.length);
   };
 
@@ -67,28 +69,29 @@ export default function useTranslationHooks({ route, name }: { route: string, na
     if (!word || !selectedPair) return;
 
     const userAnswer = userInput.trim().toLowerCase();
-    const correctAnswer = originalWord.toLowerCase();
-    
-    // Create history entry from the selected pair
+    const correctAnswers = !isFlipped
+      ? translations.map((t) => t.word.toLowerCase())
+      : [selectedPair.original.word.toLowerCase()];
+
     const historyEntry: TranslationEntryResult = {
       ...word,
       original: originalWord,
-      translation: translations[0]?.word || "",
+      translation: translations.map(t => t.word).join(", "),
       definitions: definitions,
       hintsUsed: maxHints ? definitions.length : hintIndex,
       status: "incorrect",
       message: "❌"
     };
 
-    if (userAnswer === correctAnswer) {
+    if (correctAnswers.includes(userAnswer)) {
       const pointsEarned = 1 - ((hintIndex || 0) / (definitions.length || 1));
       setScore((prev) => prev + pointsEarned);
       setMessage("✔️ Correct!");
       historyEntry.message = "✔️";
       historyEntry.status = "correct";
     } else {
-      setMessage(`❌ Incorrect. The answer was: ${originalWord}`);
-      historyEntry.message = `❌ Correct answer: ${originalWord}`;
+      setMessage(`❌ Incorrect. The answer was: ${correctAnswers.join(", ")}`);
+      historyEntry.message = `❌ Correct answer: ${correctAnswers.join(", ")}`;
       historyEntry.status = "incorrect";
     }
 
@@ -115,11 +118,9 @@ export default function useTranslationHooks({ route, name }: { route: string, na
   const selectRandom = () => {
     if (!Array.isArray(list) || list.length === 0) return null;
 
-    // Select a random entry from the list
     const randomEntryIndex = Math.floor(Math.random() * list.length);
     const selectedEntry = list[randomEntryIndex];
 
-    // Select a random pair from within that entry
     const randomPairIndex = Math.floor(Math.random() * selectedEntry.pair.length);
 
     setWord({

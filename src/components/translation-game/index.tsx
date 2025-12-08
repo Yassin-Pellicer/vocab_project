@@ -1,6 +1,7 @@
 "use client";
+import useConfigStore from "@/context/dictionary-context";
 import useTranslationHooks from "./hook";
-import { BookCheck, Calendar, Check } from "lucide-react";
+import { ArrowLeftRight, BookCheck, Calendar, Check } from "lucide-react";
 
 export default function TranslationGame({ route, name }: { route: string, name: string }) {
   const {
@@ -14,8 +15,10 @@ export default function TranslationGame({ route, name }: { route: string, name: 
     setUserInput,
     lastHistoryRef,
     handleSubmit,
-    showHint
+    showHint,
   } = useTranslationHooks({ route, name });
+
+  const { setIsFlipped, isFlipped } = useConfigStore();
 
   if (!word || Object.keys(list).length === 0) {
     return (
@@ -33,7 +36,19 @@ export default function TranslationGame({ route, name }: { route: string, name: 
     <div className="flex flex-col overflow-y-auto h-[calc(100vh-80px)] gap-4 pb-16">
       <div className="flex flex-row justify-between sticky top-0 bg-white p-2 shadow-sm z-[50]">
         <p className="font-extrabold italic text-4xl ml-1 p-2">Translate!</p>
-        <p className="flex flex-row gap-2 mr-2 text-xl items-center justify-center"> <BookCheck></BookCheck>{score.toFixed(2)}</p>
+        <div className="flex flex-row gap-2 mr-2">
+          <p className="flex flex-row gap-2 mr-2 text-xl items-center justify-center"> <BookCheck></BookCheck>{score.toFixed(2)}</p>
+          <button
+            onClick={() => setIsFlipped(!isFlipped)}
+            className={`p-2 h-10 mt-2 rounded-2xl border transition-colors ${isFlipped
+              ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
+              : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+              }`}
+            title="Flip translations"
+          >
+            <ArrowLeftRight size={18} />
+          </button>
+        </div>
       </div>
       {history.length > 0 && history.map((word, _index) => (
         <div
@@ -44,9 +59,9 @@ export default function TranslationGame({ route, name }: { route: string, name: 
             }`}>
           <div className="flex align-center justify-between items-center">
             <div className="flex flex-row gap-2 items-center">
-              <h3 className="text-2xl font-bold text-gray-900">{word.translation}</h3>
+              <h3 className="text-2xl font-bold text-gray-900">{!isFlipped ? word.original : word.translation}</h3>
               <p className="text-2xl">⇔</p>
-              <p className="italic mt-1">{word.original}</p>
+              <p className="italic mt-1">{isFlipped ? word.original : word.translation}</p>
             </div>
           </div>
           <div className="flex flex-row justify-between">
@@ -79,7 +94,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
       <form className="px-4" onSubmit={handleSubmit}>
         <div className="flex align-center justify-between items-center ">
           <div className="flex flex-row gap-2 items-center">
-            <h3 className="text-2xl font-bold text-gray-900">{word.pair[word.selectedPairIndex].translations[0].word}</h3>
+            <h3 className="text-2xl font-bold text-gray-900">{!isFlipped ? word?.pair[word.selectedPairIndex].original.word : word.pair[word.selectedPairIndex].translations[0].word}</h3>
             <p className="text-2xl">⇔</p>
             <input
               type="text"
