@@ -254,7 +254,7 @@ const AddTranslationModal = forwardRef<
             })}
           >
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select type" />
+              <SelectValue placeholder="noun" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="noun">Sustantivo</SelectItem>

@@ -53,7 +53,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
       {history.length > 0 && history.map((word, _index) => (
         <div
           ref={_index === history.length - 1 ? lastHistoryRef : null}
-          className={`mr-2 px-4 rounded-sm bg-gradient-to-r  ${word.status === "correct"
+          className={`px-4 shadow-md mx-4 p-4 rounded-2xl outline outline-gray-200 bg-gradient-to-r  ${word.status === "correct"
             ? "from-white via-white to-green-200"
             : "from-white via-white to-red-200"
             }`}>
@@ -65,17 +65,13 @@ export default function TranslationGame({ route, name }: { route: string, name: 
             </div>
           </div>
           <div className="flex flex-row justify-between">
-            <p className="text-gray-400 text-sm pb-1">
+            <p className="text-gray-400 text-md py-1">
               <b>{word?.type}</b>, {word.pair[word.selectedPairIndex].original.gender}., {word.pair[word.selectedPairIndex].original.number}.
             </p>
-            <span className="flex flex-row items-center align-center gap-2 text-gray-600 text-sm">
-              <Calendar size="14"></Calendar> {word?.dateAdded}{" "}
-            </span>
           </div>
-          <hr className="mb-2"></hr>
-          {word.definitions.map((definition: string, index: number) => (
+          {word.definitions.length > 0 && word.definitions.map((definition: string, index: number) => (
             <div key={index + ""} className="">
-              <sup>{index + 1}</sup> {definition}.
+              <sup>{index + 1}</sup> {definition}
             </div>
           ))}
           <div className="flex flex-col gap-1 mt-2">
@@ -91,8 +87,8 @@ export default function TranslationGame({ route, name }: { route: string, name: 
         </div>
       ))
       }
-      <form className="px-4" onSubmit={handleSubmit}>
-        <div className="flex align-center justify-between items-center ">
+      <form className="px-4 shadow-md mx-4 mb-4 p-4 rounded-2xl outline outline-gray-200" onSubmit={handleSubmit}>
+        <div className="">
           <div className="flex flex-row gap-2 items-center">
             <h3 className="text-2xl font-bold text-gray-900">{!isFlipped ? word?.pair[word.selectedPairIndex].original.word : word.pair[word.selectedPairIndex].translations[0].word}</h3>
             <p className="text-2xl">⇔</p>
@@ -112,11 +108,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
             <b>{word?.type}, </b>
             {word?.pair[word.selectedPairIndex].original.gender}., {word?.pair[word.selectedPairIndex].original.number}.
           </p>
-          <span className="flex flex-row items-center align-center gap-2 text-gray-400 text-sm">
-            <Calendar size="14"></Calendar> {word?.dateAdded}{" "}
-          </span>
         </div>
-        <hr className="mb-2"></hr>
         <div className="flex flex-row gap-2 items-center mt-2">
           <button
             type="button"
