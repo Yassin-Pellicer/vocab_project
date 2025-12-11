@@ -30,8 +30,7 @@ export default function addTranslation() {
             (t: TranslationEntry) => t.uuid !== _word
           );
         }
-
-        entry.uuid = uuid();
+        else entry.uuid = uuid();
         translations.push(entry);
 
         fs.writeFileSync(
