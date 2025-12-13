@@ -1,5 +1,5 @@
 import * as React from "react"
-import { BookOpen, Languages, Home } from "lucide-react"
+import { BookOpen, Languages, Rocket } from "lucide-react"
 
 import {
   Sidebar,
@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 const iconMap: Record<string, React.ElementType> = {
   BookOpen,
   Languages,
-  Home,
+  Rocket,
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

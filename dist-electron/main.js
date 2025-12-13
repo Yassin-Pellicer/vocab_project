@@ -109,8 +109,7 @@ function addTranslation() {
           translations = translations.filter(
             (t) => t.uuid !== _word
           );
-        }
-        entry.uuid = v4();
+        } else entry.uuid = v4();
         translations.push(entry);
         fs.writeFileSync(
           filePath,

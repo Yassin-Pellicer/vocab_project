@@ -1,3 +1,4 @@
+import useConfigStore from "@/context/dictionary-context";
 import { useState, useEffect, useRef } from "react";
 
 export function useMarkdown(route: string, name?: string) {
@@ -6,11 +7,13 @@ export function useMarkdown(route: string, name?: string) {
   const [collapsed, setCollapsed] = useState(false);
   const editorRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
-  
+
+  const { selectedWord } = useConfigStore();
+
   const saveMarkdown = () => {
     window.api.saveMarkdown(route, name, markdown);
   };
-  
+
   const handleScroll = () => {
     if (!editorRef.current || !previewRef.current) return;
     const editor = editorRef.current;
@@ -20,13 +23,18 @@ export function useMarkdown(route: string, name?: string) {
     const percent = editor.scrollTop / editorMax;
     preview.scrollTop = percent * previewMax;
   };
-  
+
   useEffect(() => {
+    console.log("Fetching markdown for", route, name);
     window.api
       .fetchMarkdown(route, name)
       .then((response: string) => setMarkdown(response));
-  }, []);
-  
+  }, [selectedWord, route, name]);
+
+  useEffect(() => { 
+    setCollapsed(false);
+  }, [selectedWord])
+
   return {
     markdown,
     setMarkdown,

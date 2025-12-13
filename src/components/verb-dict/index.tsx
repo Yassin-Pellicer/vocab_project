@@ -1,6 +1,5 @@
 import { ChevronLeft, ChevronRight, Search, X, ArrowLeftRight, ListOrdered, SquareSplitHorizontal } from "lucide-react";
 import useTranslationHooks from "./hook";
-import AddWordModal from "./add-word-modal";
 import WordCard from "../word-card";
 import Markdown from "@/components/markdown-display";
 import useConfigStore from "@/context/dictionary-context";
@@ -21,7 +20,6 @@ export default function DictionaryComponent({ route, name }: { route: string, na
     searchField,
     setSearchField,
     searchRef,
-    addWordButtonRef,
     scrollRef,
     isFlipped,
     setIsFlipped,
@@ -91,7 +89,6 @@ export default function DictionaryComponent({ route, name }: { route: string, na
             >
               <ListOrdered size={18} />
             </button>
-            <AddWordModal ref={addWordButtonRef} route={route} name={name}></AddWordModal>
           </div>
         </div>
       </div>

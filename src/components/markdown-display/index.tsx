@@ -42,16 +42,18 @@ export default function MarkdownEditor({
   return (
     <div className="flex overflow-hidden h-[calc(100vh-100px)] items-center flex-col mx-auto mt-4">
       {/* Header */}
-      <div className="px-4 max-w-[800px] w-full">
+      <div className={`px-4 max-w-[800px] w-full ${collapsed ? "hidden" : ""}`}>
         <WordCard word={word} />
-        <div className="flex flex-col justify-between mt-4">
+      </div>
+      <div className="flex flex-col border-b pb-4 shadow-xs items-center w-full">
+        <div className="flex flex-col justify-between max-w-[800px] px-4 w-full">
           <div className="flex flex-row justify-between mt-4">
             <div className="flex flex-row gap-2 text-sm">
               <button
                 onClick={() => setMode("edit")}
                 className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${mode === "edit"
-                    ? "!bg-black text-white"
-                    : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+                  ? "!bg-black text-white"
+                  : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
                   } `}
               >
                 <Edit3 size={16} />
@@ -60,8 +62,8 @@ export default function MarkdownEditor({
               <button
                 onClick={() => setMode("split")}
                 className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${mode === "split"
-                    ? "!bg-black text-white"
-                    : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+                  ? "!bg-black text-white"
+                  : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
                   } `}
               >
                 <Split size={16} />
@@ -70,8 +72,8 @@ export default function MarkdownEditor({
               <button
                 onClick={() => setMode("preview")}
                 className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${mode === "preview"
-                    ? "!bg-black text-white"
-                    : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+                  ? "!bg-black text-white"
+                  : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
                   } `}
               >
                 <Eye size={16} />
@@ -86,16 +88,14 @@ export default function MarkdownEditor({
               Save
             </button>
           </div>
-          <div className="flex justify-center">
-            <button onClick={() => setCollapsed(!collapsed)} className="">
-              {collapsed ? <ChevronDown /> : <ChevronUp />}
-            </button>
-          </div>
         </div>
+        <button onClick={() => setCollapsed(!collapsed)} className="">
+          {collapsed ? <ChevronDown /> : <ChevronUp />}
+        </button>
       </div>
 
       {/* Editor + Preview */}
-      <div className="mt-4 border-t-1 border-gray-200 w-full" />
+      <div className="border-gray-300 w-full" />
       <div className="flex-1 flex overflow-hidden justify-center mt-4 max-w-[800px] px-4 w-full">
         {(mode === "edit" || mode === "split") && (
           <div
@@ -118,7 +118,7 @@ export default function MarkdownEditor({
             className={`${mode === "split" ? "w-1/2" : "w-full"
               } overflow-y-auto`}
           >
-            <div className="border-l mt-[-20px] border-gray-300 px-4 markdown mx-auto">
+            <div className="mt-[-20px] px-4 markdown mx-auto">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkBreaks]}
                 rehypePlugins={[rehypeRaw, rehypeHighlight]}

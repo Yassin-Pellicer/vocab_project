@@ -10,7 +10,7 @@ export default function useTranslationHooks({ route, name }: { route: string; na
   const [currentPage, setCurrentPage] = useState(1);
   const [isAdditionOrder, setIsAdditionOrder] = useState(!useConfigStore.getState().selectedLetter);
   const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
-
+  const [verbs, setVerbs] = useState(list.filter((word) => word.type === "verb"));
   const navigate = useNavigate();
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -19,19 +19,19 @@ export default function useTranslationHooks({ route, name }: { route: string; na
   const addWordButtonRef = useRef<HTMLButtonElement>(null);
 
   const filteredWords = useMemo(() => {
-    if (!list) return [];
+    if (!verbs) return [];
     let results = [];
 
     if (searchField.trim() === "") {
       if (isAdditionOrder) {
-        results = list;
+        results = verbs;
       } else {
-        results = list.filter((word) =>
+        results = verbs.filter((word) =>
           word.pair.some((p) => p.original?.word.toUpperCase().startsWith(selectedLetter?.toUpperCase?.()))
         );
       }
     } else {
-      results = list.filter((word) =>
+      results = verbs.filter((word) =>
         word.pair.some((p) => p.original?.word.toLowerCase().includes(searchField.toLowerCase()) || p.translations?.some(t => t.word.toLowerCase().includes(searchField.toLowerCase())))
       );
     }
@@ -41,7 +41,7 @@ export default function useTranslationHooks({ route, name }: { route: string; na
     }
     
     return results;
-  }, [list, selectedLetter, searchField, isAdditionOrder]);
+  }, [verbs, selectedLetter, searchField, isAdditionOrder]);
 
   const totalPages = Math.ceil(filteredWords.length / ITEMS_PER_PAGE);
   const paginatedWords = filteredWords.slice(
@@ -142,7 +142,8 @@ export default function useTranslationHooks({ route, name }: { route: string; na
   }, [selectedLetter]);
 
   return {
-    list,
+    verbs,
+    setVerbs,
     history,
     setHistory,
     selectedLetter,

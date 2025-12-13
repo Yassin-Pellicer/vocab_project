@@ -1,7 +1,7 @@
 "use client";
 import useConfigStore from "@/context/dictionary-context";
 import useTranslationHooks from "./hook";
-import { ArrowLeftRight, BookCheck, Calendar, Check } from "lucide-react";
+import { ArrowLeftRight, BookCheck, Check } from "lucide-react";
 
 export default function TranslationGame({ route, name }: { route: string, name: string }) {
   const {

@@ -1,11 +1,6 @@
 import { TranslationEntry } from "@/types/translation-entry";
 import { create } from "zustand";
 
-interface Dictionary {
-  name: string;
-  path: string;
-}
-
 interface NavItem {
   title: string;
   url: string;
@@ -29,6 +24,8 @@ interface ConfigState {
   setList: (list: TranslationEntry[]) => void;
   loadTranslations: (route: string, name: string) => Promise<void>;
   setSelectedWord: (word: TranslationEntry | null) => void;
+  dualView: boolean;
+  setDualView: (dual: boolean) => void;
 }
 
 export const useConfigStore = create<ConfigState>()((set) => {
@@ -40,6 +37,8 @@ export const useConfigStore = create<ConfigState>()((set) => {
   const setSelectedLetter = (letter: string) => set({ selectedLetter: letter });
   const setSearchField = (field: string) => set({ searchField: field });
   const setIsFlipped = (flipped: boolean) => set({ isFlipped: flipped });
+  const dualView = true;
+  const setDualView = (dual: boolean) => { set({ dualView: dual }); };
   const setSelectedWord = (word: TranslationEntry | null) =>
     set({ selectedWord: word });
 
@@ -65,16 +64,20 @@ export const useConfigStore = create<ConfigState>()((set) => {
                 _key
               )}&path=${encodeURIComponent(dict.route)}`,
             },
+            {
+              title: "Verbs",
+              icon: "Rocket",
+              url: `/verbs?name=${encodeURIComponent(
+                _key
+              )}&path=${encodeURIComponent(dict.route)}`,
+            },
           ],
         })
       );
 
       set(() => ({
         data: {
-          navMain: [
-            { title: "Home", url: "/" },
-            ...languageItems,
-          ],
+          navMain: [{ title: "Home", url: "/" }, ...languageItems],
         },
       }));
     } catch (err) {
@@ -110,6 +113,8 @@ export const useConfigStore = create<ConfigState>()((set) => {
     setList,
     isFlipped,
     setIsFlipped,
+    dualView,
+    setDualView,
   };
 });
 

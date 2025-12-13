@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useConfigStore } from "@/context/dictionary-context";
 import EditWordModal from "../dict/edit-word-modal";
 
-export default function WordCard({ word, route, name }: { word: any, route?: string; name?: string }) {
+export default function WordCard({ word, route, name, doubleView}: { word: any, route?: string; name?: string; doubleView?: boolean }) {
   const {
     pairs,
     pairIdx,
@@ -23,15 +23,14 @@ export default function WordCard({ word, route, name }: { word: any, route?: str
   return (
     <div className="">
       <div className="flex items-start justify-between">
-        <div className="flex flex-wrap gap-1 items-center">
-          <h3 className={`text-xl tracking-tight font-bold text-gray-900 ${name && route ? "cursor-pointer" : ""} `}
-            onClick={() => {
-              if (!route || !name) return;
-              setSelectedWord(word);
-              navigate(
-                `/markdown?path=${encodeURIComponent(route || "")}&name=${encodeURIComponent(name || "")}`,
-              );
-            }}>
+        <div onClick={() => {
+          setSelectedWord(word);
+          if (doubleView) { return };
+          navigate(
+            `/markdown?path=${encodeURIComponent(route || "")}&name=${encodeURIComponent(name || "")}`,
+          );
+        }} className="flex flex-wrap gap-1 items-center">
+          <h3 className={`text-xl cursor-pointer tracking-tight font-bold text-gray-900 ${name && route ? "cursor-pointer" : ""} `}>
             {isFlipped ? translations : original}
           </h3>
           <p className="text-2xl">⇔</p>
@@ -53,7 +52,7 @@ export default function WordCard({ word, route, name }: { word: any, route?: str
               <button
                 onClick={() => setPairIdx((idx: number) => Math.max(0, idx - 1))}
                 disabled={pairIdx === 0}
-                className="rounded border border-gray-300 bg-white text-black disabled:opacity-50"
+                className="rounded border cursor-pointer border-gray-300 bg-white text-black disabled:opacity-50"
                 title="Previous pair"
               >
                 <ChevronLeft size={18} />
@@ -62,7 +61,7 @@ export default function WordCard({ word, route, name }: { word: any, route?: str
               <button
                 onClick={() => setPairIdx((idx: number) => Math.min(pairs.length - 1, idx + 1))}
                 disabled={pairIdx === pairs.length - 1}
-                className="rounded border border-gray-300 bg-white text-black disabled:opacity-50"
+                className="rounded border cursor-pointer border-gray-300 bg-white text-black disabled:opacity-50"
                 title="Next pair"
               >
                 <ChevronRight size={18} />
