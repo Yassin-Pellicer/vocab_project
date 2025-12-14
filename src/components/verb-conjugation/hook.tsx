@@ -125,6 +125,7 @@ export function useVerbHooks(route: string, name?: string, isEditing?: boolean) 
   const [conjugation, setConjugation] = useState<any>(placeholder);
 
   const saveConjugation = () => {
+    if(JSON.stringify(conjugation) == JSON.stringify(placeholder)) return
     console.log("Saving conjugation:", conjugation);
     window.api.saveConjugation(route, name!, selectedWord?.uuid, conjugation);
   };
