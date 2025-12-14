@@ -6,6 +6,7 @@ export default function saveMarkdown() {
   ipcMain.handle("saveMarkdown", async (_event, _route, _name, markdown) => {
     try {
       const filePath = path.join(_route, `${_name}.md`);
+      console.log("Saving markdown to", filePath);
       fs.writeFileSync(filePath, markdown);
     } catch (error) {
       console.error("Error saving markdown file:", error);

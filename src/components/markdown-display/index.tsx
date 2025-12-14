@@ -15,14 +15,17 @@ import {
 import { TranslationEntry } from "@/types/translation-entry";
 import { useMarkdown } from "./hook";
 import WordCard from "../word-card";
+import VerboConjugation from "../verb-conjugation";
 
 export default function MarkdownEditor({
   route,
   name,
+  uuid,
   word,
 }: {
   route: string;
   name: string;
+  uuid?: string;
   word: TranslationEntry;
   onSave?: (markdown: string) => void;
 }) {
@@ -37,16 +40,30 @@ export default function MarkdownEditor({
     editorRef,
     previewRef,
     handleScroll,
-  } = useMarkdown(route, name);
+    setSelectOption,
+    selectOption,
+    isEditing,
+    setIsEditing,
+  } = useMarkdown(route, name, uuid, word);
 
   return (
-    <div className="flex overflow-hidden h-[calc(100vh-100px)] items-center flex-col mx-auto mt-4">
+    <div className="flex overflow-hidden h-[calc(100vh-160px)] items-center flex-col mx-auto mt-4">
       {/* Header */}
-      <div className={`px-4 max-w-[800px] w-full ${collapsed ? "hidden" : ""}`}>
+      <div className={`px-4 max-w-[800px] ${word.type == "verb" ? "pb-6" : ""}  w-full ${collapsed ? "hidden" : ""}`}>
         <WordCard word={word} />
       </div>
-      <div className="flex flex-col border-b pb-4 shadow-xs items-center w-full">
-        <div className="flex flex-col justify-between max-w-[800px] px-4 w-full">
+      <div className="flex flex-col max-w-[800px] items-center w-full">
+        {word.type == "verb" && <div className="flex flex-row px-4 justify-around divide-x w-full">
+          <button onClick={() => setSelectOption("notes")}
+            className={`border-b w-full cursor-pointer text-sm pb-1 ${selectOption === "notes" ? "border-b-black border-b-2" : ""}`}>
+            Notes
+          </button>
+          <button onClick={() => setSelectOption("conjugation")}
+            className={`border-b w-full cursor-pointer text-sm pb-1 ${selectOption === "conjugation" ? "border-b-black border-b-2" : ""}`}>
+            Conjugation
+          </button>
+        </div>}
+        {selectOption === "notes" && <div className="flex flex-col justify-between max-w-[800px] px-4 w-full">
           <div className="flex flex-row justify-between mt-4">
             <div className="flex flex-row gap-2 text-sm">
               <button
@@ -88,15 +105,34 @@ export default function MarkdownEditor({
               Save
             </button>
           </div>
-        </div>
-        <button onClick={() => setCollapsed(!collapsed)} className="">
+        </div>}
+        {selectOption === "conjugation" && <div className="flex flex-col justify-between max-w-[800px] px-4 w-full">
+          <div className="flex flex-row justify-between mt-4">
+            <div className="flex flex-row gap-2 text-sm">
+            </div>
+            {!isEditing && <button
+              onClick={() => setIsEditing(true)}
+              className="px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+            >
+              <Edit3 size={16} />
+              Edit
+            </button>}
+            {isEditing && <button
+              onClick={() => setIsEditing(false)}
+              className="px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+            >
+              <Save size={16} />
+              Save
+            </button>}
+          </div>
+        </div>}
+        <button onClick={() => setCollapsed(!collapsed)} className=" mb-3">
           {collapsed ? <ChevronDown /> : <ChevronUp />}
         </button>
       </div>
 
-      {/* Editor + Preview */}
       <div className="border-gray-300 w-full" />
-      <div className="flex-1 flex overflow-hidden justify-center mt-4 max-w-[800px] px-4 w-full">
+      {selectOption === "notes" && <div className="flex-1 flex overflow-hidden justify-center mt-4 max-w-[800px] px-4 w-full">
         {(mode === "edit" || mode === "split") && (
           <div
             className={`${mode === "split" ? "w-1/2" : "w-full"} flex flex-col`}
@@ -135,7 +171,8 @@ export default function MarkdownEditor({
             </div>
           </div>
         )}
-      </div>
+      </div>}
+      {selectOption === "conjugation" && <VerboConjugation route={route} name={name} isEditing={isEditing} setIsEditing={setIsEditing} />}
     </div>
   );
 }

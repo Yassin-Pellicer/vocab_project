@@ -21,8 +21,9 @@ export default function MarkdownPage() {
 
   return (
     <Markdown
-      route={`${path}/MD-${name}`}
-      name={word.uuid!}
+      route={path}
+      name={name}
+      uuid={word.uuid!}
       word={word}
     />
   );

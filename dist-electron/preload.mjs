@@ -1,5 +1,13 @@
 "use strict";
 const electron = require("electron");
+const conjugation = {
+  fetchConjugation: async (route, name, uuid) => {
+    return await electron.ipcRenderer.invoke("fetchConjugation", route, name, uuid);
+  },
+  saveConjugation: async (route, name, uuid, conjugation2) => {
+    return await electron.ipcRenderer.invoke("saveConjugation", route, name, uuid, conjugation2);
+  }
+};
 const markdown = {
   fetchMarkdown: async (route, name) => {
     return await electron.ipcRenderer.invoke("fetchMarkdown", route, name);
@@ -31,7 +39,8 @@ const translations = {
 const endpoints = Object.assign(
   {},
   translations,
-  markdown
+  markdown,
+  conjugation
 );
 electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   on(...args) {

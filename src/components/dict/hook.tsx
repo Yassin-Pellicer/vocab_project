@@ -5,7 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 export default function useTranslationHooks({ route, name }: { route: string; name: string }) {
   const ITEMS_PER_PAGE = 15;
-  const { list, loadTranslations, selectedLetter, setSelectedLetter, searchField, setSearchField, isFlipped, setIsFlipped, setDualView, dualView } = useConfigStore();
+  const { 
+    list, 
+    loadTranslations, 
+    selectedLetter, 
+    setSelectedLetter, 
+    searchField, 
+    setSearchField, 
+    isFlipped, 
+    setIsFlipped, 
+    setDualView, 
+    dualView,
+    selectedTypes 
+  } = useConfigStore();
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isAdditionOrder, setIsAdditionOrder] = useState(!useConfigStore.getState().selectedLetter);
@@ -17,6 +29,17 @@ export default function useTranslationHooks({ route, name }: { route: string; na
   const scrollRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const addWordButtonRef = useRef<HTMLButtonElement>(null);
+
+  const availableTypes = useMemo(() => {
+    if (!list) return [];
+    const typesSet = new Set<string>();
+    list.forEach((word) => {
+      if (word.type) {
+        typesSet.add(word.type);
+      }
+    });
+    return Array.from(typesSet).sort();
+  }, [list]);
 
   const filteredWords = useMemo(() => {
     if (!list) return [];
@@ -36,12 +59,18 @@ export default function useTranslationHooks({ route, name }: { route: string; na
       );
     }
 
+    if (selectedTypes.length > 0) {
+      results = results.filter((word) =>
+        word.type && selectedTypes.includes(word.type)
+      );
+    }
+
     if (!isAdditionOrder) {
       return results.sort((a, b) => a.pair[0].original.word.localeCompare(b.pair[0].original.word));
     }
     
     return results;
-  }, [list, selectedLetter, searchField, isAdditionOrder]);
+  }, [list, selectedLetter, searchField, isAdditionOrder, selectedTypes]);
 
   const totalPages = Math.ceil(filteredWords.length / ITEMS_PER_PAGE);
   const paginatedWords = filteredWords.slice(
@@ -166,6 +195,7 @@ export default function useTranslationHooks({ route, name }: { route: string; na
     isAdditionOrder,
     setIsAdditionOrder,
     dualView,
-    setDualView
+    setDualView,
+    availableTypes
   };
 }

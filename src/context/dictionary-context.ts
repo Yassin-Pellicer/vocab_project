@@ -26,17 +26,30 @@ interface ConfigState {
   setSelectedWord: (word: TranslationEntry | null) => void;
   dualView: boolean;
   setDualView: (dual: boolean) => void;
+  selectedTypes: string[];
+  setSelectedTypes: (types: string[]) => void;
+  toggleType: (type: string) => void;
 }
 
-export const useConfigStore = create<ConfigState>()((set) => {
+export const useConfigStore = create<ConfigState>()((set, get) => {
   const list: TranslationEntry[] = [];
   const selectedLetter = "A";
   const searchField = "";
   const isFlipped = false;
+  const selectedTypes: string[] = [];
   const setList = (list: TranslationEntry[]) => set({ list });
   const setSelectedLetter = (letter: string) => set({ selectedLetter: letter });
   const setSearchField = (field: string) => set({ searchField: field });
   const setIsFlipped = (flipped: boolean) => set({ isFlipped: flipped });
+  const setSelectedTypes = (types: string[]) => set({ selectedTypes: types });
+  const toggleType = (type: string) => {
+    const currentTypes = get().selectedTypes;
+    if (currentTypes.includes(type)) {
+      set({ selectedTypes: currentTypes.filter(t => t !== type) });
+    } else {
+      set({ selectedTypes: [...currentTypes, type] });
+    }
+  };
   const dualView = true;
   const setDualView = (dual: boolean) => { set({ dualView: dual }); };
   const setSelectedWord = (word: TranslationEntry | null) =>
@@ -64,17 +77,9 @@ export const useConfigStore = create<ConfigState>()((set) => {
                 _key
               )}&path=${encodeURIComponent(dict.route)}`,
             },
-            {
-              title: "Verbs",
-              icon: "Rocket",
-              url: `/verbs?name=${encodeURIComponent(
-                _key
-              )}&path=${encodeURIComponent(dict.route)}`,
-            },
           ],
         })
       );
-
       set(() => ({
         data: {
           navMain: [{ title: "Home", url: "/" }, ...languageItems],
@@ -115,6 +120,9 @@ export const useConfigStore = create<ConfigState>()((set) => {
     setIsFlipped,
     dualView,
     setDualView,
+    selectedTypes,
+    setSelectedTypes,
+    toggleType,
   };
 });
 

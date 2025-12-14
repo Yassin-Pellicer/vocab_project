@@ -6,7 +6,6 @@ import HomePage from "./pages/home-page";
 import React from "react";
 import useConfigStore from "./context/dictionary-context";
 import MarkdownPage from "./pages/markdown-page";
-import VerbPage from "./pages/verb-page";
 
 function App() {
   React.useEffect(() => {
@@ -21,7 +20,6 @@ function App() {
           <Route path="/dictionary" element={<DictionaryPage />} />
           <Route path="/markdown" element={<MarkdownPage />} />
           <Route path="/translation" element={<TranslationGamePage />} />
-          <Route path="/verbs" element={<VerbPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>

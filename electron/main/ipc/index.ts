@@ -1,3 +1,5 @@
+import fetchConjugation from "./endpoints/conjugation/fetchConjugation";
+import saveConjugation from "./endpoints/conjugation/saveConjugation";
 import fetchMarkdown from "./endpoints/markdown/fetchMarkdown";
 import saveMarkdown from "./endpoints/markdown/saveMarkdown";
 import addTranslation from "./endpoints/translations/addTranslation";
@@ -16,4 +18,6 @@ export default function registerIpcHandlers() {
   loadConfig();
   fetchMarkdown();
   saveMarkdown();
+  fetchConjugation();
+  saveConjugation();
 }
