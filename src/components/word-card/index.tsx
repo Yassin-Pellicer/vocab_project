@@ -14,6 +14,7 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
     gender,
     number,
     definitions,
+    originalWithArticle
   } = useWordCard(word);
 
   const navigate = useNavigate();
@@ -31,10 +32,10 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
           );
         }} className="flex flex-wrap gap-1 items-center">
           <h3 className={`text-xl cursor-pointer tracking-tight font-bold text-gray-900 ${name && route ? "cursor-pointer" : ""} `}>
-            {isFlipped ? translations : original}
+            {isFlipped ? translations : originalWithArticle}
           </h3>
           <p className="text-2xl">⇔</p>
-          <p className="italic mt-1">{isFlipped ? original : translations}</p>
+          <p className="italic mt-1">{isFlipped ? originalWithArticle : translations}</p>
         </div>
         {name && route && <EditWordModal word={word} route={route} name={name}></EditWordModal>}
       </div>
