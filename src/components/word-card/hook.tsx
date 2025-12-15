@@ -25,17 +25,19 @@ export default function useWordCard(word: any) {
     ? currentPair.definitions
     : [];
 
-  // ✅ gender → article
   const article =
-    gender.startsWith("f")
-      ? "die"
-      : gender.startsWith("m")
-      ? "der"
-      : gender.startsWith("n")
-      ? "das"
+    word.type === "noun"
+      ? number === "plural"
+        ? "die"
+        : gender.startsWith("f")
+        ? "die"
+        : gender.startsWith("m")
+        ? "der"
+        : gender.startsWith("n")
+        ? "das"
+        : ""
       : "";
 
-  // ✅ optional composed word
   const originalWithArticle = article
     ? `${article} ${original}`
     : original;

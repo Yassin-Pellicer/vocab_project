@@ -3,24 +3,32 @@ import { TranslationEntryResult } from "@/types/translation-entry-result";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function useTranslationHooks({ route, name }: { route: string; name: string }) {
+export default function useTranslationHooks({
+  route,
+  name,
+}: {
+  route: string;
+  name: string;
+}) {
   const ITEMS_PER_PAGE = 15;
-  const { 
-    list, 
-    loadTranslations, 
-    selectedLetter, 
-    setSelectedLetter, 
-    searchField, 
-    setSearchField, 
-    isFlipped, 
-    setIsFlipped, 
-    setDualView, 
+  const {
+    list,
+    loadTranslations,
+    selectedLetter,
+    setSelectedLetter,
+    searchField,
+    setSearchField,
+    isFlipped,
+    setIsFlipped,
+    setDualView,
     dualView,
-    selectedTypes 
+    selectedTypes,
   } = useConfigStore();
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isAdditionOrder, setIsAdditionOrder] = useState(!useConfigStore.getState().selectedLetter);
+  const [isAdditionOrder, setIsAdditionOrder] = useState(
+    !useConfigStore.getState().selectedLetter
+  );
   const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
 
   const navigate = useNavigate();
@@ -50,33 +58,60 @@ export default function useTranslationHooks({ route, name }: { route: string; na
         results = list;
       } else {
         results = list.filter((word) =>
-          word.pair.some((p) => p.original?.word.toUpperCase().startsWith(selectedLetter?.toUpperCase?.()))
+          word.pair.some((p) =>
+            p.original?.word
+              .toUpperCase()
+              .startsWith(selectedLetter?.toUpperCase?.())
+          )
         );
       }
     } else {
       results = list.filter((word) =>
-        word.pair.some((p) => p.original?.word.toLowerCase().includes(searchField.toLowerCase()) || p.translations?.some(t => t.word.toLowerCase().includes(searchField.toLowerCase())))
+        word.pair.some(
+          (p) =>
+            p.original?.word
+              .toLowerCase()
+              .includes(searchField.toLowerCase()) ||
+            p.translations?.some((t) =>
+              t.word.toLowerCase().includes(searchField.toLowerCase())
+            )
+        )
       );
     }
 
     if (selectedTypes.length > 0) {
-      results = results.filter((word) =>
-        word.type && selectedTypes.includes(word.type)
+      results = results.filter(
+        (word) => word.type && selectedTypes.includes(word.type)
       );
     }
 
     if (!isAdditionOrder) {
-      return results.sort((a, b) => a.pair[0].original.word.localeCompare(b.pair[0].original.word));
+      return results.sort((a, b) =>
+        a.pair[0].original.word.localeCompare(b.pair[0].original.word)
+      );
     }
-    
     return results;
   }, [list, selectedLetter, searchField, isAdditionOrder, selectedTypes]);
 
-  const totalPages = Math.ceil(filteredWords.length / ITEMS_PER_PAGE);
-  const paginatedWords = filteredWords.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+  const totalPages = useMemo(
+    () => Math.ceil(filteredWords.length / ITEMS_PER_PAGE),
+    [filteredWords.length]
   );
+
+  const paginatedWords = useMemo(
+    () =>
+      filteredWords.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+      ),
+    [filteredWords, currentPage]
+  );
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
+    }
+  }, [filteredWords, totalPages, currentPage]);
 
   const handlePrevPage = () => {
     setCurrentPage((prev) => Math.max(1, prev - 1));
@@ -98,7 +133,7 @@ export default function useTranslationHooks({ route, name }: { route: string; na
 
   useEffect(() => {
     const handleResize = () => {
-      if(window.innerWidth <= 1000) setDualView(false);
+      if (window.innerWidth <= 1000) setDualView(false);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -107,12 +142,17 @@ export default function useTranslationHooks({ route, name }: { route: string; na
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const isLetter = /^[a-zA-Z]$/.test(e.key);
-
       if (e.key === "F1") {
-        setSelectedWord(filteredWords?.length ? filteredWords[0] : paginatedWords?.[0] || null);
-        if (dualView) { return };
+        setSelectedWord(
+          filteredWords?.length ? filteredWords[0] : paginatedWords?.[0] || null
+        );
+        if (dualView) {
+          return;
+        }
         navigate(
-          `/markdown?path=${encodeURIComponent(route)}&name=${encodeURIComponent(name)}`,
+          `/markdown?path=${encodeURIComponent(
+            route
+          )}&name=${encodeURIComponent(name)}`
         );
       }
 
@@ -128,7 +168,9 @@ export default function useTranslationHooks({ route, name }: { route: string; na
         return;
       }
 
-      const dialogOpen = !!document.querySelector('[role="dialog"][data-state="open"]');
+      const dialogOpen = !!document.querySelector(
+        '[role="dialog"][data-state="open"]'
+      );
       const active = document.activeElement;
       const search = searchRef.current;
 
@@ -160,15 +202,23 @@ export default function useTranslationHooks({ route, name }: { route: string; na
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [searchField]);
-  
+  }, [
+    searchField,
+    filteredWords,
+    paginatedWords,
+    dualView,
+    route,
+    name,
+    setSelectedWord,
+    navigate,
+    addWordButtonRef,
+    setSearchField,
+    handleLetterClick,
+  ]);
+
   useEffect(() => {
     loadTranslations(route, name);
   }, []);
-
-  useEffect(() => {
-    setSearchField("");
-  }, [selectedLetter]);
 
   return {
     list,
@@ -196,6 +246,6 @@ export default function useTranslationHooks({ route, name }: { route: string; na
     setIsAdditionOrder,
     dualView,
     setDualView,
-    availableTypes
+    availableTypes,
   };
 }
