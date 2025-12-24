@@ -2,6 +2,7 @@ import { Calendar, BookOpen, ArrowRight, Library, WholeWord } from "lucide-react
 import WordCard from '../word-card';
 import { Link } from "react-router-dom";
 import useHome from "./hook";
+import KnowledgeGraph from "../knowledge-graph";
 
 export default function Home() {
   const { dictionaries, loading, totalWords, totalDictionaries } = useHome();
@@ -103,6 +104,7 @@ export default function Home() {
             </div>
           ))}
         </div>
+        <KnowledgeGraph />
       </div>
     </div>
   );
