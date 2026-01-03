@@ -24,13 +24,27 @@ export default function addTranslation() {
         const json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
         let translations = Array.isArray(json) ? json : [];
-
         if (_word) {
           translations = translations.filter(
             (t: TranslationEntry) => t.uuid !== _word
           );
         }
-        else entry.uuid = uuid();
+        else {
+          const entryUuid = entry.uuid || uuid();
+          entry.uuid = entryUuid;
+
+          const GraphfilePath = path.join(_route, `GRAPH-${_name}.json`);
+          console.log("Saving graph to", GraphfilePath, "for uuid:", entry.uuid);
+
+          let jsonGraph: Record<string, Record<string, string>> = {};
+
+          if (fs.existsSync(GraphfilePath)) {
+            jsonGraph = JSON.parse(fs.readFileSync(GraphfilePath, "utf-8"));
+          }
+
+          jsonGraph[entryUuid] = {};
+          fs.writeFileSync(GraphfilePath, JSON.stringify(jsonGraph, null, 2), "utf-8");
+        }
         translations.push(entry);
 
         fs.writeFileSync(

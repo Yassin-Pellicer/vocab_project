@@ -1,129 +1,142 @@
-import { TranslationEntry } from "@/types/translation-entry";
 import { create } from "zustand";
-
-interface NavItem {
-  title: string;
-  url: string;
-  icon?: string;
-  items?: NavItem[];
-}
+import { TranslationEntry } from "@/types/translation-entry";
 
 interface ConfigState {
-  list: TranslationEntry[];
+  dictionaryMetadata: Record<string, any>;
+  data: { navMain: NavItem[] };
+  dictionaries: Record<string, TranslationEntry[]>;
   selectedWord: TranslationEntry | null;
-  data: {
-    navMain: NavItem[];
-  };
   selectedLetter: string;
-  setSelectedLetter: (letter: string) => void;
   searchField: string;
-  setSearchField: (field: string) => void;
   isFlipped: boolean;
-  setIsFlipped: (flipped: boolean) => void;
-  loadConfig: () => Promise<void>;
-  setList: (list: TranslationEntry[]) => void;
-  loadTranslations: (route: string, name: string) => Promise<void>;
-  setSelectedWord: (word: TranslationEntry | null) => void;
   dualView: boolean;
-  setDualView: (dual: boolean) => void;
   selectedTypes: string[];
+
+  setDictionaryMetadata: (metadata: Record<string, any>) => void;
+  setDictionaries: (dictionaries: Record<string, TranslationEntry[]>) => void;
+  setSelectedWord: (word: TranslationEntry | null) => void;
+  setSelectedLetter: (letter: string) => void;
+  setSearchField: (field: string) => void;
+  setIsFlipped: (flipped: boolean) => void;
+  setDualView: (dual: boolean) => void;
   setSelectedTypes: (types: string[]) => void;
   toggleType: (type: string) => void;
+
+  loadConfig: () => Promise<void>;
+  loadTranslations: (route: string, name: string) => Promise<void>;
+  loadAllTranslations: () => Promise<void>;
 }
 
-export const useConfigStore = create<ConfigState>()((set, get) => {
-  const list: TranslationEntry[] = [];
-  const selectedLetter = "A";
-  const searchField = "";
-  const isFlipped = false;
-  const selectedTypes: string[] = [];
-  const setList = (list: TranslationEntry[]) => set({ list });
-  const setSelectedLetter = (letter: string) => set({ selectedLetter: letter });
-  const setSearchField = (field: string) => set({ searchField: field });
-  const setIsFlipped = (flipped: boolean) => set({ isFlipped: flipped });
-  const setSelectedTypes = (types: string[]) => set({ selectedTypes: types });
-  const toggleType = (type: string) => {
-    const currentTypes = get().selectedTypes;
-    if (currentTypes.includes(type)) {
-      set({ selectedTypes: currentTypes.filter(t => t !== type) });
-    } else {
-      set({ selectedTypes: [...currentTypes, type] });
-    }
-  };
-  const dualView = true;
-  const setDualView = (dual: boolean) => { set({ dualView: dual }); };
-  const setSelectedWord = (word: TranslationEntry | null) =>
-    set({ selectedWord: word });
+export const useConfigStore = create<ConfigState>((set, get) => ({
+  dictionaryMetadata: {},
+  dictionaries: {},
+  data: { navMain: [{ title: "Home", url: "/" }] },
+  selectedWord: null,
+  selectedLetter: "A",
+  searchField: "",
+  isFlipped: false,
+  dualView: true,
+  selectedTypes: [],
 
-  const loadConfig = async () => {
+  setDictionaryMetadata: (metadata) =>
+    set({ dictionaryMetadata: metadata }),
+
+  setDictionaries: (dictionaries) =>
+    set({ dictionaries }),
+
+  setSelectedWord: (word) =>
+    set({ selectedWord: word }),
+
+  setSelectedLetter: (letter) =>
+    set({ selectedLetter: letter }),
+
+  setSearchField: (field) =>
+    set({ searchField: field }),
+
+  setIsFlipped: (flipped) =>
+    set({ isFlipped: flipped }),
+
+  setDualView: (dual) =>
+    set({ dualView: dual }),
+
+  setSelectedTypes: (types) =>
+    set({ selectedTypes: types }),
+
+  toggleType: (type) => {
+    const current = get().selectedTypes;
+    set({
+      selectedTypes: current.includes(type)
+        ? current.filter(t => t !== type)
+        : [...current, type],
+    });
+  },
+
+  loadConfig: async () => {
     try {
       const config = await window.api.loadConfig();
+
       const languageItems = Object.entries(config.dictionaries || {}).map(
-        ([_key, dict]: [any, any]) => ({
+        ([key, dict]: [string, any]) => ({
           title: dict.name,
           url: "",
           items: [
             {
               title: "Dictionary",
               icon: "BookOpen",
-              url: `/dictionary?name=${encodeURIComponent(
-                _key
-              )}&path=${encodeURIComponent(dict.route)}`,
+              url: `/dictionary?name=${encodeURIComponent(key)}&path=${encodeURIComponent(dict.route)}`,
             },
             {
               title: "Translate",
               icon: "Languages",
-              url: `/translation?name=${encodeURIComponent(
-                _key
-              )}&path=${encodeURIComponent(dict.route)}`,
+              url: `/translation?name=${encodeURIComponent(key)}&path=${encodeURIComponent(dict.route)}`,
             },
           ],
         })
       );
-      set(() => ({
+
+      set({
+        dictionaryMetadata: config.dictionaries || {},
         data: {
           navMain: [{ title: "Home", url: "/" }, ...languageItems],
         },
-      }));
+      });
     } catch (err) {
       console.error("Error loading config:", err);
     }
-  };
+  },
 
-  const loadTranslations = async (route: string, name: string) => {
+  loadTranslations: async (route, name) => {
     try {
-      const data = await (window.api as any).requestTranslations(route, name);
-      if (data) {
-        console.log("Translations loaded:", data);
-        setList(data);
-      }
+      const data = await window.api.requestTranslations(route, name);
+      if (!data) return;
+
+      set(state => ({
+        dictionaries: {
+          ...state.dictionaries,
+          [name]: data,
+        },
+      }));
     } catch (error) {
-      console.error("Failed to load JSON:", error);
+      console.error(`Failed to load translations for ${name}:`, error);
     }
-  };
+  },
 
-  return {
-    data: {
-      navMain: [],
-    },
-    list,
-    selectedWord: null,
-    selectedLetter,
-    setSelectedWord,
-    loadConfig,
-    loadTranslations,
-    setSelectedLetter,
-    setSearchField,
-    searchField,
-    setList,
-    isFlipped,
-    setIsFlipped,
-    dualView,
-    setDualView,
-    selectedTypes,
-    setSelectedTypes,
-    toggleType,
-  };
-});
+  loadAllTranslations: async () => {
+    const metadata = get().dictionaryMetadata;
+    const newDictionaries: Record<string, TranslationEntry[]> = {};
 
-export default useConfigStore;
+    for (const [key, dict] of Object.entries(metadata)) {
+      try {
+        const data = await window.api.requestTranslations(dict.route, key);
+        console.log(`Loaded translations for ${key}:`, data);
+        if (data) {
+          newDictionaries[key] = data;
+        }
+      } catch (error) {
+        console.error(`Failed to load JSON for ${key}:`, error);
+      }
+    }
+    console.log("Loaded all translations:", newDictionaries);
+    set({ dictionaries: newDictionaries });
+  },
+}));

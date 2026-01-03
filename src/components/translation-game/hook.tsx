@@ -1,4 +1,4 @@
-import useConfigStore from "@/context/dictionary-context";
+import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
 import { useEffect, useRef, useState } from "react";

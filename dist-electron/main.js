@@ -147,7 +147,18 @@ function addTranslation() {
           translations = translations.filter(
             (t) => t.uuid !== _word
           );
-        } else entry.uuid = v4();
+        } else {
+          const entryUuid = entry.uuid || v4();
+          entry.uuid = entryUuid;
+          const GraphfilePath = path$1.join(_route, `GRAPH-${_name}.json`);
+          console.log("Saving graph to", GraphfilePath, "for uuid:", entry.uuid);
+          let jsonGraph = {};
+          if (fs.existsSync(GraphfilePath)) {
+            jsonGraph = JSON.parse(fs.readFileSync(GraphfilePath, "utf-8"));
+          }
+          jsonGraph[entryUuid] = {};
+          fs.writeFileSync(GraphfilePath, JSON.stringify(jsonGraph, null, 2), "utf-8");
+        }
         translations.push(entry);
         fs.writeFileSync(
           filePath,
@@ -220,9 +231,25 @@ function deleteTranslation() {
         const data = fs.readFileSync(filePath, "utf-8");
         const json = JSON.parse(data);
         let translations = Array.isArray(json) ? json : [];
-        translations = translations.filter(
-          (t) => t.uuid !== _word
-        );
+        translations = translations.filter((t) => t.uuid !== _word);
+        {
+          const filePath2 = path$1.join(_route, `GRAPH-${_name}.json`);
+          console.log(
+            "Deleting graph entry from",
+            filePath2,
+            "for uuid:",
+            _word
+          );
+          let json2 = {};
+          if (fs.existsSync(filePath2)) {
+            json2 = JSON.parse(fs.readFileSync(filePath2, "utf-8"));
+          }
+          if (json2[_word]) {
+            delete json2[_word];
+          }
+          fs.writeFileSync(filePath2, JSON.stringify(json2, null, 2), "utf-8");
+          console.log("Graph entry deleted successfully");
+        }
         fs.writeFileSync(
           filePath,
           JSON.stringify(translations, null, 2),
@@ -282,6 +309,75 @@ function selectFolder() {
     }
   });
 }
+function fetchGraph() {
+  ipcMain.handle("fetchGraph", async (_event, route, name, _uuid) => {
+    try {
+      const filePath = path$1.join(route, `GRAPH-${name}.json`);
+      console.log("Fetching graph from", filePath, "for dictionary", name);
+      if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, "{}", "utf-8");
+      }
+      const data = fs.readFileSync(filePath, "utf-8");
+      const json = JSON.parse(data);
+      if (_uuid) {
+        return json[_uuid] || {};
+      }
+      return json || {};
+    } catch (error) {
+      console.error("Error reading JSON file:", error);
+      throw new Error("Failed to load JSON file.");
+    }
+  });
+}
+function saveGraph() {
+  ipcMain.handle(
+    "saveGraph",
+    async (_event, route, name, uuid, connection) => {
+      try {
+        const filePath = path$1.join(route, `GRAPH-${name}.json`);
+        console.log("Saving graph to", filePath, "for uuid:", uuid);
+        let json = {};
+        if (fs.existsSync(filePath)) {
+          json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        }
+        if (!json[uuid] || connection === void 0) {
+          json[uuid] = {};
+        }
+        json[uuid][connection.uuid] = connection.word;
+        fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        console.log("Graph saved successfully");
+        return { success: true };
+      } catch (error) {
+        console.error("Error saving graph:", error);
+        throw new Error("Failed to save graph.");
+      }
+    }
+  );
+}
+function deleteGraphEntry() {
+  ipcMain.handle(
+    "deleteGraphEntry",
+    async (_event, route, name, uuid, wordToDelete) => {
+      try {
+        const filePath = path$1.join(route, `GRAPH-${name}.json`);
+        console.log("Deleting graph entry from", filePath, "for uuid:", uuid);
+        let json = {};
+        if (fs.existsSync(filePath)) {
+          json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        }
+        if (json[uuid]) {
+          delete json[uuid][wordToDelete];
+        }
+        fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        console.log("Graph entry deleted successfully");
+        return { success: true };
+      } catch (error) {
+        console.error("Error deleting graph entry:", error);
+        throw new Error("Failed to delete graph entry.");
+      }
+    }
+  );
+}
 function registerIpcHandlers() {
   loadTranslations();
   addTranslation();
@@ -293,6 +389,9 @@ function registerIpcHandlers() {
   saveMarkdown();
   fetchConjugation();
   saveConjugation();
+  fetchGraph();
+  saveGraph();
+  deleteGraphEntry();
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

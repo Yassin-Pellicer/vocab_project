@@ -3,14 +3,24 @@ import Layout from "./Layout";
 import DictionaryPage from "./pages/dictionary-page";
 import TranslationGamePage from "./pages/translation-game-page";
 import HomePage from "./pages/home-page";
-import React from "react";
-import useConfigStore from "./context/dictionary-context";
+import { useEffect } from "react";
 import MarkdownPage from "./pages/markdown-page";
+import { useConfigStore } from "./context/dictionary-context";
 
 function App() {
-  React.useEffect(() => {
-    useConfigStore.getState().loadConfig();
-  }, []);
+  const loadConfig = useConfigStore(state => state.loadConfig);
+  const loadAllTranslations = useConfigStore(state => state.loadAllTranslations);
+  const dictionaryMetadata = useConfigStore(state => state.dictionaryMetadata);
+
+  useEffect(() => {
+    loadConfig();
+  }, [loadConfig]);
+
+  useEffect(() => {
+    if (Object.keys(dictionaryMetadata).length > 0) {
+      loadAllTranslations();
+    }
+  }, [dictionaryMetadata, loadAllTranslations]);
 
   return (
     <BrowserRouter>

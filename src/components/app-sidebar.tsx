@@ -12,7 +12,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
-import useConfigStore from "@/context/dictionary-context";
+import { useConfigStore } from "@/context/dictionary-context";
 import { Link } from "react-router-dom";
 
 const iconMap: Record<string, React.ElementType> = {

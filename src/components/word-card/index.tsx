@@ -9,7 +9,6 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
     pairs,
     pairIdx,
     setPairIdx,
-    original,
     translations,
     gender,
     number,
@@ -35,7 +34,7 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
             {isFlipped ? translations : originalWithArticle}
           </h3>
           <p className="text-2xl">⇔</p>
-          <p className="italic mt-1">{isFlipped ? originalWithArticle : translations}</p>
+          <p className="italic">{isFlipped ? originalWithArticle : translations}</p>
         </div>
         {name && route && <EditWordModal word={word} route={route} name={name}></EditWordModal>}
       </div>

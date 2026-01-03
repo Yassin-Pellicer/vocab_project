@@ -1,35 +1,20 @@
-import { TranslationEntry } from "@/types/translation-entry";
-import useConfigStore from "@/context/dictionary-context";
+import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryData } from "@/types/dictionary-data";
 import { useEffect, useState } from "react";
 
-interface DictionaryData {
-  name: string;
-  path: string;
-  id: string;
-  wordOfTheDay: TranslationEntry | null;
-  recentWords: TranslationEntry[];
-  totalWords: number;
-}
-
 export default function useHome() {
-  const { data } = useConfigStore();
+  const dictionaryMetadata = useConfigStore(s => s.dictionaryMetadata);
+  const dictionariesMap = useConfigStore(s => s.dictionaries);
   const [loading, setLoading] = useState(true);
-  const [dictionaries, setDictionaries] = useState<DictionaryData[]>([]);
+  const [dictionaryCards, setDictionaryCards] = useState<DictionaryData[]>([]);
   const [totalWords, setTotalWords] = useState(0);
   const [totalDictionaries, setTotalDictionaries] = useState(0);
 
-  const loadWordOfTheDay = async () => {
-    if (!data.navMain || data.navMain.length === 0) {
-      setLoading(false);
-      return;
-    }
-
-    const dictionaryList = data.navMain.filter(
-      (item) => item.items && item.items.length > 0
-    );
-
-    if (dictionaryList.length === 0) {
-      setLoading(false);
+  useEffect(() => {
+    if (
+      Object.keys(dictionaryMetadata).length === 0 ||
+      Object.keys(dictionariesMap).length === 0
+    ) {
       return;
     }
 
@@ -41,9 +26,8 @@ export default function useHome() {
     const hashCode = (str: string) => {
       let hash = 0;
       for (let i = 0; i < str.length; i++) {
-        const char = str.charCodeAt(i);
-        hash = (hash << 5) - hash + char;
-        hash = hash & hash;
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0;
       }
       return Math.abs(hash);
     };
@@ -55,59 +39,44 @@ export default function useHome() {
       return Math.floor((x - Math.floor(x)) * max);
     };
 
-    const allDictionaries: DictionaryData[] = [];
+    const result: DictionaryData[] = [];
     let wordCount = 0;
 
-    for (const dict of dictionaryList) {
-      const firstSubItem = dict.items?.[0];
-      if (firstSubItem) {
-        const urlParams = new URLSearchParams(firstSubItem.url.split("?")[1]);
-        const path = urlParams.get("path") || "";
-        const name = urlParams.get("name") || "";
+    Object.entries(dictionaryMetadata).forEach(([id, meta], index) => {
+      const translations = dictionariesMap[id];
+      if (!translations || translations.length === 0) return;
 
-        try {
-          const translations = await window.api.requestTranslations(path, name);
+      const wordIndex = seededRandom(translations.length, seed + index);
+      const wordOfTheDay = translations[wordIndex];
 
-          if (translations && translations.length > 0) {
-            wordCount += translations.length;
+      const recentWords = [...translations]
+        .sort(
+          (a, b) =>
+            new Date(b.dateAdded).getTime() -
+            new Date(a.dateAdded).getTime()
+        )
+        .slice(0, 3);
 
-            const wordIndex = seededRandom(translations.length, seed + allDictionaries.length);
-            const wordOfTheDay = translations[wordIndex];
+      wordCount += translations.length;
 
-            const sorted = [...translations].sort((a, b) => {
-              const dateA = new Date(a.dateAdded).getTime();
-              const dateB = new Date(b.dateAdded).getTime();
-              return dateB - dateA;
-            });
-            const recentWords = sorted.slice(0, 3);
+      result.push({
+        id,
+        name: meta.name,
+        path: meta.route,
+        wordOfTheDay,
+        recentWords,
+        totalWords: translations.length,
+      });
+    });
 
-            allDictionaries.push({
-              name: dict.title,
-              path,
-              id: name,
-              wordOfTheDay,
-              recentWords,
-              totalWords: translations.length,
-            });
-          }
-        } catch (error) {
-          console.error(`Failed to load dictionary ${dict.title}:`, error);
-        }
-      }
-    }
-
-    setDictionaries(allDictionaries);
+    setDictionaryCards(result);
     setTotalWords(wordCount);
-    setTotalDictionaries(dictionaryList.length);
+    setTotalDictionaries(result.length);
     setLoading(false);
-  };
-
-  useEffect(() => {
-    loadWordOfTheDay();
-  });
+  }, [dictionaryMetadata, dictionariesMap]);
 
   return {
-    dictionaries,
+    dictionaryCards,
     loading,
     totalWords,
     totalDictionaries,

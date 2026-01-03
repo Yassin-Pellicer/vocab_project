@@ -3,7 +3,7 @@ import useTranslationHooks from "./hook";
 import AddWordModal from "./add-word-modal";
 import WordCard from "../word-card";
 import Markdown from "@/components/markdown-display";
-import useConfigStore from "@/context/dictionary-context";
+import { useConfigStore } from "@/context/dictionary-context";
 import { useState, useRef, useEffect } from "react";
 
 export default function DictionaryComponent({ route, name }: { route: string, name: string }): JSX.Element {

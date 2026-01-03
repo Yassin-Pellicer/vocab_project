@@ -18,9 +18,30 @@ export default function deleteTranslation() {
 
         let translations = Array.isArray(json) ? json : [];
 
-        translations = translations.filter(
-          (t: any) => t.uuid !== _word
-        );
+        translations = translations.filter((t: any) => t.uuid !== _word);
+
+        {
+          const filePath = path.join(_route, `GRAPH-${_name}.json`);
+          console.log(
+            "Deleting graph entry from",
+            filePath,
+            "for uuid:",
+            _word
+          );
+
+          let json: Record<string, Record<string, string>> = {};
+
+          if (fs.existsSync(filePath)) {
+            json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+          }
+
+          if (json[_word]) {
+            delete json[_word];
+          }
+
+          fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+          console.log("Graph entry deleted successfully");
+        }
 
         fs.writeFileSync(
           filePath,

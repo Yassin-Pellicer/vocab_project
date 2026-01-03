@@ -1,4 +1,4 @@
-import useConfigStore from "@/context/dictionary-context";
+import { useConfigStore } from "@/context/dictionary-context";
 import { useState, useEffect, useRef } from "react";
 
 export function useVerbHooks(route: string, name?: string, isEditing?: boolean) {

@@ -1,7 +1,7 @@
 "use client";
 
 import Markdown from "@/components/markdown-display";
-import useConfigStore from "@/context/dictionary-context";
+import { useConfigStore } from "@/context/dictionary-context";
 
 export default function MarkdownPage() {
   const word = useConfigStore((state) => state.selectedWord);

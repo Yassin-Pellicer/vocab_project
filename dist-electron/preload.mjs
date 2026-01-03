@@ -8,6 +8,17 @@ const conjugation = {
     return await electron.ipcRenderer.invoke("saveConjugation", route, name, uuid, conjugation2);
   }
 };
+const graph = {
+  fetchGraph: async (route, name, uuid) => {
+    return await electron.ipcRenderer.invoke("fetchGraph", route, name, uuid);
+  },
+  saveGraph: async (route, name, uuid, connections) => {
+    return await electron.ipcRenderer.invoke("saveGraph", route, name, uuid, connections);
+  },
+  deleteGraphEntry: async (route, name, uuid, word) => {
+    return await electron.ipcRenderer.invoke("deleteGraphEntry", route, name, uuid, word);
+  }
+};
 const markdown = {
   fetchMarkdown: async (route, name) => {
     return await electron.ipcRenderer.invoke("fetchMarkdown", route, name);
@@ -40,7 +51,8 @@ const endpoints = Object.assign(
   {},
   translations,
   markdown,
-  conjugation
+  conjugation,
+  graph
 );
 electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   on(...args) {

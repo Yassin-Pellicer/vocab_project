@@ -1,4 +1,4 @@
-import useConfigStore from "@/context/dictionary-context";
+import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 
 export default function deleteWordModalHooks({ word, route, name }: { word: TranslationEntry, route: string, name: string }) {

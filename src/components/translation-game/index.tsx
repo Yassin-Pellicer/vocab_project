@@ -1,5 +1,5 @@
 "use client";
-import useConfigStore from "@/context/dictionary-context";
+import { useConfigStore } from "@/context/dictionary-context";
 import useTranslationHooks from "./hook";
 import { ArrowLeftRight, BookCheck, Check } from "lucide-react";
 

@@ -8,6 +8,9 @@ import deleteTranslation from "./endpoints/translations/deleteTranslation";
 import loadConfig from "./endpoints/translations/loadConfig";
 import loadTranslations from "./endpoints/translations/loadTranslations";
 import selectFolder from "./endpoints/translations/selectFolder";
+import fetchGraph from "./endpoints/graph/fetchGraph";
+import saveGraph from "./endpoints/graph/saveGraph";
+import deleteGraphEntry from "./endpoints/graph/deleteGraphEntry";
 
 export default function registerIpcHandlers() {
   loadTranslations();
@@ -20,4 +23,7 @@ export default function registerIpcHandlers() {
   saveMarkdown();
   fetchConjugation();
   saveConjugation();
+  fetchGraph();
+  saveGraph();
+  deleteGraphEntry();
 }

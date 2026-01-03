@@ -16,7 +16,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
-import useConfigStore from "./context/dictionary-context";
+import  { useConfigStore }from "./context/dictionary-context";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();

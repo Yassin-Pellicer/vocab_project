@@ -2,10 +2,10 @@ import { Calendar, BookOpen, ArrowRight, Library, WholeWord } from "lucide-react
 import WordCard from '../word-card';
 import { Link } from "react-router-dom";
 import useHome from "./hook";
-import KnowledgeGraph from "../knowledge-graph";
+import DictionaryGraph from "../knowledge-graph";
 
 export default function Home() {
-  const { dictionaries, loading, totalWords, totalDictionaries } = useHome();
+  const { dictionaryCards, loading, totalWords, totalDictionaries } = useHome();
 
   if (loading) {
     return (
@@ -15,7 +15,7 @@ export default function Home() {
     );
   }
 
-  if (!dictionaries || dictionaries.length === 0) {
+  if (!dictionaryCards || dictionaryCards.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[calc(100vh-64px)] px-4">
         <BookOpen size={64} className="text-gray-200 mb-4" />
@@ -62,7 +62,7 @@ export default function Home() {
         </div>
 
         <div className="grid xl:grid-cols-2 grid-cols-1 w-full space-y-12">
-          {dictionaries.map((dict, dictIndex) => (
+          {dictionaryCards.map((dict, dictIndex) => (
             <div key={dictIndex} className="flex flex-col w-full gap-4 p-4">
               <div className="flex items-center justify-between pb-4 border-b">
                 <h2 className="text-3xl font-bold text-black flex items-center gap-3">
@@ -101,10 +101,14 @@ export default function Home() {
                   ))}
                 </div>
               </div>
+              <DictionaryGraph
+                title={dict.name}
+                name={dict.id}
+                route={dict.path}
+              />
             </div>
           ))}
         </div>
-        <KnowledgeGraph />
       </div>
     </div>
   );

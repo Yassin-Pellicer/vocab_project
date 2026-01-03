@@ -1,4 +1,4 @@
-import useConfigStore from "@/context/dictionary-context";
+import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ export default function useTranslationHooks({
 }) {
   const ITEMS_PER_PAGE = 15;
   const {
-    list,
+    dictionaries,
     loadTranslations,
     selectedLetter,
     setSelectedLetter,
@@ -30,8 +30,8 @@ export default function useTranslationHooks({
     !useConfigStore.getState().selectedLetter
   );
   const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
-
   const navigate = useNavigate();
+  const list = dictionaries[name] || [];
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   const scrollRef = useRef<HTMLDivElement>(null);
