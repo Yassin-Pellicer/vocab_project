@@ -60,8 +60,7 @@ export default function Home() {
             <p className="text-2xl font-bold text-black">{(totalWords / (totalDictionaries * 15000)).toFixed(3)}%</p>
           </div>
         </div>
-
-        <div className="grid xl:grid-cols-2 grid-cols-1 w-full space-y-12">
+        <div className="grid 2xl:grid-cols-2 grid-cols-1 w-full gap-12">
           {dictionaryCards.map((dict, dictIndex) => (
             <div key={dictIndex} className="flex flex-col w-full gap-4 p-4">
               <div className="flex items-center justify-between pb-4 border-b">
@@ -69,17 +68,17 @@ export default function Home() {
                   <Library size={32} strokeWidth={2} />
                   {dict.name}
                 </h2>
-                <span className="text-xs font-mono tracking-tight text-gray-500">{dict.totalWords} words</span>
+                <span className="text-xs font-mono tracking-tight text-gray-500">
+                  {dict.totalWords} words
+                </span>
               </div>
-
-              <div className="flex flex-col shadow-md p-4 rounded-2xl outline outline-gray-200">
-                <div className="flex flex-col h-full">
-                  <p className="text-sm tracking-tighter font-semibold italic text-gray-600 ">Word of the Day</p>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-md p-4 rounded-2xl outline outline-gray-200">
+                <div className="flex flex-col min-h-0">
                   <WordCard word={dict.wordOfTheDay} />
-                  <div className="flex md:flex-row flex-col gap-2 mt-4">
+                  <div className="flex flex-col gap-2 mt-4">
                     <Link
                       to={`/dictionary?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
-                      className="flex-1 flex items-center justify-center rounded-2xl gap-2 p-2 text-sm font-semibold bg-gray-700 text-white hover:!text-white hover:bg-gray-800 transition-colors"
+                      className="flex-1 flex items-center justify-center rounded-2xl gap-2 p-2 text-sm font-semibold bg-black text-white hover:!text-white hover:bg-gray-800 transition-colors"
                     >
                       <BookOpen size={16} />
                       View Dictionary
@@ -93,19 +92,29 @@ export default function Home() {
                       <ArrowRight size={16} />
                     </Link>
                   </div>
+                  <h3 className="text-sm tracking-tighter font-semibold italic text-gray-600 mt-6 border-t-dotted border-t border-gray-200 pt-2">
+                    Recent words added to this dictionary
+                  </h3>
+                  <div className="flex flex-col gap-2 mt-1">
+                    {dict.recentWords.map((word: any, wordIndex: number) => (
+                      <WordCard
+                        key={wordIndex}
+                        word={{ ...word, definitions: undefined }}
+                        route={dict.path}
+                        name={dict.id}
+                      />
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-sm tracking-tighter font-semibold italic text-gray-600 mt-6 border-t-dotted border-t-[1px] border-t-gray-200 pt-2">Recent words added to this dictionary</h3>
-                <div className="flex flex-col gap-2 mt-1">
-                  {dict.recentWords.map((word: any, wordIndex: number) => (
-                    <WordCard key={wordIndex} word={{ ...word, definitions: undefined }} />
-                  ))}
+                <div className="h-[400px] border rounded-xl lg:h-auto min-h-0">
+                  <DictionaryGraph
+                    title={dict.name}
+                    name={dict.id}
+                    route={dict.path}
+                    doubleView={false}
+                  />
                 </div>
               </div>
-              <DictionaryGraph
-                title={dict.name}
-                name={dict.id}
-                route={dict.path}
-              />
             </div>
           ))}
         </div>

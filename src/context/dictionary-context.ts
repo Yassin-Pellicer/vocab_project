@@ -11,6 +11,7 @@ interface ConfigState {
   isFlipped: boolean;
   dualView: boolean;
   selectedTypes: string[];
+  graphMode: boolean;
 
   setDictionaryMetadata: (metadata: Record<string, any>) => void;
   setDictionaries: (dictionaries: Record<string, TranslationEntry[]>) => void;
@@ -20,8 +21,9 @@ interface ConfigState {
   setIsFlipped: (flipped: boolean) => void;
   setDualView: (dual: boolean) => void;
   setSelectedTypes: (types: string[]) => void;
-  toggleType: (type: string) => void;
+  setGraphMode: (mode: boolean) => void;
 
+  toggleType: (type: string) => void;
   loadConfig: () => Promise<void>;
   loadTranslations: (route: string, name: string) => Promise<void>;
   loadAllTranslations: () => Promise<void>;
@@ -37,6 +39,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
   isFlipped: false,
   dualView: true,
   selectedTypes: [],
+  graphMode: false,
 
   setDictionaryMetadata: (metadata) =>
     set({ dictionaryMetadata: metadata }),
@@ -70,6 +73,8 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
         : [...current, type],
     });
   },
+  setGraphMode: (mode) =>
+    set({ graphMode: mode }),
 
   loadConfig: async () => {
     try {

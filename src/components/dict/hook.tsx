@@ -23,6 +23,8 @@ export default function useTranslationHooks({
     setDualView,
     dualView,
     selectedTypes,
+    setGraphMode,
+    graphMode,
   } = useConfigStore();
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -247,5 +249,7 @@ export default function useTranslationHooks({
     dualView,
     setDualView,
     availableTypes,
+    graphMode,
+    setGraphMode,
   };
 }

@@ -1,10 +1,11 @@
-import { ChevronLeft, ChevronRight, Search, X, ArrowLeftRight, ListOrdered, SquareSplitHorizontal, Filter } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, X, ArrowLeftRight, ListOrdered, SquareSplitHorizontal, Filter, TreesIcon } from "lucide-react";
 import useTranslationHooks from "./hook";
 import AddWordModal from "./add-word-modal";
 import WordCard from "../word-card";
 import Markdown from "@/components/markdown-display";
 import { useConfigStore } from "@/context/dictionary-context";
 import { useState, useRef, useEffect } from "react";
+import KnowledgeGraph from "../knowledge-graph";
 
 export default function DictionaryComponent({ route, name }: { route: string, name: string }): JSX.Element {
 
@@ -30,6 +31,8 @@ export default function DictionaryComponent({ route, name }: { route: string, na
     setIsAdditionOrder,
     dualView,
     setDualView,
+    graphMode,
+    setGraphMode,
     availableTypes } = useTranslationHooks({ route, name });
 
   const selectedWord = useConfigStore((state: any) => state.selectedWord);
@@ -123,6 +126,16 @@ export default function DictionaryComponent({ route, name }: { route: string, na
               <SquareSplitHorizontal size={18} />
             </button>
             <button
+              onClick={() => setGraphMode(!graphMode)}
+              className={`p-2 rounded-2xl border transition-colors ${graphMode
+                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
+                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                }`}
+              title="Toggle graph mode"
+            >
+              <TreesIcon size={18} />
+            </button>
+            <button
               onClick={() => setIsFlipped(!isFlipped)}
               className={`p-2 rounded-2xl border transition-colors ${isFlipped
                 ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
@@ -158,76 +171,82 @@ export default function DictionaryComponent({ route, name }: { route: string, na
         {dualView && selectedWord && <div className="max-w-[50%] w-full">
           <Markdown route={route} name={name} uuid={selectedWord.uuid} word={selectedWord}></Markdown>
         </div>}
-
-        <div className="flex-1 flex flex-col border-r min-w-0 h-full">
-          <div className="flex flex-col overflow-auto px-2 pt-4" ref={scrollRef}>
-            {currentPage <= 1 && (
-              <div className={`mb-4 mx-2 flex-shrink-0 ${(searchField || isAdditionOrder) ? "hidden" : ""}`} >
-                <p className="text-8xl font-bold text-gray-900 mb-4">
-                  {selectedLetter}
-                </p>
-                <hr />
-              </div>
-            )}
-            {paginatedWords.length === 0 ? (
-              <div className="py-12 text-gray-500 text-center">
-                {searchField ? `No results found for "${searchField}"` : `No list found starting with ${selectedLetter}`}
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 xl:grid-cols-2 pb-8">
-                <div className="sm:pl-2 px-2">
-                  {leftColumn.map((word, idx) => (
-                    <div key={`left-${idx}-${word.uuid}`} className="shadow-md p-4 mb-4 rounded-2xl outline outline-gray-200">
-                      <WordCard word={word} route={route} name={name} doubleView={dualView} />
+        {!graphMode ? (
+          <>
+            <div className="flex-1 flex flex-col border-r min-w-0 h-full">
+              <div className="flex flex-col overflow-auto px-2 pt-4" ref={scrollRef}>
+                {currentPage <= 1 && (
+                  <div className={`mb-4 mx-2 flex-shrink-0 ${(searchField || isAdditionOrder) ? "hidden" : ""}`} >
+                    <p className="text-8xl font-bold text-gray-900 mb-4">
+                      {selectedLetter}
+                    </p>
+                    <hr />
+                  </div>
+                )}
+                {paginatedWords.length === 0 ? (
+                  <div className="py-12 text-gray-500 text-center">
+                    {searchField ? `No results found for "${searchField}"` : `No list found starting with ${selectedLetter}`}
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 xl:grid-cols-2 pb-8">
+                    <div className="sm:pl-2 px-2">
+                      {leftColumn.map((word, idx) => (
+                        <div key={`left-${idx}-${word.uuid}`} className="shadow-md p-4 mb-4 rounded-2xl outline outline-gray-200">
+                          <WordCard word={word} route={route} name={name} doubleView={dualView} />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                <div className="sm:pr-2 px-2">
-                  {rightColumn.map((word, idx) => (
-                    <div key={`right-${idx}-${word.uuid}`} className="shadow-md mb-4 p-4 rounded-2xl outline outline-gray-200">
-                      <WordCard word={word} route={route} name={name} doubleView={dualView} />
+                    <div className="sm:pr-2 px-2">
+                      {rightColumn.map((word, idx) => (
+                        <div key={`right-${idx}-${word.uuid}`} className="shadow-md mb-4 p-4 rounded-2xl outline outline-gray-200">
+                          <WordCard word={word} route={route} name={name} doubleView={dualView} />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          {totalPages > 1 && (
-            <div className="flex-shrink-0 flex items-center justify-center gap-4 my-4 pt-4 border-t border-gray-200 bg-white">
-              <button
-                onClick={handlePrevPage}
-                disabled={currentPage === 1}
-                className="p-2 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <span className="text-sm text-gray-700 font-medium">
-                Page {currentPage} of {totalPages}
-              </span>
-              <button
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-                className="p-2 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
+              {totalPages > 1 && (
+                <div className="flex-shrink-0 flex items-center justify-center gap-4 my-4 pt-4 border-t border-gray-200 bg-white">
+                  <button
+                    onClick={handlePrevPage}
+                    disabled={currentPage === 1}
+                    className="p-2 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <span className="text-sm text-gray-700 font-medium">
+                    Page {currentPage} of {totalPages}
+                  </span>
+                  <button
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPages}
+                    className="p-2 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        <div className=" flex flex-col border-r items-center divide-y overflow-y-auto h-full flex-shrink-0">
-          {alphabet.map((letter) => (
-            <button
-              key={letter}
-              onClick={() => handleLetterClick(letter)}
-              className={`w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors flex-shrink-0 ${selectedLetter === letter
-                ? "bg-blue-600 text-white"
-                : "text-gray-400 hover:text-black"
-                }`}
-            >
-              {letter}
-            </button>
-          ))}
-        </div>
+            <div className=" flex flex-col border-r items-center divide-y overflow-y-auto h-full flex-shrink-0">
+              {alphabet.map((letter) => (
+                <button
+                  key={letter}
+                  onClick={() => handleLetterClick(letter)}
+                  className={`w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors flex-shrink-0 ${selectedLetter === letter
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-400 hover:text-black"
+                    }`}
+                >
+                  {letter}
+                </button>
+              ))}
+            </div>
+          </>) :
+          <div className="border-r">
+            <KnowledgeGraph route={route} name={name} title={""} doubleView={dualView} />
+          </div>
+        }
       </div>
     </div>
   );

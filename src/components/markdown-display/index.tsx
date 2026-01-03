@@ -56,9 +56,7 @@ export default function MarkdownEditor({
       {/* Header */}
       <div className={`px-4 max-w-[800px] ${word.type == "verb" ? "pb-6" : ""}  w-full ${collapsed ? "hidden" : ""}`}>
         <WordCard word={word} />
-      </div>
-      <div className="flex flex-col max-w-[800px] items-center w-full">
-        {word.type == "verb" && <div className="flex flex-row px-4 justify-around divide-x w-full">
+        {word.type == "verb" && <div className="flex flex-row mt-6 justify-around divide-x w-full">
           <button onClick={() => setSelectOption("notes")}
             className={`border-b w-full cursor-pointer text-sm pb-1 ${selectOption === "notes" ? "border-b-black border-b-2" : ""}`}>
             Notes
@@ -68,6 +66,8 @@ export default function MarkdownEditor({
             Conjugation
           </button>
         </div>}
+      </div>
+      <div className="flex flex-col border-b items-center w-full">
         {selectOption === "notes" && <div className="flex flex-col justify-between max-w-[800px] px-4 w-full">
           <div className="py-2 mb-2">
             <p className="text-sm font-semibold mb-1">Related Words</p>
@@ -83,7 +83,7 @@ export default function MarkdownEditor({
                   className="flex items-center align-center gap-1 bg-gray-800 text-white rounded-full text-sm pt-1 px-2"
                 >
                   <p>
-                  {word}
+                    {word}
                   </p>
                   <X
                     className="cursor-pointer mb-1"
@@ -99,9 +99,10 @@ export default function MarkdownEditor({
             buttonLabel="Link word"
             onWordSelect={handleWordSelect}
             showDropdown={true}
+            name={name}
           />
           <div className="flex flex-row justify-between mt-4">
-            <div className="flex flex-row gap-2 text-sm">
+            <div className="flex flex-row flex-wrap gap-2 text-sm">
               <button
                 onClick={() => setMode("edit")}
                 className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${mode === "edit"
@@ -135,7 +136,7 @@ export default function MarkdownEditor({
             </div>
             <button
               onClick={saveMarkdown}
-              className="px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+              className="px-3 h-fit py-1 rounded-full flex items-center gap-2 outline outline-gray-300 transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
             >
               <Save size={16} />
               Save
@@ -143,12 +144,12 @@ export default function MarkdownEditor({
           </div>
         </div>}
         {selectOption === "conjugation" && <div className="flex flex-col justify-between max-w-[800px] px-4 w-full">
-          <div className="flex flex-row justify-between mt-4">
+          <div className="flex flex-row flex-wrap justify-between mt-4">
             <div className="flex flex-row gap-2 text-sm">
             </div>
             {!isEditing && <button
               onClick={() => setIsEditing(true)}
-              className="px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+              className="px-3 h-fit py-1 rounded-full flex items-center gap-2 outline outline-gray-300 transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
             >
               <Edit3 size={16} />
               Edit
@@ -162,11 +163,10 @@ export default function MarkdownEditor({
             </button>}
           </div>
         </div>}
-        <button onClick={() => setCollapsed(!collapsed)} className=" mb-3">
+        <button onClick={() => setCollapsed(!collapsed)} className="mt-2 mb-3">
           {collapsed ? <ChevronDown /> : <ChevronUp />}
         </button>
       </div>
-
       <div className="border-gray-300 w-full" />
       {selectOption === "notes" && <div className="flex-1 flex overflow-hidden justify-center mt-4 max-w-[800px] px-4 w-full">
         {(mode === "edit" || mode === "split") && (
@@ -190,7 +190,7 @@ export default function MarkdownEditor({
             className={`${mode === "split" ? "w-1/2" : "w-full"
               } overflow-y-auto`}
           >
-            <div className="mt-[-20px] px-4 markdown mx-auto">
+            <div className="mt-[-20px] px-1 markdown mx-auto">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkBreaks]}
                 rehypePlugins={[rehypeRaw, rehypeHighlight]}

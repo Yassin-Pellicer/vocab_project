@@ -20,11 +20,11 @@ const graph = {
   }
 };
 const markdown = {
-  fetchMarkdown: async (route, name) => {
-    return await electron.ipcRenderer.invoke("fetchMarkdown", route, name);
+  fetchMarkdown: async (route, name, uuid) => {
+    return await electron.ipcRenderer.invoke("fetchMarkdown", route, name, uuid);
   },
-  saveMarkdown: async (route, name, markdown2) => {
-    return await electron.ipcRenderer.invoke("saveMarkdown", route, name, markdown2);
+  saveMarkdown: async (route, name, uuid, markdown2) => {
+    return await electron.ipcRenderer.invoke("saveMarkdown", route, name, uuid, markdown2);
   }
 };
 const translations = {

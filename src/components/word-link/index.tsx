@@ -5,12 +5,13 @@ import { TranslationEntry } from '@/types/translation-entry';
 
 export const SearchBar = ({
   placeholder = 'Search for a word',
-  onSearch = () => {},
+  onSearch = () => { },
   debounceMs = 300,
   className = '',
   showDropdown = true,
   buttonLabel = 'Link word',
-  onWordSelect = (_word: TranslationEntry) => {},
+  onWordSelect = (_word: TranslationEntry) => { },
+  name = "",
 }) => {
   const {
     value,
@@ -29,6 +30,7 @@ export const SearchBar = ({
     autoSearch: true,
     onWordSelect,
     showDropdown,
+    name
   });
 
   return (
@@ -37,7 +39,7 @@ export const SearchBar = ({
         <button
           className="px-3 shrink-0 py-1 rounded-full flex items-center gap-2 outline outline-gray-300"
         >
-          <Link size={16}/>
+          <Link size={16} />
           {buttonLabel}
         </button>
 
@@ -67,7 +69,7 @@ export const SearchBar = ({
             {searchResults.length === 1 ? 'word' : 'words'}
           </div>
 
-          {searchResults.slice(0, 50).map((word, index) => (
+          {searchResults.slice(0, 50).map((word: TranslationEntry, index: number) => (
             <div
               key={`${word.pair[0]?.original?.word}-${index}`}
               onClick={() => handleWordClick(word)}

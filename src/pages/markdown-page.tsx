@@ -13,10 +13,8 @@ export default function MarkdownPage() {
   let path = urlParams.get("path") || "";
   const name = urlParams.get("name") || "";
 
-  // 🔥 Normalize Windows paths into URL-safe forward slashes
   path = path.replace(/\\/g, "/");
 
-  // 🔥 Avoid double slashes (//) except the leading one
   path = path.replace(/\/+/g, "/");
 
   return (

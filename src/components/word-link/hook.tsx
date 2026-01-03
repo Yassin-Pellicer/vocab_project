@@ -8,26 +8,28 @@ export const useSearchBar = ({
   autoSearch = true,
   onWordSelect,
   showDropdown = true,
+  name = "",
 }: {
   onSearch?: (value: string, results: TranslationEntry[]) => void;
   debounceMs?: number;
   autoSearch?: boolean;
   onWordSelect?: (word: TranslationEntry) => void;
   showDropdown?: boolean;
+  name?: string;
 } = {}) => {
   const {
-    searchField,
-    list,
+    dictionaries,
     selectedLetter,
     selectedTypes,
     setSelectedLetter,
   } = useConfigStore();
 
-  const [localValue, setLocalValue] = useState(searchField);
+  const [localValue, setLocalValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const list = dictionaries[name] || [];
 
   const searchResults = useMemo(() => {
     if (!list?.length) return [];

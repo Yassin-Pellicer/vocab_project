@@ -72,9 +72,10 @@ function saveConjugation() {
   });
 }
 function fetchMarkdown() {
-  ipcMain.handle("fetchMarkdown", async (_event, _route, _name) => {
+  ipcMain.handle("fetchMarkdown", async (_event, _route, _name, _uuid) => {
     try {
-      const filePath = path$1.join(_route, `${_name}.md`);
+      const normalizedRoute = _route.replace(/\\/g, "/");
+      const filePath = path$1.join(normalizedRoute, `MD-${_name}`, `${_uuid}.md`);
       if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, "", "utf-8");
       }
@@ -82,21 +83,25 @@ function fetchMarkdown() {
       return data;
     } catch (error) {
       console.error("Error reading markdown file:", error);
-      throw new Error("Failed to load markdown file.");
+      throw new Error(`Failed to load markdown file: ${error}`);
     }
   });
 }
 function saveMarkdown() {
-  ipcMain.handle("saveMarkdown", async (_event, _route, _name, markdown) => {
-    try {
-      const filePath = path$1.join(_route, `${_name}.md`);
-      console.log("Saving markdown to", filePath);
-      fs.writeFileSync(filePath, markdown);
-    } catch (error) {
-      console.error("Error saving markdown file:", error);
-      throw new Error("Failed to save markdown file.");
+  ipcMain.handle(
+    "saveMarkdown",
+    async (_event, _route, _name, _uuid, markdown) => {
+      try {
+        const normalizedRoute = _route.replace(/\\/g, "/");
+        const filePath = path$1.join(normalizedRoute, `MD-${_name}`, `${_uuid}.md`);
+        fs.writeFileSync(filePath, markdown, "utf-8");
+        return { success: true, path: filePath };
+      } catch (error) {
+        console.error("Error saving markdown file:", error);
+        throw new Error(`Failed to save markdown file: ${error}`);
+      }
     }
-  });
+  );
 }
 const byteToHex = [];
 for (let i = 0; i < 256; ++i) {

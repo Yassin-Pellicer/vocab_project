@@ -6,12 +6,13 @@ export function useMarkdown(route: string, uuid?: string, name?: string, word?: 
   const [markdown, setMarkdown] = useState("");
   const [mode, setMode] = useState<"edit" | "preview" | "split">("preview");
   const [collapsed, setCollapsed] = useState(false);
-  const editorRef = useRef<HTMLTextAreaElement>(null);
-  const previewRef = useRef<HTMLDivElement>(null);
   const [selectOption, setSelectOption] = useState<"notes" | "conjugation">("notes");
   const [isEditing, setIsEditing] = useState(false);
   const [linkedWordList, setLinkedWordList] = useState<Record<string, string>>({});
   const { selectedWord } = useConfigStore();
+
+  const editorRef = useRef<HTMLTextAreaElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     console.log("linkedWordList updated:", linkedWordList);
@@ -22,12 +23,12 @@ export function useMarkdown(route: string, uuid?: string, name?: string, word?: 
       try {
         const response = await window.api.fetchGraph(route, name, uuid);
         console.log("Fetched graph response:", response);
-
         setLinkedWordList(response);
       } catch (error) {
         console.error("Error fetching graph:", error);
       }
     };
+
     if (uuid && name && route) {
       fetchGraph();
     } else {
@@ -36,8 +37,8 @@ export function useMarkdown(route: string, uuid?: string, name?: string, word?: 
   }, [uuid, name, route]);
 
   const saveMarkdown = () => {
-    console.log("Saving markdown for", `${route.replace(/\\/g, "/")}/MD-${uuid}/${name}`);
-    window.api.saveMarkdown(`${route.replace(/\\/g, "/")}/MD-${uuid}`, name, markdown);
+    console.log("Saving markdown for", name, uuid, markdown);
+    window.api.saveMarkdown(route, name, uuid, markdown);
   };
 
   const handleWordSelect = (word: TranslationEntry) => {
@@ -72,9 +73,9 @@ export function useMarkdown(route: string, uuid?: string, name?: string, word?: 
   };
 
   useEffect(() => {
-    console.log("Fetching markdown for", route, name);
+    console.log("Fetching markdown for", route, uuid);
     window.api
-      .fetchMarkdown(`${route.replace(/\\/g, "/")}/MD-${uuid}`, name)
+      .fetchMarkdown(route, name, uuid)
       .then((response: string) => setMarkdown(response));
   }, [selectedWord, route, name, uuid]);
 
