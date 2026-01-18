@@ -207,7 +207,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
                 )}
               </div>
               {totalPages > 1 && (
-                <div className="flex-shrink-0 flex items-center justify-center gap-4 my-4 pt-4 border-t border-gray-200 bg-white">
+                <div className="flex-shrink-0 mt-auto mb-4 flex items-center justify-center gap-4 my-4 pt-4 border-t border-gray-200 bg-white">
                   <button
                     onClick={handlePrevPage}
                     disabled={currentPage === 1}

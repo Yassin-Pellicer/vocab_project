@@ -36,7 +36,7 @@ export default defineConfig({
   server: {
     watch: {
       ignored: [
-        "**/GRAPH-*.json"
+        "**/0ab95de2-84d0-4ab2-8873-e22bc57109f0/**",
       ]
     }
   }

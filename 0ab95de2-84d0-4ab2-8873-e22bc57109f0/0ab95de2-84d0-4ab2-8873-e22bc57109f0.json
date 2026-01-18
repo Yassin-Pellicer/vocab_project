@@ -1801,31 +1801,6 @@
     "pair": [
       {
         "original": {
-          "word": "möchten",
-          "gender": "",
-          "number": ""
-        },
-        "translations": [
-          {
-            "word": "desear",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Equivalente a \"Would like\" en inglés, como decir \"me gustaría\" o  \"desearia\"",
-          "Expresa deseo y esperanza, como \"May\" en inglés, como verbo modal"
-        ]
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "verb",
-    "uuid": "2f51d3c0-2bfd-4fc8-8d3b-6be86a6b2a0e"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "arbeiten",
           "gender": "",
           "number": ""
@@ -5128,28 +5103,6 @@
     "pair": [
       {
         "original": {
-          "word": "haben",
-          "gender": "",
-          "number": ""
-        },
-        "translations": [
-          {
-            "word": "Haber",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "verb",
-    "uuid": "98ba7f77-580a-4427-aed4-d2240fd5c5c2"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Gestern",
           "gender": "m",
           "number": "sing"
@@ -6017,28 +5970,6 @@
     "dateAdded": "2025-12-15",
     "type": "noun",
     "uuid": "bd915c46-7012-44ae-b72f-6091109f7c7d"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "ab",
-          "gender": "-",
-          "number": "-"
-        },
-        "translations": [
-          {
-            "word": "a partir de",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "preposition",
-    "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
   },
   {
     "pair": [
@@ -7234,5 +7165,74 @@
     "dateAdded": "2026-01-14",
     "type": "noun",
     "uuid": "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "möchten",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "desear",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Equivalente a \"Would like\" en inglés, como decir \"me gustaría\" o  \"desearía\"",
+          "Expresa deseo y esperanza, como \"May\" en inglés, como verbo modal"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "2f51d3c0-2bfd-4fc8-8d3b-6be86a6b2a0e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "haben",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "Haber",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "98ba7f77-580a-4427-aed4-d2240fd5c5c2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "ab",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "a partir de",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "preposition",
+    "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
   }
 ]
