@@ -104,7 +104,7 @@ const AddTranslationModal = forwardRef<
                       required
                     />
                     <div className="flex flex-row gap-2 mt-2">
-                    <Select
+                      <Select
                         value={pair.original.gender}
                         onValueChange={(val) =>
                           handlePairChange(
@@ -140,7 +140,7 @@ const AddTranslationModal = forwardRef<
                         }
                       >
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select number"/>
+                          <SelectValue placeholder="Select number" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="-">None</SelectItem>
@@ -245,7 +245,7 @@ const AddTranslationModal = forwardRef<
             </Button>
           </div>
 
-          
+
           <Select
             value={formData.type || "noun"}
             onValueChange={(val) => setFormData({

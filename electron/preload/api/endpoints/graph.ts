@@ -5,8 +5,8 @@ export const graph = {
     return await ipcRenderer.invoke("fetchGraph", route, name, uuid);
   },
 
-  saveGraph: async (route: string, name: string, uuid:string, connections: Object) => {
-    return await ipcRenderer.invoke("saveGraph", route, name, uuid, connections);
+  saveGraph: async (route: string, name: string, origin: Object, destination: Object) => {
+    return await ipcRenderer.invoke("saveGraph", route, name, origin, destination);
   },
 
   deleteGraphEntry: async (route: string, name: string, uuid: string, word: string) => {

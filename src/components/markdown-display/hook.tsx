@@ -41,16 +41,26 @@ export function useMarkdown(route: string, uuid?: string, name?: string, word?: 
     window.api.saveMarkdown(route, name, uuid, markdown);
   };
 
-  const handleWordSelect = (word: TranslationEntry) => {
-    const text = word.pair[0].original.word;
+  const handleWordSelect = (connection: TranslationEntry) => {
+    const text = connection.pair[0].original.word;
+    const wordOfOrigin = word?.pair[0].original.word || "";
+    console.log(wordOfOrigin, "is connecting to", text);
     setLinkedWordList(prev => ({
       ...prev,
-      [word.uuid as string]: text,
+      [connection.uuid as string]: text,
     }));
-    window.api.saveGraph(route, name, uuid, {
-      uuid: word.uuid,
-      word: text,
-    });
+    window.api.saveGraph(route, name,
+      {
+        uuid: uuid,
+        word: wordOfOrigin,
+      },
+      {
+        uuid: connection.uuid,
+        word: text,
+      }
+    );
+    console.log("Saved graph connection ", uuid, "and", wordOfOrigin);
+    console.log("Saved graph connection ", connection.uuid, "and", text);
   };
 
   const handleWordDelete = (id: string) => {
@@ -77,7 +87,7 @@ export function useMarkdown(route: string, uuid?: string, name?: string, word?: 
     window.api
       .fetchMarkdown(route, name, uuid)
       .then((response: string) => setMarkdown(response));
-  }, [selectedWord, route, name, uuid]);
+  }, [route, name, uuid]);
 
   useEffect(() => {
     setCollapsed(false);

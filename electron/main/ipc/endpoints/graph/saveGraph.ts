@@ -5,10 +5,9 @@ import fs from "fs";
 export default function saveGraph() {
   ipcMain.handle(
     "saveGraph",
-    async (_event, route, name, uuid, connection) => {
+    async (_event, route, name, origin, destination) => {
       try {
         const filePath = path.join(route, `GRAPH-${name}.json`);
-        console.log("Saving graph to", filePath, "for uuid:", uuid);
 
         let json: Record<string, Record<string, string>> = {};
 
@@ -16,12 +15,16 @@ export default function saveGraph() {
           json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
         }
 
-        if (!json[uuid] || connection === undefined) {
-          json[uuid] = {};
+        if (!json[origin.uuid]) {
+          json[origin.uuid] = {};
+        }
+        if (!json[destination.uuid]) {
+          json[destination.uuid] = {};
         }
 
-        json[uuid][connection.uuid] = connection.word;
-
+        json[origin.uuid][destination.uuid] = destination.word;
+        json[destination.uuid][origin.uuid] = origin.word;
+        
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
 
         console.log("Graph saved successfully");
@@ -30,6 +33,6 @@ export default function saveGraph() {
         console.error("Error saving graph:", error);
         throw new Error("Failed to save graph.");
       }
-    }
+    },
   );
 }

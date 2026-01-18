@@ -26,11 +26,10 @@ export default function useTranslationHooks({
     setGraphMode,
     graphMode,
   } = useConfigStore();
+
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isAdditionOrder, setIsAdditionOrder] = useState(
-    !useConfigStore.getState().selectedLetter
-  );
+  const [isAdditionOrder, setIsAdditionOrder] = useState(!useConfigStore.getState().selectedLetter);
   const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
   const navigate = useNavigate();
   const list = dictionaries[name] || [];

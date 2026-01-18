@@ -337,18 +337,21 @@ function fetchGraph() {
 function saveGraph() {
   ipcMain.handle(
     "saveGraph",
-    async (_event, route, name, uuid, connection) => {
+    async (_event, route, name, origin, destination) => {
       try {
         const filePath = path$1.join(route, `GRAPH-${name}.json`);
-        console.log("Saving graph to", filePath, "for uuid:", uuid);
         let json = {};
         if (fs.existsSync(filePath)) {
           json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
         }
-        if (!json[uuid] || connection === void 0) {
-          json[uuid] = {};
+        if (!json[origin.uuid]) {
+          json[origin.uuid] = {};
         }
-        json[uuid][connection.uuid] = connection.word;
+        if (!json[destination.uuid]) {
+          json[destination.uuid] = {};
+        }
+        json[origin.uuid][destination.uuid] = destination.word;
+        json[destination.uuid][origin.uuid] = origin.word;
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
         console.log("Graph saved successfully");
         return { success: true };

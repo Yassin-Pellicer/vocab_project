@@ -12,8 +12,8 @@ const graph = {
   fetchGraph: async (route, name, uuid) => {
     return await electron.ipcRenderer.invoke("fetchGraph", route, name, uuid);
   },
-  saveGraph: async (route, name, uuid, connections) => {
-    return await electron.ipcRenderer.invoke("saveGraph", route, name, uuid, connections);
+  saveGraph: async (route, name, origin, destination) => {
+    return await electron.ipcRenderer.invoke("saveGraph", route, name, origin, destination);
   },
   deleteGraphEntry: async (route, name, uuid, word) => {
     return await electron.ipcRenderer.invoke("deleteGraphEntry", route, name, uuid, word);

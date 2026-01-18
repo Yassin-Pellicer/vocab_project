@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import * as d3 from "d3";
 import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
@@ -23,16 +23,51 @@ export default function DictionaryGraph({
   const [tooltipWord, setTooltipWord] = useState<TranslationEntry | null>(null);
   const [graphData, setGraphData] = useState<{ nodes: GraphNode[]; links: GraphLink[] } | null>(null);
   const [showEmptyNodes, setShowEmptyNodes] = useState(true);
-  const { dictionaries, setSelectedWord } = useConfigStore((state: any) => state);
-  const list = dictionaries[name] || [];
   
-  // Use ref to track current doubleView value
+  const dictionaries = useConfigStore((s: any) => s.dictionaries);
+  const setSelectedWord = useConfigStore((s: any) => s.setSelectedWord);
+  const searchField = useConfigStore((s: any) => s.searchField);
+  const selectedTypes = useConfigStore((s: any) => s.selectedTypes);
+
+  const list = dictionaries[name] || [];
+
   const doubleViewRef = useRef(doubleView);
 
-  // Update ref when doubleView changes
   useEffect(() => {
     doubleViewRef.current = doubleView;
   }, [doubleView]);
+
+  const filteredNodeIds = useMemo<Set<string>>(() => {
+    if (!list || list.length === 0) {
+      return new Set<string>();
+    }
+
+    let results = [];
+
+    if (searchField.trim() === "") {
+      results = list;
+    } else {
+      results = list.filter((word: TranslationEntry) =>
+        word.pair.some(
+          (p) =>
+            p.original?.word
+              .toLowerCase()
+              .includes(searchField.toLowerCase()) ||
+            p.translations?.some((t) =>
+              t.word.toLowerCase().includes(searchField.toLowerCase())
+            )
+        )
+      );
+    }
+
+    if (selectedTypes.length > 0) {
+      results = results.filter(
+        (word: TranslationEntry) => word.type && selectedTypes.includes(word.type)
+      );
+    }
+
+    return new Set(results.map((word: TranslationEntry) => word.uuid));
+  }, [list, searchField, selectedTypes]);
 
   const fetchGraph = async () => {
     try {
@@ -106,7 +141,6 @@ export default function DictionaryGraph({
 
   useEffect(() => {
     fetchGraph();
-    console.log(list)
   }, []);
 
   useEffect(() => {
@@ -151,19 +185,62 @@ export default function DictionaryGraph({
     let filteredNodes = nodes;
     let filteredLinks = links;
 
+    // Filter based on search and type filters FIRST
+    if (searchField.trim() !== "" || selectedTypes.length > 0) {
+      console.log("Filtering nodes. filteredNodeIds:", filteredNodeIds);
+
+      // Start with nodes that match the filter
+      const matchingNodeIds = new Set<string>([ROOT_ID]);
+      filteredNodeIds.forEach(id => matchingNodeIds.add(id));
+
+      // Add all connected nodes (both incoming and outgoing connections)
+      links.forEach(link => {
+        const sourceId = typeof link.source === 'string' ? link.source : link.source.id;
+        const targetId = typeof link.target === 'string' ? link.target : link.target.id;
+
+        // If source matches, include target
+        if (filteredNodeIds.has(sourceId)) {
+          matchingNodeIds.add(targetId);
+        }
+        // If target matches, include source
+        if (filteredNodeIds.has(targetId)) {
+          matchingNodeIds.add(sourceId);
+        }
+      });
+
+      filteredNodes = nodes.filter(node => matchingNodeIds.has(node.id));
+
+      const validNodeIds = new Set(filteredNodes.map(n => n.id));
+      filteredLinks = links.filter(
+        link => {
+          const sourceId = typeof link.source === 'string' ? link.source : link.source.id;
+          const targetId = typeof link.target === 'string' ? link.target : link.target.id;
+          return validNodeIds.has(sourceId) && validNodeIds.has(targetId);
+        }
+      );
+      console.log("Filtered to", filteredNodes.length, "nodes including connected nodes");
+    }
+
+    // Then filter empty nodes if needed
     if (!showEmptyNodes) {
       const emptyNodeIds = new Set(
-        links
-          .filter(link => typeof link.source === 'object' && link.source.id === ROOT_ID)
+        filteredLinks
+          .filter(link => {
+            const sourceId = typeof link.source === 'string' ? link.source : link.source.id;
+            return sourceId === ROOT_ID;
+          })
           .map(link => typeof link.target === 'string' ? link.target : link.target.id)
       );
 
-      filteredNodes = nodes.filter(
-        node => node.id !== ROOT_ID && !emptyNodeIds.has(node.id)
+      filteredNodes = filteredNodes.filter(
+        node => node.id === ROOT_ID || !emptyNodeIds.has(node.id)
       );
 
-      filteredLinks = links.filter(
-        link => (typeof link.target === 'object' && !emptyNodeIds.has(link.target.id))
+      filteredLinks = filteredLinks.filter(
+        link => {
+          const targetId = typeof link.target === 'string' ? link.target : link.target.id;
+          return !emptyNodeIds.has(targetId);
+        }
       );
     }
 
@@ -215,7 +292,6 @@ export default function DictionaryGraph({
       })
       .on("click", (_event, d) => {
         setSelectedWord(d.wordData!);
-        // Use the ref to get the current value
         if (!doubleViewRef.current) {
           navigate(
             `/markdown?path=${encodeURIComponent(route)}&name=${encodeURIComponent(name)}`,
@@ -273,7 +349,7 @@ export default function DictionaryGraph({
     return () => {
       simulation.stop();
     };
-  }, [graphData, showEmptyNodes, navigate, route, name, setSelectedWord]);
+  }, [graphData, showEmptyNodes, navigate, route, name, setSelectedWord, searchField, selectedTypes, filteredNodeIds]);
 
   return (
     <div className="relative w-full h-full overflow-hidden">
