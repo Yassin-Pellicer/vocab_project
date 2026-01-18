@@ -1,0 +1,7238 @@
+[
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Weisheit",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Sabiduría",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Grado más alto del conocimiento.",
+          "Conducta prudente en la vida o en los negocios.",
+          "Conocimiento profundo en ciencias, letras o artes."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "319b1225-1f4a-4e5f-b79e-a1c8f5955641"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wahrheit",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Verdad",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Conformidad de las cosas con el concepto que de ellas forma la mente.",
+          "Conformidad de lo que se dice con lo que se siente o se piensa.",
+          "Propiedad que tiene una cosa de mantenerse siempre la misma sin mutación alguna.",
+          "Juicio o proposición que no se puede negar racionalmente."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "88eaaf24-76f0-4f8e-8fba-c348131a800b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Mut",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Coraje",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Valor, ánimo, esfuerzo.",
+          "Impetuosidad, ardimiento.",
+          "Irritación, ira."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "4c5d54e1-f6d4-4197-be94-67cccb78a008"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Glück",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Felicidad",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Estado de grata satisfacción espiritual y física.",
+          "Ausencia de inconvenientes o tropiezos."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "151fc9de-16b6-4a6e-a14d-ecd0388d9012"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Tod",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Muerte",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Cesación o término de la vida.",
+          "Destrucción, aniquilamiento, ruina.",
+          "Homicidio o asesinato."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "ea6bd3fd-50f1-46db-8560-e0d8ce4e8ab9"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Frieden",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Paz",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Situación en la que no existe lucha armada en un país o entre países.",
+          "Relación de armonía entre las personas, sin enfrentamientos ni conflictos.",
+          "Estado de quien no está perturbado por conflictos o inquietudes.",
+          "Sosiego, tranquilidad."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "b3efde64-d992-490c-bebf-fa485d65b12e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schönheit",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Belleza",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Cualidad de bello.",
+          "Persona o cosa notable por su hermosura."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "da9e0196-9417-43be-a022-b27dee2bce34"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Hass",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Odio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Antipatía y aversión hacia algo o hacia alguien cuyo mal se desea.",
+          "Enemistad, oposición de una cosa con otra."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "6dcf210c-82e5-41ef-92a2-4fc09e21851a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Leben",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Vida",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Fuerza o actividad interna sustancial, mediante la que obra el ser que la posee.",
+          "Estado de actividad de los seres orgánicos.",
+          "Unión del alma y del cuerpo.",
+          "Espacio de tiempo que transcurre desde el nacimiento de un ser hasta su muerte."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "fb96e578-a598-42bb-ac1d-93b5fea51a58"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Taschenrechner",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Calculadora",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Máquina utilzada para hacer cálculos"
+        ],
+        "observations": "Utiliza la misma forma en plural"
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "339ccc0e-3b6b-4722-8115-19e4533b451d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gerechtigkeit",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Justicia",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Principio moral que lleva a dar a cada uno lo que le corresponde o pertenece.",
+          "Derecho, razón, equidad.",
+          "Conjunto de todas las virtudes, por el que es bueno quien las tiene.",
+          "Poder judicial."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "2915c4a8-e107-452f-a9a1-61718711ebc5"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Freude",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Alegría",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Sentimiento grato y vivo que suele manifestarse con signos exteriores.",
+          "Palabras, gestos o actos con que se expresa el júbilo o alegría.",
+          "Irresponsabilidad, ligereza."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "ce5a87dc-61b9-4f3f-9cfd-b3182297a120"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schwamm",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Borrador",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Utensilio para borrar pizarras (de tinta, de routulador...)"
+        ],
+        "observations": "Utiliza la misma forma en plural"
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "b7d7a905-60c1-4e8e-be0f-9344521cde42"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Liebe",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Amor",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Sentimiento hacia otra persona que naturalmente nos atrae y que, procurando reciprocidad en el deseo de unión, nos completa, alegra y da energía para convivir, comunicarnos y crear.",
+          "Sentimiento intenso del ser humano que, partiendo de su propia insuficiencia, necesita y busca el encuentro y unión con otro ser.",
+          "Sentimiento de afecto, inclinación y entrega a alguien o algo.",
+          "Tendencia a la unión sexual.",
+          "Persona amada. Usado también en plural con el mismo significado que en singular.",
+          "Esmero con que se trabaja una obra deleitándose en ella."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "13ecfd48-6e68-451e-a954-862a2b8ff26c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Zeit",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Tiempo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Duración de las cosas sujetas a mudanza.",
+          "Magnitud física que permite ordenar la secuencia de los sucesos, estableciendo un pasado, un presente y un futuro.",
+          "Parte de esta secuencia establecida por una convención.",
+          "Época durante la cual vive alguien o sucede algo.",
+          "Temporada, en especial la del año, y principalmente las cuatro en que está dividido."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "23e7fabd-f418-4db3-b49d-25284147cdc5"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wissen",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Conocimiento",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Acción y efecto de conocer.",
+          "Entendimiento, inteligencia, razón natural.",
+          "Noción, saber o noticia elemental de algo.",
+          "Facultad, sentido o discernimiento."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "8313efb9-4f81-44dd-a13c-827559998bc2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Traum",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Sueño",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Acto de representarse en la fantasía de alguien, mientras duerme, sucesos o imágenes.",
+          "Suceso o imagen que se representa en la fantasía de alguien mientras duerme.",
+          "Deseo o ilusión que mueve a hacer algo.",
+          "Gana de dormir."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "761ba5cc-1ef6-477a-903a-0f07521eb3b3"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kugelschreiber",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Bolígrafo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Objeto con tinta y una bola en su punta que se utiliza para escribir sobre papel"
+        ],
+        "observations": "Utiliza la misma forma en plural"
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "094b8016-d645-41ee-bf4b-9e2093cdc45c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Freundschaft",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Amistad",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Afecto personal, puro y desinteresado, compartido con otra persona, que nace y se fortalece con el trato.",
+          "Favor, ayuda."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "97a55955-23f5-48d3-b71a-16432de6e018"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Hoffnung",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Esperanza",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Estado del ánimo en el cual se nos presenta como posible lo que deseamos.",
+          "Confianza en conseguir algo.",
+          "Virtud teologal por la que se espera que Dios dé los bienes que ha prometido."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "eed8387b-aad4-479d-ae11-86a6305cd626"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Farbe",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Color",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Gama cromática"
+        ],
+        "observations": ""
+      },
+      {
+        "original": {
+          "word": "Farben",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Colores",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Gama cromática, colores en plural"
+        ]
+      }
+    ],
+    "dateAdded": "2025-11-26",
+    "type": "noun",
+    "uuid": "84d30737-295e-4731-ad8f-4048e7420d75"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schlafen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Dormir",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "verb",
+    "uuid": "54899f37-4c0f-46c6-a021-2f21a32c5784"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Baden",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Bañar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "verb",
+    "uuid": "0e525875-c877-4aea-af3b-d6968c7dc8ca"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Pintar",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Maler",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "verb",
+    "uuid": "16473b68-abb0-47d6-9fc9-ed1a77435408"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ahnung",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Idea",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-26",
+    "type": "noun",
+    "uuid": "41751751-6e2c-4d66-baf3-4aa254857560"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Artz",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Médico",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Ärtzin",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Médica",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "",
+    "uuid": "46767a3b-6adb-41f3-95ed-e0f84bb30513"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Boxer",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Boxeador",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Persona que practica el boxeo"
+        ]
+      },
+      {
+        "original": {
+          "word": "Boxerin",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Boxeadora",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Mujer que practica el boxeo"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "6cf59f35-368e-41ca-9e2b-f8ea51b33471"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Nachrichten-sprecher",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Presentador",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Presentado de televisión (Matías Prats)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Nachrichten-sprecherin",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Presentadora",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Presentadora de televisión (Silvia Intxaurrondo)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "e5e1c597-0a86-43a6-b458-d16d76819d0b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Feuerwehrmann",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Bombero",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Feuerwehrfrau",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Bombera",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "f57433e1-aa6a-4891-b60e-8af2b030edd0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "teuer",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "caro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "caro en valor monetario"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "adjective",
+    "uuid": "e2bec568-6e23-4e8f-9a2d-f31f97f5db03"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Saft",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "zumo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Säfte",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "zumos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "065f86eb-ed7e-4095-a151-5b62b655c22b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ei",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "huevo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Eier",
+          "gender": "n",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "huevos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "e06b4974-5f91-4bae-b7cc-c7b9cc5f9968"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Brille",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Gafas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "e1755457-f595-4e29-8d10-7f261832ce30"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Tasche",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Bolsa",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "f3e74fdc-86ee-4fc4-ac7d-2ff5df595c29"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "günstig",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "barato",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "adjective",
+    "uuid": "35aef121-9d26-420d-93d5-2ae09116d565"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "seife",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "jabón",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "3bfb2d23-c8f5-4215-8469-97d3d15a3d1c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "bürste",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "cepillo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "e0c309a2-aba3-41e9-a508-bff26f8c6549"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Entschuldigung",
+          "gender": "-",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "disculpa",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Utilizado para dirigirse a alguien que no tiene tu atención de manera cordial"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "02f636cb-fe07-407a-a99c-0669e17fb725"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Brot",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Pan",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "17efb89f-efc8-4454-947a-433da30d3b7c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Milch",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Leche",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Leche (no contable)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "b1f012f1-784b-4634-8522-720784f4a1fd"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Zucker",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Azúcar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Azúcar (no contable)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "795fe5ff-332e-4c7e-adbd-a9d7df19adbf"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wurst",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Salchicha",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Würstchen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Salchichas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "noun",
+    "uuid": "ba5242d6-61aa-46d3-9c47-2e3a40ee0211"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "tabelle",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "tabla",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "",
+    "uuid": "ed0cd1dd-1693-41d4-a608-40bb79d594bc"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wochentage",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Días de la Semana",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Traurigkeit",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Tristeza",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Cualidad de triste.",
+          "Aflicción, pesadumbre."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "25d0a5e1-fe3b-41da-bc66-4d756b36efce"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Deutsch",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Alemán",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Lengua Alemana"
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "5313e5d9-ae3b-4da4-b933-cd81a29a2905"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schuler",
+          "gender": "m",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "escolar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "persona que está estudiando en la escuela (hasta la universidad sigue siendo schuler, excepto cuando llega a la uni, que se convierte en student)"
+        ],
+        "observations": ""
+      },
+      {
+        "original": {
+          "word": "Schulerin",
+          "gender": "f",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "escolar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "persona que está estudiando en la escuela (hasta la universidad sigue siendo schuler, excepto cuando llega a la uni, que se convierte en student)"
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-12-01",
+    "type": "noun",
+    "uuid": "6a7665b2-430a-42e3-8b34-eb5d30b32d36"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Plantz",
+          "gender": "femenino",
+          "number": "singular"
+        },
+        "translations": [
+          {
+            "word": "Planta",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Planta (ser vivo)"
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-24",
+    "type": "noun",
+    "uuid": "a708896a-8e9d-446c-9548-541f75e8a899"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Es gibt",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "hay",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-24",
+    "type": "verb",
+    "uuid": "a0b56246-04b2-4225-9fd4-6b2471d931b4"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "bunt",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "colorido",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": "Colorido, de colores"
+      }
+    ],
+    "dateAdded": "2025-11-26",
+    "type": "adjective",
+    "uuid": "b40871ac-dd2e-49d4-87d8-5ed243afe397"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "langweilig",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "aburrido",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-26",
+    "type": "adjective",
+    "uuid": "a34de8da-8044-4210-8966-64ed0b5f87a9"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "dunkel",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Oscuro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-26",
+    "type": "adjective",
+    "uuid": "1264dc9f-1d09-4fe3-922d-7c6e77738b03"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "hell",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "claro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": "o también luminoso"
+      }
+    ],
+    "dateAdded": "2025-11-26",
+    "type": "adjective",
+    "uuid": "f3c9a3a8-75e5-4aa5-b642-320d51826b4c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Artikel",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Artículo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Artículos en alemán (der, die, das - determinados) (ein, eine, einen... - indeterminados)"
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "77aed605-0143-4703-82aa-ceae04127ad4"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Freiheit",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Libertad",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Facultad natural que tiene el hombre de obrar de una manera o de otra, y de no obrar, por lo que es responsable de sus actos.",
+          "Estado o condición de quien no es esclavo.",
+          "Estado de quien no está preso.",
+          "Falta de sujeción y subordinación."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "51e863be-7e12-4bb3-8c43-e00788142ade"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kraft",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Fuerza",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Capacidad para mover algo que tenga peso o haga resistencia.",
+          "Vigor, robustez y capacidad para trabajar o para mover algo.",
+          "Capacidad para soportar un peso o resistir un empuje.",
+          "Eficacia natural de las cosas.",
+          "Acto de obligar a alguien a que haga algo contra su voluntad."
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "noun",
+    "uuid": "50c97b51-20cf-4924-930e-7cc91509d211"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ladekabel",
+          "gender": "neutro",
+          "number": "singular"
+        },
+        "translations": [
+          {
+            "word": "Cargador",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Cable cargador"
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-24",
+    "type": "noun",
+    "uuid": "00525f2f-29d9-4846-9d3d-37de7930f1f8"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Teppich",
+          "gender": "masculino",
+          "number": "singular"
+        },
+        "translations": [
+          {
+            "word": "alfombra",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-26",
+    "type": "noun",
+    "uuid": "42ef9469-efef-42b5-af1e-a68c27f83eff"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Tafel",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Pizarra",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": "En plural se convierte en Tafeln"
+      }
+    ],
+    "dateAdded": "2025-11-24",
+    "type": "noun",
+    "uuid": "275cfe38-2405-47b6-b059-7e856c8f5021"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Haar",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Pelo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": "Forma plural con -e, Haare"
+      }
+    ],
+    "dateAdded": "2025-11-24",
+    "type": "noun",
+    "uuid": "e11ec06d-cc7e-4cc4-806c-c6ef8009666e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ferien",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Vacaciones del Colegio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": "Sólo tiene forma femenino"
+      }
+    ],
+    "dateAdded": "2025-11-24",
+    "type": "noun",
+    "uuid": "555dfedc-ac01-480b-b10f-e145bbaa8ba2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Fenster",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Ventana",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-24",
+    "type": "noun",
+    "uuid": "13189152-139d-4ccc-b197-09cb2a57215c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Preis",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "precio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Valía monetaria",
+          "Coste de algo"
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-26",
+    "type": "noun",
+    "uuid": "1ca902f8-0cf2-468a-a51d-688b0ead3921"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kosten",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "costar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "costar (valor monetario)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "verb",
+    "uuid": "04964efd-783d-47d6-8228-f623a3193ae3"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kochen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Cocinar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "verb",
+    "uuid": "a35008d9-14b8-4a66-9e88-0ac879e95897"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "sein",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "ser",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "estar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Equivalente al verbo ser/estar en castellano. Se utiliza también en el pasado compuesto con verbos de movimiento (como en francés)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "47f3207a-ea7f-4560-b507-2f1f334a5a86"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "mögen",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "gustar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Equivalente al verbo gustar en castellano. Utilizado en frases para decir que nos gusta algo: \"Ich mag Schokolade\"",
+          "Expresa deseo y esperanza, como \"May\" en inglés, como verbo modal"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "f5e810bf-db62-41a3-a243-893272fc9f02"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "möchten",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "desear",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Equivalente a \"Would like\" en inglés, como decir \"me gustaría\" o  \"desearia\"",
+          "Expresa deseo y esperanza, como \"May\" en inglés, como verbo modal"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "2f51d3c0-2bfd-4fc8-8d3b-6be86a6b2a0e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "arbeiten",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "trabajar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "a7e03ca6-4f76-4182-9865-7c128b6272cf"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "wohnen",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "vivir",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Vivir referido al lugar en el que se habita, \"Wo wohnst du?\""
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "24fa680b-6d65-46da-93ec-2926447864a0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "heissen",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "llamarse",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Llamarse por nombre personal (Cómo te llamas = Wie heisst du?)",
+          "Llamarse por nombre una cosa, objeto o concepto (Wie heisst es)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "c86f9045-ac8c-4930-8056-0329d2153861"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Beruf",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "Oficio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Profesión, trabajo, labor, significan lo mismo"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "ac62a36e-6e0c-471c-8e57-b98d608e0cc2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "jobben",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "Trabajar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Referido a la propia acción de trabajar, casi siempre referido a trabajos a tiempo parcial y sin requerir cualificación (a diferencia de arbeiten)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "18b0bd00-6d48-4ceb-8a3c-1ce723f3ef57"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "machen",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "Hacer",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Sinónimo también de trabajar (¿qué haces? (en lo laboral))"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "567f22b3-c2c5-406a-b041-91e81ffce977"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wie",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Cómo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "34ecaff0-750e-43c0-b408-b8785c25dbb3"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wo",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Dónde",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "3801c636-5117-4849-aa2b-66fde7f6111b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wer",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Quién",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "e70bcc77-c82c-404f-ac00-25ce50e79e29"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Woher",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "De Dónde",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "6ef03ff3-2714-4fa6-ab24-707c59a793ea"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Was",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Qué",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "329ea065-6a3d-4530-a504-d7a593ca2812"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Welche",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Cuál",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Cuáles",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "d014dae3-f982-4913-be56-3a49b1577c85"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "später",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "luego",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "adverb",
+    "uuid": "effcb329-af37-4e49-8275-1f337e9b3213"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "jetzt",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "ahora",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "adverb",
+    "uuid": "382caf0e-79fe-4f14-b507-4c3e72119fd2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "auch",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "también",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "adverb",
+    "uuid": "c39db9e6-a204-4c0c-8a3a-cf1d9e0206f8"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Pferde",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Hípica",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "0b8a19be-a99b-414b-a711-33f2deca62b0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "üben",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "practicar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "7f469b0f-9de7-4a55-a08e-ca32281fd255"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wann",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Cuándo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "738602f5-e0a4-41b6-87be-5609b9cd735c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "zurück",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "de vuelta",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "atrás",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "adverb",
+    "uuid": "db063ef2-2051-44ab-ab27-327fe52f1ebe"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ich",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Yo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "1ª pers, sing. Nominativo. (Acción de Sujeto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Mich",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "me",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "1ª pers, sing. Acusativo. (Acción de Complemento Directo)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Mir",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "a mí",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "1ª pers, sing. Dativo. (Acción de Complemento Indirecto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Meiner",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "de mi",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "1ª pers, sing. Dativo. (Acción de Complemento Indirecto)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "03dd5b0a-57b8-4a59-bdb4-ba8335606e4b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Du",
+          "gender": "m/f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "tú",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "2ª pers, sing. Nominativo. (Acción de Sujeto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Dich",
+          "gender": "m/f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "te",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "2ª pers, sing. Acusativo. (Acción de Complemento Directo)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Dir",
+          "gender": "m/f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "a ti",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "2ª pers, sing. Dativo. (Acción de Complemento Indirecto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Deiner",
+          "gender": "m/f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "de ti",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "2ª pers, sing. Genitivo. (Posesión)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "03dd5b0a-57b8-4a59-bdb4-524gnifosgo"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Er",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "él",
+            "gender": "m",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Nominativo. (Acción de Sujeto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihn",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "lo",
+            "gender": "m",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Acusativo. (Acción de Complemento Directo)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihm",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "a él",
+            "gender": "m",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Dativo. (Acción de Complemento Indirecto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Seiner",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "de él",
+            "gender": "m",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Genitivo. (Posesión)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "03dd5b0a-57bapodfjsp8-4a59-bdb4-ba8335606e4b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Sie",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "ella",
+            "gender": "f",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Nominativo. (Acción de Sujeto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Sie",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "la",
+            "gender": "f",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Acusativo. (Acción de Complemento Directo)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihr",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "a ella",
+            "gender": "f",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Dativo. (Acción de Complemento Indirecto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihrer",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "de ella",
+            "gender": "f",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Genitivo. (Posesión)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "03dd5b0a-57b8-4a59-bdb4-adofnogadngoiadnfgb"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Es",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "ello",
+            "gender": "n",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Nominativo. (Acción de Sujeto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Es",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "lo",
+            "gender": "n",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Acusativo. (Acción de Complemento Directo)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihm",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "a ello",
+            "gender": "n",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Dativo. (Acción de Complemento Indirecto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Seiner",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "de ello",
+            "gender": "n",
+            "number": "sing"
+          }
+        ],
+        "definitions": [
+          "3ª pers, sing. Genitivo. (Posesión)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "03dd5b0a-57dfafgdasb8-4a59-bdb4-ba8335606e4b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wir",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "nosotros/as",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "1ª pers, plur. Nominativo. (Acción de Sujeto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Uns",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "nos",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "1ª pers, plur. Acusativo. (Acción de Complemento Directo)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Uns",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "a nosotros/as",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "1ª pers, plur. Dativo. (Acción de Complemento Indirecto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Unser",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "de nosotros/as",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "1ª pers, plur. Genitivo. (Posesión)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "03dd5b0a-57b8-4fsghhga59-bdb4-ba8335606e4b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ihr",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "vosotros/as",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "2ª pers, plur. Nominativo. (Acción de Sujeto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Euch",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "os",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "2ª pers, plur. Acusativo. (Acción de Complemento Directo)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Euch",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "a vosotros/as",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "2ª pers, plur. Dativo. (Acción de Complemento Indirecto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Euer",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "de vosotros/as",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "2ª pers, plur. Genitivo. (Posesión)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "03dd5b0a-57b8-4a59-bdb4-ba8335606e4hjku6ejy5h5b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Sie",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "ellos/as",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "3ª pers, plur. Nominativo. (Acción de Sujeto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Sie",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "los/las",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "3ª pers, plur. Acusativo. (Acción de Complemento Directo)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihnen",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "a ellos/as",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "3ª pers, plur. Dativo. (Acción de Complemento Indirecto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihrer",
+          "gender": "m/f",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "de ellos/as",
+            "gender": "",
+            "number": "plur"
+          }
+        ],
+        "definitions": [
+          "3ª pers, plur. Genitivo. (Posesión)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "03dd5b0a-57b8-4a59-bdb4-ba85uyherweth335606e4b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Sie",
+          "gender": "formal",
+          "number": "sing/plur"
+        },
+        "translations": [
+          {
+            "word": "usted/es",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Tratamiento formal. Nominativo. (Acción de Sujeto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Sie",
+          "gender": "formal",
+          "number": "sing/plur"
+        },
+        "translations": [
+          {
+            "word": "lo/la/los/las",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Tratamiento formal. Acusativo. (Acción de Complemento Directo)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihnen",
+          "gender": "formal",
+          "number": "sing/plur"
+        },
+        "translations": [
+          {
+            "word": "a usted/es",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Tratamiento formal. Dativo. (Acción de Complemento Indirecto)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihrer",
+          "gender": "formal",
+          "number": "sing/plur"
+        },
+        "translations": [
+          {
+            "word": "de usted/es",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Tratamiento formal. Genitivo. (Posesión)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "pronoun",
+    "uuid": "03dd5b0a-57b8-4a59-bdb4-ba8335606e4bgnow4nthijwpht"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Party",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Fiesta",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Partys",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Fiestas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "0e476db1-5001-4a8f-ba67-4e0e01cf93af"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Chef",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Jefe",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Chefin",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Jefa",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Chefs",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Jefas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Chefinnen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Jefas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "5ec68a3f-0943-4f4a-9cf1-52a87b3428cf"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Leute",
+          "gender": "-",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Gente",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "49af014f-ed52-4b9d-afa3-f22f34803abe"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Film",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Película",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Filme",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Películas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "9cd202f3-cb28-4831-9c01-bfcf4a1e9f3d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "der",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "el",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Nominativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "die",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "la",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Nominativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "das",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "-",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido NEUTRO (Nominativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "die",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "los/las",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Nominativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "b1a1c3d4-0001-4a9b-9001-aaaa00000001"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "den",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "al",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Acusativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "die",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "la",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Acusativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "das",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "-",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido NEUTRO (Acusativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "die",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "los/las",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Acusativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "b1a1c3d4-0002-4a9b-9002-aaaa00000002"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "dem",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "al",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Dativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "der",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "a la",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Dativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "dem",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "-",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido NEUTRO (Dativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "den",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "a los / a las",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Dativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "b1a1c3d4-0003-4a9b-9003-aaaa00000003"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "des",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "del",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Genitivo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "der",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "de la",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Genitivo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "des",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "-",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido NEUTRO (Genitivo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "der",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "de los / de las",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Demostrativo definido (Genitivo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "b1a1c3d4-0004-4a9b-9004-aaaa00000004"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Fahrrad",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Bicicleta",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Fährrader",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Bicicletas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "c1f00e66-751e-457e-8e66-33abca7cd786"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Erzieher",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Educador",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Educadores",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Erzieherin",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Erzieherinnen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Educadoras",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "17e8312c-9447-4cfe-a01f-1a1a196a3cd5"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Pflegefachmann",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Técnico en cuidados de salud",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Pflegefachfrau",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Técnica en cuidados de salud",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Pflegefachfrauen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Técnicas en cuidados de salud",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Pflegefachmänner",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Técnicos en cuidados de salud",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "687bca98-e26a-4f2d-b22a-a04e9331c65c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Handy",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Teléfono móvil",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Handys",
+          "gender": "n",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Teléfonos móviles",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "ac173a96-0cde-4d27-ae7c-04ba16660f71"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Anmeldung",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Aviso",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Anmeldunger",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Avisos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "fd9a55ba-49b4-439a-bc09-697103dda899"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Zahl",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Número",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Zahlen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Números",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "692c00ef-d8ed-4d6d-b36e-a0d7d6e47bff"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "gehen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "ir",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "andar",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "ir a pie",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "caminar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "8d995f08-f475-4292-b60e-281803d73bad"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Supermarkt",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Supermercado",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Supermärkte",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Supermercados",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "cb01475e-2225-4e1a-b94b-90b0a78947fb"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Name",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Nombre",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Namen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Nombres",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "",
+    "uuid": "72d0ca19-9386-4db8-9585-0fff665ae715"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Besuch",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Visita",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Besuche",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Visitas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "3232abef-eea5-4044-b20a-7381bea37c3e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "eigentlich",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "verdaderamente",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "en realidad",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "ciertamente",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "adverb",
+    "uuid": "2efd6831-0bcc-47e0-98e8-b48bca25396a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "mein",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "mi",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. sing. (Nominativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "meine",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "mi",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. sing. (Nominativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "mein",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "mi",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. sing. (Nominativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "meine",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "mis",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. sing. (Nominativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-mein-001"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "dein",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "tu",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. sing. (Nominativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "deine",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "tu",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. sing. (Nominativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "dein",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "tu",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. sing. (Nominativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "deine",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "tus",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. sing. (Nominativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-dein-002"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "sein",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. masc/neutro (Nominativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "seine",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. masc/neutro (Nominativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "sein",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. masc/neutro (Nominativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "seine",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "sus",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. masc/neutro (Nominativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-sein-003"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "ihr",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. femenino (Nominativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "ihre",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. femenino (Nominativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "ihr",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. femenino (Nominativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "ihre",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "sus",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. femenino (Nominativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-ihr-004"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "unser",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "nuestro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. plur. (Nominativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "unsere",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "nuestra",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. plur. (Nominativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "unser",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "nuestro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. plur. (Nominativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "unsere",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "nuestros/as",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. plur. (Nominativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-unser-005"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "euer",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "vuestro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. plur. (Nominativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "eure",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "vuestra",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. plur. (Nominativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "euer",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "vuestro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. plur. (Nominativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "eure",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "vuestros/as",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. plur. (Nominativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-euer-006"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ihr",
+          "gender": "m",
+          "number": "sing/plur"
+        },
+        "translations": [
+          {
+            "word": "su (usted/es)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo formal (Nominativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihre",
+          "gender": "f",
+          "number": "sing/plur"
+        },
+        "translations": [
+          {
+            "word": "su (usted/es)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo formal (Nominativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihr",
+          "gender": "n",
+          "number": "sing/plur"
+        },
+        "translations": [
+          {
+            "word": "su (usted/es)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo formal (Nominativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihre",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "sus (usted/es)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo formal (Nominativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-ihr-formal-007"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "meinen",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "mi",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. sing. (Acusativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "meine",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "mi",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. sing. (Nominativo / Acusativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "mein",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "mi",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. sing. (Nominativo / Acusativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "meine",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "mis",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. sing. (Nominativo / Acusativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-mein-acc-001"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "deinen",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "tu",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. sing. (Acusativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "deine",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "tu",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. sing. (Nominativo / Acusativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "dein",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "tu",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. sing. (Nominativo / Acusativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "deine",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "tus",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. sing. (Nominativo / Acusativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-dein-acc-002"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "seinen",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. masc/neutro (Acusativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "seine",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. masc/neutro (Nominativo / Acusativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "sein",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. masc/neutro (Nominativo / Acusativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "seine",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "sus",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. masc/neutro (Nominativo / Acusativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-sein-acc-003"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "ihren",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. femenino (Acusativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "ihre",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. femenino (Nominativo / Acusativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "ihr",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "su",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. femenino (Nominativo / Acusativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "ihre",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "sus",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 3ª pers. sing. femenino (Nominativo / Acusativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-ihr-acc-004"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "unseren",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "nuestro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. plur. (Acusativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "unsere",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "nuestra",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. plur. (Nominativo / Acusativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "unser",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "nuestro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. plur. (Nominativo / Acusativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "unsere",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "nuestros/as",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 1ª pers. plur. (Nominativo / Acusativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-unser-acc-005"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "euren",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "vuestro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. plur. (Acusativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "eure",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "vuestra",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. plur. (Nominativo / Acusativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "euer",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "vuestro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. plur. (Nominativo / Acusativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "eure",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "vuestros/as",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo 2ª pers. plur. (Nominativo / Acusativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-euer-acc-006"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ihren",
+          "gender": "m",
+          "number": "sing/plur"
+        },
+        "translations": [
+          {
+            "word": "su (usted/es)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo formal (Acusativo masculino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihre",
+          "gender": "f",
+          "number": "sing/plur"
+        },
+        "translations": [
+          {
+            "word": "su (usted/es)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo formal (Nominativo / Acusativo femenino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihr",
+          "gender": "n",
+          "number": "sing/plur"
+        },
+        "translations": [
+          {
+            "word": "su (usted/es)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo formal (Nominativo / Acusativo neutro)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Ihre",
+          "gender": "m/f/n",
+          "number": "plur"
+        },
+        "translations": [
+          {
+            "word": "sus (usted/es)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante posesivo formal (Nominativo / Acusativo plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "pos-det-ihr-formal-acc-007"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "einen",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "un",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido (Acusativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "eine",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "una",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido (Acusativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "-",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "unos",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "unas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido (Acusativo) no existe en alemán en forma plural, simplemente no se dice. Por ejemplo, \"Ich mag brötchen\" = \"Quiero panes\"\"."
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "fa603b8e-2de4-4885-95bb-be2b5fntebg8fb840"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "kein",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "ningún",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido negativo (Nominativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "keine",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "ninguna",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido negativo (Nominativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "kein",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "-",
+            "gender": "-",
+            "number": "-"
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido negativo NEUTRO (Nominativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "keine",
+          "gender": "-",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "ningunos",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "ningunas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido Negativo (Nominativo)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "fa603b8e-2de4-4885-95bb-be1b5f8fb8afghrjtjue40"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "keinen",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "ningún",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido negativo (Acusativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "keine",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "ninguna",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido negativo (Acusativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "kein",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "-",
+            "gender": "-",
+            "number": "-"
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido negativo NEUTRO (Acusativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "keine",
+          "gender": "-",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "ningunos",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "ningunas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido Negativo (Acusativo)"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "fa603b8e-2de4-4885-95bb-be1b5f8fafgb840"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "haben",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "Haber",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "verb",
+    "uuid": "98ba7f77-580a-4427-aed4-d2240fd5c5c2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gestern",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Ayer",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-24",
+    "type": "noun",
+    "uuid": "d6b1d7a2-b7ce-4788-bbf8-aa1ebfc33f89"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gast",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Invitado",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Gäste",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Invitados",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Gästin",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Invitada",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Gästinen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Invitadas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "f2b08345-5c47-4be5-aeaf-a1277da62b87"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "gleich",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "igual",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "adjective",
+    "uuid": "0b042cc8-2ab1-4346-918a-cd7dee53146a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Stadt",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Ciudad",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Städte",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Ciudad",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "6d2dc735-e93b-48bb-a259-60a97cd6d32d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "berühmt",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "famoso",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "adjective",
+    "uuid": "9fe39e27-0830-4141-88f2-bf49b8cc094c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Bild",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Foto",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Imagen",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Bilder",
+          "gender": "n",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Fotos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "a1c24b96-ae83-4e6d-912c-c22ca76fc03d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gegenstand",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Objeto",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Gegenstände",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Objetos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "b100c4d1-0456-453d-9420-88de913fa13f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schlüssel",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "llave",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Schlüsseln",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Llaves",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "9fc101a7-b4aa-4b89-9ed0-25285d24c8bc"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kopfhörer",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "auriculares",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Dispositivo para escuchar multimedia de un dispositivo"
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-26",
+    "type": "noun",
+    "uuid": "b65f8f77-287b-42c3-ab76-1e076a41cc83"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Flasche",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Botella",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Flaschen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Botellas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "d00ba35c-e90f-478c-8662-86bbdc3b8204"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Stift",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Lápiz",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Stifte",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Lápices",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "3d0e9e96-3f97-449e-9107-aed0b9f03366"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Portemonnaie",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Monedero",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Portemonnaies",
+          "gender": "n",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Monederos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "646570da-215b-4b66-986c-a234a14dad18"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Buch",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Libro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Bücher",
+          "gender": "n",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Libros",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "a652c9c2-a11d-4f9d-b4a0-a59a827fac4a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Glas",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Vaso",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Gläser",
+          "gender": "n",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Vasos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "5e1cd291-1ef8-426b-886c-91a5267b5bac"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Stuhl",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Silla",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Stühle",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Sillas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "e247b180-5824-437c-9e0b-bc511aca02f2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "ein",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "un",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido (Nominativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "eine",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "una",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido (Nominativo)."
+        ]
+      },
+      {
+        "original": {
+          "word": "-",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "unos",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "unas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Determinante indefinido (Nominativo) no existe en alemán en forma plural, simplemente no se dice. Por ejemplo, \"Ich mag brötchen\" = \"Quiero panes\"\"."
+        ]
+      },
+      {
+        "original": {
+          "word": "ein",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "un",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "determiner",
+    "uuid": "fa603b8e-2de4-4885-95bb-be2bhrstgrwyj5f8fb840"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Teilnehmer",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Participante",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Participantes",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Teilnehmerin",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Participante",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Teilnehmerinnen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Participantes",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "8f8140df-4d81-4517-b4e9-cb257d18290c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Laufen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Caminar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "verb",
+    "uuid": "1fd2efc8-665b-4e70-b5a4-a27a2d2e123e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Rennen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Correr",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "verb",
+    "uuid": "d237835b-068b-450e-8e75-45cfb212e115"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "anstrengend",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "agotador",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "adjective",
+    "uuid": "1f61d34b-c5d5-4606-8fd3-74c96d6af71c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Mensche",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Persona",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Como \"hombre\" referido a humanidad, como ser humano"
+        ]
+      },
+      {
+        "original": {
+          "word": "Menschen",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Personas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Como \"hombre\" referido a humanidad, como ser humano"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "bbf6844c-d0ce-4a38-bb36-686bd3d22de0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Herausforderung",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Desafío",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Herausforderungen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Desafíos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "bda31ffc-5502-499e-bf37-5d2c80a50fc4"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Lust",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Ganas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "77b486b8-d679-48ed-a385-66ac00b969ad"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schiff",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Barco",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Schiffe",
+          "gender": "n",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Barcos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "bd915c46-7012-44ae-b72f-6091109f7c7d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "ab",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "a partir de",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "preposition",
+    "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Arbeit",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "trabajo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Arbeiten",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "trabajos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "noun",
+    "uuid": "54bf5ba9-29c7-46f6-b76f-a0663674730f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "spannend",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "emocionante",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "adjective",
+    "uuid": "7e8e014a-be9a-45ea-964b-3817ec4ca605"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gern",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "gustosamente",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Se utiliza en frases para expresar \"gusto\" a la acción de la oración"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-17",
+    "type": "adverb",
+    "uuid": "bae45cdd-378f-4f05-95d7-3531742d7dad"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Künste",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Arte",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-17",
+    "type": "noun",
+    "uuid": "b037e342-e4fd-476e-86ff-483ffe30210c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wissenschaft",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Ciencia",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-17",
+    "type": "noun",
+    "uuid": "7b869c7f-a0c5-4b9b-a4c4-39520eaddef8"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Viel",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Mucho",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Viele",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Muchos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-17",
+    "type": "determiner",
+    "uuid": "26b08a30-a8f4-4bbe-a3d4-57567da2c0db"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Fahrer",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Conductor",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Conductores",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Fahrerin",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Conductora",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Fahrerinnen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Conductoras",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-17",
+    "type": "noun",
+    "uuid": "31ff53c3-9314-49fe-89ab-1801c1df11a4"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "feiern",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "festejar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-17",
+    "type": "verb",
+    "uuid": "bd6e617a-380d-4e6e-bc0d-c4c063fe953c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "solange",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "mientras",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "adverb",
+    "uuid": "578c2b89-ae19-4039-bf41-4f2d16d3862e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "langsam",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "lentos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "adjective",
+    "uuid": "1a865a7a-6346-448c-8ad4-f499848e03ca"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Montag",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Lunes",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "3c9ee78e-976f-4625-9157-d0f5a7e1628f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Dienstag",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Martes",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "09291336-33e1-4321-be0a-3011dfadc1d0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Mittwoch",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Miércoles",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "b2a57a61-1374-4e03-a160-9987f29c9650"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Donnerstag",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Jueves",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "04afba97-eefe-4763-993f-1218f955e4ea"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Freitag",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Viernes",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "34d797b4-ce98-47a5-abed-a3c7ff0cdae4"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Samstag",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Sábado",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "82da61a6-775c-49eb-88f3-da1877420d7e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Sonntag",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Domingo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "35c5b1b1-8260-4907-89a4-0c011f309679"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Tag",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Día",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "bc10c1a1-83db-42e4-a738-cf926c51114b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Mittag",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Mediodía",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "49aac7f0-2587-4fd2-aeb2-a5d8a0349a87"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Nichts",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Nada",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "fbb18db0-745f-4ddf-8978-eb8ad80a1ca3"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Andere",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Otro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Anderen",
+          "gender": "n",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Otros",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "24a64e7c-e00d-4f6b-8d83-3261c3db70e9"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Treffen",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "salir",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Salir con amigos, (actividades, quedadas, etc.)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "verb",
+    "uuid": "afee4eff-d4a4-43a2-ba63-e135c8cedad8"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wochenende",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Fin de Semana",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "af701e60-9789-4eff-bc01-9610ae94117c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "etwas",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "algo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "algo, un poco, (a bit...)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "9a5adcfc-2581-4649-a187-bf06614dbe9b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "putzten",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "limpiar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "verb",
+    "uuid": "68fec4a6-bf10-4bf1-b39f-7dffdd0e21df"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "aufräumen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "ordenar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Recoger una habitación, arreglar una caja"
+        ]
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "verb",
+    "uuid": "48869265-1050-48bc-8181-be73fb8ecd48"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Haus",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Casa",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "noun",
+    "uuid": "f3c87bb5-9e3d-47df-97ad-cef1d09d29c0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "jedesmal",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "siempre",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "immer",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "siempre",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "adverb",
+    "uuid": "adc29665-9e5a-4c58-985c-22e020ce362b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "manchmal",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "a veces",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "adverb",
+    "uuid": "1482ddcf-ccfa-4ca5-a256-a42ef862c3dc"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "selten",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "raramente",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "adverb",
+    "uuid": "be33079c-ff2b-45d8-a4cb-f97a17ad99d2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "nie",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "nunca",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "adverb",
+    "uuid": "cafd12e8-9bf3-48f5-82f6-bedc1ec09cfc"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "wiederholen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "repetir",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "verb",
+    "uuid": "20724c00-4769-4afa-8521-b99ea89c88b8"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kommilitionen",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Compañeros de estudio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Kommilitonin",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Compañeras de estudio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "1c28afbb-dd9e-46ad-b0c4-a7b2fbc8bfd3"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ausbildung",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Formación",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Formación (de carácter profesional) para acceder a una empresa, o la que te da una empresa"
+        ]
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "b0bd6cb1-50f9-4424-af5f-61257a3867bf"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "anfangen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "empezar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "verb",
+    "uuid": "948d8f21-787b-4b8b-9952-5c26dd29b1fc"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "oft",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "frecuentemente",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "regelmässig",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "frecuentemente",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "adverb",
+    "uuid": "b244ff3e-2c16-488a-8892-e01e8cd7582a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Vater",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Padre",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "8a6a46bf-0a5e-41ce-9129-438d45346295"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Mutter",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Madre",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "3a75ac1d-3910-4b20-b545-5cbbafd8336d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Eltern",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Eltern",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "29622e93-73da-4f4d-aa0f-fe16a9d0138b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Grosseltern",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Abuelos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "08abb7ab-1a54-45a7-bfdf-ddb36467d352"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Tochter",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Hija",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "1b93337d-fa7f-4ff0-929e-9cee084e70e5"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Sohn",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Hijo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "5763a459-e776-4c77-977f-db5a00834230"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Bruder",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Hermano",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "1dfa9417-f54f-468e-b1af-923bf7e20f5b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schwester",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Hermana",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "72802a50-da42-4edd-b617-8e32d475ae5e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Familien",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Familia",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "045939f2-892d-47e7-95cb-4694d97899d2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Geschwister",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Hermanos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Hermanos y Hermanas (ambos géneros)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "1aa46516-940d-421d-b144-9eb5fb9e0f17"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kinder",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Hijos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Hijos e Hijas"
+        ]
+      },
+      {
+        "original": {
+          "word": "Kind",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "hijo",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "hija",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "HIjo o Hija, independiente del género (también puede significar niño)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b"
+  }
+]

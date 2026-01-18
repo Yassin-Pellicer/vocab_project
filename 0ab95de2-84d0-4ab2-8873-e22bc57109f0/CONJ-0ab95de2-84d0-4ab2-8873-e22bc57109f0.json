@@ -1,0 +1,1445 @@
+{
+  "a35008d9-14b8-4a66-9e88-0ac879e95897": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "koche",
+          "2s": "kochst",
+          "3s": "kocht",
+          "1p": "kochen",
+          "2p": "kocht",
+          "3p": "kochen"
+        },
+        "Präteritum": {
+          "1s": "kochte",
+          "2s": "kochtest",
+          "3s": "kochte",
+          "1p": "kochten",
+          "2p": "kochtet",
+          "3p": "kochten"
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "habe gekocht",
+          "2s": "hast gekocht",
+          "3s": "hat gekocht",
+          "1p": "haben gekocht",
+          "2p": "habt gekocht",
+          "3p": "haben gekocht"
+        },
+        "Plusquamperfekt": {
+          "1s": "hatte gekocht",
+          "2s": "hattest gekocht",
+          "3s": "hatte gekocht",
+          "1p": "hatten gekocht",
+          "2p": "hattet gekocht",
+          "3p": "hatten gekocht"
+        },
+        "Futur I": {
+          "1s": "werde kochen",
+          "2s": "wirst kochen",
+          "3s": "wird kochen",
+          "1p": "werden kochen",
+          "2p": "werdet kochen",
+          "3p": "werden kochen"
+        },
+        "Futur II": {
+          "1s": "werde gekocht haben",
+          "2s": "wirst gekocht haben",
+          "3s": "wird gekocht haben",
+          "1p": "werden gekocht haben",
+          "2p": "werdet gekocht haben",
+          "3p": "werden gekocht haben"
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "koche",
+          "2s": "kochest",
+          "3s": "koche",
+          "1p": "kochen",
+          "2p": "kochet",
+          "3p": "kochen"
+        },
+        "Perfekt": {
+          "1s": "habe gekocht",
+          "2s": "habest gekocht",
+          "3s": "habe gekocht",
+          "1p": "haben gekocht",
+          "2p": "habet gekocht",
+          "3p": "haben gekocht"
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "kochte",
+          "2s": "kochtest",
+          "3s": "kochte",
+          "1p": "kochten",
+          "2p": "kochtet",
+          "3p": "kochten"
+        },
+        "Plusquamperfekt": {
+          "1s": "hätte gekocht",
+          "2s": "hättest gekocht",
+          "3s": "hätte gekocht",
+          "1p": "hätten gekocht",
+          "2p": "hättet gekocht",
+          "3p": "hätten gekocht"
+        },
+        "Würde-Form": {
+          "1s": "würde kochen",
+          "2s": "würdest kochen",
+          "3s": "würde kochen",
+          "1p": "würden kochen",
+          "2p": "würdet kochen",
+          "3p": "würden kochen"
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "koch",
+          "2p": "kocht",
+          "3p": "kochen Sie"
+        }
+      }
+    }
+  },
+  "16473b68-abb0-47d6-9fc9-ed1a77435408": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": " ",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "04964efd-783d-47d6-8228-f623a3193ae3": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "47f3207a-ea7f-4560-b507-2f1f334a5a86": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "bin",
+          "2s": "bist",
+          "3s": "ist",
+          "1p": "sind",
+          "2p": "seid",
+          "3p": "sind"
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "f5e810bf-db62-41a3-a243-893272fc9f02": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "mag",
+          "2s": "magst",
+          "3s": "mag",
+          "1p": "mögen",
+          "2p": "mögt",
+          "3p": "mögen"
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "a7e03ca6-4f76-4182-9865-7c128b6272cf": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "arbeite",
+          "2s": "arbeitest",
+          "3s": "arbeitet",
+          "1p": "arbeiten",
+          "2p": "arbeitet",
+          "3p": "arbeiten"
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "24fa680b-6d65-46da-93ec-2926447864a0": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "wohne",
+          "2s": "wohnst",
+          "3s": "wohnt",
+          "1p": "wohnen",
+          "2p": "wohnt",
+          "3p": "wohnen"
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "c86f9045-ac8c-4930-8056-0329d2153861": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "heisse",
+          "2s": "heisst",
+          "3s": "heisst",
+          "1p": "heissen",
+          "2p": "heisst",
+          "3p": "heissen"
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "18b0bd00-6d48-4ceb-8a3c-1ce723f3ef57": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "jobbe",
+          "2s": "jobbst",
+          "3s": "jobbt",
+          "1p": "jobben",
+          "2p": "jobbt",
+          "3p": "jobben"
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "567f22b3-c2c5-406a-b041-91e81ffce977": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "mache",
+          "2s": "machst",
+          "3s": "macht",
+          "1p": "machen",
+          "2p": "macht",
+          "3p": "machen"
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "8d995f08-f475-4292-b60e-281803d73bad": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "gehe",
+          "2s": "gehst",
+          "3s": "geht",
+          "1p": "gehen",
+          "2p": "geht",
+          "3p": "gehen"
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "98ba7f77-580a-4427-aed4-d2240fd5c5c2": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "habe",
+          "2s": "hast",
+          "3s": "hat",
+          "1p": "haben",
+          "2p": "habt",
+          "3p": "haben"
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  },
+  "2f51d3c0-2bfd-4fc8-8d3b-6be86a6b2a0e": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "1s": "möchte",
+          "2s": "möchtest",
+          "3s": "möchte",
+          "1p": "möchten",
+          "2p": "möchtet",
+          "3p": "möchten"
+        },
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur I": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Futur II": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Perfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Plusquamperfekt": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        },
+        "Würde-Form": {
+          "1s": "",
+          "2s": "",
+          "3s": "",
+          "1p": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "2s": "",
+          "2p": "",
+          "3p": ""
+        }
+      }
+    }
+  }
+}

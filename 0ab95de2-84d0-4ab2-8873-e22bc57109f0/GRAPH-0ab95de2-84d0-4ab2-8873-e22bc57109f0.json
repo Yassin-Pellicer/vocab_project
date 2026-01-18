@@ -1,0 +1,81 @@
+{
+  "6b6ce979-4eb2-41df-8273-ff809e25a34f": {},
+  "319b1225-1f4a-4e5f-b79e-a1c8f5955641": {
+    "51e863be-7e12-4bb3-8c43-e00788142ade": "Freiheit"
+  },
+  "f5e810bf-db62-41a3-a243-893272fc9f02": {
+    "bae45cdd-378f-4f05-95d7-3531742d7dad": "Gern"
+  },
+  "578c2b89-ae19-4039-bf41-4f2d16d3862e": {},
+  "1a865a7a-6346-448c-8ad4-f499848e03ca": {},
+  "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": {
+    "3c9ee78e-976f-4625-9157-d0f5a7e1628f": "Montag",
+    "09291336-33e1-4321-be0a-3011dfadc1d0": "Dienstag",
+    "b2a57a61-1374-4e03-a160-9987f29c9650": "Mittwoch",
+    "04afba97-eefe-4763-993f-1218f955e4ea": "Donnerstag",
+    "34d797b4-ce98-47a5-abed-a3c7ff0cdae4": "Freitag",
+    "82da61a6-775c-49eb-88f3-da1877420d7e": "Samstag",
+    "35c5b1b1-8260-4907-89a4-0c011f309679": "Sonntag"
+  },
+  "3c9ee78e-976f-4625-9157-d0f5a7e1628f": {},
+  "09291336-33e1-4321-be0a-3011dfadc1d0": {},
+  "b2a57a61-1374-4e03-a160-9987f29c9650": {},
+  "04afba97-eefe-4763-993f-1218f955e4ea": {},
+  "34d797b4-ce98-47a5-abed-a3c7ff0cdae4": {},
+  "82da61a6-775c-49eb-88f3-da1877420d7e": {},
+  "35c5b1b1-8260-4907-89a4-0c011f309679": {},
+  "49aac7f0-2587-4fd2-aeb2-a5d8a0349a87": {},
+  "bc10c1a1-83db-42e4-a738-cf926c51114b": {
+    "49aac7f0-2587-4fd2-aeb2-a5d8a0349a87": "Mittag",
+    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Wochentage"
+  },
+  "fbb18db0-745f-4ddf-8978-eb8ad80a1ca3": {},
+  "24a64e7c-e00d-4f6b-8d83-3261c3db70e9": {},
+  "afee4eff-d4a4-43a2-ba63-e135c8cedad8": {},
+  "af701e60-9789-4eff-bc01-9610ae94117c": {
+    "82da61a6-775c-49eb-88f3-da1877420d7e": "Samstag",
+    "35c5b1b1-8260-4907-89a4-0c011f309679": "Sonntag"
+  },
+  "9a5adcfc-2581-4649-a187-bf06614dbe9b": {},
+  "68fec4a6-bf10-4bf1-b39f-7dffdd0e21df": {},
+  "48869265-1050-48bc-8181-be73fb8ecd48": {},
+  "f3c87bb5-9e3d-47df-97ad-cef1d09d29c0": {},
+  "adc29665-9e5a-4c58-985c-22e020ce362b": {},
+  "b244ff3e-2c16-488a-8892-e01e8cd7582a": {},
+  "1482ddcf-ccfa-4ca5-a256-a42ef862c3dc": {},
+  "be33079c-ff2b-45d8-a4cb-f97a17ad99d2": {},
+  "cafd12e8-9bf3-48f5-82f6-bedc1ec09cfc": {},
+  "20724c00-4769-4afa-8521-b99ea89c88b8": {},
+  "1c28afbb-dd9e-46ad-b0c4-a7b2fbc8bfd3": {},
+  "b0bd6cb1-50f9-4424-af5f-61257a3867bf": {},
+  "948d8f21-787b-4b8b-9952-5c26dd29b1fc": {},
+  "8a6a46bf-0a5e-41ce-9129-438d45346295": {
+    "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern"
+  },
+  "3a75ac1d-3910-4b20-b545-5cbbafd8336d": {
+    "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern"
+  },
+  "29622e93-73da-4f4d-aa0f-fe16a9d0138b": {
+    "08abb7ab-1a54-45a7-bfdf-ddb36467d352": "Grosseltern"
+  },
+  "08abb7ab-1a54-45a7-bfdf-ddb36467d352": {},
+  "1b93337d-fa7f-4ff0-929e-9cee084e70e5": {
+    "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b": "Kinder"
+  },
+  "5763a459-e776-4c77-977f-db5a00834230": {
+    "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b": "Kinder"
+  },
+  "1dfa9417-f54f-468e-b1af-923bf7e20f5b": {
+    "1aa46516-940d-421d-b144-9eb5fb9e0f17": "Geschwister"
+  },
+  "72802a50-da42-4edd-b617-8e32d475ae5e": {
+    "1aa46516-940d-421d-b144-9eb5fb9e0f17": "Geschwister"
+  },
+  "045939f2-892d-47e7-95cb-4694d97899d2": {},
+  "1aa46516-940d-421d-b144-9eb5fb9e0f17": {
+    "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern"
+  },
+  "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b": {
+    "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern"
+  }
+}
