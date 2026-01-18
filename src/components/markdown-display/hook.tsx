@@ -69,7 +69,7 @@ export function useMarkdown(route: string, uuid?: string, name?: string, word?: 
       delete updated[id];
       return updated;
     });
-    window.api.deleteGraphEntry(route, name, uuid, id);
+    window.api.deleteGraphEntry(route, name, { uuid }, { uuid: id, word: linkedWordList[id] });
   };
 
   const handleScroll = () => {

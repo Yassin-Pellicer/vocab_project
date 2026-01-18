@@ -15,8 +15,8 @@ const graph = {
   saveGraph: async (route, name, origin, destination) => {
     return await electron.ipcRenderer.invoke("saveGraph", route, name, origin, destination);
   },
-  deleteGraphEntry: async (route, name, uuid, word) => {
-    return await electron.ipcRenderer.invoke("deleteGraphEntry", route, name, uuid, word);
+  deleteGraphEntry: async (route, name, origin, destination) => {
+    return await electron.ipcRenderer.invoke("deleteGraphEntry", route, name, origin, destination);
   }
 };
 const markdown = {

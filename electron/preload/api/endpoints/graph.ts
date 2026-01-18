@@ -9,7 +9,7 @@ export const graph = {
     return await ipcRenderer.invoke("saveGraph", route, name, origin, destination);
   },
 
-  deleteGraphEntry: async (route: string, name: string, uuid: string, word: string) => {
-    return await ipcRenderer.invoke("deleteGraphEntry", route, name, uuid, word);
+  deleteGraphEntry: async (route: string, name: string, origin: Object, destination: Object) => {
+    return await ipcRenderer.invoke("deleteGraphEntry", route, name, origin, destination);
   }
 };

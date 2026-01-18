@@ -244,6 +244,24 @@ export default function DictionaryGraph({
       );
     }
 
+// Calculate node sizes based on connections
+    const connectionCount = new Map<string, number>();
+    filteredLinks.forEach(link => {
+      const sourceId = typeof link.source === 'string' ? link.source : link.source.id;
+      const targetId = typeof link.target === 'string' ? link.target : link.target.id;
+      connectionCount.set(sourceId, (connectionCount.get(sourceId) || 0) + 1);
+      connectionCount.set(targetId, (connectionCount.get(targetId) || 0) + 1);
+    });
+
+    console.log("Connection counts:", Array.from(connectionCount.entries()));
+
+    const getNodeRadius = (d: any) => {
+      if (d.parent) return 6;
+      const connections = connectionCount.get(d.id) || 0;
+      const radius = Math.max(2, Math.min(4 + connections * 5, 50)); // Scale from 8 to max 50 based on connections
+      return radius;
+    };
+
     const simulation = d3
       .forceSimulation(filteredNodes)
       .force(
@@ -257,9 +275,9 @@ export default function DictionaryGraph({
       )
       .force(
         "charge",
-        d3.forceManyBody().strength((d: any) => (d.parent ? -300 : -150))
+        d3.forceManyBody().strength(0) // Disabled charge force to prevent repulsion
       )
-      .force("collision", d3.forceCollide().radius((d: any) => (d.parent ? 55 : 35)).strength(1))
+      .force("collision", d3.forceCollide().radius((d: any) => getNodeRadius(d) + 5).strength(1))
       .force("center", d3.forceCenter(width / 2, height / 2).strength(0.05))
       .alpha(0.6)
       .alphaDecay(0.08)
@@ -301,7 +319,7 @@ export default function DictionaryGraph({
 
     node
       .append("circle")
-      .attr("r", (d: any) => (d.parent ? 28 : 14))
+      .attr("r", (d: any) => (getNodeRadius(d)))
       .attr("fill", "#d1d5db")
       .attr("stroke", "#9ca3af")
       .attr("stroke-width", 2);
@@ -309,7 +327,7 @@ export default function DictionaryGraph({
     node
       .append("text")
       .text((d: any) => d.label)
-      .attr("dy", (d: any) => (d.parent ? 6 : -18))
+      .attr("dy", (d: any) => (d.parent ? 6 : -getNodeRadius(d) - 4))
       .attr("text-anchor", "middle")
       .attr("fill", "#6b7280")
       .attr("font-size", "12px")

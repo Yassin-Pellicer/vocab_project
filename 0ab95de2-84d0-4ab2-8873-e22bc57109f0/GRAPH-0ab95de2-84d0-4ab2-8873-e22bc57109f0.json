@@ -20,34 +20,34 @@
     "b2a57a61-1374-4e03-a160-9987f29c9650": "Mittwoch",
     "04afba97-eefe-4763-993f-1218f955e4ea": "Donnerstag",
     "34d797b4-ce98-47a5-abed-a3c7ff0cdae4": "Freitag",
-    "82da61a6-775c-49eb-88f3-da1877420d7e": "Samstag",
-    "35c5b1b1-8260-4907-89a4-0c011f309679": "Sonntag"
+    "35c5b1b1-8260-4907-89a4-0c011f309679": "Sonntag",
+    "82da61a6-775c-49eb-88f3-da1877420d7e": "Samstag"
   },
   "3c9ee78e-976f-4625-9157-d0f5a7e1628f": {
-    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Montag"
+    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Wochentage"
   },
   "09291336-33e1-4321-be0a-3011dfadc1d0": {
-    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Dienstag"
+    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Wochentage"
   },
   "b2a57a61-1374-4e03-a160-9987f29c9650": {
-    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Mittwoch"
+    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Wochentage"
   },
   "04afba97-eefe-4763-993f-1218f955e4ea": {
-    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Donnerstag"
+    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Wochentage"
   },
   "34d797b4-ce98-47a5-abed-a3c7ff0cdae4": {
-    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Freitag"
+    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Wochentage"
   },
   "82da61a6-775c-49eb-88f3-da1877420d7e": {
-    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Samstag",
-    "af701e60-9789-4eff-bc01-9610ae94117c": "Samstag"
+    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Wochentage",
+    "af701e60-9789-4eff-bc01-9610ae94117c": "Wochenende"
   },
   "35c5b1b1-8260-4907-89a4-0c011f309679": {
-    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Sonntag",
-    "af701e60-9789-4eff-bc01-9610ae94117c": "Sonntag"
+    "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": "Wochentage",
+    "af701e60-9789-4eff-bc01-9610ae94117c": "Wochenende"
   },
   "49aac7f0-2587-4fd2-aeb2-a5d8a0349a87": {
-    "bc10c1a1-83db-42e4-a738-cf926c51114b": "Mittag"
+    "bc10c1a1-83db-42e4-a738-cf926c51114b": "Tag"
   },
   "bc10c1a1-83db-42e4-a738-cf926c51114b": {
     "49aac7f0-2587-4fd2-aeb2-a5d8a0349a87": "Mittag",
@@ -65,10 +65,10 @@
   },
   "29622e93-73da-4f4d-aa0f-fe16a9d0138b": {
     "08abb7ab-1a54-45a7-bfdf-ddb36467d352": "Grosseltern",
-    "8a6a46bf-0a5e-41ce-9129-438d45346295": "Eltern",
-    "3a75ac1d-3910-4b20-b545-5cbbafd8336d": "Eltern",
-    "1aa46516-940d-421d-b144-9eb5fb9e0f17": "Eltern",
-    "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b": "Eltern"
+    "1aa46516-940d-421d-b144-9eb5fb9e0f17": "Geschwister",
+    "3a75ac1d-3910-4b20-b545-5cbbafd8336d": "Mutter",
+    "8a6a46bf-0a5e-41ce-9129-438d45346295": "Vater",
+    "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b": "Kinder"
   },
   "08abb7ab-1a54-45a7-bfdf-ddb36467d352": {
     "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern"
@@ -80,9 +80,7 @@
     "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b": "Kinder"
   },
   "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b": {
-    "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern",
-    "1b93337d-fa7f-4ff0-929e-9cee084e70e5": "Kinder",
-    "5763a459-e776-4c77-977f-db5a00834230": "Kinder"
+    "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern"
   },
   "1dfa9417-f54f-468e-b1af-923bf7e20f5b": {
     "1aa46516-940d-421d-b144-9eb5fb9e0f17": "Geschwister"
@@ -95,21 +93,9 @@
     "1dfa9417-f54f-468e-b1af-923bf7e20f5b": "Geschwister",
     "72802a50-da42-4edd-b617-8e32d475ae5e": "Geschwister"
   },
-  "41751751-6e2c-4d66-baf3-4aa254857560": {
-    "6b6ce979-4eb2-41df-8273-ff809e25a34f": "ab",
-    "24a64e7c-e00d-4f6b-8d83-3261c3db70e9": "Andere",
-    "948d8f21-787b-4b8b-9952-5c26dd29b1fc": "anfangen"
-  },
-  "24a64e7c-e00d-4f6b-8d83-3261c3db70e9": {
-    "41751751-6e2c-4d66-baf3-4aa254857560": "Ahnung"
-  },
-  "948d8f21-787b-4b8b-9952-5c26dd29b1fc": {
-    "41751751-6e2c-4d66-baf3-4aa254857560": "Ahnung"
-  },
-  "1f61d34b-c5d5-4606-8fd3-74c96d6af71c": {
-    "41751751-6e2c-4d66-baf3-4aa254857560": "Ahnung"
-  },
-  "48869265-1050-48bc-8181-be73fb8ecd48": {
-    "6b6ce979-4eb2-41df-8273-ff809e25a34f": "ab"
-  }
+  "41751751-6e2c-4d66-baf3-4aa254857560": {},
+  "24a64e7c-e00d-4f6b-8d83-3261c3db70e9": {},
+  "948d8f21-787b-4b8b-9952-5c26dd29b1fc": {},
+  "1f61d34b-c5d5-4606-8fd3-74c96d6af71c": {},
+  "48869265-1050-48bc-8181-be73fb8ecd48": {}
 }
