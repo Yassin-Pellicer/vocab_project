@@ -91,7 +91,7 @@ export default function useTranslationHooks({
         a.pair[0].original.word.localeCompare(b.pair[0].original.word)
       );
     }
-    return results;
+    return results.slice().reverse();
   }, [list, selectedLetter, searchField, isAdditionOrder, selectedTypes]);
 
   const totalPages = useMemo(
