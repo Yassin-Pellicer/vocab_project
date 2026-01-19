@@ -35,11 +35,7 @@ export default function useWordModalHooks({
     type: "",
   });
 
-  const updatePairField = (
-    value: any,
-    pairIndex: number,
-    path: string
-  ) => {
+  const updatePairField = (value: any, pairIndex: number, path: string) => {
     const newPairs = [...formData.pair];
     const parts = path.split(".");
     let obj: any = newPairs[pairIndex];
@@ -56,7 +52,7 @@ export default function useWordModalHooks({
   const handlePairChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     pairIndex: number,
-    path: string
+    path: string,
   ) => {
     updatePairField(e.target.value, pairIndex, path);
   };
@@ -82,7 +78,7 @@ export default function useWordModalHooks({
   const removeTranslationFromPair = (pairIndex: number, tIndex: number) => {
     const updated = [...formData.pair];
     updated[pairIndex].translations = updated[pairIndex].translations.filter(
-      (_, i) => i !== tIndex
+      (_, i) => i !== tIndex,
     );
     setFormData({ ...formData, pair: updated });
   };
@@ -96,7 +92,7 @@ export default function useWordModalHooks({
   const removeDefinitionFromPair = (pairIndex: number, dIndex: number) => {
     const updated = [...formData.pair];
     updated[pairIndex].definitions = updated[pairIndex].definitions.filter(
-      (_, i) => i !== dIndex
+      (_, i) => i !== dIndex,
     );
     setFormData({ ...formData, pair: updated });
   };
@@ -104,7 +100,7 @@ export default function useWordModalHooks({
   const handleSubmit = async () => {
     try {
       if (formData.pair.length === 0) return;
-      await (window.api).addTranslation(formData, null, route, name);
+      await window.api.addTranslation(formData, null, route, name);
       loadTranslations(route, name);
     } catch (error) {
       console.error("Failed to add translation:", error);
