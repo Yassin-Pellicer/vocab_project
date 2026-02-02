@@ -3724,43 +3724,6 @@
     "pair": [
       {
         "original": {
-          "word": "Name",
-          "gender": "f",
-          "number": "sing"
-        },
-        "translations": [
-          {
-            "word": "Nombre",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Namen",
-          "gender": "f",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Nombres",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "",
-    "uuid": "72d0ca19-9386-4db8-9585-0fff665ae715"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Besuch",
           "gender": "m",
           "number": "sing"
@@ -7234,5 +7197,232 @@
     "dateAdded": "2025-12-15",
     "type": "preposition",
     "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Enkelin",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Nieta",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Enkelin",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Nieto",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-26",
+    "type": "noun",
+    "uuid": "1f150895-7043-4df0-9103-1add669ff04c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Nichte",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Sobrina",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Neffe",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Sobrino",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-26",
+    "type": "noun",
+    "uuid": "66a6373c-5da9-42c3-b30a-629d092ba3fc"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Famillienstand",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Estado civil",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-26",
+    "type": "noun",
+    "uuid": "2edc15bb-1dd3-4146-a678-09c5ef0c6144"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "leidig",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "soltero",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "es la definición legal de \"soltero\", a diferencia de \"single\", que viene a ser en el habla coloquial el estar soltero"
+        ]
+      }
+    ],
+    "dateAdded": "2026-01-26",
+    "type": "noun",
+    "uuid": "9faeec9d-687c-48ae-9780-a39dcbc9f1d0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Beiziehung",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Relación",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Estar en una relación"
+        ]
+      }
+    ],
+    "dateAdded": "2026-01-26",
+    "type": "noun",
+    "uuid": "84913bcc-3777-44ce-aa67-600fee670a9f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schwieger",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Familia legal",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Es idéntico a \"in-law\" en inglés"
+        ]
+      }
+    ],
+    "dateAdded": "2026-01-26",
+    "type": "adjective",
+    "uuid": "b9ad1f8e-2e66-4407-80c0-c30102468c7e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "umarmen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "abrazar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-26",
+    "type": "verb",
+    "uuid": "e1ac13e2-c26d-47cc-bfd6-a1190be14919"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Name",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Nombre",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Namen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Nombres",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "noun",
+    "uuid": "72d0ca19-9386-4db8-9585-0fff665ae715"
   }
 ]
