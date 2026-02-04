@@ -10,7 +10,7 @@ import { Bell, Moon, Save, Globe, FerrisWheel, Brush } from "lucide-react";
 
 export default function GeneralSection() {
   return (
-    <div className="space-y-6">
+    <div className="mb-8">
       <div className="space-y-2">
         <div>
           <h2 className="text-xl font-semibold mb-2">General</h2>
