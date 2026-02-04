@@ -64,10 +64,12 @@
     "1aa46516-940d-421d-b144-9eb5fb9e0f17": "Geschwister",
     "3a75ac1d-3910-4b20-b545-5cbbafd8336d": "Mutter",
     "8a6a46bf-0a5e-41ce-9129-438d45346295": "Vater",
-    "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b": "Kinder"
+    "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b": "Kinder",
+    "045939f2-892d-47e7-95cb-4694d97899d2": "Familien"
   },
   "08abb7ab-1a54-45a7-bfdf-ddb36467d352": {
-    "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern"
+    "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern",
+    "045939f2-892d-47e7-95cb-4694d97899d2": "Familien"
   },
   "1b93337d-fa7f-4ff0-929e-9cee084e70e5": {
     "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b": "Kinder"
@@ -87,7 +89,8 @@
   "1aa46516-940d-421d-b144-9eb5fb9e0f17": {
     "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern",
     "1dfa9417-f54f-468e-b1af-923bf7e20f5b": "Geschwister",
-    "72802a50-da42-4edd-b617-8e32d475ae5e": "Geschwister"
+    "72802a50-da42-4edd-b617-8e32d475ae5e": "Geschwister",
+    "045939f2-892d-47e7-95cb-4694d97899d2": "Familien"
   },
   "41751751-6e2c-4d66-baf3-4aa254857560": {},
   "24a64e7c-e00d-4f6b-8d83-3261c3db70e9": {},
@@ -99,6 +102,26 @@
   "2edc15bb-1dd3-4146-a678-09c5ef0c6144": {},
   "9faeec9d-687c-48ae-9780-a39dcbc9f1d0": {},
   "84913bcc-3777-44ce-aa67-600fee670a9f": {},
-  "b9ad1f8e-2e66-4407-80c0-c30102468c7e": {},
-  "e1ac13e2-c26d-47cc-bfd6-a1190be14919": {}
+  "b9ad1f8e-2e66-4407-80c0-c30102468c7e": {
+    "045939f2-892d-47e7-95cb-4694d97899d2": "Familien"
+  },
+  "e1ac13e2-c26d-47cc-bfd6-a1190be14919": {},
+  "12f56dab-42f8-4183-ad4f-6644d42c4801": {},
+  "ba97a0e0-b08d-453d-a30b-a3bade71eeea": {},
+  "61ccd5dc-bf96-464b-a44d-0e10ed9765d9": {},
+  "3c0e7334-cb59-4105-897f-1807d381c652": {},
+  "d97df50e-1258-407a-bc88-59d4393ce6b8": {},
+  "dd8a9644-0ec8-487e-a341-0c493a107790": {},
+  "4d29f661-e993-474e-8614-a88b03784a72": {},
+  "f35b89ef-40a1-456a-8f44-7008307c9599": {},
+  "697a071b-eb90-47da-a6c4-e48c6b6d4aac": {},
+  "16459044-3d70-441e-87aa-9d0ef0d39467": {},
+  "1d8b37dd-ca7e-4a08-868f-26c2d501c473": {},
+  "46767a3b-6adb-41f3-95ed-e0f84bb30513": {},
+  "045939f2-892d-47e7-95cb-4694d97899d2": {
+    "29622e93-73da-4f4d-aa0f-fe16a9d0138b": "Eltern",
+    "08abb7ab-1a54-45a7-bfdf-ddb36467d352": "Grosseltern",
+    "1aa46516-940d-421d-b144-9eb5fb9e0f17": "Geschwister",
+    "b9ad1f8e-2e66-4407-80c0-c30102468c7e": "Schwieger"
+  }
 }

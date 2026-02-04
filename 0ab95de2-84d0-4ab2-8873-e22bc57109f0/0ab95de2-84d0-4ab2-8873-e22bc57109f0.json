@@ -7424,5 +7424,270 @@
     "dateAdded": "2025-12-14",
     "type": "noun",
     "uuid": "72d0ca19-9386-4db8-9585-0fff665ae715"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Geburtstag",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "día de nacimiento",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "noun",
+    "uuid": "12f56dab-42f8-4183-ad4f-6644d42c4801"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "bis",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "hasta",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "preposition",
+    "uuid": "ba97a0e0-b08d-453d-a30b-a3bade71eeea"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Unterschrift",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "firma",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Firma (de documentos, manuscrita etc.)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "noun",
+    "uuid": "61ccd5dc-bf96-464b-a44d-0e10ed9765d9"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "gericht",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "plato",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Plato de comida (tradicional), plato de menú, etc..."
+        ]
+      },
+      {
+        "original": {
+          "word": "gerichte",
+          "gender": "n",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "platos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Plato de comida (tradicional), plato de menú, etc..."
+        ]
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "noun",
+    "uuid": "3c0e7334-cb59-4105-897f-1807d381c652"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "abschliessen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "finalizar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "verb",
+    "uuid": "d97df50e-1258-407a-bc88-59d4393ce6b8"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "spass",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "diversión",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "noun",
+    "uuid": "dd8a9644-0ec8-487e-a341-0c493a107790"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "dabei",
+          "gender": "-",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "ahí",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "determiner",
+    "uuid": "4d29f661-e993-474e-8614-a88b03784a72"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "wenn",
+          "gender": "-",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "si",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "(si esto ocurre...) si condicional"
+        ]
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "adverb",
+    "uuid": "f35b89ef-40a1-456a-8f44-7008307c9599"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Zukunft",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Futuro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "noun",
+    "uuid": "1d8b37dd-ca7e-4a08-868f-26c2d501c473"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gegenwart",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Presente",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "noun",
+    "uuid": "16459044-3d70-441e-87aa-9d0ef0d39467"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Vergangenheit",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Pasado",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "noun",
+    "uuid": "697a071b-eb90-47da-a6c4-e48c6b6d4aac"
   }
 ]

@@ -20,9 +20,9 @@ export default function AddDictModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="bg-black rounded-lg px-2 flex h-8 items-center justify-center cursor-pointer">
-          <Book color="white" size={18} />
-          <p className="text-lg text-white leading-none pb-1">+</p>
+        <div className="rounded-xl px-2 border border-gray-300 flex h-8 items-center justify-center cursor-pointer hover:bg-gray-100">
+          <Book color="black" size={18} />
+          <p className="text-2xl black leading-none pb-1">+</p>
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

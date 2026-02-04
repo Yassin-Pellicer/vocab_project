@@ -60,7 +60,7 @@ export default function Home() {
             <p className="text-2xl font-bold text-black">{(totalWords / (totalDictionaries * 15000)).toFixed(3)}%</p>
           </div>
         </div>
-        <div className="grid 2xl:grid-cols-2 grid-cols-1 w-full gap-12">
+        <div className="grid 2xl:grid-cols-2 grid-cols-1 w-full">
           {dictionaryCards.map((dict, dictIndex) => (
             <div key={dictIndex} className="flex flex-col w-full gap-4 p-4">
               <div className="flex items-center justify-between pb-4 border-b">

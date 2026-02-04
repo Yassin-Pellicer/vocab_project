@@ -344,12 +344,12 @@
           "3p": "sind"
         },
         "Präteritum": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "1s": "war",
+          "2s": "warst",
+          "3s": "war",
+          "1p": "waren",
+          "2p": "wart",
+          "3p": "waren"
         }
       },
       "Compound": {

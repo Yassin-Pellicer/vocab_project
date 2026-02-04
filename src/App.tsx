@@ -1,11 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./Layout";
-import DictionaryPage from "./pages/dictionary-page";
 import TranslationGamePage from "./pages/translation-game-page";
-import HomePage from "./pages/home-page";
-import { useEffect } from "react";
+import DictionaryPage from "./pages/dictionary-page";
 import MarkdownPage from "./pages/markdown-page";
+import HomePage from "./pages/home-page";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useConfigStore } from "./context/dictionary-context";
+import { MainLayout } from "./layouts";
+import { useEffect } from "react";
+import ConfigPage from "./pages/config-page";
 
 function App() {
   const loadConfig = useConfigStore(state => state.loadConfig);
@@ -24,14 +25,15 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Layout>
+      <MainLayout>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/dictionary" element={<DictionaryPage />} />
           <Route path="/markdown" element={<MarkdownPage />} />
           <Route path="/translation" element={<TranslationGamePage />} />
+          <Route path="/config" element={<ConfigPage />} />
         </Routes>
-      </Layout>
+      </MainLayout>
     </BrowserRouter>
   );
 }

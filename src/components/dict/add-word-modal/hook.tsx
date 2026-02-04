@@ -32,7 +32,7 @@ export default function useWordModalHooks({
   const [formData, setFormData] = useState<TranslationEntry>({
     pair: [emptyPair],
     dateAdded: new Date().toISOString().split("T")[0],
-    type: "",
+    type: "noun",
   });
 
   const updatePairField = (value: any, pairIndex: number, path: string) => {
