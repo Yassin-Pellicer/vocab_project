@@ -1,4 +1,5 @@
-import { BookOpen, Plus } from "lucide-react";
+import { BookOpen, EllipsisVertical, Plus } from "lucide-react";
+import AddDictModal from "@/components/dict/add-dict-modal";
 
 export default function DictionariesSection() {
   const dictionaries = [
@@ -8,38 +9,49 @@ export default function DictionariesSection() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="mb-8">
       <div>
-        <h2 className="text-2xl font-semibold mb-2">Dictionaries</h2>
-        <p className="text-sm text-muted-foreground">
-          Manage your vocabulary dictionaries
+        <h2 className="text-xl font-semibold mb-2">Dictionaries</h2>
+        <p className="text-xs text-muted-foreground mb-4">
+          Manage your vocabulary dictionaries. Create, open, or remove
+          dictionaries used throughout the application. Move where the dictionaries are stored by changing their route.
         </p>
+        <hr />
       </div>
 
-      <button className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-md border-2 border-dashed border-muted-foreground/25 hover:border-muted-foreground/50 hover:bg-accent/50 transition-colors text-sm text-muted-foreground">
-        <Plus className="h-4 w-4" />
-        Create New Dictionary
-      </button>
+      <div className="space-y-4 mt-4">
+        <AddDictModal>
+          <button className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-md border-2 border-dashed border-muted-foreground/25 hover:border-muted-foreground/50 hover:bg-accent/50 transition-colors text-sm text-muted-foreground">
+            <Plus className="h-4 w-4" />
+            Create New Dictionary
+          </button>
+        </AddDictModal>
 
-      <div className="space-y-3">
-        {dictionaries.map((dict, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between p-4 rounded-lg border bg-card hover:bg-accent/30 transition-colors"
-          >
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-md bg-primary/10">
-                <BookOpen className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <div className="text-sm font-medium">{dict.name}</div>
-                <div className="text-xs text-muted-foreground">
-                  {dict.words} words · Last used {dict.lastUsed}
+        <div className="space-y-2">
+          {dictionaries.map((dict, index) => (
+            <div
+              key={index}
+              className="flex border items-center justify-between py-1 px-3 rounded-md hover:bg-accent/50 transition-colors group gap-4"
+            >
+              <div className="flex py-1 items-center flex-1 gap-4">
+                <div className="p-2 rounded-md bg-primary/10">
+                  <BookOpen className="h-4 w-4 text-primary" />
+                </div>
+                <div className="flex-1 gap-4">
+                  <div className="flex flex-row gap-2 items-center mb-1">
+                    <div className="text-sm font-medium">{dict.name}</div>
+                  </div>
+                  <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
+                    {dict.words} words · Last used {dict.lastUsed}
+                  </div>
                 </div>
               </div>
+              <div className="flex gap-4 items-center">
+                <EllipsisVertical className="h-4 w-4 text-muted-foreground group-hover:text-red-500 transition-colors" />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

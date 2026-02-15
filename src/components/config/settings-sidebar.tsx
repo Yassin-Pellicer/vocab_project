@@ -24,12 +24,12 @@ const menuItems = [
   { id: "ai", label: "Artificial Intelligence", icon: Sparkles },
   { id: "about", label: "About", icon: Info },
   { id: "donate", label: "Donate", icon: Heart },
-];
+];  
 
 export default function SettingsSidebar({ activeSection, onSectionChange }: SettingsSidebarProps) {
   return (
-    <div className="w-64 border-r bg-background/50 h-full p-4">
-      <div className="">
+    <div className="border-r bg-background/50 h-full pt-2 pr-2 w-48">
+      <div>
         {menuItems.map((item) => {
           const Icon = item.icon;
           return (

@@ -1,8 +1,9 @@
 import { Settings } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import AddDictModal from "@/components/dict/add-dict-modal";
+import ConfigModal from "@/components/config/config-modal";
 import { BreadcrumbNavigation } from "../breadcrumb-navigation";
-import { Link } from "react-router-dom";
+// removed unused Link import
 
 export function AppHeader() {
   return (
@@ -17,12 +18,11 @@ export function AppHeader() {
 
       <div className="flex flex-row items-center gap-2">
         <AddDictModal />
-        <Link
-          to="/config"
-          className="rounded-xl px-2 border border-gray-300 flex h-8 items-center justify-center cursor-pointer hover:bg-gray-100"
-        >
-          <Settings size={18} color="black" />
-        </Link>
+        <ConfigModal>
+          <div className="rounded-xl px-2 border border-gray-300 flex h-8 items-center justify-center cursor-pointer hover:bg-gray-100">
+            <Settings size={18} color="black" />
+          </div>
+        </ConfigModal>
       </div>
     </header>
   );

@@ -6745,43 +6745,6 @@
     "pair": [
       {
         "original": {
-          "word": "Kommilitionen",
-          "gender": "m",
-          "number": "sing"
-        },
-        "translations": [
-          {
-            "word": "Compañeros de estudio",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Kommilitonin",
-          "gender": "f",
-          "number": "sing"
-        },
-        "translations": [
-          {
-            "word": "Compañeras de estudio",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2026-01-14",
-    "type": "noun",
-    "uuid": "1c28afbb-dd9e-46ad-b0c4-a7b2fbc8bfd3"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Ausbildung",
           "gender": "f",
           "number": "sing"
@@ -7689,5 +7652,42 @@
     "dateAdded": "2026-02-02",
     "type": "noun",
     "uuid": "697a071b-eb90-47da-a6c4-e48c6b6d4aac"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kommilitonen",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Compañeros de estudio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Kommilitonin",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Compañeras de estudio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "noun",
+    "uuid": "1c28afbb-dd9e-46ad-b0c4-a7b2fbc8bfd3"
   }
 ]

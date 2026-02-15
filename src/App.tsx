@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useConfigStore } from "./context/dictionary-context";
 import { MainLayout } from "./layouts";
 import { useEffect } from "react";
-import ConfigPage from "./pages/config-page";
 
 function App() {
   const loadConfig = useConfigStore(state => state.loadConfig);
@@ -31,7 +30,6 @@ function App() {
           <Route path="/dictionary" element={<DictionaryPage />} />
           <Route path="/markdown" element={<MarkdownPage />} />
           <Route path="/translation" element={<TranslationGamePage />} />
-          <Route path="/config" element={<ConfigPage />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>

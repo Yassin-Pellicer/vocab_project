@@ -14,17 +14,26 @@ import { Label } from "@/components/ui/label";
 import { Book, FolderOpen } from "lucide-react";
 import useDictModalHooks from "./hook";
 
-export default function AddDictModal() {
+export default function AddDictModal({
+  children,
+}: {
+  children?: React.ReactNode;
+}) {
   const hook = useDictModalHooks();
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <div className="rounded-xl px-2 border border-gray-300 flex h-8 items-center justify-center cursor-pointer hover:bg-gray-100">
-          <Book color="black" size={18} />
-          <p className="text-2xl black leading-none pb-1">+</p>
-        </div>
-      </DialogTrigger>
+      {children ? (
+        <DialogTrigger asChild>{children}</DialogTrigger>
+      ) : (
+        <DialogTrigger asChild>
+          <div className="rounded-xl px-2 border border-gray-300 flex h-8 items-center justify-center cursor-pointer hover:bg-gray-100">
+            <Book color="black" size={18} />
+            <p className="text-2xl black leading-none pb-1">+</p>
+          </div>
+        </DialogTrigger>
+      )}
+
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={hook.handleSubmit}>
           <DialogHeader>
