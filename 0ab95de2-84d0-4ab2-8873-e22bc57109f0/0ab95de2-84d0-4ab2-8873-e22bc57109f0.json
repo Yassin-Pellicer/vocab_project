@@ -7689,5 +7689,240 @@
     "dateAdded": "2026-02-02",
     "type": "noun",
     "uuid": "697a071b-eb90-47da-a6c4-e48c6b6d4aac"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "schenken",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "regalar",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-04",
+    "type": "verb",
+    "uuid": "767221c0-fb5f-4803-9e71-3129c3329564"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "geschenk",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "regalo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "geschenke",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "regalos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-04",
+    "type": "noun",
+    "uuid": "66dbba0a-42f9-47ad-8ac0-fbaac1b11fc7"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Betrieb",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "empresa",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Betriebe",
+          "gender": "m",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "empresas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-04",
+    "type": "noun",
+    "uuid": "7771cd64-ef3a-4fd9-ab96-6e7ed1e6fcc3"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Firma",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "empresa",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-04",
+    "type": "noun",
+    "uuid": "d7acb990-611a-48b6-a4f4-02b09a51d10b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Einweihung",
+          "gender": "m",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "inauguración",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Como en una fiesta de inauguración de una casa"
+        ]
+      }
+    ],
+    "dateAdded": "2026-02-04",
+    "type": "noun",
+    "uuid": "c19f5bf0-9d15-41fa-9bdd-c94b81d9db05"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "benutzen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "usar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-04",
+    "type": "verb",
+    "uuid": "34abb5a0-160a-419b-afcf-33da463412ed"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "meinung",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "opinión",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-04",
+    "type": "noun",
+    "uuid": "e0d1418a-edd9-48d3-8846-0b4ef368d4d5"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "von",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "desde",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-04",
+    "type": "preposition",
+    "uuid": "e91f841c-26d4-433f-a818-3761a53edea7"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "lecker",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "delicioso",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-04",
+    "type": "adjective",
+    "uuid": "0d038005-6a60-47a8-b7c2-cdcd6f1fd709"
   }
 ]
