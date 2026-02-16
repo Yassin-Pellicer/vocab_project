@@ -298,6 +298,74 @@ function loadTranslations() {
     }
   });
 }
+function copyDirRecursive(src, dest) {
+  fs.mkdirSync(dest, { recursive: true });
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  for (const entry of entries) {
+    const srcPath = path$1.join(src, entry.name);
+    const destPath = path$1.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      copyDirRecursive(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+function removeDirRecursive(dir) {
+  if (fs.existsSync(dir)) {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
+function moveDictionary() {
+  ipcMain.handle(
+    "moveDictionary",
+    async (_event, dictId, newRoute) => {
+      try {
+        const configPath = path$1.join(
+          process.env.APP_ROOT || __dirname,
+          "public",
+          "user-config.json"
+        );
+        if (!fs.existsSync(configPath)) {
+          throw new Error("Config file not found.");
+        }
+        const config = JSON.parse(
+          fs.readFileSync(configPath, "utf-8")
+        );
+        if (!config.dictionaries || !config.dictionaries[dictId]) {
+          throw new Error(`Dictionary with id "${dictId}" not found in config.`);
+        }
+        const dictEntry = config.dictionaries[dictId];
+        const oldRoute = dictEntry.route;
+        if (!fs.existsSync(oldRoute)) {
+          throw new Error(`Source folder does not exist: ${oldRoute}`);
+        }
+        if (!fs.existsSync(newRoute)) {
+          throw new Error(`Destination folder does not exist: ${newRoute}`);
+        }
+        const folderName = path$1.basename(oldRoute);
+        const newFolderPath = path$1.join(newRoute, folderName);
+        if (fs.existsSync(newFolderPath)) {
+          throw new Error(
+            `A folder named "${folderName}" already exists at the destination.`
+          );
+        }
+        copyDirRecursive(oldRoute, newFolderPath);
+        removeDirRecursive(oldRoute);
+        config.dictionaries[dictId].route = newFolderPath;
+        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        return {
+          success: true,
+          oldRoute,
+          newRoute: newFolderPath
+        };
+      } catch (error) {
+        console.error("❌ Error moving dictionary:", error);
+        throw new Error("Failed to move dictionary.");
+      }
+    }
+  );
+}
 function selectFolder() {
   ipcMain.handle("selectFolder", async () => {
     try {
@@ -393,6 +461,7 @@ function registerIpcHandlers() {
   addTranslation();
   deleteTranslation();
   createDictionary();
+  moveDictionary();
   selectFolder();
   loadConfig();
   fetchMarkdown();

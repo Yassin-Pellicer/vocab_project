@@ -1,5 +1,10 @@
 "use strict";
 const electron = require("electron");
+const config = {
+  moveDictionary: async (dictId, newRoute) => {
+    return await electron.ipcRenderer.invoke("moveDictionary", dictId, newRoute);
+  }
+};
 const conjugation = {
   fetchConjugation: async (route, name, uuid) => {
     return await electron.ipcRenderer.invoke("fetchConjugation", route, name, uuid);
@@ -52,7 +57,8 @@ const endpoints = Object.assign(
   translations,
   markdown,
   conjugation,
-  graph
+  graph,
+  config
 );
 electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   on(...args) {

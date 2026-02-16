@@ -98,7 +98,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
           ],
         })
       );
-
+      console.log("Loaded config:", config);
       set({
         dictionaryMetadata: config.dictionaries || {},
         data: {

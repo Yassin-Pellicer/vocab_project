@@ -1,18 +1,16 @@
 import { BookOpen, EllipsisVertical, FolderSync, Pencil, Plus, Trash2 } from "lucide-react";
 import AddDictModal from "@/components/dict/add-dict-modal";
+import ChangeRouteModal from "@/components/dict/change-route-modal";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import useConfig from "../hooks";
 
 export default function DictionariesSection() {
-  const dictionaries = [
-    { name: "Spanish Vocabulary", words: 150, lastUsed: "Today" },
-    { name: "French Basics", words: 89, lastUsed: "2 days ago" },
-    { name: "German Verbs", words: 234, lastUsed: "1 week ago" },
-  ];
+  const { dictionaryMetadata } = useConfig();
 
   return (
     <div className="mb-8 mt-2">
@@ -34,9 +32,9 @@ export default function DictionariesSection() {
         </AddDictModal>
 
         <div className="space-y-2">
-          {dictionaries.map((dict, index) => (
+          {Object.entries(dictionaryMetadata).map(([id, dict]: [string, any]) => (
             <div
-              key={index}
+              key={id}
               className="flex border items-center justify-between py-1 px-3 rounded-md  group gap-4"
             >
               <div className="flex py-1 items-center flex-1 gap-4">
@@ -48,7 +46,7 @@ export default function DictionariesSection() {
                     <div className="text-sm font-medium">{dict.name}</div>
                   </div>
                   <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                    {dict.words} words · Last used {dict.lastUsed}
+                    {dict.route}
                   </div>
                 </div>
               </div>
@@ -59,10 +57,12 @@ export default function DictionariesSection() {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <FolderSync className="h-4 w-4 mr-2" />
-                    Change Route
-                  </DropdownMenuItem>
+                  <ChangeRouteModal dictId={id} dictName={dict.name} currentRoute={dict.route}>
+                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                      <FolderSync className="h-4 w-4 mr-2" />
+                      Change Route
+                    </DropdownMenuItem>
+                  </ChangeRouteModal>
                   <DropdownMenuItem>
                     <Pencil className="h-4 w-4 mr-2" />
                     Rename

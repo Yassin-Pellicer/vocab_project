@@ -1,3 +1,4 @@
+import { config } from "./endpoints/config";
 import { conjugation } from "./endpoints/conjugation";
 import { graph } from "./endpoints/graph";
 import { markdown } from "./endpoints/markdown";
@@ -8,4 +9,5 @@ export const endpoints = Object.assign({},
   markdown,
   conjugation,
   graph,
+  config,
 );
