@@ -10,15 +10,15 @@ import { Bell, Moon, Save, Globe, FerrisWheel, Brush } from "lucide-react";
 
 export default function GeneralSection() {
   return (
-    <div className="mb-8">
+    <div className="mb-8 mt-2">
       <div className="space-y-2">
         <div>
           <h2 className="text-xl font-semibold mb-2">General</h2>
           <hr></hr>
         </div>
 
-        <div className="flex flex-col px-3">
-          <div className="flex items-center justify-between rounded-md hover:bg-accent/50 transition-colors group gap-4">
+        <div className="flex flex-col">
+          <div className="flex items-center justify-between rounded-md  group gap-4">
             <div className="flex py-2 items-center flex-1 gap-4">
               <div className="flex-1 gap-4">
                 <div className="flex flex-row gap-2 items-center mb-1">
@@ -34,7 +34,7 @@ export default function GeneralSection() {
             </div>
             <Switch defaultChecked />
           </div>
-          <div className="flex flex-row mt-4">
+          <div className="flex flex-row items-center mt-4">
             <div className="text-sm font-medium w-full">
               Notification lifetime
             </div>
@@ -53,11 +53,11 @@ export default function GeneralSection() {
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-2 mt-6">Language and time</h2>
+          <h2 className="text-xl font-semibold mb-2 mt-4">Language and time</h2>
           <hr></hr>
         </div>
 
-        <div className="flex items-center justify-between  px-3 rounded-md hover:bg-accent/50 transition-colors group gap-4">
+        <div className="flex items-center justify-between rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -91,7 +91,7 @@ export default function GeneralSection() {
           </Select>
         </div>
 
-        <div className="flex items-center justify-between  px-3 rounded-md hover:bg-accent/50 transition-colors group gap-4">
+        <div className="flex items-center justify-between rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -140,7 +140,7 @@ export default function GeneralSection() {
           </Select>
         </div>
 
-        <div className="flex items-center justify-between  px-3 rounded-md hover:bg-accent/50 transition-colors group gap-4">
+        <div className="flex items-center justify-between   rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -159,11 +159,11 @@ export default function GeneralSection() {
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-2 mt-6">Looks and Feel</h2>
+          <h2 className="text-xl font-semibold mb-2 mt-4">Looks and Feel</h2>
           <hr></hr>
         </div>
 
-        <div className="flex items-center justify-between  px-3 rounded-md hover:bg-accent/50 transition-colors group gap-4">
+        <div className="flex items-center justify-between   rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -180,7 +180,7 @@ export default function GeneralSection() {
           <Switch defaultChecked />
         </div>
 
-        <div className="flex items-center justify-between  px-3 rounded-md hover:bg-accent/50 transition-colors group gap-4">
+        <div className="flex items-center justify-between   rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -239,7 +239,7 @@ export default function GeneralSection() {
           </Select>
         </div>
 
-        <div className="flex items-center justify-between  px-3 rounded-md hover:bg-accent/50 transition-colors group gap-4">
+        <div className="flex items-center justify-between   rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">

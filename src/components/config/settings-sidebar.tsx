@@ -5,8 +5,7 @@ import {
   User, 
   CreditCard, 
   Sparkles, 
-  Info, 
-  Heart 
+  Info 
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +22,6 @@ const menuItems = [
   { id: "subscription", label: "Subscription", icon: CreditCard },
   { id: "ai", label: "Artificial Intelligence", icon: Sparkles },
   { id: "about", label: "About", icon: Info },
-  { id: "donate", label: "Donate", icon: Heart },
 ];  
 
 export default function SettingsSidebar({ activeSection, onSectionChange }: SettingsSidebarProps) {
@@ -37,7 +35,7 @@ export default function SettingsSidebar({ activeSection, onSectionChange }: Sett
               key={item.id}
               onClick={() => onSectionChange(item.id)}
               className={cn(
-                "w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors",
+                "w-full flex items-center gap-3 my-1 px-3 py-[4px] rounded-md text-sm transition-colors",
                 "hover:bg-accent hover:text-accent-foreground",
                 activeSection === item.id 
                   ? "bg-accent text-accent-foreground font-medium" 

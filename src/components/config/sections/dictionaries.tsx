@@ -1,5 +1,11 @@
-import { BookOpen, EllipsisVertical, Plus } from "lucide-react";
+import { BookOpen, EllipsisVertical, FolderSync, Pencil, Plus, Trash2 } from "lucide-react";
 import AddDictModal from "@/components/dict/add-dict-modal";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function DictionariesSection() {
   const dictionaries = [
@@ -9,7 +15,7 @@ export default function DictionariesSection() {
   ];
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 mt-2">
       <div>
         <h2 className="text-xl font-semibold mb-2">Dictionaries</h2>
         <p className="text-xs text-muted-foreground mb-4">
@@ -21,7 +27,7 @@ export default function DictionariesSection() {
 
       <div className="space-y-4 mt-4">
         <AddDictModal>
-          <button className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-md border-2 border-dashed border-muted-foreground/25 hover:border-muted-foreground/50 hover:bg-accent/50 transition-colors text-sm text-muted-foreground">
+          <button className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-md border-2 border-dashed border-muted-foreground/25 hover:border-muted-foreground/50  text-sm text-muted-foreground">
             <Plus className="h-4 w-4" />
             Create New Dictionary
           </button>
@@ -31,7 +37,7 @@ export default function DictionariesSection() {
           {dictionaries.map((dict, index) => (
             <div
               key={index}
-              className="flex border items-center justify-between py-1 px-3 rounded-md hover:bg-accent/50 transition-colors group gap-4"
+              className="flex border items-center justify-between py-1 px-3 rounded-md  group gap-4"
             >
               <div className="flex py-1 items-center flex-1 gap-4">
                 <div className="p-2 rounded-md bg-primary/10">
@@ -46,9 +52,27 @@ export default function DictionariesSection() {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-4 items-center">
-                <EllipsisVertical className="h-4 w-4 text-muted-foreground group-hover:text-red-500 transition-colors" />
-              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="p-1 rounded-md hover:bg-accent transition-colors">
+                    <EllipsisVertical className="h-4 w-4 text-muted-foreground" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <FolderSync className="h-4 w-4 mr-2" />
+                    Change Route
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Pencil className="h-4 w-4 mr-2" />
+                    Rename
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="text-destructive focus:text-destructive">
+                    <Trash2 className="h-4 w-4 mr-2" />
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           ))}
         </div>

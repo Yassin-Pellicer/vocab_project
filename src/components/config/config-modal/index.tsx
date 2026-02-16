@@ -16,7 +16,6 @@ import ProfileSection from "@/components/config/sections/profile";
 import SubscriptionSection from "@/components/config/sections/subscription";
 import AISection from "@/components/config/sections/ai";
 import AboutSection from "@/components/config/sections/about";
-import DonateSection from "@/components/config/sections/donate";
 
 export default function ConfigModal({ children }: { children?: React.ReactNode }) {
   const [activeSection, setActiveSection] = useState("general");
@@ -37,8 +36,6 @@ export default function ConfigModal({ children }: { children?: React.ReactNode }
         return <AISection />;
       case "about":
         return <AboutSection />;
-      case "donate":
-        return <DonateSection />;
       default:
         return <GeneralSection />;
     }

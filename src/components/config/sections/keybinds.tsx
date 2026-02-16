@@ -11,7 +11,7 @@ export default function KeybindsSection() {
   ];
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 mt-2">
       <div>
         <h2 className="text-xl font-semibold mb-2">Keybinds</h2>
         <p className="text-xs text-muted-foreground mb-4">
@@ -24,7 +24,7 @@ export default function KeybindsSection() {
         {keybinds.map((keybind, index) => (
           <div
             key={index}
-            className="flex border items-center justify-between py-1 px-3 rounded-md hover:bg-accent/50 transition-colors group gap-4"
+            className="flex border items-center justify-between py-1 px-3 rounded-md  group gap-4"
           >
             <div className="flex py-1 items-center flex-1 gap-4">
               <div className="flex-1 gap-4">
