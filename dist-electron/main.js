@@ -268,6 +268,86 @@ function deleteTranslation() {
     }
   );
 }
+function removeDirRecursive$1(dir) {
+  if (fs.existsSync(dir)) {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
+function deleteDictionary() {
+  ipcMain.handle(
+    "deleteDictionary",
+    async (_event, dictId) => {
+      try {
+        const configPath = path$1.join(
+          process.env.APP_ROOT || __dirname,
+          "public",
+          "user-config.json"
+        );
+        if (!fs.existsSync(configPath)) {
+          throw new Error("Config file not found.");
+        }
+        const config = JSON.parse(
+          fs.readFileSync(configPath, "utf-8")
+        );
+        if (!config.dictionaries || !config.dictionaries[dictId]) {
+          throw new Error(`Dictionary with id "${dictId}" not found in config.`);
+        }
+        const dictEntry = config.dictionaries[dictId];
+        const dictPath = path$1.resolve(dictEntry.route);
+        if (!fs.existsSync(dictPath) || !fs.statSync(dictPath).isDirectory()) {
+          throw new Error(`Dictionary folder does not exist: ${dictPath}`);
+        }
+        removeDirRecursive$1(dictPath);
+        delete config.dictionaries[dictId];
+        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        return {
+          success: true,
+          deletedId: dictId,
+          deletedPath: dictPath
+        };
+      } catch (error) {
+        console.error("❌ Error deleting dictionary:", error);
+        throw new Error("Failed to delete dictionary.");
+      }
+    }
+  );
+}
+function renameDictionary() {
+  ipcMain.handle(
+    "renameDictionary",
+    async (_event, dictId, newName) => {
+      try {
+        const configPath = path$1.join(
+          process.env.APP_ROOT || __dirname,
+          "public",
+          "user-config.json"
+        );
+        if (!fs.existsSync(configPath)) {
+          throw new Error("Config file not found.");
+        }
+        const config = JSON.parse(
+          fs.readFileSync(configPath, "utf-8")
+        );
+        if (!config.dictionaries || !config.dictionaries[dictId]) {
+          throw new Error(`Dictionary with id "${dictId}" not found in config.`);
+        }
+        if (!newName || newName.trim() === "") {
+          throw new Error("Dictionary name cannot be empty.");
+        }
+        config.dictionaries[dictId].name = newName.trim();
+        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        return {
+          success: true,
+          dictId,
+          newName: newName.trim()
+        };
+      } catch (error) {
+        console.error("❌ Error renaming dictionary:", error);
+        throw new Error("Failed to rename dictionary.");
+      }
+    }
+  );
+}
 function loadConfig() {
   ipcMain.handle("loadConfig", async () => {
     try {
@@ -336,27 +416,53 @@ function moveDictionary() {
           throw new Error(`Dictionary with id "${dictId}" not found in config.`);
         }
         const dictEntry = config.dictionaries[dictId];
-        const oldRoute = dictEntry.route;
-        if (!fs.existsSync(oldRoute)) {
-          throw new Error(`Source folder does not exist: ${oldRoute}`);
+        const oldRouteRaw = dictEntry.route;
+        const srcDir = path$1.resolve(oldRouteRaw);
+        const destParent = path$1.resolve(newRoute);
+        if (!fs.existsSync(srcDir) || !fs.statSync(srcDir).isDirectory()) {
+          throw new Error(`Source folder does not exist or is not a directory: ${srcDir}`);
         }
-        if (!fs.existsSync(newRoute)) {
-          throw new Error(`Destination folder does not exist: ${newRoute}`);
+        if (!fs.existsSync(destParent) || !fs.statSync(destParent).isDirectory()) {
+          throw new Error(`Destination folder does not exist or is not a directory: ${destParent}`);
         }
-        const folderName = path$1.basename(oldRoute);
-        const newFolderPath = path$1.join(newRoute, folderName);
+        const folderName = path$1.basename(srcDir);
+        const newFolderPath = path$1.join(destParent, folderName);
+        const isSubPath = (parent, child) => {
+          const relative = path$1.relative(parent, child);
+          return !!relative && !relative.startsWith("..") && !path$1.isAbsolute(relative);
+        };
+        if (srcDir === newFolderPath) {
+          return { success: true, oldRoute: srcDir, newRoute: newFolderPath };
+        }
+        if (isSubPath(srcDir, newFolderPath)) {
+          throw new Error("Cannot move a folder into one of its own subdirectories.");
+        }
         if (fs.existsSync(newFolderPath)) {
           throw new Error(
-            `A folder named "${folderName}" already exists at the destination.`
+            `A folder named "${folderName}" already exists at the destination (${newFolderPath}).`
           );
         }
-        copyDirRecursive(oldRoute, newFolderPath);
-        removeDirRecursive(oldRoute);
+        let moved = false;
+        try {
+          fs.renameSync(srcDir, newFolderPath);
+          moved = true;
+        } catch (err) {
+          if (err && err.code === "EXDEV") {
+            copyDirRecursive(srcDir, newFolderPath);
+            removeDirRecursive(srcDir);
+            moved = true;
+          } else {
+            throw err;
+          }
+        }
+        if (!moved) {
+          throw new Error("Failed to move dictionary folder for unknown reasons.");
+        }
         config.dictionaries[dictId].route = newFolderPath;
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
         return {
           success: true,
-          oldRoute,
+          oldRoute: srcDir,
           newRoute: newFolderPath
         };
       } catch (error) {
@@ -462,6 +568,8 @@ function registerIpcHandlers() {
   deleteTranslation();
   createDictionary();
   moveDictionary();
+  deleteDictionary();
+  renameDictionary();
   selectFolder();
   loadConfig();
   fetchMarkdown();

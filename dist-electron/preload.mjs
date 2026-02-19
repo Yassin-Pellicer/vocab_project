@@ -45,6 +45,15 @@ const translations = {
   createDictionary: async (route, name) => {
     return await electron.ipcRenderer.invoke("createDictionary", route, name);
   },
+  moveDictionary: async (dictId, newRoute) => {
+    return await electron.ipcRenderer.invoke("moveDictionary", dictId, newRoute);
+  },
+  deleteDictionary: async (dictId) => {
+    return await electron.ipcRenderer.invoke("deleteDictionary", dictId);
+  },
+  renameDictionary: async (dictId, newName) => {
+    return await electron.ipcRenderer.invoke("renameDictionary", dictId, newName);
+  },
   selectFolder: async () => {
     return await electron.ipcRenderer.invoke("selectFolder");
   },

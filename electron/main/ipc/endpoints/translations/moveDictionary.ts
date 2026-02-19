@@ -11,9 +11,7 @@ interface UserConfig {
   dictionaries?: Record<string, DictionaryEntry>;
 }
 
-/**
- * Recursively copies a directory from src to dest.
- */
+
 function copyDirRecursive(src: string, dest: string) {
   fs.mkdirSync(dest, { recursive: true });
 
@@ -30,9 +28,6 @@ function copyDirRecursive(src: string, dest: string) {
   }
 }
 
-/**
- * Recursively removes a directory.
- */
 function removeDirRecursive(dir: string) {
   if (fs.existsSync(dir)) {
     fs.rmSync(dir, { recursive: true, force: true });
@@ -63,39 +58,66 @@ export default function moveDictionary() {
         }
 
         const dictEntry = config.dictionaries[dictId];
-        const oldRoute = dictEntry.route;
+        const oldRouteRaw = dictEntry.route;
 
-        if (!fs.existsSync(oldRoute)) {
-          throw new Error(`Source folder does not exist: ${oldRoute}`);
+        const srcDir = path.resolve(oldRouteRaw);
+        const destParent = path.resolve(newRoute);
+
+        if (!fs.existsSync(srcDir) || !fs.statSync(srcDir).isDirectory()) {
+          throw new Error(`Source folder does not exist or is not a directory: ${srcDir}`);
         }
 
-        if (!fs.existsSync(newRoute)) {
-          throw new Error(`Destination folder does not exist: ${newRoute}`);
+        if (!fs.existsSync(destParent) || !fs.statSync(destParent).isDirectory()) {
+          throw new Error(`Destination folder does not exist or is not a directory: ${destParent}`);
         }
 
-        // The dictionary folder name is the dictId (uuid)
-        const folderName = path.basename(oldRoute);
-        const newFolderPath = path.join(newRoute, folderName);
+        const folderName = path.basename(srcDir);
+        const newFolderPath = path.join(destParent, folderName);
+
+        const isSubPath = (parent: string, child: string) => {
+          const relative = path.relative(parent, child);
+          return !!relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+        };
+
+        if (srcDir === newFolderPath) {
+          // Nothing to do
+          return { success: true, oldRoute: srcDir, newRoute: newFolderPath };
+        }
+
+        if (isSubPath(srcDir, newFolderPath)) {
+          throw new Error("Cannot move a folder into one of its own subdirectories.");
+        }
 
         if (fs.existsSync(newFolderPath)) {
           throw new Error(
-            `A folder named "${folderName}" already exists at the destination.`
+            `A folder named "${folderName}" already exists at the destination (${newFolderPath}).`
           );
         }
 
-        // Copy entire dictionary folder to new location
-        copyDirRecursive(oldRoute, newFolderPath);
+        let moved = false;
+        try {
+          fs.renameSync(srcDir, newFolderPath);
+          moved = true;
+        } catch (err: any) {
+          if (err && err.code === 'EXDEV') {
+            copyDirRecursive(srcDir, newFolderPath);
+            removeDirRecursive(srcDir);
+            moved = true;
+          } else {
+            throw err;
+          }
+        }
 
-        // Remove old folder
-        removeDirRecursive(oldRoute);
+        if (!moved) {
+          throw new Error('Failed to move dictionary folder for unknown reasons.');
+        }
 
-        // Update config with new route
         config.dictionaries[dictId].route = newFolderPath;
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
 
         return {
           success: true,
-          oldRoute,
+          oldRoute: srcDir,
           newRoute: newFolderPath,
         };
       } catch (error) {

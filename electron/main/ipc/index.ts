@@ -5,6 +5,8 @@ import saveMarkdown from "./endpoints/markdown/saveMarkdown";
 import addTranslation from "./endpoints/translations/addTranslation";
 import createDictionary from "./endpoints/translations/createDictionary";
 import deleteTranslation from "./endpoints/translations/deleteTranslation";
+import deleteDictionary from "./endpoints/translations/deleteDictionary";
+import renameDictionary from "./endpoints/translations/renameDictionary";
 import loadConfig from "./endpoints/translations/loadConfig";
 import loadTranslations from "./endpoints/translations/loadTranslations";
 import moveDictionary from "./endpoints/translations/moveDictionary";
@@ -19,6 +21,8 @@ export default function registerIpcHandlers() {
   deleteTranslation();
   createDictionary();
   moveDictionary();
+  deleteDictionary();
+  renameDictionary();
   selectFolder();
   loadConfig();
   fetchMarkdown();

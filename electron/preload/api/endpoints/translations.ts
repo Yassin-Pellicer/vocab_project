@@ -31,6 +31,18 @@ export const translations = {
     return await ipcRenderer.invoke("createDictionary", route, name);
   },
 
+  moveDictionary: async (dictId: string, newRoute: string) => {
+    return await ipcRenderer.invoke("moveDictionary", dictId, newRoute);
+  },
+
+  deleteDictionary: async (dictId: string) => {
+    return await ipcRenderer.invoke("deleteDictionary", dictId);
+  },
+
+  renameDictionary: async (dictId: string, newName: string) => {
+    return await ipcRenderer.invoke("renameDictionary", dictId, newName);
+  },
+
   selectFolder: async (): Promise<string | null> => {
     return await ipcRenderer.invoke("selectFolder");
   },

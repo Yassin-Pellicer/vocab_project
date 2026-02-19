@@ -1,6 +1,8 @@
 import { BookOpen, EllipsisVertical, FolderSync, Pencil, Plus, Trash2 } from "lucide-react";
 import AddDictModal from "@/components/dict/add-dict-modal";
 import ChangeRouteModal from "@/components/dict/change-route-modal";
+import DeleteDictModal from "@/components/dict/delete-dict-modal";
+import RenameDictModal from "@/components/dict/rename-dict-modal";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -63,14 +65,18 @@ export default function DictionariesSection() {
                       Change Route
                     </DropdownMenuItem>
                   </ChangeRouteModal>
-                  <DropdownMenuItem>
-                    <Pencil className="h-4 w-4 mr-2" />
-                    Rename
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="text-destructive focus:text-destructive">
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    Delete
-                  </DropdownMenuItem>
+                  <RenameDictModal dictId={id} dictName={dict.name}>
+                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                      <Pencil className="h-4 w-4 mr-2" />
+                      Rename
+                    </DropdownMenuItem>
+                  </RenameDictModal>
+                  <DeleteDictModal dictId={id} dictName={dict.name}>
+                    <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-destructive focus:text-destructive">
+                      <Trash2 className="h-4 w-4 mr-2" />
+                      Delete
+                    </DropdownMenuItem>
+                  </DeleteDictModal>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
