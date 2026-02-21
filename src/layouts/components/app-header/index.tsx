@@ -17,7 +17,6 @@ export function AppHeader() {
       </div>
 
       <div className="flex flex-row items-center gap-2">
-        <AddDictModal />
         <ConfigModal>
           <div className="rounded-xl px-2 border border-gray-300 flex h-8 items-center justify-center cursor-pointer hover:bg-gray-100">
             <Settings size={18} color="black" />

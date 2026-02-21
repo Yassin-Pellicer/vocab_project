@@ -9,6 +9,8 @@ export function useVerbHooks(route: string, name?: string, isEditing?: boolean) 
   const previewRef = useRef<HTMLDivElement>(null);
   const [selectOption, setSelectOption] = useState<"notes" | "conjugation">("notes");
   const { selectedWord } = useConfigStore();
+  const [conjugationLoaded, setConjugationLoaded] = useState(false);
+
 
   const placeholder = {
     "Indicative": {
@@ -125,17 +127,19 @@ export function useVerbHooks(route: string, name?: string, isEditing?: boolean) 
   const [conjugation, setConjugation] = useState<any>(placeholder);
 
   const saveConjugation = () => {
-    if(JSON.stringify(conjugation) == JSON.stringify(placeholder)) return
     console.log("Saving conjugation:", conjugation);
     window.api.saveConjugation(route, name!, selectedWord?.uuid, conjugation);
   };
 
   useEffect(() => {
-    saveConjugation();
+    if (conjugationLoaded) {
+      saveConjugation();
+    }
   }, [isEditing]);
 
   useEffect(() => {
     console.log("Fetching conjugation for", route + "/CONJ-" + name, selectedWord?.uuid);
+    setConjugationLoaded(false);
     window.api
       .fetchConjugation(route, name, selectedWord?.uuid)
       .then((response: any) => {
@@ -143,9 +147,11 @@ export function useVerbHooks(route: string, name?: string, isEditing?: boolean) 
           setConjugation(response);
         }
         else setConjugation(placeholder);
+        setConjugationLoaded(true);
       })
       .catch((error: any) => {
         console.error("Error fetching conjugation:", error);
+        setConjugationLoaded(true);
       });
   }, [selectedWord]);
 

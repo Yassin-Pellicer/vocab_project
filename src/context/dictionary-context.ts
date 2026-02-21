@@ -32,7 +32,7 @@ interface ConfigState {
 export const useConfigStore = create<ConfigState>((set, get) => ({
   dictionaryMetadata: {},
   dictionaries: {},
-  data: { navMain: [{ title: "Home", url: "/" }] },
+  data: { navMain: [{ title: "Home", url: "/", }] },
   selectedWord: null,
   selectedLetter: "A",
   searchField: "",
@@ -84,6 +84,8 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
         ([key, dict]: [string, any]) => ({
           title: dict.name,
           url: "",
+          key: key,
+          route : dict.route,
           items: [
             {
               title: "Dictionary",

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { BookOpen, Languages, Rocket } from "lucide-react"
+import { BookOpen, EllipsisVertical, Languages, Rocket } from "lucide-react"
 
 import {
   Sidebar,
@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/sidebar"
 import { useConfigStore } from "@/context/dictionary-context";
 import { Link } from "react-router-dom";
+import DictActionsMenu from "./dict-actions-menu";
+import AddDictModal from "../dict/add-dict-modal";
 
 const iconMap: Record<string, React.ElementType> = {
   BookOpen,
@@ -34,10 +36,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <SidebarMenuButton asChild={!!item.url}>
                   {item.url ? (
                     <Link to={item.url} className="font-medium">
-                      {item.title}
+                      <div className="flex items-center justify-between w-full">
+                        {item.title}
+                        {item.key && item.route && <DictActionsMenu dictId={item.key} dictName={item.title} currentRoute={item.route} />}
+                      </div>
                     </Link>
                   ) : (
-                    <span className="font-medium">{item.title}</span>
+                    <div className="flex items-center justify-between w-full">
+                      {item.title}
+                      {item.key && item.route && <DictActionsMenu dictId={item.key} dictName={item.title} currentRoute={item.route} />}
+                    </div>
                   )}
                 </SidebarMenuButton>
                 {item.items?.length ? (
@@ -47,10 +55,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       return (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <Link to={subItem.url} className="flex items-center gap-2">
-                              {Icon && <Icon size={12} />}
-                              {subItem.title}
-                            </Link>
+                            <div className="flex items-center justify-between">
+                              <Link to={subItem.url} className="flex items-center gap-2">
+                                {Icon && <Icon size={12} />}
+                                {subItem.title}
+                              </Link>
+                            </div>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       );
@@ -59,6 +69,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 ) : null}
               </SidebarMenuItem>
             ))}
+            <SidebarMenuSub>
+              <AddDictModal></AddDictModal>
+            </SidebarMenuSub>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

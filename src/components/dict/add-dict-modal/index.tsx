@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Book, FolderOpen } from "lucide-react";
+import { FolderOpen } from "lucide-react";
 import useDictModalHooks from "./hook";
 
 export default function AddDictModal({
@@ -27,9 +27,9 @@ export default function AddDictModal({
         <DialogTrigger asChild>{children}</DialogTrigger>
       ) : (
         <DialogTrigger asChild>
-          <div className="rounded-xl px-2 border border-gray-300 flex h-8 items-center justify-center cursor-pointer hover:bg-gray-100">
-            <Book color="black" size={18} />
-            <p className="text-2xl black leading-none pb-1">+</p>
+          <div className="rounded-lg gap-1 border !text-xs border-gray-300 flex h-8 items-center justify-center cursor-pointer hover:bg-gray-100">
+            + Add Dictionary
+            <FolderOpen color="black" size={14} />
           </div>
         </DialogTrigger>
       )}

@@ -7,6 +7,13 @@ import { useConfigStore } from "@/context/dictionary-context";
 import { useState, useRef, useEffect } from "react";
 import KnowledgeGraph from "../knowledge-graph";
 
+const getGridClasses = (dualView: boolean): string => {
+  if (dualView) {
+    return "grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-4 pb-8 sm:pl-2 px-2 gap-4";
+  }
+  return "grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 pb-8 sm:pl-2 px-2 gap-4";
+};
+
 export default function DictionaryComponent({ route, name }: { route: string, name: string }): JSX.Element {
 
   const {
@@ -40,9 +47,6 @@ export default function DictionaryComponent({ route, name }: { route: string, na
   const toggleType = useConfigStore((state: any) => state.toggleType);
   const [showTypeMenu, setShowTypeMenu] = useState(false);
   const typeMenuRef = useRef<HTMLDivElement>(null);
-
-  const leftColumn = paginatedWords.filter((_, idx) => idx % 2 === 0);
-  const rightColumn = paginatedWords.filter((_, idx) => idx % 2 === 1);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -188,21 +192,12 @@ export default function DictionaryComponent({ route, name }: { route: string, na
                     {searchField ? `No results found for "${searchField}"` : `No list found starting with ${selectedLetter}`}
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 xl:grid-cols-2 pb-8">
-                    <div className="sm:pl-2 px-2">
-                      {leftColumn.map((word, idx) => (
-                        <div key={`left-${idx}-${word.uuid}`} className="shadow-md p-4 mb-4 rounded-2xl outline outline-gray-200">
-                          <WordCard word={word} route={route} name={name} doubleView={dualView} />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="sm:pr-2 px-2">
-                      {rightColumn.map((word, idx) => (
-                        <div key={`right-${idx}-${word.uuid}`} className="shadow-md mb-4 p-4 rounded-2xl outline outline-gray-200">
-                          <WordCard word={word} route={route} name={name} doubleView={dualView} />
-                        </div>
-                      ))}
-                    </div>
+                  <div className={getGridClasses(dualView)}>
+                    {paginatedWords.map((word, idx) => (
+                      <div key={`left-${idx}-${word.uuid}`} className="shadow-md p-4 mb-4 rounded-2xl outline outline-gray-200 ">
+                        <WordCard word={word} route={route} name={name} doubleView={dualView} />
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>

@@ -80,13 +80,13 @@ export default function MarkdownEditor({
               {Object.entries(linkedWordList).map(([id, word]) => (
                 <div
                   key={id}
-                  className="flex items-center align-center gap-1 bg-gray-800 text-white rounded-full text-sm pt-1 px-2"
+                  className="flex items-center gap-1 bg-gray-700 text-white rounded-lg text-sm py-1 px-2"
                 >
                   <p>
                     {word}
                   </p>
                   <X
-                    className="cursor-pointer mb-1"
+                    className="cursor-pointer"
                     size={14}
                     onClick={() => handleWordDelete(id)}
                   />

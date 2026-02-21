@@ -110,7 +110,7 @@ export default function ProfileSection() {
                 <div className="text-sm font-medium text-destructive">Delete Account</div>
               </div>
               <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                This action cannot be undone. All your dictionaries, progress, and active subscriptions will be immediately cancelled and removed from our servers. Your dictionaries and all data locally will still be available though, and you will go offline after deletion.
+                This action cannot be undone. All your dictionaries, progress, and active subscriptions will be immediately cancelled and removed from our servers. Your dictionaries and all local data will still be available though, and you will go offline after deletion.
               </div>
             </div>
           </div>

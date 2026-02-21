@@ -10,7 +10,7 @@ export default function useTranslationHooks({
   route: string;
   name: string;
 }) {
-  const ITEMS_PER_PAGE = 15;
+  const ITEMS_PER_PAGE = 50;
   const {
     dictionaries,
     loadTranslations,
@@ -27,17 +27,18 @@ export default function useTranslationHooks({
     graphMode,
   } = useConfigStore();
 
-  const [history, setHistory] = useState<TranslationEntryResult[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isAdditionOrder, setIsAdditionOrder] = useState(!useConfigStore.getState().selectedLetter);
-  const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
   const navigate = useNavigate();
   const list = dictionaries[name] || [];
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const [history, setHistory] = useState<TranslationEntryResult[]>([]);
+  const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
+  const [isAdditionOrder, setIsAdditionOrder] = useState(!useConfigStore.getState().selectedLetter);
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const addWordButtonRef = useRef<HTMLButtonElement>(null);
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
   const availableTypes = useMemo(() => {
     if (!list) return [];

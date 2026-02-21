@@ -1,14 +1,6 @@
-import { BookOpen, EllipsisVertical, FolderSync, Pencil, Plus, Trash2 } from "lucide-react";
+import { BookOpen, Plus } from "lucide-react";
 import AddDictModal from "@/components/dict/add-dict-modal";
-import ChangeRouteModal from "@/components/dict/change-route-modal";
-import DeleteDictModal from "@/components/dict/delete-dict-modal";
-import RenameDictModal from "@/components/dict/rename-dict-modal";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import DictActionsMenu from "@/components/ui/dict-actions-menu";
 import useConfig from "../hooks";
 
 export default function DictionariesSection() {
@@ -52,33 +44,7 @@ export default function DictionariesSection() {
                   </div>
                 </div>
               </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className="p-1 rounded-md hover:bg-accent transition-colors">
-                    <EllipsisVertical className="h-4 w-4 text-muted-foreground" />
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <ChangeRouteModal dictId={id} dictName={dict.name} currentRoute={dict.route}>
-                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                      <FolderSync className="h-4 w-4 mr-2" />
-                      Change Route
-                    </DropdownMenuItem>
-                  </ChangeRouteModal>
-                  <RenameDictModal dictId={id} dictName={dict.name}>
-                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                      <Pencil className="h-4 w-4 mr-2" />
-                      Rename
-                    </DropdownMenuItem>
-                  </RenameDictModal>
-                  <DeleteDictModal dictId={id} dictName={dict.name}>
-                    <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-destructive focus:text-destructive">
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Delete
-                    </DropdownMenuItem>
-                  </DeleteDictModal>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <DictActionsMenu dictId={id} dictName={dict.name} currentRoute={dict.route} />
             </div>
           ))}
         </div>
