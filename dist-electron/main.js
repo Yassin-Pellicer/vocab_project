@@ -77,7 +77,7 @@ function fetchMarkdown() {
       const normalizedRoute = _route.replace(/\\/g, "/");
       const filePath = path$1.join(normalizedRoute, `MD-${_name}`, `${_uuid}.md`);
       if (!fs.existsSync(filePath)) {
-        fs.writeFileSync(filePath, "", "utf-8");
+        return "";
       }
       const data = fs.readFileSync(filePath, "utf-8");
       return data;
@@ -94,7 +94,15 @@ function saveMarkdown() {
       try {
         const normalizedRoute = _route.replace(/\\/g, "/");
         const filePath = path$1.join(normalizedRoute, `MD-${_name}`, `${_uuid}.md`);
-        fs.writeFileSync(filePath, markdown, "utf-8");
+        if (markdown === "") {
+          if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+            console.log(`Deleted markdown file at: ${filePath}`);
+          }
+        } else {
+          fs.writeFileSync(filePath, markdown, "utf-8");
+          console.log(`Saved markdown file at: ${filePath}`);
+        }
         return { success: true, path: filePath };
       } catch (error) {
         console.error("Error saving markdown file:", error);

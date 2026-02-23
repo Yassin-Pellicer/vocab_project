@@ -32,7 +32,7 @@ interface ConfigState {
 export const useConfigStore = create<ConfigState>((set, get) => ({
   dictionaryMetadata: {},
   dictionaries: {},
-  data: { navMain: [{ title: "Home", url: "/", }] },
+  data: { navMain: [{ title: "Home", url: "/" }] },
   selectedWord: null,
   selectedLetter: "A",
   searchField: "",
@@ -41,40 +41,31 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
   selectedTypes: [],
   graphMode: false,
 
-  setDictionaryMetadata: (metadata) =>
-    set({ dictionaryMetadata: metadata }),
+  setDictionaryMetadata: (metadata) => set({ dictionaryMetadata: metadata }),
 
-  setDictionaries: (dictionaries) =>
-    set({ dictionaries }),
+  setDictionaries: (dictionaries) => set({ dictionaries }),
 
-  setSelectedWord: (word) =>
-    set({ selectedWord: word }),
+  setSelectedWord: (word) => set({ selectedWord: word }),
 
-  setSelectedLetter: (letter) =>
-    set({ selectedLetter: letter }),
+  setSelectedLetter: (letter) => set({ selectedLetter: letter }),
 
-  setSearchField: (field) =>
-    set({ searchField: field }),
+  setSearchField: (field) => set({ searchField: field }),
 
-  setIsFlipped: (flipped) =>
-    set({ isFlipped: flipped }),
+  setIsFlipped: (flipped) => set({ isFlipped: flipped }),
 
-  setDualView: (dual) =>
-    set({ dualView: dual }),
+  setDualView: (dual) => set({ dualView: dual }),
 
-  setSelectedTypes: (types) =>
-    set({ selectedTypes: types }),
+  setSelectedTypes: (types) => set({ selectedTypes: types }),
 
   toggleType: (type) => {
     const current = get().selectedTypes;
     set({
       selectedTypes: current.includes(type)
-        ? current.filter(t => t !== type)
+        ? current.filter((t) => t !== type)
         : [...current, type],
     });
   },
-  setGraphMode: (mode) =>
-    set({ graphMode: mode }),
+  setGraphMode: (mode) => set({ graphMode: mode }),
 
   loadConfig: async () => {
     try {
@@ -85,7 +76,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
           title: dict.name,
           url: "",
           key: key,
-          route : dict.route,
+          route: dict.route,
           items: [
             {
               title: "Dictionary",
@@ -98,7 +89,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
               url: `/translation?name=${encodeURIComponent(key)}&path=${encodeURIComponent(dict.route)}`,
             },
           ],
-        })
+        }),
       );
       console.log("Loaded config:", config);
       set({
@@ -117,7 +108,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
       const data = await window.api.requestTranslations(route, name);
       if (!data) return;
 
-      set(state => ({
+      set((state) => ({
         dictionaries: {
           ...state.dictionaries,
           [name]: data,

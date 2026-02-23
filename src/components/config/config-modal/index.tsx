@@ -2,10 +2,7 @@ import {
   Dialog,
   DialogTrigger,
   DialogContent,
-  DialogFooter,
-  DialogClose,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import { useState } from "react";
 import SettingsSidebar from "@/components/config/settings-sidebar";
