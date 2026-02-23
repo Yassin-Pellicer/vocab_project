@@ -10,7 +10,15 @@ export default function saveMarkdown() {
         const normalizedRoute = _route.replace(/\\/g, "/");
         const filePath = path.join(normalizedRoute, `MD-${_name}`,`${_uuid}.md`);
 
-        fs.writeFileSync(filePath, markdown, "utf-8");
+        if (markdown === "") {
+          if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+            console.log(`Deleted markdown file at: ${filePath}`);
+          }
+        } else {
+          fs.writeFileSync(filePath, markdown, "utf-8");
+          console.log(`Saved markdown file at: ${filePath}`);
+        }
 
         return { success: true, path: filePath };
       } catch (error) {
