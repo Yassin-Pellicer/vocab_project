@@ -41,7 +41,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
           <button
             onClick={() => setIsFlipped(!isFlipped)}
             className={`p-2 h-10 mt-2 rounded-2xl border transition-colors ${isFlipped
-              ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
+              ? "bg-blue-600 text-muted-foreground border-blue-600 hover:bg-blue-700"
               : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
               }`}
             title="Flip translations"
@@ -100,7 +100,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
               autoFocus
               className="mt-1 focus:outline-none border border-gray-300 rounded-xl pl-4 py-2 text-sm"
             />
-            <button type="submit" className="rounded-full p-1 !bg-blue-500 text-white hover:!bg-blue-600 cursor-pointer !text-sm"><Check></Check></button>
+            <button type="submit" className="rounded-full p-1 !bg-blue-500 text-muted-foreground hover:!bg-blue-600 cursor-pointer !text-sm"><Check></Check></button>
           </div>
         </div>
         <div className="flex flex-row justify-between">
@@ -113,7 +113,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
           <button
             type="button"
             onClick={showHint}
-            className="px-2 py-1 rounded !bg-yellow-200 hover:!bg-yellow-300 !text-black text-sm cursor-hover"
+            className="px-2 py-1 rounded !bg-yellow-200 hover:!bg-yellow-300 !text-muted-foreground text-sm cursor-hover"
           >
             Hint
           </button>

@@ -78,7 +78,7 @@ export default function RenameDictModal({
             </DialogClose>
             <Button
               type="submit"
-              className="!bg-blue-600 !text-white"
+              className="!bg-blue-600 !text-muted-foreground"
               disabled={!hook.newName || hook.loading}
             >
               {hook.loading ? "Renaming..." : "Rename"}

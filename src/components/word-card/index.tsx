@@ -30,21 +30,21 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
             `/markdown?path=${encodeURIComponent(route || "")}&name=${encodeURIComponent(name || "")}`,
           );
         }} className="flex flex-wrap gap-1 items-center">
-          <h3 className={`text-xl cursor-pointer tracking-tight font-bold text-gray-900 ${name && route ? "cursor-pointer" : ""} `}>
+          <h3 className={`text-xl cursor-pointer tracking-tight font-bold text-foreground ${name && route ? "cursor-pointer" : ""} `}>
             {isFlipped ? translations : originalWithArticle}
           </h3>
           <p className="text-2xl">⇔</p>
-          <p className="italic">{isFlipped ? originalWithArticle : translations}</p>
+            <p className="italic text-muted-foreground">{isFlipped ? originalWithArticle : translations}</p>
         </div>
         {name && route && <EditWordModal word={word} route={route} name={name}></EditWordModal>}
       </div>
       <div className="flex flex-wrap justify-between mt-2 mb-2">
-        <p className="text-gray-400 text-sm">
+        <p className="text-muted-foreground text-sm">
           <b>{word?.type}, </b>
           {gender}., {number}.
         </p>
         <div className="flex flex-wrap gap-3 items-center">
-          <span className="flex flex-row items-center gap-2 text-gray-400 text-xs">
+          <span className="flex flex-row items-center gap-2 text-muted-foreground text-xs">
             <Calendar size={12} /> {word?.dateAdded}
           </span>
           {pairs.length > 1 && (
@@ -52,7 +52,7 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
               <button
                 onClick={() => setPairIdx((idx: number) => Math.max(0, idx - 1))}
                 disabled={pairIdx === 0}
-                className="rounded border cursor-pointer border-gray-300 bg-white text-black disabled:opacity-50"
+                className="rounded border cursor-pointer border-border bg-card text-card-foreground disabled:opacity-50"
                 title="Previous pair"
               >
                 <ChevronLeft size={18} />
@@ -61,7 +61,7 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
               <button
                 onClick={() => setPairIdx((idx: number) => Math.min(pairs.length - 1, idx + 1))}
                 disabled={pairIdx === pairs.length - 1}
-                className="rounded border cursor-pointer border-gray-300 bg-white text-black disabled:opacity-50"
+                className="rounded border cursor-pointer border-border bg-card text-card-foreground disabled:opacity-50"
                 title="Next pair"
               >
                 <ChevronRight size={18} />
@@ -70,10 +70,10 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
           )}
         </div>
       </div>
-      <hr className="mb-2" />
+      <hr className="mb-2 border-border" />
 
       {definitions?.map((definition: string, index: number) => (
-        <div className="text-sm" key={index}>
+        <div className="text-sm text-foreground" key={index}>
           <sup>{index + 1}</sup> {definition}
         </div>
       ))}

@@ -27,9 +27,9 @@ export default function AddDictModal({
         <DialogTrigger asChild>{children}</DialogTrigger>
       ) : (
         <DialogTrigger asChild>
-          <div className="rounded-lg gap-1 border !text-xs border-gray-300 flex h-8 items-center justify-center cursor-pointer hover:bg-gray-100">
+          <div className="rounded-lg gap-1 border text-sm border-border flex h-8 items-center justify-center cursor-pointer hover:bg-popover text-popover-foreground">
             + Add Dictionary
-            <FolderOpen color="black" size={14} />
+            <FolderOpen size={14} />
           </div>
         </DialogTrigger>
       )}
@@ -87,8 +87,8 @@ export default function AddDictModal({
             <DialogClose asChild>
               <Button
                 type="submit"
-                variant="outline"
-                className="!bg-blue-600 !text-white"
+                variant="solid"
+                className="bg-primary text-primary-foreground"
               >
                 Create
               </Button>

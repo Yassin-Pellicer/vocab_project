@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, Search, X, ArrowLeftRight, ListOrdered, SquareSplitHorizontal, Filter, TreesIcon } from "lucide-react";
 import useTranslationHooks from "./hook";
 import AddWordModal from "./add-word-modal";
+import AddDictModal from "./add-dict-modal";
 import WordCard from "../word-card";
 import Markdown from "@/components/markdown-display";
 import { useConfigStore } from "@/context/dictionary-context";
@@ -64,16 +65,16 @@ export default function DictionaryComponent({ route, name }: { route: string, na
       <div className="bg-background flex justify-between items-center h-16 border-b pr-4 pl-1">
         <div className="flex flex-row gap-2 items-center">
           <div className="relative w-full max-w-sm">
-            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
               ref={searchRef}
               type="text"
               value={searchField}
               onChange={(e) => setSearchField(e.target.value)}
               placeholder="Search for a word"
-              className="w-full text-sm pl-14 pr-14 text-gray-700 focus:outline-none focus:border-blue-400 transition duration-150 ease-in-out"
+              className="w-full text-sm pl-14 pr-14 bg-transparent h-9 focus:outline-none"
             />
-            {searchField && <X onClick={() => { setSearchField("") }} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer" />}
+            {searchField && <X onClick={() => { setSearchField("") }} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground cursor-pointer" />}
           </div>
         </div>
         <div className="flex flex-row gap-4 items-center">
@@ -82,14 +83,14 @@ export default function DictionaryComponent({ route, name }: { route: string, na
               <button
                 onClick={() => setShowTypeMenu(!showTypeMenu)}
                 className={`p-2 rounded-2xl border transition-colors relative ${selectedTypes.length > 0
-                  ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                  ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
+                  : "bg-card text-card-foreground border-border hover:bg-popover"
                   }`}
                 title="Filter by type"
               >
                 <Filter size={18} />
                 {selectedTypes.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-destructive text-muted-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {selectedTypes.length}
                   </span>
                 )}
@@ -122,8 +123,8 @@ export default function DictionaryComponent({ route, name }: { route: string, na
             <button
               onClick={() => setDualView(!dualView)}
               className={`p-2 rounded-2xl border transition-colors ${dualView
-                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
+                : "bg-card text-card-foreground border-border hover:bg-popover"
                 }`}
               title="Toggle dual view"
             >
@@ -132,8 +133,8 @@ export default function DictionaryComponent({ route, name }: { route: string, na
             <button
               onClick={() => setGraphMode(!graphMode)}
               className={`p-2 rounded-2xl border transition-colors ${graphMode
-                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
+                : "bg-card text-card-foreground border-border hover:bg-popover"
                 }`}
               title="Toggle graph mode"
             >
@@ -142,8 +143,8 @@ export default function DictionaryComponent({ route, name }: { route: string, na
             <button
               onClick={() => setIsFlipped(!isFlipped)}
               className={`p-2 rounded-2xl border transition-colors ${isFlipped
-                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
+                : "bg-card text-card-foreground border-border hover:bg-popover"
                 }`}
               title="Flip translations"
             >
@@ -160,8 +161,8 @@ export default function DictionaryComponent({ route, name }: { route: string, na
                 setCurrentPage(1);
               }}
               className={`p-2 rounded-2xl border transition-colors ${isAdditionOrder
-                ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
+                : "bg-card text-card-foreground border-border hover:bg-popover"
                 }`}
               title="Show in addition order"
             >
@@ -181,10 +182,10 @@ export default function DictionaryComponent({ route, name }: { route: string, na
               <div className="flex flex-col overflow-auto px-2 pt-4" ref={scrollRef}>
                 {currentPage <= 1 && (
                   <div className={`mb-4 mx-2 flex-shrink-0 ${(searchField || isAdditionOrder) ? "hidden" : ""}`} >
-                    <p className="text-8xl font-bold text-gray-900 mb-4">
+                    <p className="text-8xl font-bold text-foreground mb-4">
                       {selectedLetter}
                     </p>
-                    <hr />
+                    <hr className="border-border" />
                   </div>
                 )}
                 {paginatedWords.length === 0 ? (
@@ -194,29 +195,29 @@ export default function DictionaryComponent({ route, name }: { route: string, na
                 ) : (
                   <div className={getGridClasses(dualView)}>
                     {paginatedWords.map((word, idx) => (
-                      <div key={`left-${idx}-${word.uuid}`} className="shadow-md p-4 mb-4 rounded-2xl outline outline-gray-200 ">
+                      <div key={`left-${idx}-${word.uuid}`} className="shadow-md p-4 mb-4 rounded-2xl border border-border bg-card text-card-foreground">
                         <WordCard word={word} route={route} name={name} doubleView={dualView} />
                       </div>
                     ))}
                   </div>
                 )}
               </div>
-              {totalPages > 1 && (
-                <div className="flex-shrink-0 mt-auto mb-4 flex items-center justify-center gap-4 my-4 pt-4 border-t border-gray-200 bg-white">
+                {totalPages > 1 && (
+                <div className="flex-shrink-0 mt-auto mb-4 flex items-center justify-center gap-4 my-4 pt-4 border-t border-border bg-background">
                   <button
                     onClick={handlePrevPage}
                     disabled={currentPage === 1}
-                    className="p-2 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="p-2 rounded-lg bg-card border border-border hover:bg-popover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
-                  <span className="text-sm text-gray-700 font-medium">
+                  <span className="text-sm text-muted-foreground font-medium">
                     Page {currentPage} of {totalPages}
                   </span>
                   <button
                     onClick={handleNextPage}
                     disabled={currentPage === totalPages}
-                    className="p-2 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="p-2 rounded-lg bg-card border border-border hover:bg-popover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>
@@ -229,9 +230,9 @@ export default function DictionaryComponent({ route, name }: { route: string, na
                   key={letter}
                   onClick={() => handleLetterClick(letter)}
                   className={`w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors flex-shrink-0 ${selectedLetter === letter
-                    ? "bg-blue-600 text-white"
-                    : "text-gray-400 hover:text-black"
-                    }`}
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-popover"
+                    } rounded-md`}
                 >
                   {letter}
                 </button>

@@ -77,7 +77,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
 
 	animations: true,
 	accentColor: "blue",
-	appearance: "system",
+	appearance: "light",
 
 	displayName: "",
 	email: "",
@@ -182,7 +182,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
 			dateFormat: "ISO",
 			animations: true,
 			accentColor: "blue",
-			appearance: "system",
+			appearance: "light",
 			displayName: "",
 			email: "",
 			avatarPath: null,

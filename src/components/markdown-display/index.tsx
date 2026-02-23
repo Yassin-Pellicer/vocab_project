@@ -58,11 +58,11 @@ export default function MarkdownEditor({
         <WordCard word={word} />
         {word.type == "verb" && <div className="flex flex-row mt-6 justify-around divide-x w-full">
           <button onClick={() => setSelectOption("notes")}
-            className={`border-b w-full cursor-pointer text-sm pb-1 ${selectOption === "notes" ? "border-b-black border-b-2" : ""}`}>
+            className={`border-b w-full cursor-pointer text-sm pb-1 ${selectOption === "notes" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}>
             Notes
           </button>
           <button onClick={() => setSelectOption("conjugation")}
-            className={`border-b w-full cursor-pointer text-sm pb-1 ${selectOption === "conjugation" ? "border-b-black border-b-2" : ""}`}>
+            className={`border-b w-full cursor-pointer text-sm pb-1 ${selectOption === "conjugation" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}>
             Conjugation
           </button>
         </div>}
@@ -70,9 +70,9 @@ export default function MarkdownEditor({
       <div className="flex flex-col border-b items-center w-full">
         {selectOption === "notes" && <div className="flex flex-col justify-between max-w-[800px] px-4 w-full">
           <div className="py-2 mb-2">
-            <p className="text-sm font-semibold mb-1">Related Words</p>
+            <p className="text-sm font-semibold mb-1 text-foreground">Related Words</p>
             {Object.keys(linkedWordList).length === 0 && (
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 No linked words. Use the search bar below to link words to this note.
               </p>
             )}
@@ -80,7 +80,7 @@ export default function MarkdownEditor({
               {Object.entries(linkedWordList).map(([id, word]) => (
                 <div
                   key={id}
-                  className="flex items-center gap-1 bg-gray-700 text-white rounded-lg text-sm py-1 px-2"
+                  className="flex items-center gap-1 bg-card text-card-foreground rounded-lg text-sm py-1 px-2 border border-border"
                 >
                   <p>
                     {word}
@@ -102,12 +102,12 @@ export default function MarkdownEditor({
             name={name}
           />
           <div className="flex flex-row justify-between mt-4">
-            <div className="flex flex-row flex-wrap gap-2 text-sm">
+              <div className="flex flex-row flex-wrap gap-2 text-sm">
               <button
                 onClick={() => setMode("edit")}
-                className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${mode === "edit"
-                  ? "!bg-black text-white"
-                  : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+                className={`px-3 py-1 rounded-full flex items-center gap-2 border border-border ${mode === "edit"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-card text-card-foreground hover:bg-popover"
                   } `}
               >
                 <Edit3 size={16} />
@@ -115,9 +115,9 @@ export default function MarkdownEditor({
               </button>
               <button
                 onClick={() => setMode("split")}
-                className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${mode === "split"
-                  ? "!bg-black text-white"
-                  : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+                className={`px-3 py-1 rounded-full flex items-center gap-2 border border-border ${mode === "split"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-card text-card-foreground hover:bg-popover"
                   } `}
               >
                 <Split size={16} />
@@ -125,9 +125,9 @@ export default function MarkdownEditor({
               </button>
               <button
                 onClick={() => setMode("preview")}
-                className={`px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 ${mode === "preview"
-                  ? "!bg-black text-white"
-                  : "transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+                className={`px-3 py-1 rounded-full flex items-center gap-2 border border-border ${mode === "preview"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-card text-card-foreground hover:bg-popover"
                   } `}
               >
                 <Eye size={16} />
@@ -136,7 +136,7 @@ export default function MarkdownEditor({
             </div>
             <button
               onClick={saveMarkdown}
-              className="px-3 h-fit py-1 rounded-full flex items-center gap-2 outline outline-gray-300 transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+              className="px-3 h-fit py-1 rounded-full flex items-center gap-2 border border-border bg-card text-card-foreground hover:bg-popover transition duration-100"
             >
               <Save size={16} />
               Save
@@ -149,14 +149,14 @@ export default function MarkdownEditor({
             </div>
             {!isEditing && <button
               onClick={() => setIsEditing(true)}
-              className="px-3 h-fit py-1 rounded-full flex items-center gap-2 outline outline-gray-300 transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+              className="px-3 h-fit py-1 rounded-full flex items-center gap-2 border border-border bg-card text-card-foreground hover:bg-popover transition duration-100"
             >
               <Edit3 size={16} />
               Edit
             </button>}
             {isEditing && <button
               onClick={() => setIsEditing(false)}
-              className="px-3 py-1 rounded-full flex items-center gap-2 outline outline-gray-300 transition duration-100 hover:!bg-gray-200 hover:cursor-pointer"
+              className="px-3 py-1 rounded-full flex items-center gap-2 border border-border bg-primary text-primary-foreground hover:opacity-90 transition duration-100"
             >
               <Save size={16} />
               Save

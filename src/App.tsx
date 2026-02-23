@@ -6,11 +6,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useConfigStore } from "./context/dictionary-context";
 import { MainLayout } from "./layouts";
 import { useEffect } from "react";
+import useThemeSync from "./hooks/useThemeSync";
 
 function App() {
   const loadConfig = useConfigStore(state => state.loadConfig);
   const loadAllTranslations = useConfigStore(state => state.loadAllTranslations);
   const dictionaryMetadata = useConfigStore(state => state.dictionaryMetadata);
+
+  // keep UI theme in sync with user preference
+  useThemeSync();
 
   useEffect(() => {
     loadConfig();

@@ -18,8 +18,8 @@ export function AppHeader() {
 
       <div className="flex flex-row items-center gap-2">
         <ConfigModal>
-          <div className="rounded-xl px-2 border border-gray-300 flex h-8 items-center justify-center cursor-pointer hover:bg-gray-100">
-            <Settings size={18} color="black" />
+          <div className="rounded-xl px-2 border border-border flex h-8 items-center justify-center cursor-pointer hover:bg-popover text-popover-foreground">
+            <Settings size={18} />
           </div>
         </ConfigModal>
       </div>

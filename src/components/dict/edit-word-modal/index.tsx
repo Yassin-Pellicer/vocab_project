@@ -63,7 +63,7 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
 
                 <Button
                   variant="destructive"
-                  className="absolute rounded-xl p-4 top-1 right-0 !bg-transparent !text-black hover:!text-red-600 hover:!cursor-pointer"
+                  className="absolute rounded-xl p-4 top-1 right-0 !bg-transparent !text-muted-foreground hover:!text-red-600 hover:!cursor-pointer"
                   type="button"
                   onClick={() => removePair(pairIndex)}
                 >
@@ -223,7 +223,7 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
             <Button
               variant="outline"
               type="button"
-              className="!bg-black !text-white"
+              className="!bg-background !text-muted-foreground"
               onClick={addPair}
             >
               + Add New Pair
@@ -254,7 +254,7 @@ export default function EditTranslationModal({ word, route, name }: { word: Tran
 
           <DialogFooter>
             <DialogClose asChild>
-              <Button onClick={handleSubmit} variant="outline" className="!bg-blue-600 !text-white">Save Entry</Button>
+              <Button onClick={handleSubmit} variant="outline" className="!bg-blue-600 !text-muted-foreground">Save Entry</Button>
             </DialogClose>
             <DeleteWordModal word={word} route={route} name={name}></DeleteWordModal>
             <DialogClose asChild>

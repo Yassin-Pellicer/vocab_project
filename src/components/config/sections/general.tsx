@@ -7,8 +7,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Bell, Moon, Save, Globe, FerrisWheel, Brush } from "lucide-react";
+import { useConfigStore } from "@/context/preferences-context";
 
 export default function GeneralSection() {
+  const appearance = useConfigStore((s) => s.appearance);
+  const setAppearance = useConfigStore((s) => s.setAppearance);
+  const dateFormat = useConfigStore((s) => s.dateFormat);
+  const setDateFormat = useConfigStore((s) => s.setDateFormat);
+
   return (
     <div className="mb-8 mt-2">
       <div className="space-y-2">
@@ -140,7 +146,7 @@ export default function GeneralSection() {
           </Select>
         </div>
 
-        <div className="flex items-center justify-between   rounded-md  group gap-4">
+          <div className="flex items-center justify-between   rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -155,7 +161,17 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Switch defaultChecked />
+          <Select value={dateFormat} onValueChange={(v) => setDateFormat(v as any)}>
+            <SelectTrigger className="">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="ISO">ISO (YYYY-MM-DD)</SelectItem>
+              <SelectItem value="locale">Locale</SelectItem>
+              <SelectItem value="MM/DD/YYYY">MM/DD/YYYY</SelectItem>
+              <SelectItem value="DD/MM/YYYY">DD/MM/YYYY</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         <div>
@@ -177,7 +193,16 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Switch defaultChecked />
+          <Select value={appearance} onValueChange={(v) => setAppearance(v as any)}>
+            <SelectTrigger className="">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">Light</SelectItem>
+              <SelectItem value="dark">Dark</SelectItem>
+              <SelectItem value="system">System</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         <div className="flex items-center justify-between   rounded-md  group gap-4">

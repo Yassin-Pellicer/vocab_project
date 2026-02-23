@@ -111,7 +111,7 @@ export default function MarkdownEditor({
 
     return (
       <div className="">
-        <div className="bg-black text-white font-bold text-md px-6 py-2">
+        <div className="bg-background text-muted-foreground font-bold text-md px-6 py-2">
           {moodName}
         </div>
         <div className="border-2 border-t-0 border-gray-200 p-4 bg-gray-50">

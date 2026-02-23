@@ -106,14 +106,19 @@ export default function DictionaryGraph({
       .alphaDecay(0.08)
       .alphaMin(0.02);
 
+    const styles = getComputedStyle(document.documentElement);
+    const strokeColor = (styles.getPropertyValue('--color-muted') || '#9ca3af').trim();
+    const strokeOpacity = 0.6;
+    const strokeWidth = 1.5;
+
     const link = container
       .append("g")
       .selectAll("line")
       .data(links)
       .join("line")
-      .attr("stroke", "#9ca3af")
-      .attr("stroke-opacity", 0.6)
-      .attr("stroke-width", 1.5);
+      .attr("stroke", strokeColor)
+      .attr("stroke-opacity", strokeOpacity)
+      .attr("stroke-width", strokeWidth);
 
     const node = container
       .append("g")
@@ -142,19 +147,24 @@ export default function DictionaryGraph({
         }
       });
 
+    const nodeFill = (styles.getPropertyValue('--color-card') || '#d1d5db').trim();
+    const nodeStroke = (styles.getPropertyValue('--color-border') || '#9ca3af').trim();
+
     node
       .append("circle")
       .attr("r", (d: any) => getNodeRadius(d))
-      .attr("fill", "#d1d5db")
-      .attr("stroke", "#9ca3af")
+      .attr("fill", nodeFill)
+      .attr("stroke", nodeStroke)
       .attr("stroke-width", 2);
+
+    const textFill = (styles.getPropertyValue('--color-muted-foreground') || '#6b7280').trim();
 
     node
       .append("text")
       .text((d: any) => d.label)
       .attr("dy", (d: any) => (d.parent ? 6 : -getNodeRadius(d) - 4))
       .attr("text-anchor", "middle")
-      .attr("fill", "#6b7280")
+      .attr("fill", textFill)
       .attr("font-size", "12px")
       .style("pointer-events", "none");
 
@@ -197,14 +207,14 @@ export default function DictionaryGraph({
   return (
     <div className="relative w-full h-full overflow-hidden">
       <button
-        className="px-3 pt-1 bg-gray-200 rounded-lg mt-3.5 ml-2.5 hover:bg-gray-300 absolute z-10"
+        className="px-3 pt-1 bg-popover text-popover-foreground rounded-lg mt-3.5 ml-2.5 hover:opacity-90 absolute z-10 border border-border"
         onClick={() => setShowEmptyNodes((prev) => !prev)}
       >
         {showEmptyNodes ? "Hide Empty" : "Show All"}
       </button>
 
       {tooltipWord && (
-        <div className="max-w-3/4 border rounded-xl absolute flex top-3.5 ml-2.5 right-4 z-10 bg-white p-4 shadow-lg pointer-events-none">
+        <div className="max-w-3/4 border rounded-xl absolute flex top-3.5 ml-2.5 right-4 z-10 bg-card p-4 shadow-lg pointer-events-none border-border text-card-foreground">
           <WordCard word={tooltipWord} />
         </div>
       )}

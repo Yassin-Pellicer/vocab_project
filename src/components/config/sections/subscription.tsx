@@ -102,7 +102,7 @@ export default function SubscriptionSection() {
               </div>
             </div>
           </div>
-          <button className="h-9 hover:text-white px-4 rounded-md border border-destructive bg-background text-sm text-destructive hover:bg-destructive hover:text-destructive-foreground transition-colors shrink-0">
+          <button className="h-9 hover:text-muted-foreground px-4 rounded-md border border-destructive bg-background text-sm text-destructive hover:bg-destructive hover:text-destructive-foreground transition-colors shrink-0">
             Cancel
           </button>
         </div>

@@ -99,7 +99,7 @@ export default function ChangeRouteModal({
               <Button
                 type="submit"
                 variant="outline"
-                className="!bg-blue-600 !text-white"
+                className="!bg-blue-600 !text-muted-foreground"
                 disabled={!hook.newRoute || hook.loading}
               >
                 {hook.loading ? "Moving..." : "Move"}

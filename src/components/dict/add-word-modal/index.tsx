@@ -52,7 +52,7 @@ const AddTranslationModal = forwardRef<
             className="!bg-blue-600 !rounded-xl !px-2 py-4.5 !flex !h-8 !items-center !justify-center !cursor-pointer"
           >
             <WholeWord color="white" size={18} />
-            <p className="text-lg text-white leading-none pb-1">+</p>
+            <p className="text-lg text-muted-foreground leading-none pb-1">+</p>
           </button>
         </DialogTrigger>
 
@@ -80,7 +80,7 @@ const AddTranslationModal = forwardRef<
 
                   <Button
                     variant="destructive"
-                    className="absolute rounded-xl p-2 top-2 right-0 !bg-transparent !text-black hover:!text-red-600 hover:!cursor-pointer"
+                    className="absolute rounded-xl p-2 top-2 right-0 !bg-transparent !text-muted-foreground hover:!text-red-600 hover:!cursor-pointer"
                     type="button"
                     onClick={() => removePair(pairIndex)}
                   >
@@ -250,7 +250,7 @@ const AddTranslationModal = forwardRef<
             <Button
               variant="outline"
               type="button"
-              className="!bg-black !text-white"
+              className="!bg-background !text-muted-foreground"
               onClick={addPair}
             >
               + Add New Pair
@@ -286,7 +286,7 @@ const AddTranslationModal = forwardRef<
               <Button
                 onClick={handleSubmit}
                 variant="outline"
-                className="!bg-blue-600 !text-white"
+                className="!bg-blue-600 !text-muted-foreground"
               >
                 Save Entry
               </Button>
