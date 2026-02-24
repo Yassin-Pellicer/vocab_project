@@ -1,16 +1,10 @@
 import { useConfigStore } from "@/context/dictionary-context";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 export function useVerbHooks(route: string, name?: string, isEditing?: boolean) {
-  const [markdown, setMarkdown] = useState("");
-  const [mode, setMode] = useState<"edit" | "preview" | "split">("preview");
   const [collapsed, setCollapsed] = useState(false);
-  const editorRef = useRef<HTMLTextAreaElement>(null);
-  const previewRef = useRef<HTMLDivElement>(null);
-  const [selectOption, setSelectOption] = useState<"notes" | "conjugation">("notes");
   const { selectedWord } = useConfigStore();
   const [conjugationLoaded, setConjugationLoaded] = useState(false);
-
 
   const placeholder = {
     "Indicative": {
@@ -156,16 +150,8 @@ export function useVerbHooks(route: string, name?: string, isEditing?: boolean) 
   }, [selectedWord]);
 
   return {
-    markdown,
-    setMarkdown,
-    mode,
-    setMode,
     collapsed,
     setCollapsed,
-    editorRef,
-    previewRef,
-    selectOption,
-    setSelectOption,
     conjugation,
     setConjugation,
     saveConjugation,

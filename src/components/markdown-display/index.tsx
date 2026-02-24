@@ -58,7 +58,7 @@ export default function MarkdownEditor({
         <WordCard word={word} />
         {word.type == "verb" && <div className="flex flex-row mt-6 justify-around divide-x w-full">
           <button onClick={() => setSelectOption("notes")}
-            className={`border-b w-full cursor-pointer text-sm pb-1 ${selectOption === "notes" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}>
+            className={`border-b w-full cursor-pointer border-r-0 text-sm pb-1 ${selectOption === "notes" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}>
             Notes
           </button>
           <button onClick={() => setSelectOption("conjugation")}

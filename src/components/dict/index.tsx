@@ -90,7 +90,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
               >
                 <Filter size={18} />
                 {selectedTypes.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-destructive text-muted-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-destructive text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {selectedTypes.length}
                   </span>
                 )}
@@ -232,7 +232,7 @@ export default function DictionaryComponent({ route, name }: { route: string, na
                   className={`w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors flex-shrink-0 ${selectedLetter === letter
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground hover:bg-popover"
-                    } rounded-md`}
+                    }`}
                 >
                   {letter}
                 </button>

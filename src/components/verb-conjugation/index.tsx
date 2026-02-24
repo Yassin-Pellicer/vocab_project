@@ -21,6 +21,19 @@ export default function MarkdownEditor({
 }) {
   const { conjugation, setConjugation, collapsed } = useVerbHooks(route, name, isEditing);
 
+  const getMoodColor = (moodName: string) => {
+    switch (moodName) {
+      case "Indicative":
+        return "bg-blue-100 dark:bg-blue-950 text-blue-900 dark:text-blue-100 border-blue-300 dark:border-blue-700";
+      case "Subjunctive":
+        return "bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-100 border-amber-300 dark:border-amber-700";
+      case "Imperative":
+        return "bg-green-100 dark:bg-green-950 text-green-900 dark:text-green-100 border-green-300 dark:border-green-700";
+      default:
+        return "bg-muted/5 dark:bg-muted/10 text-foreground dark:text-foreground border-border dark:border-input";
+    }
+  };
+
   const handleConjugationChange = (
     mood: string,
     subCategory: string,
@@ -54,22 +67,22 @@ export default function MarkdownEditor({
         {Object.entries(conjugations).map(([person, form]) => (
           <div
             key={person}
-            className="flex justify-between flex-wrap hover:bg-gray-50 rounded px-4 py-1"
+            className="flex justify-between flex-wrap hover:bg-muted/30 dark:hover:bg-muted/40 rounded px-4 py-1 transition-colors"
           >
-            <span className="text-gray-600 text-sm mr-2">
+            <span className="text-muted-foreground text-sm mr-2">
               {pronounMap[person] || person}
             </span>
             {isEditing ? (
               <input
-                type="text"
-                value={form}
-                onChange={(e) =>
-                  handleConjugationChange(mood, subCategory, tense, person, e.target.value)
-                }
-                className="text-gray-900 w-2/3 text-sm border border-gray-300 rounded-sm px-2"
+              type="text"
+              value={form}
+              onChange={(e) =>
+                handleConjugationChange(mood, subCategory, tense, person, e.target.value)
+              }
+              className="text-foreground dark:text-foreground w-2/3 text-sm border !border-gray-400 dark:border-input bg-background dark:bg-input/20 rounded-sm px-2"
               />
             ) : (
-              <span className="text-gray-900 text-sm">{form}</span>
+              <span className="text-foreground dark:text-foreground w-2/3 text-sm border rounded-sm px-2">{form}</span>
             )}
           </div>
         ))}
@@ -84,8 +97,8 @@ export default function MarkdownEditor({
     subCategory: string
   ) => {
     return (
-      <div className="rounded-lg border-1 shadow-sm border-gray-200 bg-white">
-        <div className="font-semibold border-b p-2 mb-2">
+      <div className="rounded-lg border-2 shadow-sm border-slate-300 dark:border-input bg-card dark:bg-card">
+        <div className="font-semibold border-b border-slate-300 dark:border-input p-2 mb-2 text-foreground dark:text-foreground">
           {tenseName}
         </div>
         {renderConjugation(tenseValue, mood, subCategory, tenseName)}
@@ -111,10 +124,10 @@ export default function MarkdownEditor({
 
     return (
       <div className="">
-        <div className="bg-background text-muted-foreground font-bold text-md px-6 py-2">
+        <div className={`${getMoodColor(moodName)} font-bold text-md px-6 py-3 border-b-2`}>
           {moodName}
         </div>
-        <div className="border-2 border-t-0 border-gray-200 p-4 bg-gray-50">
+        <div className="border-2 border-t-0 border-border dark:border-input p-4 bg-muted/5 dark:bg-muted/10">
           <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
             {allTenses.map(({ name, value, subCategory }) => (
               <div key={name}>

@@ -49,10 +49,10 @@ const AddTranslationModal = forwardRef<
           <button
             ref={ref}
             onClick={() => setOpen(true)}
-            className="!bg-blue-600 !rounded-xl !px-2 py-4.5 !flex !h-8 !items-center !justify-center !cursor-pointer"
+            className="!bg-primary !rounded-xl !px-2 py-4.5 !flex !h-8 !items-center !justify-center !cursor-pointer hover:!bg-primary/90 transition-colors"
           >
-            <WholeWord color="white" size={18} />
-            <p className="text-lg text-muted-foreground leading-none pb-1">+</p>
+            <WholeWord className="text-primary-foreground" size={18} />
+            <p className="text-lg text-primary-foreground leading-none pb-1">+</p>
           </button>
         </DialogTrigger>
 
@@ -67,8 +67,8 @@ const AddTranslationModal = forwardRef<
           <div className="flex flex-col w-full gap-4">
             {formData.pair.map(
               (pair: OriginalTranslationPair, pairIndex: number) => (
-                <div key={pairIndex} className="bg-muted/20 relative">
-                  <p className="font-semibold text-lg border rounded-t-xl p-2 flex items-center gap-2">
+                <div key={pairIndex} className="bg-muted/10 dark:bg-muted/10 relative rounded-xl">
+                  <p className="font-semibold text-lg border-1 dark:border-border border-border rounded-t-xl p-2 flex items-center gap-2 text-foreground dark:text-foreground">
                     <WholeWord size={24} className="" /> Pair {pairIndex + 1}
                     {pairIndex === 0 && (
                       <span className="text-sm italic text-muted-foreground ml-4">
@@ -80,14 +80,14 @@ const AddTranslationModal = forwardRef<
 
                   <Button
                     variant="destructive"
-                    className="absolute rounded-xl p-2 top-2 right-0 !bg-transparent !text-muted-foreground hover:!text-red-600 hover:!cursor-pointer"
+                    className="absolute rounded-xl p-1 top-1.5 right-1.5 !bg-transparent !text-destructive hover:!text-destructive/80 hover:!cursor-pointer dark:hover:!text-destructive/90 transition-colors"
                     type="button"
                     onClick={() => removePair(pairIndex)}
                   >
                     <Trash></Trash>
                   </Button>
 
-                  <div className="flex flex-row justify-between border-x gap-6 p-4 items-center">
+                  <div className="flex flex-row pb-4 justify-between border-x-1 dark:border-border border-border gap-6 p-2 items-center">
                     <div className="flex flex-col w-full">
                       <Label
                         htmlFor="original"
@@ -207,7 +207,7 @@ const AddTranslationModal = forwardRef<
                     </div>
                   </div>
 
-                  <div className="grid border p-3 gap-2 rounded-b-xl">
+                  <div className="grid border-1 border-t-1 border-border border-gray-300 dark:border-border border-border p-3 gap-2 rounded-b-xl bg-muted/5 dark:bg-muted/10">
                     <Label className="font-medium">Definitions</Label>
                     {pair.definitions.map((d: string, _dIndex: number) => (
                       <div key={_dIndex} className="flex gap-2">
@@ -250,7 +250,7 @@ const AddTranslationModal = forwardRef<
             <Button
               variant="outline"
               type="button"
-              className="!bg-background !text-muted-foreground"
+              className="!bg-muted/10 dark:!bg-muted/10 !text-foreground dark:!text-foreground border-1 border-gray-300 dark:border-border"
               onClick={addPair}
             >
               + Add New Pair
@@ -285,8 +285,8 @@ const AddTranslationModal = forwardRef<
             <DialogClose asChild>
               <Button
                 onClick={handleSubmit}
-                variant="outline"
-                className="!bg-blue-600 !text-muted-foreground"
+                variant="default"
+                className="!bg-primary !text-primary-foreground hover:!bg-primary/90"
               >
                 Save Entry
               </Button>

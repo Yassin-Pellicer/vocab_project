@@ -77,7 +77,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
 
 	animations: true,
 	accentColor: "blue",
-	appearance: "light",
+	appearance: "dark",
 
 	displayName: "",
 	email: "",
