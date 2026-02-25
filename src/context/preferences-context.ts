@@ -1,6 +1,5 @@
 import { create } from "zustand";
-
-export type Keybind = { action: string; keys: string[] };
+import { Keybind } from "@/types/config";
 
 interface ConfigState {
 	// General

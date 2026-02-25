@@ -2,15 +2,7 @@ import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
 import { v4 as uuid } from "uuid";
-
-interface DictionaryEntry {
-  name: string;
-  route: string;
-}
-
-interface UserConfig {
-  dictionaries?: Record<string, DictionaryEntry>;
-}
+import { UserConfig } from "../../../../../src/types/config";
 
 export default function createDictionary() {
   ipcMain.handle(

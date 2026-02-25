@@ -1,15 +1,7 @@
 import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
-
-interface DictionaryEntry {
-  name: string;
-  route: string;
-}
-
-interface UserConfig {
-  dictionaries?: Record<string, DictionaryEntry>;
-}
+import { UserConfig } from "../../../../../src/types/config";
 
 /**
  * Recursively removes a directory.
