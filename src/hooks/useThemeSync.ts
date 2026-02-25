@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useConfigStore } from "../context/preferences-context";
 
 export default function useThemeSync() {
-  const appearance = useConfigStore((s) => s.appearance);
+  const appearance = useConfigStore(state => state.config.appearance || "system");
 
   useEffect(() => {
     const el = typeof document !== "undefined" ? document.documentElement : null;

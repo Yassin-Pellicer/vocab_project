@@ -1,4 +1,4 @@
-import { Info, Github, Twitter, Mail, Scale, Code, Cpu, MonitorSmartphone, CalendarDays, BookOpen } from "lucide-react";
+import { Info, Github, Twitter, Mail, Scale, Cpu, MonitorSmartphone, CalendarDays, BookOpen } from "lucide-react";
 
 export default function AboutSection() {
   return (

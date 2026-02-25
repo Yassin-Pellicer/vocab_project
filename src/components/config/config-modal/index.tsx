@@ -16,6 +16,7 @@ import AboutSection from "@/components/config/sections/about";
 
 export default function ConfigModal({ children }: { children?: React.ReactNode }) {
   const [activeSection, setActiveSection] = useState("general");
+  
 
   const renderSection = () => {
     switch (activeSection) {

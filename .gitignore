@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 public/user-config.json
 public/user-config.json
+public/user-preferences.json

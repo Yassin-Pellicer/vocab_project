@@ -1,0 +1,60 @@
+{
+  "notifications": true,
+  "notificationLifetime": "5s",
+  "language": "es",
+  "timezone": "utc",
+  "dateFormat": "ISO",
+  "animations": true,
+  "accentColor": "blue",
+  "appearance": "dark",
+  "displayName": "",
+  "email": "",
+  "avatarPath": null,
+  "offline": false,
+  "keybinds": [
+    {
+      "action": "New Word",
+      "keys": [
+        "Ctrl",
+        "N"
+      ]
+    },
+    {
+      "action": "Search",
+      "keys": [
+        "Ctrl",
+        "K"
+      ]
+    },
+    {
+      "action": "Save",
+      "keys": [
+        "Ctrl",
+        "S"
+      ]
+    },
+    {
+      "action": "Quick Add",
+      "keys": [
+        "Ctrl",
+        "Shift",
+        "A"
+      ]
+    },
+    {
+      "action": "Settings",
+      "keys": [
+        "Ctrl",
+        ","
+      ]
+    },
+    {
+      "action": "Toggle Sidebar",
+      "keys": [
+        "Ctrl",
+        "B"
+      ]
+    }
+  ],
+  "subscriptionPlan": "Free"
+}

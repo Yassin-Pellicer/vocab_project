@@ -1,8 +1,9 @@
 import { BrowserWindow, Menu, ipcMain, dialog, app } from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import fs from "node:fs";
 import path$1 from "path";
-import fs from "fs";
+import fs$1 from "fs";
 import { randomFillSync, randomUUID } from "node:crypto";
 const __dirname$1 = path.dirname(fileURLToPath(import.meta.url));
 process.env.APP_ROOT = path.join(__dirname$1, "..");
@@ -10,7 +11,7 @@ const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 path.join(process.env.APP_ROOT, "dist-electron");
 const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, "public") : RENDERER_DIST;
-function createWindow() {
+async function createWindow() {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
@@ -19,6 +20,8 @@ function createWindow() {
     transparent: false,
     hasShadow: true,
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+    show: false,
+    // Don't show until config is loaded
     webPreferences: {
       preload: path.join(__dirname$1, "preload.mjs")
     }
@@ -28,21 +31,42 @@ function createWindow() {
   win.webContents.on("did-finish-load", () => {
     win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
   });
-  if (VITE_DEV_SERVER_URL) {
-    win.loadURL(VITE_DEV_SERVER_URL);
-  } else {
-    win.loadFile(path.join(RENDERER_DIST, "index.html"));
+  async function waitForConfig() {
+    const configPath = path.join(process.env.APP_ROOT, "public", "user-config.json");
+    const prefsPath = path.join(process.env.APP_ROOT, "public", "user-preferences.json");
+    let configLoaded = false;
+    let prefsLoaded = false;
+    try {
+      configLoaded = fs.existsSync(configPath) && fs.readFileSync(configPath, "utf-8").trim().length > 0;
+    } catch {
+    }
+    try {
+      prefsLoaded = fs.existsSync(prefsPath) && fs.readFileSync(prefsPath, "utf-8").trim().length > 0;
+    } catch {
+    }
+    return configLoaded && prefsLoaded;
   }
+  if (VITE_DEV_SERVER_URL) {
+    await win.loadURL(VITE_DEV_SERVER_URL);
+  } else {
+    await win.loadFile(path.join(RENDERER_DIST, "index.html"));
+  }
+  let tries = 0;
+  while (!await waitForConfig() && tries < 50) {
+    await new Promise((res) => setTimeout(res, 100));
+    tries++;
+  }
+  win.show();
 }
 function fetchConjugation() {
   ipcMain.handle("fetchConjugation", async (_event, route, name, uuid) => {
     try {
       const filePath = path$1.join(route, `CONJ-${name}.json`);
       console.log("Fetching conjugation from", filePath, uuid);
-      if (!fs.existsSync(filePath)) {
-        fs.writeFileSync(filePath, "{}", "utf-8");
+      if (!fs$1.existsSync(filePath)) {
+        fs$1.writeFileSync(filePath, "{}", "utf-8");
       }
-      const data = fs.readFileSync(filePath, "utf-8");
+      const data = fs$1.readFileSync(filePath, "utf-8");
       const json = JSON.parse(data);
       return json[uuid] || {};
     } catch (error) {
@@ -57,12 +81,12 @@ function saveConjugation() {
       const filePath = path$1.join(route, `CONJ-${name}.json`);
       console.log("Saving conjugation to", filePath, "for uuid:", uuid);
       let json = {};
-      if (fs.existsSync(filePath)) {
-        const data = fs.readFileSync(filePath, "utf-8");
+      if (fs$1.existsSync(filePath)) {
+        const data = fs$1.readFileSync(filePath, "utf-8");
         json = JSON.parse(data);
       }
       json[uuid] = conjugation;
-      fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+      fs$1.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
       console.log("Conjugation saved successfully");
       return { success: true };
     } catch (error) {
@@ -76,10 +100,10 @@ function fetchMarkdown() {
     try {
       const normalizedRoute = _route.replace(/\\/g, "/");
       const filePath = path$1.join(normalizedRoute, `MD-${_name}`, `${_uuid}.md`);
-      if (!fs.existsSync(filePath)) {
+      if (!fs$1.existsSync(filePath)) {
         return "";
       }
-      const data = fs.readFileSync(filePath, "utf-8");
+      const data = fs$1.readFileSync(filePath, "utf-8");
       return data;
     } catch (error) {
       console.error("Error reading markdown file:", error);
@@ -95,12 +119,12 @@ function saveMarkdown() {
         const normalizedRoute = _route.replace(/\\/g, "/");
         const filePath = path$1.join(normalizedRoute, `MD-${_name}`, `${_uuid}.md`);
         if (markdown === "") {
-          if (fs.existsSync(filePath)) {
-            fs.unlinkSync(filePath);
+          if (fs$1.existsSync(filePath)) {
+            fs$1.unlinkSync(filePath);
             console.log(`Deleted markdown file at: ${filePath}`);
           }
         } else {
-          fs.writeFileSync(filePath, markdown, "utf-8");
+          fs$1.writeFileSync(filePath, markdown, "utf-8");
           console.log(`Saved markdown file at: ${filePath}`);
         }
         return { success: true, path: filePath };
@@ -151,10 +175,10 @@ function addTranslation() {
     async (_event, entry, _word, _route, _name) => {
       try {
         const filePath = path$1.join(_route, `${_name}.json`);
-        if (!fs.existsSync(filePath)) {
+        if (!fs$1.existsSync(filePath)) {
           throw new Error(`The file ${filePath} does not exist.`);
         }
-        const json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        const json = JSON.parse(fs$1.readFileSync(filePath, "utf-8"));
         let translations = Array.isArray(json) ? json : [];
         if (_word) {
           translations = translations.filter(
@@ -166,14 +190,14 @@ function addTranslation() {
           const GraphfilePath = path$1.join(_route, `GRAPH-${_name}.json`);
           console.log("Saving graph to", GraphfilePath, "for uuid:", entry.uuid);
           let jsonGraph = {};
-          if (fs.existsSync(GraphfilePath)) {
-            jsonGraph = JSON.parse(fs.readFileSync(GraphfilePath, "utf-8"));
+          if (fs$1.existsSync(GraphfilePath)) {
+            jsonGraph = JSON.parse(fs$1.readFileSync(GraphfilePath, "utf-8"));
           }
           jsonGraph[entryUuid] = {};
-          fs.writeFileSync(GraphfilePath, JSON.stringify(jsonGraph, null, 2), "utf-8");
+          fs$1.writeFileSync(GraphfilePath, JSON.stringify(jsonGraph, null, 2), "utf-8");
         }
         translations.push(entry);
-        fs.writeFileSync(
+        fs$1.writeFileSync(
           filePath,
           JSON.stringify(translations, null, 2),
           "utf-8"
@@ -195,23 +219,23 @@ function createDictionary() {
         const folderPath = path$1.resolve(_route, folderName);
         const filePath = path$1.join(folderPath, `${folderName}.json`);
         const mdPath = path$1.join(folderPath, "MD-" + folderName);
-        if (!fs.existsSync(_route)) {
+        if (!fs$1.existsSync(_route)) {
           throw new Error(`The folder ${_route} does not exist.`);
         }
-        if (!fs.existsSync(folderPath)) {
-          fs.mkdirSync(folderPath, { recursive: true });
+        if (!fs$1.existsSync(folderPath)) {
+          fs$1.mkdirSync(folderPath, { recursive: true });
         }
-        fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
-        fs.mkdirSync(mdPath, { recursive: true });
+        fs$1.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
+        fs$1.mkdirSync(mdPath, { recursive: true });
         const configPath = path$1.join(
           process.env.APP_ROOT || __dirname,
           "public",
           "user-config.json"
         );
-        if (!fs.existsSync(configPath)) {
-          fs.writeFileSync(configPath, JSON.stringify({ dictionaries: {} }, null, 2), "utf-8");
+        if (!fs$1.existsSync(configPath)) {
+          fs$1.writeFileSync(configPath, JSON.stringify({ dictionaries: {} }, null, 2), "utf-8");
         }
-        const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+        const config = JSON.parse(fs$1.readFileSync(configPath, "utf-8"));
         if (!config.dictionaries) {
           config.dictionaries = {};
         }
@@ -219,7 +243,7 @@ function createDictionary() {
           name: _name,
           route: folderPath
         };
-        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        fs$1.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
         return {
           success: true,
           folderName,
@@ -238,10 +262,10 @@ function deleteTranslation() {
     async (_event, _word, _route, _name) => {
       try {
         const filePath = path$1.join(_route, `${_name}.json`);
-        if (!fs.existsSync(filePath)) {
+        if (!fs$1.existsSync(filePath)) {
           throw new Error(`The file ${filePath} does not exist.`);
         }
-        const data = fs.readFileSync(filePath, "utf-8");
+        const data = fs$1.readFileSync(filePath, "utf-8");
         const json = JSON.parse(data);
         let translations = Array.isArray(json) ? json : [];
         translations = translations.filter((t) => t.uuid !== _word);
@@ -254,16 +278,16 @@ function deleteTranslation() {
             _word
           );
           let json2 = {};
-          if (fs.existsSync(filePath2)) {
-            json2 = JSON.parse(fs.readFileSync(filePath2, "utf-8"));
+          if (fs$1.existsSync(filePath2)) {
+            json2 = JSON.parse(fs$1.readFileSync(filePath2, "utf-8"));
           }
           if (json2[_word]) {
             delete json2[_word];
           }
-          fs.writeFileSync(filePath2, JSON.stringify(json2, null, 2), "utf-8");
+          fs$1.writeFileSync(filePath2, JSON.stringify(json2, null, 2), "utf-8");
           console.log("Graph entry deleted successfully");
         }
-        fs.writeFileSync(
+        fs$1.writeFileSync(
           filePath,
           JSON.stringify(translations, null, 2),
           "utf-8"
@@ -277,8 +301,8 @@ function deleteTranslation() {
   );
 }
 function removeDirRecursive$1(dir) {
-  if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true, force: true });
+  if (fs$1.existsSync(dir)) {
+    fs$1.rmSync(dir, { recursive: true, force: true });
   }
 }
 function deleteDictionary() {
@@ -291,23 +315,23 @@ function deleteDictionary() {
           "public",
           "user-config.json"
         );
-        if (!fs.existsSync(configPath)) {
+        if (!fs$1.existsSync(configPath)) {
           throw new Error("Config file not found.");
         }
         const config = JSON.parse(
-          fs.readFileSync(configPath, "utf-8")
+          fs$1.readFileSync(configPath, "utf-8")
         );
         if (!config.dictionaries || !config.dictionaries[dictId]) {
           throw new Error(`Dictionary with id "${dictId}" not found in config.`);
         }
         const dictEntry = config.dictionaries[dictId];
         const dictPath = path$1.resolve(dictEntry.route);
-        if (!fs.existsSync(dictPath) || !fs.statSync(dictPath).isDirectory()) {
+        if (!fs$1.existsSync(dictPath) || !fs$1.statSync(dictPath).isDirectory()) {
           throw new Error(`Dictionary folder does not exist: ${dictPath}`);
         }
         removeDirRecursive$1(dictPath);
         delete config.dictionaries[dictId];
-        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        fs$1.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
         return {
           success: true,
           deletedId: dictId,
@@ -330,11 +354,11 @@ function renameDictionary() {
           "public",
           "user-config.json"
         );
-        if (!fs.existsSync(configPath)) {
+        if (!fs$1.existsSync(configPath)) {
           throw new Error("Config file not found.");
         }
         const config = JSON.parse(
-          fs.readFileSync(configPath, "utf-8")
+          fs$1.readFileSync(configPath, "utf-8")
         );
         if (!config.dictionaries || !config.dictionaries[dictId]) {
           throw new Error(`Dictionary with id "${dictId}" not found in config.`);
@@ -343,7 +367,7 @@ function renameDictionary() {
           throw new Error("Dictionary name cannot be empty.");
         }
         config.dictionaries[dictId].name = newName.trim();
-        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        fs$1.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
         return {
           success: true,
           dictId,
@@ -364,7 +388,7 @@ function loadConfig() {
         "public",
         "user-config.json"
       );
-      const data = fs.readFileSync(filePath, "utf-8");
+      const data = fs$1.readFileSync(filePath, "utf-8");
       const json = JSON.parse(data);
       return json;
     } catch (error) {
@@ -377,7 +401,7 @@ function loadTranslations() {
   ipcMain.handle("loadTranslations", async (_event, _route, _name) => {
     try {
       const filePath = path$1.join(_route, `${_name}.json`);
-      const data = fs.readFileSync(filePath, "utf-8");
+      const data = fs$1.readFileSync(filePath, "utf-8");
       const json = JSON.parse(data);
       return json;
     } catch (error) {
@@ -387,21 +411,21 @@ function loadTranslations() {
   });
 }
 function copyDirRecursive(src, dest) {
-  fs.mkdirSync(dest, { recursive: true });
-  const entries = fs.readdirSync(src, { withFileTypes: true });
+  fs$1.mkdirSync(dest, { recursive: true });
+  const entries = fs$1.readdirSync(src, { withFileTypes: true });
   for (const entry of entries) {
     const srcPath = path$1.join(src, entry.name);
     const destPath = path$1.join(dest, entry.name);
     if (entry.isDirectory()) {
       copyDirRecursive(srcPath, destPath);
     } else {
-      fs.copyFileSync(srcPath, destPath);
+      fs$1.copyFileSync(srcPath, destPath);
     }
   }
 }
 function removeDirRecursive(dir) {
-  if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true, force: true });
+  if (fs$1.existsSync(dir)) {
+    fs$1.rmSync(dir, { recursive: true, force: true });
   }
 }
 function moveDictionary() {
@@ -414,11 +438,11 @@ function moveDictionary() {
           "public",
           "user-config.json"
         );
-        if (!fs.existsSync(configPath)) {
+        if (!fs$1.existsSync(configPath)) {
           throw new Error("Config file not found.");
         }
         const config = JSON.parse(
-          fs.readFileSync(configPath, "utf-8")
+          fs$1.readFileSync(configPath, "utf-8")
         );
         if (!config.dictionaries || !config.dictionaries[dictId]) {
           throw new Error(`Dictionary with id "${dictId}" not found in config.`);
@@ -427,10 +451,10 @@ function moveDictionary() {
         const oldRouteRaw = dictEntry.route;
         const srcDir = path$1.resolve(oldRouteRaw);
         const destParent = path$1.resolve(newRoute);
-        if (!fs.existsSync(srcDir) || !fs.statSync(srcDir).isDirectory()) {
+        if (!fs$1.existsSync(srcDir) || !fs$1.statSync(srcDir).isDirectory()) {
           throw new Error(`Source folder does not exist or is not a directory: ${srcDir}`);
         }
-        if (!fs.existsSync(destParent) || !fs.statSync(destParent).isDirectory()) {
+        if (!fs$1.existsSync(destParent) || !fs$1.statSync(destParent).isDirectory()) {
           throw new Error(`Destination folder does not exist or is not a directory: ${destParent}`);
         }
         const folderName = path$1.basename(srcDir);
@@ -445,14 +469,14 @@ function moveDictionary() {
         if (isSubPath(srcDir, newFolderPath)) {
           throw new Error("Cannot move a folder into one of its own subdirectories.");
         }
-        if (fs.existsSync(newFolderPath)) {
+        if (fs$1.existsSync(newFolderPath)) {
           throw new Error(
             `A folder named "${folderName}" already exists at the destination (${newFolderPath}).`
           );
         }
         let moved = false;
         try {
-          fs.renameSync(srcDir, newFolderPath);
+          fs$1.renameSync(srcDir, newFolderPath);
           moved = true;
         } catch (err) {
           if (err && err.code === "EXDEV") {
@@ -467,7 +491,7 @@ function moveDictionary() {
           throw new Error("Failed to move dictionary folder for unknown reasons.");
         }
         config.dictionaries[dictId].route = newFolderPath;
-        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        fs$1.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
         return {
           success: true,
           oldRoute: srcDir,
@@ -501,10 +525,10 @@ function fetchGraph() {
     try {
       const filePath = path$1.join(route, `GRAPH-${name}.json`);
       console.log("Fetching graph from", filePath, "for dictionary", name);
-      if (!fs.existsSync(filePath)) {
-        fs.writeFileSync(filePath, "{}", "utf-8");
+      if (!fs$1.existsSync(filePath)) {
+        fs$1.writeFileSync(filePath, "{}", "utf-8");
       }
-      const data = fs.readFileSync(filePath, "utf-8");
+      const data = fs$1.readFileSync(filePath, "utf-8");
       const json = JSON.parse(data);
       if (_uuid) {
         return json[_uuid] || {};
@@ -523,8 +547,8 @@ function saveGraph() {
       try {
         const filePath = path$1.join(route, `GRAPH-${name}.json`);
         let json = {};
-        if (fs.existsSync(filePath)) {
-          json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        if (fs$1.existsSync(filePath)) {
+          json = JSON.parse(fs$1.readFileSync(filePath, "utf-8"));
         }
         if (!json[origin.uuid]) {
           json[origin.uuid] = {};
@@ -534,7 +558,7 @@ function saveGraph() {
         }
         json[origin.uuid][destination.uuid] = destination.word;
         json[destination.uuid][origin.uuid] = origin.word;
-        fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        fs$1.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
         console.log("Graph saved successfully");
         return { success: true };
       } catch (error) {
@@ -551,8 +575,8 @@ function deleteGraphEntry() {
       try {
         const filePath = path$1.join(route, `GRAPH-${name}.json`);
         let json = {};
-        if (fs.existsSync(filePath)) {
-          json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        if (fs$1.existsSync(filePath)) {
+          json = JSON.parse(fs$1.readFileSync(filePath, "utf-8"));
         }
         if (json[origin.uuid]) {
           delete json[origin.uuid][destination.uuid];
@@ -560,7 +584,7 @@ function deleteGraphEntry() {
         if (json[destination.uuid]) {
           delete json[destination.uuid][origin.uuid];
         }
-        fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        fs$1.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
         console.log("Graph entry deleted successfully");
         return { success: true };
       } catch (error) {
@@ -569,6 +593,53 @@ function deleteGraphEntry() {
       }
     }
   );
+}
+function saveUserPreferences() {
+  ipcMain.handle(
+    "saveUserPreferences",
+    async (_event, _config) => {
+      try {
+        const filePath = path$1.join(
+          process.env.APP_ROOT || __dirname,
+          "public",
+          "user-preferences.json"
+        );
+        if (!fs$1.existsSync(filePath)) {
+          fs$1.mkdirSync(path$1.dirname(filePath), { recursive: true });
+          fs$1.writeFileSync(filePath, JSON.stringify({}, null, 2), "utf-8");
+        }
+        const data = fs$1.readFileSync(filePath, "utf-8");
+        const json = JSON.parse(data);
+        Object.assign(json, _config);
+        fs$1.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        return json;
+      } catch (error) {
+        console.error("Error saving user preferences file:", error);
+        throw new Error("Failed to save user preferences file.");
+      }
+    }
+  );
+}
+function loadUserPreferences() {
+  ipcMain.handle("loadUserPreferences", async (_event, _config) => {
+    try {
+      const filePath = path$1.join(
+        process.env.APP_ROOT || __dirname,
+        "public",
+        "user-preferences.json"
+      );
+      if (!fs$1.existsSync(filePath)) {
+        fs$1.mkdirSync(path$1.dirname(filePath), { recursive: true });
+        fs$1.writeFileSync(filePath, JSON.stringify({}, null, 2), "utf-8");
+      }
+      const data = fs$1.readFileSync(filePath, "utf-8");
+      const json = JSON.parse(data);
+      return json;
+    } catch (error) {
+      console.error("Error reading user preferences file:", error);
+      throw new Error("Failed to load user preferences file.");
+    }
+  });
 }
 function registerIpcHandlers() {
   loadTranslations();
@@ -587,6 +658,8 @@ function registerIpcHandlers() {
   fetchGraph();
   saveGraph();
   deleteGraphEntry();
+  saveUserPreferences();
+  loadUserPreferences();
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

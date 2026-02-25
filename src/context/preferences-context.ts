@@ -1,75 +1,50 @@
 import { create } from "zustand";
-import { Keybind } from "@/types/config";
+import { Keybind, UserPreferences } from "@/types/config";
 
 interface ConfigState {
-	// General
-	notifications: boolean;
-	notificationLifetime: string;
-	language: string;
-	timezone: string;
-	dateFormat: string;
+  config: UserPreferences;
 
-	// Looks & Feel
-	animations: boolean;
-	accentColor: string;
-	appearance: "light" | "dark" | "system";
+  setConfig: (config: Partial<UserPreferences>) => void;
 
-	// Profile
-	displayName: string;
-	email: string;
-	avatarPath?: string | null;
-	offline: boolean;
+  setNotifications: (v: boolean) => void;
+  setNotificationLifetime: (v: string) => void;
+  setLanguage: (v: string) => void;
+  setTimezone: (v: string) => void;
+  setDateFormat: (v: string) => void;
 
-	// Keybinds
-	keybinds: Keybind[];
+  setAnimations: (v: boolean) => void;
+  setAccentColor: (v: string) => void;
+  setAppearance: (v: "light" | "dark" | "system") => void;
 
-	// Subscription
-	subscriptionPlan: string;
+  setDisplayName: (v: string) => void;
+  setEmail: (v: string) => void;
+  setAvatarPath: (v?: string | null) => void;
+  setOffline: (v: boolean) => void;
 
-	// Actions
-	setNotifications: (v: boolean) => void;
-	setNotificationLifetime: (v: string) => void;
-	setLanguage: (v: string) => void;
-	setTimezone: (v: string) => void;
-	setDateFormat: (v: string) => void;
+  setKeybinds: (kb: Keybind[]) => void;
+  updateKeybind: (index: number, kb: Keybind) => void;
+  addKeybind: (kb: Keybind) => void;
+  removeKeybind: (index: number) => void;
 
-	setAnimations: (v: boolean) => void;
-	setAccentColor: (v: string) => void;
-	setAppearance: (v: "light" | "dark" | "system") => void;
+  setSubscriptionPlan: (plan: string) => void;
 
-	setDisplayName: (v: string) => void;
-	setEmail: (v: string) => void;
-	setAvatarPath: (v?: string | null) => void;
-	setOffline: (v: boolean) => void;
-
-	setKeybinds: (kb: Keybind[]) => void;
-	updateKeybind: (index: number, kb: Keybind) => void;
-	addKeybind: (kb: Keybind) => void;
-	removeKeybind: (index: number) => void;
-
-	setSubscriptionPlan: (plan: string) => void;
-
-	// persistence
-	loadConfig: () => void;
-	saveConfig: () => void;
-	resetConfig: () => void;
+  loadConfig: () => void;
+  saveConfig: () => void;
+  resetConfig: () => void;
 }
 
-const STORAGE_KEY = "vocab_app_config_v1";
-
 const defaultKeybinds: Keybind[] = [
-	{ action: "New Word", keys: ["Ctrl", "N"] },
-	{ action: "Search", keys: ["Ctrl", "K"] },
-	{ action: "Save", keys: ["Ctrl", "S"] },
-	{ action: "Quick Add", keys: ["Ctrl", "Shift", "A"] },
-	{ action: "Settings", keys: ["Ctrl", ","] },
-	{ action: "Toggle Sidebar", keys: ["Ctrl", "B"] },
+  { action: "New Word", keys: ["Ctrl", "N"] },
+  { action: "Search", keys: ["Ctrl", "K"] },
+  { action: "Save", keys: ["Ctrl", "S"] },
+  { action: "Quick Add", keys: ["Ctrl", "Shift", "A"] },
+  { action: "Settings", keys: ["Ctrl", ","] },
+  { action: "Toggle Sidebar", keys: ["Ctrl", "B"] },
 ];
 
-export const useConfigStore = create<ConfigState>((set, get) => ({
-	// defaults
+const defaultConfig: UserPreferences = {
 	notifications: true,
-	notificationLifetime: "5s",
+	notificationLifetime: "5",
 	language: "en",
 	timezone: "utc",
 	dateFormat: "ISO",
@@ -86,123 +61,79 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
 	keybinds: defaultKeybinds,
 
 	subscriptionPlan: "Free",
+};
 
-	// actions
-	setNotifications: (v: boolean) => set({ notifications: v }),
-	setNotificationLifetime: (v: string) => set({ notificationLifetime: v }),
-	setLanguage: (v: string) => set({ language: v }),
-	setTimezone: (v: string) => set({ timezone: v }),
-	setDateFormat: (v: string) => set({ dateFormat: v }),
+export const useConfigStore = create<ConfigState>((set) => ({
+  config: { ...defaultConfig },
 
-	setAnimations: (v: boolean) => set({ animations: v }),
-	setAccentColor: (v: string) => set({ accentColor: v }),
-	setAppearance: (v: "light" | "dark" | "system") => set({ appearance: v }),
+  setConfig: (config: Partial<UserPreferences>) =>
+    set((state) => ({ config: { ...state.config, ...config } })),
 
-	setDisplayName: (v: string) => set({ displayName: v }),
-	setEmail: (v: string) => set({ email: v }),
-	setAvatarPath: (v?: string | null) => set({ avatarPath: v ?? null }),
-	setOffline: (v: boolean) => set({ offline: v }),
+  setNotifications: (v: boolean) =>
+    set((state) => ({ config: { ...state.config, notifications: v } })),
+  setNotificationLifetime: (v: string) =>
+    set((state) => ({ config: { ...state.config, notificationLifetime: v } })),
+  setLanguage: (v: string) =>
+    set((state) => ({ config: { ...state.config, language: v } })),
+  setTimezone: (v: string) =>
+    set((state) => ({ config: { ...state.config, timezone: v } })),
+  setDateFormat: (v: string) =>
+    set((state) => ({ config: { ...state.config, dateFormat: v } })),
 
-	setKeybinds: (kb: Keybind[]) => set({ keybinds: kb }),
-	updateKeybind: (index: number, kb: Keybind) =>
-		set((state) => {
-			const next = state.keybinds.slice();
-			if (index >= 0 && index < next.length) next[index] = kb;
-			return { keybinds: next };
-		}),
-	addKeybind: (kb: Keybind) =>
-		set((state) => ({ keybinds: [...state.keybinds, kb] })),
-	removeKeybind: (index: number) =>
-		set((state) => ({ keybinds: state.keybinds.filter((_, i) => i !== index) })),
+  setAnimations: (v: boolean) =>
+    set((state) => ({ config: { ...state.config, animations: v } })),
+  setAccentColor: (v: string) =>
+    set((state) => ({ config: { ...state.config, accentColor: v } })),
+  setAppearance: (v: "light" | "dark" | "system") =>
+    set((state) => ({ config: { ...state.config, appearance: v } })),
 
-	setSubscriptionPlan: (plan: string) => set({ subscriptionPlan: plan }),
+  setDisplayName: (v: string) =>
+    set((state) => ({ config: { ...state.config, displayName: v } })),
+  setEmail: (v: string) =>
+    set((state) => ({ config: { ...state.config, email: v } })),
+  setAvatarPath: (v?: string | null) =>
+    set((state) => ({ config: { ...state.config, avatarPath: v ?? null } })),
+  setOffline: (v: boolean) =>
+    set((state) => ({ config: { ...state.config, offline: v } })),
 
-	// persistence
-	loadConfig: () => {
-		try {
-			const raw = localStorage.getItem(STORAGE_KEY);
-			if (!raw) return;
-			const parsed = JSON.parse(raw);
-			// only set keys that exist in parsed
-			set((state) => ({
-				...state,
-				...(parsed.notifications !== undefined && { notifications: parsed.notifications }),
-				...(parsed.notificationLifetime !== undefined && { notificationLifetime: parsed.notificationLifetime }),
-				...(parsed.language !== undefined && { language: parsed.language }),
-				...(parsed.timezone !== undefined && { timezone: parsed.timezone }),
-				...(parsed.dateFormat !== undefined && { dateFormat: parsed.dateFormat }),
-				...(parsed.animations !== undefined && { animations: parsed.animations }),
-				...(parsed.accentColor !== undefined && { accentColor: parsed.accentColor }),
-				...(parsed.appearance !== undefined && { appearance: parsed.appearance }),
-				...(parsed.displayName !== undefined && { displayName: parsed.displayName }),
-				...(parsed.email !== undefined && { email: parsed.email }),
-				...(parsed.avatarPath !== undefined && { avatarPath: parsed.avatarPath }),
-				...(parsed.offline !== undefined && { offline: parsed.offline }),
-				...(parsed.keybinds !== undefined && { keybinds: parsed.keybinds }),
-				...(parsed.subscriptionPlan !== undefined && { subscriptionPlan: parsed.subscriptionPlan }),
-			}));
-		} catch (e) {
-			// ignore parse errors
-			// eslint-disable-next-line no-console
-			console.warn("Failed to load config from storage", e);
-		}
+  setKeybinds: (kb: Keybind[]) =>
+    set((state) => ({ config: { ...state.config, keybinds: kb } })),
+  updateKeybind: (index: number, kb: Keybind) =>
+    set((state) => {
+			if(state.config.keybinds === undefined) return state;
+      const next = state.config.keybinds.slice();
+      if (index >= 0 && index < next.length) next[index] = kb;
+      return { config: { ...state.config, keybinds: next } };
+    }),
+  addKeybind: (kb: Keybind) =>
+    set((state) => {
+      if(state.config.keybinds === undefined) return state;
+      return {
+        config: { ...state.config, keybinds: [...state.config.keybinds, kb] },
+      };
+    }),
+  removeKeybind: (index: number) =>
+    set((state) => {
+      if(state.config.keybinds === undefined) return state;
+      return {
+        config: {
+          ...state.config,
+          keybinds: state.config.keybinds.filter((_, i) => i !== index),
+        },
+      };
+    }),
+
+  setSubscriptionPlan: (plan: string) =>
+    set((state) => ({ config: { ...state.config, subscriptionPlan: plan } })),
+
+  loadConfig: () => {
+		window.api.loadUserPreferences().then((preferences: UserPreferences) => {
+			set({ config: { ...defaultConfig, ...preferences } });
+		})
+		console.log("Loaded user preferences");
 	},
-	saveConfig: () => {
-		try {
-			const state = get();
-			const toSave = {
-				notifications: state.notifications,
-				notificationLifetime: state.notificationLifetime,
-				language: state.language,
-				timezone: state.timezone,
-				dateFormat: state.dateFormat,
-				animations: state.animations,
-				accentColor: state.accentColor,
-				appearance: state.appearance,
-				displayName: state.displayName,
-				email: state.email,
-				avatarPath: state.avatarPath,
-				offline: state.offline,
-				keybinds: state.keybinds,
-				subscriptionPlan: state.subscriptionPlan,
-			};
-			localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-		} catch (e) {
-			// eslint-disable-next-line no-console
-			console.warn("Failed to save config to storage", e);
-		}
+  saveConfig: () => {
+		window.api.saveUserPreferences(useConfigStore.getState().config);
 	},
-	resetConfig: () => {
-		set({
-			notifications: true,
-			notificationLifetime: "5s",
-			language: "en",
-			timezone: "utc",
-			dateFormat: "ISO",
-			animations: true,
-			accentColor: "blue",
-			appearance: "light",
-			displayName: "",
-			email: "",
-			avatarPath: null,
-			offline: false,
-			keybinds: defaultKeybinds,
-			subscriptionPlan: "Free",
-		});
-		try {
-			localStorage.removeItem(STORAGE_KEY);
-		} catch {}
-	},
+  resetConfig: () => set({ config: { ...defaultConfig } }),
 }));
-
-// Automatically attempt to load persisted config when module is imported
-try {
-	// Guards for SSR / non-browser env
-	if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
-		const store = useConfigStore.getState();
-		store.loadConfig();
-	}
-} catch (e) {
-	// ignore
-}
-

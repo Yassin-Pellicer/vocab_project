@@ -7,13 +7,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Bell, Moon, Save, Globe, FerrisWheel, Brush } from "lucide-react";
-import { useConfigStore } from "@/context/preferences-context";
+import useConfig from "../hooks";
 
 export default function GeneralSection() {
-  const appearance = useConfigStore((s) => s.appearance);
-  const setAppearance = useConfigStore((s) => s.setAppearance);
-  const dateFormat = useConfigStore((s) => s.dateFormat);
-  const setDateFormat = useConfigStore((s) => s.setDateFormat);
+  const {
+    preferences,
+    setNotifications,
+    setNotificationLifetime,
+    setLanguage,
+    setTimezone,
+    setDateFormat,
+    setAnimations,
+    setAccentColor,
+    setAppearance,
+  } = useConfig();
 
   return (
     <div className="mb-8 mt-2">
@@ -38,13 +45,13 @@ export default function GeneralSection() {
                 </div>
               </div>
             </div>
-            <Switch defaultChecked />
+            <Switch checked={preferences.notifications} onCheckedChange={setNotifications} />
           </div>
           <div className="flex flex-row items-center mt-4">
             <div className="text-sm font-medium w-full">
               Notification lifetime
             </div>
-            <Select defaultValue="5s">
+            <Select value={preferences.notificationLifetime} onValueChange={setNotificationLifetime}>
               <SelectTrigger className="">
                 <SelectValue placeholder="Select duration" />
               </SelectTrigger>
@@ -82,7 +89,7 @@ export default function GeneralSection() {
               </a>
             </div>
           </div>
-          <Select defaultValue="en">
+          <Select value={preferences.language} onValueChange={setLanguage}>
             <SelectTrigger className="">
               <SelectValue placeholder="Select language" />
             </SelectTrigger>
@@ -109,7 +116,7 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Select defaultValue="utc">
+          <Select value={preferences.timezone} onValueChange={setTimezone}>
             <SelectTrigger className="">
               <SelectValue placeholder="Select time zone" />
             </SelectTrigger>
@@ -161,7 +168,7 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Select value={dateFormat} onValueChange={(v) => setDateFormat(v as any)}>
+          <Select value={preferences.dateFormat} onValueChange={(v) => setDateFormat(v as any)}>
             <SelectTrigger className="">
               <SelectValue />
             </SelectTrigger>
@@ -193,14 +200,16 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Select value={appearance} onValueChange={(v) => setAppearance(v as any)}>
+            <Select
+            value={preferences.animations === undefined ? undefined : preferences.animations ? "true" : "false"}
+            onValueChange={(v) => setAnimations(v === "true")}
+            >
             <SelectTrigger className="">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
+              <SelectItem value="true">Enabled</SelectItem>
+              <SelectItem value="false">Disabled</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -219,7 +228,7 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Select defaultValue="blue">
+          <Select value={preferences.accentColor} onValueChange={(v) => setAccentColor(v as any)}>
             <SelectTrigger className="">
               <SelectValue placeholder="Select color" />
             </SelectTrigger>
@@ -277,7 +286,16 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Switch defaultChecked />
+          <Select value={preferences.appearance || "system"} onValueChange={(v) => setAppearance(v as any)}>
+            <SelectTrigger className="">
+              <SelectValue placeholder="Select appearance" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">Light</SelectItem>
+              <SelectItem value="dark">Dark</SelectItem>
+              <SelectItem value="system">System default</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
     </div>

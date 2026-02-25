@@ -59,6 +59,12 @@ const translations = {
   },
   loadConfig: async () => {
     return await electron.ipcRenderer.invoke("loadConfig");
+  },
+  saveUserPreferences: async (config2) => {
+    return await electron.ipcRenderer.invoke("saveUserPreferences", config2);
+  },
+  loadUserPreferences: async () => {
+    return await electron.ipcRenderer.invoke("loadUserPreferences");
   }
 };
 const endpoints = Object.assign(

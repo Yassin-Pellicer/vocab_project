@@ -1,4 +1,4 @@
-// Custom APIs for renderer
+import { UserPreferences } from "@/types/config";
 import { TranslationEntry } from "@/types/translation-entry";
 import { ipcRenderer } from "electron";
 
@@ -50,4 +50,12 @@ export const translations = {
   loadConfig: async () => {
     return await ipcRenderer.invoke("loadConfig");
   },
+
+  saveUserPreferences: async (config: UserPreferences) => {
+    return await ipcRenderer.invoke("saveUserPreferences", config);
+  },
+
+  loadUserPreferences: async () => {
+    return await ipcRenderer.invoke("loadUserPreferences");
+  }
 };

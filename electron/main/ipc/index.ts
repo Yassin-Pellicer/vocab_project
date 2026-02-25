@@ -14,6 +14,8 @@ import selectFolder from "./endpoints/translations/selectFolder";
 import fetchGraph from "./endpoints/graph/fetchGraph";
 import saveGraph from "./endpoints/graph/saveGraph";
 import deleteGraphEntry from "./endpoints/graph/deleteGraphEntry";
+import saveUserPreferences from "./endpoints/translations/saveUserPreferences";
+import loadUserPreferences from "./endpoints/translations/loadUserPreferences";
 
 export default function registerIpcHandlers() {
   loadTranslations();
@@ -32,4 +34,6 @@ export default function registerIpcHandlers() {
   fetchGraph();
   saveGraph();
   deleteGraphEntry();
+  saveUserPreferences();
+  loadUserPreferences();
 }
