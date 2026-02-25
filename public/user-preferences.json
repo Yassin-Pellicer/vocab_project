@@ -6,54 +6,35 @@
   "dateFormat": "ISO",
   "animations": true,
   "accentColor": "blue",
-  "appearance": "dark",
-  "displayName": "",
-  "email": "",
+  "appearance": "light",
+  "displayName": "Yassin",
+  "email": "yassinpellicerlamla@gmail.com",
   "avatarPath": null,
   "offline": false,
   "keybinds": [
     {
       "action": "New Word",
-      "keys": [
-        "Ctrl",
-        "N"
-      ]
+      "keys": []
     },
     {
       "action": "Search",
-      "keys": [
-        "Ctrl",
-        "K"
-      ]
+      "keys": []
     },
     {
       "action": "Save",
-      "keys": [
-        "Ctrl",
-        "S"
-      ]
+      "keys": []
     },
     {
       "action": "Quick Add",
-      "keys": [
-        "Ctrl",
-        "Shift",
-        "A"
-      ]
+      "keys": []
     },
     {
       "action": "Settings",
-      "keys": [
-        "Ctrl",
-        ","
-      ]
+      "keys": []
     },
     {
       "action": "Toggle Sidebar",
-      "keys": [
-        "Ctrl",
-        "B"
-      ]
+      "keys": []
     }
   ],
   "subscriptionPlan": "Free"

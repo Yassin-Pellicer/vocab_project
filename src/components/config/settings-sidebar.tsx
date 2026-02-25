@@ -19,8 +19,8 @@ const menuItems = [
   { id: "dictionaries", label: "Dictionaries", icon: BookOpen },
   { id: "keybinds", label: "Keybinds", icon: Keyboard },
   { id: "profile", label: "Your Profile", icon: User },
-  { id: "subscription", label: "Subscription", icon: CreditCard },
-  { id: "ai", label: "Artificial Intelligence", icon: Sparkles },
+  // { id: "subscription", label: "Subscription", icon: CreditCard },
+  // { id: "ai", label: "Artificial Intelligence", icon: Sparkles },
   { id: "about", label: "About", icon: Info },
 ];  
 

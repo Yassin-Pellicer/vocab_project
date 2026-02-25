@@ -10,7 +10,7 @@ export default function DeleteWordModal({word, route, name} : {word: Translation
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button variant="outline" className="!bg-red-600 !text-muted-foreground"><Trash></Trash></Button>
+          <Button variant="outline" className="!bg-red-600 !text-white"><Trash></Trash></Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>

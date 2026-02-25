@@ -1,6 +1,16 @@
-import { User, Mail, Camera, Trash2, WifiOff, Upload } from "lucide-react";
+import { useConfigStore } from "@/context/preferences-context";
+import { Camera, Mail, Trash2, Upload, User, WifiOff } from "lucide-react";
 
 export default function ProfileSection() {
+  const {
+    config,
+    setDisplayName,
+    setEmail,
+    setAvatarPath,
+    setOffline,
+  } = useConfigStore();
+  const { displayName, email } = config;
+
   return (
     <div className="mb-8 mt-2">
       <div className="space-y-2">
@@ -15,13 +25,13 @@ export default function ProfileSection() {
             <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center">
               <User className="h-8 w-8 text-primary-foreground" />
             </div>
-            <button className="absolute inset-0 flex items-center justify-center rounded-full bg-background/50 opacity-0 group-hover/avatar:opacity-100 transition-opacity cursor-pointer">
+            <label className="absolute inset-0 flex items-center justify-center rounded-full bg-background/50 opacity-0 group-hover/avatar:opacity-100 transition-opacity cursor-pointer">
               <Camera className="h-4 w-4 text-muted-foreground" />
-            </button>
+            </label>
           </div>
           <div>
-            <div className="text-sm font-semibold">John Doe</div>
-            <div className="text-xs text-muted-foreground">john.doe@example.com</div>
+            <div className="text-sm font-semibold">{displayName || "No Name"}</div>
+            <div className="text-xs text-muted-foreground">{email || "No Email"}</div>
           </div>
         </div>
 
@@ -37,9 +47,25 @@ export default function ProfileSection() {
               </div>
             </div>
           </div>
-          <button className="h-9 px-2 rounded-md border bg-background text-sm hover:bg-accent transition-colors">
+          <label className="h-9 px-2 rounded-md border bg-background text-sm hover:bg-accent transition-colors cursor-pointer flex items-center justify-center">
             <Upload className="h-4 w-4 text-muted-foreground" />
-          </button>
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => {
+                  if (typeof reader.result === "string") {
+                    setAvatarPath(reader.result);
+                  }
+                };
+                reader.readAsDataURL(file);
+              }}
+            />
+          </label>
         </div>
 
         <div className="flex items-center justify-between rounded-md  group gap-4">
@@ -56,7 +82,8 @@ export default function ProfileSection() {
           </div>
           <input
             type="text"
-            defaultValue="John Doe"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
             className="h-9 w-48 rounded-md border bg-background px-3 text-sm"
           />
         </div>
@@ -75,7 +102,8 @@ export default function ProfileSection() {
           </div>
           <input
             type="email"
-            defaultValue="john.doe@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="h-9 w-48 rounded-md border bg-background px-3 text-sm"
           />
         </div>
@@ -97,7 +125,7 @@ export default function ProfileSection() {
               </div>
             </div>
           </div>
-          <button className="h-9 px-4 rounded-md border bg-background text-sm hover:bg-accent transition-colors shrink-0">
+          <button className="h-9 px-4 rounded-md border bg-background text-sm hover:bg-accent transition-colors shrink-0" onClick={() => setOffline(true)}>
             Go Offline
           </button>
         </div>

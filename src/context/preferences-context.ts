@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Keybind, UserPreferences } from "@/types/config";
+import { Keybind, PRESET_KEYBINDS, UserPreferences } from "@/types/config";
 
 interface ConfigState {
   config: UserPreferences;
@@ -23,7 +23,7 @@ interface ConfigState {
 
   setKeybinds: (kb: Keybind[]) => void;
   updateKeybind: (index: number, kb: Keybind) => void;
-  addKeybind: (kb: Keybind) => void;
+  addKeybind: (kb: Keybind, index: number) => void;
   removeKeybind: (index: number) => void;
 
   setSubscriptionPlan: (plan: string) => void;
@@ -33,34 +33,25 @@ interface ConfigState {
   resetConfig: () => void;
 }
 
-const defaultKeybinds: Keybind[] = [
-  { action: "New Word", keys: ["Ctrl", "N"] },
-  { action: "Search", keys: ["Ctrl", "K"] },
-  { action: "Save", keys: ["Ctrl", "S"] },
-  { action: "Quick Add", keys: ["Ctrl", "Shift", "A"] },
-  { action: "Settings", keys: ["Ctrl", ","] },
-  { action: "Toggle Sidebar", keys: ["Ctrl", "B"] },
-];
-
 const defaultConfig: UserPreferences = {
-	notifications: true,
-	notificationLifetime: "5",
-	language: "en",
-	timezone: "utc",
-	dateFormat: "ISO",
+  notifications: true,
+  notificationLifetime: "5",
+  language: "en",
+  timezone: "utc",
+  dateFormat: "ISO",
 
-	animations: true,
-	accentColor: "blue",
-	appearance: "dark",
+  animations: true,
+  accentColor: "blue",
+  appearance: "dark",
 
-	displayName: "",
-	email: "",
-	avatarPath: null,
-	offline: false,
+  displayName: "",
+  email: "",
+  avatarPath: null,
+  offline: false,
 
-	keybinds: defaultKeybinds,
+  keybinds: PRESET_KEYBINDS,
 
-	subscriptionPlan: "Free",
+  subscriptionPlan: "Free",
 };
 
 export const useConfigStore = create<ConfigState>((set) => ({
@@ -87,53 +78,73 @@ export const useConfigStore = create<ConfigState>((set) => ({
   setAppearance: (v: "light" | "dark" | "system") =>
     set((state) => ({ config: { ...state.config, appearance: v } })),
 
-  setDisplayName: (v: string) =>
-    set((state) => ({ config: { ...state.config, displayName: v } })),
-  setEmail: (v: string) =>
-    set((state) => ({ config: { ...state.config, email: v } })),
-  setAvatarPath: (v?: string | null) =>
-    set((state) => ({ config: { ...state.config, avatarPath: v ?? null } })),
-  setOffline: (v: boolean) =>
-    set((state) => ({ config: { ...state.config, offline: v } })),
+  setDisplayName: (v: string) => {
+    set((state) => ({ config: { ...state.config, displayName: v } }));
+    useConfigStore.getState().saveConfig();
+  },
+  setEmail: (v: string) => {
+    set((state) => ({ config: { ...state.config, email: v } }));
+    useConfigStore.getState().saveConfig();
+  },
+  setAvatarPath: (v?: string | null) => {
+    set((state) => ({ config: { ...state.config, avatarPath: v ?? null } }));
+    useConfigStore.getState().saveConfig();
+  },
+  setOffline: (v: boolean) => {
+    set((state) => ({ config: { ...state.config, offline: v } }));
+    useConfigStore.getState().saveConfig();
+  },
 
-  setKeybinds: (kb: Keybind[]) =>
-    set((state) => ({ config: { ...state.config, keybinds: kb } })),
-  updateKeybind: (index: number, kb: Keybind) =>
+  setKeybinds: (kb: Keybind[]) => {
+    set((state) => ({ config: { ...state.config, keybinds: kb } }));
+    useConfigStore.getState().saveConfig();
+  },
+  updateKeybind: (index: number, kb: Keybind) => {
     set((state) => {
-			if(state.config.keybinds === undefined) return state;
+      if (state.config.keybinds === undefined) return state;
       const next = state.config.keybinds.slice();
       if (index >= 0 && index < next.length) next[index] = kb;
       return { config: { ...state.config, keybinds: next } };
-    }),
-  addKeybind: (kb: Keybind) =>
+    });
+    useConfigStore.getState().saveConfig();
+  },
+  addKeybind: (kb: Keybind, index: number) => {
     set((state) => {
-      if(state.config.keybinds === undefined) return state;
-      return {
-        config: { ...state.config, keybinds: [...state.config.keybinds, kb] },
-      };
-    }),
-  removeKeybind: (index: number) =>
+      if (state.config.keybinds === undefined) return state;
+      const next = state.config.keybinds.slice();
+      if (index >= 0 && index < next.length) next[index] = kb;
+      return { config: { ...state.config, keybinds: next } };
+    });
+    useConfigStore.getState().saveConfig();
+  },
+  removeKeybind: (index: number) => {
     set((state) => {
-      if(state.config.keybinds === undefined) return state;
+      if (state.config.keybinds === undefined) return state;
+      const next = state.config.keybinds.slice();
+      if (index >= 0 && index < next.length) {
+        next[index] = { ...next[index], keys: [] };
+      }
       return {
         config: {
           ...state.config,
-          keybinds: state.config.keybinds.filter((_, i) => i !== index),
+          keybinds: next,
         },
       };
-    }),
+    });
+    useConfigStore.getState().saveConfig();
+  },
 
   setSubscriptionPlan: (plan: string) =>
     set((state) => ({ config: { ...state.config, subscriptionPlan: plan } })),
 
   loadConfig: () => {
-		window.api.loadUserPreferences().then((preferences: UserPreferences) => {
-			set({ config: { ...defaultConfig, ...preferences } });
-		})
-		console.log("Loaded user preferences");
-	},
+    window.api.loadUserPreferences().then((preferences: UserPreferences) => {
+      set({ config: { ...defaultConfig, ...preferences } });
+    });
+    console.log("Loaded user preferences");
+  },
   saveConfig: () => {
-		window.api.saveUserPreferences(useConfigStore.getState().config);
-	},
+    window.api.saveUserPreferences(useConfigStore.getState().config);
+  },
   resetConfig: () => set({ config: { ...defaultConfig } }),
 }));

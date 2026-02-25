@@ -1,14 +1,14 @@
+
 import { Keyboard, Trash } from "lucide-react";
+import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
+import AddKeybindModal from "../add-keybind-modal";
+import { useState } from "react";
 
 export default function KeybindsSection() {
-  const keybinds = [
-    { action: "New Word", keys: ["Ctrl", "N"] },
-    { action: "Search", keys: ["Ctrl", "K"] },
-    { action: "Save", keys: ["Ctrl", "S"] },
-    { action: "Quick Add", keys: ["Ctrl", "Shift", "A"] },
-    { action: "Settings", keys: ["Ctrl", ","] },
-    { action: "Toggle Sidebar", keys: ["Ctrl", "B"] },
-  ];
+  const { config, addKeybind, removeKeybind } = usePreferencesStore();
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [index, setIndex] = useState<number | null>(null);
+  const keybinds = config.keybinds || [];
 
   return (
     <div className="mb-8 mt-2">
@@ -24,7 +24,11 @@ export default function KeybindsSection() {
         {keybinds.map((keybind, index) => (
           <div
             key={index}
-            className="flex border items-center justify-between py-1 px-3 rounded-md  group gap-4"
+            onClick={() => {
+              setIndex(index);
+              setAddModalOpen(true);
+            }}
+            className="hover:bg-muted-foreground/10 cursor-pointer flex border items-center justify-between py-1 px-3 rounded-md  group gap-4"
           >
             <div className="flex py-1 items-center flex-1 gap-4">
               <div className="flex-1 gap-4">
@@ -33,7 +37,7 @@ export default function KeybindsSection() {
                   <div className="text-sm font-medium">{keybind.action}</div>
                 </div>
                 <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                  {`Press ${keybind.keys.join(' + ')}`}
+                  {keybind.keys.length > 0 ? `Press ${keybind.keys.join(' + ')}` : "No keys assigned"}
                 </div>
               </div>
             </div>
@@ -42,17 +46,34 @@ export default function KeybindsSection() {
                 {keybind.keys.map((key, keyIndex) => (
                   <kbd
                     key={keyIndex}
-                    className="px-2 py-1 text-xs font-semibold text-muted-foreground bg-muted border border-border rounded"
+                    className="px-2 py-1 text-xs font-semibold text-foreground bg-muted/30 border border-border rounded"
                   >
                     {key}
                   </kbd>
                 ))}
               </div>
-              <Trash className="h-4 w-4 text-muted-foreground group-hover:text-red-500 transition-colors" />
+              <button
+                onClick={e => {
+                  e.stopPropagation();
+                  removeKeybind(index);
+                }}
+                title="Delete keybind"
+              >
+                <Trash className="h-8 w-8 text-muted-foreground transition-colors rounded-full hover:bg-red-500 hover:text-white p-2" />
+              </button>
             </div>
           </div>
         ))}
       </div>
+      <AddKeybindModal
+        open={addModalOpen}
+        onClose={() => setAddModalOpen(false)}
+        onAdd={keybind => {
+          addKeybind(keybind, index!);
+          setAddModalOpen(false);
+        }}
+        index={index!}
+      />
     </div>
   );
 }
