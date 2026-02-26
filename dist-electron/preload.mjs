@@ -67,13 +67,25 @@ const translations = {
     return await electron.ipcRenderer.invoke("loadUserPreferences");
   }
 };
+const windowControls = {
+  minimize: async () => {
+    return await electron.ipcRenderer.invoke("window-minimize");
+  },
+  maximize: async () => {
+    return await electron.ipcRenderer.invoke("window-maximize");
+  },
+  close: async () => {
+    return await electron.ipcRenderer.invoke("window-close");
+  }
+};
 const endpoints = Object.assign(
   {},
   translations,
   markdown,
   conjugation,
   graph,
-  config
+  config,
+  windowControls
 );
 electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   on(...args) {

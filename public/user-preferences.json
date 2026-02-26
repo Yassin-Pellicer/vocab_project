@@ -14,7 +14,11 @@
   "keybinds": [
     {
       "action": "New Word",
-      "keys": []
+      "keys": [
+        "Ctrl",
+        "Alt",
+        "R"
+      ]
     },
     {
       "action": "Search",

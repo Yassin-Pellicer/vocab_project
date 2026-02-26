@@ -2,7 +2,9 @@
   "dictionaries": {
     "0ab95de2-84d0-4ab2-8873-e22bc57109f0": {
       "name": "Alemán",
-      "route": "./0ab95de2-84d0-4ab2-8873-e22bc57109f0"
+      "route": "./0ab95de2-84d0-4ab2-8873-e22bc57109f0",
+      "tenses": {},
+      "articles": {}
     }
   }
 }

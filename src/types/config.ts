@@ -1,6 +1,8 @@
 export interface DictionaryEntry {
   name: string;
   route: string;
+  tenses?: Record<string, any>;
+  articles?: Record<string, any>;
 }
 
 export interface UserConfig {

@@ -15,10 +15,9 @@ function createWindow() {
     width: 1200,
     height: 800,
     frame: true,
-    resizable: true,
-    transparent: false,
-    hasShadow: true,
-    icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
+    titleBarStyle: "hidden",
+    backgroundColor: "#ffffff",
+    hasShadow: false,
     webPreferences: {
       preload: path.join(__dirname$1, "preload.mjs")
     }
@@ -617,6 +616,29 @@ function loadUserPreferences() {
     }
   });
 }
+function minimizeWindow() {
+  ipcMain.handle("window-minimize", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    win == null ? void 0 : win.minimize();
+  });
+}
+function maximizeWindow() {
+  ipcMain.handle("window-maximize", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    if (!win) return;
+    if (win.isMaximized()) {
+      win.unmaximize();
+    } else {
+      win.maximize();
+    }
+  });
+}
+function closeWindow() {
+  ipcMain.handle("window-close", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    win == null ? void 0 : win.close();
+  });
+}
 function registerIpcHandlers() {
   loadTranslations();
   addTranslation();
@@ -636,6 +658,9 @@ function registerIpcHandlers() {
   deleteGraphEntry();
   saveUserPreferences();
   loadUserPreferences();
+  minimizeWindow();
+  maximizeWindow();
+  closeWindow();
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
