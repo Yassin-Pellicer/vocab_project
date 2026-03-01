@@ -21,6 +21,7 @@ import loadUserPreferences from "./endpoints/translations/loadUserPreferences";
 import minimizeWindow from "./endpoints/window/minimize";
 import maximizeWindow from "./endpoints/window/maximize";
 import closeWindow from "./endpoints/window/close";
+import editConfig from "./endpoints/translations/editConfig";
 
 export default function registerIpcHandlers() {
   loadTranslations();
@@ -32,6 +33,7 @@ export default function registerIpcHandlers() {
   renameDictionary();
   selectFolder();
   loadConfig();
+  editConfig();
   fetchMarkdown();
   saveMarkdown();
   fetchConjugation();

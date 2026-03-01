@@ -2,6 +2,7 @@ import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
 import { UserPreferences } from "@/types/config";
+
 export default function loadUserPreferences() {
   ipcMain.handle("loadUserPreferences", async (_event, _config: UserPreferences) => {
     try {

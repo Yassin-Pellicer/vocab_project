@@ -11,6 +11,18 @@ export default function loadConfig() {
         "user-config.json"
       );
 
+      // create parent directory if missing
+      const dir = path.dirname(filePath);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+
+      // create file with empty object if missing
+      if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, JSON.stringify({}, null, 2), "utf-8");
+        return {};
+      }
+
       const data = fs.readFileSync(filePath, "utf-8");
       const json = JSON.parse(data);
 

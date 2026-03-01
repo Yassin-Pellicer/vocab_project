@@ -363,6 +363,14 @@ function loadConfig() {
         "public",
         "user-config.json"
       );
+      const dir = path$1.dirname(filePath);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, JSON.stringify({}, null, 2), "utf-8");
+        return {};
+      }
       const data = fs.readFileSync(filePath, "utf-8");
       const json = JSON.parse(data);
       return json;
@@ -639,6 +647,32 @@ function closeWindow() {
     win == null ? void 0 : win.close();
   });
 }
+function editConfig() {
+  ipcMain.handle(
+    "editConfig",
+    async (_event, _config) => {
+      try {
+        const filePath = path$1.join(
+          process.env.APP_ROOT || __dirname,
+          "public",
+          "user-config.json"
+        );
+        if (!fs.existsSync(filePath)) {
+          fs.mkdirSync(path$1.dirname(filePath), { recursive: true });
+          fs.writeFileSync(filePath, JSON.stringify({}, null, 2), "utf-8");
+        }
+        const data = fs.readFileSync(filePath, "utf-8");
+        const json = JSON.parse(data);
+        Object.assign(json, _config);
+        fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        return json;
+      } catch (error) {
+        console.error("Error saving user preferences file:", error);
+        throw new Error("Failed to save user preferences file.");
+      }
+    }
+  );
+}
 function registerIpcHandlers() {
   loadTranslations();
   addTranslation();
@@ -649,6 +683,7 @@ function registerIpcHandlers() {
   renameDictionary();
   selectFolder();
   loadConfig();
+  editConfig();
   fetchMarkdown();
   saveMarkdown();
   fetchConjugation();

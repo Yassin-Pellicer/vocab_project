@@ -30,8 +30,8 @@ export function NavUser({
             <span className="truncate font-medium">{user.name}</span>
             <span className="truncate text-xs">{user.email}</span>
           </div>
-          <Bell size={16}></Bell>
-          <ConfigModal></ConfigModal>
+            <Bell size={16} style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}/>
+            <ConfigModal/>
         </div>
       </SidebarMenuItem>
     </SidebarMenu>

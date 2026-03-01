@@ -4,7 +4,40 @@
       "name": "Alemán",
       "route": "./0ab95de2-84d0-4ab2-8873-e22bc57109f0",
       "tenses": {},
-      "articles": {}
+      "articles": {
+        "Masculino": {
+          "Singular": "der",
+          "Plural": "die"
+        },
+        "Femenino": {
+          "Singular": "die",
+          "Plural": "die"
+        },
+        "Neutro": {
+          "Singular": "das",
+          "Plural": "die"
+        }
+      },
+      "typeWords": [
+        "Sustantivo",
+        "Verbo",
+        "Adjetivo",
+        "Determinante",
+        "Pronombre",
+        "Adverbio",
+        "Frase Hecha"
+      ],
+      "useTenses": true,
+      "useArticles": true,
+      "genders": [
+        "Masculino",
+        "Femenino",
+        "Neutro"
+      ],
+      "numbers": [
+        "Singular",
+        "Plural"
+      ]
     }
   }
 }

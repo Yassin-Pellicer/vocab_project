@@ -65,6 +65,9 @@ const translations = {
   },
   loadUserPreferences: async () => {
     return await electron.ipcRenderer.invoke("loadUserPreferences");
+  },
+  editConfig: async (newConfig) => {
+    return await electron.ipcRenderer.invoke("editConfig", newConfig);
   }
 };
 const windowControls = {

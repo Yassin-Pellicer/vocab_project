@@ -1,4 +1,4 @@
-import { EllipsisVertical, FolderSync, Pencil, Trash2 } from "lucide-react";
+import { EllipsisVertical, FolderSync, Pencil, Settings, Trash2 } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -9,6 +9,7 @@ import {
 import ChangeRouteModal from "@/components/dict/change-route-modal";
 import RenameDictModal from "@/components/dict/rename-dict-modal";
 import DeleteDictModal from "@/components/dict/delete-dict-modal";
+import ConfigureDictModal from "../dict/configure-dict-modal";
 
 type Props = {
   dictId: string;
@@ -25,6 +26,12 @@ export default function DictActionsMenu({ dictId, dictName, currentRoute }: Prop
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
+        <ConfigureDictModal dictId={dictId} dictName={dictName} currentRoute={currentRoute}>
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <Settings className="h-4 w-4 mr-2" />
+            Configure
+          </DropdownMenuItem>
+        </ConfigureDictModal>
         <ChangeRouteModal dictId={dictId} dictName={dictName} currentRoute={currentRoute}>
           <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
             <FolderSync className="h-4 w-4 mr-2" />
