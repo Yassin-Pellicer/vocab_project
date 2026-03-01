@@ -5,120 +5,9 @@ export function useVerbHooks(route: string, name?: string, isEditing?: boolean) 
   const [collapsed, setCollapsed] = useState(false);
   const { selectedWord } = useConfigStore();
   const [conjugationLoaded, setConjugationLoaded] = useState(false);
+  const { dictionaryMetadata } = useConfigStore();
 
-  const placeholder = {
-    "Indicative": {
-      "Simple": {
-        "Präsens": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-        "Präteritum": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-      },
-      "Compound": {
-        "Perfekt": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-        "Plusquamperfekt": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-        "Futur I": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-        "Futur II": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-      },
-    },
-    "Subjunctive": {
-      "Konjunktiv I": {
-        "Präsens": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-        "Perfekt": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-      },
-      "Konjunktiv II": {
-        "Präteritum": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-        "Plusquamperfekt": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-        "Würde-Form": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": "",
-        },
-      },
-    },
-    "Imperative": {
-      "Imperativ I": {
-        "Obligation": {
-          "2s": "",
-          "2p": "",
-          "3p": "",
-        }
-      }
-    }
-  };
-
-  const [conjugation, setConjugation] = useState<any>(placeholder);
+  const [conjugation, setConjugation] = useState<any>(dictionaryMetadata?.[name!]?.tenses || {});
 
   const saveConjugation = () => {
     console.log("Saving conjugation:", conjugation);
@@ -140,7 +29,7 @@ export function useVerbHooks(route: string, name?: string, isEditing?: boolean) 
         if (Object.keys(response).length !== 0) {
           setConjugation(response);
         }
-        else setConjugation(placeholder);
+        else setConjugation(conjugation);
         setConjugationLoaded(true);
       })
       .catch((error: any) => {

@@ -167,7 +167,7 @@ export default function ConfigureDictModal({
                 >
                   <Select value={hook.inputGender} onValueChange={hook.setInputGender}>
                     <SelectTrigger className="w-full">
-                      <SelectValue />
+                      <SelectValue placeholder="Select form" />
                     </SelectTrigger>
                     <SelectContent>
                       {metadata?.genders?.map(
@@ -224,7 +224,6 @@ export default function ConfigureDictModal({
                 </div>
               </div>
 
-              {/* -------------------- DEFINITE ARTICLE -------------------- */}
               <div className="flex justify-between items-center gap-2">
                 <p className="text-sm">
                   Definite article precedes nouns
