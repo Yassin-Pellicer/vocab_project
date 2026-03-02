@@ -132,5 +132,30 @@
   "34abb5a0-160a-419b-afcf-33da463412ed": {},
   "e0d1418a-edd9-48d3-8846-0b4ef368d4d5": {},
   "e91f841c-26d4-433f-a818-3761a53edea7": {},
-  "0d038005-6a60-47a8-b7c2-cdcd6f1fd709": {}
+  "0d038005-6a60-47a8-b7c2-cdcd6f1fd709": {},
+  "b244ff3e-2c16-488a-8892-e01e8cd7582a": {
+    "1482ddcf-ccfa-4ca5-a256-a42ef862c3dc": "manchmal",
+    "cafd12e8-9bf3-48f5-82f6-bedc1ec09cfc": "nie",
+    "be33079c-ff2b-45d8-a4cb-f97a17ad99d2": "selten",
+    "adc29665-9e5a-4c58-985c-22e020ce362b": "jedesmal"
+  },
+  "1482ddcf-ccfa-4ca5-a256-a42ef862c3dc": {
+    "b244ff3e-2c16-488a-8892-e01e8cd7582a": "oft"
+  },
+  "cafd12e8-9bf3-48f5-82f6-bedc1ec09cfc": {
+    "b244ff3e-2c16-488a-8892-e01e8cd7582a": "oft"
+  },
+  "be33079c-ff2b-45d8-a4cb-f97a17ad99d2": {
+    "b244ff3e-2c16-488a-8892-e01e8cd7582a": "oft"
+  },
+  "adc29665-9e5a-4c58-985c-22e020ce362b": {
+    "b244ff3e-2c16-488a-8892-e01e8cd7582a": "oft"
+  },
+  "27b900b0-8dab-4564-9680-1c6028fe90de": {},
+  "255246f6-ae40-46be-a861-ba0ab58e4093": {},
+  "43ee6df4-d0b4-47c9-a476-067d13381a2b": {},
+  "69497da7-5624-4ede-b9e5-2ecece11ff92": {},
+  "8147b07b-2d36-46dc-81ef-20e727950b35": {},
+  "2f9c4b0b-997a-4936-894a-be7bd9a866da": {},
+  "5508ca29-4c5a-4ba7-b4d1-652249911f84": {}
 }

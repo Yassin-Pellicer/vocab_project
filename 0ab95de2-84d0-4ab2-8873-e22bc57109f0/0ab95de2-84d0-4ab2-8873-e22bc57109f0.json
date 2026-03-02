@@ -7924,5 +7924,221 @@
     "dateAdded": "2026-02-04",
     "type": "adjective",
     "uuid": "0d038005-6a60-47a8-b7c2-cdcd6f1fd709"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Übung",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "ejercicio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-25",
+    "type": "noun",
+    "uuid": "27b900b0-8dab-4564-9680-1c6028fe90de"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "einfach",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "fácil",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "lecht",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "fácil",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "ligero",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-25",
+    "type": "adjective",
+    "uuid": "255246f6-ae40-46be-a861-ba0ab58e4093"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "schwer",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "difícil",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-25",
+    "type": "adjective",
+    "uuid": "43ee6df4-d0b4-47c9-a476-067d13381a2b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "essen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "comer",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "comida",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-25",
+    "type": "verb",
+    "uuid": "69497da7-5624-4ede-b9e5-2ecece11ff92"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "mittel",
+          "gender": "n",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "alimento",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "mittel",
+          "gender": "n",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "alimentos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-25",
+    "type": "noun",
+    "uuid": "8147b07b-2d36-46dc-81ef-20e727950b35"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kirschen",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Cerezas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Kirsche",
+          "gender": "f",
+          "number": "sing"
+        },
+        "translations": [
+          {
+            "word": "Cereza",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-25",
+    "type": "noun",
+    "uuid": "2f9c4b0b-997a-4936-894a-be7bd9a866da"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Sein Dran",
+          "gender": "f",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Ser el Turno",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "me/te/le toca",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Es una expresión que se traduce a como \"Es tu turno\""
+        ]
+      }
+    ],
+    "dateAdded": "2026-02-25",
+    "type": "verb",
+    "uuid": "5508ca29-4c5a-4ba7-b4d1-652249911f84"
   }
 ]
