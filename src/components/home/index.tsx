@@ -56,7 +56,7 @@ export default function Home() {
           </div>
           <div className="p-3">
             <p className="text-md tracking-tight font-semibold text-muted-foreground">Knowledge</p>
-            <p className="text-2xl font-bold text-foreground">{(totalWords / (totalDictionaries * 15000)).toFixed(3)}%</p>
+            <p className="text-2xl font-bold text-foreground">{((totalWords / (totalDictionaries * 15000)) * 100).toFixed(3)}%</p>
           </div>
         </div>
         <div className="grid 2xl:grid-cols-2 grid-cols-1 w-full">

@@ -1,10 +1,18 @@
-export interface DictionaryEntry {
+export interface Dictionary {
   name: string;
   route: string;
-}
+  tenses?: Record<string, Record<string, Record<string, string>>>;
+  articles?: Record<string, Record<string, string>>;
 
+  typeWords?: string[];
+  useTenses?: boolean;
+  useArticles?: boolean;
+
+  genders?: string[];
+  numbers?: string[];
+}
 export interface UserConfig {
-  dictionaries?: Record<string, DictionaryEntry>;
+  dictionaries?: Record<string, Dictionary>;
 }
 
 export type Keybind = { action: string; keys: string[] };
@@ -19,27 +27,87 @@ export const PRESET_KEYBINDS: Keybind[] = [
 ];
 
 export interface UserPreferences {
-  // General
   notifications?: boolean;
   notificationLifetime?: string;
   language?: string;
   timezone?: string;
   dateFormat?: string;
 
-  // Looks & Feel
   animations?: boolean;
   accentColor?: string;
   appearance?: "light" | "dark" | "system";
 
-  // Profile
   displayName?: string;
   email?: string;
   avatarPath?: string | null;
   offline?: boolean;
 
-  // Keybinds
   keybinds?: Keybind[];
 
-  // Subscription
   subscriptionPlan?: string;
 }
+
+export const defaultTenses = {
+  Indicative: {
+    Simple: {
+      Present: { "1s": "", "2s": "", "3s": "", "1p": "", "2p": "", "3p": "" },
+      Preteritum: {
+        "1s": "",
+        "2s": "",
+        "3s": "",
+        "1p": "",
+        "2p": "",
+        "3p": "",
+      },
+      Future: { "1s": "", "2s": "", "3s": "", "1p": "", "2p": "", "3p": "" },
+    },
+    Compound: {
+      "Present Perfect": { "1s": "", "2s": "", "3s": "", "1p": "", "2p": "", "3p": "" },
+      "Past Perfect": {
+        "1s": "",
+        "2s": "",
+        "3s": "",
+        "1p": "",
+        "2p": "",
+        "3p": "",
+      },
+      "Futur I": { "1s": "", "2s": "", "3s": "", "1p": "", "2p": "", "3p": "" },
+      "Futur II": {
+        "1s": "",
+        "2s": "",
+        "3s": "",
+        "1p": "",
+        "2p": "",
+        "3p": "",
+      },
+    },
+  },
+  Subjunctive: {
+    "Simple": {
+      Present: { "1s": "", "2s": "", "3s": "", "1p": "", "2p": "", "3p": "" },
+    },
+    "Compound": {
+      "Preteritum": {
+        "1s": "",
+        "2s": "",
+        "3s": "",
+        "1p": "",
+        "2p": "",
+        "3p": "",
+      },
+      "Past Perfect": {
+        "1s": "",
+        "2s": "",
+        "3s": "",
+        "1p": "",
+        "2p": "",
+        "3p": "",
+      },
+    },
+  },
+  Imperative: {
+    "Simple": {
+      "Imperative": { "2s": "", "2p": "", "3p": "" },
+    },
+  },
+};

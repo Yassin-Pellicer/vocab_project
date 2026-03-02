@@ -1,4 +1,4 @@
-import { UserPreferences } from "@/types/config";
+import { UserConfig, UserPreferences } from "@/types/config";
 import { TranslationEntry } from "@/types/translation-entry";
 import { ipcRenderer } from "electron";
 
@@ -57,5 +57,9 @@ export const translations = {
 
   loadUserPreferences: async () => {
     return await ipcRenderer.invoke("loadUserPreferences");
+  },
+
+  editConfig: async (newConfig: UserConfig) => {
+    return await ipcRenderer.invoke("editConfig", newConfig);
   }
 };

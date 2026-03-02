@@ -1,9 +1,6 @@
-import { Settings } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import AddDictModal from "@/components/dict/add-dict-modal";
-import ConfigModal from "@/components/config/config-modal";
 import { BreadcrumbNavigation } from "../breadcrumb-navigation";
-// removed unused Link import
+import { Maximize2, X, MoveDownLeft } from "lucide-react";
 
 export function AppHeader() {
   return (
@@ -11,17 +8,31 @@ export function AppHeader() {
       style={{ WebkitAppRegion: "drag" } as React.CSSProperties}
       className="bg-background sticky justify-between top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4"
     >
-      <div className="flex items-center gap-2">
+      <div
+        style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
+        className="flex items-center gap-2">
         <SidebarTrigger className="-ml-1" />
         <BreadcrumbNavigation />
       </div>
-
-      <div className="flex flex-row items-center gap-2">
-        <ConfigModal>
-          <div className="rounded-xl px-2 border border-border flex h-8 items-center justify-center cursor-pointer hover:bg-popover text-popover-foreground">
-            <Settings size={18} />
-          </div>
-        </ConfigModal>
+      <div className="flex items-center gap-1" style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}>
+        <button
+          aria-label="Minimize"
+          onClick={() => window.api?.minimize?.()}
+          className="p-1 hover:bg-gray-200 rounded cursor-pointer">
+          <MoveDownLeft size={14} />
+        </button>
+        <button
+          aria-label="Maximize"
+          onClick={() => window.api?.maximize?.()}
+          className="p-1 hover:bg-gray-200 rounded cursor-pointer">
+          <Maximize2 size={14} />
+        </button>
+        <button
+          aria-label="Close"
+          onClick={() => window.api?.close?.()}
+          className="p-1 hover:bg-red-500 hover:text-white rounded cursor-pointer">
+          <X size={14} />
+        </button>
       </div>
     </header>
   );

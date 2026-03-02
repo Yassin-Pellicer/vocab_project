@@ -3,6 +3,7 @@ import { conjugation } from "./endpoints/conjugation";
 import { graph } from "./endpoints/graph";
 import { markdown } from "./endpoints/markdown";
 import { translations } from "./endpoints/translations";
+import { windowControls } from "./endpoints/window";
 
 export const endpoints = Object.assign({}, 
   translations,
@@ -10,4 +11,5 @@ export const endpoints = Object.assign({},
   conjugation,
   graph,
   config,
+  windowControls,
 );

@@ -1,7 +1,7 @@
 {
   "notifications": true,
   "notificationLifetime": "5s",
-  "language": "es",
+  "language": "en",
   "timezone": "utc",
   "dateFormat": "ISO",
   "animations": true,
@@ -14,27 +14,46 @@
   "keybinds": [
     {
       "action": "New Word",
-      "keys": []
+      "keys": [
+        "Ctrl",
+        "N"
+      ]
     },
     {
       "action": "Search",
-      "keys": []
+      "keys": [
+        "Ctrl",
+        "K"
+      ]
     },
     {
       "action": "Save",
-      "keys": []
+      "keys": [
+        "Ctrl",
+        "S"
+      ]
     },
     {
       "action": "Quick Add",
-      "keys": []
+      "keys": [
+        "Ctrl",
+        "Shift",
+        "A"
+      ]
     },
     {
       "action": "Settings",
-      "keys": []
+      "keys": [
+        "Ctrl",
+        ","
+      ]
     },
     {
       "action": "Toggle Sidebar",
-      "keys": []
+      "keys": [
+        "Ctrl",
+        "B"
+      ]
     }
   ],
   "subscriptionPlan": "Free"

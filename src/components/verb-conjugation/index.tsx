@@ -1,14 +1,5 @@
 import { useVerbHooks } from "./hook";
 
-const pronounMap: Record<string, string> = {
-  "1s": "ich",
-  "2s": "du",
-  "3s": "er/sie/es",
-  "1p": "wir",
-  "2p": "ihr",
-  "3p": "sie/Sie",
-};
-
 export default function MarkdownEditor({
   route,
   name,
@@ -70,7 +61,7 @@ export default function MarkdownEditor({
             className="flex justify-between flex-wrap hover:bg-muted/30 dark:hover:bg-muted/40 rounded px-4 py-1 transition-colors"
           >
             <span className="text-muted-foreground text-sm mr-2">
-              {pronounMap[person] || person}
+              {person}
             </span>
             {isEditing ? (
               <input

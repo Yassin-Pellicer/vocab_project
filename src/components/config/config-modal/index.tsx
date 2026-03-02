@@ -44,7 +44,7 @@ export default function ConfigModal({ children }: { children?: React.ReactNode }
       {children ? (
         <DialogTrigger asChild>{children}</DialogTrigger>
       ) : (
-        <DialogTrigger asChild>
+        <DialogTrigger asChild style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}>
           <div className="rounded-xl px-2 border border-border flex h-8 items-center justify-center cursor-pointer hover:bg-popover text-popover-foreground">
             <Settings size={18} />
           </div>

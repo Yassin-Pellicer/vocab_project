@@ -17,6 +17,12 @@ import deleteGraphEntry from "./endpoints/graph/deleteGraphEntry";
 import saveUserPreferences from "./endpoints/translations/saveUserPreferences";
 import loadUserPreferences from "./endpoints/translations/loadUserPreferences";
 
+// window control handlers
+import minimizeWindow from "./endpoints/window/minimize";
+import maximizeWindow from "./endpoints/window/maximize";
+import closeWindow from "./endpoints/window/close";
+import editConfig from "./endpoints/translations/editConfig";
+
 export default function registerIpcHandlers() {
   loadTranslations();
   addTranslation();
@@ -27,6 +33,7 @@ export default function registerIpcHandlers() {
   renameDictionary();
   selectFolder();
   loadConfig();
+  editConfig();
   fetchMarkdown();
   saveMarkdown();
   fetchConjugation();
@@ -36,4 +43,9 @@ export default function registerIpcHandlers() {
   deleteGraphEntry();
   saveUserPreferences();
   loadUserPreferences();
+
+  // register window controls last
+  minimizeWindow();
+  maximizeWindow();
+  closeWindow();
 }

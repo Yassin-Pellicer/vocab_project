@@ -1,7 +1,6 @@
 import { ChevronLeft, ChevronRight, Search, X, ArrowLeftRight, ListOrdered, SquareSplitHorizontal, Filter, TreesIcon } from "lucide-react";
 import useTranslationHooks from "./hook";
 import AddWordModal from "./add-word-modal";
-import AddDictModal from "./add-dict-modal";
 import WordCard from "../word-card";
 import Markdown from "@/components/markdown-display";
 import { useConfigStore } from "@/context/dictionary-context";
