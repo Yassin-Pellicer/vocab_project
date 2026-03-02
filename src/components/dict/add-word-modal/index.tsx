@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OriginalTranslationPair } from "@/types/original-translation-pair";
+import { useConfigStore } from "@/context/dictionary-context";
 
 const AddTranslationModal = forwardRef<
   HTMLButtonElement,
@@ -41,6 +42,8 @@ const AddTranslationModal = forwardRef<
     handleSubmit,
     setFormData,
   } = useWordModalHooks({ route, name });
+  const { dictionaryMetadata } = useConfigStore();
+  const dict = dictionaryMetadata?.[name];
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -52,7 +55,9 @@ const AddTranslationModal = forwardRef<
             className="!bg-primary !rounded-xl !px-2 py-4.5 !flex !h-8 !items-center !justify-center !cursor-pointer hover:!bg-primary/90 transition-colors"
           >
             <WholeWord className="text-primary-foreground" size={18} />
-            <p className="text-lg text-primary-foreground leading-none pb-1">+</p>
+            <p className="text-lg text-primary-foreground leading-none pb-1">
+              +
+            </p>
           </button>
         </DialogTrigger>
 
@@ -67,7 +72,10 @@ const AddTranslationModal = forwardRef<
           <div className="flex flex-col w-full gap-4">
             {formData.pair.map(
               (pair: OriginalTranslationPair, pairIndex: number) => (
-                <div key={pairIndex} className="bg-muted/10 dark:bg-muted/10 relative rounded-xl">
+                <div
+                  key={pairIndex}
+                  className="bg-muted/10 dark:bg-muted/10 relative rounded-xl"
+                >
                   <p className="font-semibold text-lg border-1 dark:border-border border-border rounded-t-xl p-2 flex items-center gap-2 text-foreground dark:text-foreground">
                     <WholeWord size={24} className="" /> Pair {pairIndex + 1}
                     {pairIndex === 0 && (
@@ -105,7 +113,7 @@ const AddTranslationModal = forwardRef<
                         placeholder="e.g., casa"
                         required
                       />
-                      <div className="flex flex-row gap-2 mt-2">
+                      <div className="grid grid-cols-2 gap-2 mt-2">
                         <Select
                           value={pair.original.gender}
                           onValueChange={(val) =>
@@ -118,17 +126,18 @@ const AddTranslationModal = forwardRef<
                             )
                           }
                         >
-                          <SelectTrigger>
+                          <SelectTrigger className="w-full">
                             <SelectValue placeholder="Select gender" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="-">None</SelectItem>
-                            <SelectItem value="m">Masculine</SelectItem>
-                            <SelectItem value="f">Feminine</SelectItem>
-                            <SelectItem value="n">Neuter</SelectItem>
+                            <SelectItem value={"-"}>-</SelectItem>
+                            {dict.genders?.map((gender: string) => (
+                              <SelectItem key={gender} value={gender}>
+                                {gender}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
-
                         <Select
                           value={pair.original.number}
                           onValueChange={(val) =>
@@ -145,9 +154,12 @@ const AddTranslationModal = forwardRef<
                             <SelectValue placeholder="Select number" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="-">None</SelectItem>
-                            <SelectItem value="sing">Singular</SelectItem>
-                            <SelectItem value="plural">Plural</SelectItem>
+                            <SelectItem value={"-"}>-</SelectItem>
+                            {dict.numbers?.map((number: string) => (
+                              <SelectItem key={number} value={number}>
+                                {number}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                       </div>
@@ -267,17 +279,14 @@ const AddTranslationModal = forwardRef<
             }
           >
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="noun" />
+              <SelectValue placeholder={dict.typeWords?.[0] || "Select type"} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="noun">Sustantivo</SelectItem>
-              <SelectItem value="verb">Verbo</SelectItem>
-              <SelectItem value="adjective">Adjetivo</SelectItem>
-              <SelectItem value="adverb">Adverbio</SelectItem>
-              <SelectItem value="preposition">Preposición</SelectItem>
-              <SelectItem value="determiner">Determinante</SelectItem>
-              <SelectItem value="pronoun">Pronombre</SelectItem>
-              <SelectItem value="conjunction">Conjunción</SelectItem>
+              {dict.typeWords?.map((typeWord: string) => (
+                <SelectItem key={typeWord} value={typeWord}>
+                  {typeWord}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
 

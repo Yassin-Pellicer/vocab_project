@@ -215,7 +215,7 @@ export default function DictionaryGraph({
 
       {tooltipWord && (
         <div className="max-w-3/4 border rounded-xl absolute flex top-3.5 ml-2.5 right-4 z-10 bg-card p-4 shadow-lg pointer-events-none border-border text-card-foreground">
-          <WordCard word={tooltipWord} />
+          <WordCard name={name} word={tooltipWord} />
         </div>
       )}
 

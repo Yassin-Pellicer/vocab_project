@@ -2,8 +2,13 @@ import { useState, useEffect } from "react";
 import { useConfigStore } from "@/context/dictionary-context";
 import { defaultTenses } from "@/types/config";
 
-export default function useConfigureTenseModal(dictId?: string) {
-  const { dictionaryMetadata, setDictionaryTenses } = useConfigStore();
+export default function useConfigureTenseModal(dictId: string) {
+  const { dictionaryMetadata, setDictionaryTenses, setTypeWordWithTenses } = useConfigStore();
+    const [
+    selectTypeWordWithTenses,
+    setSelectTypeWordWithTenses,
+  ] = useState(dictionaryMetadata?.[dictId]?.typeWordWithTenses || "");
+
 
   const getStoredStructure = () => {
     if (dictId && dictionaryMetadata[dictId]?.tenses) {
@@ -39,11 +44,19 @@ export default function useConfigureTenseModal(dictId?: string) {
       .catch((err) => console.error("Failed to read file", err));
   };
 
+  const saveTypeWordWithTenses = (typeWord: string) => {
+    setSelectTypeWordWithTenses(typeWord);
+    setTypeWordWithTenses(dictId, typeWord);
+  }
+
   return {
     structure,
+    metadata: dictionaryMetadata?.[dictId],
     setStructure,
     reset,
     save,
     loadFromFile,
+    selectTypeWordWithTenses,
+    saveTypeWordWithTenses,
   };
 }

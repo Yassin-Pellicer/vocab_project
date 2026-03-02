@@ -73,7 +73,7 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-md p-4 rounded-2xl border border-border">
                 <div className="flex flex-col min-h-0">
-                  <WordCard word={dict.wordOfTheDay} />
+                  <WordCard name={dict.id} word={dict.wordOfTheDay} />
                   <div className="flex flex-col gap-2 mt-4">
                     <Link
                       to={`/dictionary?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}

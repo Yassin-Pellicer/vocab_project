@@ -126,28 +126,46 @@
         "Neutro": {
           "Singular": "das",
           "Plural": "die"
+        },
+        "Maskulin": {
+          "Singular": "der",
+          "Plural": "die"
+        },
+        "Neutrum": {
+          "Singular": "das",
+          "Plural": "die"
+        },
+        "Feminin": {
+          "Singular": "die",
+          "Plural": "die"
         }
       },
       "typeWords": [
-        "Sustantivo",
-        "Verbo",
-        "Adjetivo",
-        "Determinante",
-        "Pronombre",
-        "Adverbio",
-        "Frase Hecha"
+        "Nomen",
+        "Verben",
+        "Adjektive",
+        "Determiner",
+        "Pronomen",
+        "Adverbien",
+        "Präpositionen",
+        "Konjunktionen",
+        "Interjektionen",
+        "Partikeln",
+        "Redewendungen"
       ],
       "useTenses": true,
       "useArticles": true,
       "genders": [
-        "Femenino",
-        "Neutro",
-        "Masculino"
+        "Maskulin",
+        "Neutrum",
+        "Feminin"
       ],
       "numbers": [
         "Singular",
         "Plural"
-      ]
+      ],
+      "typeWordWithPrecededArticle": "Nomen",
+      "typeWordWithTenses": "Verben"
     }
   }
 }

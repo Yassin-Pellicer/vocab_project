@@ -11,9 +11,10 @@ import {
 import { Label } from "@/components/ui/label";
 import useConfigureTenseModal from "./hook";
 import { RefreshCw } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface ConfigureTenseModalProps {
-  dictId?: string;
+  dictId: string;
   dictName?: string;
   children: React.ReactNode;
 }
@@ -24,7 +25,7 @@ export default function ConfigureTenseModal({
   children,
 }: ConfigureTenseModalProps) {
   const hook = useConfigureTenseModal(dictId);
-
+  const { metadata } = hook;
   return (
     <Dialog onOpenChange={(open) => { if (!open) hook.reset(); }}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -70,6 +71,21 @@ export default function ConfigureTenseModal({
               <DialogDescription>
                 You can check out <a href="https://github.com/your-repo/your-docs" target="_blank" className="underline">our webpage</a> for info on configuring tense structures and to download already set up configs for your language.
               </DialogDescription>
+               <Select
+                    value={hook.selectTypeWordWithTenses}
+                    onValueChange={hook.saveTypeWordWithTenses}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select form" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {metadata?.typeWords?.map((form: string) => (
+                        <SelectItem key={form} value={form}>
+                          {form}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
             </div>
             <DialogFooter>
               <Button type="submit" onClick={hook.save}>

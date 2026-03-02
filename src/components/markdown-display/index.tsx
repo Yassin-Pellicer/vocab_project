@@ -55,7 +55,7 @@ export default function MarkdownEditor({
     <div className="flex overflow-hidden h-[calc(100vh-160px)] items-center flex-col mx-auto mt-4">
       {/* Header */}
       <div className={`px-4 max-w-[800px] ${word.type == "verb" ? "pb-6" : ""}  w-full ${collapsed ? "hidden" : ""}`}>
-        <WordCard word={word} />
+        <WordCard name={name} word={word} />
         {word.type == "verb" && <div className="flex flex-row mt-6 justify-around divide-x w-full">
           <button onClick={() => setSelectOption("notes")}
             className={`border-b w-full cursor-pointer border-r-0 text-sm pb-1 ${selectOption === "notes" ? "border-b-2 border-primary text-primary" : "text-muted-foreground"}`}>

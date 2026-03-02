@@ -10,6 +10,7 @@ export default function useChangeRouteModalHooks(dictId: string) {
     setDictionaryArticles,
     setDictionaryUseTenses,
     setDictionaryUseArticles,
+    setTypeWordWithPrecededArticle,
   } = useConfigStore();
 
   const [inputTypeWord, setInputTypeWord] = useState("");
@@ -17,9 +18,13 @@ export default function useChangeRouteModalHooks(dictId: string) {
   const [inputNumber, setInputNumber] = useState("");
   const [selectedForm, setSelectedForm] = useState("");
   const [genderNumberInput, setGenderNumberInput] = useState("");
+  const [
+    selectTypeWordWithPrecededArticle,
+    setSelectTypeWordWithPrecededArticle,
+  ] = useState(dictionaryMetadata?.[dictId]?.typeWordWithPrecededArticle || "");
 
   const [selectedWordType, setSelectedWordType] = useState(
-    dictionaryMetadata?.[dictId]?.typeWords?.[0] || ""
+    dictionaryMetadata?.[dictId]?.typeWords?.[0] || "",
   );
 
   const addTypeWord = () => {
@@ -37,9 +42,7 @@ export default function useChangeRouteModalHooks(dictId: string) {
   const removeTypeWord = (word: string) => {
     setDictionaryTypeWords(
       dictId,
-      (dictionaryMetadata?.[dictId]?.typeWords || []).filter(
-        (w) => w !== word
-      )
+      (dictionaryMetadata?.[dictId]?.typeWords || []).filter((w) => w !== word),
     );
   };
 
@@ -58,9 +61,7 @@ export default function useChangeRouteModalHooks(dictId: string) {
   const removeGender = (gender: string) => {
     setDictionaryGenders(
       dictId,
-      (dictionaryMetadata?.[dictId]?.genders || []).filter(
-        (g) => g !== gender
-      )
+      (dictionaryMetadata?.[dictId]?.genders || []).filter((g) => g !== gender),
     );
   };
 
@@ -79,12 +80,9 @@ export default function useChangeRouteModalHooks(dictId: string) {
   const removeNumber = (number: string) => {
     setDictionaryNumbers(
       dictId,
-      (dictionaryMetadata?.[dictId]?.numbers || []).filter(
-        (n) => n !== number
-      )
+      (dictionaryMetadata?.[dictId]?.numbers || []).filter((n) => n !== number),
     );
   };
-
 
   const handleFormAdd = () => {
     const trimmed = genderNumberInput.trim();
@@ -102,7 +100,7 @@ export default function useChangeRouteModalHooks(dictId: string) {
       ]);
     }
     setGenderNumberInput("");
-  }
+  };
 
   const setArticleValue = (gender: string, number: string, value: string) => {
     const currentArticles = dictionaryMetadata?.[dictId]?.articles || {};
@@ -122,6 +120,11 @@ export default function useChangeRouteModalHooks(dictId: string) {
   const setUseArticles = (checked: boolean) => {
     setDictionaryUseArticles(dictId, checked);
   };
+
+  const setPrecededArticleTypeWord = (typeWord: string) => {
+    setSelectTypeWordWithPrecededArticle(typeWord);
+    setTypeWordWithPrecededArticle(dictId, typeWord);
+  }
 
   return {
     dictionaryMetadata,
@@ -152,5 +155,8 @@ export default function useChangeRouteModalHooks(dictId: string) {
     setArticleValue,
     setUseTenses,
     setUseArticles,
+
+    selectTypeWordWithPrecededArticle,
+    setPrecededArticleTypeWord,
   };
 }

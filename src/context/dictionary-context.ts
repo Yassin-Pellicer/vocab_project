@@ -43,6 +43,9 @@ interface ConfigState {
   setDictionaryGenders: (key: string, genders: string[]) => void;
   setDictionaryNumbers: (key: string, numbers: string[]) => void;
 
+  setTypeWordWithPrecededArticle: (key: string, typeWord: string) => void;
+  setTypeWordWithTenses: (key: string, typeWord: string) => void;
+
   loadConfig: () => Promise<void>;
   saveConfig: () => Promise<void>;
   editConfig: () => Promise<void>;
@@ -155,7 +158,6 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
     get().editConfig();
   },
 
-  // ---------- NUMBERS ----------
   setDictionaryNumbers: (key, numbers) => {
     set((state) => {
       if (!state.dictionaryMetadata[key]) return state;
@@ -205,6 +207,38 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
       };
     });
 
+    get().editConfig();
+  },
+
+  setTypeWordWithPrecededArticle: (key, typeWord) => {
+    set((state) => {
+      if (!state.dictionaryMetadata[key]) return state;
+      return {
+        dictionaryMetadata: {
+          ...state.dictionaryMetadata,
+          [key]: {
+            ...state.dictionaryMetadata[key],
+            typeWordWithPrecededArticle: typeWord,
+          },
+        },
+      };
+    });
+    get().editConfig();
+  },
+
+  setTypeWordWithTenses: (key, typeWord) => {
+    set((state) => {
+      if (!state.dictionaryMetadata[key]) return state;
+      return {
+        dictionaryMetadata: {
+          ...state.dictionaryMetadata,
+          [key]: {
+            ...state.dictionaryMetadata[key],
+            typeWordWithTenses: typeWord,
+          },
+        },
+      };
+    });
     get().editConfig();
   },
 

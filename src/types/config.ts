@@ -10,6 +10,9 @@ export interface Dictionary {
 
   genders?: string[];
   numbers?: string[];
+
+  typeWordWithPrecededArticle: string;
+  typeWordWithTenses: string;
 }
 export interface UserConfig {
   dictionaries?: Record<string, Dictionary>;

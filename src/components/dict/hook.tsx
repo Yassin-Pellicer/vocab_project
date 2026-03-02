@@ -39,17 +39,9 @@ export default function useTranslationHooks({
   const searchRef = useRef<HTMLInputElement>(null);
   const addWordButtonRef = useRef<HTMLButtonElement>(null);
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const { dictionaryMetadata } = useConfigStore();
 
-  const availableTypes = useMemo(() => {
-    if (!list) return [];
-    const typesSet = new Set<string>();
-    list.forEach((word) => {
-      if (word.type) {
-        typesSet.add(word.type);
-      }
-    });
-    return Array.from(typesSet).sort();
-  }, [list]);
+  const availableTypes = useState(dictionaryMetadata?.[name]?.typeWords || [])?.[0] || [];
 
   const filteredWords = useMemo(() => {
     if (!list) return [];

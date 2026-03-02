@@ -4,8 +4,8 @@
       {
         "original": {
           "word": "Weisheit",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -23,7 +23,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "319b1225-1f4a-4e5f-b79e-a1c8f5955641"
   },
   {
@@ -31,8 +31,8 @@
       {
         "original": {
           "word": "Wahrheit",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -51,7 +51,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "88eaaf24-76f0-4f8e-8fba-c348131a800b"
   },
   {
@@ -59,8 +59,8 @@
       {
         "original": {
           "word": "Mut",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -78,7 +78,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "4c5d54e1-f6d4-4197-be94-67cccb78a008"
   },
   {
@@ -86,8 +86,8 @@
       {
         "original": {
           "word": "Glück",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -104,7 +104,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "151fc9de-16b6-4a6e-a14d-ecd0388d9012"
   },
   {
@@ -112,8 +112,8 @@
       {
         "original": {
           "word": "Tod",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -131,7 +131,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "ea6bd3fd-50f1-46db-8560-e0d8ce4e8ab9"
   },
   {
@@ -139,8 +139,8 @@
       {
         "original": {
           "word": "Frieden",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -159,7 +159,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "b3efde64-d992-490c-bebf-fa485d65b12e"
   },
   {
@@ -167,8 +167,8 @@
       {
         "original": {
           "word": "Schönheit",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -185,7 +185,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "da9e0196-9417-43be-a022-b27dee2bce34"
   },
   {
@@ -193,8 +193,8 @@
       {
         "original": {
           "word": "Hass",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -211,7 +211,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "6dcf210c-82e5-41ef-92a2-4fc09e21851a"
   },
   {
@@ -219,8 +219,8 @@
       {
         "original": {
           "word": "Leben",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -239,7 +239,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "fb96e578-a598-42bb-ac1d-93b5fea51a58"
   },
   {
@@ -247,8 +247,8 @@
       {
         "original": {
           "word": "Taschenrechner",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -264,7 +264,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "339ccc0e-3b6b-4722-8115-19e4533b451d"
   },
   {
@@ -272,8 +272,8 @@
       {
         "original": {
           "word": "Gerechtigkeit",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -292,7 +292,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "2915c4a8-e107-452f-a9a1-61718711ebc5"
   },
   {
@@ -300,8 +300,8 @@
       {
         "original": {
           "word": "Freude",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -319,7 +319,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "ce5a87dc-61b9-4f3f-9cfd-b3182297a120"
   },
   {
@@ -327,8 +327,8 @@
       {
         "original": {
           "word": "Schwamm",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -344,7 +344,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "b7d7a905-60c1-4e8e-be0f-9344521cde42"
   },
   {
@@ -352,8 +352,8 @@
       {
         "original": {
           "word": "Liebe",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -374,7 +374,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "13ecfd48-6e68-451e-a954-862a2b8ff26c"
   },
   {
@@ -382,8 +382,8 @@
       {
         "original": {
           "word": "Zeit",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -403,7 +403,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "23e7fabd-f418-4db3-b49d-25284147cdc5"
   },
   {
@@ -411,8 +411,8 @@
       {
         "original": {
           "word": "Wissen",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -431,7 +431,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "8313efb9-4f81-44dd-a13c-827559998bc2"
   },
   {
@@ -439,8 +439,8 @@
       {
         "original": {
           "word": "Traum",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -459,7 +459,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "761ba5cc-1ef6-477a-903a-0f07521eb3b3"
   },
   {
@@ -467,8 +467,8 @@
       {
         "original": {
           "word": "Kugelschreiber",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -484,7 +484,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "094b8016-d645-41ee-bf4b-9e2093cdc45c"
   },
   {
@@ -492,8 +492,8 @@
       {
         "original": {
           "word": "Freundschaft",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -510,7 +510,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "97a55955-23f5-48d3-b71a-16432de6e018"
   },
   {
@@ -518,8 +518,8 @@
       {
         "original": {
           "word": "Hoffnung",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -537,7 +537,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "eed8387b-aad4-479d-ae11-86a6305cd626"
   },
   {
@@ -545,8 +545,8 @@
       {
         "original": {
           "word": "Farbe",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -563,7 +563,7 @@
       {
         "original": {
           "word": "Farben",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -579,7 +579,7 @@
       }
     ],
     "dateAdded": "2025-11-26",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "84d30737-295e-4731-ad8f-4048e7420d75"
   },
   {
@@ -602,7 +602,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "54899f37-4c0f-46c6-a021-2f21a32c5784"
   },
   {
@@ -625,7 +625,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "0e525875-c877-4aea-af3b-d6968c7dc8ca"
   },
   {
@@ -648,7 +648,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "16473b68-abb0-47d6-9fc9-ed1a77435408"
   },
   {
@@ -656,8 +656,8 @@
       {
         "original": {
           "word": "Ahnung",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -671,53 +671,16 @@
       }
     ],
     "dateAdded": "2025-11-26",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "41751751-6e2c-4d66-baf3-4aa254857560"
   },
   {
     "pair": [
       {
         "original": {
-          "word": "Artz",
-          "gender": "m",
-          "number": "sing"
-        },
-        "translations": [
-          {
-            "word": "Médico",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Ärtzin",
-          "gender": "f",
-          "number": "sing"
-        },
-        "translations": [
-          {
-            "word": "Médica",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-10",
-    "type": "",
-    "uuid": "46767a3b-6adb-41f3-95ed-e0f84bb30513"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Boxer",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -733,8 +696,8 @@
       {
         "original": {
           "word": "Boxerin",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -749,7 +712,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "6cf59f35-368e-41ca-9e2b-f8ea51b33471"
   },
   {
@@ -757,8 +720,8 @@
       {
         "original": {
           "word": "Nachrichten-sprecher",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -774,8 +737,8 @@
       {
         "original": {
           "word": "Nachrichten-sprecherin",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -790,7 +753,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "e5e1c597-0a86-43a6-b458-d16d76819d0b"
   },
   {
@@ -798,8 +761,8 @@
       {
         "original": {
           "word": "Feuerwehrmann",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -813,8 +776,8 @@
       {
         "original": {
           "word": "Feuerwehrfrau",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -827,7 +790,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "f57433e1-aa6a-4891-b60e-8af2b030edd0"
   },
   {
@@ -851,7 +814,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "e2bec568-6e23-4e8f-9a2d-f31f97f5db03"
   },
   {
@@ -859,8 +822,8 @@
       {
         "original": {
           "word": "Saft",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -874,7 +837,7 @@
       {
         "original": {
           "word": "Säfte",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -888,7 +851,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "065f86eb-ed7e-4095-a151-5b62b655c22b"
   },
   {
@@ -896,8 +859,8 @@
       {
         "original": {
           "word": "Ei",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -911,7 +874,7 @@
       {
         "original": {
           "word": "Eier",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "plural"
         },
         "translations": [
@@ -925,7 +888,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "e06b4974-5f91-4bae-b7cc-c7b9cc5f9968"
   },
   {
@@ -933,8 +896,8 @@
       {
         "original": {
           "word": "Brille",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -947,7 +910,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "e1755457-f595-4e29-8d10-7f261832ce30"
   },
   {
@@ -955,8 +918,8 @@
       {
         "original": {
           "word": "Tasche",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -969,7 +932,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "f3e74fdc-86ee-4fc4-ac7d-2ff5df595c29"
   },
   {
@@ -977,8 +940,8 @@
       {
         "original": {
           "word": "günstig",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -991,7 +954,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "35aef121-9d26-420d-93d5-2ae09116d565"
   },
   {
@@ -999,8 +962,8 @@
       {
         "original": {
           "word": "seife",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1013,7 +976,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "3bfb2d23-c8f5-4215-8469-97d3d15a3d1c"
   },
   {
@@ -1021,8 +984,8 @@
       {
         "original": {
           "word": "bürste",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1035,7 +998,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "e0c309a2-aba3-41e9-a508-bff26f8c6549"
   },
   {
@@ -1044,7 +1007,7 @@
         "original": {
           "word": "Entschuldigung",
           "gender": "-",
-          "number": "sing"
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1059,7 +1022,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "02f636cb-fe07-407a-a99c-0669e17fb725"
   },
   {
@@ -1067,8 +1030,8 @@
       {
         "original": {
           "word": "Brot",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1081,7 +1044,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "17efb89f-efc8-4454-947a-433da30d3b7c"
   },
   {
@@ -1089,8 +1052,8 @@
       {
         "original": {
           "word": "Milch",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1105,7 +1068,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "b1f012f1-784b-4634-8522-720784f4a1fd"
   },
   {
@@ -1113,8 +1076,8 @@
       {
         "original": {
           "word": "Zucker",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1129,7 +1092,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "795fe5ff-332e-4c7e-adbd-a9d7df19adbf"
   },
   {
@@ -1137,8 +1100,8 @@
       {
         "original": {
           "word": "Wurst",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1152,7 +1115,7 @@
       {
         "original": {
           "word": "Würstchen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -1166,7 +1129,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "ba5242d6-61aa-46d3-9c47-2e3a40ee0211"
   },
   {
@@ -1174,8 +1137,8 @@
       {
         "original": {
           "word": "tabelle",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1196,7 +1159,7 @@
       {
         "original": {
           "word": "Wochentage",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -1211,7 +1174,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2"
   },
   {
@@ -1219,8 +1182,8 @@
       {
         "original": {
           "word": "Traurigkeit",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1237,7 +1200,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "25d0a5e1-fe3b-41da-bc66-4d756b36efce"
   },
   {
@@ -1245,8 +1208,8 @@
       {
         "original": {
           "word": "Deutsch",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1262,7 +1225,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "5313e5d9-ae3b-4da4-b933-cd81a29a2905"
   },
   {
@@ -1270,7 +1233,7 @@
       {
         "original": {
           "word": "Schuler",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": ""
         },
         "translations": [
@@ -1288,7 +1251,7 @@
       {
         "original": {
           "word": "Schulerin",
-          "gender": "f",
+          "gender": "Feminin",
           "number": ""
         },
         "translations": [
@@ -1305,7 +1268,7 @@
       }
     ],
     "dateAdded": "2025-12-01",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "6a7665b2-430a-42e3-8b34-eb5d30b32d36"
   },
   {
@@ -1330,7 +1293,7 @@
       }
     ],
     "dateAdded": "2025-11-24",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "a708896a-8e9d-446c-9548-541f75e8a899"
   },
   {
@@ -1353,7 +1316,7 @@
       }
     ],
     "dateAdded": "2025-11-24",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "a0b56246-04b2-4225-9fd4-6b2471d931b4"
   },
   {
@@ -1376,7 +1339,7 @@
       }
     ],
     "dateAdded": "2025-11-26",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "b40871ac-dd2e-49d4-87d8-5ed243afe397"
   },
   {
@@ -1399,7 +1362,7 @@
       }
     ],
     "dateAdded": "2025-11-26",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "a34de8da-8044-4210-8966-64ed0b5f87a9"
   },
   {
@@ -1422,7 +1385,7 @@
       }
     ],
     "dateAdded": "2025-11-26",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "1264dc9f-1d09-4fe3-922d-7c6e77738b03"
   },
   {
@@ -1445,7 +1408,7 @@
       }
     ],
     "dateAdded": "2025-11-26",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "f3c9a3a8-75e5-4aa5-b642-320d51826b4c"
   },
   {
@@ -1453,8 +1416,8 @@
       {
         "original": {
           "word": "Artikel",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1470,7 +1433,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "77aed605-0143-4703-82aa-ceae04127ad4"
   },
   {
@@ -1478,8 +1441,8 @@
       {
         "original": {
           "word": "Freiheit",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1498,7 +1461,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "51e863be-7e12-4bb3-8c43-e00788142ade"
   },
   {
@@ -1506,8 +1469,8 @@
       {
         "original": {
           "word": "Kraft",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1527,7 +1490,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "50c97b51-20cf-4924-930e-7cc91509d211"
   },
   {
@@ -1552,7 +1515,7 @@
       }
     ],
     "dateAdded": "2025-11-24",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "00525f2f-29d9-4846-9d3d-37de7930f1f8"
   },
   {
@@ -1575,7 +1538,7 @@
       }
     ],
     "dateAdded": "2025-11-26",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "42ef9469-efef-42b5-af1e-a68c27f83eff"
   },
   {
@@ -1583,8 +1546,8 @@
       {
         "original": {
           "word": "Tafel",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1598,7 +1561,7 @@
       }
     ],
     "dateAdded": "2025-11-24",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "275cfe38-2405-47b6-b059-7e856c8f5021"
   },
   {
@@ -1606,8 +1569,8 @@
       {
         "original": {
           "word": "Haar",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1621,7 +1584,7 @@
       }
     ],
     "dateAdded": "2025-11-24",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "e11ec06d-cc7e-4cc4-806c-c6ef8009666e"
   },
   {
@@ -1629,8 +1592,8 @@
       {
         "original": {
           "word": "Ferien",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1644,7 +1607,7 @@
       }
     ],
     "dateAdded": "2025-11-24",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "555dfedc-ac01-480b-b10f-e145bbaa8ba2"
   },
   {
@@ -1652,8 +1615,8 @@
       {
         "original": {
           "word": "Fenster",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1667,7 +1630,7 @@
       }
     ],
     "dateAdded": "2025-11-24",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "13189152-139d-4ccc-b197-09cb2a57215c"
   },
   {
@@ -1675,8 +1638,8 @@
       {
         "original": {
           "word": "Preis",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -1693,7 +1656,7 @@
       }
     ],
     "dateAdded": "2025-11-26",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "1ca902f8-0cf2-468a-a51d-688b0ead3921"
   },
   {
@@ -1717,7 +1680,7 @@
       }
     ],
     "dateAdded": "2025-12-10",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "04964efd-783d-47d6-8228-f623a3193ae3"
   },
   {
@@ -1740,7 +1703,7 @@
       }
     ],
     "dateAdded": "2025-11-19",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "a35008d9-14b8-4a66-9e88-0ac879e95897"
   },
   {
@@ -1769,7 +1732,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "47f3207a-ea7f-4560-b507-2f1f334a5a86"
   },
   {
@@ -1794,7 +1757,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "f5e810bf-db62-41a3-a243-893272fc9f02"
   },
   {
@@ -1816,7 +1779,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "a7e03ca6-4f76-4182-9865-7c128b6272cf"
   },
   {
@@ -1840,7 +1803,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "24fa680b-6d65-46da-93ec-2926447864a0"
   },
   {
@@ -1865,7 +1828,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "c86f9045-ac8c-4930-8056-0329d2153861"
   },
   {
@@ -1889,7 +1852,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "ac62a36e-6e0c-471c-8e57-b98d608e0cc2"
   },
   {
@@ -1913,7 +1876,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "18b0bd00-6d48-4ceb-8a3c-1ce723f3ef57"
   },
   {
@@ -1937,7 +1900,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "567f22b3-c2c5-406a-b041-91e81ffce977"
   },
   {
@@ -1959,7 +1922,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "34ecaff0-750e-43c0-b408-b8785c25dbb3"
   },
   {
@@ -1981,7 +1944,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "3801c636-5117-4849-aa2b-66fde7f6111b"
   },
   {
@@ -2003,7 +1966,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "e70bcc77-c82c-404f-ac00-25ce50e79e29"
   },
   {
@@ -2025,7 +1988,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "6ef03ff3-2714-4fa6-ab24-707c59a793ea"
   },
   {
@@ -2047,7 +2010,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "329ea065-6a3d-4530-a504-d7a593ca2812"
   },
   {
@@ -2074,7 +2037,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "d014dae3-f982-4913-be56-3a49b1577c85"
   },
   {
@@ -2096,7 +2059,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "effcb329-af37-4e49-8275-1f337e9b3213"
   },
   {
@@ -2118,7 +2081,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "382caf0e-79fe-4f14-b507-4c3e72119fd2"
   },
   {
@@ -2140,7 +2103,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "c39db9e6-a204-4c0c-8a3a-cf1d9e0206f8"
   },
   {
@@ -2162,7 +2125,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "0b8a19be-a99b-414b-a711-33f2deca62b0"
   },
   {
@@ -2184,7 +2147,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "7f469b0f-9de7-4a55-a08e-ca32281fd255"
   },
   {
@@ -2206,7 +2169,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "738602f5-e0a4-41b6-87be-5609b9cd735c"
   },
   {
@@ -2233,7 +2196,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "db063ef2-2051-44ab-ab27-327fe52f1ebe"
   },
   {
@@ -2241,8 +2204,8 @@
       {
         "original": {
           "word": "Ich",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2258,8 +2221,8 @@
       {
         "original": {
           "word": "Mich",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2275,8 +2238,8 @@
       {
         "original": {
           "word": "Mir",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2292,8 +2255,8 @@
       {
         "original": {
           "word": "Meiner",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2308,7 +2271,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "03dd5b0a-57b8-4a59-bdb4-ba8335606e4b"
   },
   {
@@ -2317,7 +2280,7 @@
         "original": {
           "word": "Du",
           "gender": "m/f",
-          "number": "sing"
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2334,7 +2297,7 @@
         "original": {
           "word": "Dich",
           "gender": "m/f",
-          "number": "sing"
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2351,7 +2314,7 @@
         "original": {
           "word": "Dir",
           "gender": "m/f",
-          "number": "sing"
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2368,7 +2331,7 @@
         "original": {
           "word": "Deiner",
           "gender": "m/f",
-          "number": "sing"
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2383,7 +2346,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "03dd5b0a-57b8-4a59-bdb4-524gnifosgo"
   },
   {
@@ -2391,14 +2354,14 @@
       {
         "original": {
           "word": "Er",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "él",
-            "gender": "m",
-            "number": "sing"
+            "gender": "Maskulin",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2408,14 +2371,14 @@
       {
         "original": {
           "word": "Ihn",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "lo",
-            "gender": "m",
-            "number": "sing"
+            "gender": "Maskulin",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2425,14 +2388,14 @@
       {
         "original": {
           "word": "Ihm",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "a él",
-            "gender": "m",
-            "number": "sing"
+            "gender": "Maskulin",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2442,14 +2405,14 @@
       {
         "original": {
           "word": "Seiner",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "de él",
-            "gender": "m",
-            "number": "sing"
+            "gender": "Maskulin",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2458,7 +2421,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "03dd5b0a-57bapodfjsp8-4a59-bdb4-ba8335606e4b"
   },
   {
@@ -2466,14 +2429,14 @@
       {
         "original": {
           "word": "Sie",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "ella",
-            "gender": "f",
-            "number": "sing"
+            "gender": "Feminin",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2483,14 +2446,14 @@
       {
         "original": {
           "word": "Sie",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "la",
-            "gender": "f",
-            "number": "sing"
+            "gender": "Feminin",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2500,14 +2463,14 @@
       {
         "original": {
           "word": "Ihr",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "a ella",
-            "gender": "f",
-            "number": "sing"
+            "gender": "Feminin",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2517,14 +2480,14 @@
       {
         "original": {
           "word": "Ihrer",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "de ella",
-            "gender": "f",
-            "number": "sing"
+            "gender": "Feminin",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2533,7 +2496,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "03dd5b0a-57b8-4a59-bdb4-adofnogadngoiadnfgb"
   },
   {
@@ -2541,14 +2504,14 @@
       {
         "original": {
           "word": "Es",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "ello",
-            "gender": "n",
-            "number": "sing"
+            "gender": "Neutrum",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2558,14 +2521,14 @@
       {
         "original": {
           "word": "Es",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "lo",
-            "gender": "n",
-            "number": "sing"
+            "gender": "Neutrum",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2575,14 +2538,14 @@
       {
         "original": {
           "word": "Ihm",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "a ello",
-            "gender": "n",
-            "number": "sing"
+            "gender": "Neutrum",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2592,14 +2555,14 @@
       {
         "original": {
           "word": "Seiner",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
             "word": "de ello",
-            "gender": "n",
-            "number": "sing"
+            "gender": "Neutrum",
+            "number": "Singular"
           }
         ],
         "definitions": [
@@ -2608,7 +2571,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "03dd5b0a-57dfafgdasb8-4a59-bdb4-ba8335606e4b"
   },
   {
@@ -2617,13 +2580,13 @@
         "original": {
           "word": "Wir",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "nosotros/as",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2634,13 +2597,13 @@
         "original": {
           "word": "Uns",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "nos",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2651,13 +2614,13 @@
         "original": {
           "word": "Uns",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "a nosotros/as",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2668,13 +2631,13 @@
         "original": {
           "word": "Unser",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "de nosotros/as",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2683,7 +2646,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "03dd5b0a-57b8-4fsghhga59-bdb4-ba8335606e4b"
   },
   {
@@ -2692,13 +2655,13 @@
         "original": {
           "word": "Ihr",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "vosotros/as",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2709,13 +2672,13 @@
         "original": {
           "word": "Euch",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "os",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2726,13 +2689,13 @@
         "original": {
           "word": "Euch",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "a vosotros/as",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2743,13 +2706,13 @@
         "original": {
           "word": "Euer",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "de vosotros/as",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2758,7 +2721,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "03dd5b0a-57b8-4a59-bdb4-ba8335606e4hjku6ejy5h5b"
   },
   {
@@ -2767,13 +2730,13 @@
         "original": {
           "word": "Sie",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "ellos/as",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2784,13 +2747,13 @@
         "original": {
           "word": "Sie",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "los/las",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2801,13 +2764,13 @@
         "original": {
           "word": "Ihnen",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "a ellos/as",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2818,13 +2781,13 @@
         "original": {
           "word": "Ihrer",
           "gender": "m/f",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
             "word": "de ellos/as",
             "gender": "",
-            "number": "plur"
+            "number": "Plural"
           }
         ],
         "definitions": [
@@ -2833,7 +2796,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "03dd5b0a-57b8-4a59-bdb4-ba85uyherweth335606e4b"
   },
   {
@@ -2908,7 +2871,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "pronoun",
+    "type": "Pronomen",
     "uuid": "03dd5b0a-57b8-4a59-bdb4-ba8335606e4bgnow4nthijwpht"
   },
   {
@@ -2916,8 +2879,8 @@
       {
         "original": {
           "word": "Party",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2931,7 +2894,7 @@
       {
         "original": {
           "word": "Partys",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -2945,7 +2908,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "0e476db1-5001-4a8f-ba67-4e0e01cf93af"
   },
   {
@@ -2953,8 +2916,8 @@
       {
         "original": {
           "word": "Chef",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2968,8 +2931,8 @@
       {
         "original": {
           "word": "Chefin",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -2983,7 +2946,7 @@
       {
         "original": {
           "word": "Chefs",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -2998,7 +2961,7 @@
       {
         "original": {
           "word": "Chefinnen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -3012,7 +2975,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "5ec68a3f-0943-4f4a-9cf1-52a87b3428cf"
   },
   {
@@ -3034,7 +2997,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "49af014f-ed52-4b9d-afa3-f22f34803abe"
   },
   {
@@ -3042,8 +3005,8 @@
       {
         "original": {
           "word": "Film",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3057,7 +3020,7 @@
       {
         "original": {
           "word": "Filme",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -3071,7 +3034,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "9cd202f3-cb28-4831-9c01-bfcf4a1e9f3d"
   },
   {
@@ -3079,8 +3042,8 @@
       {
         "original": {
           "word": "der",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3096,8 +3059,8 @@
       {
         "original": {
           "word": "die",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3113,8 +3076,8 @@
       {
         "original": {
           "word": "das",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3131,7 +3094,7 @@
         "original": {
           "word": "die",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -3146,7 +3109,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "b1a1c3d4-0001-4a9b-9001-aaaa00000001"
   },
   {
@@ -3154,8 +3117,8 @@
       {
         "original": {
           "word": "den",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3171,8 +3134,8 @@
       {
         "original": {
           "word": "die",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3188,8 +3151,8 @@
       {
         "original": {
           "word": "das",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3206,7 +3169,7 @@
         "original": {
           "word": "die",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -3221,7 +3184,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "b1a1c3d4-0002-4a9b-9002-aaaa00000002"
   },
   {
@@ -3229,8 +3192,8 @@
       {
         "original": {
           "word": "dem",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3246,8 +3209,8 @@
       {
         "original": {
           "word": "der",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3263,8 +3226,8 @@
       {
         "original": {
           "word": "dem",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3281,7 +3244,7 @@
         "original": {
           "word": "den",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -3296,7 +3259,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "b1a1c3d4-0003-4a9b-9003-aaaa00000003"
   },
   {
@@ -3304,8 +3267,8 @@
       {
         "original": {
           "word": "des",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3321,8 +3284,8 @@
       {
         "original": {
           "word": "der",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3338,8 +3301,8 @@
       {
         "original": {
           "word": "des",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3356,7 +3319,7 @@
         "original": {
           "word": "der",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -3371,7 +3334,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "b1a1c3d4-0004-4a9b-9004-aaaa00000004"
   },
   {
@@ -3379,8 +3342,8 @@
       {
         "original": {
           "word": "Fahrrad",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3394,7 +3357,7 @@
       {
         "original": {
           "word": "Fährrader",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -3408,7 +3371,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "c1f00e66-751e-457e-8e66-33abca7cd786"
   },
   {
@@ -3416,8 +3379,8 @@
       {
         "original": {
           "word": "Erzieher",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3436,7 +3399,7 @@
       {
         "original": {
           "word": "Erzieherin",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -3451,7 +3414,7 @@
       {
         "original": {
           "word": "Erzieherinnen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -3465,7 +3428,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "17e8312c-9447-4cfe-a01f-1a1a196a3cd5"
   },
   {
@@ -3473,8 +3436,8 @@
       {
         "original": {
           "word": "Pflegefachmann",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3488,7 +3451,7 @@
       {
         "original": {
           "word": "Pflegefachfrau",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -3503,7 +3466,7 @@
       {
         "original": {
           "word": "Pflegefachfrauen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -3518,7 +3481,7 @@
       {
         "original": {
           "word": "Pflegefachmänner",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -3532,7 +3495,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "687bca98-e26a-4f2d-b22a-a04e9331c65c"
   },
   {
@@ -3540,8 +3503,8 @@
       {
         "original": {
           "word": "Handy",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3555,7 +3518,7 @@
       {
         "original": {
           "word": "Handys",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "plural"
         },
         "translations": [
@@ -3569,7 +3532,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "ac173a96-0cde-4d27-ae7c-04ba16660f71"
   },
   {
@@ -3577,8 +3540,8 @@
       {
         "original": {
           "word": "Anmeldung",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3592,7 +3555,7 @@
       {
         "original": {
           "word": "Anmeldunger",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -3606,7 +3569,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "fd9a55ba-49b4-439a-bc09-697103dda899"
   },
   {
@@ -3614,8 +3577,8 @@
       {
         "original": {
           "word": "Zahl",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3629,7 +3592,7 @@
       {
         "original": {
           "word": "Zahlen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -3643,7 +3606,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "692c00ef-d8ed-4d6d-b36e-a0d7d6e47bff"
   },
   {
@@ -3680,7 +3643,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "8d995f08-f475-4292-b60e-281803d73bad"
   },
   {
@@ -3688,8 +3651,8 @@
       {
         "original": {
           "word": "Supermarkt",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3703,7 +3666,7 @@
       {
         "original": {
           "word": "Supermärkte",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -3717,7 +3680,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "cb01475e-2225-4e1a-b94b-90b0a78947fb"
   },
   {
@@ -3725,8 +3688,8 @@
       {
         "original": {
           "word": "Besuch",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3740,7 +3703,7 @@
       {
         "original": {
           "word": "Besuche",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -3754,7 +3717,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "3232abef-eea5-4044-b20a-7381bea37c3e"
   },
   {
@@ -3762,8 +3725,8 @@
       {
         "original": {
           "word": "eigentlich",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3786,7 +3749,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "2efd6831-0bcc-47e0-98e8-b48bca25396a"
   },
   {
@@ -3794,8 +3757,8 @@
       {
         "original": {
           "word": "mein",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3811,8 +3774,8 @@
       {
         "original": {
           "word": "meine",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3828,8 +3791,8 @@
       {
         "original": {
           "word": "mein",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3846,7 +3809,7 @@
         "original": {
           "word": "meine",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -3861,7 +3824,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-mein-001"
   },
   {
@@ -3869,8 +3832,8 @@
       {
         "original": {
           "word": "dein",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3886,8 +3849,8 @@
       {
         "original": {
           "word": "deine",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3903,8 +3866,8 @@
       {
         "original": {
           "word": "dein",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3921,7 +3884,7 @@
         "original": {
           "word": "deine",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -3936,7 +3899,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-dein-002"
   },
   {
@@ -3944,8 +3907,8 @@
       {
         "original": {
           "word": "sein",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3961,8 +3924,8 @@
       {
         "original": {
           "word": "seine",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3978,8 +3941,8 @@
       {
         "original": {
           "word": "sein",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -3996,7 +3959,7 @@
         "original": {
           "word": "seine",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4011,7 +3974,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-sein-003"
   },
   {
@@ -4019,8 +3982,8 @@
       {
         "original": {
           "word": "ihr",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4036,8 +3999,8 @@
       {
         "original": {
           "word": "ihre",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4053,8 +4016,8 @@
       {
         "original": {
           "word": "ihr",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4071,7 +4034,7 @@
         "original": {
           "word": "ihre",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4086,7 +4049,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-ihr-004"
   },
   {
@@ -4094,8 +4057,8 @@
       {
         "original": {
           "word": "unser",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4111,8 +4074,8 @@
       {
         "original": {
           "word": "unsere",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4128,8 +4091,8 @@
       {
         "original": {
           "word": "unser",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4146,7 +4109,7 @@
         "original": {
           "word": "unsere",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4161,7 +4124,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-unser-005"
   },
   {
@@ -4169,8 +4132,8 @@
       {
         "original": {
           "word": "euer",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4186,8 +4149,8 @@
       {
         "original": {
           "word": "eure",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4203,8 +4166,8 @@
       {
         "original": {
           "word": "euer",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4221,7 +4184,7 @@
         "original": {
           "word": "eure",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4236,7 +4199,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-euer-006"
   },
   {
@@ -4244,7 +4207,7 @@
       {
         "original": {
           "word": "Ihr",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "sing/plur"
         },
         "translations": [
@@ -4261,7 +4224,7 @@
       {
         "original": {
           "word": "Ihre",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "sing/plur"
         },
         "translations": [
@@ -4278,7 +4241,7 @@
       {
         "original": {
           "word": "Ihr",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "sing/plur"
         },
         "translations": [
@@ -4296,7 +4259,7 @@
         "original": {
           "word": "Ihre",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4311,7 +4274,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-ihr-formal-007"
   },
   {
@@ -4319,8 +4282,8 @@
       {
         "original": {
           "word": "meinen",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4336,8 +4299,8 @@
       {
         "original": {
           "word": "meine",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4353,8 +4316,8 @@
       {
         "original": {
           "word": "mein",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4371,7 +4334,7 @@
         "original": {
           "word": "meine",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4386,7 +4349,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-mein-acc-001"
   },
   {
@@ -4394,8 +4357,8 @@
       {
         "original": {
           "word": "deinen",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4411,8 +4374,8 @@
       {
         "original": {
           "word": "deine",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4428,8 +4391,8 @@
       {
         "original": {
           "word": "dein",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4446,7 +4409,7 @@
         "original": {
           "word": "deine",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4461,7 +4424,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-dein-acc-002"
   },
   {
@@ -4469,8 +4432,8 @@
       {
         "original": {
           "word": "seinen",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4486,8 +4449,8 @@
       {
         "original": {
           "word": "seine",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4503,8 +4466,8 @@
       {
         "original": {
           "word": "sein",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4521,7 +4484,7 @@
         "original": {
           "word": "seine",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4536,7 +4499,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-sein-acc-003"
   },
   {
@@ -4544,8 +4507,8 @@
       {
         "original": {
           "word": "ihren",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4561,8 +4524,8 @@
       {
         "original": {
           "word": "ihre",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4578,8 +4541,8 @@
       {
         "original": {
           "word": "ihr",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4596,7 +4559,7 @@
         "original": {
           "word": "ihre",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4611,7 +4574,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-ihr-acc-004"
   },
   {
@@ -4619,8 +4582,8 @@
       {
         "original": {
           "word": "unseren",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4636,8 +4599,8 @@
       {
         "original": {
           "word": "unsere",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4653,8 +4616,8 @@
       {
         "original": {
           "word": "unser",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4671,7 +4634,7 @@
         "original": {
           "word": "unsere",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4686,7 +4649,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-unser-acc-005"
   },
   {
@@ -4694,8 +4657,8 @@
       {
         "original": {
           "word": "euren",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4711,8 +4674,8 @@
       {
         "original": {
           "word": "eure",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4728,8 +4691,8 @@
       {
         "original": {
           "word": "euer",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4746,7 +4709,7 @@
         "original": {
           "word": "eure",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4761,7 +4724,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-euer-acc-006"
   },
   {
@@ -4769,7 +4732,7 @@
       {
         "original": {
           "word": "Ihren",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "sing/plur"
         },
         "translations": [
@@ -4786,7 +4749,7 @@
       {
         "original": {
           "word": "Ihre",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "sing/plur"
         },
         "translations": [
@@ -4803,7 +4766,7 @@
       {
         "original": {
           "word": "Ihr",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "sing/plur"
         },
         "translations": [
@@ -4821,7 +4784,7 @@
         "original": {
           "word": "Ihre",
           "gender": "m/f/n",
-          "number": "plur"
+          "number": "Plural"
         },
         "translations": [
           {
@@ -4836,7 +4799,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "pos-det-ihr-formal-acc-007"
   },
   {
@@ -4844,8 +4807,8 @@
       {
         "original": {
           "word": "einen",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4861,8 +4824,8 @@
       {
         "original": {
           "word": "eine",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4899,7 +4862,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "fa603b8e-2de4-4885-95bb-be2b5fntebg8fb840"
   },
   {
@@ -4907,8 +4870,8 @@
       {
         "original": {
           "word": "kein",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4924,8 +4887,8 @@
       {
         "original": {
           "word": "keine",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4941,8 +4904,8 @@
       {
         "original": {
           "word": "kein",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -4979,7 +4942,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "fa603b8e-2de4-4885-95bb-be1b5f8fb8afghrjtjue40"
   },
   {
@@ -4987,8 +4950,8 @@
       {
         "original": {
           "word": "keinen",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5004,8 +4967,8 @@
       {
         "original": {
           "word": "keine",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5021,8 +4984,8 @@
       {
         "original": {
           "word": "kein",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5059,7 +5022,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "fa603b8e-2de4-4885-95bb-be1b5f8fafgb840"
   },
   {
@@ -5067,8 +5030,8 @@
       {
         "original": {
           "word": "Gestern",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5082,7 +5045,7 @@
       }
     ],
     "dateAdded": "2025-11-24",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "d6b1d7a2-b7ce-4788-bbf8-aa1ebfc33f89"
   },
   {
@@ -5090,8 +5053,8 @@
       {
         "original": {
           "word": "Gast",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5105,7 +5068,7 @@
       {
         "original": {
           "word": "Gäste",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -5120,8 +5083,8 @@
       {
         "original": {
           "word": "Gästin",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5135,7 +5098,7 @@
       {
         "original": {
           "word": "Gästinen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -5149,7 +5112,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "f2b08345-5c47-4be5-aeaf-a1277da62b87"
   },
   {
@@ -5171,7 +5134,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "0b042cc8-2ab1-4346-918a-cd7dee53146a"
   },
   {
@@ -5179,8 +5142,8 @@
       {
         "original": {
           "word": "Stadt",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5194,7 +5157,7 @@
       {
         "original": {
           "word": "Städte",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -5208,7 +5171,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "6d2dc735-e93b-48bb-a259-60a97cd6d32d"
   },
   {
@@ -5230,7 +5193,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "9fe39e27-0830-4141-88f2-bf49b8cc094c"
   },
   {
@@ -5238,8 +5201,8 @@
       {
         "original": {
           "word": "Bild",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5258,7 +5221,7 @@
       {
         "original": {
           "word": "Bilder",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "plural"
         },
         "translations": [
@@ -5272,7 +5235,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "a1c24b96-ae83-4e6d-912c-c22ca76fc03d"
   },
   {
@@ -5280,8 +5243,8 @@
       {
         "original": {
           "word": "Gegenstand",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5295,7 +5258,7 @@
       {
         "original": {
           "word": "Gegenstände",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -5309,7 +5272,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "b100c4d1-0456-453d-9420-88de913fa13f"
   },
   {
@@ -5317,8 +5280,8 @@
       {
         "original": {
           "word": "Schlüssel",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5332,7 +5295,7 @@
       {
         "original": {
           "word": "Schlüsseln",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -5346,7 +5309,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "9fc101a7-b4aa-4b89-9ed0-25285d24c8bc"
   },
   {
@@ -5354,8 +5317,8 @@
       {
         "original": {
           "word": "Kopfhörer",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5371,7 +5334,7 @@
       }
     ],
     "dateAdded": "2025-11-26",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "b65f8f77-287b-42c3-ab76-1e076a41cc83"
   },
   {
@@ -5379,8 +5342,8 @@
       {
         "original": {
           "word": "Flasche",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5394,7 +5357,7 @@
       {
         "original": {
           "word": "Flaschen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -5408,7 +5371,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "d00ba35c-e90f-478c-8662-86bbdc3b8204"
   },
   {
@@ -5416,8 +5379,8 @@
       {
         "original": {
           "word": "Stift",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5431,7 +5394,7 @@
       {
         "original": {
           "word": "Stifte",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -5445,7 +5408,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "3d0e9e96-3f97-449e-9107-aed0b9f03366"
   },
   {
@@ -5453,8 +5416,8 @@
       {
         "original": {
           "word": "Portemonnaie",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5468,7 +5431,7 @@
       {
         "original": {
           "word": "Portemonnaies",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "plural"
         },
         "translations": [
@@ -5482,7 +5445,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "646570da-215b-4b66-986c-a234a14dad18"
   },
   {
@@ -5490,8 +5453,8 @@
       {
         "original": {
           "word": "Buch",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5505,7 +5468,7 @@
       {
         "original": {
           "word": "Bücher",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "plural"
         },
         "translations": [
@@ -5519,7 +5482,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "a652c9c2-a11d-4f9d-b4a0-a59a827fac4a"
   },
   {
@@ -5527,8 +5490,8 @@
       {
         "original": {
           "word": "Glas",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5542,7 +5505,7 @@
       {
         "original": {
           "word": "Gläser",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "plural"
         },
         "translations": [
@@ -5556,7 +5519,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "5e1cd291-1ef8-426b-886c-91a5267b5bac"
   },
   {
@@ -5564,8 +5527,8 @@
       {
         "original": {
           "word": "Stuhl",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5579,7 +5542,7 @@
       {
         "original": {
           "word": "Stühle",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -5593,7 +5556,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "e247b180-5824-437c-9e0b-bc511aca02f2"
   },
   {
@@ -5601,8 +5564,8 @@
       {
         "original": {
           "word": "ein",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5618,8 +5581,8 @@
       {
         "original": {
           "word": "eine",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5657,8 +5620,8 @@
       {
         "original": {
           "word": "ein",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5671,7 +5634,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "fa603b8e-2de4-4885-95bb-be2bhrstgrwyj5f8fb840"
   },
   {
@@ -5679,8 +5642,8 @@
       {
         "original": {
           "word": "Teilnehmer",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5699,8 +5662,8 @@
       {
         "original": {
           "word": "Teilnehmerin",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5714,7 +5677,7 @@
       {
         "original": {
           "word": "Teilnehmerinnen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -5728,7 +5691,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "8f8140df-4d81-4517-b4e9-cb257d18290c"
   },
   {
@@ -5750,7 +5713,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "1fd2efc8-665b-4e70-b5a4-a27a2d2e123e"
   },
   {
@@ -5772,7 +5735,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "d237835b-068b-450e-8e75-45cfb212e115"
   },
   {
@@ -5794,7 +5757,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "1f61d34b-c5d5-4606-8fd3-74c96d6af71c"
   },
   {
@@ -5802,8 +5765,8 @@
       {
         "original": {
           "word": "Mensche",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5819,7 +5782,7 @@
       {
         "original": {
           "word": "Menschen",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -5835,7 +5798,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "bbf6844c-d0ce-4a38-bb36-686bd3d22de0"
   },
   {
@@ -5843,8 +5806,8 @@
       {
         "original": {
           "word": "Herausforderung",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5858,7 +5821,7 @@
       {
         "original": {
           "word": "Herausforderungen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -5872,7 +5835,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "bda31ffc-5502-499e-bf37-5d2c80a50fc4"
   },
   {
@@ -5894,7 +5857,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "77b486b8-d679-48ed-a385-66ac00b969ad"
   },
   {
@@ -5902,8 +5865,8 @@
       {
         "original": {
           "word": "Schiff",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5917,7 +5880,7 @@
       {
         "original": {
           "word": "Schiffe",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "plural"
         },
         "translations": [
@@ -5931,7 +5894,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "bd915c46-7012-44ae-b72f-6091109f7c7d"
   },
   {
@@ -5939,8 +5902,8 @@
       {
         "original": {
           "word": "Arbeit",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -5954,7 +5917,7 @@
       {
         "original": {
           "word": "Arbeiten",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -5968,7 +5931,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "54bf5ba9-29c7-46f6-b76f-a0663674730f"
   },
   {
@@ -5990,7 +5953,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "7e8e014a-be9a-45ea-964b-3817ec4ca605"
   },
   {
@@ -6014,7 +5977,7 @@
       }
     ],
     "dateAdded": "2025-12-17",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "bae45cdd-378f-4f05-95d7-3531742d7dad"
   },
   {
@@ -6022,8 +5985,8 @@
       {
         "original": {
           "word": "Künste",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6036,7 +5999,7 @@
       }
     ],
     "dateAdded": "2025-12-17",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "b037e342-e4fd-476e-86ff-483ffe30210c"
   },
   {
@@ -6044,8 +6007,8 @@
       {
         "original": {
           "word": "Wissenschaft",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6058,7 +6021,7 @@
       }
     ],
     "dateAdded": "2025-12-17",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "7b869c7f-a0c5-4b9b-a4c4-39520eaddef8"
   },
   {
@@ -6095,7 +6058,7 @@
       }
     ],
     "dateAdded": "2025-12-17",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "26b08a30-a8f4-4bbe-a3d4-57567da2c0db"
   },
   {
@@ -6103,8 +6066,8 @@
       {
         "original": {
           "word": "Fahrer",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6123,8 +6086,8 @@
       {
         "original": {
           "word": "Fahrerin",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6138,7 +6101,7 @@
       {
         "original": {
           "word": "Fahrerinnen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -6152,7 +6115,7 @@
       }
     ],
     "dateAdded": "2025-12-17",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "31ff53c3-9314-49fe-89ab-1801c1df11a4"
   },
   {
@@ -6174,7 +6137,7 @@
       }
     ],
     "dateAdded": "2025-12-17",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "bd6e617a-380d-4e6e-bc0d-c4c063fe953c"
   },
   {
@@ -6196,7 +6159,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "578c2b89-ae19-4039-bf41-4f2d16d3862e"
   },
   {
@@ -6218,7 +6181,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "1a865a7a-6346-448c-8ad4-f499848e03ca"
   },
   {
@@ -6226,8 +6189,8 @@
       {
         "original": {
           "word": "Montag",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6240,7 +6203,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "3c9ee78e-976f-4625-9157-d0f5a7e1628f"
   },
   {
@@ -6248,8 +6211,8 @@
       {
         "original": {
           "word": "Dienstag",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6262,7 +6225,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "09291336-33e1-4321-be0a-3011dfadc1d0"
   },
   {
@@ -6270,8 +6233,8 @@
       {
         "original": {
           "word": "Mittwoch",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6284,7 +6247,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "b2a57a61-1374-4e03-a160-9987f29c9650"
   },
   {
@@ -6292,8 +6255,8 @@
       {
         "original": {
           "word": "Donnerstag",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6306,7 +6269,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "04afba97-eefe-4763-993f-1218f955e4ea"
   },
   {
@@ -6314,8 +6277,8 @@
       {
         "original": {
           "word": "Freitag",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6328,7 +6291,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "34d797b4-ce98-47a5-abed-a3c7ff0cdae4"
   },
   {
@@ -6336,8 +6299,8 @@
       {
         "original": {
           "word": "Samstag",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6350,7 +6313,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "82da61a6-775c-49eb-88f3-da1877420d7e"
   },
   {
@@ -6358,8 +6321,8 @@
       {
         "original": {
           "word": "Sonntag",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6372,7 +6335,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "35c5b1b1-8260-4907-89a4-0c011f309679"
   },
   {
@@ -6380,8 +6343,8 @@
       {
         "original": {
           "word": "Tag",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6394,7 +6357,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "bc10c1a1-83db-42e4-a738-cf926c51114b"
   },
   {
@@ -6402,8 +6365,8 @@
       {
         "original": {
           "word": "Mittag",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6416,7 +6379,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "49aac7f0-2587-4fd2-aeb2-a5d8a0349a87"
   },
   {
@@ -6424,8 +6387,8 @@
       {
         "original": {
           "word": "Nichts",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6438,7 +6401,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "fbb18db0-745f-4ddf-8978-eb8ad80a1ca3"
   },
   {
@@ -6446,8 +6409,8 @@
       {
         "original": {
           "word": "Andere",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6461,7 +6424,7 @@
       {
         "original": {
           "word": "Anderen",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "plural"
         },
         "translations": [
@@ -6475,7 +6438,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "24a64e7c-e00d-4f6b-8d83-3261c3db70e9"
   },
   {
@@ -6483,8 +6446,8 @@
       {
         "original": {
           "word": "Treffen",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6499,7 +6462,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "afee4eff-d4a4-43a2-ba63-e135c8cedad8"
   },
   {
@@ -6507,8 +6470,8 @@
       {
         "original": {
           "word": "Wochenende",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6521,7 +6484,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "af701e60-9789-4eff-bc01-9610ae94117c"
   },
   {
@@ -6529,8 +6492,8 @@
       {
         "original": {
           "word": "etwas",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6545,7 +6508,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "9a5adcfc-2581-4649-a187-bf06614dbe9b"
   },
   {
@@ -6567,7 +6530,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "68fec4a6-bf10-4bf1-b39f-7dffdd0e21df"
   },
   {
@@ -6591,7 +6554,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "48869265-1050-48bc-8181-be73fb8ecd48"
   },
   {
@@ -6599,8 +6562,8 @@
       {
         "original": {
           "word": "Haus",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6613,7 +6576,7 @@
       }
     ],
     "dateAdded": "2026-01-12",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "f3c87bb5-9e3d-47df-97ad-cef1d09d29c0"
   },
   {
@@ -6650,7 +6613,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "adc29665-9e5a-4c58-985c-22e020ce362b"
   },
   {
@@ -6672,7 +6635,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "1482ddcf-ccfa-4ca5-a256-a42ef862c3dc"
   },
   {
@@ -6694,7 +6657,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "be33079c-ff2b-45d8-a4cb-f97a17ad99d2"
   },
   {
@@ -6716,7 +6679,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "cafd12e8-9bf3-48f5-82f6-bedc1ec09cfc"
   },
   {
@@ -6738,7 +6701,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "20724c00-4769-4afa-8521-b99ea89c88b8"
   },
   {
@@ -6746,8 +6709,8 @@
       {
         "original": {
           "word": "Ausbildung",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6762,7 +6725,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "b0bd6cb1-50f9-4424-af5f-61257a3867bf"
   },
   {
@@ -6784,7 +6747,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "948d8f21-787b-4b8b-9952-5c26dd29b1fc"
   },
   {
@@ -6821,7 +6784,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "b244ff3e-2c16-488a-8892-e01e8cd7582a"
   },
   {
@@ -6829,8 +6792,8 @@
       {
         "original": {
           "word": "Vater",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6843,7 +6806,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "8a6a46bf-0a5e-41ce-9129-438d45346295"
   },
   {
@@ -6851,8 +6814,8 @@
       {
         "original": {
           "word": "Mutter",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6865,7 +6828,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "3a75ac1d-3910-4b20-b545-5cbbafd8336d"
   },
   {
@@ -6873,7 +6836,7 @@
       {
         "original": {
           "word": "Eltern",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -6887,7 +6850,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "29622e93-73da-4f4d-aa0f-fe16a9d0138b"
   },
   {
@@ -6895,7 +6858,7 @@
       {
         "original": {
           "word": "Grosseltern",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -6909,7 +6872,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "08abb7ab-1a54-45a7-bfdf-ddb36467d352"
   },
   {
@@ -6917,8 +6880,8 @@
       {
         "original": {
           "word": "Tochter",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6931,7 +6894,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "1b93337d-fa7f-4ff0-929e-9cee084e70e5"
   },
   {
@@ -6939,8 +6902,8 @@
       {
         "original": {
           "word": "Sohn",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6953,7 +6916,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "5763a459-e776-4c77-977f-db5a00834230"
   },
   {
@@ -6961,8 +6924,8 @@
       {
         "original": {
           "word": "Bruder",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6975,7 +6938,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "1dfa9417-f54f-468e-b1af-923bf7e20f5b"
   },
   {
@@ -6983,8 +6946,8 @@
       {
         "original": {
           "word": "Schwester",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -6997,7 +6960,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "72802a50-da42-4edd-b617-8e32d475ae5e"
   },
   {
@@ -7005,8 +6968,8 @@
       {
         "original": {
           "word": "Familien",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7019,7 +6982,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "045939f2-892d-47e7-95cb-4694d97899d2"
   },
   {
@@ -7027,7 +6990,7 @@
       {
         "original": {
           "word": "Geschwister",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -7043,7 +7006,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "1aa46516-940d-421d-b144-9eb5fb9e0f17"
   },
   {
@@ -7051,7 +7014,7 @@
       {
         "original": {
           "word": "Kinder",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -7068,8 +7031,8 @@
       {
         "original": {
           "word": "Kind",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7089,7 +7052,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b"
   },
   {
@@ -7114,7 +7077,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "2f51d3c0-2bfd-4fc8-8d3b-6be86a6b2a0e"
   },
   {
@@ -7136,7 +7099,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "98ba7f77-580a-4427-aed4-d2240fd5c5c2"
   },
   {
@@ -7158,7 +7121,7 @@
       }
     ],
     "dateAdded": "2025-12-15",
-    "type": "preposition",
+    "type": "Präpositionen",
     "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
   },
   {
@@ -7166,8 +7129,8 @@
       {
         "original": {
           "word": "Enkelin",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7181,8 +7144,8 @@
       {
         "original": {
           "word": "Enkelin",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7195,7 +7158,7 @@
       }
     ],
     "dateAdded": "2026-01-26",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "1f150895-7043-4df0-9103-1add669ff04c"
   },
   {
@@ -7203,8 +7166,8 @@
       {
         "original": {
           "word": "Nichte",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7218,8 +7181,8 @@
       {
         "original": {
           "word": "Neffe",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7232,7 +7195,7 @@
       }
     ],
     "dateAdded": "2026-01-26",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "66a6373c-5da9-42c3-b30a-629d092ba3fc"
   },
   {
@@ -7240,8 +7203,8 @@
       {
         "original": {
           "word": "Famillienstand",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7254,7 +7217,7 @@
       }
     ],
     "dateAdded": "2026-01-26",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "2edc15bb-1dd3-4146-a678-09c5ef0c6144"
   },
   {
@@ -7262,8 +7225,8 @@
       {
         "original": {
           "word": "leidig",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7278,7 +7241,7 @@
       }
     ],
     "dateAdded": "2026-01-26",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "9faeec9d-687c-48ae-9780-a39dcbc9f1d0"
   },
   {
@@ -7286,8 +7249,8 @@
       {
         "original": {
           "word": "Beiziehung",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7302,7 +7265,7 @@
       }
     ],
     "dateAdded": "2026-01-26",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "84913bcc-3777-44ce-aa67-600fee670a9f"
   },
   {
@@ -7310,8 +7273,8 @@
       {
         "original": {
           "word": "Schwieger",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7326,7 +7289,7 @@
       }
     ],
     "dateAdded": "2026-01-26",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "b9ad1f8e-2e66-4407-80c0-c30102468c7e"
   },
   {
@@ -7348,7 +7311,7 @@
       }
     ],
     "dateAdded": "2026-01-26",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "e1ac13e2-c26d-47cc-bfd6-a1190be14919"
   },
   {
@@ -7356,8 +7319,8 @@
       {
         "original": {
           "word": "Name",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7371,7 +7334,7 @@
       {
         "original": {
           "word": "Namen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -7385,7 +7348,7 @@
       }
     ],
     "dateAdded": "2025-12-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "72d0ca19-9386-4db8-9585-0fff665ae715"
   },
   {
@@ -7393,8 +7356,8 @@
       {
         "original": {
           "word": "Geburtstag",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7407,7 +7370,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "12f56dab-42f8-4183-ad4f-6644d42c4801"
   },
   {
@@ -7429,7 +7392,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "preposition",
+    "type": "Präpositionen",
     "uuid": "ba97a0e0-b08d-453d-a30b-a3bade71eeea"
   },
   {
@@ -7437,8 +7400,8 @@
       {
         "original": {
           "word": "Unterschrift",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7453,7 +7416,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "61ccd5dc-bf96-464b-a44d-0e10ed9765d9"
   },
   {
@@ -7461,8 +7424,8 @@
       {
         "original": {
           "word": "gericht",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7478,7 +7441,7 @@
       {
         "original": {
           "word": "gerichte",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "plural"
         },
         "translations": [
@@ -7494,7 +7457,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "3c0e7334-cb59-4105-897f-1807d381c652"
   },
   {
@@ -7516,7 +7479,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "d97df50e-1258-407a-bc88-59d4393ce6b8"
   },
   {
@@ -7524,8 +7487,8 @@
       {
         "original": {
           "word": "spass",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7538,7 +7501,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "dd8a9644-0ec8-487e-a341-0c493a107790"
   },
   {
@@ -7547,7 +7510,7 @@
         "original": {
           "word": "dabei",
           "gender": "-",
-          "number": "sing"
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7560,7 +7523,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "determiner",
+    "type": "Determiner",
     "uuid": "4d29f661-e993-474e-8614-a88b03784a72"
   },
   {
@@ -7569,7 +7532,7 @@
         "original": {
           "word": "wenn",
           "gender": "-",
-          "number": "sing"
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7584,7 +7547,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "adverb",
+    "type": "Adverbien",
     "uuid": "f35b89ef-40a1-456a-8f44-7008307c9599"
   },
   {
@@ -7592,8 +7555,8 @@
       {
         "original": {
           "word": "Zukunft",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7606,7 +7569,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "1d8b37dd-ca7e-4a08-868f-26c2d501c473"
   },
   {
@@ -7614,8 +7577,8 @@
       {
         "original": {
           "word": "Gegenwart",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7628,7 +7591,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "16459044-3d70-441e-87aa-9d0ef0d39467"
   },
   {
@@ -7636,8 +7599,8 @@
       {
         "original": {
           "word": "Vergangenheit",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7650,7 +7613,7 @@
       }
     ],
     "dateAdded": "2026-02-02",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "697a071b-eb90-47da-a6c4-e48c6b6d4aac"
   },
   {
@@ -7658,8 +7621,8 @@
       {
         "original": {
           "word": "Kommilitonen",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7673,8 +7636,8 @@
       {
         "original": {
           "word": "Kommilitonin",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7687,7 +7650,7 @@
       }
     ],
     "dateAdded": "2026-01-14",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "1c28afbb-dd9e-46ad-b0c4-a7b2fbc8bfd3"
   },
   {
@@ -7714,7 +7677,7 @@
       }
     ],
     "dateAdded": "2026-02-04",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "767221c0-fb5f-4803-9e71-3129c3329564"
   },
   {
@@ -7722,8 +7685,8 @@
       {
         "original": {
           "word": "geschenk",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7737,7 +7700,7 @@
       {
         "original": {
           "word": "geschenke",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -7751,7 +7714,7 @@
       }
     ],
     "dateAdded": "2026-02-04",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "66dbba0a-42f9-47ad-8ac0-fbaac1b11fc7"
   },
   {
@@ -7759,8 +7722,8 @@
       {
         "original": {
           "word": "Betrieb",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7774,7 +7737,7 @@
       {
         "original": {
           "word": "Betriebe",
-          "gender": "m",
+          "gender": "Maskulin",
           "number": "plural"
         },
         "translations": [
@@ -7788,7 +7751,7 @@
       }
     ],
     "dateAdded": "2026-02-04",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "7771cd64-ef3a-4fd9-ab96-6e7ed1e6fcc3"
   },
   {
@@ -7796,8 +7759,8 @@
       {
         "original": {
           "word": "Firma",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7810,7 +7773,7 @@
       }
     ],
     "dateAdded": "2026-02-04",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "d7acb990-611a-48b6-a4f4-02b09a51d10b"
   },
   {
@@ -7818,8 +7781,8 @@
       {
         "original": {
           "word": "Einweihung",
-          "gender": "m",
-          "number": "sing"
+          "gender": "Maskulin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7834,7 +7797,7 @@
       }
     ],
     "dateAdded": "2026-02-04",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "c19f5bf0-9d15-41fa-9bdd-c94b81d9db05"
   },
   {
@@ -7856,7 +7819,7 @@
       }
     ],
     "dateAdded": "2026-02-04",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "34abb5a0-160a-419b-afcf-33da463412ed"
   },
   {
@@ -7864,8 +7827,8 @@
       {
         "original": {
           "word": "meinung",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7878,7 +7841,7 @@
       }
     ],
     "dateAdded": "2026-02-04",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "e0d1418a-edd9-48d3-8846-0b4ef368d4d5"
   },
   {
@@ -7900,7 +7863,7 @@
       }
     ],
     "dateAdded": "2026-02-04",
-    "type": "preposition",
+    "type": "Präpositionen",
     "uuid": "e91f841c-26d4-433f-a818-3761a53edea7"
   },
   {
@@ -7922,7 +7885,7 @@
       }
     ],
     "dateAdded": "2026-02-04",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "0d038005-6a60-47a8-b7c2-cdcd6f1fd709"
   },
   {
@@ -7930,8 +7893,8 @@
       {
         "original": {
           "word": "Übung",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7944,7 +7907,7 @@
       }
     ],
     "dateAdded": "2026-02-25",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "27b900b0-8dab-4564-9680-1c6028fe90de"
   },
   {
@@ -7952,8 +7915,8 @@
       {
         "original": {
           "word": "einfach",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -7986,7 +7949,7 @@
       }
     ],
     "dateAdded": "2026-02-25",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "255246f6-ae40-46be-a861-ba0ab58e4093"
   },
   {
@@ -7994,8 +7957,8 @@
       {
         "original": {
           "word": "schwer",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -8008,7 +7971,7 @@
       }
     ],
     "dateAdded": "2026-02-25",
-    "type": "adjective",
+    "type": "Adjektive",
     "uuid": "43ee6df4-d0b4-47c9-a476-067d13381a2b"
   },
   {
@@ -8035,7 +7998,7 @@
       }
     ],
     "dateAdded": "2026-02-25",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "69497da7-5624-4ede-b9e5-2ecece11ff92"
   },
   {
@@ -8043,8 +8006,8 @@
       {
         "original": {
           "word": "mittel",
-          "gender": "n",
-          "number": "sing"
+          "gender": "Neutrum",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -8058,7 +8021,7 @@
       {
         "original": {
           "word": "mittel",
-          "gender": "n",
+          "gender": "Neutrum",
           "number": "plural"
         },
         "translations": [
@@ -8072,7 +8035,7 @@
       }
     ],
     "dateAdded": "2026-02-25",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "8147b07b-2d36-46dc-81ef-20e727950b35"
   },
   {
@@ -8080,7 +8043,7 @@
       {
         "original": {
           "word": "Kirschen",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -8095,8 +8058,8 @@
       {
         "original": {
           "word": "Kirsche",
-          "gender": "f",
-          "number": "sing"
+          "gender": "Feminin",
+          "number": "Singular"
         },
         "translations": [
           {
@@ -8109,7 +8072,7 @@
       }
     ],
     "dateAdded": "2026-02-25",
-    "type": "noun",
+    "type": "Nomen",
     "uuid": "2f9c4b0b-997a-4936-894a-be7bd9a866da"
   },
   {
@@ -8117,7 +8080,7 @@
       {
         "original": {
           "word": "Sein Dran",
-          "gender": "f",
+          "gender": "Feminin",
           "number": "plural"
         },
         "translations": [
@@ -8138,7 +8101,66 @@
       }
     ],
     "dateAdded": "2026-02-25",
-    "type": "verb",
+    "type": "Verben",
     "uuid": "5508ca29-4c5a-4ba7-b4d1-652249911f84"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Artz",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Médico",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Ärtzin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Médica",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "Nomen",
+    "uuid": "46767a3b-6adb-41f3-95ed-e0f84bb30513"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Beispiel",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Ejemplo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Nomen",
+    "uuid": "5f34b6b6-831f-4718-8941-596f1d6327e2"
   }
 ]

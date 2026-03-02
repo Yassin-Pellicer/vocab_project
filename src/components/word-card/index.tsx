@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useConfigStore } from "@/context/dictionary-context";
 import EditWordModal from "../dict/edit-word-modal";
 
-export default function WordCard({ word, route, name, doubleView}: { word: any, route?: string; name?: string; doubleView?: boolean }) {
+export default function WordCard({ word, route, name, doubleView}: { word: any, route?: string; name: string; doubleView?: boolean }) {
   const {
     pairs,
     pairIdx,
@@ -14,7 +14,7 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
     number,
     definitions,
     originalWithArticle
-  } = useWordCard(word);
+  } = useWordCard(name, word);
 
   const navigate = useNavigate();
   const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);

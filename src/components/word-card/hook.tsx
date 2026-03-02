@@ -1,10 +1,12 @@
+import { useConfigStore } from "@/context/dictionary-context";
 import { useState } from "react";
 
-export default function useWordCard(word: any) {
+export default function useWordCard(dictId: string, word: any) {
   const pairs = Array.isArray(word.pair) ? word.pair : [word.pair];
   const [pairIdx, setPairIdx] = useState(0);
 
   const currentPair = pairs[pairIdx] || {};
+  const { dictionaryMetadata } = useConfigStore();
 
   const original = currentPair.original?.word || "";
 
@@ -26,17 +28,15 @@ export default function useWordCard(word: any) {
     : [];
 
   const article =
-    word.type === "noun"
-      ? number === "plural"
-        ? "die"
-        : gender.startsWith("f")
-        ? "die"
-        : gender.startsWith("m")
-        ? "der"
-        : gender.startsWith("n")
-        ? "das"
-        : ""
+    (word.type === dictionaryMetadata?.[dictId].typeWordWithPrecededArticle &&
+      dictionaryMetadata?.[dictId].useArticles)
+      ? dictionaryMetadata?.[dictId].articles?.[gender]?.[number] || ""
       : "";
+      console.log(word.type)
+      console.log(dictionaryMetadata?.[dictId].typeWordWithPrecededArticle)
+      console.log(dictionaryMetadata?.[dictId].useArticles)
+      console.log(dictionaryMetadata?.[dictId].articles?.[gender]?.[number])
+      console.log("WordCard Hook:", article);
 
   const originalWithArticle = article
     ? `${article} ${original}`
