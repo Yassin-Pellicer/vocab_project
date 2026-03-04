@@ -1545,29 +1545,6 @@
     "pair": [
       {
         "original": {
-          "word": "Tafel",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Pizarra",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [],
-        "observations": "En plural se convierte en Tafeln"
-      }
-    ],
-    "dateAdded": "2025-11-24",
-    "type": "Nomen",
-    "uuid": "275cfe38-2405-47b6-b059-7e856c8f5021"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Haar",
           "gender": "Neutrum",
           "number": "Singular"
@@ -8079,35 +8056,6 @@
     "pair": [
       {
         "original": {
-          "word": "Sein Dran",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Ser el Turno",
-            "gender": "",
-            "number": ""
-          },
-          {
-            "word": "me/te/le toca",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Es una expresión que se traduce a como \"Es tu turno\""
-        ]
-      }
-    ],
-    "dateAdded": "2026-02-25",
-    "type": "Verben",
-    "uuid": "5508ca29-4c5a-4ba7-b4d1-652249911f84"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Artz",
           "gender": "Maskulin",
           "number": "Singular"
@@ -8162,5 +8110,311 @@
     "dateAdded": "2026-03-02",
     "type": "Nomen",
     "uuid": "5f34b6b6-831f-4718-8941-596f1d6327e2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kartoffel",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Patata",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Kartoffeln",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Patatas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Nomen",
+    "uuid": "3a7f8caa-7817-41f6-9d4a-cf550066d2ea"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "kaufen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Comprar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "einkaufen",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "Comprar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Versión separable del verbo"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Verben",
+    "uuid": "ca143fae-893f-4676-921e-f99783217c57"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Zweibel",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Cebolla",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Versión separable del verbo"
+        ]
+      },
+      {
+        "original": {
+          "word": "Zweibeln",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Cebollas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Nomen",
+    "uuid": "219d7f21-2b9a-48b3-aa51-dea882a1e052"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Tafel",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Pizarra",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Tableta",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": "En plural se convierte en Tafeln"
+      },
+      {
+        "original": {
+          "word": "Tafeln",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Pizarras",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Tabletas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-11-24",
+    "type": "Nomen",
+    "uuid": "275cfe38-2405-47b6-b059-7e856c8f5021"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "ende",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "final",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "\"al final\" = \"am ende\""
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Adjektive",
+    "uuid": "7561621e-0982-43f3-a074-9f0b65094827"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "anfang",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "principio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "\"al final\" = \"am ende\""
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Adjektive",
+    "uuid": "3dc87d1e-cfb6-48ed-bd84-65869d3b0d65"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Fluss",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Río",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Nomen",
+    "uuid": "534b5109-b24a-4245-a07a-0f24e42537fa"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "draussen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "afuera",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Adverbien",
+    "uuid": "6e9a48e8-6386-474d-acfb-65ac0ad129db"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "ganze",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "todo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Determiner",
+    "uuid": "6044d273-1b8f-439d-8541-5e481dc20231"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Sein Dran",
+          "gender": "Feminin",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Ser el Turno",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "me/te/le toca",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Es una expresión que se traduce a como \"Es tu turno\""
+        ]
+      }
+    ],
+    "dateAdded": "2026-02-25",
+    "type": "Redewendungen",
+    "uuid": "5508ca29-4c5a-4ba7-b4d1-652249911f84"
   }
 ]

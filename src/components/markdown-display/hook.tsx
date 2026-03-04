@@ -9,7 +9,7 @@ export function useMarkdown(route: string, uuid?: string, name?: string, word?: 
   const [selectOption, setSelectOption] = useState<"notes" | "conjugation">("notes");
   const [isEditing, setIsEditing] = useState(false);
   const [linkedWordList, setLinkedWordList] = useState<Record<string, string>>({});
-  const { selectedWord } = useConfigStore();
+  const { selectedWord, dictionaryMetadata } = useConfigStore();
 
   const editorRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
@@ -94,10 +94,10 @@ export function useMarkdown(route: string, uuid?: string, name?: string, word?: 
   }, [selectedWord]);
 
   useEffect(() => {
-    if (word?.type !== "verb") {
+    if (word?.type !== dictionaryMetadata?.[name!]?.typeWordWithTenses) {
       setSelectOption("notes");
     }
-  }, [word]);
+  }, [word, dictionaryMetadata, name]);
 
   return {
     markdown,

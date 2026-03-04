@@ -27,7 +27,7 @@ export default function ConfigureTenseModal({
   const hook = useConfigureTenseModal(dictId);
   const { metadata } = hook;
   return (
-    <Dialog onOpenChange={(open) => { if (!open) hook.reset(); }}>
+    <Dialog onOpenChange={(open) => { if (!open) hook.resetToStored(); }}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="w-full p-0">
         <div className="p-6 pb-2 overflow-auto max-h-[80vh]">

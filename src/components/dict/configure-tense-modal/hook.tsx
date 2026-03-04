@@ -9,10 +9,9 @@ export default function useConfigureTenseModal(dictId: string) {
     setSelectTypeWordWithTenses,
   ] = useState(dictionaryMetadata?.[dictId]?.typeWordWithTenses || "");
 
-
   const getStoredStructure = () => {
-    if (dictId && dictionaryMetadata[dictId]?.tenses) {
-      return JSON.stringify(dictionaryMetadata[dictId].tenses, null, 2);
+    if (dictId && dictionaryMetadata?.[dictId]?.tenses) {
+      return JSON.stringify(dictionaryMetadata?.[dictId]?.tenses, null, 2);
     }
     return JSON.stringify(defaultTenses, null, 2);
   };
@@ -22,6 +21,10 @@ export default function useConfigureTenseModal(dictId: string) {
   useEffect(() => {
     setStructure(getStoredStructure());
   }, [dictId, dictionaryMetadata]);
+
+  const resetToStored = () => {
+    setStructure(getStoredStructure());
+  };
 
   const reset = () => {
     setStructure(JSON.stringify(defaultTenses, null, 2));
@@ -53,6 +56,7 @@ export default function useConfigureTenseModal(dictId: string) {
     structure,
     metadata: dictionaryMetadata?.[dictId],
     setStructure,
+    resetToStored,
     reset,
     save,
     loadFromFile,
