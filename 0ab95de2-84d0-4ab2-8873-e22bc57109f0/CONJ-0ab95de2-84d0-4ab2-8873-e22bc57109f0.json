@@ -3,109 +3,116 @@
     "Indicative": {
       "Simple": {
         "Präsens": {
-          "1s": "koche",
-          "2s": "kochst",
-          "3s": "kocht",
-          "1p": "kochen",
-          "2p": "kocht",
-          "3p": "kochen"
+          "ich": "koche",
+          "du": "kochst",
+          "er/sie/es": "kocht",
+          "wir": "kochen",
+          "ihr": "kocht",
+          "sie/Sie": "kochen"
         },
         "Präteritum": {
-          "1s": "kochte",
-          "2s": "kochtest",
-          "3s": "kochte",
-          "1p": "kochten",
-          "2p": "kochtet",
-          "3p": "kochten"
+          "ich": "kochte",
+          "du": "kochtest",
+          "er/sie/es": "kochte",
+          "wir": "kochten",
+          "ihr": "kochtet",
+          "sie/Sie": "kochten"
         }
       },
       "Compound": {
         "Perfekt": {
-          "1s": "habe gekocht",
-          "2s": "hast gekocht",
-          "3s": "hat gekocht",
-          "1p": "haben gekocht",
-          "2p": "habt gekocht",
-          "3p": "haben gekocht"
+          "ich": "habe gekocht",
+          "du": "hast gekocht",
+          "er/sie/es": "hat gekocht",
+          "wir": "haben gekocht",
+          "ihr": "habt gekocht",
+          "sie/Sie": "haben gekocht"
         },
         "Plusquamperfekt": {
-          "1s": "hatte gekocht",
-          "2s": "hattest gekocht",
-          "3s": "hatte gekocht",
-          "1p": "hatten gekocht",
-          "2p": "hattet gekocht",
-          "3p": "hatten gekocht"
+          "ich": "hatte gekocht",
+          "du": "hattest gekocht",
+          "er/sie/es": "hatte gekocht",
+          "wir": "hatten gekocht",
+          "ihr": "hattet gekocht",
+          "sie/Sie": "hatten gekocht"
         },
         "Futur I": {
-          "1s": "werde kochen",
-          "2s": "wirst kochen",
-          "3s": "wird kochen",
-          "1p": "werden kochen",
-          "2p": "werdet kochen",
-          "3p": "werden kochen"
+          "ich": "werde kochen",
+          "du": "wirst kochen",
+          "er/sie/es": "wird kochen",
+          "wir": "werden kochen",
+          "ihr": "werdet kochen",
+          "sie/Sie": "werden kochen"
         },
         "Futur II": {
-          "1s": "werde gekocht haben",
-          "2s": "wirst gekocht haben",
-          "3s": "wird gekocht haben",
-          "1p": "werden gekocht haben",
-          "2p": "werdet gekocht haben",
-          "3p": "werden gekocht haben"
+          "ich": "werde gekocht haben",
+          "du": "wirst gekocht haben",
+          "er/sie/es": "wird gekocht haben",
+          "wir": "werden gekocht haben",
+          "ihr": "werdet gekocht haben",
+          "sie/Sie": "werden gekocht haben"
         }
       }
     },
     "Subjunctive": {
       "Konjunktiv I": {
         "Präsens": {
-          "1s": "koche",
-          "2s": "kochest",
-          "3s": "koche",
-          "1p": "kochen",
-          "2p": "kochet",
-          "3p": "kochen"
+          "ich": "koche",
+          "du": "kochest",
+          "er/sie/es": "koche",
+          "wir": "kochen",
+          "ihr": "kochet",
+          "sie/Sie": "kochen"
         },
         "Perfekt": {
-          "1s": "habe gekocht",
-          "2s": "habest gekocht",
-          "3s": "habe gekocht",
-          "1p": "haben gekocht",
-          "2p": "habet gekocht",
-          "3p": "haben gekocht"
+          "ich": "habe gekocht",
+          "du": "habest gekocht",
+          "er/sie/es": "habe gekocht",
+          "wir": "haben gekocht",
+          "ihr": "habet gekocht",
+          "sie/Sie": "haben gekocht"
         }
       },
       "Konjunktiv II": {
         "Präteritum": {
-          "1s": "kochte",
-          "2s": "kochtest",
-          "3s": "kochte",
-          "1p": "kochten",
-          "2p": "kochtet",
-          "3p": "kochten"
+          "ich": "kochte",
+          "du": "kochtest",
+          "er/sie/es": "kochte",
+          "wir": "kochten",
+          "ihr": "kochtet",
+          "sie/Sie": "kochten"
         },
         "Plusquamperfekt": {
-          "1s": "hätte gekocht",
-          "2s": "hättest gekocht",
-          "3s": "hätte gekocht",
-          "1p": "hätten gekocht",
-          "2p": "hättet gekocht",
-          "3p": "hätten gekocht"
+          "ich": "hätte gekocht",
+          "du": "hättest gekocht",
+          "er/sie/es": "hätte gekocht",
+          "wir": "hätten gekocht",
+          "ihr": "hättet gekocht",
+          "sie/Sie": "hätten gekocht"
         },
         "Würde-Form": {
-          "1s": "würde kochen",
-          "2s": "würdest kochen",
-          "3s": "würde kochen",
-          "1p": "würden kochen",
-          "2p": "würdet kochen",
-          "3p": "würden kochen"
+          "ich": "würde kochen",
+          "du": "würdest kochen",
+          "er/sie/es": "würde kochen",
+          "wir": "würden kochen",
+          "ihr": "würdet kochen",
+          "sie/Sie": "würden kochen"
         }
       }
     },
     "Imperative": {
       "Imperativ I": {
         "Obligation": {
-          "2s": "koch",
-          "2p": "kocht",
-          "3p": "kochen Sie"
+          "du": "koch",
+          "ihr": "kocht",
+          "sie/Sie": "kochen Sie"
+        }
+      }
+    },
+    "Andere Konjugations": {
+      "Partizip": {
+        "Partizip I": {
+          "-": ""
         }
       }
     }

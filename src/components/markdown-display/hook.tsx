@@ -94,7 +94,7 @@ export function useMarkdown(route: string, uuid?: string, name?: string, word?: 
   }, [selectedWord]);
 
   useEffect(() => {
-    if (word?.type !== dictionaryMetadata?.[name!]?.typeWordWithTenses) {
+    if (word?.type !== dictionaryMetadata?.[name!]?.typeWordWithTenses || !dictionaryMetadata?.[name!]?.useTenses) {
       setSelectOption("notes");
     }
   }, [word, dictionaryMetadata, name]);
