@@ -51,7 +51,7 @@ body,
   --accent: #60a5fa;
   --accent-foreground: #0f1724;
   --destructive: #ef4444;
-  --border: #d8e3ef; /* subtle border that's not too stark */
+  --border: #d4d4d4; /* subtle border that's not too stark */
   --input: #f1f5f9;
   --ring: rgba(37,99,235,0.22);
   --chart-1: #2563eb;

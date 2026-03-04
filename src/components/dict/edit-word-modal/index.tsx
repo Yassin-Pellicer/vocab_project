@@ -100,6 +100,7 @@ export default function EditTranslationModal({
                         Original
                       </Label>
                       <Input
+                        className="border-muted-foreground/15 bg-background"
                         value={pair.original.word}
                         onChange={(e) =>
                           handlePairChange(e, pairIndex, "original.word")
@@ -109,7 +110,7 @@ export default function EditTranslationModal({
                         placeholder="e.g., casa"
                         required
                       />
-                      <div className="flex flex-row gap-2 mt-2">
+                      <div className="grid grid-cols-2 gap-2 mt-2">
                         <Select
                           value={pair.original.gender}
                           onValueChange={(val) =>
@@ -122,7 +123,7 @@ export default function EditTranslationModal({
                             )
                           }
                         >
-                          <SelectTrigger className="w-full">
+                          <SelectTrigger className="border-muted-foreground/20 bg-background w-full">
                             <SelectValue placeholder="Select gender" />
                           </SelectTrigger>
                           <SelectContent>
@@ -147,7 +148,7 @@ export default function EditTranslationModal({
                             )
                           }
                         >
-                          <SelectTrigger className="w-full">
+                          <SelectTrigger className="border-muted-foreground/20 bg-background w-full">
                             <SelectValue placeholder="Select number" />
                           </SelectTrigger>
                           <SelectContent>
@@ -181,6 +182,7 @@ export default function EditTranslationModal({
                           ) => (
                             <div key={_tIndex} className="flex gap-2">
                               <Input
+                                className="border-muted-foreground/15 bg-background"
                                 placeholder="translation"
                                 value={t.word}
                                 onChange={(e) =>
@@ -216,11 +218,12 @@ export default function EditTranslationModal({
                     </div>
                   </div>
 
-                  <div className="grid border-1 border-t-1 border-border border-gray-300 dark:border-border border-border p-3 gap-2 rounded-b-xl bg-muted/5 dark:bg-muted/10">
+                  <div className="grid border-1 border-t-1 p-3 gap-2 rounded-b-xl">
                     <Label className="font-medium">Definitions</Label>
                     {pair.definitions.map((d: string, _dIndex: number) => (
                       <div key={_dIndex} className="flex gap-2">
                         <Input
+                          className="border-muted-foreground/20 bg-background text-sm"
                           placeholder={`Definition ${_dIndex + 1}`}
                           value={d}
                           onChange={(e) =>
@@ -275,7 +278,7 @@ export default function EditTranslationModal({
               })
             }
           >
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="border-muted-foreground/20 bg-background w-full">
               <SelectValue placeholder={dict.typeWords?.[0] || "Select type"} />
             </SelectTrigger>
             <SelectContent>
