@@ -20,7 +20,7 @@ import VerboConjugation from "../verb-conjugation";
 import SearchBar from "../word-link";
 import { useConfigStore } from "@/context/dictionary-context";
 
-export default function MarkdownEditor({
+export default function NoteEditor({
   route,
   name,
   uuid,

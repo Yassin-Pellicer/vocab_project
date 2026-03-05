@@ -39,6 +39,7 @@ function App() {
           <Route path="/dictionary" element={<DictionaryPage />} />
           <Route path="/markdown" element={<MarkdownPage />} />
           <Route path="/translation" element={<TranslationGamePage />} />
+          <Route path="/notes" element={<DictionaryPage />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>

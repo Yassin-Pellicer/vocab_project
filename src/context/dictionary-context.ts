@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { TranslationEntry } from "@/types/translation-entry";
 import { Dictionary } from "@/types/config";
+import { BookAIcon, BookOpen, Languages } from "lucide-react";
 
 interface ConfigState {
   dictionaryMetadata: Record<string, Dictionary>;
@@ -273,15 +274,22 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
           items: [
             {
               title: "Dictionary",
-              icon: "BookOpen",
+              icon: BookOpen,
               url: `/dictionary?name=${encodeURIComponent(
                 key,
               )}&path=${encodeURIComponent(dict.route)}`,
             },
             {
               title: "Translate",
-              icon: "Languages",
+              icon: Languages,
               url: `/translation?name=${encodeURIComponent(
+                key,
+              )}&path=${encodeURIComponent(dict.route)}`,
+            },
+            {
+              title: "Notes",
+              icon: BookAIcon,
+              url: `/notes?name=${encodeURIComponent(
                 key,
               )}&path=${encodeURIComponent(dict.route)}`,
             },

@@ -19,11 +19,6 @@ import DictActionsMenu from "./dict-actions-menu";
 import AddDictModal from "../dict/add-dict-modal";
 import { NavUser } from "./nav-user";
 
-const iconMap: Record<string, React.ElementType> = {
-  BookOpen,
-  Languages,
-  Rocket,
-};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data } = useConfigStore();
@@ -61,13 +56,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 {item.items?.length ? (
                   <SidebarMenuSub>
                     {item.items.map((subItem) => {
-                      const Icon = subItem.icon ? iconMap[subItem.icon] : null;
                       return (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
                             <div className="flex items-center justify-between">
                               <Link to={subItem.url} className="flex items-center gap-2">
-                                {Icon && <Icon size={12} />}
+                                {subItem.icon && <subItem.icon size={12} />}
                                 {subItem.title}
                               </Link>
                             </div>

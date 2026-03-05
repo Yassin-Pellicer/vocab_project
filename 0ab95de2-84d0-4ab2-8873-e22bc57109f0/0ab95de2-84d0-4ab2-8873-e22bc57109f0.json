@@ -632,29 +632,6 @@
     "pair": [
       {
         "original": {
-          "word": "Pintar",
-          "gender": "-",
-          "number": "-"
-        },
-        "translations": [
-          {
-            "word": "Maler",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [],
-        "observations": ""
-      }
-    ],
-    "dateAdded": "2025-11-19",
-    "type": "Verben",
-    "uuid": "16473b68-abb0-47d6-9fc9-ed1a77435408"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Ahnung",
           "gender": "Feminin",
           "number": "Singular"
@@ -8416,5 +8393,28 @@
     "dateAdded": "2026-02-25",
     "type": "Redewendungen",
     "uuid": "5508ca29-4c5a-4ba7-b4d1-652249911f84"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Maler",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Pintar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "Verben",
+    "uuid": "16473b68-abb0-47d6-9fc9-ed1a77435408"
   }
 ]
