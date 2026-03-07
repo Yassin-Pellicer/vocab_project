@@ -2869,73 +2869,6 @@
     "pair": [
       {
         "original": {
-          "word": "Chef",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Jefe",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Chefin",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Jefa",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Chefs",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Jefas",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Chefinnen",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Jefas",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Nomen",
-    "uuid": "5ec68a3f-0943-4f4a-9cf1-52a87b3428cf"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Leute",
           "gender": "-",
           "number": "plural"
@@ -2953,43 +2886,6 @@
     "dateAdded": "2025-12-14",
     "type": "Nomen",
     "uuid": "49af014f-ed52-4b9d-afa3-f22f34803abe"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Film",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Película",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Filme",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Películas",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Nomen",
-    "uuid": "9cd202f3-cb28-4831-9c01-bfcf4a1e9f3d"
   },
   {
     "pair": [
@@ -3295,278 +3191,6 @@
     "pair": [
       {
         "original": {
-          "word": "Fahrrad",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Bicicleta",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Fährrader",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Bicicletas",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Nomen",
-    "uuid": "c1f00e66-751e-457e-8e66-33abca7cd786"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Erzieher",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Educador",
-            "gender": "",
-            "number": ""
-          },
-          {
-            "word": "Educadores",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Erzieherin",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Erzieherinnen",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Educadoras",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Nomen",
-    "uuid": "17e8312c-9447-4cfe-a01f-1a1a196a3cd5"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Pflegefachmann",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Técnico en cuidados de salud",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Pflegefachfrau",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Técnica en cuidados de salud",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Pflegefachfrauen",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Técnicas en cuidados de salud",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Pflegefachmänner",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Técnicos en cuidados de salud",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Nomen",
-    "uuid": "687bca98-e26a-4f2d-b22a-a04e9331c65c"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Handy",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Teléfono móvil",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Handys",
-          "gender": "Neutrum",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Teléfonos móviles",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Nomen",
-    "uuid": "ac173a96-0cde-4d27-ae7c-04ba16660f71"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Anmeldung",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Aviso",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Anmeldunger",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Avisos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Nomen",
-    "uuid": "fd9a55ba-49b4-439a-bc09-697103dda899"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Zahl",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Número",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Zahlen",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Números",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Nomen",
-    "uuid": "692c00ef-d8ed-4d6d-b36e-a0d7d6e47bff"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "gehen",
           "gender": "-",
           "number": "-"
@@ -3636,43 +3260,6 @@
     "dateAdded": "2025-12-14",
     "type": "Nomen",
     "uuid": "cb01475e-2225-4e1a-b94b-90b0a78947fb"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Besuch",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Visita",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Besuche",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Visitas",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Nomen",
-    "uuid": "3232abef-eea5-4044-b20a-7381bea37c3e"
   },
   {
     "pair": [
@@ -5006,73 +4593,6 @@
     "pair": [
       {
         "original": {
-          "word": "Gast",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Invitado",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Gäste",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Invitados",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Gästin",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Invitada",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Gästinen",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Invitadas",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "f2b08345-5c47-4be5-aeaf-a1277da62b87"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "gleich",
           "gender": "-",
           "number": "-"
@@ -5095,43 +4615,6 @@
     "pair": [
       {
         "original": {
-          "word": "Stadt",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Ciudad",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Städte",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Ciudad",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "6d2dc735-e93b-48bb-a259-60a97cd6d32d"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "berühmt",
           "gender": "-",
           "number": "-"
@@ -5149,122 +4632,6 @@
     "dateAdded": "2025-12-15",
     "type": "Adjektive",
     "uuid": "9fe39e27-0830-4141-88f2-bf49b8cc094c"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Bild",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Foto",
-            "gender": "",
-            "number": ""
-          },
-          {
-            "word": "Imagen",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Bilder",
-          "gender": "Neutrum",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Fotos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "a1c24b96-ae83-4e6d-912c-c22ca76fc03d"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Gegenstand",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Objeto",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Gegenstände",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Objetos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "b100c4d1-0456-453d-9420-88de913fa13f"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Schlüssel",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "llave",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Schlüsseln",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Llaves",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "9fc101a7-b4aa-4b89-9ed0-25285d24c8bc"
   },
   {
     "pair": [
@@ -5327,191 +4694,6 @@
     "dateAdded": "2025-12-15",
     "type": "Nomen",
     "uuid": "d00ba35c-e90f-478c-8662-86bbdc3b8204"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Stift",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Lápiz",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Stifte",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Lápices",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "3d0e9e96-3f97-449e-9107-aed0b9f03366"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Portemonnaie",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Monedero",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Portemonnaies",
-          "gender": "Neutrum",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Monederos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "646570da-215b-4b66-986c-a234a14dad18"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Buch",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Libro",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Bücher",
-          "gender": "Neutrum",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Libros",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "a652c9c2-a11d-4f9d-b4a0-a59a827fac4a"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Glas",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Vaso",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Gläser",
-          "gender": "Neutrum",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Vasos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "5e1cd291-1ef8-426b-886c-91a5267b5bac"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Stuhl",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Silla",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Stühle",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Sillas",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "e247b180-5824-437c-9e0b-bc511aca02f2"
   },
   {
     "pair": [
@@ -5595,63 +4777,6 @@
     "pair": [
       {
         "original": {
-          "word": "Teilnehmer",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Participante",
-            "gender": "",
-            "number": ""
-          },
-          {
-            "word": "Participantes",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Teilnehmerin",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Participante",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Teilnehmerinnen",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Participantes",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "8f8140df-4d81-4517-b4e9-cb257d18290c"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Laufen",
           "gender": "-",
           "number": "-"
@@ -5718,84 +4843,6 @@
     "pair": [
       {
         "original": {
-          "word": "Mensche",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Persona",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Como \"hombre\" referido a humanidad, como ser humano"
-        ]
-      },
-      {
-        "original": {
-          "word": "Menschen",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Personas",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Como \"hombre\" referido a humanidad, como ser humano"
-        ]
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "bbf6844c-d0ce-4a38-bb36-686bd3d22de0"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Herausforderung",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Desafío",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Herausforderungen",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Desafíos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "bda31ffc-5502-499e-bf37-5d2c80a50fc4"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Lust",
           "gender": "-",
           "number": "-"
@@ -5813,80 +4860,6 @@
     "dateAdded": "2025-12-15",
     "type": "Nomen",
     "uuid": "77b486b8-d679-48ed-a385-66ac00b969ad"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Schiff",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Barco",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Schiffe",
-          "gender": "Neutrum",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Barcos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "bd915c46-7012-44ae-b72f-6091109f7c7d"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Arbeit",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "trabajo",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Arbeiten",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "trabajos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "54bf5ba9-29c7-46f6-b76f-a0663674730f"
   },
   {
     "pair": [
@@ -6014,63 +4987,6 @@
     "dateAdded": "2025-12-17",
     "type": "Determiner",
     "uuid": "26b08a30-a8f4-4bbe-a3d4-57567da2c0db"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Fahrer",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Conductor",
-            "gender": "",
-            "number": ""
-          },
-          {
-            "word": "Conductores",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Fahrerin",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Conductora",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Fahrerinnen",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Conductoras",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-17",
-    "type": "Nomen",
-    "uuid": "31ff53c3-9314-49fe-89ab-1801c1df11a4"
   },
   {
     "pair": [
@@ -6357,43 +5273,6 @@
     "dateAdded": "2026-01-12",
     "type": "Nomen",
     "uuid": "fbb18db0-745f-4ddf-8978-eb8ad80a1ca3"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Andere",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Otro",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Anderen",
-          "gender": "Neutrum",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Otros",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2026-01-12",
-    "type": "Nomen",
-    "uuid": "24a64e7c-e00d-4f6b-8d83-3261c3db70e9"
   },
   {
     "pair": [
@@ -6967,52 +5846,6 @@
     "pair": [
       {
         "original": {
-          "word": "Kinder",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Hijos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Hijos e Hijas"
-        ]
-      },
-      {
-        "original": {
-          "word": "Kind",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "hijo",
-            "gender": "",
-            "number": ""
-          },
-          {
-            "word": "hija",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "HIjo o Hija, independiente del género (también puede significar niño)"
-        ]
-      }
-    ],
-    "dateAdded": "2026-01-14",
-    "type": "Nomen",
-    "uuid": "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "möchten",
           "gender": "",
           "number": ""
@@ -7272,43 +6105,6 @@
     "pair": [
       {
         "original": {
-          "word": "Name",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Nombre",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Namen",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Nombres",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Nomen",
-    "uuid": "72d0ca19-9386-4db8-9585-0fff665ae715"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Geburtstag",
           "gender": "Maskulin",
           "number": "Singular"
@@ -7372,47 +6168,6 @@
     "dateAdded": "2026-02-02",
     "type": "Nomen",
     "uuid": "61ccd5dc-bf96-464b-a44d-0e10ed9765d9"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "gericht",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "plato",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Plato de comida (tradicional), plato de menú, etc..."
-        ]
-      },
-      {
-        "original": {
-          "word": "gerichte",
-          "gender": "Neutrum",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "platos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Plato de comida (tradicional), plato de menú, etc..."
-        ]
-      }
-    ],
-    "dateAdded": "2026-02-02",
-    "type": "Nomen",
-    "uuid": "3c0e7334-cb59-4105-897f-1807d381c652"
   },
   {
     "pair": [
@@ -7633,43 +6388,6 @@
     "dateAdded": "2026-02-04",
     "type": "Verben",
     "uuid": "767221c0-fb5f-4803-9e71-3129c3329564"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "geschenk",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "regalo",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "geschenke",
-          "gender": "Maskulin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "regalos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2026-02-04",
-    "type": "Nomen",
-    "uuid": "66dbba0a-42f9-47ad-8ac0-fbaac1b11fc7"
   },
   {
     "pair": [
@@ -8416,5 +7134,1287 @@
     "dateAdded": "2025-11-19",
     "type": "Verben",
     "uuid": "16473b68-abb0-47d6-9fc9-ed1a77435408"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Andere",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Otro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Anderen",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Otros",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "Nomen",
+    "uuid": "24a64e7c-e00d-4f6b-8d83-3261c3db70e9"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Anmeldung",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Aviso",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Anmeldunger",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Avisos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Nomen",
+    "uuid": "fd9a55ba-49b4-439a-bc09-697103dda899"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Arbeit",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "trabajo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Arbeiten",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "trabajos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "54bf5ba9-29c7-46f6-b76f-a0663674730f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "geschenk",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "regalo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "geschenke",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "regalos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-02-04",
+    "type": "Nomen",
+    "uuid": "66dbba0a-42f9-47ad-8ac0-fbaac1b11fc7"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Name",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Nombre",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Namen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Nombres",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Nomen",
+    "uuid": "72d0ca19-9386-4db8-9585-0fff665ae715"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kinder",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Hijos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Hijos e Hijas"
+        ]
+      },
+      {
+        "original": {
+          "word": "Kind",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "hijo",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "hija",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "HIjo o Hija, independiente del género (también puede significar niño)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "Nomen",
+    "uuid": "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "gericht",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "plato",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Plato de comida (tradicional), plato de menú, etc..."
+        ]
+      },
+      {
+        "original": {
+          "word": "gerichte",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "platos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Plato de comida (tradicional), plato de menú, etc..."
+        ]
+      }
+    ],
+    "dateAdded": "2026-02-02",
+    "type": "Nomen",
+    "uuid": "3c0e7334-cb59-4105-897f-1807d381c652"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Fahrer",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Conductor",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Conductores",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Fahrerin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Conductora",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Fahrerinnen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Conductoras",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-17",
+    "type": "Nomen",
+    "uuid": "31ff53c3-9314-49fe-89ab-1801c1df11a4"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schiff",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Barco",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Schiffe",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Barcos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "bd915c46-7012-44ae-b72f-6091109f7c7d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Glas",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Vaso",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Gläser",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Vasos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "5e1cd291-1ef8-426b-886c-91a5267b5bac"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Stift",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Lápiz",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Stifte",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Lápices",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "3d0e9e96-3f97-449e-9107-aed0b9f03366"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Portemonnaie",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Monedero",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Portemonnaies",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Monederos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "646570da-215b-4b66-986c-a234a14dad18"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Buch",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Libro",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Bücher",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Libros",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "a652c9c2-a11d-4f9d-b4a0-a59a827fac4a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schlüssel",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "llave",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Schlüsseln",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Llaves",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "9fc101a7-b4aa-4b89-9ed0-25285d24c8bc"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Stadt",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Ciudad",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Städte",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Ciudad",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "6d2dc735-e93b-48bb-a259-60a97cd6d32d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Besuch",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Visita",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Besuche",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Visitas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Nomen",
+    "uuid": "3232abef-eea5-4044-b20a-7381bea37c3e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gegenstand",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Objeto",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Gegenstände",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Objetos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "b100c4d1-0456-453d-9420-88de913fa13f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Pflegefachmann",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Técnico en cuidados de salud",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Pflegefachfrau",
+          "gender": "Maskulin",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Técnica en cuidados de salud",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Pflegefachfrauen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Técnicas en cuidados de salud",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Pflegefachmänner",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Técnicos en cuidados de salud",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Nomen",
+    "uuid": "687bca98-e26a-4f2d-b22a-a04e9331c65c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Film",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Película",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Filme",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Películas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Nomen",
+    "uuid": "9cd202f3-cb28-4831-9c01-bfcf4a1e9f3d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Chef",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Jefe",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Chefin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Jefa",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Chefs",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Jefas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Chefinnen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Jefas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Nomen",
+    "uuid": "5ec68a3f-0943-4f4a-9cf1-52a87b3428cf"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Teilnehmer",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Participante",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Participantes",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Teilnehmerin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Participante",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Teilnehmerinnen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Participantes",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "8f8140df-4d81-4517-b4e9-cb257d18290c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gast",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Invitado",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Gäste",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Invitados",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Gästin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Invitada",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Gästinen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Invitadas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "f2b08345-5c47-4be5-aeaf-a1277da62b87"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Mensche",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Persona",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Como \"hombre\" referido a humanidad, como ser humano"
+        ]
+      },
+      {
+        "original": {
+          "word": "Menschen",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Personas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Como \"hombre\" referido a humanidad, como ser humano"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "bbf6844c-d0ce-4a38-bb36-686bd3d22de0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Erzieher",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Educador",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Educadores",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Erzieherin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Educadora",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Erzieherinnen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Educadoras",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Nomen",
+    "uuid": "17e8312c-9447-4cfe-a01f-1a1a196a3cd5"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Handy",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Teléfono móvil",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Handys",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Teléfonos móviles",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Nomen",
+    "uuid": "ac173a96-0cde-4d27-ae7c-04ba16660f71"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Fahrrad",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Bicicleta",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Fährrader",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Bicicletas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Nomen",
+    "uuid": "c1f00e66-751e-457e-8e66-33abca7cd786"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Herausforderung",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Desafío",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Herausforderungen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Desafíos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "bda31ffc-5502-499e-bf37-5d2c80a50fc4"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Stuhl",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Silla",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Stühle",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Sillas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "e247b180-5824-437c-9e0b-bc511aca02f2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Bild",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Foto",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Imagen",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Bilder",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Fotos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Nomen",
+    "uuid": "a1c24b96-ae83-4e6d-912c-c22ca76fc03d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Zahl",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Número",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Zahlen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Números",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Nomen",
+    "uuid": "692c00ef-d8ed-4d6d-b36e-a0d7d6e47bff"
   }
 ]

@@ -8,6 +8,7 @@ import { useConfigStore as usePreferencesStore } from "@/context/preferences-con
 import { MainLayout } from "./layouts";
 import { useEffect } from "react";
 import useThemeSync from "./hooks/useThemeSync";
+import NotesPage from "./pages/notes-page";
 
 function App() {
   const loadConfig = useConfigStore((state: any) => state.loadConfig);
@@ -39,7 +40,7 @@ function App() {
           <Route path="/dictionary" element={<DictionaryPage />} />
           <Route path="/markdown" element={<MarkdownPage />} />
           <Route path="/translation" element={<TranslationGamePage />} />
-          <Route path="/notes" element={<DictionaryPage />} />
+          <Route path="/notes" element={<NotesPage />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>

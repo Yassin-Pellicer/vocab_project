@@ -1,6 +1,4 @@
 import * as React from "react"
-import { BookOpen, Languages, Rocket } from "lucide-react"
-
 import {
   Sidebar,
   SidebarContent,

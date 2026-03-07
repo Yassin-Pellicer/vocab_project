@@ -13,6 +13,7 @@ export default function createDictionary() {
         const folderPath = path.resolve(_route, folderName);
         const filePath = path.join(folderPath, `${folderName}.json`);
         const mdPath = path.join(folderPath, "MD-"+folderName);
+        const notesPath = path.join(folderPath, "NOTES-"+folderName);
 
         if (!fs.existsSync(_route)) {
           throw new Error(`The folder ${_route} does not exist.`);
@@ -24,6 +25,7 @@ export default function createDictionary() {
 
         fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
         fs.mkdirSync(mdPath, { recursive: true });
+        fs.mkdirSync(notesPath, { recursive: true });
 
         const configPath = path.join(
           process.env.APP_ROOT || __dirname,
@@ -44,6 +46,8 @@ export default function createDictionary() {
         config.dictionaries[folderName] = {
           name: _name,
           route: folderPath,
+          typeWordWithPrecededArticle: "",
+          typeWordWithTenses: "",
         };
 
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");

@@ -32,11 +32,6 @@ export default function useWordCard(dictId: string, word: any) {
       dictionaryMetadata?.[dictId].useArticles)
       ? dictionaryMetadata?.[dictId].articles?.[gender]?.[number] || ""
       : "";
-      console.log(word.type)
-      console.log(dictionaryMetadata?.[dictId].typeWordWithPrecededArticle)
-      console.log(dictionaryMetadata?.[dictId].useArticles)
-      console.log(dictionaryMetadata?.[dictId].articles?.[gender]?.[number])
-      console.log("WordCard Hook:", article);
 
   const originalWithArticle = article
     ? `${article} ${original}`

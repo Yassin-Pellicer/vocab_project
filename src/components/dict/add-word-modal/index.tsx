@@ -52,7 +52,7 @@ const AddTranslationModal = forwardRef<
           <button
             ref={ref}
             onClick={() => setOpen(true)}
-            className="!bg-primary !rounded-xl !px-2 py-4.5 !flex !h-8 !items-center !justify-center !cursor-pointer hover:!bg-primary/90 transition-colors"
+            className="bg-primary! rounded-xl! px-2! py-4.5 flex! h-8! items-center! justify-center! cursor-pointer! hover:bg-primary/90! transition-colors"
           >
             <WholeWord className="text-primary-foreground" size={18} />
             <p className="text-lg text-primary-foreground leading-none pb-1">
@@ -61,7 +61,7 @@ const AddTranslationModal = forwardRef<
           </button>
         </DialogTrigger>
 
-        <DialogContent className="sm:max-w-[650px] overflow-y-scroll max-h-[80vh]">
+        <DialogContent className="sm:max-w-162.5 overflow-y-scroll max-h-[80vh]">
           <DialogHeader>
             <DialogTitle>Add Translation Entry</DialogTitle>
             <DialogDescription>
@@ -76,7 +76,7 @@ const AddTranslationModal = forwardRef<
                   key={pairIndex}
                   className="bg-muted/10 dark:bg-muted/10 relative rounded-xl"
                 >
-                  <p className="font-semibold text-lg border-1 dark:border-border border-border rounded-t-xl p-2 flex items-center gap-2 text-foreground dark:text-foreground">
+                  <p className="font-semibold text-lg border dark:border-border border-border rounded-t-xl p-2 flex items-center gap-2 text-foreground dark:text-foreground">
                     <WholeWord size={24} className="" /> Pair {pairIndex + 1}
                     {pairIndex === 0 && (
                       <span className="text-sm italic text-muted-foreground ml-4">
@@ -88,14 +88,14 @@ const AddTranslationModal = forwardRef<
 
                   <Button
                     variant="destructive"
-                    className="absolute rounded-xl p-1 top-1.5 right-1.5 !bg-transparent !text-destructive hover:!text-destructive/80 hover:!cursor-pointer dark:hover:!text-destructive/90 transition-colors"
+                    className="absolute rounded-xl p-1 top-1.5 right-1.5 bg-transparent! text-destructive! hover:text-destructive/80! hover:cursor-pointer! dark:hover:text-destructive/90! transition-colors"
                     type="button"
                     onClick={() => removePair(pairIndex)}
                   >
                     <Trash></Trash>
                   </Button>
 
-                  <div className="flex flex-row pb-4 justify-between border-x-1 dark:border-border border-border gap-6 p-2 items-center">
+                  <div className="flex flex-row pb-4 justify-between border-x dark:border-border border-border gap-6 p-2 items-center">
                     <div className="flex flex-col w-full">
                       <Label
                         htmlFor="original"
@@ -222,7 +222,7 @@ const AddTranslationModal = forwardRef<
                     </div>
                   </div>
 
-                  <div className="grid border-1 border-t-1 p-3 gap-2 rounded-b-xl">
+                  <div className="grid border border-t p-3 gap-2 rounded-b-xl">
                     <Label className="font-medium">Definitions</Label>
                     {pair.definitions.map((d: string, _dIndex: number) => (
                       <div key={_dIndex} className="flex gap-2">
@@ -266,7 +266,7 @@ const AddTranslationModal = forwardRef<
             <Button
               variant="outline"
               type="button"
-              className="!bg-muted/10 dark:!bg-muted/10 !text-foreground dark:!text-foreground border-1 border-gray-300 dark:border-border"
+              className="bg-muted/10! dark:bg-muted/10! text-foreground! dark:text-foreground! border border-gray-300 dark:border-border"
               onClick={addPair}
             >
               + Add New Pair
@@ -299,7 +299,7 @@ const AddTranslationModal = forwardRef<
               <Button
                 onClick={handleSubmit}
                 variant="default"
-                className="!bg-primary !text-primary-foreground hover:!bg-primary/90"
+                className="bg-primary! text-primary-foreground! hover:bg-primary/90!"
               >
                 Save Entry
               </Button>

@@ -194,6 +194,7 @@ function createDictionary() {
         const folderPath = path$1.resolve(_route, folderName);
         const filePath = path$1.join(folderPath, `${folderName}.json`);
         const mdPath = path$1.join(folderPath, "MD-" + folderName);
+        const notesPath = path$1.join(folderPath, "NOTES-" + folderName);
         if (!fs.existsSync(_route)) {
           throw new Error(`The folder ${_route} does not exist.`);
         }
@@ -202,6 +203,7 @@ function createDictionary() {
         }
         fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
         fs.mkdirSync(mdPath, { recursive: true });
+        fs.mkdirSync(notesPath, { recursive: true });
         const configPath = path$1.join(
           process.env.APP_ROOT || __dirname,
           "public",
@@ -216,7 +218,9 @@ function createDictionary() {
         }
         config.dictionaries[folderName] = {
           name: _name,
-          route: folderPath
+          route: folderPath,
+          typeWordWithPrecededArticle: "",
+          typeWordWithTenses: ""
         };
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
         return {
@@ -624,29 +628,6 @@ function loadUserPreferences() {
     }
   });
 }
-function minimizeWindow() {
-  ipcMain.handle("window-minimize", () => {
-    const win = BrowserWindow.getFocusedWindow();
-    win == null ? void 0 : win.minimize();
-  });
-}
-function maximizeWindow() {
-  ipcMain.handle("window-maximize", () => {
-    const win = BrowserWindow.getFocusedWindow();
-    if (!win) return;
-    if (win.isMaximized()) {
-      win.unmaximize();
-    } else {
-      win.maximize();
-    }
-  });
-}
-function closeWindow() {
-  ipcMain.handle("window-close", () => {
-    const win = BrowserWindow.getFocusedWindow();
-    win == null ? void 0 : win.close();
-  });
-}
 function editConfig() {
   ipcMain.handle(
     "editConfig",
@@ -673,6 +654,113 @@ function editConfig() {
     }
   );
 }
+function fetchNoteIndex() {
+  ipcMain.handle("fetchNoteIndex", async (_event, _route, _name) => {
+    try {
+      const normalizedRoute = _route.replace(/\\/g, "/");
+      const filePath = path$1.join(
+        normalizedRoute,
+        `NOTES-${_name}`,
+        `NOTES-INDEX-${_name}.json`
+      );
+      if (!fs.existsSync(filePath)) {
+        fs.mkdirSync(path$1.dirname(filePath), { recursive: true });
+        fs.writeFileSync(filePath, JSON.stringify({}, null, 2), "utf-8");
+      }
+      const data = fs.readFileSync(filePath, "utf-8");
+      const json = JSON.parse(data);
+      return json;
+    } catch (error) {
+      console.error("Error reading markdown file:", error);
+      throw new Error(`Failed to load markdown file: ${error}`);
+    }
+  });
+}
+function saveNoteIndex() {
+  ipcMain.handle(
+    "saveNoteIndex",
+    async (_event, _route, _name, _uuid, currentConfig) => {
+      try {
+        const normalizedRoute = _route.replace(/\\/g, "/");
+        let filePath = path$1.join(normalizedRoute, `NOTES-${_name}`, `${_uuid}.md`);
+        let indexFilePath = path$1.join(
+          normalizedRoute,
+          `NOTES-${_name}`,
+          `NOTES-INDEX-${_name}.md`
+        );
+        const indexData = fs.readFileSync(indexFilePath, "utf-8");
+        const indexJson = JSON.parse(indexData);
+        Object.assign(indexJson, currentConfig);
+        fs.writeFileSync(indexFilePath, JSON.stringify(indexJson, null, 2), "utf-8");
+        return { success: true, path: filePath };
+      } catch (error) {
+        console.error("Error saving markdown file:", error);
+        throw new Error(`Failed to save markdown file: ${error}`);
+      }
+    }
+  );
+}
+function saveNotes() {
+  ipcMain.handle(
+    "saveNotes",
+    async (_event, _route, _name, _uuid, content, currentConfig) => {
+      try {
+        const normalizedRoute = _route.replace(/\\/g, "/");
+        let filePath = path$1.join(normalizedRoute, `NOTES-${_name}`, `${_uuid}.md`);
+        if (content === "") {
+          if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+            console.log(`Deleted markdown file at: ${filePath}`);
+          }
+        } else {
+          fs.writeFileSync(filePath, content, "utf-8");
+          console.log(`Saved markdown file at: ${filePath}`);
+        }
+        if (!fs.existsSync(filePath)) {
+          fs.mkdirSync(path$1.dirname(filePath), { recursive: true });
+          fs.writeFileSync(filePath, JSON.stringify({}, null, 2), "utf-8");
+        }
+        let indexFilePath = path$1.join(
+          normalizedRoute,
+          `NOTES-${_name}`,
+          `NOTES-INDEX-${_name}.md`
+        );
+        const indexData = fs.readFileSync(indexFilePath, "utf-8");
+        const indexJson = JSON.parse(indexData);
+        Object.assign(indexJson, currentConfig);
+        fs.writeFileSync(filePath, content, "utf-8");
+        fs.writeFileSync(indexFilePath, JSON.stringify(indexJson, null, 2), "utf-8");
+        return { success: true, path: filePath };
+      } catch (error) {
+        console.error("Error saving markdown file:", error);
+        throw new Error(`Failed to save markdown file: ${error}`);
+      }
+    }
+  );
+}
+function minimizeWindow() {
+  ipcMain.handle("window-minimize", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    win == null ? void 0 : win.minimize();
+  });
+}
+function maximizeWindow() {
+  ipcMain.handle("window-maximize", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    if (!win) return;
+    if (win.isMaximized()) {
+      win.unmaximize();
+    } else {
+      win.maximize();
+    }
+  });
+}
+function closeWindow() {
+  ipcMain.handle("window-close", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    win == null ? void 0 : win.close();
+  });
+}
 function registerIpcHandlers() {
   loadTranslations();
   addTranslation();
@@ -693,6 +781,9 @@ function registerIpcHandlers() {
   deleteGraphEntry();
   saveUserPreferences();
   loadUserPreferences();
+  fetchNoteIndex();
+  saveNoteIndex();
+  saveNotes();
   minimizeWindow();
   maximizeWindow();
   closeWindow();

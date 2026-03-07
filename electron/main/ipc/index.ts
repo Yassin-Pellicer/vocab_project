@@ -16,12 +16,14 @@ import saveGraph from "./endpoints/graph/saveGraph";
 import deleteGraphEntry from "./endpoints/graph/deleteGraphEntry";
 import saveUserPreferences from "./endpoints/translations/saveUserPreferences";
 import loadUserPreferences from "./endpoints/translations/loadUserPreferences";
+import editConfig from "./endpoints/translations/editConfig";
+import fetchNoteIndex from "./endpoints/notes/fetchNoteIndex";
+import saveNoteIndex from "./endpoints/notes/saveNoteIndex";
+import saveNotes from "./endpoints/notes/saveNotes";
 
-// window control handlers
 import minimizeWindow from "./endpoints/window/minimize";
 import maximizeWindow from "./endpoints/window/maximize";
 import closeWindow from "./endpoints/window/close";
-import editConfig from "./endpoints/translations/editConfig";
 
 export default function registerIpcHandlers() {
   loadTranslations();
@@ -43,6 +45,10 @@ export default function registerIpcHandlers() {
   deleteGraphEntry();
   saveUserPreferences();
   loadUserPreferences();
+  fetchNoteIndex();
+  saveNoteIndex();
+  saveNotes()
+
 
   // register window controls last
   minimizeWindow();
