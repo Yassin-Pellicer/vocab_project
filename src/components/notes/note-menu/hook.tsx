@@ -8,7 +8,7 @@ export default function NoteMenuHook({
   route: string;
   name: string;
 }) {
-  const { setTree } = useNotesStore();
+  const { tree, setTree } = useNotesStore();
 
   useEffect(() => {
     const fetchIndex = async () => {

@@ -3,7 +3,7 @@ import { useConfigStore as usePreferencesStore } from "@/context/preferences-con
 import { useEffect } from "react";
 
 export default function useConfig() {
-  const { dictionaryMetadata, setDictionaryMetadata, saveConfig: saveDictConfig } = useDictionaryStore();
+  const { dictionaryMetadata, setDictionaryMetadata } = useDictionaryStore();
   const {
     config: preferences,
     setConfig,
@@ -37,7 +37,6 @@ export default function useConfig() {
     dictionaryMetadata,
     preferences,
     setDictionaryMetadata,
-    saveDictConfig,
     setConfig,
     setNotifications,
     setNotificationLifetime,

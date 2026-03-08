@@ -4,7 +4,7 @@ import { SidebarNode, SidebarTree } from "@/types/sidebar-types";
 const appendChildNode = (
   n: SidebarNode,
   parentId: string,
-  child: SidebarNode
+  child: SidebarNode,
 ): SidebarNode => {
   if (n.id === parentId) {
     return { ...n, children: [...(n.children ?? []), child] };
@@ -23,10 +23,10 @@ const walk = (
   visitor: (
     node: SidebarNode,
     depth: number,
-    parent: SidebarNode | null
+    parent: SidebarNode | null,
   ) => void,
   _depth = 0,
-  _parent: SidebarNode | null = null
+  _parent: SidebarNode | null = null,
 ): void => {
   for (const n of tree) {
     visitor(n, _depth, _parent);
@@ -37,10 +37,6 @@ const walk = (
 interface NotesState {
   tree: SidebarTree;
 
-  selectedNodeId: string | null;
-
-  editingNodeId: string | null;
-
   sidebarOpen: boolean;
 
   findById: (id: string) => SidebarNode | undefined;
@@ -48,8 +44,6 @@ interface NotesState {
   flatten: () => SidebarNode[];
 
   setTree: (tree: SidebarTree) => void;
-  setSelectedNodeId: (id: string | null) => void;
-  setEditingNodeId: (id: string | null) => void;
   setSidebarOpen: (open: boolean) => void;
 
   addLeaf: (title: string, parentId?: string | null) => SidebarNode;
@@ -57,7 +51,7 @@ interface NotesState {
   addBranch: (
     title: string,
     children?: SidebarNode[],
-    parentId?: string | null
+    parentId?: string | null,
   ) => SidebarNode;
 
   appendChild: (child: SidebarNode, parentId?: string | null) => void;
@@ -67,6 +61,10 @@ interface NotesState {
   renameNode: (id: string, newTitle: string) => void;
 
   moveNode: (nodeId: string, newParentId: string | null) => void;
+
+  selectParent: (item: SidebarNode) => SidebarNode | undefined;
+
+  isDescendantOrSelf: (nodeId: string, targetId: string) => boolean;
 }
 
 const makeLeaf = (title: string, id?: string): SidebarNode => ({
@@ -77,7 +75,7 @@ const makeLeaf = (title: string, id?: string): SidebarNode => ({
 const makeBranch = (
   title: string,
   children: SidebarNode[],
-  id?: string
+  id?: string,
 ): SidebarNode => ({
   id: id ?? crypto.randomUUID(),
   title,
@@ -88,13 +86,13 @@ const removeById = (tree: SidebarTree, id: string): SidebarTree =>
   tree
     .filter((n) => n.id !== id)
     .map((n) =>
-      n.children ? { ...n, children: removeById(n.children, id) } : n
+      n.children ? { ...n, children: removeById(n.children, id) } : n,
     );
 
 const renameById = (
   tree: SidebarTree,
   id: string,
-  newTitle: string
+  newTitle: string,
 ): SidebarTree =>
   tree.map((n) => {
     if (n.id === id) return { ...n, title: newTitle };
@@ -105,7 +103,6 @@ const renameById = (
 
 export const useNotesStore = create<NotesState>((set, get) => ({
   tree: [],
-  selectedNodeId: null,
   editingNodeId: null,
   sidebarOpen: true,
 
@@ -132,39 +129,52 @@ export const useNotesStore = create<NotesState>((set, get) => ({
   },
 
   setTree: (tree) => set({ tree }),
-  setSelectedNodeId: (id) => set({ selectedNodeId: id }),
-  setEditingNodeId: (id) => set({ editingNodeId: id }),
   setSidebarOpen: (open) => set({ sidebarOpen: open }),
+  selectParent: (item: SidebarNode) => {
+    let parentId: string | null = null;
+    walk(get().tree, (n, _, parent) => {
+      if (n.id === item.id && parent) parentId = parent.id;
+    });
+    return parentId ? get().findById(parentId) : item;
+  },
 
   addLeaf: (title, parentId = null) => {
     const leaf = makeLeaf(title);
-    const { tree } = get();
-    set({
+    set((state) => ({
       tree: parentId
-        ? tree.map((n) => appendChildNode(n, parentId, leaf))
-        : [...tree, leaf],
-    });
+        ? state.tree.map((n) => appendChildNode(n, parentId, leaf))
+        : [...state.tree, leaf],
+    }));
     return leaf;
   },
 
   addBranch: (title, children = [], parentId = null) => {
     const branch = makeBranch(title, children);
-    const { tree } = get();
-    set({
+    set((state) => ({
       tree: parentId
-        ? tree.map((n) => appendChildNode(n, parentId, branch))
-        : [...tree, branch],
-    });
+        ? state.tree.map((n) => appendChildNode(n, parentId, branch))
+        : [...state.tree, branch],
+    }));
     return branch;
   },
 
   appendChild: (child, parentId = null) => {
-    const { tree } = get();
-    set({
+    set((state) => ({
       tree: parentId
-        ? tree.map((n) => appendChildNode(n, parentId, child))
-        : [...tree, child],
+        ? state.tree.map((n) => appendChildNode(n, parentId, child))
+        : [...state.tree, child],
+    }));
+  },
+
+  isDescendantOrSelf: (nodeId, targetId) => {
+    const node = get().findById(nodeId);
+    if (!node) return false;
+
+    let found = false;
+    walk([node], (n) => {
+      if (n.id === targetId) found = true;
     });
+    return found;
   },
 
   removeById: (id) => {

@@ -48,7 +48,6 @@ interface ConfigState {
   setTypeWordWithTenses: (key: string, typeWord: string) => void;
 
   loadConfig: () => Promise<void>;
-  saveConfig: () => Promise<void>;
   editConfig: () => Promise<void>;
   loadTranslations: (route: string, name: string) => Promise<void>;
   loadAllTranslations: () => Promise<void>;
@@ -68,7 +67,6 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
 
   setDictionaryMetadata: (metadata) => {
     set({ dictionaryMetadata: metadata });
-    get().saveConfig();
   },
 
   setDictionaries: (dictionaries) => set({ dictionaries }),
@@ -243,14 +241,6 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
     get().editConfig();
   },
 
-  saveConfig: async () => {
-    const metadata = get().dictionaryMetadata;
-    try {
-      await window.api.saveConfig({ dictionaries: metadata });
-    } catch (err) {
-      console.error("Error saving dictionary config:", err);
-    }
-  },
 
   editConfig: async () => {
     const metadata = get().dictionaryMetadata;

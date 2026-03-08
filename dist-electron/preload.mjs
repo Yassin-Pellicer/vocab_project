@@ -39,8 +39,8 @@ const notes = {
   fetchNoteIndex: async (route, name) => {
     return await electron.ipcRenderer.invoke("fetchNoteIndex", route, name);
   },
-  saveNoteIndex: async (route, name, uuid, currentConfig) => {
-    return await electron.ipcRenderer.invoke("saveNoteIndex", route, name, uuid, currentConfig);
+  saveNoteIndex: async (route, name, currentConfig) => {
+    return await electron.ipcRenderer.invoke("saveNoteIndex", route, name, currentConfig);
   },
   saveNotes: async (route, name, uuid, content, currentConfig) => {
     return await electron.ipcRenderer.invoke("saveNotes", route, name, uuid, content, currentConfig);

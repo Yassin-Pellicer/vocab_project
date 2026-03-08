@@ -1,9 +1,13 @@
 import {
+  Notebook,
   Search,
   X,
 } from "lucide-react";
 import useTranslationHooks from "./hook";
-import { NoteSidebar } from "./note-menu.tsx";
+import { NoteSidebar } from "./note-menu/index.tsx";
+import NoteActionsMenu from "../ui/note-actions-menu.tsx";
+import { Button } from "../ui/button.tsx";
+import AddNoteModal from "./add-note-modal/index.tsx";
 
 export default function Notes({
   route,
@@ -47,8 +51,26 @@ export default function Notes({
         </div>
       </div>
       <div className="flex flex-row overflow-hidden h-[calc(100vh-130px)]">
-        <NoteSidebar route={route} name={name} className="w-64" />
-        <div className=" flex flex-col border-r items-center divide-y overflow-y-auto h-full shrink-0">
+        <div className="flex flex-col w-98 h-full overflow-hidden">
+          <div className="p-2 border-b">
+            <AddNoteModal route={route} name={name} item={null}>
+              <Button
+                variant="outline"
+                className="w-full rounded-md cursor-pointer hover:bg-muted/10"
+                onClick={() => {
+                  setSearchField("");
+                  searchRef.current?.focus();
+                }}
+              >
+                <Notebook /> + Add Root Note
+              </Button>
+            </AddNoteModal>
+          </div>
+          <div className="flex-1 overflow-y-auto">
+            <NoteSidebar route={route} name={name} element={(item) => <NoteActionsMenu route={route} name={name} item={item} />} />
+          </div>
+        </div>
+        <div className="flex flex-col border-r items-center divide-y overflow-y-auto h-full shrink-0">
         </div>
       </div>
     </div>

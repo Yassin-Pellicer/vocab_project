@@ -5,27 +5,22 @@ import fs from "fs";
 export default function saveNoteIndex() {
   ipcMain.handle(
     "saveNoteIndex",
-    async (_event, _route, _name, _uuid, currentConfig) => {
+    async (_event, _route, _name, currentConfig) => {
       try {
         const normalizedRoute = _route.replace(/\\/g, "/");
-        let filePath = path.join(normalizedRoute, `NOTES-${_name}`,`${_uuid}.md`);
 
         let indexFilePath = path.join(
         normalizedRoute,
         `NOTES-${_name}`,
-        `NOTES-INDEX-${_name}.md`,
+        `NOTES-INDEX-${_name}.json`,
         );
 
-        const indexData = fs.readFileSync(indexFilePath, "utf-8");
-        const indexJson = JSON.parse(indexData);
-        Object.assign(indexJson, currentConfig);
+        fs.writeFileSync(indexFilePath, JSON.stringify(currentConfig, null, 2), "utf-8");
 
-        fs.writeFileSync(indexFilePath, JSON.stringify(indexJson, null, 2), "utf-8");
-
-        return { success: true, path: filePath };
+        return { success: true, path: indexFilePath };
       } catch (error) {
-        console.error("Error saving markdown file:", error);
-        throw new Error(`Failed to save markdown file: ${error}`);
+        console.error("Error saving JSON file:", error);
+        throw new Error(`Failed to save JSON file: ${error}`);
       }
     }
   );

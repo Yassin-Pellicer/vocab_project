@@ -2,29 +2,37 @@ import { useNotesStore } from "@/context/notes-context";
 import { SidebarNode } from "@/types/sidebar-types";
 import { useEffect, useState } from "react";
 
-export default function hook(dictRoute: string, dictName: string, item?: SidebarNode | null) {
+export default function hook(dictRoute: string, dictName: string, item: SidebarNode | null) {
   const [route, setRoute] = useState(item?.title || "");
-  const [name, setName] = useState("");
+  const [name, setName] = useState(item?.title || "");
   const [disableSetRouteInput, setDisableSetRouteInput] = useState(!!item || item === null);
-  const { appendChild } = useNotesStore();
+  const { selectParent, moveNode, isDescendantOrSelf, renameNode } = useNotesStore();
   const [selectedNode, setSelectedNode] = useState<SidebarNode | null>(item || null);
 
-  useEffect(() => {
-    if (item == null) {
+  const selectRoute = (n: SidebarNode | null) => {
+    if (n === null) {
       setRoute("Root");
       setSelectedNode(null);
       return;
     }
-  }, [item])
-
-  const selectRoute = (n: any) => {
-    console.log("Selected route:", n);
+    if (item && isDescendantOrSelf(item.id, n.id)) {
+      console.warn("Cannot move a node into itself or its children");
+      return;
+    }
     setRoute(n.title);
     setSelectedNode(n);
-  }
+  };
+  
+  useEffect(() => {
+    if (item === undefined) return;
+    const parentNode = selectParent(item!) ?? null;
+    setSelectedNode(parentNode);
+    setRoute(parentNode ? parentNode.title : item!.title);
+    setDisableSetRouteInput(!!parentNode || item === null);
+  }, [item]);
 
   const handleSubmit = async () => {
-    await (window.api).createDictionary(route, name);
+    await window.api.createDictionary(route, name);
     setRoute("");
     setName("");
   };
@@ -32,21 +40,17 @@ export default function hook(dictRoute: string, dictName: string, item?: Sidebar
   const handleAddNote = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!name.trim()) return;
-    let id = crypto.randomUUID();
-    if (!selectedNode) {
-      appendChild({ id: id, title: name }, null);
-      setName("");
-      return;
-    }
-    appendChild({ id: id, title: name }, selectedNode.id);
+    moveNode(item!.id, selectedNode?.id ?? null);
+    renameNode(item!.id, name);
     await window.api.saveNoteIndex(dictRoute, dictName, useNotesStore.getState().tree);
-
     setName("");
     setSelectedNode(null);
   };
 
   return {
     disableSetRouteInput,
+    selectedNode,
+    setSelectedNode,
     setDisableSetRouteInput,
     handleSubmit,
     route,
@@ -54,6 +58,6 @@ export default function hook(dictRoute: string, dictName: string, item?: Sidebar
     name,
     setName,
     selectRoute,
-    handleAddNote
+    handleAddNote,
   };
 }

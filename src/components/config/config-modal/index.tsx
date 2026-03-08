@@ -51,7 +51,7 @@ export default function ConfigModal({ children }: { children?: React.ReactNode }
         </DialogTrigger>
       )}
       <DialogContent className="lg:max-w-5xl md:max-w-3xl sm:max-w-2xl w-full p-0">
-        <div className="flex rounded-xl pl-2 h-[70vh] max-h-[800px] overflow-hidden">
+        <div className="flex rounded-xl pl-2 h-[70vh] max-h-200 overflow-hidden">
           <SettingsSidebar
             activeSection={activeSection}
             onSectionChange={setActiveSection}

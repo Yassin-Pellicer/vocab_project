@@ -1,112 +1,135 @@
 [
   {
+    "id": "a1b2c3d4-0041",
+    "title": "environment setup flashcards apps etc",
+    "children": [
+      {
+        "id": "0ed18b79-b414-4fed-80fb-4ba04311d042",
+        "title": "SEGUIMO CONSUMIENDO",
+        "children": [
+          {
+            "id": "86293a5c-f6e9-466e-9a54-247af16ba90c",
+            "title": "LA DROGA E MALA"
+          }
+        ]
+      },
+      {
+        "id": "178491dd-5742-458f-83f7-4ba9b7e5ba85",
+        "title": "SEGUIMO SEGUIMO SEGUIMO",
+        "children": []
+      }
+    ]
+  },
+  {
     "id": "a1b2c3d4-0001",
-    "title": "Projects",
+    "title": "german study stuff",
     "children": [
       {
         "id": "a1b2c3d4-0002",
-        "title": "Web App",
+        "title": "verbs and conjugations",
         "children": [
           {
             "id": "a1b2c3d4-0003",
-            "title": "src",
+            "title": "regular verbs present tense examples"
+          },
+          {
+            "id": "a1b2c3d4-0004",
+            "title": "irregular verbs list need to memorize"
+          },
+          {
+            "id": "a1b2c3d4-0005",
+            "title": "verbs that change vowel e to ie"
+          },
+          {
+            "id": "a1b2c3d4-0006",
+            "title": "weird verb things",
             "children": [
-              { "id": "a1b2c3d4-0004", "title": "index.ts" },
-              { "id": "a1b2c3d4-0005", "title": "App.tsx" },
               {
-                "id": "a1b2c3d4-0006",
-                "title": "components",
-                "children": [
-                  { "id": "a1b2c3d4-0007", "title": "Sidebar.tsx" },
-                  { "id": "a1b2c3d4-0008", "title": "Header.tsx" },
-                  { "id": "a1b2c3d4-0009", "title": "Footer.tsx" }
-                ]
+                "id": "a1b2c3d4-0007",
+                "title": "separable prefix verbs what even is going on"
               },
               {
-                "id": "a1b2c3d4-0010",
-                "title": "hooks",
-                "children": [
-                  { "id": "a1b2c3d4-0011", "title": "useAuth.ts" },
-                  { "id": "a1b2c3d4-0012", "title": "useFetch.ts" }
-                ]
+                "id": "a1b2c3d4-0008",
+                "title": "reflexive verbs examples and notes"
+              },
+              {
+                "id": "a1b2c3d4-0009",
+                "title": "modal verbs usage quick notes"
               }
             ]
           },
           {
-            "id": "a1b2c3d4-0013",
-            "title": "public",
+            "id": "a1b2c3d4-0010",
+            "title": "past tense practice",
             "children": [
-              { "id": "a1b2c3d4-0014", "title": "favicon.ico" },
-              { "id": "a1b2c3d4-0015", "title": "index.html" }
+              {
+                "id": "a1b2c3d4-0011",
+                "title": "perfekt tense examples from homework"
+              },
+              {
+                "id": "a1b2c3d4-0012",
+                "title": "prateritum common verbs list"
+              }
             ]
           },
-          { "id": "a1b2c3d4-0016", "title": "package.json" },
-          { "id": "a1b2c3d4-0017", "title": "tsconfig.json" }
+          {
+            "id": "6227b401-3e87-4371-af34-f425d72bc3da",
+            "title": " YETS"
+          },
+          {
+            "id": "a8c87fb7-eef9-445d-9e23-dad2b53cfe30",
+            "title": "HLA",
+            "children": [
+              {
+                "id": "a1b2c3d4-0040",
+                "title": "readme language learning plan maybe EEEE"
+              }
+            ]
+          }
         ]
+      },
+      {
+        "id": "a1b2c3d4-0013",
+        "title": "class sessions",
+        "children": [
+          {
+            "id": "a1b2c3d4-0014",
+            "title": "session 1 basic sentence structure"
+          },
+          {
+            "id": "a1b2c3d4-0015",
+            "title": "session 2 3 understanding adjektiv endings"
+          },
+          {
+            "id": "a1b2c3d4-0016",
+            "title": "session 4 wtf is dative again",
+            "children": [
+              {
+                "id": "a1b2c3d4-0020",
+                "title": "verb tables",
+                "children": [
+                  {
+                    "id": "a1b2c3d4-0021",
+                    "title": "regular ar verbs practice sheet"
+                  },
+                  {
+                    "id": "a1b2c3d4-0022",
+                    "title": "ser vs estar confusion notes"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "a1b2c3d4-0017",
+        "title": "vocabulary random words list asd asdf"
       },
       {
         "id": "a1b2c3d4-0018",
-        "title": "Mobile App",
-        "children": [
-          {
-            "id": "a1b2c3d4-0019",
-            "title": "screens",
-            "children": [
-              { "id": "a1b2c3d4-0020", "title": "HomeScreen.tsx" },
-              { "id": "a1b2c3d4-0021", "title": "ProfileScreen.tsx" },
-              { "id": "a1b2c3d4-0022", "title": "SettingsScreen.tsx" }
-            ]
-          },
-          {
-            "id": "a1b2c3d4-0023",
-            "title": "assets",
-            "children": [
-              { "id": "a1b2c3d4-0024", "title": "logo.png" },
-              { "id": "a1b2c3d4-0025", "title": "splash.png" }
-            ]
-          },
-          { "id": "a1b2c3d4-0026", "title": "app.json" }
-        ]
+        "title": "pronunciation notes umlauts and stuffas dfas df"
       }
     ]
-  },
-  {
-    "id": "a1b2c3d4-0027",
-    "title": "Notes",
-    "children": [
-      {
-        "id": "a1b2c3d4-0028",
-        "title": "Research",
-        "children": [
-          { "id": "a1b2c3d4-0029", "title": "state-management.md" },
-          { "id": "a1b2c3d4-0030", "title": "rendering-patterns.md" }
-        ]
-      },
-      {
-        "id": "a1b2c3d4-0031",
-        "title": "Meetings",
-        "children": [
-          { "id": "a1b2c3d4-0032", "title": "2024-01-15-kickoff.md" },
-          { "id": "a1b2c3d4-0033", "title": "2024-02-03-review.md" }
-        ]
-      },
-      { "id": "a1b2c3d4-0034", "title": "scratch.md" }
-    ]
-  },
-  {
-    "id": "a1b2c3d4-0035",
-    "title": "Archive",
-    "children": [
-      {
-        "id": "a1b2c3d4-0036",
-        "title": "2023",
-        "children": [
-          { "id": "a1b2c3d4-0037", "title": "old-prototype.ts" },
-          { "id": "a1b2c3d4-0038", "title": "legacy-utils.ts" }
-        ]
-      }
-    ]
-  },
-  { "id": "a1b2c3d4-0039", "title": "README.md" },
-  { "id": "a1b2c3d4-0040", "title": ".env" }
+  }
 ]

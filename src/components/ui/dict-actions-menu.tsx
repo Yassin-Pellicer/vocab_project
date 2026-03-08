@@ -26,7 +26,7 @@ export default function DictActionsMenu({ dictId, dictName, currentRoute }: Prop
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <ConfigureDictModal dictId={dictId} dictName={dictName} currentRoute={currentRoute}>
+        <ConfigureDictModal dictId={dictId} dictName={dictName}>
           <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
             <Settings className="h-4 w-4 mr-2" />
             Configure
