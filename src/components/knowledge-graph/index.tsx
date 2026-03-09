@@ -207,7 +207,7 @@ export default function DictionaryGraph({
   return (
     <div className="relative w-full h-full overflow-hidden">
       <button
-        className="px-3 pt-1 bg-popover text-popover-foreground rounded-lg mt-3.5 ml-2.5 hover:opacity-90 absolute z-10 border border-border"
+        className="px-3 pt-1 bg-popover text-popover-foreground rounded-lg mt-3.5 ml-2.5 hover:opacity-90 absolute border border-border"
         onClick={() => setShowEmptyNodes((prev) => !prev)}
       >
         {showEmptyNodes ? "Hide Empty" : "Show All"}

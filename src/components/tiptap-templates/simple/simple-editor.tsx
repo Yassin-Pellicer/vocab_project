@@ -70,9 +70,9 @@ import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils"
 // --- Styles ---
 import "@/components/tiptap-templates/simple/simple-editor.scss"
 
-import content from "@/components/tiptap-templates/simple/data/content.json"
 import { DictionaryGraphNode } from "@/components/editor/nodes/dictionary-graph-node"
 import { InsertGraphButton } from "@/components/editor/button/insert-graph-button"
+import { useNotesStore } from "@/context/notes-context"
 
 const MainToolbarContent = ({
   editor,
@@ -185,13 +185,16 @@ const MobileToolbarContent = ({
   </>
 )
 
-export function SimpleEditor({route, name} : {route: string, name: string}) {
+export function SimpleEditor({ route, name }: { route: string, name: string }) {
   const isMobile = useIsBreakpoint()
   const { height } = useWindowSize()
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
     "main"
   )
   const toolbarRef = useRef<HTMLDivElement>(null)
+
+  const { selectedNoteId } = useNotesStore();
+  const [content, setContent] = useState({});
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -222,6 +225,7 @@ export function SimpleEditor({route, name} : {route: string, name: string}) {
       Superscript,
       Subscript,
       Selection,
+
       ImageUploadNode.configure({
         accept: "image/*",
         maxSize: MAX_FILE_SIZE,
@@ -232,8 +236,24 @@ export function SimpleEditor({route, name} : {route: string, name: string}) {
       DictionaryGraphNode,
 
     ],
-    content,
+    content: {type: "doc", content: []},
+    onUpdate: ({ editor }) => {
+      console.log("update")
+      window.api.saveNotes(route, name, selectedNoteId, editor.getJSON());
+    },
   })
+
+  useEffect(() => {
+    const loadNote = async () => {
+      const data = await window.api.fetchNotes(route, name, selectedNoteId)
+
+      if (editor && data) {
+        editor.commands.setContent(data)
+      }
+    }
+
+    if (selectedNoteId) loadNote()
+  }, [selectedNoteId, editor])
 
   const rect = useCursorVisibility({
     editor,
@@ -254,8 +274,8 @@ export function SimpleEditor({route, name} : {route: string, name: string}) {
           style={{
             ...(isMobile
               ? {
-                  bottom: `calc(100% - ${height - rect.y}px)`,
-                }
+                bottom: `calc(100% - ${height - rect.y}px)`,
+              }
               : {}),
           }}
         >

@@ -1,163 +1,22 @@
 [
   {
-    "id": "a1b2c3d4-0041",
-    "title": "environment setup flashcards apps etc",
+    "id": "d9954bee-02c8-4790-9540-c27b54aae487",
+    "title": "Apuntes de clase",
     "children": [
       {
-        "id": "0ed18b79-b414-4fed-80fb-4ba04311d042",
-        "title": "SEGUIMO CONSUMIENDO",
+        "id": "9ff79f59-cceb-46b1-b4f7-bf340b9fa354",
+        "title": "Redacciones",
         "children": [
           {
-            "id": "86293a5c-f6e9-466e-9a54-247af16ba90c",
-            "title": "LA DROGA E MALA"
-          },
-          {
-            "id": "0f1751a6-2599-4425-a663-31c3b0330ca0",
-            "title": "asdfasdfasdf"
-          },
-          {
-            "id": "896e578e-ba43-4c7d-9b5f-9389b52d286f",
-            "title": "asdfasdf asdf asd asdf asdfasdf as"
+            "id": "b81508b8-8374-4116-bb5c-23471d30eac0",
+            "title": "Meine Familie"
           }
         ]
       },
       {
-        "id": "178491dd-5742-458f-83f7-4ba9b7e5ba85",
-        "title": "SEGUIMO SEGUIMO SEGUIMO",
-        "children": []
-      },
-      {
-        "id": "0c0c09de-a607-4896-a35b-b6d629fc8652",
-        "title": "yayayayayay"
+        "id": "9dd44425-71e1-40a0-b226-221e70d96e8e",
+        "title": "Notas de clase"
       }
     ]
-  },
-  {
-    "id": "a1b2c3d4-0001",
-    "title": "german study stuff",
-    "children": [
-      {
-        "id": "a1b2c3d4-0002",
-        "title": "verbs and conjugations",
-        "children": [
-          {
-            "id": "a1b2c3d4-0003",
-            "title": "regular verbs present tense examples"
-          },
-          {
-            "id": "a1b2c3d4-0004",
-            "title": "irregular verbs list need to memorize"
-          },
-          {
-            "id": "a1b2c3d4-0005",
-            "title": "verbs that change vowel e to ie"
-          },
-          {
-            "id": "a1b2c3d4-0006",
-            "title": "weird verb things",
-            "children": [
-              {
-                "id": "a1b2c3d4-0007",
-                "title": "separable prefix verbs what even is going on"
-              },
-              {
-                "id": "a1b2c3d4-0008",
-                "title": "reflexive verbs examples and notes"
-              },
-              {
-                "id": "a1b2c3d4-0009",
-                "title": "modal verbs usage quick notes"
-              }
-            ]
-          },
-          {
-            "id": "a1b2c3d4-0010",
-            "title": "past tense practice",
-            "children": [
-              {
-                "id": "a1b2c3d4-0011",
-                "title": "perfekt tense examples from homework"
-              },
-              {
-                "id": "a1b2c3d4-0012",
-                "title": "prateritum common verbs list"
-              }
-            ]
-          },
-          {
-            "id": "6227b401-3e87-4371-af34-f425d72bc3da",
-            "title": " YETS"
-          },
-          {
-            "id": "a8c87fb7-eef9-445d-9e23-dad2b53cfe30",
-            "title": "HLA",
-            "children": [
-              {
-                "id": "a1b2c3d4-0040",
-                "title": "readme language learning plan maybe EEEE"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "a1b2c3d4-0013",
-        "title": "class sessions",
-        "children": [
-          {
-            "id": "a1b2c3d4-0014",
-            "title": "session 1 basic sentence structure"
-          },
-          {
-            "id": "a1b2c3d4-0015",
-            "title": "session 2 3 understanding adjektiv endings"
-          },
-          {
-            "id": "a1b2c3d4-0016",
-            "title": "session 4 wtf is dative again",
-            "children": [
-              {
-                "id": "a1b2c3d4-0020",
-                "title": "verb tables",
-                "children": [
-                  {
-                    "id": "a1b2c3d4-0021",
-                    "title": "regular ar verbs practice sheet"
-                  },
-                  {
-                    "id": "a1b2c3d4-0022",
-                    "title": "ser vs estar confusion notes"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "a1b2c3d4-0017",
-        "title": "vocabulary random words list asd asdf"
-      },
-      {
-        "id": "a1b2c3d4-0018",
-        "title": "pronunciation notes umlauts and stuffas dfas df"
-      }
-    ]
-  },
-  {
-    "id": "b3fc7a47-ba85-489a-b4f2-d560e96b7fde",
-    "title": "NEW TEST"
-  },
-  {
-    "id": "76c00aaf-3634-4cb6-a6d7-3a8dc7e70479",
-    "title": "asfg adfga gadf d g"
-  },
-  {
-    "id": "3ef19936-149c-4fbe-acbb-66077cd64edc",
-    "title": "asfg adfga gadf d gasd fasdf"
-  },
-  {
-    "id": "e68616f4-a3b1-4f8f-84ea-671dc527b799",
-    "title": "aaaaaaaaaaaaaa"
   }
 ]

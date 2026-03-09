@@ -14,7 +14,7 @@ export default function fetchNoteIndex() {
 
       if (!fs.existsSync(filePath)) {
         fs.mkdirSync(path.dirname(filePath), { recursive: true });
-        fs.writeFileSync(filePath, JSON.stringify({}, null, 2), "utf-8");
+        fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
       }
 
       const data = fs.readFileSync(filePath, "utf-8");

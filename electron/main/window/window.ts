@@ -15,25 +15,44 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
   : RENDERER_DIST;
 
 export default function createWindow() {
-const win = new BrowserWindow({
-  width: 1200,
-  height: 800,
-  frame: true,
-  titleBarStyle: "hidden",
+  const win = new BrowserWindow({
+    width: 1200,
+    height: 800,
+    frame: true,
+    titleBarStyle: "hidden",
+    backgroundColor: "#ffffff",
+    hasShadow: false,
+    webPreferences: {
+      preload: path.join(__dirname, "preload.mjs"),
+      zoomFactor: 1.0,
+    },
+  });
 
-  backgroundColor: "#ffffff",   
-  hasShadow: false,             
+  win.webContents.setVisualZoomLevelLimits(1, 5);
 
-  webPreferences: {
-    preload: path.join(__dirname, "preload.mjs"),
-  },
-});
   win.webContents.openDevTools();
   Menu.setApplicationMenu(null);
 
   win.webContents.on("did-finish-load", () => {
     win?.webContents.send("main-process-message", new Date().toLocaleString());
   });
+
+  win.webContents.on("before-input-event", (event, input) => {
+  if (!input.control) return;
+
+  if (input.key === "+") {
+    const current = win.webContents.getZoomFactor();
+    win.webContents.setZoomFactor(Math.min(current + 0.1, 5.0));
+    event.preventDefault();
+  } else if (input.key === "-") {
+    const current = win.webContents.getZoomFactor();
+    win.webContents.setZoomFactor(Math.max(current - 0.1, 0.5));
+    event.preventDefault();
+  } else if (input.key === "0") {
+    win.webContents.setZoomFactor(1.0);
+    event.preventDefault();
+  }
+});
 
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL);

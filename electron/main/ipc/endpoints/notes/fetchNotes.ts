@@ -6,17 +6,27 @@ export default function fetchNotes() {
   ipcMain.handle("fetchNotes", async (_event, _route, _name, _uuid) => {
     try {
       const normalizedRoute = _route.replace(/\\/g, "/");
-      const filePath = path.join(normalizedRoute, `NOTES-${_name}`, `${_uuid}.json`);
+      const filePath = path.join(
+        normalizedRoute,
+        `NOTES-${_name}`,
+        `${_uuid}.json`
+      );
 
       if (!fs.existsSync(filePath)) {
-        return ""; 
+        return { type: "doc", content: [] };
       }
 
       const data = fs.readFileSync(filePath, "utf-8");
-      return data;
+
+      try {
+        return JSON.parse(data);
+      } catch {
+        return { type: "doc", content: [] };
+      }
+
     } catch (error) {
-      console.error("Error reading markdown file:", error);
-      throw new Error(`Failed to load markdown file: ${error}`);
+      console.error("Error reading note file:", error);
+      return { type: "doc", content: [] };
     }
   });
 }

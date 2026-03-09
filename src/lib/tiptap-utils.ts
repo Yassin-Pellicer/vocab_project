@@ -352,18 +352,18 @@ export function selectionWithinConvertibleTypes(
 }
 
 /**
- * Handles image upload with progress tracking and abort capability
+ * Handles image upload with progress tracking and abort capability.
+ * Converts the file to a base64 data URL — works in Electron without a server.
  * @param file The file to upload
  * @param onProgress Optional callback for tracking upload progress
  * @param abortSignal Optional AbortSignal for cancelling the upload
- * @returns Promise resolving to the URL of the uploaded image
+ * @returns Promise resolving to a base64 data URL of the uploaded image
  */
 export const handleImageUpload = async (
   file: File,
   onProgress?: (event: { progress: number }) => void,
   abortSignal?: AbortSignal
 ): Promise<string> => {
-  // Validate file
   if (!file) {
     throw new Error("No file provided")
   }
@@ -374,17 +374,41 @@ export const handleImageUpload = async (
     )
   }
 
-  // For demo/testing: Simulate upload progress. In production, replace the following code
-  // with your own upload implementation.
-  for (let progress = 0; progress <= 100; progress += 10) {
+  return new Promise<string>((resolve, reject) => {
     if (abortSignal?.aborted) {
-      throw new Error("Upload cancelled")
+      reject(new Error("Upload cancelled"))
+      return
     }
-    await new Promise((resolve) => setTimeout(resolve, 500))
-    onProgress?.({ progress })
-  }
 
-  return "/images/tiptap-ui-placeholder-image.jpg"
+    const reader = new FileReader()
+
+    reader.onprogress = (event) => {
+      if (event.lengthComputable) {
+        const progress = Math.round((event.loaded / event.total) * 100)
+        onProgress?.({ progress })
+      }
+    }
+
+    reader.onload = () => {
+      if (abortSignal?.aborted) {
+        reject(new Error("Upload cancelled"))
+        return
+      }
+      onProgress?.({ progress: 100 })
+      resolve(reader.result as string)
+    }
+
+    reader.onerror = () => {
+      reject(new Error("Failed to read file"))
+    }
+
+    abortSignal?.addEventListener("abort", () => {
+      reader.abort()
+      reject(new Error("Upload cancelled"))
+    })
+
+    reader.readAsDataURL(file)
+  })
 }
 
 type ProtocolOptions = {

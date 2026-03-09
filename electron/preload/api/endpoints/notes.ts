@@ -9,10 +9,29 @@ export const notes = {
   },
 
   saveNoteIndex: async (route: string, name: string, currentConfig: Object) => {
-    return await ipcRenderer.invoke("saveNoteIndex", route, name, currentConfig);
+    return await ipcRenderer.invoke(
+      "saveNoteIndex",
+      route,
+      name,
+      currentConfig,
+    );
   },
 
-  saveNotes: async (route: string, name: string, uuid: string, content: Object) => {
+  saveNotes: async (
+    route: string,
+    name: string,
+    uuid: string,
+    content: Object,
+  ) => {
     return await ipcRenderer.invoke("saveNotes", route, name, uuid, content);
+  },
+
+  saveImage: async (
+    route: string,
+    name: string,
+    buffer: number[],
+    filename: string,
+  ) => {
+    return await ipcRenderer.invoke("saveImage", route, name, buffer, filename);
   },
 };

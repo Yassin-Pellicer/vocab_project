@@ -10,7 +10,6 @@ body {
 }
 
 body {
-  font-family: "Inter", sans-serif;
   color: var(--tt-theme-text);
   font-optical-sizing: auto;
   font-weight: 400;
@@ -55,7 +54,7 @@ body,
 }
 
 .simple-editor-content {
-  max-width: 648px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
   height: 100%;

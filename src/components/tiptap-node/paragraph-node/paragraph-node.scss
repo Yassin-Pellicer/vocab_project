@@ -263,3 +263,8 @@
   height: 0.188rem;
   cursor: grabbing;
 }
+
+
+.tiptap.ProseMirror h1, h2, h3, h4 {
+  margin-top: 0em !important;
+}

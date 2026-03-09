@@ -19,13 +19,30 @@ function createWindow() {
     backgroundColor: "#ffffff",
     hasShadow: false,
     webPreferences: {
-      preload: path.join(__dirname$1, "preload.mjs")
+      preload: path.join(__dirname$1, "preload.mjs"),
+      zoomFactor: 1
     }
   });
+  win.webContents.setVisualZoomLevelLimits(1, 5);
   win.webContents.openDevTools();
   Menu.setApplicationMenu(null);
   win.webContents.on("did-finish-load", () => {
     win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
+  });
+  win.webContents.on("before-input-event", (event, input) => {
+    if (!input.control) return;
+    if (input.key === "+") {
+      const current = win.webContents.getZoomFactor();
+      win.webContents.setZoomFactor(Math.min(current + 0.1, 5));
+      event.preventDefault();
+    } else if (input.key === "-") {
+      const current = win.webContents.getZoomFactor();
+      win.webContents.setZoomFactor(Math.max(current - 0.1, 0.5));
+      event.preventDefault();
+    } else if (input.key === "0") {
+      win.webContents.setZoomFactor(1);
+      event.preventDefault();
+    }
   });
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL);
@@ -665,7 +682,7 @@ function fetchNoteIndex() {
       );
       if (!fs.existsSync(filePath)) {
         fs.mkdirSync(path$1.dirname(filePath), { recursive: true });
-        fs.writeFileSync(filePath, JSON.stringify({}, null, 2), "utf-8");
+        fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
       }
       const data = fs.readFileSync(filePath, "utf-8");
       const json = JSON.parse(data);
@@ -725,6 +742,54 @@ function saveNotes() {
     }
   });
 }
+function fetchNotes() {
+  ipcMain.handle("fetchNotes", async (_event, _route, _name, _uuid) => {
+    try {
+      const normalizedRoute = _route.replace(/\\/g, "/");
+      const filePath = path$1.join(
+        normalizedRoute,
+        `NOTES-${_name}`,
+        `${_uuid}.json`
+      );
+      if (!fs.existsSync(filePath)) {
+        return { type: "doc", content: [] };
+      }
+      const data = fs.readFileSync(filePath, "utf-8");
+      try {
+        return JSON.parse(data);
+      } catch {
+        return { type: "doc", content: [] };
+      }
+    } catch (error) {
+      console.error("Error reading note file:", error);
+      return { type: "doc", content: [] };
+    }
+  });
+}
+function saveImage() {
+  ipcMain.handle("saveImage", async (_event, route, name, buffer, filename) => {
+    try {
+      const normalizedRoute = route.replace(/\\/g, "/");
+      const resourcesDir = path$1.join(
+        normalizedRoute,
+        `NOTES-${name}`,
+        `RESOURCES`
+      );
+      fs.mkdirSync(resourcesDir, { recursive: true });
+      console.log("SAVED IMGE SAVED IMG");
+      const ext = path$1.extname(filename);
+      const base = path$1.basename(filename, ext);
+      const unique = `${base}-${Date.now()}${ext}`;
+      const filePath = path$1.join(resourcesDir, unique);
+      fs.writeFileSync(filePath, Buffer.from(buffer));
+      const fileUrl = `file://${filePath.replace(/\\/g, "/")}`;
+      return { success: true, url: fileUrl };
+    } catch (error) {
+      console.error("Error saving image:", error);
+      throw new Error(`Failed to save image: ${error}`);
+    }
+  });
+}
 function minimizeWindow() {
   ipcMain.handle("window-minimize", () => {
     const win = BrowserWindow.getFocusedWindow();
@@ -771,6 +836,8 @@ function registerIpcHandlers() {
   fetchNoteIndex();
   saveNoteIndex();
   saveNotes();
+  fetchNotes();
+  saveImage();
   minimizeWindow();
   maximizeWindow();
   closeWindow();
