@@ -105,6 +105,7 @@ export default function AddNoteModal({
                 type="submit"
                 variant="outline"
                 className="bg-primary text-primary-foreground"
+                disabled={!hook.name.trim()}
               >
                 Create
               </Button>

@@ -34,10 +34,33 @@ const walk = (
   }
 };
 
+const findRouteRecursive = (
+  tree: SidebarTree,
+  id: string,
+  path: string[] = [],
+): string[] | null => {
+  for (const node of tree) {
+    const nextPath = [...path, node.title];
+
+    if (node.id === id) {
+      return nextPath;
+    }
+
+    if (node.children?.length) {
+      const found = findRouteRecursive(node.children, id, nextPath);
+      if (found) return found;
+    }
+  }
+
+  return null;
+};
+
 interface NotesState {
   tree: SidebarTree;
 
   sidebarOpen: boolean;
+
+  selectedNoteId: string | null;
 
   findById: (id: string) => SidebarNode | undefined;
   findByTitle: (title: string) => SidebarNode | undefined;
@@ -65,6 +88,10 @@ interface NotesState {
   selectParent: (item: SidebarNode) => SidebarNode | undefined;
 
   isDescendantOrSelf: (nodeId: string, targetId: string) => boolean;
+
+  setSelectedNoteId: (id: string | null) => void;
+
+  getRoute: (id: string) => string | null;
 }
 
 const makeLeaf = (title: string, id?: string): SidebarNode => ({
@@ -105,6 +132,7 @@ export const useNotesStore = create<NotesState>((set, get) => ({
   tree: [],
   editingNodeId: null,
   sidebarOpen: true,
+  selectedNoteId: null,
 
   findById: (id) => {
     let found: SidebarNode | undefined;
@@ -196,5 +224,12 @@ export const useNotesStore = create<NotesState>((set, get) => ({
       : [...pruned, node];
 
     set({ tree: reinserted });
+  },
+
+  setSelectedNoteId: (id) => set({ selectedNoteId: id }),
+
+  getRoute: (id: string) => {
+    const path = findRouteRecursive(get().tree, id);
+    return path ? path.join("/") : null;
   },
 }));

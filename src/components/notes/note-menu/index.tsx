@@ -8,12 +8,13 @@ import {
 import NoteMenuHook from "./hook";
 import { SidebarNode } from "@/types/sidebar-types";
 import { useNotesStore } from "@/context/notes-context";
+
 function renderNode(
   n: SidebarNode,
   route: string,
   name: string,
   action?: any,
-  element?: (item: SidebarNode) => React.ReactNode  // ← render prop type
+  element?: (item: SidebarNode) => React.ReactNode 
 ): React.ReactNode {
   if (!n.children?.length) {
     return <SidebarItem key={n.id} title={n.title} element={element} item={n} action={action} />;

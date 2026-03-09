@@ -32,19 +32,25 @@ export default function hook(dictRoute: string, dictName: string, item?: Sidebar
   const handleAddNote = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!name.trim()) return;
-    let id = crypto.randomUUID();
+    const id = crypto.randomUUID();
+
     if (!selectedNode) {
-      appendChild({ id: id, title: name }, null);
-      setName("");
-      return;
+      appendChild({ id, title: name }, null);
+    } else {
+      appendChild({ id, title: name }, selectedNode.id);
     }
-    appendChild({ id: id, title: name }, selectedNode.id);
-    await window.api.saveNoteIndex(dictRoute, dictName, useNotesStore.getState().tree);
+
+    await window.api.saveNoteIndex(
+      dictRoute,
+      dictName,
+      useNotesStore.getState().tree
+    );
+
+    await window.api.saveNotes(dictRoute, dictName, id, undefined);
 
     setName("");
     setSelectedNode(null);
   };
-
   return {
     disableSetRouteInput,
     setDisableSetRouteInput,
