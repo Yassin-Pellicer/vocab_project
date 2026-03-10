@@ -1693,31 +1693,6 @@
     "pair": [
       {
         "original": {
-          "word": "mögen",
-          "gender": "",
-          "number": ""
-        },
-        "translations": [
-          {
-            "word": "gustar",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Equivalente al verbo gustar en castellano. Utilizado en frases para decir que nos gusta algo: \"Ich mag Schokolade\"",
-          "Expresa deseo y esperanza, como \"May\" en inglés, como verbo modal"
-        ]
-      }
-    ],
-    "dateAdded": "2025-12-14",
-    "type": "Verben",
-    "uuid": "f5e810bf-db62-41a3-a243-893272fc9f02"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "arbeiten",
           "gender": "",
           "number": ""
@@ -8416,5 +8391,30 @@
     "dateAdded": "2025-12-14",
     "type": "Nomen",
     "uuid": "692c00ef-d8ed-4d6d-b36e-a0d7d6e47bff"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "mögen",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "gustar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Equivalente al verbo gustar en castellano. Utilizado en frases para decir que nos gusta algo: \"Ich mag Schokolade\"",
+          "Expresa deseo y esperanza, como \"May\" en inglés, como verbo modal"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-14",
+    "type": "Adverbien",
+    "uuid": "f5e810bf-db62-41a3-a243-893272fc9f02"
   }
 ]
