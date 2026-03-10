@@ -12,13 +12,13 @@ export default function useWordCard(dictId: string, word: any) {
 
   const translations = Array.isArray(currentPair.translations)
     ? currentPair.translations
-        .map((t: { word: string }) => t.word)
-        .filter(Boolean)
-        .join(", ")
+      .map((t: { word: string }) => t.word)
+      .filter(Boolean)
+      .join(", ")
     : typeof currentPair.translations === "object" &&
       currentPair.translations?.word
-    ? currentPair.translations.word
-    : "";
+      ? currentPair.translations.word
+      : "";
 
   const gender = currentPair.original?.gender || "";
   const number = currentPair.original?.number || "";
@@ -28,9 +28,9 @@ export default function useWordCard(dictId: string, word: any) {
     : [];
 
   const article =
-    (word.type === dictionaryMetadata?.[dictId].typeWordWithPrecededArticle &&
-      dictionaryMetadata?.[dictId].useArticles)
-      ? dictionaryMetadata?.[dictId].articles?.[gender]?.[number] || ""
+    (word.type === dictionaryMetadata?.[dictId]?.typeWordWithPrecededArticle &&
+      dictionaryMetadata?.[dictId]?.useArticles)
+      ? dictionaryMetadata?.[dictId]?.articles?.[gender]?.[number] || ""
       : "";
 
   const originalWithArticle = article
@@ -43,11 +43,11 @@ export default function useWordCard(dictId: string, word: any) {
     setPairIdx,
     currentPair,
     original,
-    originalWithArticle, 
+    originalWithArticle,
     translations,
     gender,
     number,
-    article,            
+    article,
     definitions,
   };
 }

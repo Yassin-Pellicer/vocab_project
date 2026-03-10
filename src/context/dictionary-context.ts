@@ -270,13 +270,6 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
               )}&path=${encodeURIComponent(dict.route)}`,
             },
             {
-              title: "Translate",
-              icon: Languages,
-              url: `/translation?name=${encodeURIComponent(
-                key,
-              )}&path=${encodeURIComponent(dict.route)}`,
-            },
-            {
               title: "Notes",
               icon: BookAIcon,
               url: `/notes?name=${encodeURIComponent(

@@ -1,0 +1,290 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Hay 7 días de la semana:"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Montag"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Dienstag"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Mittwoch"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Donnerstag"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Freitag"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Samstag"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Sonntag"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Alles wochentagen sind maskulin ("
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            },
+            {
+              "type": "italic"
+            }
+          ],
+          "text": "der Montag, der Dienstag"
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": ")"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Der Montag, der Dienstag..."
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Como en inglés, on monday, I'm going..."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "En alemán sería:"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "italic"
+                }
+              ],
+              "text": "Am montag gehe ich ins Theater"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "El verbo siempre va en segunda posición. Si empezamos por otra parte de la oración que no sea el sujeto, el verbo irá en tercera posición."
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Esto quiere decir que..."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "italic"
+                }
+              ],
+              "text": "Am Montag gehe ich ins Theater = Ich am Montag gehe ins Theater"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      }
+    }
+  ]
+}

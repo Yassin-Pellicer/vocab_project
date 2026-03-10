@@ -1918,109 +1918,116 @@
     "Indicative": {
       "Simple": {
         "Präsens": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         },
         "Präteritum": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         }
       },
       "Compound": {
         "Perfekt": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         },
         "Plusquamperfekt": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         },
         "Futur I": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         },
         "Futur II": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         }
       }
     },
     "Subjunctive": {
       "Konjunktiv I": {
         "Präsens": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         },
         "Perfekt": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         }
       },
       "Konjunktiv II": {
         "Präteritum": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         },
         "Plusquamperfekt": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         },
         "Würde-Form": {
-          "1s": "",
-          "2s": "",
-          "3s": "",
-          "1p": "",
-          "2p": "",
-          "3p": ""
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
         }
       }
     },
     "Imperative": {
       "Imperativ I": {
         "Obligation": {
-          "2s": "",
-          "2p": "",
-          "3p": ""
+          "du": "",
+          "ihr": "",
+          "sie/Sie": ""
+        }
+      }
+    },
+    "Andere Konjugations": {
+      "Partizip": {
+        "Partizip I": {
+          "-": ""
         }
       }
     }

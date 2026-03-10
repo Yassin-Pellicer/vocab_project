@@ -1,0 +1,203 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 4
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "italic"
+            }
+          ],
+          "text": "Sie haben Geburtstag und planen eine Feier mit Kolleginnen und Kollegen aus dem Deutschkurs"
+        },
+        {
+          "type": "text",
+          "text": ":"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      }
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Hallo Leute!"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Ich lade euch zu meinen Geburststagfeier. Das passt bei meinem Haus, nexte wochenende am 18:00 Uhr. Ihr müsst nichts mitbringen. Aber wenn ihr möchtet, könnt Getränke oder süssigkeit bringen. Wir möchten einen schönen Abend haben."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Liebe Grüße, Yassin."
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            },
+            {
+              "type": "italic"
+            }
+          ],
+          "text": "Einweihungsparty"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Informal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 4
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Hallo Lucia, wie geht's?"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Meine Kommilitonin macht eine Einweihungsparty und ich muss ein Geschenk. Ich glaube ein Teppich oder ein Stuhl können gute Geschenke sein. Was denkst du? Tschüss!"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Formal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 4
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Guten Morgen, Laura, wie geht es Ihnen?"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Morgen ist Sommerfest in meine Firma. Wollen wir zusammen hin gehen?"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      }
+    }
+  ]
+}

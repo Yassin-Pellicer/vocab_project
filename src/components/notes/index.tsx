@@ -94,14 +94,14 @@ export default function Notes({
 
         {/* Main content */}
         <div className="flex-1 overflow-y-auto">
-          <div className="sticky flex flex-col top-0 gap-1 z-1 bg-background p-3 border-b">
+          <div className="flex flex-col top-0 gap-1 z-1 bg-background p-3 border-b ">
             <p className="flex flex-row items-center gap-2 text-xl font-semibold">
               <NotebookIcon size={20} className="shrink-0" /> {selectedNoteTitle || "Notes"}
             </p>
             <p className="flex items-center gap-1 text-xs text-foreground/60"><Folder size={14}></Folder>
-            <b>Route:</b> {selectedNoteRoute}</p>
+              <b>Route:</b> {selectedNoteRoute}</p>
           </div>
-            <NoteDisplay route={route} name={name}/>
+          <NoteDisplay route={route} name={name} />
         </div>
       </div>
     </div>

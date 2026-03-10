@@ -6,5 +6,7 @@ export default function NotesPage() {
   const path = searchParams.get('path') || "";
   const name = searchParams.get('name') || "";
 
+  if (!path || !name) return null;
+
   return <Notes key={`${path}-${name}`} route={path} name={name} />;
 }

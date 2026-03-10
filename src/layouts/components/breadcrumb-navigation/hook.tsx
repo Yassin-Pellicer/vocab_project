@@ -1,10 +1,12 @@
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useConfigStore } from "@/context/dictionary-context";
+import { useNotesStore } from "@/context/notes-context";
 
 export function useBreadcrumbNavigation() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const { data, selectedWord } = useConfigStore();
+  const { itemsFromRouteRecursive } = useNotesStore();
 
   const name = searchParams.get("name") || "";
   const path = searchParams.get("path") || "";
@@ -19,6 +21,7 @@ export function useBreadcrumbNavigation() {
   const getCurrentPage = () => {
     if (location.pathname === "/dictionary") return "Dictionary";
     if (location.pathname === "/translation") return "Translate";
+    if (location.pathname === "/notes") return "Notes";
     if (location.pathname === "/markdown" && selectedWord)
       return selectedWord.pair[0].original.word;
     return null;
@@ -37,6 +40,13 @@ export function useBreadcrumbNavigation() {
     }
 
     breadcrumbItems.push({ label: currentPage, url: null });
+  }
+
+  if (location.pathname === "/notes") {
+    const items = itemsFromRouteRecursive();
+    items?.forEach((element) => {
+      breadcrumbItems.push({ label: element.title, url: null });
+    });
   }
 
   return { breadcrumbItems };

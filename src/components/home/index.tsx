@@ -91,7 +91,7 @@ export default function Home() {
                       <ArrowRight size={16} />
                     </Link>
                   </div>
-                  <h3 className="text-sm tracking-tighter font-semibold italic text-muted-foreground mt-6 border-t-dotted border-t border-border pt-2">
+                  <h3 className="text-sm! tracking-tighter font-semibold italic text-muted-foreground mt-6 border-t-dotted border-t border-border pt-2">
                     Recent words added to this dictionary
                   </h3>
                   <div className="flex flex-col gap-2 mt-1">
@@ -105,7 +105,7 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
-                <div className="h-[400px] border rounded-xl lg:h-auto min-h-0">
+                <div className="h-100 border rounded-xl lg:h-auto min-h-0">
                   <DictionaryGraph
                     title={dict.name}
                     name={dict.id}

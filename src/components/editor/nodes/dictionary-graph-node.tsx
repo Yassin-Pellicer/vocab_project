@@ -3,16 +3,17 @@ import { ReactNodeViewRenderer, NodeViewWrapper } from "@tiptap/react"
 import DictionaryGraph from "@/components/knowledge-graph"
 
 const DictionaryGraphView = ({ node }: { node: any }) => {
-  const { route, name, title, doubleView } = node.attrs
+  const { route, name, title, doubleView, word } = node.attrs
 
   return (
     <NodeViewWrapper className="dictionary-graph-node">
-      <div className="w-full height-[800px] border rounded-xl">
+      <div className="w-full h-125 border rounded-xl">
         <DictionaryGraph
           route={route}
           name={name}
           title={title}
           doubleView={doubleView}
+          word={word}
         />
       </div>
     </NodeViewWrapper>
@@ -29,6 +30,7 @@ export const DictionaryGraphNode = Node.create({
       name: { default: "" },
       title: { default: "" },
       doubleView: { default: false },
+      word: { default: "" },
     }
   },
   parseHTML() {

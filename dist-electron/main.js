@@ -91,12 +91,20 @@ function fetchMarkdown() {
   ipcMain.handle("fetchMarkdown", async (_event, _route, _name, _uuid) => {
     try {
       const normalizedRoute = _route.replace(/\\/g, "/");
-      const filePath = path$1.join(normalizedRoute, `MD-${_name}`, `${_uuid}.md`);
+      const filePath = path$1.join(
+        normalizedRoute,
+        `MD-${_name}`,
+        `${_uuid}.json`
+      );
       if (!fs.existsSync(filePath)) {
-        return "";
+        return { type: "doc", content: [] };
       }
       const data = fs.readFileSync(filePath, "utf-8");
-      return data;
+      try {
+        return JSON.parse(data);
+      } catch {
+        return { type: "doc", content: [] };
+      }
     } catch (error) {
       console.error("Error reading markdown file:", error);
       throw new Error(`Failed to load markdown file: ${error}`);
@@ -106,18 +114,28 @@ function fetchMarkdown() {
 function saveMarkdown() {
   ipcMain.handle(
     "saveMarkdown",
-    async (_event, _route, _name, _uuid, markdown) => {
+    async (_event, _route, _name, _uuid, content) => {
+      var _a;
       try {
         const normalizedRoute = _route.replace(/\\/g, "/");
-        const filePath = path$1.join(normalizedRoute, `MD-${_name}`, `${_uuid}.md`);
-        if (markdown === "") {
+        const filePath = path$1.join(
+          normalizedRoute,
+          `MD-${_name}`,
+          `${_uuid}.json`
+        );
+        const dir = path$1.dirname(filePath);
+        const isEmptyDoc = content && content.type === "doc" && Array.isArray(content.content) && content.content.length === 1 && content.content[0].type === "paragraph" && ((_a = content.content[0].attrs) == null ? void 0 : _a.textAlign) === null && !content.content[0].content;
+        if (content === null || isEmptyDoc) {
           if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
-            console.log(`Deleted markdown file at: ${filePath}`);
           }
+          return { success: true };
+        }
+        fs.mkdirSync(dir, { recursive: true });
+        if (content === void 0) {
+          fs.writeFileSync(filePath, "", "utf-8");
         } else {
-          fs.writeFileSync(filePath, markdown, "utf-8");
-          console.log(`Saved markdown file at: ${filePath}`);
+          fs.writeFileSync(filePath, JSON.stringify(content, null, 2), "utf-8");
         }
         return { success: true, path: filePath };
       } catch (error) {

@@ -36,7 +36,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenu>
             {data.navMain.map((item) => (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild={!!item.url}>
+                <SidebarMenuButton asChild>
                   {item.url ? (
                     <Link to={item.url} className="font-medium">
                       <div className="flex items-center justify-between w-full">
@@ -45,7 +45,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       </div>
                     </Link>
                   ) : (
-                    <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center justify-between w-full font-medium">
                       {item.title}
                       {item.key && item.route && <DictActionsMenu dictId={item.key} dictName={item.title} currentRoute={item.route} />}
                     </div>

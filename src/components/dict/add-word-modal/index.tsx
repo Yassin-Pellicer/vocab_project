@@ -43,7 +43,7 @@ const AddTranslationModal = forwardRef<
     setFormData,
   } = useWordModalHooks({ route, name });
   const { dictionaryMetadata } = useConfigStore();
-  const dict = dictionaryMetadata?.[name];
+  const dict = dictionaryMetadata?.[name] ?? {};
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -128,7 +128,7 @@ const AddTranslationModal = forwardRef<
                             )
                           }
                         >
-                          <SelectTrigger                         className="border-muted-foreground/20 bg-background w-full">
+                          <SelectTrigger className="border-muted-foreground/20 bg-background w-full">
                             <SelectValue placeholder="Select gender" />
                           </SelectTrigger>
                           <SelectContent>
@@ -186,7 +186,7 @@ const AddTranslationModal = forwardRef<
                           ) => (
                             <div key={_tIndex} className="flex gap-2">
                               <Input
-                        className="border-muted-foreground/15 bg-background"
+                                className="border-muted-foreground/15 bg-background"
                                 placeholder="translation"
                                 value={t.word}
                                 onChange={(e) =>
@@ -227,7 +227,7 @@ const AddTranslationModal = forwardRef<
                     {pair.definitions.map((d: string, _dIndex: number) => (
                       <div key={_dIndex} className="flex gap-2">
                         <Input
-                        className="border-muted-foreground/20 bg-background text-sm"
+                          className="border-muted-foreground/20 bg-background text-sm"
                           placeholder={`Definition ${_dIndex + 1}`}
                           value={d}
                           onChange={(e) =>

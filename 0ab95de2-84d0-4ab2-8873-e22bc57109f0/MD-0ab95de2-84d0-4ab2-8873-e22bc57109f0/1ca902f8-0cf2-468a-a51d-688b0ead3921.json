@@ -1,0 +1,293 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 1
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Para decir el precio..."
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "4,50€ -> "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "italic"
+                    }
+                  ],
+                  "text": "cuatro euros cincuenta"
+                },
+                {
+                  "type": "text",
+                  "text": " = "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "vier euro funfzig"
+                },
+                {
+                  "type": "text",
+                  "text": " "
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Cuando el precio empieza por 0… → 0,90 = "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "italic"
+                    }
+                  ],
+                  "text": "noventa céntimos"
+                },
+                {
+                  "type": "text",
+                  "text": " = "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "neunzig zent."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": null
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Para decir cuánto cuesta algo..."
+                }
+              ]
+            },
+            {
+              "type": "bulletList",
+              "content": [
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "textAlign": null
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "bold"
+                            }
+                          ],
+                          "text": "Das macht"
+                        },
+                        {
+                          "type": "text",
+                          "text": " = (literalmente "
+                        },
+                        {
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "italic"
+                            }
+                          ],
+                          "text": "eso hace"
+                        },
+                        {
+                          "type": "text",
+                          "text": ")"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "listItem",
+                  "content": [
+                    {
+                      "type": "paragraph",
+                      "attrs": {
+                        "textAlign": null
+                      },
+                      "content": [
+                        {
+                          "type": "text",
+                          "marks": [
+                            {
+                              "type": "italic"
+                            }
+                          ],
+                          "text": "Das macht 2,50 €"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Algunos ejemplos de cómo decir y preguntar el precio:"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      }
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Was kosten die Chips?"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Was kostet die Lampe?"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      }
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Es decir, el verbo debe ir conjugado con el sujeto."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "También puede preguntarse como se hace en castellano (cuánto cuesta)."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      }
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Wie viel kosten die Chips?"
+        }
+      ]
+    }
+  ]
+}

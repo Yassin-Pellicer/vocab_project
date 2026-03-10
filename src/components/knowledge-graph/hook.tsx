@@ -10,7 +10,7 @@ interface GraphData {
   links: GraphLink[];
 }
 
-export function useKnowledgeGraph(route: string, name: string, title: string) {
+export function useKnowledgeGraph(route: string, name: string, title: string, word?: string) {
   const [graphData, setGraphData] = useState<GraphData | null>(null);
   const [showEmptyNodes, setShowEmptyNodes] = useState(false);
 
@@ -27,15 +27,17 @@ export function useKnowledgeGraph(route: string, name: string, title: string) {
 
     let results = list;
 
-    if (searchField.trim() !== "") {
-      results = results.filter((word: TranslationEntry) =>
-        word.pair.some(
+    const activeSearch = word?.trim() || searchField.trim();
+
+    if (activeSearch !== "") {
+      const searchLower = activeSearch.toLowerCase();
+
+      results = results.filter((entry: TranslationEntry) =>
+        entry.pair.some(
           (p) =>
-            p.original?.word
-              .toLowerCase()
-              .includes(searchField.toLowerCase()) ||
+            p.original?.word?.toLowerCase().includes(searchLower) ||
             p.translations?.some((t) =>
-              t.word.toLowerCase().includes(searchField.toLowerCase()),
+              t.word.toLowerCase().includes(searchLower),
             ),
         ),
       );
@@ -53,7 +55,7 @@ export function useKnowledgeGraph(route: string, name: string, title: string) {
         .map((word: TranslationEntry) => word.uuid)
         .filter((uuid): uuid is string => uuid !== undefined),
     );
-  }, [list, searchField, selectedTypes]);
+  }, [list, searchField, selectedTypes, word]);
 
   const fetchGraph = async () => {
     try {
@@ -124,8 +126,9 @@ export function useKnowledgeGraph(route: string, name: string, title: string) {
     let { nodes, links } = graphData;
     let filteredNodes = nodes;
     let filteredLinks = links;
+    const activeSearch = word?.trim() || searchField.trim();
 
-    if (searchField.trim() !== "" || selectedTypes.length > 0) {
+    if (activeSearch !== "" || selectedTypes.length > 0) {
       const matchingNodeIds = new Set<string>([ROOT_ID]);
       filteredNodeIds.forEach((id) => matchingNodeIds.add(id));
 

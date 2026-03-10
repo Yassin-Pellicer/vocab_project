@@ -71,8 +71,9 @@ import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils"
 import "@/components/tiptap-templates/simple/simple-editor.scss"
 
 import { DictionaryGraphNode } from "@/components/editor/nodes/dictionary-graph-node"
-import { InsertGraphButton } from "@/components/editor/button/insert-graph-button"
+import { InsertGraphButton } from "@/components/editor/trigger/insert-graph-button"
 import { useNotesStore } from "@/context/notes-context"
+import { useConfigStore } from "@/context/dictionary-context"
 
 const MainToolbarContent = ({
   editor,
@@ -96,11 +97,7 @@ const MainToolbarContent = ({
       <ToolbarGroup>
         <UndoRedoButton action="undo" />
         <UndoRedoButton action="redo" />
-      </ToolbarGroup>
 
-      <ToolbarSeparator />
-
-      <ToolbarGroup>
         <HeadingDropdownMenu levels={[1, 2, 3, 4]} portal={isMobile} />
         <ListDropdownMenu
           types={["bulletList", "orderedList", "taskList"]}
@@ -108,11 +105,7 @@ const MainToolbarContent = ({
         />
         <BlockquoteButton />
         <CodeBlockButton />
-      </ToolbarGroup>
 
-      <ToolbarSeparator />
-
-      <ToolbarGroup>
         <MarkButton type="bold" />
         <MarkButton type="italic" />
         <MarkButton type="strike" />
@@ -124,27 +117,15 @@ const MainToolbarContent = ({
           <ColorHighlightPopoverButton onClick={onHighlighterClick} />
         )}
         {!isMobile ? <LinkPopover /> : <LinkButton onClick={onLinkClick} />}
-      </ToolbarGroup>
 
-      <ToolbarSeparator />
-
-      <ToolbarGroup>
         <MarkButton type="superscript" />
         <MarkButton type="subscript" />
-      </ToolbarGroup>
 
-      <ToolbarSeparator />
-
-      <ToolbarGroup>
         <TextAlignButton align="left" />
         <TextAlignButton align="center" />
         <TextAlignButton align="right" />
         <TextAlignButton align="justify" />
-      </ToolbarGroup>
 
-      <ToolbarSeparator />
-
-      <ToolbarGroup>
         <ImageUploadButton text="Add" />
         <InsertGraphButton editor={editor} route={route} name={name} />
       </ToolbarGroup>
@@ -185,7 +166,7 @@ const MobileToolbarContent = ({
   </>
 )
 
-export function SimpleEditor({ route, name }: { route: string, name: string }) {
+export function SimpleEditor({ route, name, type }: { route: string, name: string, type: string }) {
   const isMobile = useIsBreakpoint()
   const { height } = useWindowSize()
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
@@ -194,7 +175,7 @@ export function SimpleEditor({ route, name }: { route: string, name: string }) {
   const toolbarRef = useRef<HTMLDivElement>(null)
 
   const { selectedNoteId } = useNotesStore();
-  const [content, setContent] = useState({});
+  const { selectedWord } = useConfigStore();
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -236,11 +217,16 @@ export function SimpleEditor({ route, name }: { route: string, name: string }) {
       DictionaryGraphNode,
 
     ],
-    content: {type: "doc", content: []},
+    content: { type: "doc", content: [] },
+    autofocus: false,
     onUpdate: ({ editor }) => {
       console.log("update")
-      window.api.saveNotes(route, name, selectedNoteId, editor.getJSON());
+      if (type === "notes") window.api.saveNotes(route, name, selectedNoteId, editor.getJSON());
+      if (type === "words") window.api.saveMarkdown(route, name, selectedWord?.uuid, editor.getJSON());
     },
+    onCreate({ editor }) {
+      editor.commands.setTextSelection(editor.state.doc.content.size);
+    }
   })
 
   useEffect(() => {
@@ -252,8 +238,18 @@ export function SimpleEditor({ route, name }: { route: string, name: string }) {
       }
     }
 
-    if (selectedNoteId) loadNote()
-  }, [selectedNoteId, editor])
+    const loadWord = async () => {
+      const data = await window.api.fetchMarkdown(route, name, selectedWord?.uuid, selectedNoteId)
+
+      if (editor && data) {
+        editor.commands.setContent(data)
+      }
+    }
+
+    if (type === "notes" && selectedNoteId) loadNote()
+    if (type === "words" && selectedWord?.uuid) loadWord()
+
+  }, [selectedNoteId, selectedWord, editor])
 
   const rect = useCursorVisibility({
     editor,
@@ -267,7 +263,7 @@ export function SimpleEditor({ route, name }: { route: string, name: string }) {
   }, [isMobile, mobileView])
 
   return (
-    <div className="simple-editor-wrapper">
+    <div className="simple-editor-wrapper max-w-200!">
       <EditorContext.Provider value={{ editor }}>
         <Toolbar
           ref={toolbarRef}
@@ -298,6 +294,7 @@ export function SimpleEditor({ route, name }: { route: string, name: string }) {
 
         <EditorContent
           editor={editor}
+          spellCheck={false}
           role="presentation"
           className="simple-editor-content"
         />

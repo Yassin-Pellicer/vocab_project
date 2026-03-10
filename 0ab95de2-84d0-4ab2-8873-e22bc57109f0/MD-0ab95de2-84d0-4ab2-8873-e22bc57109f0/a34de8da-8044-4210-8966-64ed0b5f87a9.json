@@ -1,0 +1,83 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Para decir que estás aburrido, es importante hacer la diferencia entre "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "estar aburrido"
+        },
+        {
+          "type": "text",
+          "text": " y ser una persona aburrida como cualidad:"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Ich bin langweilig"
+            },
+            {
+              "type": "text",
+              "text": " -> SOY ABURRIDO."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "MIr ist langweilig / Ich bin gelangweilt"
+            },
+            {
+              "type": "text",
+              "text": " ->  ESTOY ABURRIDO."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      }
+    }
+  ]
+}

@@ -15,6 +15,7 @@ interface DictionaryGraphProps {
   route: string;
   name: string;
   title: string;
+  word?: string,
   doubleView: boolean;
 }
 
@@ -22,16 +23,21 @@ export default function DictionaryGraph({
   route,
   name,
   title,
+  word,
   doubleView,
 }: DictionaryGraphProps) {
   const navigate = useNavigate();
   const [tooltipWord, setTooltipWord] = useState<TranslationEntry | null>(null);
   const doubleViewRef = useRef(doubleView);
 
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   const { graphData, showEmptyNodes, setShowEmptyNodes } = useKnowledgeGraph(
     route,
     name,
     title,
+    word,
   );
 
   const setSelectedWord = useConfigStore((s) => s.setSelectedWord);
@@ -44,12 +50,13 @@ export default function DictionaryGraph({
     if (!graphData) return;
 
     const { nodes, links } = graphData;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
 
-    d3.select("#graph-svg").selectAll("*").remove();
+    const svg = d3.select(svgRef.current);
+    svg.selectAll("*").remove();
 
-    const svg = d3.select("#graph-svg").attr("viewBox", [0, 0, width, height]);
+    const width = containerRef.current?.clientWidth || 800;
+    const height = containerRef.current?.clientHeight || 600;
+
     const container = svg.append("g");
 
     const zoom = d3
@@ -67,7 +74,7 @@ export default function DictionaryGraph({
 
     svg.call(zoom as any);
 
-    const initialScale = 3;
+    const initialScale = 1;
     svg.call(
       zoom.transform as any,
       d3.zoomIdentity
@@ -205,7 +212,7 @@ export default function DictionaryGraph({
   }, [graphData, navigate, route, name, setSelectedWord]);
 
   return (
-    <div className="relative w-full h-full overflow-hidden">
+    <div ref={containerRef} className="relative w-full h-full">
       <button
         className="px-3 pt-1 bg-popover text-popover-foreground rounded-lg mt-3.5 ml-2.5 hover:opacity-90 absolute border border-border"
         onClick={() => setShowEmptyNodes((prev) => !prev)}
@@ -220,7 +227,7 @@ export default function DictionaryGraph({
       )}
 
       <svg
-        id="graph-svg"
+        ref={svgRef}
         onMouseOver={() => tooltipWord && setTooltipWord(null)}
         style={{ width: "100%", height: "100%", background: "transparent" }}
       />

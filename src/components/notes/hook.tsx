@@ -18,12 +18,8 @@ export default function Hooks({
   const [selectedNoteRoute, setSelectedNoteRoute] = useState<string | null>(null);
 
   const handleMenuItemClick = (item: SidebarNode) => {
-    console.log(`Menu item clicked: ${item.id}`);
     setSelectedNoteId(item.id);
     setSelectedNoteTitle(item.title);
-    console.log("Selected note ID:", item.id);
-    console.log("Selected note title:", item.title);
-    console.log("Selected note route:", getRoute(item.id));
     setSelectedNoteRoute(getRoute(item.id));
   }
 

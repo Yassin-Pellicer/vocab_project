@@ -10,6 +10,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "Meine Familie"
         }
       ]
@@ -29,6 +34,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "Hallo! Ich bin Yassin, und jetzt spreche ich über meine Familie."
         }
       ]
@@ -128,6 +138,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "Einladung zur Familienfeier"
         }
       ]
@@ -147,6 +162,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "Hallo Leute!"
         }
       ]
@@ -182,13 +202,55 @@
           "type": "paragraph",
           "attrs": {
             "textAlign": null
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
           },
           "content": [
             {
               "type": "text",
-              "text": "Liebe Grüße, Yassin"
+              "text": "Es gibt viel leckeres Essen! Meine Mutter kocht Käsekuchen und Cookies. Es gibt Fleisch, Salate, Reis und auch etwas Süssigkeit für die Nachtisch. Für die Kinder gibt es auch Saft und kleine Spiele."
             }
           ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Ihr müsst nichts mitbringen. Aber wenn ihr möchtet, könnt Getränke oder Nachtischen bringen. Wir möchten zusammen essen, reden, lachen und einen schönen Abend haben."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 4
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Liebe Grüße, Yassin"
         }
       ]
     },
@@ -202,7 +264,23 @@
         "name": "0ab95de2-84d0-4ab2-8873-e22bc57109f0",
         "title": "",
         "doubleView": false,
-        "word": "fami"
+        "word": "eltern"
+      }
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      }
+    },
+    {
+      "type": "dictionaryGraph",
+      "attrs": {
+        "route": "./0ab95de2-84d0-4ab2-8873-e22bc57109f0",
+        "name": "0ab95de2-84d0-4ab2-8873-e22bc57109f0",
+        "title": "",
+        "doubleView": false,
+        "word": "gesch"
       }
     },
     {
