@@ -129,8 +129,7 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
     const activeSearch = word?.trim() || searchField.trim();
 
     if (activeSearch !== "" || selectedTypes.length > 0) {
-      const matchingNodeIds = new Set<string>([ROOT_ID]);
-      filteredNodeIds.forEach((id) => matchingNodeIds.add(id));
+      const adjacency = new Map<string, Set<string>>();
 
       links.forEach((link) => {
         const sourceId =
@@ -138,13 +137,38 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
         const targetId =
           typeof link.target === "string" ? link.target : link.target.id;
 
-        if (filteredNodeIds.has(sourceId)) {
-          matchingNodeIds.add(targetId);
+        if (!adjacency.has(sourceId)) {
+          adjacency.set(sourceId, new Set<string>());
         }
-        if (filteredNodeIds.has(targetId)) {
-          matchingNodeIds.add(sourceId);
+        if (!adjacency.has(targetId)) {
+          adjacency.set(targetId, new Set<string>());
         }
+
+        adjacency.get(sourceId)!.add(targetId);
+        adjacency.get(targetId)!.add(sourceId);
       });
+
+      const visited = new Set<string>(filteredNodeIds);
+      const queue = Array.from(filteredNodeIds);
+
+      while (queue.length > 0) {
+        const currentId = queue.shift()!;
+        const neighbors = adjacency.get(currentId);
+        if (!neighbors) {
+          continue;
+        }
+
+        neighbors.forEach((neighborId) => {
+          if (neighborId === ROOT_ID || visited.has(neighborId)) {
+            return;
+          }
+
+          visited.add(neighborId);
+          queue.push(neighborId);
+        });
+      }
+
+      const matchingNodeIds = new Set<string>([ROOT_ID, ...visited]);
 
       filteredNodes = nodes.filter((node) => matchingNodeIds.has(node.id));
 

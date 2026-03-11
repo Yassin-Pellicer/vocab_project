@@ -71,7 +71,9 @@ import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils"
 import "@/components/tiptap-templates/simple/simple-editor.scss"
 
 import { DictionaryGraphNode } from "@/components/editor/nodes/dictionary-graph-node"
-import { InsertGraphButton } from "@/components/editor/trigger/insert-graph-button"
+import { ReferenceNoteNode } from "@/components/editor/nodes/reference-note-node"
+import { InsertGraphButton } from "@/components/editor/trigger/graph/insert-graph-button"
+import { ReferenceNoteButton } from "@/components/editor/trigger/note/reference-note-button"
 import { useNotesStore } from "@/context/notes-context"
 import { useConfigStore } from "@/context/dictionary-context"
 
@@ -128,6 +130,7 @@ const MainToolbarContent = ({
 
         <ImageUploadButton text="Add" />
         <InsertGraphButton editor={editor} route={route} name={name} />
+        <ReferenceNoteButton editor={editor} route={route} name={name} />
       </ToolbarGroup>
 
       <Spacer />
@@ -166,7 +169,7 @@ const MobileToolbarContent = ({
   </>
 )
 
-export function SimpleEditor({ route, name, type }: { route: string, name: string, type: string }) {
+export function SimpleEditor({ route, name, type, noteId, editMode = true }: { route: string, name: string, type: string, noteId?: string, editMode?: boolean }) {
   const isMobile = useIsBreakpoint()
   const { height } = useWindowSize()
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
@@ -174,11 +177,12 @@ export function SimpleEditor({ route, name, type }: { route: string, name: strin
   )
   const toolbarRef = useRef<HTMLDivElement>(null)
 
-  const { selectedNoteId } = useNotesStore();
+  const { selectedNoteId } = noteId ? { selectedNoteId: noteId } : useNotesStore();
   const { selectedWord } = useConfigStore();
 
   const editor = useEditor({
     immediatelyRender: false,
+    editable: editMode,
     editorProps: {
       attributes: {
         autocomplete: "off",
@@ -215,6 +219,7 @@ export function SimpleEditor({ route, name, type }: { route: string, name: strin
         onError: (error) => console.error("Upload failed:", error),
       }),
       DictionaryGraphNode,
+      ReferenceNoteNode,
 
     ],
     content: { type: "doc", content: [] },
@@ -274,6 +279,7 @@ export function SimpleEditor({ route, name, type }: { route: string, name: strin
               }
               : {}),
           }}
+          className={`${editMode ? '' : 'hidden!'}`}
         >
           {mobileView === "main" ? (
             <MainToolbarContent
@@ -296,7 +302,7 @@ export function SimpleEditor({ route, name, type }: { route: string, name: strin
           editor={editor}
           spellCheck={false}
           role="presentation"
-          className="simple-editor-content"
+          className={`${!editMode ? 'simple-editor-content p-3' : 'simple-editor-content p-4! pt-8!'}`}
         />
       </EditorContext.Provider>
     </div>

@@ -272,7 +272,7 @@ export default function DictionaryComponent({
                 </div>
               )}
             </div>
-            <div className=" flex flex-col border-r items-center divide-y overflow-y-auto h-full flex-shrink-0">
+            <div className=" flex flex-col border-r items-center divide-y overflow-y-auto hide-scrollbar h-full flex-shrink-0">
               {alphabet.map((letter) => (
                 <button
                   key={letter}

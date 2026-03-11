@@ -1,9 +1,35 @@
-import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor"
+import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
+import { useNotesStore } from "@/context/notes-context";
 
-export default function NoteDisplay({ route, name }: { route: string, name: string }) {
+export default function NoteDisplay({
+  route,
+  name,
+  noteId,
+  editMode,
+}: {
+  route: string;
+  name: string;
+  noteId?: string;
+  editMode?: boolean;
+}) {
+  const { selectedNoteId } = useNotesStore();
   return (
     <div className="flex justify-center align-center p-4">
-      <SimpleEditor route={route} name={name} type={"notes"} />
+      {route && name && (noteId || selectedNoteId) ? (
+        <SimpleEditor
+          route={route}
+          name={name}
+          type={"notes"}
+          noteId={noteId}
+          editMode={editMode}
+        />
+      ) : (
+        <div className="flex flex-col items-center justify-center h-[calc(100vh-160px)]">
+          <p className="text-md text-foreground">
+            Select a note to view or edit
+          </p>
+        </div>
+      )}
     </div>
-  )
+  );
 }

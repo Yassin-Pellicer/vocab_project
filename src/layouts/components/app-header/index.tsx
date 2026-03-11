@@ -10,11 +10,17 @@ export function AppHeader() {
     >
       <div
         style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
-        className="flex items-center gap-2">
+        className="flex items-center gap-2 flex-1 min-w-0"
+      >
         <SidebarTrigger className="-ml-1" />
-        <BreadcrumbNavigation />
+        <div className="min-w-0 flex-1 overflow-x-auto hide-scrollbar whitespace-nowrap">
+          <BreadcrumbNavigation />
+        </div>
       </div>
-      <div className="flex items-center gap-1" style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}>
+      <div
+        className="flex items-center gap-1 flex-shrink-0"
+        style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
+      >
         <button
           aria-label="Minimize"
           onClick={() => window.api?.minimize?.()}

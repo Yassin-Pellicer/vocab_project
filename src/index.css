@@ -203,6 +203,15 @@ h3 {
   scrollbar-gutter: stable overlay;
 }
 
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .markdown > * {
   all: revert;
 }

@@ -2,6 +2,14 @@
   "type": "doc",
   "content": [
     {
+      "type": "referenceNote",
+      "attrs": {
+        "selectedNoteId": "9ff79f59-cceb-46b1-b4f7-bf340b9fa354",
+        "title": "Redacciones",
+        "route": "Apuntes de clase/Redacciones"
+      }
+    },
+    {
       "type": "paragraph",
       "attrs": {
         "textAlign": null

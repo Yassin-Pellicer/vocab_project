@@ -1,6 +1,24 @@
 import { useConfigStore } from "@/context/dictionary-context";
 import { DictionaryData } from "@/types/dictionary-data";
+import { SidebarNode, SidebarTree } from "@/types/sidebar-types";
 import { useEffect, useState } from "react";
+
+const collectLeafNotes = (tree: SidebarTree): SidebarNode[] => {
+  const leaves: SidebarNode[] = [];
+
+  const walk = (nodes: SidebarTree) => {
+    for (const node of nodes) {
+      if (node.children && node.children.length > 0) {
+        walk(node.children);
+      } else {
+        leaves.push(node);
+      }
+    }
+  };
+
+  walk(tree);
+  return leaves;
+};
 
 export default function useHome() {
   const dictionaryMetadata = useConfigStore(s => s.dictionaryMetadata);
@@ -11,6 +29,8 @@ export default function useHome() {
   const [totalDictionaries, setTotalDictionaries] = useState(0);
 
   useEffect(() => {
+    let isCancelled = false;
+
     if (
       Object.keys(dictionaryMetadata).length === 0 ||
       Object.keys(dictionariesMap).length === 0
@@ -39,40 +59,69 @@ export default function useHome() {
       return Math.floor((x - Math.floor(x)) * max);
     };
 
-    const result: DictionaryData[] = [];
-    let wordCount = 0;
+    const loadHome = async () => {
+      setLoading(true);
 
-    Object.entries(dictionaryMetadata).forEach(([id, meta], index) => {
-      const translations = dictionariesMap[id];
-      if (!translations || translations.length === 0) return;
+      const result: DictionaryData[] = [];
+      let wordCount = 0;
 
-      const wordIndex = seededRandom(translations.length, seed + index);
-      const wordOfTheDay = translations[wordIndex];
+      const entries = Object.entries(dictionaryMetadata);
 
-      const recentWords = [...translations]
-        .sort(
-          (a, b) =>
-            new Date(b.dateAdded).getTime() -
-            new Date(a.dateAdded).getTime()
-        )
-        .slice(0, 3);
+      for (const [index, [id, meta]] of entries.entries()) {
+        const translations = dictionariesMap[id];
+        if (!translations || translations.length === 0) continue;
 
-      wordCount += translations.length;
+        const wordIndex = seededRandom(translations.length, seed + index);
+        const wordOfTheDay = translations[wordIndex];
 
-      result.push({
-        id,
-        name: meta.name,
-        path: meta.route,
-        wordOfTheDay,
-        recentWords,
-        totalWords: translations.length,
-      });
-    });
+        const recentWords = [...translations]
+          .sort(
+            (a, b) =>
+              new Date(b.dateAdded).getTime() -
+              new Date(a.dateAdded).getTime()
+          )
+          .slice(0, 3);
 
-    setDictionaryCards(result);
-    setTotalWords(wordCount);
-    setTotalDictionaries(result.length);
-    setLoading(false);
+        let randomNote: SidebarNode | null = null;
+        try {
+          const noteIndex = (await window.api.fetchNoteIndex(
+            meta.route,
+            id,
+          )) as SidebarTree;
+          const leaves = collectLeafNotes(Array.isArray(noteIndex) ? noteIndex : []);
+          if (leaves.length > 0) {
+            randomNote = leaves[seededRandom(leaves.length, seed + index + 10_000)];
+          }
+        } catch (error) {
+          console.error(`Failed loading note index for ${id}:`, error);
+        }
+
+        wordCount += translations.length;
+
+        result.push({
+          id,
+          name: meta.name,
+          path: meta.route,
+          wordOfTheDay,
+          recentWords,
+          totalWords: translations.length,
+          randomNote,
+        });
+      }
+
+      if (isCancelled) return;
+
+      setDictionaryCards(result);
+      setTotalWords(wordCount);
+      setTotalDictionaries(result.length);
+      setLoading(false);
+    };
+
+    loadHome();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [dictionaryMetadata, dictionariesMap]);
 
   return {

@@ -2,6 +2,14 @@
   "type": "doc",
   "content": [
     {
+      "type": "referenceNote",
+      "attrs": {
+        "selectedNoteId": "b81508b8-8374-4116-bb5c-23471d30eac0",
+        "title": "Meine Familie",
+        "route": "Apuntes de clase/Redacciones/Meine Familie"
+      }
+    },
+    {
       "type": "paragraph",
       "attrs": {
         "textAlign": null

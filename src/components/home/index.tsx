@@ -4,15 +4,19 @@ import {
   ArrowRight,
   Library,
   WholeWord,
+  Notebook,
 } from "lucide-react";
 import WordCard from "../word-card";
 import { Link } from "react-router-dom";
 import useHome from "./hook";
 import DictionaryGraph from "../knowledge-graph";
 import { Button } from "../ui/button";
+import NoteDisplay from "../notes/note-display";
+import { useNotesStore } from "@/context/notes-context";
 
 export default function Home() {
   const { dictionaryCards, loading, totalWords, totalDictionaries } = useHome();
+  const { setSelectedNoteId } = useNotesStore();
 
   if (loading) {
     return (
@@ -113,42 +117,6 @@ export default function Home() {
                       </Button>
                     </Link>
                   </div>
-
-                  <div className="mt-4 p-3 rounded-xl border bg-muted/20">
-                    <p className="text-xs uppercase tracking-wide text-muted-foreground mb-1">
-                      Random Note
-                    </p>
-                    {dict.randomNote ? (
-                      <>
-                        <p className="text-sm font-medium text-foreground line-clamp-2">
-                          {dict.randomNote.title}
-                        </p>
-                        {dict.randomNoteContent ? (
-                          <div className="mt-2">
-                            <NotePreview content={dict.randomNoteContent} />
-                          </div>
-                        ) : null}
-                        <Link
-                          to={`/notes?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
-                        >
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="mt-2 px-2 h-8 flex items-center gap-1"
-                          >
-                            <Notebook size={14} />
-                            Open Notes
-                            <ArrowRight size={14} />
-                          </Button>
-                        </Link>
-                      </>
-                    ) : (
-                      <p className="text-sm text-muted-foreground">
-                        No notes found for this dictionary yet.
-                      </p>
-                    )}
-                  </div>
-
                   <h3 className="text-sm! tracking-tighter font-semibold italic text-muted-foreground mt-4!">
                     Recent words added to this dictionary
                   </h3>
@@ -171,6 +139,45 @@ export default function Home() {
                     doubleView={false}
                   />
                 </div>
+              </div>
+              <div className="mt-4 p-3 rounded-xl border bg-gradient-to-b from-transparent via-to-background/70 to-background/90">
+                <p className="text-xs uppercase tracking-wide mb-1">
+                  Random Note
+                </p>
+                {dict.randomNote ? (
+                  <div className="flex flex-col items-center bg-gradient-to-b from-transparent via-to-background/70 to-background/90 justify-center overflow-hidden max-h-[400px]">
+                    <p className="text-lg text-foreground float-left w-full mt-2">
+                      {dict.randomNote.title}
+                    </p>
+                    <div className="mt-2 overflow-y-hidden w-full relative">
+                      <NoteDisplay
+                        route={dict.path}
+                        name={dict.id}
+                        noteId={dict.randomNote.id}
+                        editMode={false}
+                      ></NoteDisplay>
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-to-background/70 to-background/90" />
+                    </div>
+                    <Link
+                      to={`/notes?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
+                      onClick={() => setSelectedNoteId(dict.randomNote!.id!)}
+                    >
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="mt-2 px-2 h-8 flex items-center gap-1"
+                      >
+                        <Notebook size={14} />
+                        Open Notes
+                        <ArrowRight size={14} />
+                      </Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    No notes found for this dictionary yet.
+                  </p>
+                )}
               </div>
             </div>
           ))}
