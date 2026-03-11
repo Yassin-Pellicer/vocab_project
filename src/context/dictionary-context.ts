@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { TranslationEntry } from "@/types/translation-entry";
 import { Dictionary } from "@/types/config";
+import { BookAIcon, BookOpen, Languages } from "lucide-react";
 
 interface ConfigState {
   dictionaryMetadata: Record<string, Dictionary>;
@@ -47,7 +48,6 @@ interface ConfigState {
   setTypeWordWithTenses: (key: string, typeWord: string) => void;
 
   loadConfig: () => Promise<void>;
-  saveConfig: () => Promise<void>;
   editConfig: () => Promise<void>;
   loadTranslations: (route: string, name: string) => Promise<void>;
   loadAllTranslations: () => Promise<void>;
@@ -67,7 +67,6 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
 
   setDictionaryMetadata: (metadata) => {
     set({ dictionaryMetadata: metadata });
-    get().saveConfig();
   },
 
   setDictionaries: (dictionaries) => set({ dictionaries }),
@@ -242,14 +241,6 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
     get().editConfig();
   },
 
-  saveConfig: async () => {
-    const metadata = get().dictionaryMetadata;
-    try {
-      await window.api.saveConfig({ dictionaries: metadata });
-    } catch (err) {
-      console.error("Error saving dictionary config:", err);
-    }
-  },
 
   editConfig: async () => {
     const metadata = get().dictionaryMetadata;
@@ -273,15 +264,15 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
           items: [
             {
               title: "Dictionary",
-              icon: "BookOpen",
+              icon: BookOpen,
               url: `/dictionary?name=${encodeURIComponent(
                 key,
               )}&path=${encodeURIComponent(dict.route)}`,
             },
             {
-              title: "Translate",
-              icon: "Languages",
-              url: `/translation?name=${encodeURIComponent(
+              title: "Notes",
+              icon: BookAIcon,
+              url: `/notes?name=${encodeURIComponent(
                 key,
               )}&path=${encodeURIComponent(dict.route)}`,
             },

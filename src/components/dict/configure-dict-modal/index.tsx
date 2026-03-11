@@ -47,7 +47,6 @@ export default function ConfigureDictModal({
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-
       <DialogContent className="w-full p-0">
         <div className="p-6 pb-2 overflow-auto max-h-[75vh]">
           <DialogHeader>
@@ -80,7 +79,7 @@ export default function ConfigureDictModal({
                   Add
                 </Button>
               </div>
-              <p className="text-xs mb-[-10px]">Added forms</p>
+              <p className="text-xs -mb-[-2.5]">Added forms</p>
               <div className="flex flex-row gap-2">
                 <Select
                   value={hook.selectedWordType ?? ""}
@@ -123,7 +122,7 @@ export default function ConfigureDictModal({
                   value={hook.selectedForm}
                   onValueChange={hook.setSelectedForm}
                 >
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger className="w-45">
                     <SelectValue placeholder="Select type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -140,8 +139,8 @@ export default function ConfigureDictModal({
                 </Button>
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <p className="text-xs mb-[-10px]">Genders</p>
-                <p className="text-xs mb-[-10px]">Numbers</p>
+                <p className="text-xs -mb-[-2.5]">Genders</p>
+                <p className="text-xs -mb-[-2.5]">Numbers</p>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div className="flex flex-row gap-2">

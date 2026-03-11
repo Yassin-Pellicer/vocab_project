@@ -1,0 +1,22 @@
+[
+  {
+    "id": "d9954bee-02c8-4790-9540-c27b54aae487",
+    "title": "Apuntes de clase",
+    "children": [
+      {
+        "id": "9ff79f59-cceb-46b1-b4f7-bf340b9fa354",
+        "title": "Redacciones",
+        "children": [
+          {
+            "id": "b81508b8-8374-4116-bb5c-23471d30eac0",
+            "title": "Meine Familie"
+          }
+        ]
+      },
+      {
+        "id": "9dd44425-71e1-40a0-b226-221e70d96e8e",
+        "title": "Notas de clase"
+      }
+    ]
+  }
+]

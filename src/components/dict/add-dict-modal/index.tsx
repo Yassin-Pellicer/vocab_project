@@ -33,8 +33,7 @@ export default function AddDictModal({
           </div>
         </DialogTrigger>
       )}
-
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-106.25">
         <form onSubmit={hook.handleSubmit}>
           <DialogHeader>
             <DialogTitle>Add Dictionary</DialogTitle>
@@ -87,7 +86,7 @@ export default function AddDictModal({
             <DialogClose asChild>
               <Button
                 type="submit"
-                variant="solid"
+                variant="outline"
                 className="bg-primary text-primary-foreground"
               >
                 Create

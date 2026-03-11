@@ -50,7 +50,7 @@ export default function AddKeybindModal({
             <Keyboard className="h-5"></Keyboard><b>{PRESET_KEYBINDS[index!]?.action}</b>
           </span>
         </div>
-        <div className="w-full flex flex-col items-center justify-center mt-[-10px] mb-[-5px]">
+        <div className="w-full flex flex-col items-center justify-center -mt-2.5 -mb-1.25">
           <input
             className="sr-only"
             type="text"
@@ -85,7 +85,7 @@ export default function AddKeybindModal({
                   .map((key, keyIndex) => (
                     <kbd
                       key={keyIndex}
-                      className="px-2 py-1 text-sm text-foreground bg-muted/30 font-semibold border border-border rounded shadow-sm"
+                      className="px-2 py-1 mb-1 mt-2.5 text-md text-foreground bg-muted/30 font-semibold border border-border rounded shadow-sm"
                     >
                       {key}
                     </kbd>

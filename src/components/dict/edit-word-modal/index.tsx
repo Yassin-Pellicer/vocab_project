@@ -47,7 +47,7 @@ export default function EditTranslationModal({
     formData,
   } = useWordModalHooks({ word, route, name });
   const { dictionaryMetadata } = useConfigStore();
-  const dict = dictionaryMetadata?.[name];
+  const dict = dictionaryMetadata?.[name] ?? {};
 
   return (
     <Dialog>

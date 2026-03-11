@@ -64,7 +64,7 @@ export default function ConfigureTenseModal({
                     });
                   }
                 }}
-                className="w-full h-98 p-3 font-mono text-xs border-muted border-1 rounded-md bg-background overflow-auto"
+                className="w-full h-98 p-3 font-mono text-xs border-muted border rounded-md bg-background overflow-auto"
                 spellCheck={false}
                 placeholder="Enter tense structure..."
               />

@@ -1,6 +1,4 @@
 import * as React from "react"
-import { BookOpen, Languages, Rocket } from "lucide-react"
-
 import {
   Sidebar,
   SidebarContent,
@@ -19,11 +17,6 @@ import DictActionsMenu from "./dict-actions-menu";
 import AddDictModal from "../dict/add-dict-modal";
 import { NavUser } from "./nav-user";
 
-const iconMap: Record<string, React.ElementType> = {
-  BookOpen,
-  Languages,
-  Rocket,
-};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data } = useConfigStore();
@@ -43,7 +36,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenu>
             {data.navMain.map((item) => (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild={!!item.url}>
+                <SidebarMenuButton asChild>
                   {item.url ? (
                     <Link to={item.url} className="font-medium">
                       <div className="flex items-center justify-between w-full">
@@ -52,7 +45,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       </div>
                     </Link>
                   ) : (
-                    <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center justify-between w-full font-medium">
                       {item.title}
                       {item.key && item.route && <DictActionsMenu dictId={item.key} dictName={item.title} currentRoute={item.route} />}
                     </div>
@@ -61,13 +54,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 {item.items?.length ? (
                   <SidebarMenuSub>
                     {item.items.map((subItem) => {
-                      const Icon = subItem.icon ? iconMap[subItem.icon] : null;
                       return (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
                             <div className="flex items-center justify-between">
                               <Link to={subItem.url} className="flex items-center gap-2">
-                                {Icon && <Icon size={12} />}
+                                {subItem.icon && <subItem.icon size={12} />}
                                 {subItem.title}
                               </Link>
                             </div>

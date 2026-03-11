@@ -289,7 +289,7 @@ export default function DictionaryComponent({
             </div>
           </>
         ) : (
-          <div className="border-r">
+          <div className="border-r w-full">
             <KnowledgeGraph
               route={route}
               name={name}

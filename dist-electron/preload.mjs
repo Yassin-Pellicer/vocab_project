@@ -32,6 +32,28 @@ const markdown = {
     return await electron.ipcRenderer.invoke("saveMarkdown", route, name, uuid, markdown2);
   }
 };
+const notes = {
+  fetchNotes: async (route, name, uuid) => {
+    return await electron.ipcRenderer.invoke("fetchNotes", route, name, uuid);
+  },
+  fetchNoteIndex: async (route, name) => {
+    return await electron.ipcRenderer.invoke("fetchNoteIndex", route, name);
+  },
+  saveNoteIndex: async (route, name, currentConfig) => {
+    return await electron.ipcRenderer.invoke(
+      "saveNoteIndex",
+      route,
+      name,
+      currentConfig
+    );
+  },
+  saveNotes: async (route, name, uuid, content) => {
+    return await electron.ipcRenderer.invoke("saveNotes", route, name, uuid, content);
+  },
+  saveImage: async (route, name, buffer, filename) => {
+    return await electron.ipcRenderer.invoke("saveImage", route, name, buffer, filename);
+  }
+};
 const translations = {
   requestTranslations: async (route, name) => {
     return await electron.ipcRenderer.invoke("loadTranslations", route, name);
@@ -88,6 +110,7 @@ const endpoints = Object.assign(
   conjugation,
   graph,
   config,
+  notes,
   windowControls
 );
 electron.contextBridge.exposeInMainWorld("ipcRenderer", {

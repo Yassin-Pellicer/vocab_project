@@ -3,10 +3,7 @@
 import Markdown from "@/components/markdown-display";
 import { useConfigStore } from "@/context/dictionary-context";
 
-export default function MarkdownPage() {
-  const word = useConfigStore((state) => state.selectedWord);
-  if (!word)
-    return <p className="text-center text-gray-500 mt-4">No word selected.</p>;
+export default function MarkdownPage({ _uuid }: { _uuid?: string }) {
 
   const urlParams = new URLSearchParams(window.location.search);
 
@@ -16,6 +13,16 @@ export default function MarkdownPage() {
   path = path.replace(/\\/g, "/");
 
   path = path.replace(/\/+/g, "/");
+
+  let word = useConfigStore((state) => state.selectedWord);
+  let dictionaries = useConfigStore((state) => state.dictionaries);
+  if (!word) {
+    if (!_uuid) {
+      return <p className="text-center text-gray-500 mt-4">No word selected.</p>;
+    }
+    word = dictionaries[name].filter((_word) =>
+      _word.uuid === _uuid)[0];
+  }
 
   return (
     <Markdown
