@@ -1,8 +1,15 @@
-import { Calendar, BookOpen, ArrowRight, Library, WholeWord } from "lucide-react";
-import WordCard from '../word-card';
+import {
+  Calendar,
+  BookOpen,
+  ArrowRight,
+  Library,
+  WholeWord,
+} from "lucide-react";
+import WordCard from "../word-card";
 import { Link } from "react-router-dom";
 import useHome from "./hook";
 import DictionaryGraph from "../knowledge-graph";
+import { Button } from "../ui/button";
 
 export default function Home() {
   const { dictionaryCards, loading, totalWords, totalDictionaries } = useHome();
@@ -19,7 +26,9 @@ export default function Home() {
     return (
       <div className="flex flex-col items-center justify-center h-[calc(100vh-64px)] px-4">
         <BookOpen size={64} className="text-muted mb-4" />
-        <h2 className="text-2xl font-bold text-foreground mb-2">No Dictionaries Found</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-2">
+          No Dictionaries Found
+        </h2>
         <p className="text-muted-foreground text-center">
           Add a dictionary to get started with your vocabulary learning journey.
         </p>
@@ -47,16 +56,26 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 w-full divide-y divide-x border-b md:divide-y-0 md:divide-x divide-border">
           <div className="p-3">
-            <p className="text-md tracking-tight font-semibold text-muted-foreground">Total Words</p>
+            <p className="text-md tracking-tight font-semibold text-muted-foreground">
+              Total Words
+            </p>
             <p className="text-2xl font-bold text-foreground">{totalWords}</p>
           </div>
           <div className="p-3">
-            <p className="text-md tracking-tight font-semibold text-muted-foreground">Dictionaries</p>
-            <p className="text-2xl font-bold text-foreground">{totalDictionaries}</p>
+            <p className="text-md tracking-tight font-semibold text-muted-foreground">
+              Dictionaries
+            </p>
+            <p className="text-2xl font-bold text-foreground">
+              {totalDictionaries}
+            </p>
           </div>
           <div className="p-3">
-            <p className="text-md tracking-tight font-semibold text-muted-foreground">Knowledge</p>
-            <p className="text-2xl font-bold text-foreground">{((totalWords / (totalDictionaries * 15000)) * 100).toFixed(3)}%</p>
+            <p className="text-md tracking-tight font-semibold text-muted-foreground">
+              Knowledge
+            </p>
+            <p className="text-2xl font-bold text-foreground">
+              {((totalWords / (totalDictionaries * 15000)) * 100).toFixed(3)}%
+            </p>
           </div>
         </div>
         <div className="grid 2xl:grid-cols-2 grid-cols-1 w-full">
@@ -71,27 +90,66 @@ export default function Home() {
                   {dict.totalWords} words
                 </span>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-md p-4 rounded-2xl border border-border">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
                 <div className="flex flex-col min-h-0">
                   <WordCard name={dict.id} word={dict.wordOfTheDay} />
-                  <div className="flex flex-col gap-2 mt-4">
+                  <div className="flex justify-between flex-row w-full gap-2 mt-1">
                     <Link
                       to={`/dictionary?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
-                      className="flex-1 flex items-center justify-center rounded-2xl gap-2 p-2 text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                      className="w-full!"
                     >
-                      <BookOpen size={16} />
-                      View Dictionary
-                      <ArrowRight size={16} />
+                      <Button className="flex items-center gap-1 w-full!">
+                        <BookOpen size={16} />
+                        View Dictionary
+                        <ArrowRight size={16} />
+                      </Button>
                     </Link>
                     <Link
                       to={`/translation?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
-                      className="flex-1 flex items-center justify-center rounded-2xl gap-2 p-2 text-sm font-semibold border-2 border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
                     >
-                      Practice
-                      <ArrowRight size={16} />
+                      <Button className="flex items-center gap-1">
+                        Practice
+                        <ArrowRight size={16} />
+                      </Button>
                     </Link>
                   </div>
-                  <h3 className="text-sm! tracking-tighter font-semibold italic text-muted-foreground mt-6 border-t-dotted border-t border-border pt-2">
+
+                  <div className="mt-4 p-3 rounded-xl border bg-muted/20">
+                    <p className="text-xs uppercase tracking-wide text-muted-foreground mb-1">
+                      Random Note
+                    </p>
+                    {dict.randomNote ? (
+                      <>
+                        <p className="text-sm font-medium text-foreground line-clamp-2">
+                          {dict.randomNote.title}
+                        </p>
+                        {dict.randomNoteContent ? (
+                          <div className="mt-2">
+                            <NotePreview content={dict.randomNoteContent} />
+                          </div>
+                        ) : null}
+                        <Link
+                          to={`/notes?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
+                        >
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="mt-2 px-2 h-8 flex items-center gap-1"
+                          >
+                            <Notebook size={14} />
+                            Open Notes
+                            <ArrowRight size={14} />
+                          </Button>
+                        </Link>
+                      </>
+                    ) : (
+                      <p className="text-sm text-muted-foreground">
+                        No notes found for this dictionary yet.
+                      </p>
+                    )}
+                  </div>
+
+                  <h3 className="text-sm! tracking-tighter font-semibold italic text-muted-foreground mt-4!">
                     Recent words added to this dictionary
                   </h3>
                   <div className="flex flex-col gap-2 mt-1">

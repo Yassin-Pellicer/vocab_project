@@ -1,4 +1,5 @@
 import { TranslationEntry } from "./translation-entry";
+import { SidebarNode } from "./sidebar-types";
 
 export interface DictionaryData {
   name: string;
@@ -7,4 +8,5 @@ export interface DictionaryData {
   wordOfTheDay: TranslationEntry | null;
   recentWords: TranslationEntry[];
   totalWords: number;
+  randomNote: SidebarNode | null;
 }
