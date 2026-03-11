@@ -8416,5 +8416,32 @@
     "dateAdded": "2026-02-25",
     "type": "Redewendungen",
     "uuid": "5508ca29-4c5a-4ba7-b4d1-652249911f84"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Katze",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Gato",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "Gata",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-04",
+    "type": "Nomen",
+    "uuid": "fd8c9b49-55fe-4cfa-bc01-1153f8695df9"
   }
 ]
