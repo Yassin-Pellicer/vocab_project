@@ -8416,5 +8416,213 @@
     "dateAdded": "2025-12-14",
     "type": "Adverbien",
     "uuid": "f5e810bf-db62-41a3-a243-893272fc9f02"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Trinkgelt",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Propina",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-11",
+    "type": "Nomen",
+    "uuid": "5d975ee8-fcc3-4817-a4ab-6c480285c555"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gehalt",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Salario",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-11",
+    "type": "Nomen",
+    "uuid": "a6b58e52-0e14-4574-84a3-ee89547434b4"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Bezahlen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Pagar",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-11",
+    "type": "Verben",
+    "uuid": "75cbddb9-9fb5-491a-b379-f80ac322928d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Bar",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Efectivo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-11",
+    "type": "Nomen",
+    "uuid": "180ac9f6-fe66-4986-a171-4871d9dbd64a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Karte",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Tarjeta",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-11",
+    "type": "Nomen",
+    "uuid": "758a7a94-778d-405f-9d0f-c1700470cc0c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Rechnung",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Cuenta",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "\"La cuenta, por favor\""
+        ]
+      },
+      {
+        "original": {
+          "word": "Rechnungen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Cuentas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-11",
+    "type": "Nomen",
+    "uuid": "c2871b47-e194-4155-932e-a4634d13fbbc"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "getrennt",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "separado",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-11",
+    "type": "Adjektive",
+    "uuid": "7d386bd7-ac4d-458b-ba7b-00e5c07a9819"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Eiswürfel",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Cubito de Hielo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "Eiswürfeln",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Cubitos de Hielo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-11",
+    "type": "Nomen",
+    "uuid": "be48a006-8746-42dc-9e36-6207d664c671"
   }
 ]
