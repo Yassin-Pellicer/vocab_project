@@ -10,4 +10,7 @@ export const windowControls = {
   close: async () => {
     return await ipcRenderer.invoke("window-close");
   },
+  openNewWindow: async (route: string) => {
+    return await ipcRenderer.invoke("window-open-new", route);
+  },
 };

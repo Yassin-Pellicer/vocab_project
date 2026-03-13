@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 import DictActionsMenu from "./dict-actions-menu";
 import AddDictModal from "../dict/add-dict-modal";
 import { NavUser } from "./nav-user";
+import { Button } from "@/components/ui/button";
+import { ExternalLink } from "lucide-react";
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -62,6 +64,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 {subItem.icon && <subItem.icon size={12} />}
                                 {subItem.title}
                               </Link>
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="icon-sm"
+                                className="shrink-0"
+                                title="Open in new window"
+                                aria-label={`Open ${subItem.title} in a new window`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  window.api?.openNewWindow?.(subItem.url);
+                                }}
+                              >
+                                <ExternalLink className="size-3" />
+                              </Button>
                             </div>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>

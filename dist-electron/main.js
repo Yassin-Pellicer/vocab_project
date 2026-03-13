@@ -1,17 +1,17 @@
-import { BrowserWindow as g, Menu as _, ipcMain as u, dialog as T, app as v } from "electron";
+import { BrowserWindow as g, Menu as D, ipcMain as u, dialog as T, app as E } from "electron";
 import { fileURLToPath as b } from "node:url";
 import S from "node:path";
 import a from "path";
-import r from "fs";
+import n from "fs";
 import { randomFillSync as A, randomUUID as k } from "node:crypto";
-const N = S.dirname(b(import.meta.url));
-process.env.APP_ROOT = S.join(N, "..");
-const F = process.env.VITE_DEV_SERVER_URL;
+const J = S.dirname(b(import.meta.url));
+process.env.APP_ROOT = S.join(J, "..");
+const p = process.env.VITE_DEV_SERVER_URL;
 S.join(process.env.APP_ROOT, "dist-electron");
-const x = S.join(process.env.APP_ROOT, "dist");
-process.env.VITE_PUBLIC = F ? S.join(process.env.APP_ROOT, "public") : x;
-function J() {
-  const n = new g({
+const O = S.join(process.env.APP_ROOT, "dist");
+process.env.VITE_PUBLIC = p ? S.join(process.env.APP_ROOT, "public") : O;
+function N(o) {
+  const r = new g({
     width: 1200,
     height: 800,
     frame: !0,
@@ -19,29 +19,31 @@ function J() {
     backgroundColor: "#ffffff",
     hasShadow: !1,
     webPreferences: {
-      preload: S.join(N, "preload.mjs"),
+      preload: S.join(J, "preload.mjs"),
       zoomFactor: 1
     }
   });
-  n.webContents.setVisualZoomLevelLimits(1, 5), n.webContents.openDevTools(), _.setApplicationMenu(null), n.webContents.on("did-finish-load", () => {
-    n == null || n.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
-  }), n.webContents.on("before-input-event", (o, i) => {
-    if (i.control)
-      if (i.key === "+") {
-        const t = n.webContents.getZoomFactor();
-        n.webContents.setZoomFactor(Math.min(t + 0.1, 5)), o.preventDefault();
-      } else if (i.key === "-") {
-        const t = n.webContents.getZoomFactor();
-        n.webContents.setZoomFactor(Math.max(t - 0.1, 0.5)), o.preventDefault();
-      } else i.key === "0" && (n.webContents.setZoomFactor(1), o.preventDefault());
-  }), F ? n.loadURL(F) : n.loadFile(S.join(x, "index.html"));
+  r.webContents.setVisualZoomLevelLimits(1, 5), r.webContents.openDevTools(), D.setApplicationMenu(null), r.webContents.on("did-finish-load", () => {
+    r == null || r.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
+  }), r.webContents.on("before-input-event", (i, t) => {
+    if (t.control)
+      if (t.key === "+") {
+        const e = r.webContents.getZoomFactor();
+        r.webContents.setZoomFactor(Math.min(e + 0.1, 5)), i.preventDefault();
+      } else if (t.key === "-") {
+        const e = r.webContents.getZoomFactor();
+        r.webContents.setZoomFactor(Math.max(e - 0.1, 0.5)), i.preventDefault();
+      } else t.key === "0" && (r.webContents.setZoomFactor(1), i.preventDefault());
+  }), p ? o ? r.loadURL(`${p}#${encodeURIComponent(o)}`) : r.loadURL(p) : o ? r.loadFile(S.join(O, "index.html"), {
+    hash: encodeURIComponent(o)
+  }) : r.loadFile(S.join(O, "index.html"));
 }
 function C() {
-  u.handle("fetchConjugation", async (n, o, i, t) => {
+  u.handle("fetchConjugation", async (o, r, i, t) => {
     try {
-      const e = a.join(o, `CONJ-${i}.json`);
-      console.log("Fetching conjugation from", e, t), r.existsSync(e) || r.writeFileSync(e, "{}", "utf-8");
-      const s = r.readFileSync(e, "utf-8");
+      const e = a.join(r, `CONJ-${i}.json`);
+      console.log("Fetching conjugation from", e, t), n.existsSync(e) || n.writeFileSync(e, "{}", "utf-8");
+      const s = n.readFileSync(e, "utf-8");
       return JSON.parse(s)[t] || {};
     } catch (e) {
       throw console.error("Error reading JSON file:", e), new Error("Failed to load JSON file.");
@@ -49,32 +51,32 @@ function C() {
   });
 }
 function U() {
-  u.handle("saveConjugation", async (n, o, i, t, e) => {
+  u.handle("saveConjugation", async (o, r, i, t, e) => {
     try {
-      const s = a.join(o, `CONJ-${i}.json`);
+      const s = a.join(r, `CONJ-${i}.json`);
       console.log("Saving conjugation to", s, "for uuid:", t);
       let c = {};
-      if (r.existsSync(s)) {
-        const l = r.readFileSync(s, "utf-8");
+      if (n.existsSync(s)) {
+        const l = n.readFileSync(s, "utf-8");
         c = JSON.parse(l);
       }
-      return c[t] = e, r.writeFileSync(s, JSON.stringify(c, null, 2), "utf-8"), console.log("Conjugation saved successfully"), { success: !0 };
+      return c[t] = e, n.writeFileSync(s, JSON.stringify(c, null, 2), "utf-8"), console.log("Conjugation saved successfully"), { success: !0 };
     } catch (s) {
       throw console.error("Error saving conjugation:", s), new Error("Failed to save conjugation.");
     }
   });
 }
 function G() {
-  u.handle("fetchMarkdown", async (n, o, i, t) => {
+  u.handle("fetchMarkdown", async (o, r, i, t) => {
     try {
-      const e = o.replace(/\\/g, "/"), s = a.join(
+      const e = r.replace(/\\/g, "/"), s = a.join(
         e,
         `MD-${i}`,
         `${t}.json`
       );
-      if (!r.existsSync(s))
+      if (!n.existsSync(s))
         return { type: "doc", content: [] };
-      const c = r.readFileSync(s, "utf-8");
+      const c = n.readFileSync(s, "utf-8");
       try {
         return JSON.parse(c);
       } catch {
@@ -88,15 +90,15 @@ function G() {
 function z() {
   u.handle(
     "saveMarkdown",
-    async (n, o, i, t, e) => {
+    async (o, r, i, t, e) => {
       var s;
       try {
-        const c = o.replace(/\\/g, "/"), l = a.join(
+        const c = r.replace(/\\/g, "/"), l = a.join(
           c,
           `MD-${i}`,
           `${t}.json`
         ), d = a.dirname(l), f = e && e.type === "doc" && Array.isArray(e.content) && e.content.length === 1 && e.content[0].type === "paragraph" && ((s = e.content[0].attrs) == null ? void 0 : s.textAlign) === null && !e.content[0].content;
-        return e === null || f ? (r.existsSync(l) && r.unlinkSync(l), { success: !0 }) : (r.mkdirSync(d, { recursive: !0 }), e === void 0 ? r.writeFileSync(l, "", "utf-8") : r.writeFileSync(l, JSON.stringify(e, null, 2), "utf-8"), { success: !0, path: l });
+        return e === null || f ? (n.existsSync(l) && n.unlinkSync(l), { success: !0 }) : (n.mkdirSync(d, { recursive: !0 }), e === void 0 ? n.writeFileSync(l, "", "utf-8") : n.writeFileSync(l, JSON.stringify(e, null, 2), "utf-8"), { success: !0, path: l });
       } catch (c) {
         throw console.error("Error saving markdown file:", c), new Error(`Failed to save markdown file: ${c}`);
       }
@@ -104,51 +106,51 @@ function z() {
   );
 }
 const y = [];
-for (let n = 0; n < 256; ++n)
-  y.push((n + 256).toString(16).slice(1));
-function M(n, o = 0) {
-  return (y[n[o + 0]] + y[n[o + 1]] + y[n[o + 2]] + y[n[o + 3]] + "-" + y[n[o + 4]] + y[n[o + 5]] + "-" + y[n[o + 6]] + y[n[o + 7]] + "-" + y[n[o + 8]] + y[n[o + 9]] + "-" + y[n[o + 10]] + y[n[o + 11]] + y[n[o + 12]] + y[n[o + 13]] + y[n[o + 14]] + y[n[o + 15]]).toLowerCase();
+for (let o = 0; o < 256; ++o)
+  y.push((o + 256).toString(16).slice(1));
+function W(o, r = 0) {
+  return (y[o[r + 0]] + y[o[r + 1]] + y[o[r + 2]] + y[o[r + 3]] + "-" + y[o[r + 4]] + y[o[r + 5]] + "-" + y[o[r + 6]] + y[o[r + 7]] + "-" + y[o[r + 8]] + y[o[r + 9]] + "-" + y[o[r + 10]] + y[o[r + 11]] + y[o[r + 12]] + y[o[r + 13]] + y[o[r + 14]] + y[o[r + 15]]).toLowerCase();
 }
-const p = new Uint8Array(256);
-let m = p.length;
-function W() {
-  return m > p.length - 16 && (A(p), m = 0), p.slice(m, m += 16);
+const v = new Uint8Array(256);
+let m = v.length;
+function M() {
+  return m > v.length - 16 && (A(v), m = 0), v.slice(m, m += 16);
 }
-const P = { randomUUID: k };
-function V(n, o, i) {
+const x = { randomUUID: k };
+function I(o, r, i) {
   var e;
-  n = n || {};
-  const t = n.random ?? ((e = n.rng) == null ? void 0 : e.call(n)) ?? W();
+  o = o || {};
+  const t = o.random ?? ((e = o.rng) == null ? void 0 : e.call(o)) ?? M();
   if (t.length < 16)
     throw new Error("Random bytes length must be >= 16");
-  return t[6] = t[6] & 15 | 64, t[8] = t[8] & 63 | 128, M(t);
+  return t[6] = t[6] & 15 | 64, t[8] = t[8] & 63 | 128, W(t);
 }
-function $(n, o, i) {
-  return P.randomUUID && !n ? P.randomUUID() : V(n);
+function $(o, r, i) {
+  return x.randomUUID && !o ? x.randomUUID() : I(o);
 }
-function I() {
+function V() {
   u.handle(
     "addTranslation",
-    async (n, o, i, t, e) => {
+    async (o, r, i, t, e) => {
       try {
         const s = a.join(t, `${e}.json`);
-        if (!r.existsSync(s))
+        if (!n.existsSync(s))
           throw new Error(`The file ${s} does not exist.`);
-        const c = JSON.parse(r.readFileSync(s, "utf-8"));
+        const c = JSON.parse(n.readFileSync(s, "utf-8"));
         let l = Array.isArray(c) ? c : [];
         if (i)
           l = l.filter(
             (d) => d.uuid !== i
           );
         else {
-          const d = o.uuid || $();
-          o.uuid = d;
+          const d = r.uuid || $();
+          r.uuid = d;
           const f = a.join(t, `GRAPH-${e}.json`);
-          console.log("Saving graph to", f, "for uuid:", o.uuid);
+          console.log("Saving graph to", f, "for uuid:", r.uuid);
           let h = {};
-          r.existsSync(f) && (h = JSON.parse(r.readFileSync(f, "utf-8"))), h[d] = {}, r.writeFileSync(f, JSON.stringify(h, null, 2), "utf-8");
+          n.existsSync(f) && (h = JSON.parse(n.readFileSync(f, "utf-8"))), h[d] = {}, n.writeFileSync(f, JSON.stringify(h, null, 2), "utf-8");
         }
-        return l.push(o), r.writeFileSync(
+        return l.push(r), n.writeFileSync(
           s,
           JSON.stringify(l, null, 2),
           "utf-8"
@@ -162,25 +164,25 @@ function I() {
 function L() {
   u.handle(
     "createDictionary",
-    async (n, o, i) => {
+    async (o, r, i) => {
       try {
-        const t = $(), e = a.resolve(o, t), s = a.join(e, `${t}.json`), c = a.join(e, "MD-" + t), l = a.join(e, "NOTES-" + t);
-        if (!r.existsSync(o))
-          throw new Error(`The folder ${o} does not exist.`);
-        r.existsSync(e) || r.mkdirSync(e, { recursive: !0 }), r.writeFileSync(s, JSON.stringify([], null, 2), "utf-8"), r.mkdirSync(c, { recursive: !0 }), r.mkdirSync(l, { recursive: !0 });
+        const t = $(), e = a.resolve(r, t), s = a.join(e, `${t}.json`), c = a.join(e, "MD-" + t), l = a.join(e, "NOTES-" + t);
+        if (!n.existsSync(r))
+          throw new Error(`The folder ${r} does not exist.`);
+        n.existsSync(e) || n.mkdirSync(e, { recursive: !0 }), n.writeFileSync(s, JSON.stringify([], null, 2), "utf-8"), n.mkdirSync(c, { recursive: !0 }), n.mkdirSync(l, { recursive: !0 });
         const d = a.join(
           process.env.APP_ROOT || __dirname,
           "public",
           "user-config.json"
         );
-        r.existsSync(d) || r.writeFileSync(d, JSON.stringify({ dictionaries: {} }, null, 2), "utf-8");
-        const f = JSON.parse(r.readFileSync(d, "utf-8"));
+        n.existsSync(d) || n.writeFileSync(d, JSON.stringify({ dictionaries: {} }, null, 2), "utf-8");
+        const f = JSON.parse(n.readFileSync(d, "utf-8"));
         return f.dictionaries || (f.dictionaries = {}), f.dictionaries[t] = {
           name: i,
           route: e,
           typeWordWithPrecededArticle: "",
           typeWordWithTenses: ""
-        }, r.writeFileSync(d, JSON.stringify(f, null, 2), "utf-8"), {
+        }, n.writeFileSync(d, JSON.stringify(f, null, 2), "utf-8"), {
           success: !0,
           folderName: t,
           folderPath: e
@@ -194,26 +196,26 @@ function L() {
 function H() {
   u.handle(
     "deleteTranslation",
-    async (n, o, i, t) => {
+    async (o, r, i, t) => {
       try {
         const e = a.join(i, `${t}.json`);
-        if (!r.existsSync(e))
+        if (!n.existsSync(e))
           throw new Error(`The file ${e} does not exist.`);
-        const s = r.readFileSync(e, "utf-8"), c = JSON.parse(s);
+        const s = n.readFileSync(e, "utf-8"), c = JSON.parse(s);
         let l = Array.isArray(c) ? c : [];
-        l = l.filter((d) => d.uuid !== o);
+        l = l.filter((d) => d.uuid !== r);
         {
           const d = a.join(i, `GRAPH-${t}.json`);
           console.log(
             "Deleting graph entry from",
             d,
             "for uuid:",
-            o
+            r
           );
           let f = {};
-          r.existsSync(d) && (f = JSON.parse(r.readFileSync(d, "utf-8"))), f[o] && delete f[o], r.writeFileSync(d, JSON.stringify(f, null, 2), "utf-8"), console.log("Graph entry deleted successfully");
+          n.existsSync(d) && (f = JSON.parse(n.readFileSync(d, "utf-8"))), f[r] && delete f[r], n.writeFileSync(d, JSON.stringify(f, null, 2), "utf-8"), console.log("Graph entry deleted successfully");
         }
-        return r.writeFileSync(
+        return n.writeFileSync(
           e,
           JSON.stringify(l, null, 2),
           "utf-8"
@@ -224,32 +226,32 @@ function H() {
     }
   );
 }
-function Z(n) {
-  r.existsSync(n) && r.rmSync(n, { recursive: !0, force: !0 });
+function Z(o) {
+  n.existsSync(o) && n.rmSync(o, { recursive: !0, force: !0 });
 }
 function B() {
   u.handle(
     "deleteDictionary",
-    async (n, o) => {
+    async (o, r) => {
       try {
         const i = a.join(
           process.env.APP_ROOT || __dirname,
           "public",
           "user-config.json"
         );
-        if (!r.existsSync(i))
+        if (!n.existsSync(i))
           throw new Error("Config file not found.");
         const t = JSON.parse(
-          r.readFileSync(i, "utf-8")
+          n.readFileSync(i, "utf-8")
         );
-        if (!t.dictionaries || !t.dictionaries[o])
-          throw new Error(`Dictionary with id "${o}" not found in config.`);
-        const e = t.dictionaries[o], s = a.resolve(e.route);
-        if (!r.existsSync(s) || !r.statSync(s).isDirectory())
+        if (!t.dictionaries || !t.dictionaries[r])
+          throw new Error(`Dictionary with id "${r}" not found in config.`);
+        const e = t.dictionaries[r], s = a.resolve(e.route);
+        if (!n.existsSync(s) || !n.statSync(s).isDirectory())
           throw new Error(`Dictionary folder does not exist: ${s}`);
-        return Z(s), delete t.dictionaries[o], r.writeFileSync(i, JSON.stringify(t, null, 2), "utf-8"), {
+        return Z(s), delete t.dictionaries[r], n.writeFileSync(i, JSON.stringify(t, null, 2), "utf-8"), {
           success: !0,
-          deletedId: o,
+          deletedId: r,
           deletedPath: s
         };
       } catch (i) {
@@ -261,25 +263,25 @@ function B() {
 function X() {
   u.handle(
     "renameDictionary",
-    async (n, o, i) => {
+    async (o, r, i) => {
       try {
         const t = a.join(
           process.env.APP_ROOT || __dirname,
           "public",
           "user-config.json"
         );
-        if (!r.existsSync(t))
+        if (!n.existsSync(t))
           throw new Error("Config file not found.");
         const e = JSON.parse(
-          r.readFileSync(t, "utf-8")
+          n.readFileSync(t, "utf-8")
         );
-        if (!e.dictionaries || !e.dictionaries[o])
-          throw new Error(`Dictionary with id "${o}" not found in config.`);
+        if (!e.dictionaries || !e.dictionaries[r])
+          throw new Error(`Dictionary with id "${r}" not found in config.`);
         if (!i || i.trim() === "")
           throw new Error("Dictionary name cannot be empty.");
-        return e.dictionaries[o].name = i.trim(), r.writeFileSync(t, JSON.stringify(e, null, 2), "utf-8"), {
+        return e.dictionaries[r].name = i.trim(), n.writeFileSync(t, JSON.stringify(e, null, 2), "utf-8"), {
           success: !0,
-          dictId: o,
+          dictId: r,
           newName: i.trim()
         };
       } catch (t) {
@@ -291,87 +293,87 @@ function X() {
 function q() {
   u.handle("loadConfig", async () => {
     try {
-      const n = a.join(
+      const o = a.join(
         process.env.APP_ROOT || __dirname,
         "public",
         "user-config.json"
-      ), o = a.dirname(n);
-      if (r.existsSync(o) || r.mkdirSync(o, { recursive: !0 }), !r.existsSync(n))
-        return r.writeFileSync(n, JSON.stringify({}, null, 2), "utf-8"), {};
-      const i = r.readFileSync(n, "utf-8");
+      ), r = a.dirname(o);
+      if (n.existsSync(r) || n.mkdirSync(r, { recursive: !0 }), !n.existsSync(o))
+        return n.writeFileSync(o, JSON.stringify({}, null, 2), "utf-8"), {};
+      const i = n.readFileSync(o, "utf-8");
       return JSON.parse(i);
-    } catch (n) {
-      throw console.error("Error reading JSON file:", n), new Error("Failed to load JSON file.");
+    } catch (o) {
+      throw console.error("Error reading JSON file:", o), new Error("Failed to load JSON file.");
     }
   });
 }
 function K() {
-  u.handle("loadTranslations", async (n, o, i) => {
+  u.handle("loadTranslations", async (o, r, i) => {
     try {
-      const t = a.join(o, `${i}.json`), e = r.readFileSync(t, "utf-8");
+      const t = a.join(r, `${i}.json`), e = n.readFileSync(t, "utf-8");
       return JSON.parse(e);
     } catch (t) {
       throw console.error("Error reading JSON file:", t), new Error("Failed to load JSON file.");
     }
   });
 }
-function D(n, o) {
-  r.mkdirSync(o, { recursive: !0 });
-  const i = r.readdirSync(n, { withFileTypes: !0 });
+function R(o, r) {
+  n.mkdirSync(r, { recursive: !0 });
+  const i = n.readdirSync(o, { withFileTypes: !0 });
   for (const t of i) {
-    const e = a.join(n, t.name), s = a.join(o, t.name);
-    t.isDirectory() ? D(e, s) : r.copyFileSync(e, s);
+    const e = a.join(o, t.name), s = a.join(r, t.name);
+    t.isDirectory() ? R(e, s) : n.copyFileSync(e, s);
   }
 }
-function Q(n) {
-  r.existsSync(n) && r.rmSync(n, { recursive: !0, force: !0 });
+function Q(o) {
+  n.existsSync(o) && n.rmSync(o, { recursive: !0, force: !0 });
 }
 function Y() {
   u.handle(
     "moveDictionary",
-    async (n, o, i) => {
+    async (o, r, i) => {
       try {
         const t = a.join(
           process.env.APP_ROOT || __dirname,
           "public",
           "user-config.json"
         );
-        if (!r.existsSync(t))
+        if (!n.existsSync(t))
           throw new Error("Config file not found.");
         const e = JSON.parse(
-          r.readFileSync(t, "utf-8")
+          n.readFileSync(t, "utf-8")
         );
-        if (!e.dictionaries || !e.dictionaries[o])
-          throw new Error(`Dictionary with id "${o}" not found in config.`);
-        const c = e.dictionaries[o].route, l = a.resolve(c), d = a.resolve(i);
-        if (!r.existsSync(l) || !r.statSync(l).isDirectory())
+        if (!e.dictionaries || !e.dictionaries[r])
+          throw new Error(`Dictionary with id "${r}" not found in config.`);
+        const c = e.dictionaries[r].route, l = a.resolve(c), d = a.resolve(i);
+        if (!n.existsSync(l) || !n.statSync(l).isDirectory())
           throw new Error(`Source folder does not exist or is not a directory: ${l}`);
-        if (!r.existsSync(d) || !r.statSync(d).isDirectory())
+        if (!n.existsSync(d) || !n.statSync(d).isDirectory())
           throw new Error(`Destination folder does not exist or is not a directory: ${d}`);
-        const f = a.basename(l), h = a.join(d, f), O = (w, R) => {
-          const j = a.relative(w, R);
-          return !!j && !j.startsWith("..") && !a.isAbsolute(j);
+        const f = a.basename(l), h = a.join(d, f), P = (w, _) => {
+          const F = a.relative(w, _);
+          return !!F && !F.startsWith("..") && !a.isAbsolute(F);
         };
         if (l === h)
           return { success: !0, oldRoute: l, newRoute: h };
-        if (O(l, h))
+        if (P(l, h))
           throw new Error("Cannot move a folder into one of its own subdirectories.");
-        if (r.existsSync(h))
+        if (n.existsSync(h))
           throw new Error(
             `A folder named "${f}" already exists at the destination (${h}).`
           );
-        let E = !1;
+        let j = !1;
         try {
-          r.renameSync(l, h), E = !0;
+          n.renameSync(l, h), j = !0;
         } catch (w) {
           if (w && w.code === "EXDEV")
-            D(l, h), Q(l), E = !0;
+            R(l, h), Q(l), j = !0;
           else
             throw w;
         }
-        if (!E)
+        if (!j)
           throw new Error("Failed to move dictionary folder for unknown reasons.");
-        return e.dictionaries[o].route = h, r.writeFileSync(t, JSON.stringify(e, null, 2), "utf-8"), {
+        return e.dictionaries[r].route = h, n.writeFileSync(t, JSON.stringify(e, null, 2), "utf-8"), {
           success: !0,
           oldRoute: l,
           newRoute: h
@@ -385,21 +387,21 @@ function Y() {
 function ee() {
   u.handle("selectFolder", async () => {
     try {
-      const n = await T.showOpenDialog({
+      const o = await T.showOpenDialog({
         properties: ["openDirectory"]
       });
-      return n.canceled ? null : n.filePaths[0];
-    } catch (n) {
-      throw console.error("Error selecting folder:", n), new Error("Failed to select folder.");
+      return o.canceled ? null : o.filePaths[0];
+    } catch (o) {
+      throw console.error("Error selecting folder:", o), new Error("Failed to select folder.");
     }
   });
 }
 function re() {
-  u.handle("fetchGraph", async (n, o, i, t) => {
+  u.handle("fetchGraph", async (o, r, i, t) => {
     try {
-      const e = a.join(o, `GRAPH-${i}.json`);
-      console.log("Fetching graph from", e, "for dictionary", i), r.existsSync(e) || r.writeFileSync(e, "{}", "utf-8");
-      const s = r.readFileSync(e, "utf-8"), c = JSON.parse(s);
+      const e = a.join(r, `GRAPH-${i}.json`);
+      console.log("Fetching graph from", e, "for dictionary", i), n.existsSync(e) || n.writeFileSync(e, "{}", "utf-8");
+      const s = n.readFileSync(e, "utf-8"), c = JSON.parse(s);
       return t ? c[t] || {} : c || {};
     } catch (e) {
       throw console.error("Error reading JSON file:", e), new Error("Failed to load JSON file.");
@@ -409,11 +411,11 @@ function re() {
 function ne() {
   u.handle(
     "saveGraph",
-    async (n, o, i, t, e) => {
+    async (o, r, i, t, e) => {
       try {
-        const s = a.join(o, `GRAPH-${i}.json`);
+        const s = a.join(r, `GRAPH-${i}.json`);
         let c = {};
-        return r.existsSync(s) && (c = JSON.parse(r.readFileSync(s, "utf-8"))), c[t.uuid] || (c[t.uuid] = {}), c[e.uuid] || (c[e.uuid] = {}), c[t.uuid][e.uuid] = e.word, c[e.uuid][t.uuid] = t.word, r.writeFileSync(s, JSON.stringify(c, null, 2), "utf-8"), console.log("Graph saved successfully"), { success: !0 };
+        return n.existsSync(s) && (c = JSON.parse(n.readFileSync(s, "utf-8"))), c[t.uuid] || (c[t.uuid] = {}), c[e.uuid] || (c[e.uuid] = {}), c[t.uuid][e.uuid] = e.word, c[e.uuid][t.uuid] = t.word, n.writeFileSync(s, JSON.stringify(c, null, 2), "utf-8"), console.log("Graph saved successfully"), { success: !0 };
       } catch (s) {
         throw console.error("Error saving graph:", s), new Error("Failed to save graph.");
       }
@@ -423,11 +425,11 @@ function ne() {
 function te() {
   u.handle(
     "deleteGraphEntry",
-    async (n, o, i, t, e) => {
+    async (o, r, i, t, e) => {
       try {
-        const s = a.join(o, `GRAPH-${i}.json`);
+        const s = a.join(r, `GRAPH-${i}.json`);
         let c = {};
-        return r.existsSync(s) && (c = JSON.parse(r.readFileSync(s, "utf-8"))), c[t.uuid] && delete c[t.uuid][e.uuid], c[e.uuid] && delete c[e.uuid][t.uuid], r.writeFileSync(s, JSON.stringify(c, null, 2), "utf-8"), console.log("Graph entry deleted successfully"), { success: !0 };
+        return n.existsSync(s) && (c = JSON.parse(n.readFileSync(s, "utf-8"))), c[t.uuid] && delete c[t.uuid][e.uuid], c[e.uuid] && delete c[e.uuid][t.uuid], n.writeFileSync(s, JSON.stringify(c, null, 2), "utf-8"), console.log("Graph entry deleted successfully"), { success: !0 };
       } catch (s) {
         throw console.error("Error deleting graph entry:", s), new Error("Failed to delete graph entry.");
       }
@@ -437,16 +439,16 @@ function te() {
 function oe() {
   u.handle(
     "saveUserPreferences",
-    async (n, o) => {
+    async (o, r) => {
       try {
         const i = a.join(
           process.env.APP_ROOT || __dirname,
           "public",
           "user-preferences.json"
         );
-        r.existsSync(i) || (r.mkdirSync(a.dirname(i), { recursive: !0 }), r.writeFileSync(i, JSON.stringify({}, null, 2), "utf-8"));
-        const t = r.readFileSync(i, "utf-8"), e = JSON.parse(t);
-        return Object.assign(e, o), r.writeFileSync(i, JSON.stringify(e, null, 2), "utf-8"), e;
+        n.existsSync(i) || (n.mkdirSync(a.dirname(i), { recursive: !0 }), n.writeFileSync(i, JSON.stringify({}, null, 2), "utf-8"));
+        const t = n.readFileSync(i, "utf-8"), e = JSON.parse(t);
+        return Object.assign(e, r), n.writeFileSync(i, JSON.stringify(e, null, 2), "utf-8"), e;
       } catch (i) {
         throw console.error("Error saving user preferences file:", i), new Error("Failed to save user preferences file.");
       }
@@ -454,15 +456,15 @@ function oe() {
   );
 }
 function ie() {
-  u.handle("loadUserPreferences", async (n, o) => {
+  u.handle("loadUserPreferences", async (o, r) => {
     try {
       const i = a.join(
         process.env.APP_ROOT || __dirname,
         "public",
         "user-preferences.json"
       );
-      r.existsSync(i) || (r.mkdirSync(a.dirname(i), { recursive: !0 }), r.writeFileSync(i, JSON.stringify({}, null, 2), "utf-8"));
-      const t = r.readFileSync(i, "utf-8");
+      n.existsSync(i) || (n.mkdirSync(a.dirname(i), { recursive: !0 }), n.writeFileSync(i, JSON.stringify({}, null, 2), "utf-8"));
+      const t = n.readFileSync(i, "utf-8");
       return JSON.parse(t);
     } catch (i) {
       throw console.error("Error reading user preferences file:", i), new Error("Failed to load user preferences file.");
@@ -472,16 +474,16 @@ function ie() {
 function se() {
   u.handle(
     "editConfig",
-    async (n, o) => {
+    async (o, r) => {
       try {
         const i = a.join(
           process.env.APP_ROOT || __dirname,
           "public",
           "user-config.json"
         );
-        r.existsSync(i) || (r.mkdirSync(a.dirname(i), { recursive: !0 }), r.writeFileSync(i, JSON.stringify({}, null, 2), "utf-8"));
-        const t = r.readFileSync(i, "utf-8"), e = JSON.parse(t);
-        return Object.assign(e, o), r.writeFileSync(i, JSON.stringify(e, null, 2), "utf-8"), e;
+        n.existsSync(i) || (n.mkdirSync(a.dirname(i), { recursive: !0 }), n.writeFileSync(i, JSON.stringify({}, null, 2), "utf-8"));
+        const t = n.readFileSync(i, "utf-8"), e = JSON.parse(t);
+        return Object.assign(e, r), n.writeFileSync(i, JSON.stringify(e, null, 2), "utf-8"), e;
       } catch (i) {
         throw console.error("Error saving user preferences file:", i), new Error("Failed to save user preferences file.");
       }
@@ -489,15 +491,15 @@ function se() {
   );
 }
 function ce() {
-  u.handle("fetchNoteIndex", async (n, o, i) => {
+  u.handle("fetchNoteIndex", async (o, r, i) => {
     try {
-      const t = o.replace(/\\/g, "/"), e = a.join(
+      const t = r.replace(/\\/g, "/"), e = a.join(
         t,
         `NOTES-${i}`,
         `NOTES-INDEX-${i}.json`
       );
-      r.existsSync(e) || (r.mkdirSync(a.dirname(e), { recursive: !0 }), r.writeFileSync(e, JSON.stringify([], null, 2), "utf-8"));
-      const s = r.readFileSync(e, "utf-8");
+      n.existsSync(e) || (n.mkdirSync(a.dirname(e), { recursive: !0 }), n.writeFileSync(e, JSON.stringify([], null, 2), "utf-8"));
+      const s = n.readFileSync(e, "utf-8");
       return JSON.parse(s);
     } catch (t) {
       throw console.error("Error reading markdown file:", t), new Error(`Failed to load markdown file: ${t}`);
@@ -507,15 +509,15 @@ function ce() {
 function ae() {
   u.handle(
     "saveNoteIndex",
-    async (n, o, i, t) => {
+    async (o, r, i, t) => {
       try {
-        const e = o.replace(/\\/g, "/");
+        const e = r.replace(/\\/g, "/");
         let s = a.join(
           e,
           `NOTES-${i}`,
           `NOTES-INDEX-${i}.json`
         );
-        return r.writeFileSync(s, JSON.stringify(t, null, 2), "utf-8"), { success: !0, path: s };
+        return n.writeFileSync(s, JSON.stringify(t, null, 2), "utf-8"), { success: !0, path: s };
       } catch (e) {
         throw console.error("Error saving JSON file:", e), new Error(`Failed to save JSON file: ${e}`);
       }
@@ -523,30 +525,30 @@ function ae() {
   );
 }
 function le() {
-  u.handle("saveNotes", async (n, o, i, t, e) => {
+  u.handle("saveNotes", async (o, r, i, t, e) => {
     try {
-      const s = o.replace(/\\/g, "/"), c = a.join(
+      const s = r.replace(/\\/g, "/"), c = a.join(
         s,
         `NOTES-${i}`,
         `${t}.json`
       ), l = a.dirname(c);
-      return e === null ? (r.existsSync(c) && r.unlinkSync(c), { success: !0 }) : (r.mkdirSync(l, { recursive: !0 }), e === void 0 ? r.writeFileSync(c, "", "utf-8") : r.writeFileSync(c, JSON.stringify(e, null, 2), "utf-8"), { success: !0, path: c });
+      return e === null ? (n.existsSync(c) && n.unlinkSync(c), { success: !0 }) : (n.mkdirSync(l, { recursive: !0 }), e === void 0 ? n.writeFileSync(c, "", "utf-8") : n.writeFileSync(c, JSON.stringify(e, null, 2), "utf-8"), { success: !0, path: c });
     } catch (s) {
       throw console.error("Error saving markdown file:", s), new Error(`Failed to save markdown file: ${s}`);
     }
   });
 }
 function ue() {
-  u.handle("fetchNotes", async (n, o, i, t) => {
+  u.handle("fetchNotes", async (o, r, i, t) => {
     try {
-      const e = o.replace(/\\/g, "/"), s = a.join(
+      const e = r.replace(/\\/g, "/"), s = a.join(
         e,
         `NOTES-${i}`,
         `${t}.json`
       );
-      if (!r.existsSync(s))
+      if (!n.existsSync(s))
         return { type: "doc", content: [] };
-      const c = r.readFileSync(s, "utf-8");
+      const c = n.readFileSync(s, "utf-8");
       try {
         return JSON.parse(c);
       } catch {
@@ -558,16 +560,16 @@ function ue() {
   });
 }
 function de() {
-  u.handle("saveImage", async (n, o, i, t, e) => {
+  u.handle("saveImage", async (o, r, i, t, e) => {
     try {
-      const s = o.replace(/\\/g, "/"), c = a.join(
+      const s = r.replace(/\\/g, "/"), c = a.join(
         s,
         `NOTES-${i}`,
         "RESOURCES"
       );
-      r.mkdirSync(c, { recursive: !0 }), console.log("SAVED IMGE SAVED IMG");
+      n.mkdirSync(c, { recursive: !0 }), console.log("SAVED IMGE SAVED IMG");
       const l = a.extname(e), f = `${a.basename(e, l)}-${Date.now()}${l}`, h = a.join(c, f);
-      return r.writeFileSync(h, Buffer.from(t)), { success: !0, url: `file://${h.replace(/\\/g, "/")}` };
+      return n.writeFileSync(h, Buffer.from(t)), { success: !0, url: `file://${h.replace(/\\/g, "/")}` };
     } catch (s) {
       throw console.error("Error saving image:", s), new Error(`Failed to save image: ${s}`);
     }
@@ -575,31 +577,42 @@ function de() {
 }
 function fe() {
   u.handle("window-minimize", () => {
-    const n = g.getFocusedWindow();
-    n == null || n.minimize();
+    const o = g.getFocusedWindow();
+    o == null || o.minimize();
   });
 }
 function ye() {
   u.handle("window-maximize", () => {
-    const n = g.getFocusedWindow();
-    n && (n.isMaximized() ? n.unmaximize() : n.maximize());
+    const o = g.getFocusedWindow();
+    o && (o.isMaximized() ? o.unmaximize() : o.maximize());
   });
 }
 function he() {
   u.handle("window-close", () => {
-    const n = g.getFocusedWindow();
-    n == null || n.close();
+    const o = g.getFocusedWindow();
+    o == null || o.close();
   });
 }
-function Se() {
-  K(), I(), H(), L(), Y(), B(), X(), ee(), q(), se(), G(), z(), C(), U(), re(), ne(), te(), oe(), ie(), ce(), ae(), le(), ue(), de(), fe(), ye(), he();
+function Se(o) {
+  if (typeof o != "string") return;
+  const r = o.trim();
+  if (r)
+    return r.startsWith("/") ? r : `/${r}`;
 }
-v.on("window-all-closed", () => {
-  process.platform !== "darwin" && v.quit();
+function we() {
+  u.handle("window-open-new", (o, r) => {
+    N(Se(r));
+  });
+}
+function ge() {
+  K(), V(), H(), L(), Y(), B(), X(), ee(), q(), se(), G(), z(), C(), U(), re(), ne(), te(), oe(), ie(), ce(), ae(), le(), ue(), de(), fe(), ye(), he(), we();
+}
+E.on("window-all-closed", () => {
+  process.platform !== "darwin" && E.quit();
 });
-v.on("activate", () => {
-  g.getAllWindows().length === 0 && J();
+E.on("activate", () => {
+  g.getAllWindows().length === 0 && N();
 });
-v.whenReady().then(() => {
-  Se(), J();
+E.whenReady().then(() => {
+  ge(), N();
 });

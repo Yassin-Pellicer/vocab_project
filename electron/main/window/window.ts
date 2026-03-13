@@ -14,7 +14,7 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
   ? path.join(process.env.APP_ROOT, "public")
   : RENDERER_DIST;
 
-export default function createWindow() {
+export default function createWindow(initialRoute?: string) {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
@@ -55,8 +55,18 @@ export default function createWindow() {
 });
 
   if (VITE_DEV_SERVER_URL) {
-    win.loadURL(VITE_DEV_SERVER_URL);
+    if (initialRoute) {
+      win.loadURL(`${VITE_DEV_SERVER_URL}#${encodeURIComponent(initialRoute)}`);
+    } else {
+      win.loadURL(VITE_DEV_SERVER_URL);
+    }
   } else {
-    win.loadFile(path.join(RENDERER_DIST, "index.html"));
+    if (initialRoute) {
+      win.loadFile(path.join(RENDERER_DIST, "index.html"), {
+        hash: encodeURIComponent(initialRoute),
+      });
+    } else {
+      win.loadFile(path.join(RENDERER_DIST, "index.html"));
+    }
   }
 }

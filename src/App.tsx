@@ -1,13 +1,29 @@
 import DictionaryPage from "./pages/dictionary-page";
 import MarkdownPage from "./pages/markdown-page";
 import HomePage from "./pages/home-page";
-import { BrowserRouter, useLocation } from "react-router-dom";
+import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
 import { useConfigStore } from "./context/dictionary-context";
 import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
 import { MainLayout } from "./layouts";
 import { useEffect, useRef } from "react";
 import useThemeSync from "./hooks/useThemeSync";
 import NotesPage from "./pages/notes-page";
+
+function InitialRouteFromHash() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+
+    const decoded = decodeURIComponent(hash.replace(/^#/, ""));
+    if (!decoded.startsWith("/")) return;
+
+    navigate(decoded, { replace: true });
+  }, [navigate]);
+
+  return null;
+}
 
 function Pages() {
   const location = useLocation();
@@ -39,6 +55,7 @@ export default function App() {
   }, [dictionaryMetadata]);
   return (
     <BrowserRouter>
+      <InitialRouteFromHash />
       <MainLayout>
         <Pages />
       </MainLayout>

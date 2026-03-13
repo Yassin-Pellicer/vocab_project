@@ -26,6 +26,7 @@ import saveImage from "./endpoints/notes/saveImage";
 import minimizeWindow from "./endpoints/window/minimize";
 import maximizeWindow from "./endpoints/window/maximize";
 import closeWindow from "./endpoints/window/close";
+import openNewWindow from "./endpoints/window/openNewWindow";
 
 export default function registerIpcHandlers() {
   loadTranslations();
@@ -57,4 +58,5 @@ export default function registerIpcHandlers() {
   minimizeWindow();
   maximizeWindow();
   closeWindow();
+  openNewWindow();
 }
