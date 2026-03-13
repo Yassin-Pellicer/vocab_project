@@ -5,7 +5,7 @@ import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
 import { useConfigStore } from "./context/dictionary-context";
 import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
 import { MainLayout } from "./layouts";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import useThemeSync from "./hooks/useThemeSync";
 import NotesPage from "./pages/notes-page";
 
@@ -39,6 +39,11 @@ function Pages() {
 }
 
 export default function App() {
+  const hideSidebar = useMemo(() => {
+    const value = new URLSearchParams(window.location.search).get("hideSidebar");
+    return value === "1" || value === "true";
+  }, []);
+
   const loadConfig = useConfigStore((state: any) => state.loadConfig);
   const loadUserPreferences = usePreferencesStore((state: any) => state.loadConfig);
   const loadAllTranslations = useConfigStore((state: any) => state.loadAllTranslations);
@@ -56,7 +61,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <InitialRouteFromHash />
-      <MainLayout>
+      <MainLayout hideSidebar={hideSidebar}>
         <Pages />
       </MainLayout>
     </BrowserRouter>

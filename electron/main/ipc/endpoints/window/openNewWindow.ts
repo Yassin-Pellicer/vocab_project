@@ -10,6 +10,6 @@ function normalizeRoute(route: unknown) {
 
 export default function openNewWindow() {
   ipcMain.handle("window-open-new", (_event, route: unknown) => {
-    createWindow(normalizeRoute(route));
+    createWindow(normalizeRoute(route), { hideSidebar: true });
   });
 }

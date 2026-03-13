@@ -14,7 +14,10 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
   ? path.join(process.env.APP_ROOT, "public")
   : RENDERER_DIST;
 
-export default function createWindow(initialRoute?: string) {
+export default function createWindow(
+  initialRoute?: string,
+  options?: { hideSidebar?: boolean }
+) {
   const win = new BrowserWindow({
     width: 1200,
     height: 800,
@@ -54,19 +57,18 @@ export default function createWindow(initialRoute?: string) {
   }
 });
 
+  const search =
+    typeof options?.hideSidebar === "boolean"
+      ? `?hideSidebar=${options.hideSidebar ? "1" : "0"}`
+      : "";
+
   if (VITE_DEV_SERVER_URL) {
-    if (initialRoute) {
-      win.loadURL(`${VITE_DEV_SERVER_URL}#${encodeURIComponent(initialRoute)}`);
-    } else {
-      win.loadURL(VITE_DEV_SERVER_URL);
-    }
+    const hash = initialRoute ? `#${encodeURIComponent(initialRoute)}` : "";
+    win.loadURL(`${VITE_DEV_SERVER_URL}${search}${hash}`);
   } else {
-    if (initialRoute) {
-      win.loadFile(path.join(RENDERER_DIST, "index.html"), {
-        hash: encodeURIComponent(initialRoute),
-      });
-    } else {
-      win.loadFile(path.join(RENDERER_DIST, "index.html"));
-    }
+    win.loadFile(path.join(RENDERER_DIST, "index.html"), {
+      hash: initialRoute ? encodeURIComponent(initialRoute) : undefined,
+      search: search || undefined,
+    });
   }
 }
