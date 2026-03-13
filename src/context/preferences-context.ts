@@ -57,26 +57,44 @@ const defaultConfig: UserPreferences = {
 export const useConfigStore = create<ConfigState>((set) => ({
   config: { ...defaultConfig },
 
-  setConfig: (config: Partial<UserPreferences>) =>
-    set((state) => ({ config: { ...state.config, ...config } })),
+  setConfig: (config: Partial<UserPreferences>) => {
+    set((state) => ({ config: { ...state.config, ...config } }));
+    useConfigStore.getState().saveConfig();
+  },
 
-  setNotifications: (v: boolean) =>
-    set((state) => ({ config: { ...state.config, notifications: v } })),
-  setNotificationLifetime: (v: string) =>
-    set((state) => ({ config: { ...state.config, notificationLifetime: v } })),
-  setLanguage: (v: string) =>
-    set((state) => ({ config: { ...state.config, language: v } })),
-  setTimezone: (v: string) =>
-    set((state) => ({ config: { ...state.config, timezone: v } })),
-  setDateFormat: (v: string) =>
-    set((state) => ({ config: { ...state.config, dateFormat: v } })),
+  setNotifications: (v: boolean) => {
+    set((state) => ({ config: { ...state.config, notifications: v } }));
+    useConfigStore.getState().saveConfig();
+  },
+  setNotificationLifetime: (v: string) => {
+    set((state) => ({ config: { ...state.config, notificationLifetime: v } }));
+    useConfigStore.getState().saveConfig();
+  },
+  setLanguage: (v: string) => {
+    set((state) => ({ config: { ...state.config, language: v } }));
+    useConfigStore.getState().saveConfig();
+  },
+  setTimezone: (v: string) => {
+    set((state) => ({ config: { ...state.config, timezone: v } }));
+    useConfigStore.getState().saveConfig();
+  },
+  setDateFormat: (v: string) => {
+    set((state) => ({ config: { ...state.config, dateFormat: v } }));
+    useConfigStore.getState().saveConfig();
+  },
 
-  setAnimations: (v: boolean) =>
-    set((state) => ({ config: { ...state.config, animations: v } })),
-  setAccentColor: (v: string) =>
-    set((state) => ({ config: { ...state.config, accentColor: v } })),
-  setAppearance: (v: "light" | "dark" | "system") =>
-    set((state) => ({ config: { ...state.config, appearance: v } })),
+  setAnimations: (v: boolean) => {
+    set((state) => ({ config: { ...state.config, animations: v } }));
+    useConfigStore.getState().saveConfig();
+  },
+  setAccentColor: (v: string) => {
+    set((state) => ({ config: { ...state.config, accentColor: v } }));
+    useConfigStore.getState().saveConfig();
+  },
+  setAppearance: (v: "light" | "dark" | "system") => {
+    set((state) => ({ config: { ...state.config, appearance: v } }));
+    useConfigStore.getState().saveConfig();
+  },
 
   setDisplayName: (v: string) => {
     set((state) => ({ config: { ...state.config, displayName: v } }));
@@ -134,8 +152,10 @@ export const useConfigStore = create<ConfigState>((set) => ({
     useConfigStore.getState().saveConfig();
   },
 
-  setSubscriptionPlan: (plan: string) =>
-    set((state) => ({ config: { ...state.config, subscriptionPlan: plan } })),
+  setSubscriptionPlan: (plan: string) => {
+    set((state) => ({ config: { ...state.config, subscriptionPlan: plan } }));
+    useConfigStore.getState().saveConfig();
+  },
 
   loadConfig: () => {
     window.api.loadUserPreferences().then((preferences: UserPreferences) => {

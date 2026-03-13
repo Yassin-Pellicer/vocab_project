@@ -59,8 +59,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       return (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <div className="flex items-center justify-between">
-                              <Link to={subItem.url} className="flex items-center gap-2">
+                            <div className="group/dict-subitem flex items-center justify-between">
+                              <Link to={subItem.url} className="group flex items-center gap-2">
                                 {subItem.icon && <subItem.icon size={12} />}
                                 {subItem.title}
                               </Link>
@@ -68,7 +68,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 type="button"
                                 variant="ghost"
                                 size="icon-sm"
-                                className="shrink-0"
+                                className="shrink-0 hidden group-hover/dict-subitem:inline-flex"
                                 title="Open in new window"
                                 aria-label={`Open ${subItem.title} in a new window`}
                                 onClick={(e) => {

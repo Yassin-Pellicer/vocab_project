@@ -1,8 +1,11 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { BreadcrumbNavigation } from "../breadcrumb-navigation";
-import { Maximize2, X, MoveDownLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight, Maximize2, X, MoveDownLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export function AppHeader() {
+  const navigate = useNavigate();
+
   return (
     <header
       style={{ WebkitAppRegion: "drag" } as React.CSSProperties}
@@ -15,8 +18,27 @@ export function AppHeader() {
         <BreadcrumbNavigation />
       </div>
       <div className="flex items-center gap-1" style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}>
+        <div className="flex flex-row mr-6">
+        <button
+          aria-label="Back"
+          title="Back"
+          onClick={() => navigate(-1)}
+          className="p-1 hover:bg-gray-200 rounded cursor-pointer"
+        >
+          <ArrowLeft size={14} />
+        </button>
+        <button
+          aria-label="Forward"
+          title="Forward"
+          onClick={() => navigate(1)}
+          className="p-1 hover:bg-gray-200 rounded cursor-pointer"
+        >
+          <ArrowRight size={14} />
+        </button>
+        </div>
         <button
           aria-label="Minimize"
+          title="Minimize"
           onClick={() => window.api?.minimize?.()}
           className="p-1 hover:bg-gray-200 rounded cursor-pointer">
           <MoveDownLeft size={14} />

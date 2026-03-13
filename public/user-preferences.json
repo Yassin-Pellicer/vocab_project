@@ -1,6 +1,6 @@
 {
   "notifications": true,
-  "notificationLifetime": "5s",
+  "notificationLifetime": "10s",
   "language": "en",
   "timezone": "utc",
   "dateFormat": "ISO",

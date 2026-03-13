@@ -29,10 +29,6 @@ export default function useConfig() {
     resetConfig,
   } = usePreferencesStore();
 
-  useEffect(() => {
-    saveConfig();
-  }, [preferences]);
-
   return {
     dictionaryMetadata,
     preferences,

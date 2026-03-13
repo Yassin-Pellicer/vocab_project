@@ -227,7 +227,6 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
     content: { type: "doc", content: [] },
     autofocus: false,
     onUpdate: ({ editor }) => {
-      console.log("update")
       if (isApplyingRemoteContent.current) return;
       if (type === "notes" && selectedNoteId && loadedNoteIdRef.current === selectedNoteId) {
         window.api.saveNotes(route, name, selectedNoteId, editor.getJSON());
@@ -256,7 +255,7 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
 
       if (editor && data) {
         isApplyingRemoteContent.current = true
-        editor.commands.setContent(data)
+      editor.commands.setContent(data, { emitUpdate: false })
         loadedNoteIdRef.current = selectedNoteId
         queueMicrotask(() => {
           isApplyingRemoteContent.current = false
@@ -269,7 +268,7 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
 
       if (editor && data) {
         isApplyingRemoteContent.current = true
-        editor.commands.setContent(data)
+      editor.commands.setContent(data, { emitUpdate: false })
         loadedWordIdRef.current = selectedWord?.uuid ?? null
         queueMicrotask(() => {
           isApplyingRemoteContent.current = false

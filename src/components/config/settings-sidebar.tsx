@@ -32,7 +32,7 @@ export default function SettingsSidebar({ activeSection, onSectionChange }: Sett
               key={item.id}
               onClick={() => onSectionChange(item.id)}
               className={cn(
-                "w-full flex items-center gap-3 my-1 md:px-3 px-1 py-[4px] rounded-md text-sm transition-colors",
+                "w-full flex items-center gap-3 my-1 md:px-3 px-1 py-1 rounded-md text-sm transition-colors",
                 "hover:bg-accent hover:text-accent-foreground",
                 activeSection === item.id 
                   ? "bg-accent text-accent-foreground font-medium" 
