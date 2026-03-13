@@ -1474,54 +1474,6 @@
     "pair": [
       {
         "original": {
-          "word": "Ladekabel",
-          "gender": "neutro",
-          "number": "singular"
-        },
-        "translations": [
-          {
-            "word": "Cargador",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Cable cargador"
-        ],
-        "observations": ""
-      }
-    ],
-    "dateAdded": "2025-11-24",
-    "type": "Nomen",
-    "uuid": "00525f2f-29d9-4846-9d3d-37de7930f1f8"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Teppich",
-          "gender": "masculino",
-          "number": "singular"
-        },
-        "translations": [
-          {
-            "word": "alfombra",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [],
-        "observations": ""
-      }
-    ],
-    "dateAdded": "2025-11-26",
-    "type": "Nomen",
-    "uuid": "42ef9469-efef-42b5-af1e-a68c27f83eff"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Haar",
           "gender": "Neutrum",
           "number": "Singular"
@@ -8624,5 +8576,53 @@
     "dateAdded": "2026-03-11",
     "type": "Nomen",
     "uuid": "be48a006-8746-42dc-9e36-6207d664c671"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ladekabel",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Cargador",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Cable cargador"
+        ],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-24",
+    "type": "Nomen",
+    "uuid": "00525f2f-29d9-4846-9d3d-37de7930f1f8"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Teppich",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "alfombra",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-26",
+    "type": "Nomen",
+    "uuid": "42ef9469-efef-42b5-af1e-a68c27f83eff"
   }
 ]

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Button } from "@/components/tiptap-ui-primitive/button"
+import { Button } from "@/components/ui/tiptap/tiptap-ui-primitive/button"
 import { Editor } from "@tiptap/react"
 import { GitGraph } from "lucide-react"
 import GraphInsertModal from "./insert-graph-modal"

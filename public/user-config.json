@@ -178,7 +178,8 @@
       "name": "French",
       "route": "C:\\Users\\ypellicl\\vocab\\f4bdaa15-3e9c-44e9-8507-9547cfb6597c",
       "typeWordWithPrecededArticle": "",
-      "typeWordWithTenses": ""
+      "typeWordWithTenses": "",
+      "useArticles": false
     }
   }
 }

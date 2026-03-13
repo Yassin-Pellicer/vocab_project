@@ -1,4 +1,4 @@
-import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
+import { SimpleEditor } from "@/components/ui/tiptap/tiptap-templates/simple/simple-editor";
 import { useNotesStore } from "@/context/notes-context";
 
 export default function NoteDisplay({

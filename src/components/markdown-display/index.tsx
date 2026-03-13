@@ -14,7 +14,7 @@ import WordCard from "../word-card";
 import VerboConjugation from "../verb-conjugation";
 import SearchBar from "../word-link";
 import { useConfigStore } from "@/context/dictionary-context";
-import { SimpleEditor } from "../tiptap-templates/simple/simple-editor";
+import { SimpleEditor } from "../ui/tiptap/tiptap-templates/simple/simple-editor";
 
 export default function MarkdownEditor({
   route,
