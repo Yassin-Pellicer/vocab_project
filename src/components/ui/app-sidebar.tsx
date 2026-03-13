@@ -41,13 +41,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <SidebarMenuButton asChild>
                   {item.url ? (
                     <Link to={item.url} className="font-medium">
-                      <div className="flex items-center justify-between w-full">
+                      <div className="flex items-center justify-between w-full font-medium hover:text-background!">
                         {item.title}
                         {item.key && item.route && <DictActionsMenu dictId={item.key} dictName={item.title} currentRoute={item.route} />}
                       </div>
                     </Link>
                   ) : (
-                    <div className="flex items-center justify-between w-full font-medium">
+                    <div className="flex items-center justify-between w-full font-medium hover:text-background!">
                       {item.title}
                       {item.key && item.route && <DictActionsMenu dictId={item.key} dictName={item.title} currentRoute={item.route} />}
                     </div>
@@ -60,7 +60,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
                             <div className="group/dict-subitem flex items-center justify-between">
-                              <Link to={subItem.url} className="group flex items-center gap-2">
+                              <Link to={subItem.url} className="group flex items-center gap-2 text-current hover:text-background!">
                                 {subItem.icon && <subItem.icon size={12} />}
                                 {subItem.title}
                               </Link>
@@ -68,7 +68,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 type="button"
                                 variant="ghost"
                                 size="icon-sm"
-                                className="shrink-0 hidden group-hover/dict-subitem:inline-flex"
+                                className="shrink-0 hidden cursor-pointer group-hover/dict-subitem:inline-flex"
                                 title="Open in new window"
                                 aria-label={`Open ${subItem.title} in a new window`}
                                 onClick={(e) => {

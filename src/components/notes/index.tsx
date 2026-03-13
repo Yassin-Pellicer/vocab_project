@@ -81,8 +81,8 @@ export default function Notes({
             <div className="p-2 border-b">
               <AddNoteModal route={route} name={name} item={null}>
                 <Button
-                  variant="outline"
-                  className="w-full rounded-md cursor-pointer hover:bg-muted/10"
+                  variant="default"
+                  className="w-full rounded-md cursor-pointer"
                   onClick={() => {
                     setSearchField("");
                     searchRef.current?.focus();

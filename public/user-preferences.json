@@ -5,7 +5,7 @@
   "timezone": "utc",
   "dateFormat": "ISO",
   "animations": true,
-  "accentColor": "blue",
+  "accentColor": "purple",
   "appearance": "light",
   "displayName": "Yassin",
   "email": "yassinpellicerlamla@gmail.com",
@@ -30,7 +30,8 @@
       "action": "Save",
       "keys": [
         "Ctrl",
-        "S"
+        "Alt",
+        "W"
       ]
     },
     {
