@@ -17,7 +17,13 @@ export function ReferenceNoteButton({
 
   return (
     <>
-      <Button className="bg-transparent!" onClick={() => setOpen(true)}>
+      <Button
+        type="button"
+        variant="ghost"
+        role="button"
+        tabIndex={-1}
+        tooltip={"Insert Graph"}
+        onClick={() => setOpen(true)}>
         <Notebook size={16} />
       </Button>
 

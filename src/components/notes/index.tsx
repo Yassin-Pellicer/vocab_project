@@ -26,6 +26,9 @@ export default function Notes({
     handleMenuItemClick,
     selectedNoteTitle,
     selectedNoteRoute,
+    sidebarWidth,
+    sidebarCollapsed,
+    handleResizeStart,
   } = useTranslationHooks({ route, name });
 
   return (
@@ -60,47 +63,71 @@ export default function Notes({
       </div>
 
       <div className="flex flex-row overflow-hidden h-[calc(100vh-130px)]">
-        <div className="w-98 shrink-0 flex flex-col border-r">
-          <div className="p-2 border-b">
-            <AddNoteModal route={route} name={name} item={null}>
-              <Button
-                variant="outline"
-                className="w-full rounded-md cursor-pointer hover:bg-muted/10"
-                onClick={() => {
-                  setSearchField("");
-                  searchRef.current?.focus();
-                }}
-              >
-                <Notebook /> + Add Root Note
-              </Button>
-            </AddNoteModal>
-          </div>
-
-          <div className="flex-1 overflow-y-auto">
-            <NoteSidebar
-              route={route}
-              name={name}
-              action={handleMenuItemClick}
-              element={(item) => (
-                <NoteActionsMenu
-                  route={route}
-                  name={name}
-                  item={item}
-                />
-              )}
+        {sidebarCollapsed ? (
+          <div className="shrink-0 relative" style={{ width: 8 }}>
+            <div
+              role="separator"
+              aria-orientation="vertical"
+              title="Drag to resize"
+              onPointerDown={handleResizeStart}
+              className="absolute right-0 top-0 h-full w-2 cursor-col-resize bg-muted/20 hover:bg-muted/40"
             />
           </div>
-        </div>
+        ) : (
+          <div
+            className="shrink-0 flex flex-col border-r relative"
+            style={{ width: sidebarWidth }}
+          >
+            <div className="p-2 border-b">
+              <AddNoteModal route={route} name={name} item={null}>
+                <Button
+                  variant="outline"
+                  className="w-full rounded-md cursor-pointer hover:bg-muted/10"
+                  onClick={() => {
+                    setSearchField("");
+                    searchRef.current?.focus();
+                  }}
+                >
+                  <Notebook /> + Add Root Note
+                </Button>
+              </AddNoteModal>
+            </div>
+
+            <div className="flex-1 overflow-y-auto">
+              <NoteSidebar
+                route={route}
+                name={name}
+                query={searchField}
+                action={handleMenuItemClick}
+                element={(item) => (
+                  <NoteActionsMenu
+                    route={route}
+                    name={name}
+                    item={item}
+                  />
+                )}
+              />
+            </div>
+
+            <div
+              role="separator"
+              aria-orientation="vertical"
+              title="Drag to resize"
+              onPointerDown={handleResizeStart}
+              className="absolute right-0 top-0 h-full w-1 cursor-col-resize bg-transparent hover:bg-muted/20"
+            />
+          </div>
+        )}
 
         {/* Main content */}
         <div className="flex-1 overflow-y-auto">
-          <div className="flex flex-col top-0 gap-1 z-1 bg-background p-3 border-b ">
+          {selectedNoteRoute && <div className="flex flex-col top-0 gap-1 z-1 bg-background p-3 border-b ">
             <p className="flex flex-row items-center gap-2 text-xl font-semibold">
               <NotebookIcon size={20} className="shrink-0" /> {selectedNoteTitle || "Notes"}
             </p>
             <p className="flex items-center gap-1 text-xs text-foreground/60"><Folder size={14}></Folder>
               <b>Route:</b> {selectedNoteRoute}</p>
-          </div>
+          </div>}
           <NoteDisplay route={route} name={name} />
         </div>
       </div>

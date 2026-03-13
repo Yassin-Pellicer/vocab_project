@@ -42,7 +42,7 @@ export default function MarkdownEditor({
   const { dictionaryMetadata } = useConfigStore();
 
   return (
-    <div className="flex overflow-hidden h-[calc(100vh-160px)] items-center flex-col mx-auto mt-4">
+    <div className="flex overflow-hidden h-[calc(100vh-80px)] items-center flex-col mx-auto mt-4">
       {/* Header */}
       <div
         className={`px-4 max-w-[800px] ${word.type == dictionaryMetadata?.[name]?.typeWordWithTenses && dictionaryMetadata?.[name]?.useTenses} "pb-6" : ""}  w-full ${collapsed ? "hidden" : ""}`}

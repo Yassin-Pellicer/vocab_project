@@ -17,10 +17,15 @@ export function InsertGraphButton({
 
   return (
     <>
-      <Button className="bg-transparent!" onClick={() => setOpen(true)}>
+      <Button
+        type="button"
+        variant="ghost"
+        role="button"
+        tabIndex={-1}
+        tooltip={"Insert Graph"}
+        onClick={() => setOpen(true)}>
         <GitGraph size={16} />
       </Button>
-
       <GraphInsertModal
         editor={editor}
         route={route}

@@ -95,7 +95,7 @@ const MainToolbarContent = ({
     <>
       <Spacer />
 
-      <ToolbarGroup>
+      <ToolbarGroup className="py-0.5!">
         <UndoRedoButton action="undo" />
         <UndoRedoButton action="redo" />
 
@@ -133,8 +133,6 @@ const MainToolbarContent = ({
       </ToolbarGroup>
 
       <Spacer />
-
-      {isMobile && <ToolbarSeparator />}
     </>
   )
 }
