@@ -184,6 +184,12 @@ function v4(options, buf, offset) {
   }
   return _v4(options);
 }
+function broadcastToAllWindows(channel, payload) {
+  for (const win of BrowserWindow.getAllWindows()) {
+    if (win.isDestroyed()) continue;
+    win.webContents.send(channel, payload);
+  }
+}
 function addTranslation() {
   ipcMain.handle(
     "addTranslation",
@@ -217,6 +223,7 @@ function addTranslation() {
           JSON.stringify(translations, null, 2),
           "utf-8"
         );
+        broadcastToAllWindows("app-data-changed");
         return { success: true };
       } catch (error) {
         console.error("Error adding translation:", error);
@@ -263,6 +270,7 @@ function createDictionary() {
           typeWordWithTenses: ""
         };
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        broadcastToAllWindows("app-data-changed");
         return {
           success: true,
           folderName,
@@ -311,6 +319,7 @@ function deleteTranslation() {
           JSON.stringify(translations, null, 2),
           "utf-8"
         );
+        broadcastToAllWindows("app-data-changed");
         return { success: true, message: "Translation added successfully." };
       } catch (error) {
         console.error("Error adding translation:", error);
@@ -351,6 +360,7 @@ function deleteDictionary() {
         removeDirRecursive$1(dictPath);
         delete config.dictionaries[dictId];
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        broadcastToAllWindows("app-data-changed");
         return {
           success: true,
           deletedId: dictId,
@@ -387,6 +397,7 @@ function renameDictionary() {
         }
         config.dictionaries[dictId].name = newName.trim();
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        broadcastToAllWindows("app-data-changed");
         return {
           success: true,
           dictId,
@@ -519,6 +530,7 @@ function moveDictionary() {
         }
         config.dictionaries[dictId].route = newFolderPath;
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        broadcastToAllWindows("app-data-changed");
         return {
           success: true,
           oldRoute: srcDir,
@@ -639,6 +651,7 @@ function saveUserPreferences() {
         const json = JSON.parse(data);
         Object.assign(json, _config);
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        broadcastToAllWindows("app-data-changed");
         return json;
       } catch (error) {
         console.error("Error saving user preferences file:", error);
@@ -686,6 +699,7 @@ function editConfig() {
         const json = JSON.parse(data);
         Object.assign(json, _config);
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        broadcastToAllWindows("app-data-changed");
         return json;
       } catch (error) {
         console.error("Error saving user preferences file:", error);
@@ -722,12 +736,16 @@ function saveNoteIndex() {
     async (_event, _route, _name, currentConfig) => {
       try {
         const normalizedRoute = _route.replace(/\\/g, "/");
-        let indexFilePath = path$1.join(
+        const indexFilePath = path$1.join(
           normalizedRoute,
           `NOTES-${_name}`,
           `NOTES-INDEX-${_name}.json`
         );
         fs.writeFileSync(indexFilePath, JSON.stringify(currentConfig, null, 2), "utf-8");
+        broadcastToAllWindows("notes-changed", {
+          route: normalizedRoute,
+          name: _name
+        });
         return { success: true, path: indexFilePath };
       } catch (error) {
         console.error("Error saving JSON file:", error);
@@ -739,6 +757,12 @@ function saveNoteIndex() {
 function saveNotes() {
   ipcMain.handle("saveNotes", async (_event, route, name, uuid, content) => {
     try {
+      if (typeof route !== "string" || typeof name !== "string") {
+        throw new Error("Invalid note route/name.");
+      }
+      if (typeof uuid !== "string" || !uuid.trim()) {
+        return { success: false, error: "Invalid note id." };
+      }
       const normalizedRoute = route.replace(/\\/g, "/");
       const filePath = path$1.join(
         normalizedRoute,
@@ -746,18 +770,14 @@ function saveNotes() {
         `${uuid}.json`
       );
       const dir = path$1.dirname(filePath);
-      if (content === null) {
-        if (fs.existsSync(filePath)) {
-          fs.unlinkSync(filePath);
-        }
-        return { success: true };
-      }
       fs.mkdirSync(dir, { recursive: true });
-      if (content === void 0) {
-        fs.writeFileSync(filePath, "", "utf-8");
-      } else {
-        fs.writeFileSync(filePath, JSON.stringify(content, null, 2), "utf-8");
-      }
+      const safeContent = content && typeof content === "object" ? content : { type: "doc", content: [] };
+      fs.writeFileSync(filePath, JSON.stringify(safeContent, null, 2), "utf-8");
+      broadcastToAllWindows("notes-changed", {
+        route: normalizedRoute,
+        name,
+        uuid
+      });
       return { success: true, path: filePath };
     } catch (error) {
       console.error("Error saving markdown file:", error);
@@ -786,30 +806,6 @@ function fetchNotes() {
     } catch (error) {
       console.error("Error reading note file:", error);
       return { type: "doc", content: [] };
-    }
-  });
-}
-function saveImage() {
-  ipcMain.handle("saveImage", async (_event, route, name, buffer, filename) => {
-    try {
-      const normalizedRoute = route.replace(/\\/g, "/");
-      const resourcesDir = path$1.join(
-        normalizedRoute,
-        `NOTES-${name}`,
-        `RESOURCES`
-      );
-      fs.mkdirSync(resourcesDir, { recursive: true });
-      console.log("SAVED IMGE SAVED IMG");
-      const ext = path$1.extname(filename);
-      const base = path$1.basename(filename, ext);
-      const unique = `${base}-${Date.now()}${ext}`;
-      const filePath = path$1.join(resourcesDir, unique);
-      fs.writeFileSync(filePath, Buffer.from(buffer));
-      const fileUrl = `file://${filePath.replace(/\\/g, "/")}`;
-      return { success: true, url: fileUrl };
-    } catch (error) {
-      console.error("Error saving image:", error);
-      throw new Error(`Failed to save image: ${error}`);
     }
   });
 }
@@ -871,7 +867,6 @@ function registerIpcHandlers() {
   saveNoteIndex();
   saveNotes();
   fetchNotes();
-  saveImage();
   minimizeWindow();
   maximizeWindow();
   closeWindow();

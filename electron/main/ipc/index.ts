@@ -21,7 +21,6 @@ import fetchNoteIndex from "./endpoints/notes/fetchNoteIndex";
 import saveNoteIndex from "./endpoints/notes/saveNoteIndex";
 import saveNotes from "./endpoints/notes/saveNotes";
 import fetchNotes from "./endpoints/notes/fetchNotes";
-import saveImage from "./endpoints/notes/saveImage";
 
 import minimizeWindow from "./endpoints/window/minimize";
 import maximizeWindow from "./endpoints/window/maximize";
@@ -52,7 +51,6 @@ export default function registerIpcHandlers() {
   saveNoteIndex();
   saveNotes()
   fetchNotes();
-  saveImage();
 
   // register window controls last
   minimizeWindow();

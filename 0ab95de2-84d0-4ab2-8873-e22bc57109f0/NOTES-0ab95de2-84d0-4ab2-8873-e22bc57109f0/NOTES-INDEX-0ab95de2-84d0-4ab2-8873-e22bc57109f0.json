@@ -13,16 +13,17 @@
             "children": []
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "id": "b32cfceb-8ef2-4db9-8c90-f603a4b8ef66",
+    "title": "Sesiones",
+    "children": [
       {
-        "id": "b32cfceb-8ef2-4db9-8c90-f603a4b8ef66",
-        "title": "Sesiones",
-        "children": [
-          {
-            "id": "8a111cd7-f964-4f5d-8e39-867f3b95731b",
-            "title": "Sesión 11/03/2026"
-          }
-        ]
+        "id": "8a111cd7-f964-4f5d-8e39-867f3b95731b",
+        "title": "Sesión 11/03/2026",
+        "children": []
       }
     ]
   }

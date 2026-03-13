@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import { v4 as uuid } from "uuid";
 import { UserConfig } from "../../../../../src/types/config";
+import { broadcastToAllWindows } from "../../broadcast";
 
 export default function createDictionary() {
   ipcMain.handle(
@@ -52,6 +53,7 @@ export default function createDictionary() {
 
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
 
+        broadcastToAllWindows("app-data-changed");
         return {
           success: true,
           folderName,

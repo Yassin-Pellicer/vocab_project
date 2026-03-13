@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import { v4 as uuid } from "uuid";
 import type { TranslationEntry } from "@/types/translation-entry";
+import { broadcastToAllWindows } from "../../broadcast";
 
 export default function addTranslation() {
   ipcMain.handle(
@@ -53,6 +54,7 @@ export default function addTranslation() {
           "utf-8"
         );
 
+        broadcastToAllWindows("app-data-changed");
         return { success: true };
       } catch (error) {
         console.error("Error adding translation:", error);
@@ -61,4 +63,3 @@ export default function addTranslation() {
     }
   );
 }
-

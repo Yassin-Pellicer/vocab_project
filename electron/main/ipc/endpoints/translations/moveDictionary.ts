@@ -2,6 +2,7 @@ import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
 import { UserConfig } from "../../../../../src/types/config";
+import { broadcastToAllWindows } from "../../broadcast";
 
 
 function copyDirRecursive(src: string, dest: string) {
@@ -107,6 +108,7 @@ export default function moveDictionary() {
         config.dictionaries[dictId].route = newFolderPath;
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
 
+        broadcastToAllWindows("app-data-changed");
         return {
           success: true,
           oldRoute: srcDir,

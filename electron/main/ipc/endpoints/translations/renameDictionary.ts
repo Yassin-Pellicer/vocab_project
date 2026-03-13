@@ -2,6 +2,7 @@ import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
 import { UserConfig } from "../../../../../src/types/config";
+import { broadcastToAllWindows } from "../../broadcast";
 
 export default function renameDictionary() {
   ipcMain.handle(
@@ -34,6 +35,7 @@ export default function renameDictionary() {
         config.dictionaries[dictId].name = newName.trim();
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
 
+        broadcastToAllWindows("app-data-changed");
         return {
           success: true,
           dictId,

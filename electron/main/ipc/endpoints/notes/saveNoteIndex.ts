@@ -1,6 +1,7 @@
 import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
+import { broadcastToAllWindows } from "../../broadcast";
 
 export default function saveNoteIndex() {
   ipcMain.handle(
@@ -9,7 +10,7 @@ export default function saveNoteIndex() {
       try {
         const normalizedRoute = _route.replace(/\\/g, "/");
 
-        let indexFilePath = path.join(
+        const indexFilePath = path.join(
         normalizedRoute,
         `NOTES-${_name}`,
         `NOTES-INDEX-${_name}.json`,
@@ -17,6 +18,10 @@ export default function saveNoteIndex() {
 
         fs.writeFileSync(indexFilePath, JSON.stringify(currentConfig, null, 2), "utf-8");
 
+        broadcastToAllWindows("notes-changed", {
+          route: normalizedRoute,
+          name: _name,
+        });
         return { success: true, path: indexFilePath };
       } catch (error) {
         console.error("Error saving JSON file:", error);

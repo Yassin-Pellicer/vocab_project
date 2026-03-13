@@ -49,9 +49,6 @@ const notes = {
   },
   saveNotes: async (route, name, uuid, content) => {
     return await electron.ipcRenderer.invoke("saveNotes", route, name, uuid, content);
-  },
-  saveImage: async (route, name, buffer, filename) => {
-    return await electron.ipcRenderer.invoke("saveImage", route, name, buffer, filename);
   }
 };
 const translations = {

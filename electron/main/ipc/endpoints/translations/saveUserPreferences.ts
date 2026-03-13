@@ -2,6 +2,7 @@ import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
 import { UserPreferences } from "@/types/config";
+import { broadcastToAllWindows } from "../../broadcast";
 
 export default function saveUserPreferences() {
   ipcMain.handle(
@@ -24,6 +25,7 @@ export default function saveUserPreferences() {
 
         Object.assign(json, _config);
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        broadcastToAllWindows("app-data-changed");
         return json;
       } catch (error) {
         console.error("Error saving user preferences file:", error);

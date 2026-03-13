@@ -73,7 +73,7 @@ const returnItemsFromRouteRecursive = (
     }
   }
 
-  return [];
+  return null;
 };
 
 
@@ -84,12 +84,15 @@ interface NotesState {
 
   selectedNoteId: string | null;
 
+  reloadToken: number;
+
   findById: (id: string) => SidebarNode | undefined;
   findByTitle: (title: string) => SidebarNode | undefined;
   flatten: () => SidebarNode[];
 
   setTree: (tree: SidebarTree) => void;
   setSidebarOpen: (open: boolean) => void;
+  bumpReloadToken: () => void;
 
   addLeaf: (title: string, parentId?: string | null) => SidebarNode;
 
@@ -157,6 +160,7 @@ export const useNotesStore = create<NotesState>((set, get) => ({
   editingNodeId: null,
   sidebarOpen: true,
   selectedNoteId: null,
+  reloadToken: 0,
 
   findById: (id) => {
     let found: SidebarNode | undefined;
@@ -182,6 +186,7 @@ export const useNotesStore = create<NotesState>((set, get) => ({
 
   setTree: (tree) => set({ tree }),
   setSidebarOpen: (open) => set({ sidebarOpen: open }),
+  bumpReloadToken: () => set((state) => ({ reloadToken: state.reloadToken + 1 })),
   selectParent: (item: SidebarNode) => {
     let parentId: string | null = null;
     walk(get().tree, (n, _, parent) => {
@@ -261,6 +266,6 @@ export const useNotesStore = create<NotesState>((set, get) => ({
 
   itemsFromRouteRecursive: () => {
     const current = get().selectedNoteId;
-    return current ? returnItemsFromRouteRecursive(get().tree, current) : [];
+    return current ? returnItemsFromRouteRecursive(get().tree, current) ?? [] : [];
   },
 }));

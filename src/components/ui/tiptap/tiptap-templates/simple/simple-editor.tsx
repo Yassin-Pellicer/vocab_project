@@ -175,8 +175,13 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
     "main"
   )
   const toolbarRef = useRef<HTMLDivElement>(null)
+  const isApplyingRemoteContent = useRef(false)
+  const loadedNoteIdRef = useRef<string | null>(null)
+  const loadedWordIdRef = useRef<string | null>(null)
 
-  const { selectedNoteId } = noteId ? { selectedNoteId: noteId } : useNotesStore();
+  const { selectedNoteId, reloadToken } = noteId
+    ? { selectedNoteId: noteId, reloadToken: 0 }
+    : useNotesStore();
   const { selectedWord } = useConfigStore();
 
   const editor = useEditor({
@@ -225,8 +230,13 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
     autofocus: false,
     onUpdate: ({ editor }) => {
       console.log("update")
-      if (type === "notes") window.api.saveNotes(route, name, selectedNoteId, editor.getJSON());
-      if (type === "words") window.api.saveMarkdown(route, name, selectedWord?.uuid, editor.getJSON());
+      if (isApplyingRemoteContent.current) return;
+      if (type === "notes" && selectedNoteId && loadedNoteIdRef.current === selectedNoteId) {
+        window.api.saveNotes(route, name, selectedNoteId, editor.getJSON());
+      }
+      if (type === "words" && selectedWord?.uuid && loadedWordIdRef.current === selectedWord.uuid) {
+        window.api.saveMarkdown(route, name, selectedWord?.uuid, editor.getJSON());
+      }
     },
     onCreate({ editor }) {
       editor.commands.setTextSelection(editor.state.doc.content.size);
@@ -234,11 +244,25 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
   })
 
   useEffect(() => {
+    if (type === "notes") {
+      loadedNoteIdRef.current = null
+    }
+    if (type === "words") {
+      loadedWordIdRef.current = null
+    }
+  }, [type, selectedNoteId, selectedWord?.uuid])
+
+  useEffect(() => {
     const loadNote = async () => {
       const data = await window.api.fetchNotes(route, name, selectedNoteId)
 
       if (editor && data) {
+        isApplyingRemoteContent.current = true
         editor.commands.setContent(data)
+        loadedNoteIdRef.current = selectedNoteId
+        queueMicrotask(() => {
+          isApplyingRemoteContent.current = false
+        })
       }
     }
 
@@ -246,14 +270,19 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
       const data = await window.api.fetchMarkdown(route, name, selectedWord?.uuid, selectedNoteId)
 
       if (editor && data) {
+        isApplyingRemoteContent.current = true
         editor.commands.setContent(data)
+        loadedWordIdRef.current = selectedWord?.uuid ?? null
+        queueMicrotask(() => {
+          isApplyingRemoteContent.current = false
+        })
       }
     }
 
     if (type === "notes" && selectedNoteId) loadNote()
     if (type === "words" && selectedWord?.uuid) loadWord()
 
-  }, [selectedNoteId, selectedWord, editor])
+  }, [selectedNoteId, selectedWord, editor, reloadToken])
 
   const rect = useCursorVisibility({
     editor,

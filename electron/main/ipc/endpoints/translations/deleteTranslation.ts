@@ -1,6 +1,7 @@
 import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
+import { broadcastToAllWindows } from "../../broadcast";
 
 export default function deleteTranslation() {
   ipcMain.handle(
@@ -49,6 +50,7 @@ export default function deleteTranslation() {
           "utf-8"
         );
 
+        broadcastToAllWindows("app-data-changed");
         return { success: true, message: "Translation added successfully." };
       } catch (error) {
         console.error("Error adding translation:", error);

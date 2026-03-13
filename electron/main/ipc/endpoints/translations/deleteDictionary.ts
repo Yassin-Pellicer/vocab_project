@@ -2,6 +2,7 @@ import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
 import { UserConfig } from "../../../../../src/types/config";
+import { broadcastToAllWindows } from "../../broadcast";
 
 /**
  * Recursively removes a directory.
@@ -49,6 +50,7 @@ export default function deleteDictionary() {
         delete config.dictionaries[dictId];
         fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
 
+        broadcastToAllWindows("app-data-changed");
         return {
           success: true,
           deletedId: dictId,

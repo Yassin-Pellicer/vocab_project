@@ -5820,28 +5820,6 @@
     "pair": [
       {
         "original": {
-          "word": "ab",
-          "gender": "-",
-          "number": "-"
-        },
-        "translations": [
-          {
-            "word": "a partir de",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Präpositionen",
-    "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Enkelin",
           "gender": "Feminin",
           "number": "Singular"
@@ -8624,5 +8602,27 @@
     "dateAdded": "2025-11-26",
     "type": "Nomen",
     "uuid": "42ef9469-efef-42b5-af1e-a68c27f83eff"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "ab",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "a partir de",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Präpositionen",
+    "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
   }
 ]

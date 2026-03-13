@@ -25,13 +25,4 @@ export const notes = {
   ) => {
     return await ipcRenderer.invoke("saveNotes", route, name, uuid, content);
   },
-
-  saveImage: async (
-    route: string,
-    name: string,
-    buffer: number[],
-    filename: string,
-  ) => {
-    return await ipcRenderer.invoke("saveImage", route, name, buffer, filename);
-  },
 };
