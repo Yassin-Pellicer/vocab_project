@@ -1,4 +1,5 @@
 import { useNotesStore } from "@/context/notes-context";
+import { notify } from "@/services/notify";
 import { SidebarNode } from "@/types/sidebar-types";
 import { useEffect, useState } from "react";
 
@@ -32,12 +33,13 @@ export default function hook(dictRoute: string, dictName: string, item?: Sidebar
   const handleAddNote = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!name.trim()) return;
+    const title = name.trim();
     const id = crypto.randomUUID();
 
     if (!selectedNode) {
-      appendChild({ id, title: name }, null);
+      appendChild({ id, title }, null);
     } else {
-      appendChild({ id, title: name }, selectedNode.id);
+      appendChild({ id, title }, selectedNode.id);
     }
 
     await window.api.saveNoteIndex(
@@ -47,6 +49,7 @@ export default function hook(dictRoute: string, dictName: string, item?: Sidebar
     );
 
     await window.api.saveNotes(dictRoute, dictName, id, undefined);
+    notify("noteCreated", { title, dictionary: dictName });
 
     setName("");
     setSelectedNode(null);

@@ -6992,35 +6992,6 @@
     "pair": [
       {
         "original": {
-          "word": "Sein Dran",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Ser el Turno",
-            "gender": "",
-            "number": ""
-          },
-          {
-            "word": "me/te/le toca",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Es una expresión que se traduce a como \"Es tu turno\""
-        ]
-      }
-    ],
-    "dateAdded": "2026-02-25",
-    "type": "Redewendungen",
-    "uuid": "5508ca29-4c5a-4ba7-b4d1-652249911f84"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Maler",
           "gender": "-",
           "number": "-"
@@ -8351,28 +8322,6 @@
     "pair": [
       {
         "original": {
-          "word": "Trinkgelt",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Propina",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2026-03-11",
-    "type": "Nomen",
-    "uuid": "5d975ee8-fcc3-4817-a4ab-6c480285c555"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Gehalt",
           "gender": "Neutrum",
           "number": "Singular"
@@ -8434,28 +8383,6 @@
     "dateAdded": "2026-03-11",
     "type": "Nomen",
     "uuid": "180ac9f6-fe66-4986-a171-4871d9dbd64a"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Karte",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Tarjeta",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2026-03-11",
-    "type": "Nomen",
-    "uuid": "758a7a94-778d-405f-9d0f-c1700470cc0c"
   },
   {
     "pair": [
@@ -8602,6 +8529,167 @@
     "dateAdded": "2025-11-26",
     "type": "Nomen",
     "uuid": "42ef9469-efef-42b5-af1e-a68c27f83eff"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Vorspeise",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Entrante",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-14",
+    "type": "Nomen",
+    "uuid": "84e1f4d4-ec69-4a1f-a2d4-e588c53f322f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Nachspeise",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Postre",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-14",
+    "type": "Nomen",
+    "uuid": "cf2f8ac1-a6b9-4edb-ad97-174ce1126cfd"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Das freut mich ",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Me alegra",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-14",
+    "type": "Redewendungen",
+    "uuid": "f46d0fd9-0989-4f0b-8d02-2056bfae0183"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Sein Dran",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Ser el Turno",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "me/te/le toca",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Es una expresión que se traduce a como \"Es tu turno\""
+        ]
+      }
+    ],
+    "dateAdded": "2026-02-25",
+    "type": "Redewendungen",
+    "uuid": "5508ca29-4c5a-4ba7-b4d1-652249911f84"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Hauptspeise",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Plato principal",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-14",
+    "type": "Nomen",
+    "uuid": "a7f64817-41c5-4383-a5d2-158dc3f2df6b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Karte",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Tarjeta",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-11",
+    "type": "Nomen",
+    "uuid": "758a7a94-778d-405f-9d0f-c1700470cc0c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Trinkgelt",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Propina",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-11",
+    "type": "Nomen",
+    "uuid": "5d975ee8-fcc3-4817-a4ab-6c480285c555"
   },
   {
     "pair": [

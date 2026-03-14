@@ -8,6 +8,7 @@ import { MainLayout } from "./layouts";
 import { useEffect, useMemo, useRef } from "react";
 import useThemeSync from "./hooks/useThemeSync";
 import NotesPage from "./pages/notes-page";
+import { Toaster } from "@/components/ui/sonner";
 
 function InitialRouteFromHash() {
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <InitialRouteFromHash />
+      <Toaster position="top-center" closeButton />
       <MainLayout hideSidebar={hideSidebar}>
         <Pages />
       </MainLayout>

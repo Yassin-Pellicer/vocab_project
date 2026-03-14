@@ -1,4 +1,5 @@
 import { useNotesStore } from "@/context/notes-context";
+import { notify } from "@/services/notify";
 import { SidebarNode } from "@/types/sidebar-types";
 import { useEffect, useState } from "react";
 
@@ -40,9 +41,37 @@ export default function hook(dictRoute: string, dictName: string, item: SidebarN
   const handleAddNote = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!name.trim()) return;
+
+    const fromTitle = item?.title ?? "";
+    const fromPath = item ? useNotesStore.getState().getRoute(item.id) : null;
+    const beforeParent = item ? selectParent(item) : undefined;
+    const beforeParentId =
+      beforeParent && item && beforeParent.id !== item.id ? beforeParent.id : null;
+
+    const toTitle = name.trim();
     moveNode(item!.id, selectedNode?.id ?? null);
-    renameNode(item!.id, name);
+    renameNode(item!.id, toTitle);
     await window.api.saveNoteIndex(dictRoute, dictName, useNotesStore.getState().tree);
+
+    const toPath = item ? useNotesStore.getState().getRoute(item.id) : null;
+    const afterParent = item ? selectParent(item) : undefined;
+    const afterParentId =
+      afterParent && item && afterParent.id !== item.id ? afterParent.id : null;
+
+    const renamed = fromTitle !== toTitle;
+    const moved = beforeParentId !== afterParentId;
+    if (renamed || moved) {
+      notify("noteUpdated", {
+        dictionary: dictName,
+        renamed,
+        moved,
+        fromPath,
+        toPath,
+        fromTitle,
+        toTitle,
+      });
+    }
+
     setName("");
     setSelectedNode(null);
   };

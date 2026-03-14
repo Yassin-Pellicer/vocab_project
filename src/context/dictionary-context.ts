@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { TranslationEntry } from "@/types/translation-entry";
 import { Dictionary } from "@/types/config";
-import { BookAIcon, BookOpen, Languages } from "lucide-react";
+import { BookAIcon, BookOpen } from "lucide-react";
+import { notify } from "@/services/notify";
 
 interface ConfigState {
   dictionaryMetadata: Record<string, Dictionary>;
@@ -246,6 +247,7 @@ export const useConfigStore = create<ConfigState>((set, get) => ({
     const metadata = get().dictionaryMetadata;
     try {
       await window.api.editConfig({ dictionaries: metadata });
+      notify("configSaved", { scope: "dictionary" });
     } catch (err) {
       console.error("Error saving dictionary config:", err);
     }

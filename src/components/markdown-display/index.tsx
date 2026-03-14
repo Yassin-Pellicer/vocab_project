@@ -1,8 +1,6 @@
 import "highlight.js/styles/github.css";
 import {
-  Eye,
   Edit3,
-  Split,
   Save,
   ChevronDown,
   ChevronUp,
@@ -45,7 +43,7 @@ export default function MarkdownEditor({
     <div className="flex overflow-hidden h-[calc(100vh-80px)] items-center flex-col mx-auto mt-4">
       {/* Header */}
       <div
-        className={`px-4 max-w-[800px] ${word.type == dictionaryMetadata?.[name]?.typeWordWithTenses && dictionaryMetadata?.[name]?.useTenses} "pb-6" : ""}  w-full ${collapsed ? "hidden" : ""}`}
+        className={`px-4 max-w-200 ${word.type == dictionaryMetadata?.[name]?.typeWordWithTenses && dictionaryMetadata?.[name]?.useTenses} "pb-6" : ""}  w-full ${collapsed ? "hidden" : ""}`}
       >
         <WordCard name={name} word={word} />
         {word.type == dictionaryMetadata?.[name]?.typeWordWithTenses &&
@@ -68,7 +66,7 @@ export default function MarkdownEditor({
       </div>
       <div className="flex flex-col border-b items-center w-full">
         {selectOption === "notes" && (
-          <div className="flex flex-col justify-between max-w-[800px] px-4 w-full">
+          <div className="flex flex-col justify-between max-w-200 px-4 w-full">
             <div className="py-2 mb-2">
               <p className="text-sm font-semibold mb-1 text-foreground">
                 Related Words

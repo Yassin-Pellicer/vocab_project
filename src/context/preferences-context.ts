@@ -1,5 +1,8 @@
 import { create } from "zustand";
 import { Keybind, PRESET_KEYBINDS, UserPreferences } from "@/types/config";
+import { notify } from "@/services/notify";
+import { setNotificationSettings } from "@/services/notification-settings";
+import { parseDurationMs } from "@/lib/parse-duration";
 
 interface ConfigState {
   config: UserPreferences;
@@ -35,7 +38,7 @@ interface ConfigState {
 
 const defaultConfig: UserPreferences = {
   notifications: true,
-  notificationLifetime: "5",
+  notificationLifetime: "5s",
   language: "en",
   timezone: "utc",
   dateFormat: "ISO",
@@ -54,20 +57,32 @@ const defaultConfig: UserPreferences = {
   subscriptionPlan: "Free",
 };
 
+setNotificationSettings({
+  enabled: defaultConfig.notifications,
+  durationMs: parseDurationMs(defaultConfig.notificationLifetime) ?? 5000,
+});
+
 export const useConfigStore = create<ConfigState>((set) => ({
   config: { ...defaultConfig },
 
   setConfig: (config: Partial<UserPreferences>) => {
     set((state) => ({ config: { ...state.config, ...config } }));
+    const next = useConfigStore.getState().config;
+    setNotificationSettings({
+      enabled: next.notifications,
+      durationMs: parseDurationMs(next.notificationLifetime) ?? 5000,
+    });
     useConfigStore.getState().saveConfig();
   },
 
   setNotifications: (v: boolean) => {
     set((state) => ({ config: { ...state.config, notifications: v } }));
+    setNotificationSettings({ enabled: v });
     useConfigStore.getState().saveConfig();
   },
   setNotificationLifetime: (v: string) => {
     set((state) => ({ config: { ...state.config, notificationLifetime: v } }));
+    setNotificationSettings({ durationMs: parseDurationMs(v) ?? 5000 });
     useConfigStore.getState().saveConfig();
   },
   setLanguage: (v: string) => {
@@ -159,12 +174,21 @@ export const useConfigStore = create<ConfigState>((set) => ({
 
   loadConfig: () => {
     window.api.loadUserPreferences().then((preferences: UserPreferences) => {
-      set({ config: { ...defaultConfig, ...preferences } });
+      const merged = { ...defaultConfig, ...preferences };
+      set({ config: merged });
+      setNotificationSettings({
+        enabled: merged.notifications,
+        durationMs: parseDurationMs(merged.notificationLifetime) ?? 5000,
+      });
     });
     console.log("Loaded user preferences");
   },
   saveConfig: () => {
-    window.api.saveUserPreferences(useConfigStore.getState().config);
+    Promise.resolve(
+      window.api.saveUserPreferences(useConfigStore.getState().config),
+    )
+      .then(() => notify("configSaved", { scope: "preferences" }))
+      .catch((err) => console.error("Error saving user preferences:", err));
   },
   resetConfig: () => set({ config: { ...defaultConfig } }),
 }));

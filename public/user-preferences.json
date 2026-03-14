@@ -1,11 +1,11 @@
 {
   "notifications": true,
-  "notificationLifetime": "10s",
+  "notificationLifetime": "3s",
   "language": "en",
   "timezone": "utc",
   "dateFormat": "ISO",
   "animations": true,
-  "accentColor": "purple",
+  "accentColor": "blue",
   "appearance": "light",
   "displayName": "Yassin",
   "email": "yassinpellicerlamla@gmail.com",

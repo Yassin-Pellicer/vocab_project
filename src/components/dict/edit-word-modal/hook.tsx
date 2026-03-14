@@ -1,4 +1,5 @@
 import { useConfigStore } from "@/context/dictionary-context";
+import { notify } from "@/services/notify";
 import { OriginalTranslationPair } from "@/types/original-translation-pair";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useState } from "react";
@@ -87,6 +88,13 @@ export default function useWordModalHooks({word, route, name }: { word: Translat
       if (formData.pair.length === 0) return;
 
       await (window.api).addTranslation(formData, word.uuid, route, name);
+      const before =
+        word.pair.find((p) => p.original.word.trim())?.original.word.trim() ??
+        "word";
+      const after =
+        formData.pair.find((p) => p.original.word.trim())?.original.word.trim() ??
+        before;
+      notify("wordEdited", { before, after, dictionary: name });
       loadTranslations(route, name);
     } catch (error) {
       console.error("Failed to add translation:", error);
