@@ -3,7 +3,11 @@ import { notify } from "@/services/notify";
 import { SidebarNode } from "@/types/sidebar-types";
 import { useEffect, useState } from "react";
 
-export default function hook(dictRoute: string, dictName: string, item?: SidebarNode | null) {
+export default function useAddNoteModalHooks(
+  dictRoute: string,
+  dictName: string,
+  item?: SidebarNode | null,
+) {
   const [route, setRoute] = useState(item?.title || "");
   const [name, setName] = useState("");
   const [disableSetRouteInput, setDisableSetRouteInput] = useState(!!item || item === null);
@@ -16,18 +20,16 @@ export default function hook(dictRoute: string, dictName: string, item?: Sidebar
       setSelectedNode(null);
       return;
     }
-  }, [item])
+  }, [item]);
 
-  const selectRoute = (n: any) => {
-    console.log("Selected route:", n);
+  const selectRoute = (n: SidebarNode | null) => {
+    if (!n) {
+      setRoute("Root");
+      setSelectedNode(null);
+      return;
+    }
     setRoute(n.title);
     setSelectedNode(n);
-  }
-
-  const handleSubmit = async () => {
-    await (window.api).createDictionary(route, name);
-    setRoute("");
-    setName("");
   };
 
   const handleAddNote = async (e?: React.FormEvent) => {
@@ -57,7 +59,6 @@ export default function hook(dictRoute: string, dictName: string, item?: Sidebar
   return {
     disableSetRouteInput,
     setDisableSetRouteInput,
-    handleSubmit,
     route,
     setRoute,
     name,

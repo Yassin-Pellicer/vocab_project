@@ -36,16 +36,18 @@ export default function useWordModalHooks({
     type: "noun",
   });
 
-  const updatePairField = (value: any, pairIndex: number, path: string) => {
+  const setPairField = (value: string, pairIndex: number, path: string) => {
     const newPairs = [...formData.pair];
     const parts = path.split(".");
-    let obj: any = newPairs[pairIndex];
+    let cursor: unknown = newPairs[pairIndex];
 
     for (let i = 0; i < parts.length - 1; i++) {
-      obj = obj[parts[i]];
+      if (typeof cursor !== "object" || cursor === null) return;
+      cursor = (cursor as Record<string, unknown>)[parts[i]];
     }
 
-    obj[parts[parts.length - 1]] = value;
+    if (typeof cursor !== "object" || cursor === null) return;
+    (cursor as Record<string, unknown>)[parts[parts.length - 1]] = value;
 
     setFormData({ ...formData, pair: newPairs });
   };
@@ -55,7 +57,7 @@ export default function useWordModalHooks({
     pairIndex: number,
     path: string,
   ) => {
-    updatePairField(e.target.value, pairIndex, path);
+    setPairField(e.target.value, pairIndex, path);
   };
 
   const addPair = () => {
@@ -118,6 +120,7 @@ export default function useWordModalHooks({
     formData,
     setFormData,
     handlePairChange,
+    setPairField,
     addPair,
     removePair,
     addTranslationToPair,

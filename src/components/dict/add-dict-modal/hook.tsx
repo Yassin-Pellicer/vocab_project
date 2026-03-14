@@ -6,15 +6,15 @@ export default function useDictModalHooks() {
 
   const handleFolderSelect = async () => {
     try {
-      const dirHandle = await (window.api).selectFolder();
-      setRoute(dirHandle);
+      const dirHandle = await window.api.selectFolder();
+      if (dirHandle) setRoute(dirHandle);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   };
 
   const handleSubmit = async () => {
-    await (window.api).createDictionary(route, name);
+    await window.api.createDictionary(route, name);
     setRoute("");
     setName("");
   };

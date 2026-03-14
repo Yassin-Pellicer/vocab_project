@@ -3,6 +3,7 @@ import { TranslationEntry } from "@/types/translation-entry";
 import { Dictionary } from "@/types/config";
 import { BookAIcon, BookOpen } from "lucide-react";
 import { notify } from "@/services/notify";
+import type { NavItem } from "@/types/nav-item";
 
 interface ConfigState {
   dictionaryMetadata: Record<string, Dictionary>;
@@ -54,276 +55,167 @@ interface ConfigState {
   loadAllTranslations: () => Promise<void>;
 }
 
-export const useConfigStore = create<ConfigState>((set, get) => ({
-  dictionaryMetadata: {},
-  dictionaries: {},
-  data: { navMain: [{ title: "Home", url: "/" }] },
-  selectedWord: null,
-  selectedLetter: "A",
-  searchField: "",
-  isFlipped: false,
-  dualView: true,
-  selectedTypes: [],
-  graphMode: false,
-
-  setDictionaryMetadata: (metadata) => {
-    set({ dictionaryMetadata: metadata });
-  },
-
-  setDictionaries: (dictionaries) => set({ dictionaries }),
-  setSelectedWord: (word) => set({ selectedWord: word }),
-  setSelectedLetter: (letter) => set({ selectedLetter: letter }),
-  setSearchField: (field) => set({ searchField: field }),
-  setIsFlipped: (flipped) => set({ isFlipped: flipped }),
-  setDualView: (dual) => set({ dualView: dual }),
-  setSelectedTypes: (types) => set({ selectedTypes: types }),
-  setGraphMode: (mode) => set({ graphMode: mode }),
-
-  toggleType: (type) => {
-    const current = get().selectedTypes;
-    set({
-      selectedTypes: current.includes(type)
-        ? current.filter((t) => t !== type)
-        : [...current, type],
-    });
-  },
-
-  setDictionaryTenses: (key, tenses) => {
+export const useConfigStore = create<ConfigState>((set, get) => {
+  const updateDictionary = (
+    key: string,
+    updater: (current: Dictionary) => Dictionary,
+  ) => {
     set((state) => {
-      if (!state.dictionaryMetadata[key]) return state;
-
+      const current = state.dictionaryMetadata[key];
+      if (!current) return state;
       return {
         dictionaryMetadata: {
           ...state.dictionaryMetadata,
-          [key]: {
-            ...state.dictionaryMetadata[key],
-            tenses,
-          },
+          [key]: updater(current),
         },
       };
     });
+    void get().editConfig();
+  };
 
-    get().editConfig();
-  },
+  return {
+    dictionaryMetadata: {},
+    dictionaries: {},
+    data: { navMain: [{ title: "Home", url: "/" }] },
+    selectedWord: null,
+    selectedLetter: "A",
+    searchField: "",
+    isFlipped: false,
+    dualView: true,
+    selectedTypes: [],
+    graphMode: false,
 
-  setDictionaryArticles: (key, articles) => {
-    set((state) => {
-      if (!state.dictionaryMetadata[key]) return state;
+    setDictionaryMetadata: (metadata) => set({ dictionaryMetadata: metadata }),
+    setDictionaries: (dictionaries) => set({ dictionaries }),
+    setSelectedWord: (word) => set({ selectedWord: word }),
+    setSelectedLetter: (letter) => set({ selectedLetter: letter }),
+    setSearchField: (field) => set({ searchField: field }),
+    setIsFlipped: (flipped) => set({ isFlipped: flipped }),
+    setDualView: (dual) => set({ dualView: dual }),
+    setSelectedTypes: (types) => set({ selectedTypes: types }),
+    setGraphMode: (mode) => set({ graphMode: mode }),
 
-      return {
-        dictionaryMetadata: {
-          ...state.dictionaryMetadata,
-          [key]: {
-            ...state.dictionaryMetadata[key],
-            articles,
-          },
-        },
-      };
-    });
-
-    get().editConfig();
-  },
-
-  setDictionaryTypeWords: (key, types) => {
-    set((state) => {
-      if (!state.dictionaryMetadata[key]) return state;
-
-      return {
-        dictionaryMetadata: {
-          ...state.dictionaryMetadata,
-          [key]: {
-            ...state.dictionaryMetadata[key],
-            typeWords: types,
-          },
-        },
-      };
-    });
-
-    get().editConfig();
-  },
-
-  setDictionaryGenders: (key, genders) => {
-    set((state) => {
-      if (!state.dictionaryMetadata[key]) return state;
-      return {
-        dictionaryMetadata: {
-          ...state.dictionaryMetadata,
-          [key]: {
-            ...state.dictionaryMetadata[key],
-            genders,
-          },
-        },
-      };
-    });
-    get().editConfig();
-  },
-
-  setDictionaryNumbers: (key, numbers) => {
-    set((state) => {
-      if (!state.dictionaryMetadata[key]) return state;
-      return {
-        dictionaryMetadata: {
-          ...state.dictionaryMetadata,
-          [key]: {
-            ...state.dictionaryMetadata[key],
-            numbers,
-          },
-        },
-      };
-    });
-    get().editConfig();
-  },
-
-  setDictionaryUseTenses: (key, value) => {
-    set((state) => {
-      if (!state.dictionaryMetadata[key]) return state;
-
-      return {
-        dictionaryMetadata: {
-          ...state.dictionaryMetadata,
-          [key]: {
-            ...state.dictionaryMetadata[key],
-            useTenses: value,
-          },
-        },
-      };
-    });
-
-    get().editConfig();
-  },
-
-  setDictionaryUseArticles: (key: string, value: boolean) => {
-    set((state) => {
-      if (!state.dictionaryMetadata[key]) return state;
-
-      return {
-        dictionaryMetadata: {
-          ...state.dictionaryMetadata,
-          [key]: {
-            ...state.dictionaryMetadata[key],
-            useArticles: value,
-          },
-        },
-      };
-    });
-
-    get().editConfig();
-  },
-
-  setTypeWordWithPrecededArticle: (key, typeWord) => {
-    set((state) => {
-      if (!state.dictionaryMetadata[key]) return state;
-      return {
-        dictionaryMetadata: {
-          ...state.dictionaryMetadata,
-          [key]: {
-            ...state.dictionaryMetadata[key],
-            typeWordWithPrecededArticle: typeWord,
-          },
-        },
-      };
-    });
-    get().editConfig();
-  },
-
-  setTypeWordWithTenses: (key, typeWord) => {
-    set((state) => {
-      if (!state.dictionaryMetadata[key]) return state;
-      return {
-        dictionaryMetadata: {
-          ...state.dictionaryMetadata,
-          [key]: {
-            ...state.dictionaryMetadata[key],
-            typeWordWithTenses: typeWord,
-          },
-        },
-      };
-    });
-    get().editConfig();
-  },
-
-
-  editConfig: async () => {
-    const metadata = get().dictionaryMetadata;
-    try {
-      await window.api.editConfig({ dictionaries: metadata });
-      notify("configSaved", { scope: "dictionary" });
-    } catch (err) {
-      console.error("Error saving dictionary config:", err);
-    }
-  },
-
-  loadConfig: async () => {
-    try {
-      const config = await window.api.loadConfig();
-
-      const languageItems = Object.entries(config.dictionaries || {}).map(
-        ([key, dict]: [string, any]) => ({
-          title: dict.name,
-          url: "",
-          key,
-          route: dict.route,
-          items: [
-            {
-              title: "Dictionary",
-              icon: BookOpen,
-              url: `/dictionary?name=${encodeURIComponent(
-                key,
-              )}&path=${encodeURIComponent(dict.route)}`,
-            },
-            {
-              title: "Notes",
-              icon: BookAIcon,
-              url: `/notes?name=${encodeURIComponent(
-                key,
-              )}&path=${encodeURIComponent(dict.route)}`,
-            },
-          ],
-        }),
-      );
-
+    toggleType: (type) => {
+      const current = get().selectedTypes;
       set({
-        dictionaryMetadata: config.dictionaries || {},
-        data: {
-          navMain: [{ title: "Home", url: "/" }, ...languageItems],
-        },
+        selectedTypes: current.includes(type)
+          ? current.filter((t) => t !== type)
+          : [...current, type],
       });
-    } catch (err) {
-      console.error("Error loading config:", err);
-    }
-  },
+    },
 
-  loadTranslations: async (route, name) => {
-    try {
-      const data = await window.api.requestTranslations(route, name);
-      if (!data) return;
+    setDictionaryTenses: (key, tenses) =>
+      updateDictionary(key, (d) => ({ ...d, tenses })),
 
-      set((state) => ({
-        dictionaries: {
-          ...state.dictionaries,
-          [name]: data,
-        },
-      }));
-    } catch (error) {
-      console.error(`Failed to load translations for ${name}:`, error);
-    }
-  },
+    setDictionaryArticles: (key, articles) =>
+      updateDictionary(key, (d) => ({ ...d, articles })),
 
-  loadAllTranslations: async () => {
-    const metadata = get().dictionaryMetadata;
-    const newDictionaries: Record<string, TranslationEntry[]> = {};
+    setDictionaryTypeWords: (key, types) =>
+      updateDictionary(key, (d) => ({ ...d, typeWords: types })),
 
-    for (const [key, dict] of Object.entries(metadata)) {
+    setDictionaryUseTenses: (key, value) =>
+      updateDictionary(key, (d) => ({ ...d, useTenses: value })),
+
+    setDictionaryUseArticles: (key, value) =>
+      updateDictionary(key, (d) => ({ ...d, useArticles: value })),
+
+    setDictionaryGenders: (key, genders) =>
+      updateDictionary(key, (d) => ({ ...d, genders })),
+
+    setDictionaryNumbers: (key, numbers) =>
+      updateDictionary(key, (d) => ({ ...d, numbers })),
+
+    setTypeWordWithPrecededArticle: (key, typeWord) =>
+      updateDictionary(key, (d) => ({
+        ...d,
+        typeWordWithPrecededArticle: typeWord,
+      })),
+
+    setTypeWordWithTenses: (key, typeWord) =>
+      updateDictionary(key, (d) => ({ ...d, typeWordWithTenses: typeWord })),
+
+    editConfig: async () => {
+      const metadata = get().dictionaryMetadata;
       try {
-        const data = await window.api.requestTranslations(dict.route, key);
-        if (data) {
-          newDictionaries[key] = data;
-        }
+        await window.api.editConfig({ dictionaries: metadata });
+        notify("configSaved", { scope: "dictionary" });
       } catch (error) {
-        console.error(`Failed to load JSON for ${key}:`, error);
+        console.error("Error saving dictionary config:", error);
       }
-    }
+    },
 
-    set({ dictionaries: newDictionaries });
-  },
-}));
+    loadConfig: async () => {
+      try {
+        const config = await window.api.loadConfig();
+        const dictionaries: Record<string, Dictionary> =
+          config.dictionaries ?? {};
+
+        const languageItems: NavItem[] = Object.entries(dictionaries).map(
+          ([key, dict]) => ({
+            title: dict.name,
+            url: "",
+            key,
+            route: dict.route,
+            items: [
+              {
+                title: "Dictionary",
+                icon: BookOpen,
+                url: `/dictionary?name=${encodeURIComponent(
+                  key,
+                )}&path=${encodeURIComponent(dict.route)}`,
+              },
+              {
+                title: "Notes",
+                icon: BookAIcon,
+                url: `/notes?name=${encodeURIComponent(
+                  key,
+                )}&path=${encodeURIComponent(dict.route)}`,
+              },
+            ],
+          }),
+        );
+
+        set({
+          dictionaryMetadata: dictionaries,
+          data: {
+            navMain: [{ title: "Home", url: "/" }, ...languageItems],
+          },
+        });
+      } catch (error) {
+        console.error("Error loading config:", error);
+      }
+    },
+
+    loadTranslations: async (route, name) => {
+      try {
+        const data = await window.api.requestTranslations(route, name);
+        if (!data) return;
+
+        set((state) => ({
+          dictionaries: {
+            ...state.dictionaries,
+            [name]: data,
+          },
+        }));
+      } catch (error) {
+        console.error(`Failed to load translations for ${name}:`, error);
+      }
+    },
+
+    loadAllTranslations: async () => {
+      const metadata = get().dictionaryMetadata;
+      const newDictionaries: Record<string, TranslationEntry[]> = {};
+
+      for (const [key, dict] of Object.entries(metadata)) {
+        try {
+          const data = await window.api.requestTranslations(dict.route, key);
+          if (data) newDictionaries[key] = data;
+        } catch (error) {
+          console.error(`Failed to load JSON for ${key}:`, error);
+        }
+      }
+
+      set({ dictionaries: newDictionaries });
+    },
+  };
+});

@@ -2,13 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { TranslationEntry } from "@/types/translation-entry";
 import { Trash } from "lucide-react";
-import deleteWordModalHooks from "./hook";
+import useDeleteWordModalHooks from "./hook";
 
 export default function DeleteWordModal({word, route, name} : {word: TranslationEntry, route: string, name: string}) {
-  const { handleSubmit } = deleteWordModalHooks({word, route, name});
+  const { handleSubmit } = useDeleteWordModalHooks({ word, route, name });
   return (
     <Dialog>
-      <form>
+      <form onSubmit={handleSubmit}>
         <DialogTrigger asChild>
           <Button variant="outline" className="!bg-red-600 !text-white"><Trash></Trash></Button>
         </DialogTrigger>
@@ -21,7 +21,7 @@ export default function DeleteWordModal({word, route, name} : {word: Translation
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={handleSubmit} variant="outline" className="!bg-red-600 !text-muted-foreground">Delete</Button>
+            <Button type="submit" variant="outline" className="!bg-red-600 !text-muted-foreground">Delete</Button>
             <DialogClose asChild>
               <Button variant="outline" >Cancel</Button>
             </DialogClose>

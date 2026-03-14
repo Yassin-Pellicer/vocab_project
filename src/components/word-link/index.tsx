@@ -2,6 +2,16 @@ import { Link, X } from 'lucide-react';
 import { useSearchBar } from './hook';
 import { TranslationEntry } from '@/types/translation-entry';
 
+export type SearchBarProps = {
+  placeholder?: string;
+  onSearch?: (value: string, results: TranslationEntry[]) => void;
+  debounceMs?: number;
+  className?: string;
+  showDropdown?: boolean;
+  buttonLabel?: string;
+  onWordSelect?: (word: TranslationEntry) => void;
+  name?: string;
+};
 
 export const SearchBar = ({
   placeholder = 'Search for a word',
@@ -10,9 +20,9 @@ export const SearchBar = ({
   className = '',
   showDropdown = true,
   buttonLabel = 'Link word',
-  onWordSelect = (_word: TranslationEntry) => { },
+  onWordSelect = () => { },
   name = "",
-}) => {
+}: SearchBarProps) => {
   const {
     value,
     hasValue,

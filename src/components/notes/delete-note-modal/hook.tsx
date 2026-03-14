@@ -2,7 +2,11 @@ import { useNotesStore } from "@/context/notes-context";
 import { notify } from "@/services/notify";
 import { SidebarNode } from "@/types/sidebar-types";
 
-export default function hook(dictRoute: string, dictName: string, item: SidebarNode | null) {
+export default function useDeleteNoteModalHooks(
+  dictRoute: string,
+  dictName: string,
+  item: SidebarNode | null,
+) {
   const { removeById } = useNotesStore();
 
   const removeNote = async (e: React.FormEvent) => {

@@ -1,6 +1,53 @@
 import { useConfigStore } from "@/context/dictionary-context";
-import { useState, useEffect } from "react";
-import { isEqual } from "lodash-es";
+import { useCallback, useEffect, useMemo, useState } from "react";
+
+type TenseConjugations = Record<string, string>;
+type TenseGroup = Record<string, TenseConjugations>;
+type MoodGroup = Record<string, TenseGroup>;
+type ConjugationTemplate = Record<string, MoodGroup>;
+
+const isRecord = (v: unknown): v is Record<string, unknown> =>
+  typeof v === "object" && v !== null;
+
+const getLeaf = (
+  obj: unknown,
+  mood: string,
+  group: string,
+  tense: string,
+  person: string,
+): string | undefined => {
+  if (!isRecord(obj)) return undefined;
+  const moodObj = obj[mood];
+  if (!isRecord(moodObj)) return undefined;
+  const groupObj = moodObj[group];
+  if (!isRecord(groupObj)) return undefined;
+  const tenseObj = groupObj[tense];
+  if (!isRecord(tenseObj)) return undefined;
+  const value = tenseObj[person];
+  return typeof value === "string" ? value : undefined;
+};
+
+const mergeConjugations = (
+  template: ConjugationTemplate,
+  existing: unknown,
+): ConjugationTemplate => {
+  const next = structuredClone(template);
+
+  for (const mood of Object.keys(next)) {
+    for (const group of Object.keys(next[mood])) {
+      for (const tense of Object.keys(next[mood][group])) {
+        for (const person of Object.keys(next[mood][group][tense])) {
+          const v = getLeaf(existing, mood, group, tense, person);
+          if (typeof v === "string") {
+            next[mood][group][tense][person] = v;
+          }
+        }
+      }
+    }
+  }
+
+  return next;
+};
 
 export function useVerbHooks(
   route: string,
@@ -8,90 +55,59 @@ export function useVerbHooks(
   isEditing?: boolean,
 ) {
   const [collapsed, setCollapsed] = useState(false);
-  const { selectedWord } = useConfigStore();
+  const selectedWord = useConfigStore((s) => s.selectedWord);
   const [conjugationLoaded, setConjugationLoaded] = useState(false);
-  const { dictionaryMetadata } = useConfigStore();
+  const dictionaryMetadata = useConfigStore((s) => s.dictionaryMetadata);
 
-  const template = dictionaryMetadata?.[name!]?.tenses || {};
-  const cloneTemplate = () => JSON.parse(JSON.stringify(template));
-  const [conjugation, setConjugation] = useState<any>(() => cloneTemplate());
+  const template = useMemo(
+    () =>
+      (dictionaryMetadata?.[name ?? ""]?.tenses ?? {}) as unknown as ConjugationTemplate,
+    [dictionaryMetadata, name],
+  );
 
-  const hasSameKeys = (conjugation: any, template: any) => {
-    return isEqual(conjugation, template);
-  };
+  const cloneTemplate = useCallback(
+    () => structuredClone(template),
+    [template],
+  );
 
-  const getByIndex = (obj: any, indexes: number[]) => {
-    return indexes.reduce((acc: any, idx: number) => {
-      const values = Object.values(acc || {});
-      console.log("Current object:", acc, "Values:", values, "Index:", idx);
-      return idx >= 0 && idx < values.length ? values[idx] : undefined;
-    }, obj);
-  };
+  const [conjugation, setConjugation] = useState<ConjugationTemplate>(() =>
+    cloneTemplate(),
+  );
 
-  const mergeConjugations = (conjugation: any, template: any) => {
-    let newTemplate = JSON.parse(JSON.stringify(template));
-    Object.keys(template).forEach((mode, modeIndex) => {
-      console.log("Merging mode:", mode);
-      Object.keys(template[mode]).forEach((form, formIndex) => {
-        console.log("Merging form:", form);
-        Object.keys(template[mode][form]).forEach((tense, tenseIndex) => {
-          console.log("Merging tense:", tense);
-          Object.keys(template[mode][form][tense]).forEach(
-            (person, personIndex) => {
-              console.log("Merging person:", person);
-              const value = getByIndex(conjugation, [
-                modeIndex,
-                formIndex,
-                tenseIndex,
-                personIndex,
-              ]);
-              console.log(`Value for ${mode} ${form} ${tense} ${person}:`, value);
-              if (value !== undefined && value !== null) {
-                newTemplate[mode][form][tense][person] = value;
-              }
-            },
-          );
-        });
-      });
-    });
-    console.log("Merged conjugation:", newTemplate);
-    return newTemplate;
-  };
+  const selectedWordUuid = selectedWord?.uuid;
 
-  const saveConjugation = () => {
-    console.log("Saving conjugation:", conjugation);
-    window.api.saveConjugation(route, name!, selectedWord?.uuid, conjugation);
-  };
+  const saveConjugation = useCallback(() => {
+    if (!route || !name || !selectedWordUuid) return;
+    void window.api.saveConjugation(route, name, selectedWordUuid, conjugation);
+  }, [conjugation, name, route, selectedWordUuid]);
 
   useEffect(() => {
-    if (conjugationLoaded) {
+    if (!isEditing && conjugationLoaded) {
       saveConjugation();
     }
-  }, [isEditing]);
+  }, [conjugationLoaded, isEditing, saveConjugation]);
 
   useEffect(() => {
-    console.log("Fetching conjugation for", route + "/CONJ-" + name, selectedWord?.uuid);
+    if (!route || !name || !selectedWordUuid) {
+      setConjugation(cloneTemplate());
+      setConjugationLoaded(true);
+      return;
+    }
+
     setConjugationLoaded(false);
     window.api
-      .fetchConjugation(route, name, selectedWord?.uuid)
-      .then((response: any) => {
-        if (Object.keys(response).length === 0) {
-          setConjugation(cloneTemplate());
-        }
-        else if (hasSameKeys(response, template)) {
-          setConjugation(response);
-        }
-        else {
-          const newTemplate = mergeConjugations(response, cloneTemplate());
-          setConjugation(newTemplate);
-        }
+      .fetchConjugation(route, name, selectedWordUuid)
+      .then((response) => {
+        const merged = mergeConjugations(cloneTemplate(), response);
+        setConjugation(merged);
         setConjugationLoaded(true);
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.error("Error fetching conjugation:", error);
+        setConjugation(cloneTemplate());
         setConjugationLoaded(true);
       });
-  }, [selectedWord]);
+  }, [cloneTemplate, name, route, selectedWordUuid]);
 
   return {
     collapsed,

@@ -1,31 +1,32 @@
 import { useConfigStore } from "@/context/dictionary-context";
+import type { OriginalTranslationPair } from "@/types/original-translation-pair";
+import type { TranslationEntry } from "@/types/translation-entry";
 import { useState } from "react";
 
-export default function useWordCard(dictId: string, word: any) {
-  const pairs = Array.isArray(word.pair) ? word.pair : [word.pair];
+const EMPTY_PAIR: OriginalTranslationPair = {
+  original: { word: "" },
+  translations: [],
+  definitions: [],
+};
+
+export default function useWordCard(dictId: string, word: TranslationEntry) {
+  const pairs = word.pair ?? [];
   const [pairIdx, setPairIdx] = useState(0);
 
-  const currentPair = pairs[pairIdx] || {};
+  const currentPair = pairs[pairIdx] ?? EMPTY_PAIR;
   const { dictionaryMetadata } = useConfigStore();
 
   const original = currentPair.original?.word || "";
 
-  const translations = Array.isArray(currentPair.translations)
-    ? currentPair.translations
-      .map((t: { word: string }) => t.word)
-      .filter(Boolean)
-      .join(", ")
-    : typeof currentPair.translations === "object" &&
-      currentPair.translations?.word
-      ? currentPair.translations.word
-      : "";
+  const translations = currentPair.translations
+    .map((t) => t.word)
+    .filter(Boolean)
+    .join(", ");
 
   const gender = currentPair.original?.gender || "";
   const number = currentPair.original?.number || "";
 
-  const definitions = Array.isArray(currentPair.definitions)
-    ? currentPair.definitions
-    : [];
+  const definitions = currentPair.definitions ?? [];
 
   const article =
     (word.type === dictionaryMetadata?.[dictId]?.typeWordWithPrecededArticle &&

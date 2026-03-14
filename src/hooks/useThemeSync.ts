@@ -50,8 +50,8 @@ function getAccentPalette(accent: string, isDark: boolean) {
 }
 
 export default function useThemeSync() {
-  const appearance = useConfigStore(state => state.config.appearance || "system");
-  const accentColor = useConfigStore(state => state.config.accentColor || "blue");
+  const appearance = useConfigStore((state) => state.config.appearance || "system");
+  const accentColor = useConfigStore((state) => state.config.accentColor || "blue");
 
   useEffect(() => {
     const el = typeof document !== "undefined" ? document.documentElement : null;
@@ -102,16 +102,25 @@ export default function useThemeSync() {
       applyAccent();
     };
 
+    type LegacyMediaQueryList = {
+      addListener: (listener: (e: MediaQueryListEvent) => void) => void;
+      removeListener: (listener: (e: MediaQueryListEvent) => void) => void;
+    };
+
     if (appearance === "system" && window.matchMedia) {
       mql = window.matchMedia("(prefers-color-scheme: dark)");
       if (mql.addEventListener) mql.addEventListener("change", listener);
-      else if ((mql as any).addListener) (mql as any).addListener(listener);
+      else if ("addListener" in mql) {
+        (mql as unknown as LegacyMediaQueryList).addListener(listener);
+      }
     }
 
     return () => {
       if (mql) {
         if (mql.removeEventListener) mql.removeEventListener("change", listener);
-        else if ((mql as any).removeListener) (mql as any).removeListener(listener);
+        else if ("removeListener" in mql) {
+          (mql as unknown as LegacyMediaQueryList).removeListener(listener);
+        }
       }
     };
   }, [appearance, accentColor]);

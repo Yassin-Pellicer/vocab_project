@@ -63,9 +63,9 @@ export default function DictionaryComponent({
     availableTypes,
   } = useTranslationHooks({ route, name });
 
-  const selectedWord = useConfigStore((state: any) => state.selectedWord);
-  const selectedTypes = useConfigStore((state: any) => state.selectedTypes);
-  const toggleType = useConfigStore((state: any) => state.toggleType);
+  const selectedWord = useConfigStore((state) => state.selectedWord);
+  const selectedTypes = useConfigStore((state) => state.selectedTypes);
+  const toggleType = useConfigStore((state) => state.toggleType);
 
   return (
     <div>

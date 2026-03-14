@@ -5,7 +5,7 @@ import {
   Search,
   X,
 } from "lucide-react";
-import useTranslationHooks from "./hook";
+import useNotesHooks from "./hook";
 import { NoteSidebar } from "./note-menu/index.tsx";
 import NoteActionsMenu from "../ui/note-actions-menu.tsx";
 import { Button } from "../ui/button.tsx";
@@ -29,7 +29,7 @@ export default function Notes({
     sidebarWidth,
     sidebarCollapsed,
     handleResizeStart,
-  } = useTranslationHooks({ route, name });
+  } = useNotesHooks();
 
   return (
     <div className="h-screen flex flex-col">

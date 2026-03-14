@@ -13,8 +13,10 @@ export default function useDeleteDictModalHooks() {
     try {
       await window.api.deleteDictionary(dictId);
       onSuccess?.();
-    } catch (err: any) {
-      setError(err?.message || "Failed to delete dictionary.");
+    } catch (error) {
+      setError(
+        error instanceof Error ? error.message : "Failed to delete dictionary.",
+      );
     } finally {
       setLoading(false);
     }

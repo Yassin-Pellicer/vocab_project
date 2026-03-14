@@ -1,6 +1,5 @@
 import { useConfigStore as useDictionaryStore } from "@/context/dictionary-context";
 import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
-import { useEffect } from "react";
 
 export default function useConfig() {
   const { dictionaryMetadata, setDictionaryMetadata } = useDictionaryStore();

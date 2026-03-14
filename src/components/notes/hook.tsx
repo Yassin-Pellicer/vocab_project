@@ -4,7 +4,7 @@ import { SidebarNode } from "@/types/sidebar-types";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export default function Hooks({}: { route: string; name: string }) {
+export default function useNotesHooks() {
   const { searchField, setSearchField } = useConfigStore();
 
   const {
@@ -71,6 +71,7 @@ export default function Hooks({}: { route: string; name: string }) {
         JSON.stringify({ width: sidebarWidth, collapsed: sidebarCollapsed }),
       );
     } catch {
+      // Ignore storage write errors (private browsing, disabled storage, etc.)
     }
   }, [sidebarWidth, sidebarCollapsed]);
 

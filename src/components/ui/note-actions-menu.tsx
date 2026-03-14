@@ -1,4 +1,4 @@
-import { EllipsisVertical, FolderSync, Notebook, Pencil, Trash2 } from "lucide-react";
+import { EllipsisVertical, FolderSync, Notebook, Trash2 } from "lucide-react";
 
 import {
   DropdownMenu,

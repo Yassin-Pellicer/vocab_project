@@ -157,7 +157,6 @@ const renameById = (
 
 export const useNotesStore = create<NotesState>((set, get) => ({
   tree: [],
-  editingNodeId: null,
   sidebarOpen: true,
   selectedNoteId: null,
   reloadToken: 0,

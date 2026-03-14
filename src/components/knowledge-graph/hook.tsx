@@ -1,9 +1,10 @@
-import { useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { GraphLink, GraphNode } from "@/types/graph-types";
 
 const ROOT_ID = "__ROOT__";
+const EMPTY_TRANSLATIONS: TranslationEntry[] = [];
 
 interface GraphData {
   nodes: GraphNode[];
@@ -18,7 +19,7 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
   const searchField = useConfigStore((s) => s.searchField);
   const selectedTypes = useConfigStore((s) => s.selectedTypes);
 
-  const list = dictionaries[name] || [];
+  const list = dictionaries[name] ?? EMPTY_TRANSLATIONS;
 
   const filteredNodeIds = useMemo<Set<string>>(() => {
     if (!list || list.length === 0) {
@@ -57,15 +58,19 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
     );
   }, [list, searchField, selectedTypes, word]);
 
-  const fetchGraph = async () => {
+  const fetchGraph = useCallback(async () => {
     try {
-      const response = await (window as any).api.fetchGraph(route, name);
+      const response =
+        (await window.api.fetchGraph(route, name)) as Record<
+          string,
+          Record<string, string>
+        >;
 
       const nodeIds = new Set<string>([ROOT_ID]);
       const links: GraphLink[] = [];
       const hasIncoming = new Set<string>();
 
-      Object.entries(response).forEach(([sourceId, targets]: [string, any]) => {
+      Object.entries(response).forEach(([sourceId, targets]) => {
         nodeIds.add(sourceId);
 
         if (targets && typeof targets === "object") {
@@ -77,7 +82,7 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
         }
       });
 
-      Object.entries(response).forEach(([sourceId, targets]: [string, any]) => {
+      Object.entries(response).forEach(([sourceId, targets]) => {
         const isEmpty =
           !targets ||
           (typeof targets === "object" && Object.keys(targets).length === 0);
@@ -108,22 +113,17 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
     } catch (error) {
       console.error("Error fetching graph:", error);
     }
-  };
+  }, [list, name, route, title]);
 
   useEffect(() => {
-    if (route && name && list.length > 0) {
-      fetchGraph();
-    }
-  }, [route, name, list]);
-
-  useEffect(() => {
-    fetchGraph();
-  }, []);
+    if (!route || !name || list.length === 0) return;
+    void fetchGraph();
+  }, [fetchGraph, list.length, name, route]);
 
   const filteredGraphData = useMemo(() => {
     if (!graphData) return null;
 
-    let { nodes, links } = graphData;
+    const { nodes, links } = graphData;
     let filteredNodes = nodes;
     let filteredLinks = links;
     const activeSearch = word?.trim() || searchField.trim();
@@ -207,7 +207,7 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
     }
 
     return { nodes: filteredNodes, links: filteredLinks };
-  }, [graphData, showEmptyNodes, searchField, selectedTypes, filteredNodeIds]);
+  }, [graphData, showEmptyNodes, searchField, selectedTypes, filteredNodeIds, word]);
 
   return {
     graphData: filteredGraphData,

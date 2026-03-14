@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Pencil, Trash, WholeWord } from "lucide-react";
-import useWordModalHooks from "./hook";
+import useEditWordModalHooks from "./hook";
 import { TranslationEntry } from "@/types/translation-entry";
 import DeleteWordModal from "../delete-word-modal";
 import { OriginalTranslationPair } from "@/types/original-translation-pair";
@@ -36,6 +36,7 @@ export default function EditTranslationModal({
 }) {
   const {
     handlePairChange,
+    setPairField,
     addPair,
     removePair,
     addTranslationToPair,
@@ -45,7 +46,7 @@ export default function EditTranslationModal({
     handleSubmit,
     setFormData,
     formData,
-  } = useWordModalHooks({ word, route, name });
+  } = useEditWordModalHooks({ word, route, name });
   const { dictionaryMetadata } = useConfigStore();
   const dict = dictionaryMetadata?.[name] ?? {};
 
@@ -114,13 +115,7 @@ export default function EditTranslationModal({
                         <Select
                           value={pair.original.gender}
                           onValueChange={(val) =>
-                            handlePairChange(
-                              {
-                                target: { value: val === "-" ? "-" : val },
-                              } as any,
-                              pairIndex,
-                              "original.gender",
-                            )
+                            setPairField(val, pairIndex, "original.gender")
                           }
                         >
                           <SelectTrigger className="border-muted-foreground/20 bg-background w-full">
@@ -139,13 +134,7 @@ export default function EditTranslationModal({
                         <Select
                           value={pair.original.number}
                           onValueChange={(val) =>
-                            handlePairChange(
-                              {
-                                target: { value: val === "-" ? "-" : val },
-                              } as any,
-                              pairIndex,
-                              "original.number",
-                            )
+                            setPairField(val, pairIndex, "original.number")
                           }
                         >
                           <SelectTrigger className="border-muted-foreground/20 bg-background w-full">

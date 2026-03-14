@@ -27,8 +27,10 @@ export default function useChangeRouteModalHooks() {
       await window.api.moveDictionary(dictId, newRoute);
       setNewRoute("");
       onSuccess?.();
-    } catch (err: any) {
-      setError(err.message || "Failed to move dictionary.");
+    } catch (error) {
+      setError(
+        error instanceof Error ? error.message : "Failed to move dictionary.",
+      );
     } finally {
       setLoading(false);
     }

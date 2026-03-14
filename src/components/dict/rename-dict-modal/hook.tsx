@@ -15,8 +15,10 @@ export default function useRenameDictModalHooks() {
       await window.api.renameDictionary(dictId, newName);
       setNewName("");
       onSuccess?.();
-    } catch (err: any) {
-      setError(err?.message || "Failed to rename dictionary.");
+    } catch (error) {
+      setError(
+        error instanceof Error ? error.message : "Failed to rename dictionary.",
+      );
     } finally {
       setLoading(false);
     }

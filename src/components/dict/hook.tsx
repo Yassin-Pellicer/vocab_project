@@ -1,7 +1,10 @@
 import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
-import { useEffect, useMemo, useRef, useState } from "react";
+import type { TranslationEntry } from "@/types/translation-entry";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+const EMPTY_TRANSLATIONS: TranslationEntry[] = [];
 
 export default function useTranslationHooks({
   route,
@@ -28,12 +31,14 @@ export default function useTranslationHooks({
   } = useConfigStore();
 
   const navigate = useNavigate();
-  const list = dictionaries[name] || [];
+  const list = dictionaries[name] ?? EMPTY_TRANSLATIONS;
   const [currentPage, setCurrentPage] = useState(1);
 
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
-  const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
-  const [isAdditionOrder, setIsAdditionOrder] = useState(!useConfigStore.getState().selectedLetter);
+  const setSelectedWord = useConfigStore((state) => state.setSelectedWord);
+  const [isAdditionOrder, setIsAdditionOrder] = useState(
+    () => !useConfigStore.getState().selectedLetter,
+  );
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -41,11 +46,11 @@ export default function useTranslationHooks({
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   const { dictionaryMetadata } = useConfigStore();
 
-  const availableTypes = useState(dictionaryMetadata?.[name]?.typeWords || [])?.[0] || [];
+  const availableTypes = dictionaryMetadata?.[name]?.typeWords ?? [];
 
   const filteredWords = useMemo(() => {
     if (!list) return [];
-    let results = [];
+    let results = list;
 
     if (searchField.trim() === "") {
       if (isAdditionOrder) {
@@ -53,9 +58,7 @@ export default function useTranslationHooks({
       } else {
         results = list.filter((word) =>
           word.pair.some((p) =>
-            p.original?.word
-              .toUpperCase()
-              .startsWith(selectedLetter?.toUpperCase?.())
+            p.original?.word.toUpperCase().startsWith(selectedLetter.toUpperCase())
           )
         );
       }
@@ -80,7 +83,7 @@ export default function useTranslationHooks({
     }
 
     if (!isAdditionOrder) {
-      return results.sort((a, b) =>
+      return [...results].sort((a, b) =>
         a.pair[0].original.word.localeCompare(b.pair[0].original.word)
       );
     }
@@ -117,13 +120,13 @@ export default function useTranslationHooks({
     scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleLetterClick = (letter: string) => {
+  const handleLetterClick = useCallback((letter: string) => {
     setSelectedLetter(letter);
     setCurrentPage(1);
     if (isAdditionOrder) {
       setIsAdditionOrder(false);
     }
-  };
+  }, [isAdditionOrder, setSelectedLetter]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -131,7 +134,7 @@ export default function useTranslationHooks({
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [setDualView]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -205,14 +208,13 @@ export default function useTranslationHooks({
     name,
     setSelectedWord,
     navigate,
-    addWordButtonRef,
     setSearchField,
     handleLetterClick,
   ]);
 
   useEffect(() => {
-    loadTranslations(route, name);
-  }, []);
+    void loadTranslations(route, name);
+  }, [loadTranslations, route, name]);
 
   return {
     list,

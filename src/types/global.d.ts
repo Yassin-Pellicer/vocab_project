@@ -1,8 +1,8 @@
-export {};
-
 declare global {
   interface Window {
-    api: any
-    ipcRenderer: any
+    api: import("./electron-api").RendererApi;
+    ipcRenderer: import("./electron-api").IpcRendererLike;
   }
 }
+
+export {};

@@ -1,9 +1,15 @@
 import { Node, mergeAttributes } from "@tiptap/core"
-import { ReactNodeViewRenderer, NodeViewWrapper } from "@tiptap/react"
+import { ReactNodeViewRenderer, NodeViewWrapper, type NodeViewProps } from "@tiptap/react"
 import DictionaryGraph from "@/components/knowledge-graph"
 
-const DictionaryGraphView = ({ node }: { node: any }) => {
-  const { route, name, title, doubleView, word } = node.attrs
+const DictionaryGraphView = ({ node }: NodeViewProps) => {
+  const { route, name, title, doubleView, word } = node.attrs as {
+    route: string
+    name: string
+    title: string
+    doubleView: boolean
+    word: string
+  }
 
   return (
     <NodeViewWrapper className="dictionary-graph-node">

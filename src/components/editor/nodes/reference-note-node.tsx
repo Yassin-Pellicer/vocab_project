@@ -1,9 +1,13 @@
 import { useNotesStore } from "@/context/notes-context"
 import { Node, mergeAttributes } from "@tiptap/core"
-import { ReactNodeViewRenderer, NodeViewWrapper } from "@tiptap/react"
+import { ReactNodeViewRenderer, NodeViewWrapper, type NodeViewProps } from "@tiptap/react"
 
-const ReferenceNoteView = ({ node }: { node: any }) => {
-  const { selectedNoteId, title, route } = node.attrs
+const ReferenceNoteView = ({ node }: NodeViewProps) => {
+  const { selectedNoteId, title, route } = node.attrs as {
+    selectedNoteId: string | null
+    title: string | null
+    route: string | null
+  }
   const { setSelectedNoteId } = useNotesStore();
   return (
     <NodeViewWrapper className="reference-note-node">

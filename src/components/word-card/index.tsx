@@ -3,8 +3,19 @@ import useWordCard from "./hook";
 import { useNavigate } from "react-router-dom";
 import { useConfigStore } from "@/context/dictionary-context";
 import EditWordModal from "../dict/edit-word-modal";
+import type { TranslationEntry } from "@/types/translation-entry";
 
-export default function WordCard({ word, route, name, doubleView}: { word: any, route?: string; name: string; doubleView?: boolean }) {
+export default function WordCard({
+  word,
+  route,
+  name,
+  doubleView,
+}: {
+  word: TranslationEntry;
+  route?: string;
+  name: string;
+  doubleView?: boolean;
+}) {
   const {
     pairs,
     pairIdx,
@@ -17,7 +28,7 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
   } = useWordCard(name, word);
 
   const navigate = useNavigate();
-  const setSelectedWord = useConfigStore((state: any) => state.setSelectedWord);
+  const setSelectedWord = useConfigStore((state) => state.setSelectedWord);
   const isFlipped = useConfigStore((state) => state.isFlipped);
 
   return (
@@ -25,9 +36,10 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
       <div className="flex items-start justify-between">
         <div onClick={() => {
           setSelectedWord(word);
-          if (doubleView) { return };
+          if (doubleView) return;
+          if (!route) return;
           navigate(
-            `/markdown?path=${encodeURIComponent(route || "")}&name=${encodeURIComponent(name || "")}`,
+            `/markdown?path=${encodeURIComponent(route)}&name=${encodeURIComponent(name)}`,
           );
         }} className="flex flex-wrap gap-1 items-center">
           <h3 className={`text-xl cursor-pointer tracking-tight font-bold text-foreground ${name && route ? "cursor-pointer" : ""} `}>
@@ -36,7 +48,7 @@ export default function WordCard({ word, route, name, doubleView}: { word: any, 
           <p className="text-2xl">⇔</p>
             <p className="italic text-muted-foreground">{isFlipped ? originalWithArticle : translations}</p>
         </div>
-        {name && route && <EditWordModal word={word} route={route} name={name}></EditWordModal>}
+        {route && <EditWordModal word={word} route={route} name={name} />}
       </div>
       <div className="flex flex-wrap justify-between mt-2 mb-2">
         <p className="text-muted-foreground text-sm">

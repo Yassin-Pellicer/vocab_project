@@ -7,14 +7,15 @@ import {
 } from "@/components/ui/note-sidebar";
 import { SidebarNode } from "@/types/sidebar-types";
 import { useNotesStore } from "@/context/notes-context";
-import NoteMenuHook, { filterTree } from "./hook";
+import useNoteMenu from "./hook";
 import type { ReactNode } from "react";
+import { filterTree } from "./utils";
 
 function renderNode(
   n: SidebarNode,
   route: string,
   name: string,
-  action?: any,
+  action?: (item: SidebarNode) => void,
   element?: (item: SidebarNode) => ReactNode
 ): ReactNode {
   if (!n.children?.length) {
@@ -38,14 +39,14 @@ export function NoteSidebar({
   route: string;
   name: string;
   className?: string;
-  action?: any;
+  action?: (item: SidebarNode) => void;
   element?: (item: SidebarNode) => ReactNode;
   query?: string;
 }) {
   const { tree } = useNotesStore();
   const safeTree = Array.isArray(tree) ? tree : [];
   const visibleTree = filterTree(safeTree, query);
-  NoteMenuHook({route, name})
+  useNoteMenu({ route, name });
   
   return (
     <Sidebar className={className}>

@@ -1,5 +1,8 @@
 import { useVerbHooks } from "./hook";
 
+type TenseConjugations = Record<string, string>;
+type TenseGroup = Record<string, TenseConjugations>;
+type MoodGroup = Record<string, TenseGroup>;
 export default function MarkdownEditor({
   route,
   name,
@@ -32,19 +35,25 @@ export default function MarkdownEditor({
     person: string,
     value: string
   ) => {
-    setConjugation((prev: any) => ({
-      ...prev,
-      [mood]: {
-        ...prev[mood as keyof typeof prev],
-        [subCategory]: {
-          ...(prev[mood as keyof typeof prev] as any)[subCategory],
-          [tense]: {
-            ...((prev[mood as keyof typeof prev] as any)[subCategory] as any)[tense],
-            [person]: value,
+    setConjugation((prev) => {
+      const currentMood = prev[mood] ?? {};
+      const currentGroup = currentMood[subCategory] ?? {};
+      const currentTense = currentGroup[tense] ?? {};
+
+      return {
+        ...prev,
+        [mood]: {
+          ...currentMood,
+          [subCategory]: {
+            ...currentGroup,
+            [tense]: {
+              ...currentTense,
+              [person]: value,
+            },
           },
         },
-      },
-    }));
+      };
+    });
   };
 
   const renderConjugation = (
@@ -83,7 +92,7 @@ export default function MarkdownEditor({
 
   const renderTenseCard = (
     tenseName: string,
-    tenseValue: any,
+    tenseValue: TenseConjugations,
     mood: string,
     subCategory: string
   ) => {
@@ -99,11 +108,11 @@ export default function MarkdownEditor({
 
   const renderMoodSection = (
     moodName: string,
-    moodValue: Record<string, any>
+    moodValue: MoodGroup
   ) => {
     const allTenses: Array<{ 
       name: string; 
-      value: any; 
+      value: TenseConjugations; 
       subCategory: string 
     }> = [];
 
@@ -137,8 +146,8 @@ export default function MarkdownEditor({
         className={`max-w-[830px] w-full px-4 pb-6 ${collapsed ? "hidden" : ""}`}
       >
         <div>
-          {Object.entries(conjugation).map(([section, sectionValue]) =>
-            renderMoodSection(section, sectionValue as Record<string, any>)
+          {(Object.entries(conjugation) as Array<[string, MoodGroup]>).map(
+            ([section, sectionValue]) => renderMoodSection(section, sectionValue),
           )}
         </div>
       </div>

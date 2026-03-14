@@ -1,5 +1,6 @@
 import { ChevronDown, ChevronRight } from "lucide-react";
 import React, { useState } from "react";
+import type { SidebarNode } from "@/types/sidebar-types";
 
 export function Sidebar({
   children,
@@ -42,9 +43,9 @@ export function SidebarItem({
 }: {
   title: string;
   children?: React.ReactNode;
-  element?: (item: any) => React.ReactNode;
-  item: any;
-  action?: any;
+  element?: (item: SidebarNode) => React.ReactNode;
+  item: SidebarNode;
+  action?: (item: SidebarNode) => void;
 }) {
   const [open, setOpen] = useState(true);
   const hasChildren = Boolean(children);

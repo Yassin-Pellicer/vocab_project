@@ -2,6 +2,8 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { TranslationEntry } from '@/types/translation-entry';
 import { useConfigStore } from '@/context/dictionary-context';
 
+const EMPTY_TRANSLATIONS: TranslationEntry[] = [];
+
 export const useSearchBar = ({
   onSearch,
   debounceMs = 300,
@@ -27,9 +29,9 @@ export const useSearchBar = ({
   const [localValue, setLocalValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const list = dictionaries[name] || [];
+  const list = dictionaries[name] ?? EMPTY_TRANSLATIONS;
 
   const searchResults = useMemo(() => {
     if (!list?.length) return [];
@@ -49,7 +51,7 @@ export const useSearchBar = ({
         w => w.type && selectedTypes.includes(w.type)
       );
     }
-    return results.sort((a, b) =>
+    return [...results].sort((a, b) =>
       a.pair[0].original.word.localeCompare(b.pair[0].original.word)
     );
   }, [localValue, list, selectedLetter, selectedTypes]);
@@ -85,7 +87,7 @@ export const useSearchBar = ({
 
   const onClear = () => {
     setLocalValue('');
-    onSearch?.('', list ?? []);
+    onSearch?.('', list);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -102,7 +104,6 @@ export const useSearchBar = ({
 
   const handleWordClick = (word: TranslationEntry) => {
     onWordSelect?.(word);
-    console.log(word.pair[0].original.word)
     setIsDropdownOpen(false);
     onClear();
   };

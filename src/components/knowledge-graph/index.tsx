@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import WordCard from "../word-card";
-import { GraphNode } from "@/types/graph-types";
+import { GraphLink, GraphNode } from "@/types/graph-types";
 import { useNavigate } from "react-router-dom";
 import {
   useKnowledgeGraph,
@@ -15,7 +15,7 @@ interface DictionaryGraphProps {
   route: string;
   name: string;
   title: string;
-  word?: string,
+  word?: string;
   doubleView: boolean;
 }
 
@@ -50,8 +50,10 @@ export default function DictionaryGraph({
     if (!graphData) return;
 
     const { nodes, links } = graphData;
+    const svgEl = svgRef.current;
+    if (!svgEl) return;
 
-    const svg = d3.select(svgRef.current);
+    const svg = d3.select<SVGSVGElement, unknown>(svgEl);
     svg.selectAll("*").remove();
 
     const width = containerRef.current?.clientWidth || 800;
@@ -63,20 +65,20 @@ export default function DictionaryGraph({
       .zoom<SVGSVGElement, unknown>()
       .filter((event) => {
         if (event.type === "wheel") {
-          return event.ctrlKey;
+          return (event as WheelEvent).ctrlKey;
         }
         return true;
       })
-      .wheelDelta((event: any) => -event.deltaY * 0.002)
+      .wheelDelta((event: WheelEvent) => -event.deltaY * 0.002)
       .on("zoom", (event) => {
         container.attr("transform", event.transform);
       });
 
-    svg.call(zoom as any);
+    svg.call(zoom);
 
     const initialScale = 1;
     svg.call(
-      zoom.transform as any,
+      zoom.transform,
       d3.zoomIdentity
         .translate(width / 2, height / 2)
         .scale(initialScale)
@@ -85,18 +87,20 @@ export default function DictionaryGraph({
 
     const connectionCount = buildConnectionCount(links);
 
-    const getNodeRadius = (d: any) =>
-      calculateNodeRadius(connectionCount, d.id, d.parent);
+    const getNodeRadius = (d: GraphNode) =>
+      calculateNodeRadius(connectionCount, d.id, Boolean(d.parent));
 
     const simulation = d3
-      .forceSimulation(nodes)
+      .forceSimulation<GraphNode>(nodes)
       .force(
         "link",
         d3
-          .forceLink(links)
-          .id((d: any) => d.id)
-          .distance((d: any) =>
-            (d.source as any).parent || (d.target as any).parent ? 100 : 100,
+          .forceLink<GraphNode, GraphLink>(links)
+          .id((d) => d.id)
+          .distance((d) =>
+            (d.source as GraphNode).parent || (d.target as GraphNode).parent
+              ? 100
+              : 100,
           )
           .strength(1.2),
       )
@@ -105,7 +109,7 @@ export default function DictionaryGraph({
         "collision",
         d3
           .forceCollide()
-          .radius((d: any) => getNodeRadius(d) + 5)
+          .radius((d) => getNodeRadius(d as GraphNode) + 5)
           .strength(1),
       )
       .force("center", d3.forceCenter(width / 2, height / 2).strength(0.05))
@@ -120,7 +124,7 @@ export default function DictionaryGraph({
 
     const link = container
       .append("g")
-      .selectAll("line")
+      .selectAll<SVGLineElement, GraphLink>("line")
       .data(links)
       .join("line")
       .attr("stroke", strokeColor)
@@ -129,7 +133,7 @@ export default function DictionaryGraph({
 
     const node = container
       .append("g")
-      .selectAll("g")
+      .selectAll<SVGGElement, GraphNode>("g")
       .data(nodes)
       .join("g")
       .style("cursor", "pointer")
@@ -138,7 +142,7 @@ export default function DictionaryGraph({
           .drag<SVGGElement, GraphNode>()
           .on("start", dragStarted)
           .on("drag", dragged)
-          .on("end", dragEnded) as any,
+          .on("end", dragEnded),
       )
       .on("mouseover", (_event, d) => {
         if (!d.wordData) return;
@@ -159,7 +163,7 @@ export default function DictionaryGraph({
 
     node
       .append("circle")
-      .attr("r", (d: any) => getNodeRadius(d))
+      .attr("r", (d) => getNodeRadius(d))
       .attr("fill", nodeFill)
       .attr("stroke", nodeStroke)
       .attr("stroke-width", 2);
@@ -168,8 +172,8 @@ export default function DictionaryGraph({
 
     node
       .append("text")
-      .text((d: any) => d.label)
-      .attr("dy", (d: any) => (d.parent ? 6 : -getNodeRadius(d) - 4))
+      .text((d) => d.label)
+      .attr("dy", (d) => (d.parent ? 6 : -getNodeRadius(d) - 4))
       .attr("text-anchor", "middle")
       .attr("fill", textFill)
       .attr("font-size", "12px")
@@ -177,30 +181,35 @@ export default function DictionaryGraph({
 
     simulation.on("tick", () => {
       link
-        .attr("x1", (d: any) => (d.source as any).x)
-        .attr("y1", (d: any) => (d.source as any).y)
-        .attr("x2", (d: any) => (d.target as any).x)
-        .attr("y2", (d: any) => (d.target as any).y);
+        .attr("x1", (d) => (d.source as GraphNode).x ?? 0)
+        .attr("y1", (d) => (d.source as GraphNode).y ?? 0)
+        .attr("x2", (d) => (d.target as GraphNode).x ?? 0)
+        .attr("y2", (d) => (d.target as GraphNode).y ?? 0);
 
-      node.attr("transform", (d: any) => `translate(${d.x}, ${d.y})`);
+      node.attr(
+        "transform",
+        (d) => `translate(${d.x ?? 0}, ${d.y ?? 0})`,
+      );
     });
 
     simulation.on("end", () => {
       simulation.stop();
     });
 
-    function dragStarted(event: any) {
+    type DragEvent = d3.D3DragEvent<SVGGElement, GraphNode, GraphNode>;
+
+    function dragStarted(event: DragEvent) {
       if (!event.active) simulation.alphaTarget(0.15).restart();
       event.subject.fx = event.subject.x;
       event.subject.fy = event.subject.y;
     }
 
-    function dragged(event: any) {
+    function dragged(event: DragEvent) {
       event.subject.fx = event.x;
       event.subject.fy = event.y;
     }
 
-    function dragEnded(event: any) {
+    function dragEnded(event: DragEvent) {
       if (!event.active) simulation.alphaTarget(0);
       event.subject.fx = null;
       event.subject.fy = null;

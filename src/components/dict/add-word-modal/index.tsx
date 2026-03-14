@@ -35,6 +35,7 @@ const AddTranslationModal = forwardRef<
     addPair,
     removePair,
     handlePairChange,
+    setPairField,
     addTranslationToPair,
     removeTranslationFromPair,
     addDefinitionToPair,
@@ -116,16 +117,9 @@ const AddTranslationModal = forwardRef<
                       />
                       <div className="grid grid-cols-2 gap-2 mt-2">
                         <Select
-
                           value={pair.original.gender}
                           onValueChange={(val) =>
-                            handlePairChange(
-                              {
-                                target: { value: val === "-" ? "-" : val },
-                              } as any,
-                              pairIndex,
-                              "original.gender",
-                            )
+                            setPairField(val, pairIndex, "original.gender")
                           }
                         >
                           <SelectTrigger className="border-muted-foreground/20 bg-background w-full">
@@ -143,13 +137,7 @@ const AddTranslationModal = forwardRef<
                         <Select
                           value={pair.original.number}
                           onValueChange={(val) =>
-                            handlePairChange(
-                              {
-                                target: { value: val === "-" ? "-" : val },
-                              } as any,
-                              pairIndex,
-                              "original.number",
-                            )
+                            setPairField(val, pairIndex, "original.number")
                           }
                         >
                           <SelectTrigger className="border-muted-foreground/20 bg-background w-full">

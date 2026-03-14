@@ -1,7 +1,7 @@
 import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface SelectedWord extends TranslationEntry {
   selectedPairIndex: number;
@@ -27,11 +27,36 @@ export default function useTranslationHooks({ route, name }: { route: string, na
   const translations = selectedPair?.translations || [];
   const definitions = selectedPair?.definitions || [];
 
+  const loadTranslations = useCallback(async (_route: string, _name: string) => {
+    try {
+      const data = await window.api.requestTranslations(_route, _name);
+      if (data) setList(data);
+    } catch (error) {
+      console.error("Failed to load JSON:", error);
+    }
+  }, []);
+
+  const selectRandom = useCallback(() => {
+    if (!Array.isArray(list) || list.length === 0) return null;
+
+    const randomEntryIndex = Math.floor(Math.random() * list.length);
+    const selectedEntry = list[randomEntryIndex];
+
+    const randomPairIndex = Math.floor(
+      Math.random() * selectedEntry.pair.length,
+    );
+
+    setWord({
+      ...selectedEntry,
+      selectedPairIndex: randomPairIndex,
+    });
+  }, [list]);
+
   useEffect(() => {
     if (word && list.length > 0) {
       setMessage("");
     }
-  }, [word]);
+  }, [word, list.length]);
 
   useEffect(() => {
     if (lastHistoryRef.current) {
@@ -40,14 +65,14 @@ export default function useTranslationHooks({ route, name }: { route: string, na
   }, [history]);
 
   useEffect(() => {
-    loadTranslations(route, name);
-  }, []);
+    void loadTranslations(route, name);
+  }, [loadTranslations, name, route]);
 
   useEffect(() => {
     if (list.length > 0) {
       selectRandom();
     }
-  }, [list]);
+  }, [list.length, selectRandom]);
 
   const showHint = () => {
     if (!definitions || definitions.length === 0) {
@@ -102,32 +127,9 @@ export default function useTranslationHooks({ route, name }: { route: string, na
       setHint(null);
       setMaxHints(false);
       setHintIndex(0);
-      setHistory([...history, historyEntry]);
+      setHistory((prev) => [...prev, historyEntry]);
       selectRandom();
     }, 1500);
-  };
-
-  const loadTranslations = async (route: string, name: string) => {
-    try {
-      const data = await window.api.requestTranslations(route, name);
-      if (data) setList(data);
-    } catch (error) {
-      console.error("Failed to load JSON:", error);
-    }
-  };
-
-  const selectRandom = () => {
-    if (!Array.isArray(list) || list.length === 0) return null;
-
-    const randomEntryIndex = Math.floor(Math.random() * list.length);
-    const selectedEntry = list[randomEntryIndex];
-
-    const randomPairIndex = Math.floor(Math.random() * selectedEntry.pair.length);
-
-    setWord({
-      ...selectedEntry,
-      selectedPairIndex: randomPairIndex
-    });
   };
 
   return {

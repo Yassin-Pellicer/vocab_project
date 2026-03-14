@@ -1,8 +1,14 @@
-import { NodeViewWrapper } from "@tiptap/react"
+import { NodeViewWrapper, type NodeViewProps } from "@tiptap/react"
 import DictionaryGraph from "@/components/knowledge-graph"
 
-export default function DictionaryGraphView({ node }: { node: any }) {
-  const { route, name, title, doubleView, word} = node.attrs
+export default function DictionaryGraphView({ node }: NodeViewProps) {
+  const { route, name, title, doubleView, word } = node.attrs as {
+    route: string
+    name: string
+    title: string
+    doubleView: boolean
+    word: string
+  }
 
   return (
     <NodeViewWrapper className="dictionary-graph-node">

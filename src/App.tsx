@@ -45,20 +45,24 @@ export default function App() {
     return value === "1" || value === "true";
   }, []);
 
-  const loadConfig = useConfigStore((state: any) => state.loadConfig);
-  const loadUserPreferences = usePreferencesStore((state: any) => state.loadConfig);
-  const loadAllTranslations = useConfigStore((state: any) => state.loadAllTranslations);
-  const dictionaryMetadata = useConfigStore((state: any) => state.dictionaryMetadata);
+  const loadConfig = useConfigStore((state) => state.loadConfig);
+  const loadUserPreferences = usePreferencesStore((state) => state.loadConfig);
+  const loadAllTranslations = useConfigStore((state) => state.loadAllTranslations);
+  const dictionaryMetadata = useConfigStore((state) => state.dictionaryMetadata);
   const hasLoadedTranslations = useRef(false);
   useThemeSync();
-  useEffect(() => { loadConfig(); }, []);
-  useEffect(() => { loadUserPreferences(); }, []);
+  useEffect(() => {
+    void loadConfig();
+  }, [loadConfig]);
+  useEffect(() => {
+    loadUserPreferences();
+  }, [loadUserPreferences]);
   useEffect(() => {
     if (Object.keys(dictionaryMetadata).length > 0 && !hasLoadedTranslations.current) {
       hasLoadedTranslations.current = true;
-      loadAllTranslations();
+      void loadAllTranslations();
     }
-  }, [dictionaryMetadata]);
+  }, [dictionaryMetadata, loadAllTranslations]);
   return (
     <BrowserRouter>
       <InitialRouteFromHash />

@@ -4,10 +4,19 @@ import { OriginalTranslationPair } from "@/types/original-translation-pair";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useState } from "react";
 
-export default function useWordModalHooks({word, route, name }: { word: TranslationEntry, route: string; name: string }) {
-
+export default function useEditWordModalHooks({
+  word,
+  route,
+  name,
+}: {
+  word: TranslationEntry;
+  route: string;
+  name: string;
+}) {
   const { loadTranslations } = useConfigStore();
-  const [formData, setFormData] = useState<TranslationEntry>(structuredClone(word));
+  const [formData, setFormData] = useState<TranslationEntry>(
+    structuredClone(word),
+  );
 
   const emptyPair: OriginalTranslationPair = {
     original: {
@@ -25,23 +34,27 @@ export default function useWordModalHooks({word, route, name }: { word: Translat
     definitions: [],
   };
 
-  const handlePairChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    pairIndex: number,
-    path: string
-  ) => {
+  const setPairField = (value: string, pairIndex: number, path: string) => {
     const newPairs = [...formData.pair];
     const parts = path.split(".");
-    let obj: any = newPairs[pairIndex];
+    let cursor: unknown = newPairs[pairIndex];
 
     for (let i = 0; i < parts.length - 1; i++) {
-      obj = obj[parts[i]];
+      if (typeof cursor !== "object" || cursor === null) return;
+      cursor = (cursor as Record<string, unknown>)[parts[i]];
     }
 
-    obj[parts[parts.length - 1]] = e.target.value;
+    if (typeof cursor !== "object" || cursor === null) return;
+    (cursor as Record<string, unknown>)[parts[parts.length - 1]] = value;
 
     setFormData({ ...formData, pair: newPairs });
   };
+
+  const handlePairChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    pairIndex: number,
+    path: string,
+  ) => setPairField(e.target.value, pairIndex, path);
 
   const addPair = () => {
     setFormData({
@@ -86,8 +99,9 @@ export default function useWordModalHooks({word, route, name }: { word: Translat
   const handleSubmit = async () => {
     try {
       if (formData.pair.length === 0) return;
+      if (!word.uuid) throw new Error("Cannot edit word without uuid.");
 
-      await (window.api).addTranslation(formData, word.uuid, route, name);
+      await window.api.addTranslation(formData, word.uuid, route, name);
       const before =
         word.pair.find((p) => p.original.word.trim())?.original.word.trim() ??
         "word";
@@ -105,6 +119,7 @@ export default function useWordModalHooks({word, route, name }: { word: Translat
     formData,
     setFormData,
     handlePairChange,
+    setPairField,
     addPair,
     removePair,
     addTranslationToPair,

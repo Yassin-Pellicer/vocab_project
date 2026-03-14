@@ -1,26 +1,27 @@
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useConfigStore } from "@/context/dictionary-context";
 import { defaultTenses } from "@/types/config";
 
 export default function useConfigureTenseModal(dictId: string) {
-  const { dictionaryMetadata, setDictionaryTenses, setTypeWordWithTenses } = useConfigStore();
-    const [
+  const { dictionaryMetadata, setDictionaryTenses, setTypeWordWithTenses } =
+    useConfigStore();
+  const [
     selectTypeWordWithTenses,
     setSelectTypeWordWithTenses,
   ] = useState(dictionaryMetadata?.[dictId]?.typeWordWithTenses || "");
 
-  const getStoredStructure = () => {
+  const getStoredStructure = useCallback(() => {
     if (dictId && dictionaryMetadata?.[dictId]?.tenses) {
       return JSON.stringify(dictionaryMetadata?.[dictId]?.tenses, null, 2);
     }
     return JSON.stringify(defaultTenses, null, 2);
-  };
+  }, [dictId, dictionaryMetadata]);
 
-  const [structure, setStructure] = useState<string>(getStoredStructure);
+  const [structure, setStructure] = useState<string>(() => getStoredStructure());
 
   useEffect(() => {
     setStructure(getStoredStructure());
-  }, [dictId, dictionaryMetadata]);
+  }, [getStoredStructure]);
 
   const resetToStored = () => {
     setStructure(getStoredStructure());
@@ -50,7 +51,7 @@ export default function useConfigureTenseModal(dictId: string) {
   const saveTypeWordWithTenses = (typeWord: string) => {
     setSelectTypeWordWithTenses(typeWord);
     setTypeWordWithTenses(dictId, typeWord);
-  }
+  };
 
   return {
     structure,

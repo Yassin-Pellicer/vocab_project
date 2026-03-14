@@ -1,9 +1,9 @@
-import { PRESET_KEYBINDS } from "@/types/config";
+import { PRESET_KEYBINDS, type Keybind } from "@/types/config";
 import { useState, useEffect, useRef, useCallback } from "react";
 
 export function useAddKeybindModal({ open, onAdd, index, onClose }: {
   open: boolean;
-  onAdd: (keybind: any) => void;
+  onAdd: (keybind: Keybind) => void;
   index: number;
   onClose: () => void;
 }) {
@@ -19,7 +19,7 @@ export function useAddKeybindModal({ open, onAdd, index, onClose }: {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement)?.tagName === "BUTTON" || (e.target as HTMLElement)?.tagName === "INPUT") return;
       e.preventDefault();
-      const keys = [];
+      const keys: string[] = [];
       if (e.ctrlKey) keys.push("Ctrl");
       if (e.altKey) keys.push("Alt");
       if (e.shiftKey) keys.push("Shift");
@@ -39,11 +39,15 @@ export function useAddKeybindModal({ open, onAdd, index, onClose }: {
   }, [open]);
 
   const handleAdd = useCallback(() => {
-    if (index === null || !customKeys.trim()) return;
-    onAdd({ action: PRESET_KEYBINDS[index].action, keys: customKeys.split("+").map((k: string) => k.trim()) });
+    const preset = PRESET_KEYBINDS[index];
+    if (!preset || !customKeys.trim()) return;
+    onAdd({
+      action: preset.action,
+      keys: customKeys.split("+").map((k) => k.trim()),
+    });
     reset();
     onClose();
-  }, [index, customKeys, onAdd, PRESET_KEYBINDS, reset, onClose]);
+  }, [index, customKeys, onAdd, reset, onClose]);
 
   return {
     customKeys,

@@ -168,7 +168,7 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Select value={preferences.dateFormat} onValueChange={(v) => setDateFormat(v as any)}>
+          <Select value={preferences.dateFormat} onValueChange={setDateFormat}>
             <SelectTrigger className="">
               <SelectValue />
             </SelectTrigger>
@@ -228,7 +228,7 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Select value={preferences.accentColor} onValueChange={(v) => setAccentColor(v as any)}>
+          <Select value={preferences.accentColor} onValueChange={setAccentColor}>
             <SelectTrigger className="">
               <SelectValue placeholder="Select color" />
             </SelectTrigger>
@@ -286,7 +286,10 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Select value={preferences.appearance || "system"} onValueChange={(v) => setAppearance(v as any)}>
+          <Select
+            value={preferences.appearance || "system"}
+            onValueChange={(v) => setAppearance(v as "light" | "dark" | "system")}
+          >
             <SelectTrigger className="">
               <SelectValue placeholder="Select appearance" />
             </SelectTrigger>

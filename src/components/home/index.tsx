@@ -94,9 +94,15 @@ export default function Home() {
                   {dict.totalWords} words
                 </span>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
-                <div className="flex flex-col min-h-0">
-                  <WordCard name={dict.id} word={dict.wordOfTheDay} />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
+                  <div className="flex flex-col min-h-0">
+                  {dict.wordOfTheDay ? (
+                    <WordCard name={dict.id} word={dict.wordOfTheDay} />
+                  ) : (
+                    <p className="text-sm text-muted-foreground">
+                      No word of the day.
+                    </p>
+                  )}
                   <div className="flex justify-between flex-row w-full gap-2 mt-1">
                     <Link
                       to={`/dictionary?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
@@ -121,10 +127,10 @@ export default function Home() {
                     Recent words added to this dictionary
                   </h3>
                   <div className="flex flex-col gap-2 mt-1">
-                    {dict.recentWords.map((word: any, wordIndex: number) => (
+                    {dict.recentWords.map((word) => (
                       <WordCard
-                        key={wordIndex}
-                        word={{ ...word, definitions: undefined }}
+                        key={word.uuid ?? `${dict.id}-${word.dateAdded}`}
+                        word={word}
                         route={dict.path}
                         name={dict.id}
                       />

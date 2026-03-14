@@ -177,10 +177,13 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
   const loadedNoteIdRef = useRef<string | null>(null)
   const loadedWordIdRef = useRef<string | null>(null)
 
-  const { selectedNoteId, reloadToken } = noteId
-    ? { selectedNoteId: noteId, reloadToken: 0 }
-    : useNotesStore();
-  const { selectedWord } = useConfigStore();
+  const selectedNoteIdFromStore = useNotesStore((s) => s.selectedNoteId)
+  const reloadTokenFromStore = useNotesStore((s) => s.reloadToken)
+  const selectedNoteId = noteId ?? selectedNoteIdFromStore
+  const reloadToken = noteId ? 0 : reloadTokenFromStore
+
+  const selectedWord = useConfigStore((s) => s.selectedWord)
+  const selectedWordUuid = selectedWord?.uuid ?? null
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -231,8 +234,8 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
       if (type === "notes" && selectedNoteId && loadedNoteIdRef.current === selectedNoteId) {
         window.api.saveNotes(route, name, selectedNoteId, editor.getJSON());
       }
-      if (type === "words" && selectedWord?.uuid && loadedWordIdRef.current === selectedWord.uuid) {
-        window.api.saveMarkdown(route, name, selectedWord?.uuid, editor.getJSON());
+      if (type === "words" && selectedWordUuid && loadedWordIdRef.current === selectedWordUuid) {
+        window.api.saveMarkdown(route, name, selectedWordUuid, editor.getJSON());
       }
     },
     onCreate({ editor }) {
@@ -247,39 +250,39 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
     if (type === "words") {
       loadedWordIdRef.current = null
     }
-  }, [type, selectedNoteId, selectedWord?.uuid])
+  }, [type, selectedNoteId, selectedWordUuid])
 
   useEffect(() => {
-    const loadNote = async () => {
-      const data = await window.api.fetchNotes(route, name, selectedNoteId)
+    const loadNote = async (id: string) => {
+      const data = await window.api.fetchNotes(route, name, id)
 
       if (editor && data) {
         isApplyingRemoteContent.current = true
       editor.commands.setContent(data, { emitUpdate: false })
-        loadedNoteIdRef.current = selectedNoteId
+        loadedNoteIdRef.current = id
         queueMicrotask(() => {
           isApplyingRemoteContent.current = false
         })
       }
     }
 
-    const loadWord = async () => {
-      const data = await window.api.fetchMarkdown(route, name, selectedWord?.uuid, selectedNoteId)
+    const loadWord = async (uuid: string) => {
+      const data = await window.api.fetchMarkdown(route, name, uuid, selectedNoteId)
 
       if (editor && data) {
         isApplyingRemoteContent.current = true
       editor.commands.setContent(data, { emitUpdate: false })
-        loadedWordIdRef.current = selectedWord?.uuid ?? null
+        loadedWordIdRef.current = uuid
         queueMicrotask(() => {
           isApplyingRemoteContent.current = false
         })
       }
     }
 
-    if (type === "notes" && selectedNoteId) loadNote()
-    if (type === "words" && selectedWord?.uuid) loadWord()
+    if (type === "notes" && selectedNoteId) void loadNote(selectedNoteId)
+    if (type === "words" && selectedWordUuid) void loadWord(selectedWordUuid)
 
-  }, [selectedNoteId, selectedWord, editor, reloadToken])
+  }, [editor, name, reloadToken, route, selectedNoteId, selectedWordUuid, type])
 
   const rect = useCursorVisibility({
     editor,

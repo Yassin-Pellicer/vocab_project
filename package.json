@@ -63,6 +63,7 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.11.1",
     "@types/d3": "^7.4.3",
     "@types/lodash-es": "^4.17.12",
     "@types/react": "^18.2.64",

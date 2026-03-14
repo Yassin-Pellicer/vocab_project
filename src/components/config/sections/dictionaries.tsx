@@ -2,6 +2,7 @@ import { BookOpen, Plus } from "lucide-react";
 import AddDictModal from "@/components/dict/add-dict-modal";
 import DictActionsMenu from "@/components/ui/dict-actions-menu";
 import useConfig from "../hooks";
+import type { Dictionary } from "@/types/config";
 
 export default function DictionariesSection() {
   const { dictionaryMetadata } = useConfig();
@@ -26,7 +27,8 @@ export default function DictionariesSection() {
         </AddDictModal>
 
         <div className="space-y-2">
-          {Object.entries(dictionaryMetadata).map(([id, dict]: [string, any]) => (
+          {(Object.entries(dictionaryMetadata) as Array<[string, Dictionary]>).map(
+            ([id, dict]) => (
             <div
               key={id}
               className="flex border items-center justify-between py-1 px-3 rounded-md  group gap-4"
@@ -35,18 +37,23 @@ export default function DictionariesSection() {
                 <div className="p-2 rounded-md bg-primary/10">
                   <BookOpen className="h-4 w-4 text-primary" />
                 </div>
-                <div className="flex-1 gap-4">
-                  <div className="flex flex-row gap-2 items-center mb-1">
-                    <div className="text-sm font-medium">{dict.name}</div>
-                  </div>
-                  <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                    {dict.route}
+                  <div className="flex-1 gap-4">
+                    <div className="flex flex-row gap-2 items-center mb-1">
+                      <div className="text-sm font-medium">{dict.name}</div>
+                    </div>
+                    <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
+                      {dict.route}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <DictActionsMenu dictId={id} dictName={dict.name} currentRoute={dict.route} />
+              <DictActionsMenu
+                dictId={id}
+                dictName={dict.name}
+                currentRoute={dict.route}
+              />
             </div>
-          ))}
+            ),
+          )}
         </div>
       </div>
     </div>
