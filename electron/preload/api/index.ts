@@ -5,6 +5,7 @@ import { markdown } from "./endpoints/markdown";
 import { notes } from "./endpoints/notes";
 import { translations } from "./endpoints/translations";
 import { windowControls } from "./endpoints/window";
+import { chat } from "./endpoints/chat";
 
 export const endpoints = Object.assign({}, 
   translations,
@@ -14,4 +15,5 @@ export const endpoints = Object.assign({},
   config,
   notes,
   windowControls,
+  chat,
 );

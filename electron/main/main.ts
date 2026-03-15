@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron'
 import createWindow from './window/window'
 import registerIpcHandlers from './ipc'
+import { loadEnvIfPresent } from "./env/load-env";
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -15,6 +16,7 @@ app.on('activate', () => {
 })
 
 app.whenReady().then(() => {
+  void loadEnvIfPresent();
   registerIpcHandlers()
   createWindow()
 })
