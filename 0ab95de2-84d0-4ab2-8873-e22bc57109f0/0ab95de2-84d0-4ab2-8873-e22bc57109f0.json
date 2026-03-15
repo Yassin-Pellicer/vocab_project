@@ -8534,28 +8534,6 @@
     "pair": [
       {
         "original": {
-          "word": "Vorspeise",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Entrante",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2026-03-14",
-    "type": "Nomen",
-    "uuid": "84e1f4d4-ec69-4a1f-a2d4-e588c53f322f"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Nachspeise",
           "gender": "Feminin",
           "number": "Singular"
@@ -8712,5 +8690,27 @@
     "dateAdded": "2025-12-15",
     "type": "Präpositionen",
     "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Vorspeise",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Entrante",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-14",
+    "type": "Nomen",
+    "uuid": "84e1f4d4-ec69-4a1f-a2d4-e588c53f322f"
   }
 ]

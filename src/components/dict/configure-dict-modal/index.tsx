@@ -32,7 +32,7 @@ import { Settings, Trash } from "lucide-react";
 interface ConfigureDictModalProps {
   dictId: string;
   dictName: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function ConfigureDictModal({
@@ -46,7 +46,14 @@ export default function ConfigureDictModal({
 
   return (
     <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger asChild>
+        {children ?? (
+          <Button className="flex items-center gap-2">
+            <Settings className="h-4 w-4" />
+            Configure Dictionary
+          </Button>
+        )}
+      </DialogTrigger>
       <DialogContent className="w-full p-0">
         <div className="p-6 pb-2 overflow-auto max-h-[75vh]">
           <DialogHeader>

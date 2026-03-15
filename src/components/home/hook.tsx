@@ -23,7 +23,6 @@ const collectLeafNotes = (tree: SidebarTree): SidebarNode[] => {
 export default function useHome() {
   const dictionaryMetadata = useConfigStore(s => s.dictionaryMetadata);
   const dictionariesMap = useConfigStore(s => s.dictionaries);
-  const [loading, setLoading] = useState(true);
   const [dictionaryCards, setDictionaryCards] = useState<DictionaryData[]>([]);
   const [totalWords, setTotalWords] = useState(0);
   const [totalDictionaries, setTotalDictionaries] = useState(0);
@@ -60,7 +59,6 @@ export default function useHome() {
     };
 
     const loadHome = async () => {
-      setLoading(true);
 
       const result: DictionaryData[] = [];
       let wordCount = 0;
@@ -68,19 +66,23 @@ export default function useHome() {
       const entries = Object.entries(dictionaryMetadata);
 
       for (const [index, [id, meta]] of entries.entries()) {
-        const translations = dictionariesMap[id];
-        if (!translations || translations.length === 0) continue;
+        const translations = dictionariesMap[id] ?? [];
 
-        const wordIndex = seededRandom(translations.length, seed + index);
-        const wordOfTheDay = translations[wordIndex];
+        let wordOfTheDay = null;
+        let recentWords: typeof translations = [];
 
-        const recentWords = [...translations]
-          .sort(
-            (a, b) =>
-              new Date(b.dateAdded).getTime() -
-              new Date(a.dateAdded).getTime()
-          )
-          .slice(0, 3);
+        if (translations.length > 0) {
+          const wordIndex = seededRandom(translations.length, seed + index);
+          wordOfTheDay = translations[wordIndex];
+
+          recentWords = [...translations]
+            .sort(
+              (a, b) =>
+                new Date(b.dateAdded).getTime() -
+                new Date(a.dateAdded).getTime()
+            )
+            .slice(0, 3);
+        }
 
         let randomNote: SidebarNode | null = null;
         try {
@@ -113,8 +115,7 @@ export default function useHome() {
 
       setDictionaryCards(result);
       setTotalWords(wordCount);
-      setTotalDictionaries(result.length);
-      setLoading(false);
+      setTotalDictionaries(Object.keys(dictionaryMetadata).length);
     };
 
     loadHome();
@@ -126,7 +127,6 @@ export default function useHome() {
 
   return {
     dictionaryCards,
-    loading,
     totalWords,
     totalDictionaries,
   };

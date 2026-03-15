@@ -4,30 +4,48 @@ import { TranslationEntry } from "@/types/translation-entry";
 import { Trash } from "lucide-react";
 import useDeleteWordModalHooks from "./hook";
 
-export default function DeleteWordModal({word, route, name} : {word: TranslationEntry, route: string, name: string}) {
+export default function DeleteWordModal({
+  word,
+  route,
+  name,
+}: {
+  word: TranslationEntry;
+  route: string;
+  name: string;
+}) {
   const { handleSubmit } = useDeleteWordModalHooks({ word, route, name });
+
   return (
     <Dialog>
-      <form onSubmit={handleSubmit}>
-        <DialogTrigger asChild>
-          <Button variant="outline" className="!bg-red-600 !text-white"><Trash></Trash></Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+      <DialogTrigger asChild>
+        <Button variant="destructive" size="icon">
+          <Trash className="h-4 w-4" />
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="sm:max-w-[425px]">
+        <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>Delete Word</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this word from the dictionary? This process
-              can't be reversed.
+              Are you sure you want to delete this word from the dictionary?
+              This action cannot be undone.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter>
-            <Button type="submit" variant="outline" className="!bg-red-600 !text-muted-foreground">Delete</Button>
+
+          <DialogFooter className="mt-4">
             <DialogClose asChild>
-              <Button variant="outline" >Cancel</Button>
+              <Button type="button" variant="outline">
+                Cancel
+              </Button>
             </DialogClose>
+
+            <Button type="submit" variant="destructive">
+              Delete
+            </Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }
