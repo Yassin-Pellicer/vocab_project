@@ -5,7 +5,7 @@ export const conjugation = {
     return await ipcRenderer.invoke("fetchConjugation", route, name, uuid);
   },
 
-  saveConjugation: async (route: string, name: string, uuid:string, conjugation: Object) => {
+  saveConjugation: async (route: string, name: string, uuid: string, conjugation: unknown) => {
     return await ipcRenderer.invoke("saveConjugation", route, name, uuid, conjugation);
   },
 };

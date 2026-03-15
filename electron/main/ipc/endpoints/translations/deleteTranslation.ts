@@ -2,6 +2,7 @@ import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
 import { broadcastToAllWindows } from "../../broadcast";
+import type { TranslationEntry } from "@/types/translation-entry";
 
 export default function deleteTranslation() {
   ipcMain.handle(
@@ -17,9 +18,8 @@ export default function deleteTranslation() {
         const data = fs.readFileSync(filePath, "utf-8");
         const json = JSON.parse(data);
 
-        let translations = Array.isArray(json) ? json : [];
-
-        translations = translations.filter((t: any) => t.uuid !== _word);
+        const translations: TranslationEntry[] = Array.isArray(json) ? (json as TranslationEntry[]) : [];
+        const nextTranslations = translations.filter((t) => t.uuid !== _word);
 
         {
           const filePath = path.join(_route, `GRAPH-${_name}.json`);
@@ -46,7 +46,7 @@ export default function deleteTranslation() {
 
         fs.writeFileSync(
           filePath,
-          JSON.stringify(translations, null, 2),
+          JSON.stringify(nextTranslations, null, 2),
           "utf-8"
         );
 

@@ -8,10 +8,10 @@ export default function saveConjugation() {
       const filePath = path.join(route, `CONJ-${name}.json`);
       console.log("Saving conjugation to", filePath, "for uuid:", uuid);
       
-      let json: Record<string, any> = {};
+      let json: Record<string, unknown> = {};
       if (fs.existsSync(filePath)) {
         const data = fs.readFileSync(filePath, "utf-8");
-        json = JSON.parse(data);
+        json = JSON.parse(data) as Record<string, unknown>;
       }
       
       json[uuid] = conjugation;

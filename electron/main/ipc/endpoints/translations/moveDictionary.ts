@@ -1,50 +1,34 @@
 import { ipcMain } from "electron";
-import path from "path";
-import fs from "fs";
-import { UserConfig } from "../../../../../src/types/config";
+import path from "node:path";
+import { promises as fs } from "node:fs";
 import { broadcastToAllWindows } from "../../broadcast";
+import { readUserConfig, writeUserConfig } from "../../../storage/user-files";
 
+async function copyDirRecursive(src: string, dest: string) {
+  await fs.mkdir(dest, { recursive: true });
 
-function copyDirRecursive(src: string, dest: string) {
-  fs.mkdirSync(dest, { recursive: true });
-
-  const entries = fs.readdirSync(src, { withFileTypes: true });
+  const entries = await fs.readdir(src, { withFileTypes: true });
   for (const entry of entries) {
     const srcPath = path.join(src, entry.name);
     const destPath = path.join(dest, entry.name);
 
     if (entry.isDirectory()) {
-      copyDirRecursive(srcPath, destPath);
+      await copyDirRecursive(srcPath, destPath);
     } else {
-      fs.copyFileSync(srcPath, destPath);
+      await fs.copyFile(srcPath, destPath);
     }
   }
 }
 
-function removeDirRecursive(dir: string) {
-  if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true, force: true });
-  }
-}
+const removeDirRecursive = (dir: string) =>
+  fs.rm(dir, { recursive: true, force: true });
 
 export default function moveDictionary() {
   ipcMain.handle(
     "moveDictionary",
     async (_event, dictId: string, newRoute: string) => {
       try {
-        const configPath = path.join(
-          process.env.APP_ROOT || __dirname,
-          "public",
-          "user-config.json"
-        );
-
-        if (!fs.existsSync(configPath)) {
-          throw new Error("Config file not found.");
-        }
-
-        const config: UserConfig = JSON.parse(
-          fs.readFileSync(configPath, "utf-8")
-        );
+        const config = await readUserConfig();
 
         if (!config.dictionaries || !config.dictionaries[dictId]) {
           throw new Error(`Dictionary with id "${dictId}" not found in config.`);
@@ -56,11 +40,13 @@ export default function moveDictionary() {
         const srcDir = path.resolve(oldRouteRaw);
         const destParent = path.resolve(newRoute);
 
-        if (!fs.existsSync(srcDir) || !fs.statSync(srcDir).isDirectory()) {
+        const srcStats = await fs.stat(srcDir).catch(() => null);
+        if (!srcStats?.isDirectory()) {
           throw new Error(`Source folder does not exist or is not a directory: ${srcDir}`);
         }
 
-        if (!fs.existsSync(destParent) || !fs.statSync(destParent).isDirectory()) {
+        const destStats = await fs.stat(destParent).catch(() => null);
+        if (!destStats?.isDirectory()) {
           throw new Error(`Destination folder does not exist or is not a directory: ${destParent}`);
         }
 
@@ -81,7 +67,7 @@ export default function moveDictionary() {
           throw new Error("Cannot move a folder into one of its own subdirectories.");
         }
 
-        if (fs.existsSync(newFolderPath)) {
+        if (await fs.stat(newFolderPath).catch(() => null)) {
           throw new Error(
             `A folder named "${folderName}" already exists at the destination (${newFolderPath}).`
           );
@@ -89,15 +75,20 @@ export default function moveDictionary() {
 
         let moved = false;
         try {
-          fs.renameSync(srcDir, newFolderPath);
+          await fs.rename(srcDir, newFolderPath);
           moved = true;
-        } catch (err: any) {
-          if (err && err.code === 'EXDEV') {
-            copyDirRecursive(srcDir, newFolderPath);
-            removeDirRecursive(srcDir);
+        } catch (error) {
+          if (
+            typeof error === "object" &&
+            error !== null &&
+            "code" in error &&
+            (error as { code?: string }).code === "EXDEV"
+          ) {
+            await copyDirRecursive(srcDir, newFolderPath);
+            await removeDirRecursive(srcDir);
             moved = true;
           } else {
-            throw err;
+            throw error;
           }
         }
 
@@ -106,7 +97,7 @@ export default function moveDictionary() {
         }
 
         config.dictionaries[dictId].route = newFolderPath;
-        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        await writeUserConfig(config);
 
         broadcastToAllWindows("app-data-changed");
         return {

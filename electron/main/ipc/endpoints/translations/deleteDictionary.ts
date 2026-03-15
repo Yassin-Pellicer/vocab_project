@@ -1,8 +1,8 @@
 import { ipcMain } from "electron";
-import path from "path";
-import fs from "fs";
-import { UserConfig } from "../../../../../src/types/config";
+import path from "node:path";
+import fs from "node:fs";
 import { broadcastToAllWindows } from "../../broadcast";
+import { readUserConfig, writeUserConfig } from "../../../storage/user-files";
 
 /**
  * Recursively removes a directory.
@@ -18,19 +18,7 @@ export default function deleteDictionary() {
     "deleteDictionary",
     async (_event, dictId: string) => {
       try {
-        const configPath = path.join(
-          process.env.APP_ROOT || __dirname,
-          "public",
-          "user-config.json"
-        );
-
-        if (!fs.existsSync(configPath)) {
-          throw new Error("Config file not found.");
-        }
-
-        const config: UserConfig = JSON.parse(
-          fs.readFileSync(configPath, "utf-8")
-        );
+        const config = await readUserConfig();
 
         if (!config.dictionaries || !config.dictionaries[dictId]) {
           throw new Error(`Dictionary with id "${dictId}" not found in config.`);
@@ -48,7 +36,7 @@ export default function deleteDictionary() {
 
         // Remove from config
         delete config.dictionaries[dictId];
-        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        await writeUserConfig(config);
 
         broadcastToAllWindows("app-data-changed");
         return {

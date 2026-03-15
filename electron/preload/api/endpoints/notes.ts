@@ -8,7 +8,7 @@ export const notes = {
     return await ipcRenderer.invoke("fetchNoteIndex", route, name);
   },
 
-  saveNoteIndex: async (route: string, name: string, currentConfig: Object) => {
+  saveNoteIndex: async (route: string, name: string, currentConfig: unknown) => {
     return await ipcRenderer.invoke(
       "saveNoteIndex",
       route,
@@ -21,7 +21,7 @@ export const notes = {
     route: string,
     name: string,
     uuid: string,
-    content: Object,
+    content: unknown,
   ) => {
     return await ipcRenderer.invoke("saveNotes", route, name, uuid, content);
   },

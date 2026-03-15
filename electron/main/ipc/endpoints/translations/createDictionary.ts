@@ -1,9 +1,9 @@
 import { ipcMain } from "electron";
-import path from "path";
-import fs from "fs";
+import path from "node:path";
+import fs from "node:fs";
 import { v4 as uuid } from "uuid";
-import { UserConfig } from "../../../../../src/types/config";
 import { broadcastToAllWindows } from "../../broadcast";
+import { readUserConfig, writeUserConfig } from "../../../storage/user-files";
 
 export default function createDictionary() {
   ipcMain.handle(
@@ -28,17 +28,7 @@ export default function createDictionary() {
         fs.mkdirSync(mdPath, { recursive: true });
         fs.mkdirSync(notesPath, { recursive: true });
 
-        const configPath = path.join(
-          process.env.APP_ROOT || __dirname,
-          "public",
-          "user-config.json"
-        );
-
-        if (!fs.existsSync(configPath)) {
-          fs.writeFileSync(configPath, JSON.stringify({ dictionaries: {} }, null, 2), "utf-8");
-        }
-
-        const config: UserConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+        const config = await readUserConfig();
 
         if (!config.dictionaries) {
           config.dictionaries = {};
@@ -51,7 +41,7 @@ export default function createDictionary() {
           typeWordWithTenses: "",
         };
 
-        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+        await writeUserConfig(config);
 
         broadcastToAllWindows("app-data-changed");
         return {
