@@ -11,28 +11,18 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 import { useConfigStore } from "@/context/dictionary-context";
-import { useConfigStore as useAppConfigStore } from "@/context/preferences-context";
 import { Link } from "react-router-dom";
 import DictActionsMenu from "./dict-actions-menu";
 import AddDictModal from "../dict/add-dict-modal";
-import { NavUser } from "./nav-user";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data } = useConfigStore();
-  const { config } = useAppConfigStore();
 
   return (
     <Sidebar {...props}>
-      <NavUser
-        user={{
-          name: config.displayName || "User",
-          email: config.email!,
-          avatar: config.avatarPath || "",
-        }}
-      />
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>

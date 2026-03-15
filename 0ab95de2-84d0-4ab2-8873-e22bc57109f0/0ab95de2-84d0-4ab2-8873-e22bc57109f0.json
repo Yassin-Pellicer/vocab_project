@@ -7089,43 +7089,6 @@
     "pair": [
       {
         "original": {
-          "word": "Arbeit",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "trabajo",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Arbeiten",
-          "gender": "Feminin",
-          "number": "Plural"
-        },
-        "translations": [
-          {
-            "word": "trabajos",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Nomen",
-    "uuid": "54bf5ba9-29c7-46f6-b76f-a0663674730f"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "geschenk",
           "gender": "Maskulin",
           "number": "Singular"

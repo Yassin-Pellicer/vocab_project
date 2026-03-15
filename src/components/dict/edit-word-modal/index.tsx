@@ -75,12 +75,6 @@ export default function EditTranslationModal({
                 >
                   <p className="font-semibold text-lg border-1 dark:border-border border-border rounded-t-xl p-2 flex items-center gap-2 text-foreground dark:text-foreground">
                     <WholeWord size={24} className="" /> Pair {pairIndex + 1}
-                    {pairIndex === 0 && (
-                      <span className="text-sm italic text-muted-foreground ml-4">
-                        (this one will be the first one to appear in the
-                        dictionary)
-                      </span>
-                    )}
                   </p>
 
                   <Button

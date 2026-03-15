@@ -58,7 +58,7 @@ export default function ConfigureDictModal({
         <div className="p-6 pb-2 overflow-auto max-h-[75vh]">
           <DialogHeader>
             <DialogTitle>
-              <Settings className="h-4 w-4 inline-block mr-2" />
+              <Settings className="h-6 w-6 inline-block mb-1.5 mr-2" />
               Configure <b>{dictName}</b>
             </DialogTitle>
             <DialogDescription>
@@ -68,7 +68,7 @@ export default function ConfigureDictModal({
               used in your dictionary.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 my-4">
+          <div className="grid gap-4 my-6">
             <div className="grid gap-4">
               <Label>Types of word</Label>
 
@@ -87,7 +87,7 @@ export default function ConfigureDictModal({
                 </Button>
               </div>
               <p className="text-xs -mb-[-2.5]">Added forms</p>
-              <div className="flex flex-row gap-2">
+              <div className="flex flex-row gap-2 mb-4">
                 <Select
                   value={hook.selectedWordType ?? ""}
                   onValueChange={hook.setSelectedWordType}
@@ -203,10 +203,10 @@ export default function ConfigureDictModal({
                   </button>
                 </div>
               </div>
-              <div className="flex justify-between items-center gap-2">
-                <p className="text-sm">
+              <div className="flex justify-between items-center gap-2 mt-4">
+                <Label>
                   Definite article precedes nouns in Dictionary
-                </p>
+                </Label>
                 <Switch
                   id="use-articles"
                   checked={metadata?.useArticles ?? true}
@@ -215,7 +215,7 @@ export default function ConfigureDictModal({
               </div>
               <DialogDescription className="text-xs">
                 When enabled, the app will automatically add the appropriate
-                definite article before nouns based on their gender and number.
+                definite article before the type of word of your choosing based on their gender and number.
               </DialogDescription>
               {metadata?.useArticles && (
                 <div className="flex flex-col gap-2">
@@ -272,8 +272,8 @@ export default function ConfigureDictModal({
                   </Select>
                 </div>
               )}
-              <div className="flex justify-between items-center gap-2">
-                <p className="text-sm">Enable Tenses</p>
+              <div className="flex justify-between items-center gap-2 mt-4">
+                <Label>Enable Tenses</Label>
                 <Switch
                   id="use-tenses"
                   checked={metadata?.useTenses ?? false}

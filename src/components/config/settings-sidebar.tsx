@@ -15,8 +15,8 @@ interface SettingsSidebarProps {
 const menuItems = [
   { id: "general", label: "General", icon: Settings },
   { id: "dictionaries", label: "Dictionaries", icon: BookOpen },
-  { id: "keybinds", label: "Keybinds", icon: Keyboard },
-  { id: "profile", label: "Your Profile", icon: User },
+  // { id: "keybinds", label: "Keybinds", icon: Keyboard },
+  // { id: "profile", label: "Your Profile", icon: User },
   // { id: "subscription", label: "Subscription", icon: CreditCard },
   // { id: "ai", label: "Artificial Intelligence", icon: Sparkles },
   { id: "about", label: "About", icon: Info },

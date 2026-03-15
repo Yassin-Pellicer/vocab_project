@@ -149,14 +149,14 @@ export default function Home() {
                         <ArrowRight size={16} />
                       </Button>
                     </Link>
-                    <Link
+                    {/* <Link
                       to={`/translation?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
                     >
                       <Button className="flex items-center gap-1">
                         Practice
                         <ArrowRight size={16} />
                       </Button>
-                    </Link>
+                    </Link> */}
                   </div>
                   <h3 className="text-sm! tracking-tighter font-semibold italic text-muted-foreground mt-4!">
                     Recent words added to this dictionary

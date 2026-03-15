@@ -76,7 +76,7 @@ export default function AboutSection() {
           <div className="text-xs text-muted-foreground font-mono shrink-0">Node 20 · Electron 28</div>
         </div>
 
-        <div className="flex items-center justify-between rounded-md  group gap-4">
+        {/* <div className="flex items-center justify-between rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -89,7 +89,7 @@ export default function AboutSection() {
             </div>
           </div>
           <a href="#" className="text-xs text-blue-600 hover:text-blue-800 underline shrink-0">View Docs</a>
-        </div>
+        </div> */}
 
         <div>
           <h2 className="text-xl font-semibold mb-2 mt-4">Connect</h2>
@@ -108,7 +108,12 @@ export default function AboutSection() {
               </div>
             </div>
           </div>
-          <a href="#" className="text-xs text-blue-600 hover:text-blue-800 underline shrink-0">Email Us</a>
+          <a
+            href="mailto:yassinpellicerlamla@gmail.com"
+            className="text-xs text-blue-600 hover:text-blue-800 underline shrink-0"
+          >
+            Email Us
+          </a>
         </div>
       </div>
     </div>
