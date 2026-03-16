@@ -1,5 +1,4 @@
 import {
-  BookOpen,
   CalendarDays,
   Cpu,
   Info,

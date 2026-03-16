@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Bell, Moon, Save, Globe, FerrisWheel, Brush } from "lucide-react";
+import { Bell, Moon, Brush } from "lucide-react";
 import useConfig from "../hooks";
 
 export default function GeneralSection() {
@@ -14,10 +14,6 @@ export default function GeneralSection() {
     preferences,
     setNotifications,
     setNotificationLifetime,
-    setLanguage,
-    setTimezone,
-    setDateFormat,
-    setAnimations,
     setAccentColor,
     setAppearance,
   } = useConfig();

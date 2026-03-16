@@ -1,8 +1,6 @@
 import { 
   Settings, 
-  Keyboard, 
   BookOpen, 
-  User, 
   Info 
 } from "lucide-react";
 import { cn } from "@/lib/utils";
