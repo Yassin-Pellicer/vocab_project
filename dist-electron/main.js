@@ -1,687 +1,959 @@
-import { BrowserWindow as E, Menu as V, ipcMain as c, app as F, dialog as H } from "electron";
-import { fileURLToPath as B } from "node:url";
-import l from "node:path";
-import h from "path";
-import a from "fs";
-import { randomFillSync as Z, randomUUID as q } from "node:crypto";
-import g, { promises as w } from "node:fs";
-const J = l.dirname(B(import.meta.url));
-process.env.APP_ROOT = l.join(J, "..");
-const D = process.env.VITE_DEV_SERVER_URL;
-l.join(process.env.APP_ROOT, "dist-electron");
-const A = l.join(process.env.APP_ROOT, "dist");
-process.env.VITE_PUBLIC = D ? l.join(process.env.APP_ROOT, "public") : A;
-function R(e, r) {
-  const o = new E({
+import { BrowserWindow, Menu, ipcMain, app, dialog } from "electron";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+import path$1 from "path";
+import fs from "fs";
+import { randomFillSync, randomUUID } from "node:crypto";
+import fs$1, { promises } from "node:fs";
+const __dirname$1 = path.dirname(fileURLToPath(import.meta.url));
+process.env.APP_ROOT = path.join(__dirname$1, "..");
+const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
+path.join(process.env.APP_ROOT, "dist-electron");
+const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
+process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, "public") : RENDERER_DIST;
+function createWindow(initialRoute, options) {
+  const win = new BrowserWindow({
     width: 1200,
     height: 800,
-    frame: !0,
+    frame: true,
     titleBarStyle: "hidden",
     backgroundColor: "#ffffff",
-    hasShadow: !1,
+    hasShadow: false,
     webPreferences: {
-      preload: l.join(J, "preload.mjs"),
+      preload: path.join(__dirname$1, "preload.mjs"),
       zoomFactor: 1
     }
   });
-  o.webContents.setVisualZoomLevelLimits(1, 5), o.webContents.openDevTools(), V.setApplicationMenu(null), o.webContents.on("did-finish-load", () => {
-    o == null || o.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
-  }), o.webContents.on("before-input-event", (n, s) => {
-    if (s.control)
-      if (s.key === "+") {
-        const i = o.webContents.getZoomFactor();
-        o.webContents.setZoomFactor(Math.min(i + 0.1, 5)), n.preventDefault();
-      } else if (s.key === "-") {
-        const i = o.webContents.getZoomFactor();
-        o.webContents.setZoomFactor(Math.max(i - 0.1, 0.5)), n.preventDefault();
-      } else s.key === "0" && (o.webContents.setZoomFactor(1), n.preventDefault());
+  win.webContents.setVisualZoomLevelLimits(1, 5);
+  win.webContents.openDevTools();
+  Menu.setApplicationMenu(null);
+  win.webContents.on("did-finish-load", () => {
+    win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
   });
-  const t = typeof (r == null ? void 0 : r.hideSidebar) == "boolean" ? `?hideSidebar=${r.hideSidebar ? "1" : "0"}` : "";
-  if (D) {
-    const n = e ? `#${encodeURIComponent(e)}` : "";
-    o.loadURL(`${D}${t}${n}`);
-  } else
-    o.loadFile(l.join(A, "index.html"), {
-      hash: e ? encodeURIComponent(e) : void 0,
-      search: t || void 0
+  win.webContents.on("before-input-event", (event, input) => {
+    if (!input.control) return;
+    if (input.key === "+") {
+      const current = win.webContents.getZoomFactor();
+      win.webContents.setZoomFactor(Math.min(current + 0.1, 5));
+      event.preventDefault();
+    } else if (input.key === "-") {
+      const current = win.webContents.getZoomFactor();
+      win.webContents.setZoomFactor(Math.max(current - 0.1, 0.5));
+      event.preventDefault();
+    } else if (input.key === "0") {
+      win.webContents.setZoomFactor(1);
+      event.preventDefault();
+    }
+  });
+  const search = typeof (options == null ? void 0 : options.hideSidebar) === "boolean" ? `?hideSidebar=${options.hideSidebar ? "1" : "0"}` : "";
+  if (VITE_DEV_SERVER_URL) {
+    const hash = initialRoute ? `#${encodeURIComponent(initialRoute)}` : "";
+    win.loadURL(`${VITE_DEV_SERVER_URL}${search}${hash}`);
+  } else {
+    win.loadFile(path.join(RENDERER_DIST, "index.html"), {
+      hash: initialRoute ? encodeURIComponent(initialRoute) : void 0,
+      search: search || void 0
     });
+  }
 }
-function K() {
-  c.handle("fetchConjugation", async (e, r, o, t) => {
+function fetchConjugation() {
+  ipcMain.handle("fetchConjugation", async (_event, route, name, uuid) => {
     try {
-      const n = h.join(r, `CONJ-${o}.json`);
-      console.log("Fetching conjugation from", n, t), a.existsSync(n) || a.writeFileSync(n, "{}", "utf-8");
-      const s = a.readFileSync(n, "utf-8");
-      return JSON.parse(s)[t] || {};
-    } catch (n) {
-      throw console.error("Error reading JSON file:", n), new Error("Failed to load JSON file.");
-    }
-  });
-}
-function X() {
-  c.handle("saveConjugation", async (e, r, o, t, n) => {
-    try {
-      const s = h.join(r, `CONJ-${o}.json`);
-      console.log("Saving conjugation to", s, "for uuid:", t);
-      let i = {};
-      if (a.existsSync(s)) {
-        const u = a.readFileSync(s, "utf-8");
-        i = JSON.parse(u);
+      const filePath = path$1.join(route, `CONJ-${name}.json`);
+      console.log("Fetching conjugation from", filePath, uuid);
+      if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, "{}", "utf-8");
       }
-      return i[t] = n, a.writeFileSync(s, JSON.stringify(i, null, 2), "utf-8"), console.log("Conjugation saved successfully"), { success: !0 };
-    } catch (s) {
-      throw console.error("Error saving conjugation:", s), new Error("Failed to save conjugation.");
+      const data = fs.readFileSync(filePath, "utf-8");
+      const json = JSON.parse(data);
+      return json[uuid] || {};
+    } catch (error) {
+      console.error("Error reading JSON file:", error);
+      throw new Error("Failed to load JSON file.");
     }
   });
 }
-function Y() {
-  c.handle("fetchMarkdown", async (e, r, o, t) => {
+function saveConjugation() {
+  ipcMain.handle("saveConjugation", async (_event, route, name, uuid, conjugation) => {
     try {
-      const n = r.replace(/\\/g, "/"), s = h.join(
-        n,
-        `MD-${o}`,
-        `${t}.json`
+      const filePath = path$1.join(route, `CONJ-${name}.json`);
+      console.log("Saving conjugation to", filePath, "for uuid:", uuid);
+      let json = {};
+      if (fs.existsSync(filePath)) {
+        const data = fs.readFileSync(filePath, "utf-8");
+        json = JSON.parse(data);
+      }
+      json[uuid] = conjugation;
+      fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+      console.log("Conjugation saved successfully");
+      return { success: true };
+    } catch (error) {
+      console.error("Error saving conjugation:", error);
+      throw new Error("Failed to save conjugation.");
+    }
+  });
+}
+function fetchMarkdown() {
+  ipcMain.handle("fetchMarkdown", async (_event, _route, _name, _uuid) => {
+    try {
+      const normalizedRoute = _route.replace(/\\/g, "/");
+      const filePath = path$1.join(
+        normalizedRoute,
+        `MD-${_name}`,
+        `${_uuid}.json`
       );
-      if (!a.existsSync(s))
+      if (!fs.existsSync(filePath)) {
         return { type: "doc", content: [] };
-      const i = a.readFileSync(s, "utf-8");
+      }
+      const data = fs.readFileSync(filePath, "utf-8");
       try {
-        return JSON.parse(i);
+        return JSON.parse(data);
       } catch {
         return { type: "doc", content: [] };
       }
-    } catch (n) {
-      throw console.error("Error reading markdown file:", n), new Error(`Failed to load markdown file: ${n}`);
+    } catch (error) {
+      console.error("Error reading markdown file:", error);
+      throw new Error(`Failed to load markdown file: ${error}`);
     }
   });
 }
-function Q() {
-  c.handle(
+function saveMarkdown() {
+  ipcMain.handle(
     "saveMarkdown",
-    async (e, r, o, t, n) => {
-      var s;
+    async (_event, _route, _name, _uuid, content) => {
+      var _a;
       try {
-        const i = r.replace(/\\/g, "/"), u = h.join(
-          i,
-          `MD-${o}`,
-          `${t}.json`
-        ), d = h.dirname(u), f = n && n.type === "doc" && Array.isArray(n.content) && n.content.length === 1 && n.content[0].type === "paragraph" && ((s = n.content[0].attrs) == null ? void 0 : s.textAlign) === null && !n.content[0].content;
-        return n === null || f ? (a.existsSync(u) && a.unlinkSync(u), { success: !0 }) : (a.mkdirSync(d, { recursive: !0 }), n === void 0 ? a.writeFileSync(u, "", "utf-8") : a.writeFileSync(u, JSON.stringify(n, null, 2), "utf-8"), { success: !0, path: u });
-      } catch (i) {
-        throw console.error("Error saving markdown file:", i), new Error(`Failed to save markdown file: ${i}`);
-      }
-    }
-  );
-}
-const y = [];
-for (let e = 0; e < 256; ++e)
-  y.push((e + 256).toString(16).slice(1));
-function ee(e, r = 0) {
-  return (y[e[r + 0]] + y[e[r + 1]] + y[e[r + 2]] + y[e[r + 3]] + "-" + y[e[r + 4]] + y[e[r + 5]] + "-" + y[e[r + 6]] + y[e[r + 7]] + "-" + y[e[r + 8]] + y[e[r + 9]] + "-" + y[e[r + 10]] + y[e[r + 11]] + y[e[r + 12]] + y[e[r + 13]] + y[e[r + 14]] + y[e[r + 15]]).toLowerCase();
-}
-const N = new Uint8Array(256);
-let O = N.length;
-function re() {
-  return O > N.length - 16 && (Z(N), O = 0), N.slice(O, O += 16);
-}
-const b = { randomUUID: q };
-function ne(e, r, o) {
-  var n;
-  e = e || {};
-  const t = e.random ?? ((n = e.rng) == null ? void 0 : n.call(e)) ?? re();
-  if (t.length < 16)
-    throw new Error("Random bytes length must be >= 16");
-  return t[6] = t[6] & 15 | 64, t[8] = t[8] & 63 | 128, ee(t);
-}
-function T(e, r, o) {
-  return b.randomUUID && !e ? b.randomUUID() : ne(e);
-}
-function m(e, r) {
-  for (const o of E.getAllWindows())
-    o.isDestroyed() || o.webContents.send(e, r);
-}
-function te() {
-  c.handle(
-    "addTranslation",
-    async (e, r, o, t, n) => {
-      try {
-        const s = h.join(t, `${n}.json`);
-        if (!a.existsSync(s))
-          throw new Error(`The file ${s} does not exist.`);
-        const i = JSON.parse(a.readFileSync(s, "utf-8"));
-        let u = Array.isArray(i) ? i : [];
-        if (o)
-          u = u.filter(
-            (d) => d.uuid !== o
-          );
-        else {
-          const d = r.uuid || T();
-          r.uuid = d;
-          const f = h.join(t, `GRAPH-${n}.json`);
-          console.log("Saving graph to", f, "for uuid:", r.uuid);
-          let p = {};
-          a.existsSync(f) && (p = JSON.parse(a.readFileSync(f, "utf-8"))), p[d] = {}, a.writeFileSync(f, JSON.stringify(p, null, 2), "utf-8");
+        const normalizedRoute = _route.replace(/\\/g, "/");
+        const filePath = path$1.join(
+          normalizedRoute,
+          `MD-${_name}`,
+          `${_uuid}.json`
+        );
+        const dir = path$1.dirname(filePath);
+        const isEmptyDoc = content && content.type === "doc" && Array.isArray(content.content) && content.content.length === 1 && content.content[0].type === "paragraph" && ((_a = content.content[0].attrs) == null ? void 0 : _a.textAlign) === null && !content.content[0].content;
+        if (content === null || isEmptyDoc) {
+          if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+          }
+          return { success: true };
         }
-        return u.push(r), a.writeFileSync(
-          s,
-          JSON.stringify(u, null, 2),
-          "utf-8"
-        ), m("app-data-changed"), { success: !0 };
-      } catch (s) {
-        throw console.error("Error adding translation:", s), new Error(`Failed to add translation. ${t}, ${s}`);
+        fs.mkdirSync(dir, { recursive: true });
+        if (content === void 0) {
+          fs.writeFileSync(filePath, "", "utf-8");
+        } else {
+          fs.writeFileSync(filePath, JSON.stringify(content, null, 2), "utf-8");
+        }
+        return { success: true, path: filePath };
+      } catch (error) {
+        console.error("Error saving markdown file:", error);
+        throw new Error(`Failed to save markdown file: ${error}`);
       }
     }
   );
 }
-const oe = "user-config.json", ie = "user-preferences.json", se = () => F.getPath("userData"), C = (e) => l.join(se(), e);
-async function _(e) {
-  await w.mkdir(l.dirname(e), { recursive: !0 });
+const byteToHex = [];
+for (let i = 0; i < 256; ++i) {
+  byteToHex.push((i + 256).toString(16).slice(1));
 }
-async function U(e, r) {
-  try {
-    const o = await w.readFile(e, "utf-8");
-    return JSON.parse(o);
-  } catch (o) {
-    if (typeof o == "object" && o !== null && "code" in o && o.code === "ENOENT")
-      return await _(e), await w.writeFile(e, JSON.stringify(r, null, 2), "utf-8"), r;
-    throw o;
+function unsafeStringify(arr, offset = 0) {
+  return (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
+}
+const rnds8Pool = new Uint8Array(256);
+let poolPtr = rnds8Pool.length;
+function rng() {
+  if (poolPtr > rnds8Pool.length - 16) {
+    randomFillSync(rnds8Pool);
+    poolPtr = 0;
+  }
+  return rnds8Pool.slice(poolPtr, poolPtr += 16);
+}
+const native = { randomUUID };
+function _v4(options, buf, offset) {
+  var _a;
+  options = options || {};
+  const rnds = options.random ?? ((_a = options.rng) == null ? void 0 : _a.call(options)) ?? rng();
+  if (rnds.length < 16) {
+    throw new Error("Random bytes length must be >= 16");
+  }
+  rnds[6] = rnds[6] & 15 | 64;
+  rnds[8] = rnds[8] & 63 | 128;
+  return unsafeStringify(rnds);
+}
+function v4(options, buf, offset) {
+  if (native.randomUUID && true && !options) {
+    return native.randomUUID();
+  }
+  return _v4(options);
+}
+function broadcastToAllWindows(channel, payload) {
+  for (const win of BrowserWindow.getAllWindows()) {
+    if (win.isDestroyed()) continue;
+    win.webContents.send(channel, payload);
   }
 }
-async function k(e, r) {
-  await _(e);
-  const o = `${e}.${process.pid}.${Date.now()}.tmp`;
-  await w.writeFile(o, JSON.stringify(r, null, 2), "utf-8"), await w.rename(o, e);
-}
-const ae = {}, ce = {}, W = () => C(oe), I = () => C(ie);
-async function j() {
-  const e = W();
-  return U(e, ae);
-}
-async function P(e) {
-  return k(W(), e);
-}
-async function z() {
-  const e = I();
-  return U(e, ce);
-}
-async function le(e) {
-  return k(I(), e);
-}
-function ue() {
-  c.handle(
-    "createDictionary",
-    async (e, r, o) => {
+function addTranslation() {
+  ipcMain.handle(
+    "addTranslation",
+    async (_event, entry, _word, _route, _name) => {
       try {
-        const t = T(), n = l.resolve(r, t), s = l.join(n, `${t}.json`), i = l.join(n, "MD-" + t), u = l.join(n, "NOTES-" + t);
-        if (!g.existsSync(r))
-          throw new Error(`The folder ${r} does not exist.`);
-        g.existsSync(n) || g.mkdirSync(n, { recursive: !0 }), g.writeFileSync(s, JSON.stringify([], null, 2), "utf-8"), g.mkdirSync(i, { recursive: !0 }), g.mkdirSync(u, { recursive: !0 });
-        const d = await j();
-        return d.dictionaries || (d.dictionaries = {}), d.dictionaries[t] = {
-          name: o,
-          route: n,
+        const filePath = path$1.join(_route, `${_name}.json`);
+        if (!fs.existsSync(filePath)) {
+          throw new Error(`The file ${filePath} does not exist.`);
+        }
+        const json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        let translations = Array.isArray(json) ? json : [];
+        if (_word) {
+          translations = translations.filter(
+            (t) => t.uuid !== _word
+          );
+        } else {
+          const entryUuid = entry.uuid || v4();
+          entry.uuid = entryUuid;
+          const GraphfilePath = path$1.join(_route, `GRAPH-${_name}.json`);
+          console.log("Saving graph to", GraphfilePath, "for uuid:", entry.uuid);
+          let jsonGraph = {};
+          if (fs.existsSync(GraphfilePath)) {
+            jsonGraph = JSON.parse(fs.readFileSync(GraphfilePath, "utf-8"));
+          }
+          jsonGraph[entryUuid] = {};
+          fs.writeFileSync(GraphfilePath, JSON.stringify(jsonGraph, null, 2), "utf-8");
+        }
+        translations.push(entry);
+        fs.writeFileSync(
+          filePath,
+          JSON.stringify(translations, null, 2),
+          "utf-8"
+        );
+        broadcastToAllWindows("app-data-changed");
+        return { success: true };
+      } catch (error) {
+        console.error("Error adding translation:", error);
+        throw new Error(`Failed to add translation. ${_route}, ${error}`);
+      }
+    }
+  );
+}
+const USER_CONFIG_FILENAME = "user-config.json";
+const USER_PREFERENCES_FILENAME = "user-preferences.json";
+const getUserDataDir = () => app.getPath("userData");
+const getUserDataFilePath = (filename) => path.join(getUserDataDir(), filename);
+async function ensureParentDir(filePath) {
+  await promises.mkdir(path.dirname(filePath), { recursive: true });
+}
+async function readJsonFile(filePath, defaultValue) {
+  try {
+    const raw = await promises.readFile(filePath, "utf-8");
+    return JSON.parse(raw);
+  } catch (error) {
+    if (typeof error === "object" && error !== null && "code" in error && error.code === "ENOENT") {
+      await ensureParentDir(filePath);
+      await promises.writeFile(filePath, JSON.stringify(defaultValue, null, 2), "utf-8");
+      return defaultValue;
+    }
+    throw error;
+  }
+}
+async function writeJsonFile(filePath, value) {
+  await ensureParentDir(filePath);
+  const tmpPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
+  await promises.writeFile(tmpPath, JSON.stringify(value, null, 2), "utf-8");
+  await promises.rename(tmpPath, filePath);
+}
+const defaultUserConfig = {};
+const defaultUserPreferences = {};
+const getUserConfigPath = () => getUserDataFilePath(USER_CONFIG_FILENAME);
+const getUserPreferencesPath = () => getUserDataFilePath(USER_PREFERENCES_FILENAME);
+async function readUserConfig() {
+  const filePath = getUserConfigPath();
+  return readJsonFile(filePath, defaultUserConfig);
+}
+async function writeUserConfig(config) {
+  return writeJsonFile(getUserConfigPath(), config);
+}
+async function readUserPreferences() {
+  const filePath = getUserPreferencesPath();
+  return readJsonFile(filePath, defaultUserPreferences);
+}
+async function writeUserPreferences(prefs) {
+  return writeJsonFile(getUserPreferencesPath(), prefs);
+}
+function createDictionary() {
+  ipcMain.handle(
+    "createDictionary",
+    async (_event, _route, _name) => {
+      try {
+        const folderName = v4();
+        const folderPath = path.resolve(_route, folderName);
+        const filePath = path.join(folderPath, `${folderName}.json`);
+        const mdPath = path.join(folderPath, "MD-" + folderName);
+        const notesPath = path.join(folderPath, "NOTES-" + folderName);
+        if (!fs$1.existsSync(_route)) {
+          throw new Error(`The folder ${_route} does not exist.`);
+        }
+        if (!fs$1.existsSync(folderPath)) {
+          fs$1.mkdirSync(folderPath, { recursive: true });
+        }
+        fs$1.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
+        fs$1.mkdirSync(mdPath, { recursive: true });
+        fs$1.mkdirSync(notesPath, { recursive: true });
+        const config = await readUserConfig();
+        if (!config.dictionaries) {
+          config.dictionaries = {};
+        }
+        config.dictionaries[folderName] = {
+          name: _name,
+          route: folderPath,
           typeWordWithPrecededArticle: "",
           typeWordWithTenses: ""
-        }, await P(d), m("app-data-changed"), {
-          success: !0,
-          folderName: t,
-          folderPath: n
         };
-      } catch (t) {
-        throw console.error("❌ Error creating dictionary:", t), new Error("Failed to create dictionary.");
+        await writeUserConfig(config);
+        broadcastToAllWindows("app-data-changed");
+        return {
+          success: true,
+          folderName,
+          folderPath
+        };
+      } catch (error) {
+        console.error("❌ Error creating dictionary:", error);
+        throw new Error("Failed to create dictionary.");
       }
     }
   );
 }
-function de() {
-  c.handle(
+function deleteTranslation() {
+  ipcMain.handle(
     "deleteTranslation",
-    async (e, r, o, t) => {
+    async (_event, _word, _route, _name) => {
       try {
-        const n = h.join(o, `${t}.json`);
-        if (!a.existsSync(n))
-          throw new Error(`The file ${n} does not exist.`);
-        const s = a.readFileSync(n, "utf-8"), i = JSON.parse(s), d = (Array.isArray(i) ? i : []).filter((f) => f.uuid !== r);
+        const filePath = path$1.join(_route, `${_name}.json`);
+        if (!fs.existsSync(filePath)) {
+          throw new Error(`The file ${filePath} does not exist.`);
+        }
+        const data = fs.readFileSync(filePath, "utf-8");
+        const json = JSON.parse(data);
+        const translations = Array.isArray(json) ? json : [];
+        const nextTranslations = translations.filter((t) => t.uuid !== _word);
         {
-          const f = h.join(o, `GRAPH-${t}.json`);
+          const filePath2 = path$1.join(_route, `GRAPH-${_name}.json`);
           console.log(
             "Deleting graph entry from",
-            f,
+            filePath2,
             "for uuid:",
-            r
+            _word
           );
-          let p = {};
-          a.existsSync(f) && (p = JSON.parse(a.readFileSync(f, "utf-8"))), p[r] && delete p[r], a.writeFileSync(f, JSON.stringify(p, null, 2), "utf-8"), console.log("Graph entry deleted successfully");
+          let json2 = {};
+          if (fs.existsSync(filePath2)) {
+            json2 = JSON.parse(fs.readFileSync(filePath2, "utf-8"));
+          }
+          if (json2[_word]) {
+            delete json2[_word];
+          }
+          fs.writeFileSync(filePath2, JSON.stringify(json2, null, 2), "utf-8");
+          console.log("Graph entry deleted successfully");
         }
-        return a.writeFileSync(
-          n,
-          JSON.stringify(d, null, 2),
+        fs.writeFileSync(
+          filePath,
+          JSON.stringify(nextTranslations, null, 2),
           "utf-8"
-        ), m("app-data-changed"), { success: !0, message: "Translation added successfully." };
-      } catch (n) {
-        throw console.error("Error adding translation:", n), new Error(`Failed to delete translation. ${n}`);
+        );
+        broadcastToAllWindows("app-data-changed");
+        return { success: true, message: "Translation added successfully." };
+      } catch (error) {
+        console.error("Error adding translation:", error);
+        throw new Error(`Failed to delete translation. ${error}`);
       }
     }
   );
 }
-function fe(e) {
-  g.existsSync(e) && g.rmSync(e, { recursive: !0, force: !0 });
-}
-function he() {
-  c.handle(
-    "deleteDictionary",
-    async (e, r) => {
-      try {
-        const o = await j();
-        if (!o.dictionaries || !o.dictionaries[r])
-          throw new Error(`Dictionary with id "${r}" not found in config.`);
-        const t = o.dictionaries[r], n = l.resolve(t.route);
-        if (!g.existsSync(n) || !g.statSync(n).isDirectory())
-          throw new Error(`Dictionary folder does not exist: ${n}`);
-        return fe(n), delete o.dictionaries[r], await P(o), m("app-data-changed"), {
-          success: !0,
-          deletedId: r,
-          deletedPath: n
-        };
-      } catch (o) {
-        throw console.error("❌ Error deleting dictionary:", o), new Error("Failed to delete dictionary.");
-      }
-    }
-  );
-}
-function ye() {
-  c.handle(
-    "renameDictionary",
-    async (e, r, o) => {
-      try {
-        const t = await j();
-        if (!t.dictionaries || !t.dictionaries[r])
-          throw new Error(`Dictionary with id "${r}" not found in config.`);
-        if (!o || o.trim() === "")
-          throw new Error("Dictionary name cannot be empty.");
-        return t.dictionaries[r].name = o.trim(), await P(t), m("app-data-changed"), {
-          success: !0,
-          dictId: r,
-          newName: o.trim()
-        };
-      } catch (t) {
-        throw console.error("❌ Error renaming dictionary:", t), new Error("Failed to rename dictionary.");
-      }
-    }
-  );
-}
-function we() {
-  c.handle("loadConfig", async () => {
-    try {
-      return await j();
-    } catch (e) {
-      throw console.error("Error reading JSON file:", e), new Error("Failed to load JSON file.");
-    }
-  });
-}
-function pe() {
-  c.handle("loadTranslations", async (e, r, o) => {
-    try {
-      const t = h.join(r, `${o}.json`);
-      if (!a.existsSync(t))
-        return [];
-      const n = a.readFileSync(t, "utf-8"), s = JSON.parse(n || "[]");
-      return Array.isArray(s) ? s : [];
-    } catch (t) {
-      return console.error("Error reading JSON file:", t), [];
-    }
-  });
-}
-async function G(e, r) {
-  await w.mkdir(r, { recursive: !0 });
-  const o = await w.readdir(e, { withFileTypes: !0 });
-  for (const t of o) {
-    const n = l.join(e, t.name), s = l.join(r, t.name);
-    t.isDirectory() ? await G(n, s) : await w.copyFile(n, s);
+function removeDirRecursive$1(dir) {
+  if (fs$1.existsSync(dir)) {
+    fs$1.rmSync(dir, { recursive: true, force: true });
   }
 }
-const ge = (e) => w.rm(e, { recursive: !0, force: !0 });
-function me() {
-  c.handle(
-    "moveDictionary",
-    async (e, r, o) => {
+function deleteDictionary() {
+  ipcMain.handle(
+    "deleteDictionary",
+    async (_event, dictId) => {
       try {
-        const t = await j();
-        if (!t.dictionaries || !t.dictionaries[r])
-          throw new Error(`Dictionary with id "${r}" not found in config.`);
-        const s = t.dictionaries[r].route, i = l.resolve(s), u = l.resolve(o), d = await w.stat(i).catch(() => null);
-        if (!(d != null && d.isDirectory()))
-          throw new Error(`Source folder does not exist or is not a directory: ${i}`);
-        const f = await w.stat(u).catch(() => null);
-        if (!(f != null && f.isDirectory()))
-          throw new Error(`Destination folder does not exist or is not a directory: ${u}`);
-        const p = l.basename(i), v = l.join(u, p), M = (S, L) => {
-          const $ = l.relative(S, L);
-          return !!$ && !$.startsWith("..") && !l.isAbsolute($);
-        };
-        if (i === v)
-          return { success: !0, oldRoute: i, newRoute: v };
-        if (M(i, v))
-          throw new Error("Cannot move a folder into one of its own subdirectories.");
-        if (await w.stat(v).catch(() => null))
-          throw new Error(
-            `A folder named "${p}" already exists at the destination (${v}).`
-          );
-        let x = !1;
-        try {
-          await w.rename(i, v), x = !0;
-        } catch (S) {
-          if (typeof S == "object" && S !== null && "code" in S && S.code === "EXDEV")
-            await G(i, v), await ge(i), x = !0;
-          else
-            throw S;
+        const config = await readUserConfig();
+        if (!config.dictionaries || !config.dictionaries[dictId]) {
+          throw new Error(`Dictionary with id "${dictId}" not found in config.`);
         }
-        if (!x)
-          throw new Error("Failed to move dictionary folder for unknown reasons.");
-        return t.dictionaries[r].route = v, await P(t), m("app-data-changed"), {
-          success: !0,
-          oldRoute: i,
-          newRoute: v
+        const dictEntry = config.dictionaries[dictId];
+        const dictPath = path.resolve(dictEntry.route);
+        if (!fs$1.existsSync(dictPath) || !fs$1.statSync(dictPath).isDirectory()) {
+          throw new Error(`Dictionary folder does not exist: ${dictPath}`);
+        }
+        removeDirRecursive$1(dictPath);
+        delete config.dictionaries[dictId];
+        await writeUserConfig(config);
+        broadcastToAllWindows("app-data-changed");
+        return {
+          success: true,
+          deletedId: dictId,
+          deletedPath: dictPath
         };
-      } catch (t) {
-        throw console.error("❌ Error moving dictionary:", t), new Error("Failed to move dictionary.");
+      } catch (error) {
+        console.error("❌ Error deleting dictionary:", error);
+        throw new Error("Failed to delete dictionary.");
       }
     }
   );
 }
-function ve() {
-  c.handle("selectFolder", async () => {
+function renameDictionary() {
+  ipcMain.handle(
+    "renameDictionary",
+    async (_event, dictId, newName) => {
+      try {
+        const config = await readUserConfig();
+        if (!config.dictionaries || !config.dictionaries[dictId]) {
+          throw new Error(`Dictionary with id "${dictId}" not found in config.`);
+        }
+        if (!newName || newName.trim() === "") {
+          throw new Error("Dictionary name cannot be empty.");
+        }
+        config.dictionaries[dictId].name = newName.trim();
+        await writeUserConfig(config);
+        broadcastToAllWindows("app-data-changed");
+        return {
+          success: true,
+          dictId,
+          newName: newName.trim()
+        };
+      } catch (error) {
+        console.error("❌ Error renaming dictionary:", error);
+        throw new Error("Failed to rename dictionary.");
+      }
+    }
+  );
+}
+function loadConfig() {
+  ipcMain.handle("loadConfig", async () => {
     try {
-      const e = await H.showOpenDialog({
+      return await readUserConfig();
+    } catch (error) {
+      console.error("Error reading JSON file:", error);
+      throw new Error("Failed to load JSON file.");
+    }
+  });
+}
+function loadTranslations() {
+  ipcMain.handle("loadTranslations", async (_event, _route, _name) => {
+    try {
+      const filePath = path$1.join(_route, `${_name}.json`);
+      if (!fs.existsSync(filePath)) {
+        return [];
+      }
+      const data = fs.readFileSync(filePath, "utf-8");
+      const json = JSON.parse(data || "[]");
+      return Array.isArray(json) ? json : [];
+    } catch (error) {
+      console.error("Error reading JSON file:", error);
+      return [];
+    }
+  });
+}
+async function copyDirRecursive(src, dest) {
+  await promises.mkdir(dest, { recursive: true });
+  const entries = await promises.readdir(src, { withFileTypes: true });
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      await copyDirRecursive(srcPath, destPath);
+    } else {
+      await promises.copyFile(srcPath, destPath);
+    }
+  }
+}
+const removeDirRecursive = (dir) => promises.rm(dir, { recursive: true, force: true });
+function moveDictionary() {
+  ipcMain.handle(
+    "moveDictionary",
+    async (_event, dictId, newRoute) => {
+      try {
+        const config = await readUserConfig();
+        if (!config.dictionaries || !config.dictionaries[dictId]) {
+          throw new Error(`Dictionary with id "${dictId}" not found in config.`);
+        }
+        const dictEntry = config.dictionaries[dictId];
+        const oldRouteRaw = dictEntry.route;
+        const srcDir = path.resolve(oldRouteRaw);
+        const destParent = path.resolve(newRoute);
+        const srcStats = await promises.stat(srcDir).catch(() => null);
+        if (!(srcStats == null ? void 0 : srcStats.isDirectory())) {
+          throw new Error(`Source folder does not exist or is not a directory: ${srcDir}`);
+        }
+        const destStats = await promises.stat(destParent).catch(() => null);
+        if (!(destStats == null ? void 0 : destStats.isDirectory())) {
+          throw new Error(`Destination folder does not exist or is not a directory: ${destParent}`);
+        }
+        const folderName = path.basename(srcDir);
+        const newFolderPath = path.join(destParent, folderName);
+        const isSubPath = (parent, child) => {
+          const relative = path.relative(parent, child);
+          return !!relative && !relative.startsWith("..") && !path.isAbsolute(relative);
+        };
+        if (srcDir === newFolderPath) {
+          return { success: true, oldRoute: srcDir, newRoute: newFolderPath };
+        }
+        if (isSubPath(srcDir, newFolderPath)) {
+          throw new Error("Cannot move a folder into one of its own subdirectories.");
+        }
+        if (await promises.stat(newFolderPath).catch(() => null)) {
+          throw new Error(
+            `A folder named "${folderName}" already exists at the destination (${newFolderPath}).`
+          );
+        }
+        let moved = false;
+        try {
+          await promises.rename(srcDir, newFolderPath);
+          moved = true;
+        } catch (error) {
+          if (typeof error === "object" && error !== null && "code" in error && error.code === "EXDEV") {
+            await copyDirRecursive(srcDir, newFolderPath);
+            await removeDirRecursive(srcDir);
+            moved = true;
+          } else {
+            throw error;
+          }
+        }
+        if (!moved) {
+          throw new Error("Failed to move dictionary folder for unknown reasons.");
+        }
+        config.dictionaries[dictId].route = newFolderPath;
+        await writeUserConfig(config);
+        broadcastToAllWindows("app-data-changed");
+        return {
+          success: true,
+          oldRoute: srcDir,
+          newRoute: newFolderPath
+        };
+      } catch (error) {
+        console.error("❌ Error moving dictionary:", error);
+        throw new Error("Failed to move dictionary.");
+      }
+    }
+  );
+}
+function selectFolder() {
+  ipcMain.handle("selectFolder", async () => {
+    try {
+      const result = await dialog.showOpenDialog({
         properties: ["openDirectory"]
       });
-      return e.canceled ? null : e.filePaths[0];
-    } catch (e) {
-      throw console.error("Error selecting folder:", e), new Error("Failed to select folder.");
+      if (result.canceled) {
+        return null;
+      }
+      return result.filePaths[0];
+    } catch (error) {
+      console.error("Error selecting folder:", error);
+      throw new Error("Failed to select folder.");
     }
   });
 }
-function Se() {
-  c.handle("fetchGraph", async (e, r, o, t) => {
+function fetchGraph() {
+  ipcMain.handle("fetchGraph", async (_event, route, name, _uuid) => {
     try {
-      const n = h.join(r, `GRAPH-${o}.json`);
-      console.log("Fetching graph from", n, "for dictionary", o), a.existsSync(n) || a.writeFileSync(n, "{}", "utf-8");
-      const s = a.readFileSync(n, "utf-8"), i = JSON.parse(s);
-      return t ? i[t] || {} : i || {};
-    } catch (n) {
-      throw console.error("Error reading JSON file:", n), new Error("Failed to load JSON file.");
+      const filePath = path$1.join(route, `GRAPH-${name}.json`);
+      console.log("Fetching graph from", filePath, "for dictionary", name);
+      if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, "{}", "utf-8");
+      }
+      const data = fs.readFileSync(filePath, "utf-8");
+      const json = JSON.parse(data);
+      if (_uuid) {
+        return json[_uuid] || {};
+      }
+      return json || {};
+    } catch (error) {
+      console.error("Error reading JSON file:", error);
+      throw new Error("Failed to load JSON file.");
     }
   });
 }
-function Ee() {
-  c.handle(
+function saveGraph() {
+  ipcMain.handle(
     "saveGraph",
-    async (e, r, o, t, n) => {
+    async (_event, route, name, origin, destination) => {
       try {
-        const s = h.join(r, `GRAPH-${o}.json`);
-        let i = {};
-        return a.existsSync(s) && (i = JSON.parse(a.readFileSync(s, "utf-8"))), i[t.uuid] || (i[t.uuid] = {}), i[n.uuid] || (i[n.uuid] = {}), i[t.uuid][n.uuid] = n.word, i[n.uuid][t.uuid] = t.word, a.writeFileSync(s, JSON.stringify(i, null, 2), "utf-8"), console.log("Graph saved successfully"), { success: !0 };
-      } catch (s) {
-        throw console.error("Error saving graph:", s), new Error("Failed to save graph.");
+        const filePath = path$1.join(route, `GRAPH-${name}.json`);
+        let json = {};
+        if (fs.existsSync(filePath)) {
+          json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        }
+        if (!json[origin.uuid]) {
+          json[origin.uuid] = {};
+        }
+        if (!json[destination.uuid]) {
+          json[destination.uuid] = {};
+        }
+        json[origin.uuid][destination.uuid] = destination.word;
+        json[destination.uuid][origin.uuid] = origin.word;
+        fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        console.log("Graph saved successfully");
+        return { success: true };
+      } catch (error) {
+        console.error("Error saving graph:", error);
+        throw new Error("Failed to save graph.");
       }
     }
   );
 }
-function je() {
-  c.handle(
+function deleteGraphEntry() {
+  ipcMain.handle(
     "deleteGraphEntry",
-    async (e, r, o, t, n) => {
+    async (_event, route, name, origin, destination) => {
       try {
-        const s = h.join(r, `GRAPH-${o}.json`);
-        let i = {};
-        return a.existsSync(s) && (i = JSON.parse(a.readFileSync(s, "utf-8"))), i[t.uuid] && delete i[t.uuid][n.uuid], i[n.uuid] && delete i[n.uuid][t.uuid], a.writeFileSync(s, JSON.stringify(i, null, 2), "utf-8"), console.log("Graph entry deleted successfully"), { success: !0 };
-      } catch (s) {
-        throw console.error("Error deleting graph entry:", s), new Error("Failed to delete graph entry.");
+        const filePath = path$1.join(route, `GRAPH-${name}.json`);
+        let json = {};
+        if (fs.existsSync(filePath)) {
+          json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        }
+        if (json[origin.uuid]) {
+          delete json[origin.uuid][destination.uuid];
+        }
+        if (json[destination.uuid]) {
+          delete json[destination.uuid][origin.uuid];
+        }
+        fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        console.log("Graph entry deleted successfully");
+        return { success: true };
+      } catch (error) {
+        console.error("Error deleting graph entry:", error);
+        throw new Error("Failed to delete graph entry.");
       }
     }
   );
 }
-function Fe() {
-  c.handle(
+function saveUserPreferences() {
+  ipcMain.handle(
     "saveUserPreferences",
-    async (e, r) => {
+    async (_event, _config) => {
       try {
-        const t = { ...await z(), ...r };
-        return await le(t), m("app-data-changed"), t;
-      } catch (o) {
-        throw console.error("Error saving user preferences file:", o), new Error("Failed to save user preferences file.");
+        const current = await readUserPreferences();
+        const merged = { ...current, ..._config };
+        await writeUserPreferences(merged);
+        broadcastToAllWindows("app-data-changed");
+        return merged;
+      } catch (error) {
+        console.error("Error saving user preferences file:", error);
+        throw new Error("Failed to save user preferences file.");
       }
     }
   );
 }
-function Pe() {
-  c.handle("loadUserPreferences", async () => {
+function loadUserPreferences() {
+  ipcMain.handle("loadUserPreferences", async () => {
     try {
-      return await z();
-    } catch (e) {
-      throw console.error("Error reading user preferences file:", e), new Error("Failed to load user preferences file.");
+      return await readUserPreferences();
+    } catch (error) {
+      console.error("Error reading user preferences file:", error);
+      throw new Error("Failed to load user preferences file.");
     }
   });
 }
-function Oe() {
-  c.handle(
+function editConfig() {
+  ipcMain.handle(
     "editConfig",
-    async (e, r) => {
+    async (_event, _config) => {
       try {
-        const t = { ...await j(), ...r };
-        return await P(t), m("app-data-changed"), t;
-      } catch (o) {
-        throw console.error("Error saving user preferences file:", o), new Error("Failed to save user preferences file.");
+        const current = await readUserConfig();
+        const merged = { ...current, ..._config };
+        await writeUserConfig(merged);
+        broadcastToAllWindows("app-data-changed");
+        return merged;
+      } catch (error) {
+        console.error("Error saving user preferences file:", error);
+        throw new Error("Failed to save user preferences file.");
       }
     }
   );
 }
-function Ne() {
-  c.handle("fetchNoteIndex", async (e, r, o) => {
+function fetchNoteIndex() {
+  ipcMain.handle("fetchNoteIndex", async (_event, _route, _name) => {
     try {
-      const t = r.replace(/\\/g, "/"), n = h.join(
-        t,
-        `NOTES-${o}`,
-        `NOTES-INDEX-${o}.json`
+      const normalizedRoute = _route.replace(/\\/g, "/");
+      const filePath = path$1.join(
+        normalizedRoute,
+        `NOTES-${_name}`,
+        `NOTES-INDEX-${_name}.json`
       );
-      a.existsSync(n) || (a.mkdirSync(h.dirname(n), { recursive: !0 }), a.writeFileSync(n, JSON.stringify([], null, 2), "utf-8"));
-      const s = a.readFileSync(n, "utf-8");
-      return JSON.parse(s);
-    } catch (t) {
-      throw console.error("Error reading markdown file:", t), new Error(`Failed to load markdown file: ${t}`);
+      if (!fs.existsSync(filePath)) {
+        fs.mkdirSync(path$1.dirname(filePath), { recursive: true });
+        fs.writeFileSync(filePath, JSON.stringify([], null, 2), "utf-8");
+      }
+      const data = fs.readFileSync(filePath, "utf-8");
+      const json = JSON.parse(data);
+      return json;
+    } catch (error) {
+      console.error("Error reading markdown file:", error);
+      throw new Error(`Failed to load markdown file: ${error}`);
     }
   });
 }
-function xe() {
-  c.handle(
+function saveNoteIndex() {
+  ipcMain.handle(
     "saveNoteIndex",
-    async (e, r, o, t) => {
+    async (_event, _route, _name, currentConfig) => {
       try {
-        const n = r.replace(/\\/g, "/"), s = h.join(
-          n,
-          `NOTES-${o}`,
-          `NOTES-INDEX-${o}.json`
+        const normalizedRoute = _route.replace(/\\/g, "/");
+        const indexFilePath = path$1.join(
+          normalizedRoute,
+          `NOTES-${_name}`,
+          `NOTES-INDEX-${_name}.json`
         );
-        return a.writeFileSync(s, JSON.stringify(t, null, 2), "utf-8"), m("notes-changed", {
-          route: n,
-          name: o
-        }), { success: !0, path: s };
-      } catch (n) {
-        throw console.error("Error saving JSON file:", n), new Error(`Failed to save JSON file: ${n}`);
+        fs.writeFileSync(indexFilePath, JSON.stringify(currentConfig, null, 2), "utf-8");
+        broadcastToAllWindows("notes-changed", {
+          route: normalizedRoute,
+          name: _name
+        });
+        return { success: true, path: indexFilePath };
+      } catch (error) {
+        console.error("Error saving JSON file:", error);
+        throw new Error(`Failed to save JSON file: ${error}`);
       }
     }
   );
 }
-function $e() {
-  c.handle("saveNotes", async (e, r, o, t, n) => {
+function saveNotes() {
+  ipcMain.handle("saveNotes", async (_event, route, name, uuid, content) => {
     try {
-      if (typeof r != "string" || typeof o != "string")
+      if (typeof route !== "string" || typeof name !== "string") {
         throw new Error("Invalid note route/name.");
-      if (typeof t != "string" || !t.trim())
-        return { success: !1, error: "Invalid note id." };
-      const s = r.replace(/\\/g, "/"), i = h.join(
-        s,
-        `NOTES-${o}`,
-        `${t}.json`
-      ), u = h.dirname(i);
-      a.mkdirSync(u, { recursive: !0 });
-      const d = n && typeof n == "object" ? n : { type: "doc", content: [] };
-      return a.writeFileSync(i, JSON.stringify(d, null, 2), "utf-8"), m("notes-changed", {
-        route: s,
-        name: o,
-        uuid: t
-      }), { success: !0, path: i };
-    } catch (s) {
-      throw console.error("Error saving markdown file:", s), new Error(`Failed to save markdown file: ${s}`);
+      }
+      if (typeof uuid !== "string" || !uuid.trim()) {
+        return { success: false, error: "Invalid note id." };
+      }
+      const normalizedRoute = route.replace(/\\/g, "/");
+      const filePath = path$1.join(
+        normalizedRoute,
+        `NOTES-${name}`,
+        `${uuid}.json`
+      );
+      const dir = path$1.dirname(filePath);
+      fs.mkdirSync(dir, { recursive: true });
+      const safeContent = content && typeof content === "object" ? content : { type: "doc", content: [] };
+      fs.writeFileSync(filePath, JSON.stringify(safeContent, null, 2), "utf-8");
+      broadcastToAllWindows("notes-changed", {
+        route: normalizedRoute,
+        name,
+        uuid
+      });
+      return { success: true, path: filePath };
+    } catch (error) {
+      console.error("Error saving markdown file:", error);
+      throw new Error(`Failed to save markdown file: ${error}`);
     }
   });
 }
-function De() {
-  c.handle("fetchNotes", async (e, r, o, t) => {
+function fetchNotes() {
+  ipcMain.handle("fetchNotes", async (_event, _route, _name, _uuid) => {
     try {
-      const n = r.replace(/\\/g, "/"), s = h.join(
-        n,
-        `NOTES-${o}`,
-        `${t}.json`
+      const normalizedRoute = _route.replace(/\\/g, "/");
+      const filePath = path$1.join(
+        normalizedRoute,
+        `NOTES-${_name}`,
+        `${_uuid}.json`
       );
-      if (!a.existsSync(s))
+      if (!fs.existsSync(filePath)) {
         return { type: "doc", content: [] };
-      const i = a.readFileSync(s, "utf-8");
+      }
+      const data = fs.readFileSync(filePath, "utf-8");
       try {
-        return JSON.parse(i);
+        return JSON.parse(data);
       } catch {
         return { type: "doc", content: [] };
       }
-    } catch (n) {
-      return console.error("Error reading note file:", n), { type: "doc", content: [] };
+    } catch (error) {
+      console.error("Error reading note file:", error);
+      return { type: "doc", content: [] };
     }
   });
 }
-function Re() {
-  c.handle("window-minimize", () => {
-    const e = E.getFocusedWindow();
-    e == null || e.minimize();
+function minimizeWindow() {
+  ipcMain.handle("window-minimize", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    win == null ? void 0 : win.minimize();
   });
 }
-function be() {
-  c.handle("window-maximize", () => {
-    const e = E.getFocusedWindow();
-    e && (e.isMaximized() ? e.unmaximize() : e.maximize());
+function maximizeWindow() {
+  ipcMain.handle("window-maximize", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    if (!win) return;
+    if (win.isMaximized()) {
+      win.unmaximize();
+    } else {
+      win.maximize();
+    }
   });
 }
-function Je() {
-  c.handle("window-close", () => {
-    const e = E.getFocusedWindow();
-    e == null || e.close();
+function closeWindow() {
+  ipcMain.handle("window-close", () => {
+    const win = BrowserWindow.getFocusedWindow();
+    win == null ? void 0 : win.close();
   });
 }
-function Ae(e) {
-  if (typeof e != "string") return;
-  const r = e.trim();
-  if (r)
-    return r.startsWith("/") ? r : `/${r}`;
+function normalizeRoute(route) {
+  if (typeof route !== "string") return void 0;
+  const trimmed = route.trim();
+  if (!trimmed) return void 0;
+  return trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
 }
-function Te() {
-  c.handle("window-open-new", (e, r) => {
-    R(Ae(r), { hideSidebar: !0 });
+function openNewWindow() {
+  ipcMain.handle("window-open-new", (_event, route) => {
+    createWindow(normalizeRoute(route), { hideSidebar: true });
   });
 }
-function Ce(e) {
-  return Array.isArray(e) ? e.map((r) => {
-    if (typeof r != "object" || r === null) return null;
-    const o = "role" in r ? r.role : void 0, t = "content" in r ? r.content : void 0;
-    if (o !== "user" && o !== "assistant" || typeof t != "string") return null;
-    const n = t.trim();
-    return n ? { role: o, content: n } : null;
-  }).filter((r) => !!r) : [];
+function coerceMessages(value) {
+  if (!Array.isArray(value)) return [];
+  return value.map((m) => {
+    if (typeof m !== "object" || m === null) return null;
+    const role = "role" in m ? m.role : void 0;
+    const content = "content" in m ? m.content : void 0;
+    if (role !== "user" && role !== "assistant") return null;
+    if (typeof content !== "string") return null;
+    const trimmed = content.trim();
+    if (!trimmed) return null;
+    return { role, content: trimmed };
+  }).filter((m) => Boolean(m));
 }
-function _e(e) {
-  if (typeof e.output_text == "string" && e.output_text.trim())
-    return e.output_text.trim();
-  for (const r of e.output ?? [])
-    for (const o of r.content ?? [])
-      if (typeof o.text == "string" && o.text.trim())
-        return o.text.trim();
+function getOutputText(payload) {
+  if (typeof payload.output_text === "string" && payload.output_text.trim()) {
+    return payload.output_text.trim();
+  }
+  for (const item of payload.output ?? []) {
+    for (const part of item.content ?? []) {
+      if (typeof part.text === "string" && part.text.trim()) {
+        return part.text.trim();
+      }
+    }
+  }
   return "";
 }
-function Ue() {
-  c.handle("chatSend", async (e, r) => {
-    var d;
-    const o = process.env.OPENAI_API_KEY;
-    if (!o)
+function sendChat() {
+  ipcMain.handle("chatSend", async (_event, rawMessages) => {
+    var _a;
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
       throw new Error(
         "Missing OPENAI_API_KEY. Set it in your environment (or a .env/.env.local file) before starting the app."
       );
-    const t = Ce(r);
-    if (t.length === 0)
+    }
+    const messages = coerceMessages(rawMessages);
+    if (messages.length === 0) {
       throw new Error("No messages provided.");
-    const s = await fetch("https://api.openai.com/v1/responses", {
+    }
+    const developerPrompt = "You are a helpful, concise assistant inside a vocabulary app. Answer in the user's language. Prefer short, actionable answers. If asked for vocabulary help, include examples and brief explanations.Don't deviate from your task. Politely decline anything that isnt related with learning a language";
+    const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${o}`,
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
         model: "gpt-5-mini",
         input: [
-          { role: "developer", content: "You are a helpful, concise assistant inside a vocabulary app. Answer in the user's language. Prefer short, actionable answers. If asked for vocabulary help, include examples and brief explanations." },
-          ...t.map((f) => ({ role: f.role, content: f.content }))
+          { role: "developer", content: developerPrompt },
+          ...messages.map((m) => ({ role: m.role, content: m.content }))
         ]
       })
-    }), i = await s.json().catch(() => null);
-    if (!s.ok) {
-      const f = ((d = i == null ? void 0 : i.error) == null ? void 0 : d.message) || `OpenAI request failed with status ${s.status}.`;
-      throw new Error(f);
+    });
+    const payload = await response.json().catch(() => null);
+    if (!response.ok) {
+      const message = ((_a = payload == null ? void 0 : payload.error) == null ? void 0 : _a.message) || `OpenAI request failed with status ${response.status}.`;
+      throw new Error(message);
     }
-    const u = i ? _e(i) : "";
-    if (!u) throw new Error("Empty response from model.");
-    return { text: u };
+    const text = payload ? getOutputText(payload) : "";
+    if (!text) throw new Error("Empty response from model.");
+    return { text };
   });
 }
-function ke() {
-  pe(), te(), de(), ue(), me(), he(), ye(), ve(), we(), Oe(), Y(), Q(), K(), X(), Se(), Ee(), je(), Fe(), Pe(), Ne(), xe(), $e(), De(), Ue(), Re(), be(), Je(), Te();
+function registerIpcHandlers() {
+  loadTranslations();
+  addTranslation();
+  deleteTranslation();
+  createDictionary();
+  moveDictionary();
+  deleteDictionary();
+  renameDictionary();
+  selectFolder();
+  loadConfig();
+  editConfig();
+  fetchMarkdown();
+  saveMarkdown();
+  fetchConjugation();
+  saveConjugation();
+  fetchGraph();
+  saveGraph();
+  deleteGraphEntry();
+  saveUserPreferences();
+  loadUserPreferences();
+  fetchNoteIndex();
+  saveNoteIndex();
+  saveNotes();
+  fetchNotes();
+  sendChat();
+  minimizeWindow();
+  maximizeWindow();
+  closeWindow();
+  openNewWindow();
 }
-function We(e) {
-  const r = {};
-  for (const o of e.split(/\r?\n/)) {
-    const t = o.trim();
-    if (!t || t.startsWith("#")) continue;
-    const n = t.indexOf("=");
-    if (n <= 0) continue;
-    const s = t.slice(0, n).trim();
-    let i = t.slice(n + 1).trim();
-    s && ((i.startsWith('"') && i.endsWith('"') || i.startsWith("'") && i.endsWith("'")) && (i = i.slice(1, -1)), i && (r[s] = i));
+function parseEnvFile(raw) {
+  const result = {};
+  for (const line of raw.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eq = trimmed.indexOf("=");
+    if (eq <= 0) continue;
+    const key = trimmed.slice(0, eq).trim();
+    let value = trimmed.slice(eq + 1).trim();
+    if (!key) continue;
+    if (value.startsWith('"') && value.endsWith('"') || value.startsWith("'") && value.endsWith("'")) {
+      value = value.slice(1, -1);
+    }
+    if (value) result[key] = value;
   }
-  return r;
+  return result;
 }
-async function Ie(e) {
+async function readEnvFileIfExists(filePath) {
   try {
-    const r = await w.readFile(e, "utf-8");
-    return We(r);
-  } catch (r) {
-    return typeof r == "object" && r !== null && "code" in r && r.code === "ENOENT", null;
+    const raw = await promises.readFile(filePath, "utf-8");
+    return parseEnvFile(raw);
+  } catch (error) {
+    if (typeof error === "object" && error !== null && "code" in error && error.code === "ENOENT") {
+      return null;
+    }
+    return null;
   }
 }
-async function ze() {
-  const e = [
-    l.join(process.cwd(), ".env"),
-    l.join(process.cwd(), ".env.local"),
-    process.env.APP_ROOT ? l.join(process.env.APP_ROOT, ".env") : null,
-    process.env.APP_ROOT ? l.join(process.env.APP_ROOT, ".env.local") : null
-  ].filter((r) => !!r);
-  for (const r of e) {
-    const o = await Ie(r);
-    if (o)
-      for (const [t, n] of Object.entries(o))
-        process.env[t] || (process.env[t] = n);
+async function loadEnvIfPresent() {
+  const candidates = [
+    path.join(process.cwd(), ".env"),
+    path.join(process.cwd(), ".env.local"),
+    process.env.APP_ROOT ? path.join(process.env.APP_ROOT, ".env") : null,
+    process.env.APP_ROOT ? path.join(process.env.APP_ROOT, ".env.local") : null
+  ].filter((p) => Boolean(p));
+  for (const filePath of candidates) {
+    const parsed = await readEnvFileIfExists(filePath);
+    if (!parsed) continue;
+    for (const [key, value] of Object.entries(parsed)) {
+      if (!process.env[key]) process.env[key] = value;
+    }
   }
 }
-F.on("window-all-closed", () => {
-  process.platform !== "darwin" && F.quit();
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
 });
-F.on("activate", () => {
-  E.getAllWindows().length === 0 && R();
+app.on("activate", () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
 });
-F.whenReady().then(() => {
-  ze(), ke(), R();
+app.whenReady().then(() => {
+  void loadEnvIfPresent();
+  registerIpcHandlers();
+  createWindow();
 });

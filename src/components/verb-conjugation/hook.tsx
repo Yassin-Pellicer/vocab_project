@@ -1,14 +1,12 @@
 import { useConfigStore } from "@/context/dictionary-context";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 
 type TenseConjugations = Record<string, string>;
 type TenseGroup = Record<string, TenseConjugations>;
 type MoodGroup = Record<string, TenseGroup>;
 type ConjugationTemplate = Record<string, MoodGroup>;
 
-const isRecord = (v: unknown): v is Record<string, unknown> =>
-  typeof v === "object" && v !== null;
-
+// Helper: safe merge
 const getLeaf = (
   obj: unknown,
   mood: string,
@@ -16,13 +14,13 @@ const getLeaf = (
   tense: string,
   person: string,
 ): string | undefined => {
-  if (!isRecord(obj)) return undefined;
-  const moodObj = obj[mood];
-  if (!isRecord(moodObj)) return undefined;
+  if (typeof obj !== "object" || obj === null) return undefined;
+  const moodObj = (obj as any)[mood];
+  if (typeof moodObj !== "object" || moodObj === null) return undefined;
   const groupObj = moodObj[group];
-  if (!isRecord(groupObj)) return undefined;
+  if (typeof groupObj !== "object" || groupObj === null) return undefined;
   const tenseObj = groupObj[tense];
-  if (!isRecord(tenseObj)) return undefined;
+  if (typeof tenseObj !== "object" || tenseObj === null) return undefined;
   const value = tenseObj[person];
   return typeof value === "string" ? value : undefined;
 };
@@ -32,15 +30,14 @@ const mergeConjugations = (
   existing: unknown,
 ): ConjugationTemplate => {
   const next = structuredClone(template);
+  if (!existing) return next;
 
   for (const mood of Object.keys(next)) {
     for (const group of Object.keys(next[mood])) {
       for (const tense of Object.keys(next[mood][group])) {
         for (const person of Object.keys(next[mood][group][tense])) {
-          const v = getLeaf(existing, mood, group, tense, person);
-          if (typeof v === "string") {
-            next[mood][group][tense][person] = v;
-          }
+          const value = getLeaf(existing, mood, group, tense, person);
+          if (value) next[mood][group][tense][person] = value;
         }
       }
     }
@@ -48,72 +45,57 @@ const mergeConjugations = (
 
   return next;
 };
-
-export function useVerbHooks(
-  route: string,
-  name?: string,
-  isEditing?: boolean,
-) {
-  const [collapsed, setCollapsed] = useState(false);
+export function useVerbHooks(route: string, name?: string, isEditing?: boolean) {
   const selectedWord = useConfigStore((s) => s.selectedWord);
-  const [conjugationLoaded, setConjugationLoaded] = useState(false);
   const dictionaryMetadata = useConfigStore((s) => s.dictionaryMetadata);
 
   const template = useMemo(
-    () =>
-      (dictionaryMetadata?.[name ?? ""]?.tenses ?? {}) as unknown as ConjugationTemplate,
+    () => (dictionaryMetadata?.[name ?? ""]?.tenses ?? {}) as unknown as ConjugationTemplate,
     [dictionaryMetadata, name],
   );
+  const createTemplate = useCallback(() => structuredClone(template), [template]);
 
-  const cloneTemplate = useCallback(
-    () => structuredClone(template),
-    [template],
-  );
-
-  const [conjugation, setConjugation] = useState<ConjugationTemplate>(() =>
-    cloneTemplate(),
-  );
-
+  const [conjugation, setConjugation] = useState<ConjugationTemplate>(createTemplate);
+  const [collapsed, setCollapsed] = useState(false);
   const selectedWordUuid = selectedWord?.uuid;
 
   const saveConjugation = useCallback(() => {
     if (!route || !name || !selectedWordUuid) return;
     void window.api.saveConjugation(route, name, selectedWordUuid, conjugation);
-  }, [conjugation, name, route, selectedWordUuid]);
+  }, [route, name, selectedWordUuid, conjugation]);
 
-  useEffect(() => {
-    if (!isEditing && conjugationLoaded) {
-      saveConjugation();
-    }
-  }, [conjugationLoaded, isEditing, saveConjugation]);
+  const hasFetchedRef = useRef(false);
 
   useEffect(() => {
     if (!route || !name || !selectedWordUuid) {
-      setConjugation(cloneTemplate());
-      setConjugationLoaded(true);
+      setConjugation(createTemplate());
+      hasFetchedRef.current = false;
       return;
     }
 
-    setConjugationLoaded(false);
+    hasFetchedRef.current = false;
+    setConjugation(createTemplate());
+
     window.api
       .fetchConjugation(route, name, selectedWordUuid)
       .then((response) => {
-        const merged = mergeConjugations(cloneTemplate(), response);
-        setConjugation(merged);
-        setConjugationLoaded(true);
+        setConjugation(mergeConjugations(createTemplate(), response));
+        hasFetchedRef.current = true;
       })
-      .catch((error) => {
-        console.error("Error fetching conjugation:", error);
-        setConjugation(cloneTemplate());
-        setConjugationLoaded(true);
+      .catch((err) => {
+        console.error("Error fetching conjugation:", err);
+        setConjugation(createTemplate());
+        hasFetchedRef.current = true;
       });
-  }, [cloneTemplate, name, route, selectedWordUuid]);
+  }, [route, name, selectedWordUuid, createTemplate]);
 
-  return {
-    collapsed,
-    setCollapsed,
-    conjugation,
-    setConjugation,
-    saveConjugation,
-  };
+  useEffect(() => {
+    if (!isEditing && hasFetchedRef.current) {
+      if (conjugation && Object.keys(conjugation).length > 0) {
+        saveConjugation();
+      }
+    }
+  }, [isEditing, saveConjugation, conjugation]);
+
+  return { collapsed, setCollapsed, conjugation, setConjugation, saveConjugation };
 }

@@ -1,10 +1,13 @@
+import { Button } from "@/components/ui/button";
 import { useConfigStore } from "@/context/preferences-context";
-import { Camera, Mail, Trash2, Upload, User, WifiOff } from "lucide-react";
+import { Camera, Mail, Trash2, UnplugIcon, Upload, User, WifiOff } from "lucide-react";
+import useConfig from "../hooks";
 
 export default function ProfileSection() {
   const { config, setDisplayName, setEmail, setAvatarPath, setOffline } =
     useConfigStore();
   const { displayName, email } = config;
+  const { signOut } =  useConfig();
 
   return (
     <div className="mb-8 mt-2">
@@ -17,7 +20,7 @@ export default function ProfileSection() {
         {/* Profile Preview Card */}
         <div className="flex items-center gap-4 py-4">
           <div className="relative group/avatar">
-            <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center">
+            <div className="h-16 w-16 rounded-full bg-linear-to-br from-primary to-primary/50 flex items-center justify-center">
               <User className="h-8 w-8 text-primary-foreground" />
             </div>
             <label className="absolute inset-0 flex items-center justify-center rounded-full bg-background/50 opacity-0 group-hover/avatar:opacity-100 transition-opacity cursor-pointer">
@@ -132,12 +135,11 @@ export default function ProfileSection() {
               </div>
             </div>
           </div>
-          <button
-            className="h-9 px-4 rounded-md border bg-background text-sm hover:bg-accent transition-colors shrink-0"
-            onClick={() => setOffline(true)}
+          <Button
+            onClick={() => {setOffline(true); signOut();}}
           >
-            Go Offline
-          </button>
+            <UnplugIcon></UnplugIcon> Go Offline
+          </Button>
         </div>
 
         <div className="flex items-center justify-between rounded-md  group gap-4">

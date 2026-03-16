@@ -167,7 +167,7 @@ export function ChatWidget() {
                       : "mr-auto bg-card text-card-foreground border",
                   )}
                 >
-                  <div className="whitespace-pre-wrap break-words">
+                  <div className="whitespace-pre-wrap wrap-break-word">
                     {m.content}
                   </div>
                 </div>
