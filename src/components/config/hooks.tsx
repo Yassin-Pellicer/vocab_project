@@ -1,8 +1,15 @@
 import { useConfigStore as useDictionaryStore } from "@/context/dictionary-context";
 import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
+import { supabase } from "@/supabase/supabase-client";
+import { useCallback } from "react";
 
 export default function useConfig() {
   const { dictionaryMetadata, setDictionaryMetadata } = useDictionaryStore();
+
+  const signOut = useCallback(async () => {
+    await supabase.auth.signOut()
+  }, [])
+
   const {
     config: preferences,
     setConfig,
@@ -53,5 +60,6 @@ export default function useConfig() {
     loadConfig,
     saveConfig,
     resetConfig,
+    signOut,
   };
 }
