@@ -1,7 +1,11 @@
 import { 
   Settings, 
   BookOpen, 
-  Info 
+  Info, 
+  Keyboard,
+  User,
+  CreditCard,
+  Sparkles
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -13,10 +17,9 @@ interface SettingsSidebarProps {
 const menuItems = [
   { id: "general", label: "General", icon: Settings },
   { id: "dictionaries", label: "Dictionaries", icon: BookOpen },
-  // { id: "keybinds", label: "Keybinds", icon: Keyboard },
-  // { id: "profile", label: "Your Profile", icon: User },
-  // { id: "subscription", label: "Subscription", icon: CreditCard },
-  // { id: "ai", label: "Artificial Intelligence", icon: Sparkles },
+  { id: "keybinds", label: "Keybinds", icon: Keyboard },
+  { id: "profile", label: "Your Profile", icon: User },
+  { id: "subscription", label: "Subscription", icon: CreditCard },
   { id: "about", label: "About", icon: Info },
 ];  
 

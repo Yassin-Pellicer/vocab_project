@@ -14,6 +14,7 @@ import { useConfigStore } from "@/context/dictionary-context";
 import { Link } from "react-router-dom";
 import DictActionsMenu from "./dict-actions-menu";
 import AddDictModal from "../dict/add-dict-modal";
+import { NavUser } from "./nav-user";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 
@@ -23,6 +24,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar {...props}>
+      <NavUser/>
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>

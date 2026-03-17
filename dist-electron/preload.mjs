@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-"use strict";const r=require("electron"),o={moveDictionary:async(e,n)=>await r.ipcRenderer.invoke("moveDictionary",e,n)},c={fetchConjugation:async(e,n,i)=>await r.ipcRenderer.invoke("fetchConjugation",e,n,i),saveConjugation:async(e,n,i,a)=>await r.ipcRenderer.invoke("saveConjugation",e,n,i,a)},s={fetchGraph:async(e,n,i)=>await r.ipcRenderer.invoke("fetchGraph",e,n,i),saveGraph:async(e,n,i,a)=>await r.ipcRenderer.invoke("saveGraph",e,n,i,a),deleteGraphEntry:async(e,n,i,a)=>await r.ipcRenderer.invoke("deleteGraphEntry",e,n,i,a)},d={fetchMarkdown:async(e,n,i)=>await r.ipcRenderer.invoke("fetchMarkdown",e,n,i),saveMarkdown:async(e,n,i,a)=>await r.ipcRenderer.invoke("saveMarkdown",e,n,i,a)},p={fetchNotes:async(e,n,i)=>await r.ipcRenderer.invoke("fetchNotes",e,n,i),fetchNoteIndex:async(e,n)=>await r.ipcRenderer.invoke("fetchNoteIndex",e,n),saveNoteIndex:async(e,n,i)=>await r.ipcRenderer.invoke("saveNoteIndex",e,n,i),saveNotes:async(e,n,i,a)=>await r.ipcRenderer.invoke("saveNotes",e,n,i,a)},v={requestTranslations:async(e,n)=>await r.ipcRenderer.invoke("loadTranslations",e,n),addTranslation:async(e,n,i,a)=>await r.ipcRenderer.invoke("addTranslation",e,n,i,a),deleteTranslation:async(e,n,i)=>await r.ipcRenderer.invoke("deleteTranslation",e,n,i),createDictionary:async(e,n)=>await r.ipcRenderer.invoke("createDictionary",e,n),moveDictionary:async(e,n)=>await r.ipcRenderer.invoke("moveDictionary",e,n),deleteDictionary:async e=>await r.ipcRenderer.invoke("deleteDictionary",e),renameDictionary:async(e,n)=>await r.ipcRenderer.invoke("renameDictionary",e,n),selectFolder:async()=>await r.ipcRenderer.invoke("selectFolder"),loadConfig:async()=>await r.ipcRenderer.invoke("loadConfig"),saveUserPreferences:async e=>await r.ipcRenderer.invoke("saveUserPreferences",e),loadUserPreferences:async()=>await r.ipcRenderer.invoke("loadUserPreferences"),editConfig:async e=>await r.ipcRenderer.invoke("editConfig",e)},w={minimize:async()=>await r.ipcRenderer.invoke("window-minimize"),maximize:async()=>await r.ipcRenderer.invoke("window-maximize"),close:async()=>await r.ipcRenderer.invoke("window-close"),openNewWindow:async e=>await r.ipcRenderer.invoke("window-open-new",e)},u=Object.assign({},v,d,c,s,o,p,w);r.contextBridge.exposeInMainWorld("ipcRenderer",{on(...e){const[n,i]=e;return r.ipcRenderer.on(n,(a,...t)=>i(a,...t))},off(...e){const[n,...i]=e;return r.ipcRenderer.off(n,...i)},send(...e){const[n,...i]=e;return r.ipcRenderer.send(n,...i)},invoke(...e){const[n,...i]=e;return r.ipcRenderer.invoke(n,...i)}});r.contextBridge.exposeInMainWorld("api",u);
-=======
 "use strict";
 const electron = require("electron");
 const config = {
@@ -106,11 +103,6 @@ const windowControls = {
     return await electron.ipcRenderer.invoke("window-open-new", route);
   }
 };
-const chat = {
-  chatSend: async (messages) => {
-    return await electron.ipcRenderer.invoke("chatSend", messages);
-  }
-};
 const endpoints = Object.assign(
   {},
   translations,
@@ -119,8 +111,7 @@ const endpoints = Object.assign(
   graph,
   config,
   notes,
-  windowControls,
-  chat
+  windowControls
 );
 electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   on(...args) {
@@ -141,4 +132,3 @@ electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   }
 });
 electron.contextBridge.exposeInMainWorld("api", endpoints);
->>>>>>> dd30e28 (config done)

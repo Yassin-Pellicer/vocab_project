@@ -2,7 +2,6 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { BreadcrumbNavigation } from "../breadcrumb-navigation";
 import { ArrowLeft, ArrowRight, Maximize2, X, MoveDownLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import ConfigModal from "@/components/config/config-modal";
 
 export function AppHeader() {
   const navigate = useNavigate();
@@ -20,7 +19,6 @@ export function AppHeader() {
       </div>
       <div className="flex items-center gap-1" style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}>
         <div className="flex flex-row gap-2 mr-6">
-          <ConfigModal></ConfigModal>
           <button
             aria-label="Back"
             title="Back"
