@@ -74,15 +74,15 @@ export default function MarkdownEditor({
             </span>
             {isEditing ? (
               <input
-              type="text"
-              value={form}
-              onChange={(e) =>
-                handleConjugationChange(mood, subCategory, tense, person, e.target.value)
-              }
-              className="text-foreground dark:text-foreground w-2/3 text-sm border border-gray-400! dark:border-input bg-background dark:bg-input/20 rounded-sm px-2"
+                type="text"
+                value={form}
+                onChange={(e) =>
+                  handleConjugationChange(mood, subCategory, tense, person, e.target.value)
+                }
+                className="text-foreground shrink-0! dark:text-foreground w-2/3 text-sm border border-gray-400! dark:border-input bg-background dark:bg-input/20 rounded-sm px-2 h-5"
               />
             ) : (
-              <span className="text-foreground dark:text-foreground w-2/3 text-sm border rounded-sm px-2">{form}</span>
+              <span className="text-foreground shrink-0 h-5 dark:text-foreground w-2/3 text-sm border rounded-sm px-2">{form}</span>
             )}
           </div>
         ))}
@@ -110,10 +110,10 @@ export default function MarkdownEditor({
     moodName: string,
     moodValue: MoodGroup
   ) => {
-    const allTenses: Array<{ 
-      name: string; 
-      value: TenseConjugations; 
-      subCategory: string 
+    const allTenses: Array<{
+      name: string;
+      value: TenseConjugations;
+      subCategory: string
     }> = [];
 
     Object.entries(moodValue).forEach(([subCategory, subValue]) => {
@@ -141,14 +141,18 @@ export default function MarkdownEditor({
   };
 
   return (
-    <div className="flex overflow-y-auto items-center w-full flex-col">
+    <div className="flex-col items-center [scrollbar-gutter:stable] overflow-y-auto w-full px-4 pb-6 mt-4 mb-8">
       <div
-        className={`max-w-207.5 h-[calc(100vh-380px)] w-full px-4 pb-6 ${collapsed ? "hidden" : ""}`}
+        className={`flex-col items-center  overflow-y-auto w-full pb-6 ${collapsed ? "hidden" : ""
+          }`}
       >
-        <div>
+        <div className="flex flex-col items-center">
+          <div className="max-w-200 w-full">
           {(Object.entries(conjugation) as Array<[string, MoodGroup]>).map(
-            ([section, sectionValue]) => renderMoodSection(section, sectionValue),
+            ([section, sectionValue]) =>
+              renderMoodSection(section, sectionValue)
           )}
+          </div>
         </div>
       </div>
     </div>

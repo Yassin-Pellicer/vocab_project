@@ -40,7 +40,7 @@ export default function MarkdownEditor({
   const { dictionaryMetadata } = useConfigStore();
 
   return (
-    <div className="flex overflow-hidden h-[calc(100vh-80px)] items-center flex-col mx-auto mt-4">
+    <div className="items-center flex flex-col h-[calc(100vh-80px)] w-full mx-auto mt-4">
       {/* Header */}
       <div
         className={`px-4 max-w-200 ${word.type == dictionaryMetadata?.[name]?.typeWordWithTenses && dictionaryMetadata?.[name]?.useTenses} "pb-6" : ""}  w-full ${collapsed ? "hidden" : ""}`}
@@ -103,9 +103,8 @@ export default function MarkdownEditor({
           </div>
         )}
         {selectOption === "conjugation" && (
-          <div className="flex flex-col justify-between px-4 w-full">
-            <div className="flex flex-row flex-wrap justify-between mt-4 max-w-210">
-              <div className="flex flex-row gap-2 text-sm"></div>
+          <div className="flex flex-col justify-between max-w-200 w-full mt-4">
+            <div className="flex flex-row w-fit max-w-200 px-4">
               {!isEditing && (
                 <button
                   onClick={() => setIsEditing(true)}
