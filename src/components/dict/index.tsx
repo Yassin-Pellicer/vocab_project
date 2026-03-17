@@ -218,7 +218,7 @@ export default function DictionaryComponent({
               >
                 {currentPage <= 1 && (
                   <div
-                    className={`mb-4 mx-2 flex-shrink-0 ${searchField || isAdditionOrder ? "hidden" : ""}`}
+                    className={`mb-4 mx-2 shrink-0 ${searchField || isAdditionOrder ? "hidden" : ""}`}
                   >
                     <p className="text-8xl font-bold text-foreground mb-4">
                       {selectedLetter}

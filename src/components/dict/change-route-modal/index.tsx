@@ -98,8 +98,6 @@ export default function ChangeRouteModal({
             <DialogClose asChild>
               <Button
                 type="submit"
-                variant="outline"
-                className="!bg-blue-600 !text-muted-foreground"
                 disabled={!hook.newRoute || hook.loading}
               >
                 {hook.loading ? "Moving..." : "Move"}

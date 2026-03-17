@@ -30,11 +30,13 @@ export default function useWordModalHooks({
     definitions: [],
   };
 
-  const [formData, setFormData] = useState<TranslationEntry>({
+  const template = {
     pair: [emptyPair],
     dateAdded: new Date().toISOString().split("T")[0],
     type: "noun",
-  });
+  };
+
+  const [formData, setFormData] = useState<TranslationEntry>(template);
 
   const setPairField = (value: string, pairIndex: number, path: string) => {
     const newPairs = [...formData.pair];
@@ -109,6 +111,7 @@ export default function useWordModalHooks({
         "word";
       notify("wordAdded", { word: firstOriginal, dictionary: name });
       loadTranslations(route, name);
+      setFormData(template);
     } catch (error) {
       console.error("Failed to add translation:", error);
     }

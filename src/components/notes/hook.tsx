@@ -71,7 +71,6 @@ export default function useNotesHooks() {
         JSON.stringify({ width: sidebarWidth, collapsed: sidebarCollapsed }),
       );
     } catch {
-      // Ignore storage write errors (private browsing, disabled storage, etc.)
     }
   }, [sidebarWidth, sidebarCollapsed]);
 

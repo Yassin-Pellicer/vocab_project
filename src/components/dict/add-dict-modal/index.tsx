@@ -27,10 +27,10 @@ export default function AddDictModal({
         <DialogTrigger asChild>{children}</DialogTrigger>
       ) : (
         <DialogTrigger asChild>
-          <div className="rounded-lg gap-1 border text-sm border-border flex h-8 items-center justify-center cursor-pointer hover:bg-popover text-popover-foreground">
+          <Button className="flex items-center gap-2">
             + Add Dictionary
             <FolderOpen size={14} />
-          </div>
+          </Button>
         </DialogTrigger>
       )}
       <DialogContent className="sm:max-w-106.25">
@@ -88,6 +88,7 @@ export default function AddDictModal({
                 type="submit"
                 variant="outline"
                 className="bg-primary text-primary-foreground"
+                disabled={hook.name.length === 0}
               >
                 Create
               </Button>

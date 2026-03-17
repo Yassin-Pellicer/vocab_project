@@ -13,29 +13,64 @@ import DictionaryGraph from "../knowledge-graph";
 import { Button } from "../ui/button";
 import NoteDisplay from "../notes/note-display";
 import { useNotesStore } from "@/context/notes-context";
+import AddDictModal from "../dict/add-dict-modal";
+import ConfigureDictModal from "../dict/configure-dict-modal";
+import AddTranslationModal from "../dict/add-word-modal";
 
 export default function Home() {
-  const { dictionaryCards, loading, totalWords, totalDictionaries } = useHome();
+  const { dictionaryCards, totalWords, totalDictionaries } = useHome();
   const { setSelectedNoteId } = useNotesStore();
 
-  if (loading) {
+  if (totalWords <= 0 && totalDictionaries === 1 && dictionaryCards.length === 1) {
+    const dict = dictionaryCards[0];
+
     return (
-      <div className="flex items-center justify-center h-[calc(100vh-64px)]">
-        <p className="text-muted-foreground text-lg">Loading...</p>
+      <div className="flex items-center justify-center h-[calc(100vh-64px)] px-4">
+        <div className="flex flex-col w-100">
+          <h2 className="flex wrap flex-row gap-4 text-2xl! font-bold text-foreground mb-2">
+            <BookOpen size={32} className="shrink-0" /> Great!
+          </h2>
+
+          <p className="text-sm! text-muted-foreground mb-4">
+            You've added your dictionary! Now we'd recommend you do some
+            configurations first in order to bring the best out of your learning
+            experience.
+          </p>
+
+          <ConfigureDictModal
+            dictId={dict.id}
+            dictName={dict.name}
+          >
+          </ConfigureDictModal>
+          <div className="flex flex-row mt-12 mb-4 items-center">
+            <p className="text-sm! text-muted-foreground ">
+              Once you've configured your dictionary you can try and add your <b>first word!</b>
+            </p>
+
+            <AddTranslationModal
+              route={dict.path}
+              name={dict.id}
+            >
+            </AddTranslationModal>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (!dictionaryCards || dictionaryCards.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-[calc(100vh-64px)] px-4">
-        <BookOpen size={64} className="text-muted mb-4" />
-        <h2 className="text-2xl font-bold text-foreground mb-2">
-          No Dictionaries Found
-        </h2>
-        <p className="text-muted-foreground text-center">
-          Add a dictionary to get started with your vocabulary learning journey.
-        </p>
+      <div className="flex items-center justify-center h-[calc(100vh-64px)] px-4">
+        <div className="flex flex-col w-100">
+          <h2 className="flex wrap flex-row gap-4 text-2xl! font-bold text-foreground mb-2">
+            <BookOpen size={32} className="shrink-0" /> No Dictionaries Found
+          </h2>
+          <p className="text-sm! text-muted-foreground mb-4">
+            Add a dictionary to get started with your vocabulary learning journey.
+            Follow the recommendations once created to make the best use of it!
+          </p>
+          <AddDictModal></AddDictModal>
+        </div>
       </div>
     );
   }
@@ -94,8 +129,8 @@ export default function Home() {
                   {dict.totalWords} words
                 </span>
               </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
-                  <div className="flex flex-col min-h-0">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
+                <div className="flex flex-col min-h-0">
                   {dict.wordOfTheDay ? (
                     <WordCard name={dict.id} word={dict.wordOfTheDay} />
                   ) : (
@@ -114,14 +149,14 @@ export default function Home() {
                         <ArrowRight size={16} />
                       </Button>
                     </Link>
-                    <Link
+                    {/* <Link
                       to={`/translation?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
                     >
                       <Button className="flex items-center gap-1">
                         Practice
                         <ArrowRight size={16} />
                       </Button>
-                    </Link>
+                    </Link> */}
                   </div>
                   <h3 className="text-sm! tracking-tighter font-semibold italic text-muted-foreground mt-4!">
                     Recent words added to this dictionary

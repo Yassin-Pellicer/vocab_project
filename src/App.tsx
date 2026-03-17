@@ -66,7 +66,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <InitialRouteFromHash />
-      <Toaster position="top-center" closeButton />
+      <Toaster position="top-center" richColors closeButton />
       <MainLayout hideSidebar={hideSidebar}>
         <Pages />
       </MainLayout>
