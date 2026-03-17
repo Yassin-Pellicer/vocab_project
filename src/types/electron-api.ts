@@ -1,5 +1,6 @@
 import type { TranslationEntry } from "./translation-entry";
 import type { UserConfig, UserPreferences } from "./config";
+import type { ChatMessage } from "./chat";
 
 type GraphWordRef = { uuid: string; word: string };
 
@@ -106,4 +107,6 @@ export interface RendererApi {
   maximize: () => Promise<unknown>;
   close: () => Promise<unknown>;
   openNewWindow: (route: string) => Promise<unknown>;
+
+  chatSend: (messages: ChatMessage[]) => Promise<{ text: string }>;
 }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { MessageCircle, Send, Trash2, X } from "lucide-react";
+import { MessageCircle, Send, Sparkle, Sparkles, Star, Trash2, X } from "lucide-react";
 import type { ChatMessage } from "@/types/chat";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -22,15 +22,15 @@ function loadState(): PersistedChatState {
     const open = Boolean(parsed.open);
     const messages = Array.isArray(parsed.messages)
       ? (parsed.messages
-          .map((m) => {
-            if (typeof m !== "object" || m === null) return null;
-            const role = (m as { role?: unknown }).role;
-            const content = (m as { content?: unknown }).content;
-            if (role !== "user" && role !== "assistant") return null;
-            if (typeof content !== "string" || !content.trim()) return null;
-            return { role, content: content.trim() } as ChatMessage;
-          })
-          .filter((m): m is ChatMessage => Boolean(m))) as ChatMessage[]
+        .map((m) => {
+          if (typeof m !== "object" || m === null) return null;
+          const role = (m as { role?: unknown }).role;
+          const content = (m as { content?: unknown }).content;
+          if (role !== "user" && role !== "assistant") return null;
+          if (typeof content !== "string" || !content.trim()) return null;
+          return { role, content: content.trim() } as ChatMessage;
+        })
+        .filter((m): m is ChatMessage => Boolean(m))) as ChatMessage[]
       : [];
     return { open, messages };
   } catch {
@@ -42,7 +42,6 @@ function saveState(state: PersistedChatState) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch {
-    // ignore
   }
 }
 
@@ -116,65 +115,36 @@ export function ChatWidget() {
   }
 
   return (
-    <div
-      style={{ WebkitAppRegion: "no-drag" } as CSSProperties}
-      className="fixed bottom-4 right-4 z-50"
-    >
-      <Card className="flex h-[min(520px,calc(100vh-6rem))] w-[min(420px,calc(100vw-2rem))] flex-col overflow-hidden">
-        <div className="flex items-center justify-between gap-2 border-b bg-card px-3 py-2">
+    <div>
+      <Card className="flex w-full h-full flex-col overflow-hidden">
+        <div className="flex items-center justify-between gap-2 border-b bg-card px-3 py-4">
           <div className="flex items-center gap-2">
-            <div className="text-sm font-semibold">Assistant</div>
-            <div className="text-xs text-muted-foreground">
-              {sending ? "Thinking…" : "Ask anything"}
+            <div className="flex items-center gap-2 justify-center text-md font-semibold">
+              <Sparkles size={16}></Sparkles>Assistant
             </div>
-          </div>
-          <div className="flex items-center gap-1">
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={clearChat}
-              aria-label="Clear chat"
-              title="Clear chat"
-            >
-              <Trash2 />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={() => setOpen(false)}
-              aria-label="Close assistant"
-              title="Close assistant"
-            >
-              <X />
-            </Button>
           </div>
         </div>
 
         <div className="flex-1 overflow-auto p-3">
-          {messages.length === 0 ? (
-            <div className="rounded-md border bg-background p-3 text-sm text-muted-foreground">
-              Try: “Help me remember the difference between ‘say’ and ‘tell’.”
-            </div>
-          ) : (
-            <div className="flex flex-col gap-2">
-              {messages.map((m, idx) => (
-                <div
-                  key={`${m.role}-${idx}`}
-                  className={cn(
-                    "max-w-[90%] rounded-lg px-3 py-2 text-sm shadow-sm",
-                    m.role === "user"
-                      ? "ml-auto bg-primary text-primary-foreground"
-                      : "mr-auto bg-card text-card-foreground border",
-                  )}
-                >
-                  <div className="whitespace-pre-wrap break-words">
-                    {m.content}
-                  </div>
+
+          <div className="flex flex-col gap-2">
+            {messages.map((m, idx) => (
+              <div
+                key={`${m.role}-${idx}`}
+                className={cn(
+                  "max-w-[90%] rounded-lg px-3 py-2 text-sm shadow-sm",
+                  m.role === "user"
+                    ? "ml-auto bg-primary text-primary-foreground"
+                    : "mr-auto bg-card text-card-foreground border",
+                )}
+              >
+                <div className="whitespace-pre-wrap wrap-break-word">
+                  {m.content}
                 </div>
-              ))}
-              <div ref={endRef} />
-            </div>
-          )}
+              </div>
+            ))}
+            <div ref={endRef} />
+          </div>
         </div>
 
         <div className="border-t bg-card p-3">

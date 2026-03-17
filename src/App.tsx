@@ -71,7 +71,6 @@ export default function App() {
       <MainLayout hideSidebar={hideSidebar}>
         <Pages />
       </MainLayout>
-      <ChatWidget></ChatWidget>
     </BrowserRouter>
   );
 }

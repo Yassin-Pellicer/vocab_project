@@ -16,6 +16,7 @@ import { useNotesStore } from "@/context/notes-context";
 import AddDictModal from "../dict/add-dict-modal";
 import ConfigureDictModal from "../dict/configure-dict-modal";
 import AddTranslationModal from "../dict/add-word-modal";
+import { ChatWidget } from "../chat";
 
 export default function Home() {
   const { dictionaryCards, totalWords, totalDictionaries } = useHome();
@@ -117,7 +118,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="grid 2xl:grid-cols-2 grid-cols-1 w-full">
+        <div className="grid 2xl:grid-cols-1 grid-cols-1 w-full">
           {dictionaryCards.map((dict, dictIndex) => (
             <div key={dictIndex} className="flex flex-col w-full gap-4 p-4">
               <div className="flex items-center justify-between pb-4 border-b">
@@ -129,27 +130,29 @@ export default function Home() {
                   {dict.totalWords} words
                 </span>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
-                <div className="flex flex-col min-h-0">
-                  {dict.wordOfTheDay ? (
-                    <WordCard name={dict.id} word={dict.wordOfTheDay} />
-                  ) : (
-                    <p className="text-sm text-muted-foreground">
-                      No word of the day.
-                    </p>
-                  )}
-                  <div className="flex justify-between flex-row w-full gap-2 mt-1">
-                    <Link
-                      to={`/dictionary?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
-                      className="w-full!"
-                    >
-                      <Button className="flex items-center gap-1 w-full!">
-                        <BookOpen size={16} />
-                        View Dictionary
-                        <ArrowRight size={16} />
-                      </Button>
-                    </Link>
-                    {/* <Link
+              <div className="grid 2xl:grid-cols-2 grid-cols-1 gap-4">
+                <div>
+                  <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
+                    <div className="flex flex-col min-h-0">
+                      {dict.wordOfTheDay ? (
+                        <WordCard name={dict.id} word={dict.wordOfTheDay} />
+                      ) : (
+                        <p className="text-sm text-muted-foreground">
+                          No word of the day.
+                        </p>
+                      )}
+                      <div className="flex justify-between flex-row w-full gap-2 mt-1">
+                        <Link
+                          to={`/dictionary?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
+                          className="w-full!"
+                        >
+                          <Button className="flex items-center gap-1 w-full!">
+                            <BookOpen size={16} />
+                            View Dictionary
+                            <ArrowRight size={16} />
+                          </Button>
+                        </Link>
+                        {/* <Link
                       to={`/translation?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
                     >
                       <Button className="flex items-center gap-1">
@@ -157,69 +160,72 @@ export default function Home() {
                         <ArrowRight size={16} />
                       </Button>
                     </Link> */}
-                  </div>
-                  <h3 className="text-sm! tracking-tighter font-semibold italic text-muted-foreground mt-4!">
-                    Recent words added to this dictionary
-                  </h3>
-                  <div className="flex flex-col gap-2 mt-1">
-                    {dict.recentWords.map((word) => (
-                      <WordCard
-                        key={word.uuid ?? `${dict.id}-${word.dateAdded}`}
-                        word={word}
-                        route={dict.path}
-                        name={dict.id}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className="h-100 border rounded-xl lg:h-auto min-h-0">
-                  <DictionaryGraph
-                    title={dict.name}
-                    name={dict.id}
-                    route={dict.path}
-                    doubleView={false}
-                    word=""
-                  />
-                </div>
-              </div>
-              <div className="mt-4 p-3 rounded-xl border bg-gradient-to-b from-transparent via-to-background/70 to-background/90">
-                <p className="text-xs uppercase tracking-wide mb-1">
-                  Random Note
-                </p>
-                {dict.randomNote ? (
-                  <div className="flex flex-col items-center bg-gradient-to-b from-transparent via-to-background/70 to-background/90 justify-center overflow-hidden max-h-[400px]">
-                    <p className="text-lg text-foreground float-left w-full mt-2">
-                      {dict.randomNote.title}
-                    </p>
-                    <div className="mt-2 overflow-y-hidden w-full relative">
-                      <NoteDisplay
-                        route={dict.path}
-                        name={dict.id}
-                        noteId={dict.randomNote.id}
-                        editMode={false}
-                      ></NoteDisplay>
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-to-background/70 to-background/90" />
+                      </div>
+                      <h3 className="text-sm! tracking-tighter font-semibold italic text-muted-foreground mt-4!">
+                        Recent words added to this dictionary
+                      </h3>
+                      <div className="flex flex-col gap-2 mt-1">
+                        {dict.recentWords.map((word) => (
+                          <WordCard
+                            key={word.uuid ?? `${dict.id}-${word.dateAdded}`}
+                            word={word}
+                            route={dict.path}
+                            name={dict.id}
+                          />
+                        ))}
+                      </div>
                     </div>
-                    <Link
-                      to={`/notes?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
-                      onClick={() => setSelectedNoteId(dict.randomNote!.id!)}
-                    >
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="mt-2 px-2 h-8 flex items-center gap-1"
-                      >
-                        <Notebook size={14} />
-                        Open Notes
-                        <ArrowRight size={14} />
-                      </Button>
-                    </Link>
+                    <div className="h-100 border rounded-xl xl:h-auto min-h-0">
+                      <DictionaryGraph
+                        title={dict.name}
+                        name={dict.id}
+                        route={dict.path}
+                        doubleView={false}
+                        word=""
+                      />
+                    </div>
                   </div>
-                ) : (
-                  <p className="text-sm text-muted-foreground">
-                    No notes found for this dictionary yet.
-                  </p>
-                )}
+                  <div className="mt-4 p-3 rounded-xl border bg-linear-to-b from-transparent via-to-background/70 to-background/90">
+                    <p className="text-xs uppercase tracking-wide mb-1">
+                      Random Note
+                    </p>
+                    {dict.randomNote ? (
+                      <div className="flex flex-col items-center bg-linear-to-b from-transparent via-to-background/70 to-background/90 justify-center overflow-hidden max-h-[400px]">
+                        <p className="text-lg text-foreground float-left w-full mt-2">
+                          {dict.randomNote.title}
+                        </p>
+                        <div className="mt-2 overflow-y-hidden w-full relative">
+                          <NoteDisplay
+                            route={dict.path}
+                            name={dict.id}
+                            noteId={dict.randomNote.id}
+                            editMode={false}
+                          ></NoteDisplay>
+                          <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-to-background/70 to-background/90" />
+                        </div>
+                        <Link
+                          to={`/notes?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
+                          onClick={() => setSelectedNoteId(dict.randomNote!.id!)}
+                        >
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="mt-2 px-2 h-8 flex items-center gap-1"
+                          >
+                            <Notebook size={14} />
+                            Open Notes
+                            <ArrowRight size={14} />
+                          </Button>
+                        </Link>
+                      </div>
+                    ) : (
+                      <p className="text-sm text-muted-foreground">
+                        No notes found for this dictionary yet.
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <ChatWidget></ChatWidget>
               </div>
             </div>
           ))}

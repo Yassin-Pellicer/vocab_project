@@ -26,4 +26,5 @@ public/user-config.json
 public/user-config.json
 public/user-preferences.json
 out/
+.env.*
 .env
