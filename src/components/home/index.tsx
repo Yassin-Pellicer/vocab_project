@@ -178,6 +178,7 @@ export default function Home() {
                     name={dict.id}
                     route={dict.path}
                     doubleView={false}
+                    word=""
                   />
                 </div>
               </div>

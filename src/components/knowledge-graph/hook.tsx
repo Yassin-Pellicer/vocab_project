@@ -28,7 +28,7 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
 
     let results = list;
 
-    const activeSearch = word?.trim() || searchField.trim();
+    const activeSearch = word !== undefined ? word.trim() : searchField.trim();
 
     if (activeSearch !== "") {
       const searchLower = activeSearch.toLowerCase();
