@@ -79,7 +79,7 @@ export default function MarkdownEditor({
               onChange={(e) =>
                 handleConjugationChange(mood, subCategory, tense, person, e.target.value)
               }
-              className="text-foreground dark:text-foreground w-2/3 text-sm border !border-gray-400 dark:border-input bg-background dark:bg-input/20 rounded-sm px-2"
+              className="text-foreground dark:text-foreground w-2/3 text-sm border border-gray-400! dark:border-input bg-background dark:bg-input/20 rounded-sm px-2"
               />
             ) : (
               <span className="text-foreground dark:text-foreground w-2/3 text-sm border rounded-sm px-2">{form}</span>
@@ -141,9 +141,9 @@ export default function MarkdownEditor({
   };
 
   return (
-    <div className="flex h-[calc(100vh-150px)] overflow-y-auto items-center w-full flex-col">
+    <div className="flex overflow-y-auto items-center w-full flex-col">
       <div
-        className={`max-w-[830px] w-full px-4 pb-6 ${collapsed ? "hidden" : ""}`}
+        className={`max-w-207.5 h-[calc(100vh-380px)] w-full px-4 pb-6 ${collapsed ? "hidden" : ""}`}
       >
         <div>
           {(Object.entries(conjugation) as Array<[string, MoodGroup]>).map(
