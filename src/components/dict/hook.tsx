@@ -3,6 +3,7 @@ import { TranslationEntryResult } from "@/types/translation-entry-result";
 import type { TranslationEntry } from "@/types/translation-entry";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import type { PointerEvent as ReactPointerEvent } from "react";
 
 const EMPTY_TRANSLATIONS: TranslationEntry[] = [];
 
@@ -23,8 +24,6 @@ export default function useTranslationHooks({
     setSearchField,
     isFlipped,
     setIsFlipped,
-    setDualView,
-    dualView,
     selectedTypes,
     setGraphMode,
     graphMode,
@@ -36,6 +35,7 @@ export default function useTranslationHooks({
 
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
   const setSelectedWord = useConfigStore((state) => state.setSelectedWord);
+  const selectedWord = useConfigStore((state) => state.selectedWord);
   const [isAdditionOrder, setIsAdditionOrder] = useState(
     () => !useConfigStore.getState().selectedLetter,
   );
@@ -47,6 +47,81 @@ export default function useTranslationHooks({
   const { dictionaryMetadata } = useConfigStore();
 
   const availableTypes = dictionaryMetadata?.[name]?.typeWords ?? [];
+
+  const [splitViewCollapsed, setSplitViewCollapsed] = useState<boolean>(() => {
+    try {
+      const raw = localStorage.getItem("chat-sidebar");
+      if (!raw) return false;
+      const parsed = JSON.parse(raw);
+      return Boolean(parsed?.collapsed);
+    } catch {
+      return false;
+    }
+  });
+
+  const [splitViewWidth, setSplitViewWidth] = useState<number>(() => {
+    try {
+      const raw = localStorage.getItem("chat-sidebar");
+      if (!raw) return 392;
+      const parsedJson = JSON.parse(raw);
+      const parsed = Number(parsedJson?.width);
+      return Number.isFinite(parsed) ? parsed : 392;
+    } catch {
+      return 392;
+    }
+  });
+
+  // Refs so pointermove always reads fresh values without re-creating the handler
+  const splitViewWidthRef = useRef(splitViewWidth);
+  const splitViewCollapsedRef = useRef(splitViewCollapsed);
+  useEffect(() => { splitViewWidthRef.current = splitViewWidth; }, [splitViewWidth]);
+  useEffect(() => { splitViewCollapsedRef.current = splitViewCollapsed; }, [splitViewCollapsed]);
+
+  useEffect(() => {
+    if (selectedWord && splitViewCollapsedRef.current) {
+      setSplitViewCollapsed(false);
+      setSplitViewWidth(Math.floor(window.innerWidth / 1.6));
+    }
+  }, [selectedWord]);
+
+  const handleResizeSplitView = useCallback((e: ReactPointerEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const startX = e.clientX;
+    const startWidth = splitViewCollapsedRef.current ? 0 : splitViewWidthRef.current;
+    const minWidth = 260;
+    const maxWidth = Math.floor(window.innerWidth / 1.6);
+
+    const onMove = (ev: PointerEvent) => {
+      const rawNext = startWidth + (startX - ev.clientX);
+      if (rawNext < minWidth) {
+        setSplitViewCollapsed(true);
+        return;
+      }
+      setSplitViewCollapsed(false);
+      setSplitViewWidth(Math.min(maxWidth, Math.max(minWidth, rawNext)));
+    };
+
+    const onUp = () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+  }, []); // stable — reads live values via refs
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(
+        "dictionary-sidebar",
+        JSON.stringify({ width: splitViewWidth, collapsed: splitViewCollapsed }),
+      );
+    } catch {
+      // ignore
+    }
+  }, [splitViewWidth, splitViewCollapsed]);
 
   const filteredWords = useMemo(() => {
     if (!list) return [];
@@ -129,27 +204,11 @@ export default function useTranslationHooks({
   }, [isAdditionOrder, setSelectedLetter]);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 1000) setDualView(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [setDualView]);
-
-  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const isLetter = /^[a-zA-Z]$/.test(e.key);
       if (e.key === "F1") {
         setSelectedWord(
           filteredWords?.length ? filteredWords[0] : paginatedWords?.[0] || null
-        );
-        if (dualView) {
-          return;
-        }
-        navigate(
-          `/markdown?path=${encodeURIComponent(
-            route
-          )}&name=${encodeURIComponent(name)}`
         );
       }
 
@@ -203,7 +262,6 @@ export default function useTranslationHooks({
     searchField,
     filteredWords,
     paginatedWords,
-    dualView,
     route,
     name,
     setSelectedWord,
@@ -240,10 +298,11 @@ export default function useTranslationHooks({
     setIsFlipped,
     isAdditionOrder,
     setIsAdditionOrder,
-    dualView,
-    setDualView,
     availableTypes,
     graphMode,
     setGraphMode,
+    splitViewWidth,
+    splitViewCollapsed,
+    handleResizeSplitView,
   };
 }

@@ -54,12 +54,6 @@
       "type": "paragraph",
       "attrs": {
         "textAlign": null
-      }
-    },
-    {
-      "type": "paragraph",
-      "attrs": {
-        "textAlign": null
       },
       "content": [
         {
@@ -67,12 +61,6 @@
           "text": "Debit = negativo."
         }
       ]
-    },
-    {
-      "type": "paragraph",
-      "attrs": {
-        "textAlign": null
-      }
     },
     {
       "type": "paragraph",

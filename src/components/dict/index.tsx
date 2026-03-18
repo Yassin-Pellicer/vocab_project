@@ -5,7 +5,6 @@ import {
   X,
   ArrowLeftRight,
   ListOrdered,
-  SquareSplitHorizontal,
   Filter,
   TreesIcon,
 } from "lucide-react";
@@ -22,11 +21,12 @@ import Markdown from "@/components/markdown-display";
 import { useConfigStore } from "@/context/dictionary-context";
 import KnowledgeGraph from "../knowledge-graph";
 
-const getGridClasses = (dualView: boolean): string => {
-  if (dualView) {
-    return "grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-4 pb-8 sm:pl-2 px-2 gap-4";
-  }
-  return "grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 pb-8 sm:pl-2 px-2 gap-4";
+const getGridClasses = (): string => {
+  return `
+    grid 
+    [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))]
+    pb-8 sm:pl-2 px-2 gap-4
+  `;
 };
 
 export default function DictionaryComponent({
@@ -56,11 +56,12 @@ export default function DictionaryComponent({
     setIsFlipped,
     isAdditionOrder,
     setIsAdditionOrder,
-    dualView,
-    setDualView,
     graphMode,
     setGraphMode,
     availableTypes,
+    splitViewWidth,
+    splitViewCollapsed,
+    handleResizeSplitView,
   } = useTranslationHooks({ route, name });
 
   const selectedWord = useConfigStore((state) => state.selectedWord);
@@ -86,9 +87,7 @@ export default function DictionaryComponent({
             />
             {searchField && (
               <X
-                onClick={() => {
-                  setSearchField("");
-                }}
+                onClick={() => setSearchField("")}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground cursor-pointer"
               />
             )}
@@ -139,17 +138,6 @@ export default function DictionaryComponent({
               </PopoverContent>
             </Popover>
             <button
-              onClick={() => setDualView(!dualView)}
-              className={`p-2 rounded-2xl border transition-colors ${
-                dualView
-                  ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
-                  : "bg-card text-card-foreground border-border hover:bg-popover"
-              }`}
-              title="Toggle dual view"
-            >
-              <SquareSplitHorizontal size={18} />
-            </button>
-            <button
               onClick={() => setGraphMode(!graphMode)}
               className={`p-2 rounded-2xl border transition-colors ${
                 graphMode
@@ -190,25 +178,53 @@ export default function DictionaryComponent({
             >
               <ListOrdered size={18} />
             </button>
-            <AddWordModal
-              ref={addWordButtonRef}
-              route={route}
-              name={name}
-            ></AddWordModal>
+            <AddWordModal ref={addWordButtonRef} route={route} name={name} />
           </div>
         </div>
       </div>
+
       <div className="flex flex-row-reverse overflow-hidden h-[calc(100vh-130px)]">
-        {dualView && selectedWord && (
-          <div className="max-w-[50%] w-full">
-            <Markdown
-              route={route}
-              name={name}
-              uuid={selectedWord.uuid}
-              word={selectedWord}
-            ></Markdown>
+        {splitViewCollapsed ? (
+          <div className="shrink-0 relative" style={{ width: 8 }}>
+            <div
+              role="separator"
+              aria-orientation="vertical"
+              title="Drag to expand"
+              onPointerDown={handleResizeSplitView}
+              className="absolute left-0 top-0 h-full w-2 cursor-col-resize bg-muted/20 hover:bg-muted/40"
+            />
+          </div>
+        ) : (
+          <div
+            className="flex flex-col relative min-w-100!"
+            style={{
+              width: splitViewWidth,
+            }}
+          >
+            <div
+              role="separator"
+              aria-orientation="vertical"
+              title="Drag to resize"
+              onPointerDown={handleResizeSplitView}
+              className="absolute left-0 top-0 h-full w-1 cursor-col-resize bg-transparent hover:bg-muted/20 z-10"
+            />
+            <div className="flex-1 overflow-y-auto">
+              {selectedWord ? (
+                <Markdown
+                  route={route}
+                  name={name}
+                  uuid={selectedWord.uuid}
+                  word={selectedWord}
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                  Select a word to view details
+                </div>
+              )}
+            </div>
           </div>
         )}
+
         {!graphMode ? (
           <>
             <div className="flex-1 flex flex-col border-r min-w-0 h-full">
@@ -218,7 +234,9 @@ export default function DictionaryComponent({
               >
                 {currentPage <= 1 && (
                   <div
-                    className={`mb-4 mx-2 shrink-0 ${searchField || isAdditionOrder ? "hidden" : ""}`}
+                    className={`mb-4 mx-2 shrink-0 ${
+                      searchField || isAdditionOrder ? "hidden" : ""
+                    }`}
                   >
                     <p className="text-8xl font-bold text-foreground mb-4">
                       {selectedLetter}
@@ -233,25 +251,20 @@ export default function DictionaryComponent({
                       : `No list found starting with ${selectedLetter}`}
                   </div>
                 ) : (
-                  <div className={getGridClasses(dualView)}>
+                  <div className={getGridClasses()}>
                     {paginatedWords.map((word, idx) => (
                       <div
                         key={`left-${idx}-${word.uuid}`}
-                        className="shadow-md p-4 mb-4 rounded-2xl border border-border bg-card text-card-foreground"
+                        className="shadow-md p-4 mb-4 rounded-2xl border bg-card text-card-foreground"
                       >
-                        <WordCard
-                          word={word}
-                          route={route}
-                          name={name}
-                          doubleView={dualView}
-                        />
+                        <WordCard word={word} route={route} name={name} />
                       </div>
                     ))}
                   </div>
                 )}
               </div>
               {totalPages > 1 && (
-                <div className="flex-shrink-0 mt-auto mb-4 flex items-center justify-center gap-4 my-4 pt-4 border-t border-border bg-background">
+                <div className="shrink-0 mt-auto mb-4 flex items-center justify-center gap-4 my-4 pt-4 border-t border-border bg-background">
                   <button
                     onClick={handlePrevPage}
                     disabled={currentPage === 1}
@@ -272,12 +285,12 @@ export default function DictionaryComponent({
                 </div>
               )}
             </div>
-            <div className=" flex flex-col border-r items-center divide-y overflow-y-auto hide-scrollbar h-full flex-shrink-0">
+            <div className="flex flex-col border-r items-center divide-y overflow-y-auto hide-scrollbar h-full shrink-0">
               {alphabet.map((letter) => (
                 <button
                   key={letter}
                   onClick={() => handleLetterClick(letter)}
-                  className={`w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors flex-shrink-0 ${
+                  className={`w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors shrink-0 ${
                     selectedLetter === letter
                       ? "bg-primary text-primary-foreground"
                       : "text-muted-foreground hover:text-foreground hover:bg-popover"
@@ -294,7 +307,7 @@ export default function DictionaryComponent({
               route={route}
               name={name}
               title={""}
-              doubleView={dualView}
+              doubleView={true}
             />
           </div>
         )}

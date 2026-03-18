@@ -54,12 +54,12 @@ export default function EditTranslationModal({
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <div className="bg-gray-200 rounded-full flex h-6 w-6 items-center justify-center cursor-pointer">
-            <Pencil color="black" className="" size={14} />
+          <div className="bg-accent rounded-full flex h-6 w-6 items-center justify-center cursor-pointer">
+            <Pencil size={14} />
           </div>
         </DialogTrigger>
 
-        <DialogContent className="sm:max-w-[650px] overflow-y-scroll max-h-[80vh]">
+        <DialogContent className="sm:max-w-162.5 overflow-y-scroll max-h-[80vh]">
           <DialogHeader>
             <DialogTitle>Edit Translation Entry</DialogTitle>
             <DialogDescription>
@@ -73,20 +73,20 @@ export default function EditTranslationModal({
                   key={pairIndex}
                   className="bg-muted/10 dark:bg-muted/10 relative rounded-xl"
                 >
-                  <p className="font-semibold text-lg border-1 dark:border-border border-border rounded-t-xl p-2 flex items-center gap-2 text-foreground dark:text-foreground">
+                  <p className="font-semibold text-lg border dark:border-border border-border rounded-t-xl p-2 flex items-center gap-2 text-foreground dark:text-foreground">
                     <WholeWord size={24} className="" /> Pair {pairIndex + 1}
                   </p>
 
                   <Button
                     variant="destructive"
-                    className="absolute rounded-xl p-1 top-1.5 right-1.5 !bg-transparent !text-destructive hover:!text-destructive/80 hover:!cursor-pointer dark:hover:!text-destructive/90 transition-colors text-white"
+                    className="absolute rounded-xl p-1 top-1.5 right-1.5 bg-transparent! text-destructive! hover:text-destructive/80! hover:cursor-pointer! dark:hover:text-destructive/90! transition-colors"
                     type="button"
                     onClick={() => removePair(pairIndex)}
                   >
                     <Trash></Trash>
                   </Button>
 
-                  <div className="flex flex-row pb-4 justify-between border-x-1 dark:border-border border-border gap-6 p-2 items-center">
+                  <div className="flex flex-row pb-4 justify-between border-x dark:border-border border-border gap-6 p-2 items-center">
                     <div className="flex flex-col w-full">
                       <Label
                         htmlFor="original"
@@ -201,7 +201,7 @@ export default function EditTranslationModal({
                     </div>
                   </div>
 
-                  <div className="grid border-1 border-t-1 p-3 gap-2 rounded-b-xl">
+                  <div className="grid border border-t p-3 gap-2 rounded-b-xl">
                     <Label className="font-medium">Definitions</Label>
                     {pair.definitions.map((d: string, _dIndex: number) => (
                       <div key={_dIndex} className="flex gap-2">
@@ -245,7 +245,7 @@ export default function EditTranslationModal({
             <Button
               variant="outline"
               type="button"
-              className="!bg-muted/10 dark:!bg-muted/10 !text-foreground dark:!text-foreground border-1 border-gray-300 dark:border-border"
+              className="bg-muted/10! dark:bg-muted/10! text-foreground! dark:text-foreground! border border-gray-300 dark:border-border"
               onClick={addPair}
             >
               + Add New Pair

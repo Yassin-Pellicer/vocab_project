@@ -50,9 +50,9 @@ function DictRow({
           {dict.totalWords} words
         </span>
       </div>
-      <div className="grid 2xl:grid-cols-2 grid-cols-1 gap-4 items-start ">
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 items-start ">
         <div ref={leftRef} className="flex flex-col h-fit!">
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
+          <div className="grid grid-cols-1 2xl:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
             <div className="flex flex-col">
               {dict.wordOfTheDay ? (
                 <WordCard name={dict.id} word={dict.wordOfTheDay} />
@@ -87,7 +87,7 @@ function DictRow({
                 ))}
               </div>
             </div>
-            <div className="h-100 border rounded-xl xl:h-auto min-h-0">
+            <div className="h-100 border rounded-xl 2xl:h-auto min-h-0">
               <DictionaryGraph
                 title={dict.name}
                 name={dict.id}
@@ -242,7 +242,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="grid 2xl:grid-cols-1 grid-cols-1 w-full">
+        <div className="grid lg:grid-cols-1 grid-cols-1 w-full">
           {dictionaryCards.map((dict, dictIndex) => (
             <DictRow
               key={dictIndex}

@@ -64,11 +64,38 @@ export default function useNotesHooks() {
     }
   });
 
+  const [chatCollapsed, setChatCollapsed] = useState<boolean>(() => {
+    try {
+      const raw = localStorage.getItem("chat-sidebar");
+      if (!raw) return false;
+      const parsed = JSON.parse(raw);
+      return Boolean(parsed?.collapsed);
+    } catch {
+      return false;
+    }
+  });
+
+  const [chatWidth, setChatWidth] = useState<number>(() => {
+    try {
+      const raw = localStorage.getItem("chat-sidebar");
+      if (!raw) return 392;
+      const parsedJson = JSON.parse(raw);
+      const parsed = Number(parsedJson?.width);
+      return Number.isFinite(parsed) ? parsed : 392;
+    } catch {
+      return 392;
+    }
+  });
+
   useEffect(() => {
     try {
       localStorage.setItem(
         "notes-sidebar",
         JSON.stringify({ width: sidebarWidth, collapsed: sidebarCollapsed }),
+      );
+      localStorage.setItem(
+        "chat-sidebar",
+        JSON.stringify({ width: chatWidth, collapsed: chatCollapsed }),
       );
     } catch {
     }
@@ -108,6 +135,39 @@ export default function useNotesHooks() {
     [sidebarWidth, sidebarCollapsed],
   );
 
+  const handleResizeChat = useCallback(
+    (e: ReactPointerEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const startX = e.clientX;
+      const startWidth = chatCollapsed ? 0 : chatWidth;
+
+      const minWidth = 260;
+      const maxWidth = window.innerWidth/2.25;
+
+      const onMove = (ev: PointerEvent) => {
+        const rawNext = startWidth + (startX - ev.clientX);
+        if (rawNext < minWidth) {
+          setChatCollapsed(true);
+          return;
+        }
+
+        setChatCollapsed(false);
+        setChatWidth(Math.min(maxWidth, Math.max(minWidth, rawNext)));
+      };
+
+      const onUp = () => {
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("pointerup", onUp);
+      };
+
+      window.addEventListener("pointermove", onMove);
+      window.addEventListener("pointerup", onUp);
+    },
+    [chatWidth, chatCollapsed],
+  );
+
   return {
     searchField,
     setSearchField,
@@ -118,5 +178,10 @@ export default function useNotesHooks() {
     sidebarWidth,
     sidebarCollapsed,
     handleResizeStart,
+    chatWidth,
+    chatCollapsed,
+    handleResizeChat,
+    setChatCollapsed,
+    setChatWidth,
   };
 }

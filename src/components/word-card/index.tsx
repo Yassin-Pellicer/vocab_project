@@ -1,6 +1,5 @@
 import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 import useWordCard from "./hook";
-import { useNavigate } from "react-router-dom";
 import { useConfigStore } from "@/context/dictionary-context";
 import EditWordModal from "../dict/edit-word-modal";
 import type { TranslationEntry } from "@/types/translation-entry";
@@ -9,12 +8,10 @@ export default function WordCard({
   word,
   route,
   name,
-  doubleView,
 }: {
   word: TranslationEntry;
   route?: string;
   name: string;
-  doubleView?: boolean;
 }) {
   const {
     pairs,
@@ -27,26 +24,20 @@ export default function WordCard({
     originalWithArticle
   } = useWordCard(name, word);
 
-  const navigate = useNavigate();
   const setSelectedWord = useConfigStore((state) => state.setSelectedWord);
   const isFlipped = useConfigStore((state) => state.isFlipped);
 
   return (
     <div className="">
       <div className="flex items-start justify-between">
-        <div onClick={() => {
-          setSelectedWord(word);
-          if (doubleView) return;
-          if (!route) return;
-          navigate(
-            `/markdown?path=${encodeURIComponent(route)}&name=${encodeURIComponent(name)}`,
-          );
-        }} className="flex flex-wrap gap-1 items-center">
+        <div
+          onClick={() => setSelectedWord(word)}
+          className="flex flex-wrap gap-1 items-center">
           <h3 className={`text-xl cursor-pointer tracking-tight font-bold text-foreground ${name && route ? "cursor-pointer" : ""} `}>
             {isFlipped ? translations : originalWithArticle}
           </h3>
           <p className="text-2xl">⇔</p>
-            <p className="italic text-muted-foreground">{isFlipped ? originalWithArticle : translations}</p>
+          <p className="italic text-muted-foreground">{isFlipped ? originalWithArticle : translations}</p>
         </div>
         {route && <EditWordModal word={word} route={route} name={name} />}
       </div>

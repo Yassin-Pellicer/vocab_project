@@ -24,11 +24,21 @@ export default function MarkdownPage({ _uuid }: { _uuid?: string }) {
   }
 
   return (
-    <Markdown
-      route={path}
-      name={name}
-      uuid={word.uuid}
-      word={word}
-    />
+    <div className="flex flex-row-reverse overflow-hidden h-[calc(100vh-64px)]">
+      <div className="flex-1 overflow-y-auto">
+        {selectedWord ? (
+          <Markdown
+            route={path}
+            name={name}
+            uuid={selectedWord.uuid}
+            word={selectedWord}
+          />
+        ) : (
+          <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+            Select a word to view details
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

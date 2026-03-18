@@ -1,4 +1,4 @@
-import { Send, Sparkles, Trash2 } from "lucide-react";
+import { Send, Sparkles, Trash2, WholeWord, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,8 +8,9 @@ import { TranslationEntry } from "@/types/translation-entry";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import { ContextType } from "@/types/chat";
 
-export function Chat({ startingInfo, route, name }: { startingInfo?: TranslationEntry | string | null, route?: string, name?: string | null }) {
+export function Chat({ startingInfo, route, name, context }: { startingInfo?: TranslationEntry | string | null, route?: string, name?: string | null, context?: ContextType }) {
   const {
     clearChat,
     send,
@@ -19,7 +20,8 @@ export function Chat({ startingInfo, route, name }: { startingInfo?: Translation
     setDraft,
     sending,
     canSend,
-  } = useChat({ startingInfo });
+    contextForChat,
+  } = useChat({ startingInfo, context });
 
   return (
     <Card className="flex flex-col min-h-0 h-full">
@@ -38,16 +40,16 @@ export function Chat({ startingInfo, route, name }: { startingInfo?: Translation
         </Button>
       </div>
 
-      <div className="flex-1 min-h-0 overflow-y-auto p-3">
+      <div className="flex-1 min-h-0 overflow-y-auto p-4">
         <div className="flex flex-col gap-2">
           {messages.map((m, idx) => (
             <div
               key={`${m.role}-${idx}`}
               className={cn(
-                "w-fit max-w-[90%] rounded-lg px-3 text-sm shadow-sm markdown",
+                "w-fit max-w-[65%] rounded-lg text-sm shadow-sm markdown",
                 m.role === "user"
-                  ? "ml-auto bg-primary text-primary-foreground"
-                  : "mr-auto bg-card text-card-foreground border"
+                  ? "ml-auto bg-primary px-3 text-primary-foreground"
+                  : "mr-auto bg-card px-5 py-4 text-card-foreground border"
               )}
             >
               <ReactMarkdown
@@ -63,6 +65,12 @@ export function Chat({ startingInfo, route, name }: { startingInfo?: Translation
       </div>
 
       <div className="border-t p-3 sticky bottom-0 z-10 bg-background rounded-xl">
+        {contextForChat && <div className="flex flex-row mb-2 items-center justify-between gap-4">
+          <p className="text-xs">Loaded context <br></br>with word: </p>
+          <Button className="h-fit">
+            <WholeWord size={32} strokeWidth={1.5} /> {(contextForChat?.elements as TranslationEntry)?.pair[0].original.word}
+          </Button>
+        </div>}
         <div className="flex gap-2">
           <Textarea
             value={draft}

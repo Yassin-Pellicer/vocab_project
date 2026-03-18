@@ -13,7 +13,6 @@ interface ConfigState {
   selectedLetter: string;
   searchField: string;
   isFlipped: boolean;
-  dualView: boolean;
   selectedTypes: string[];
   graphMode: boolean;
 
@@ -23,7 +22,6 @@ interface ConfigState {
   setSelectedLetter: (letter: string) => void;
   setSearchField: (field: string) => void;
   setIsFlipped: (flipped: boolean) => void;
-  setDualView: (dual: boolean) => void;
   setSelectedTypes: (types: string[]) => void;
   setGraphMode: (mode: boolean) => void;
 
@@ -81,7 +79,6 @@ export const useConfigStore = create<ConfigState>((set, get) => {
     selectedLetter: "A",
     searchField: "",
     isFlipped: false,
-    dualView: true,
     selectedTypes: [],
     graphMode: false,
 
@@ -91,7 +88,6 @@ export const useConfigStore = create<ConfigState>((set, get) => {
     setSelectedLetter: (letter) => set({ selectedLetter: letter }),
     setSearchField: (field) => set({ searchField: field }),
     setIsFlipped: (flipped) => set({ isFlipped: flipped }),
-    setDualView: (dual) => set({ dualView: dual }),
     setSelectedTypes: (types) => set({ selectedTypes: types }),
     setGraphMode: (mode) => set({ graphMode: mode }),
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { ChatMessage } from "@/types/chat";
+import type { ChatMessage, ContextType } from "@/types/chat";
 import { notifyError } from "@/services/notify";
 import { TranslationEntry } from "@/types/translation-entry";
 
@@ -10,12 +10,14 @@ type PersistedChatState = {
   messages: ChatMessage[];
 };
 
-export function useChat({ startingInfo }: { startingInfo?: TranslationEntry | string | null; }) {
-  
+export function useChat({ startingInfo, context }: { startingInfo?: TranslationEntry | string | null; context?: ContextType }) {
+
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
   const [sending, setSending] = useState(false);
   const endRef = useRef<HTMLDivElement | null>(null);
+  type ChatContext = { description: string; elements: object };
+  const [contextForChat, setContextForChat] = useState<ChatContext | undefined>(undefined);
 
   const saveState = (state: PersistedChatState) => {
     try {
@@ -26,6 +28,24 @@ export function useChat({ startingInfo }: { startingInfo?: TranslationEntry | st
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
+
+  useEffect(() => {
+    if (!context) { return }
+    let contextObject = { description: "", elements: {} }
+    if (context.type === "word") {
+      contextObject.description = "This is the word that the user has selected from their dictionary. " +
+        "Do with it whatever the user asks you to. "
+      contextObject.elements = context.content;
+      setContextForChat(contextObject);
+    }
+    else if (context.type === "note") {
+      contextObject.description = "This is the note that the user has selected from their note folders. " +
+        "Do with it whatever the user asks you to. "
+      contextObject.elements = context.content;
+      setContextForChat(contextObject);
+    }
+    else { return; }
+  }, [context])
 
   const canSend = !sending && draft.trim().length > 0;
 
@@ -38,8 +58,9 @@ export function useChat({ startingInfo }: { startingInfo?: TranslationEntry | st
     const messageContent = content?.trim() || draft.trim();
     if (!messageContent) return;
 
-    const nextMessages: ChatMessage[] = [...messages, { role: "user", content: messageContent }];
+    let nextMessages: ChatMessage[] = [...messages, { role: "user", content: messageContent }];
     setMessages(nextMessages);
+    nextMessages = [...messages, { role: "user", content: messageContent + ". Content -> " + JSON.stringify(contextForChat) }];
     setDraft("");
     setSending(true);
 
@@ -62,10 +83,10 @@ export function useChat({ startingInfo }: { startingInfo?: TranslationEntry | st
       const startingPrompt: ChatMessage = {
         role: "user",
         content: "Give a fun fact about the word of the day today. " +
-        "You must always answer in the language of the app (english) and you must first say"
-        + "'The word of the Day is... {wordoftheday}!. Here are some interesting facts about it!'" +
-        "Highlight three topics if u can 1. ethymology, 2.historical fact, 3.tips. The word is the following -> "
-        + startingInfo,
+          "You must always answer in the language of the app (english) and you must first say"
+          + "'The word of the Day is... {wordoftheday}! Here are some interesting facts about it!'" +
+          "Highlight three topics if u can 1. ethymology, 2.historical fact, 3.tips. The word is the following -> "
+          + startingInfo,
       };
       const nextMessages = [...messages, startingPrompt];
       setSending(true);
@@ -93,5 +114,7 @@ export function useChat({ startingInfo }: { startingInfo?: TranslationEntry | st
     sending,
     canSend,
     open,
+    contextForChat,
+    setContextForChat
   };
 }
