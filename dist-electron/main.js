@@ -805,6 +805,40 @@ function openNewWindow() {
     createWindow(normalizeRoute(route), { hideSidebar: true });
   });
 }
+function coerceMessages(value) {
+  if (!Array.isArray(value)) return [];
+  return value.map((m) => {
+    if (typeof m !== "object" || m === null) return null;
+    const role = "role" in m ? m.role : void 0;
+    const content = "content" in m ? m.content : void 0;
+    if (role !== "user" && role !== "assistant") return null;
+    if (typeof content !== "string") return null;
+    const trimmed = content.trim();
+    if (!trimmed) return null;
+    return { role, content: trimmed };
+  }).filter((m) => Boolean(m));
+}
+function sendChat() {
+  ipcMain.handle("chatSend", async (_event, rawMessages) => {
+    const messages = coerceMessages(rawMessages);
+    if (messages.length === 0) {
+      throw new Error("No messages provided.");
+    }
+    const response = await fetch("http://localhost:3000/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages })
+    });
+    if (!response.ok) {
+      const text = await response.text().catch(() => "");
+      throw new Error(
+        `Local API request failed with status ${response.status}: ${text}`
+      );
+    }
+    const payload = await response.json().catch(() => null);
+    return { text: payload.text };
+  });
+}
 function registerIpcHandlers() {
   loadTranslations();
   addTranslation();
@@ -829,10 +863,54 @@ function registerIpcHandlers() {
   saveNoteIndex();
   saveNotes();
   fetchNotes();
+  sendChat();
   minimizeWindow();
   maximizeWindow();
   closeWindow();
   openNewWindow();
+}
+function parseEnvFile(raw) {
+  const result = {};
+  for (const line of raw.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eq = trimmed.indexOf("=");
+    if (eq <= 0) continue;
+    const key = trimmed.slice(0, eq).trim();
+    let value = trimmed.slice(eq + 1).trim();
+    if (!key) continue;
+    if (value.startsWith('"') && value.endsWith('"') || value.startsWith("'") && value.endsWith("'")) {
+      value = value.slice(1, -1);
+    }
+    if (value) result[key] = value;
+  }
+  return result;
+}
+async function readEnvFileIfExists(filePath) {
+  try {
+    const raw = await promises.readFile(filePath, "utf-8");
+    return parseEnvFile(raw);
+  } catch (error) {
+    if (typeof error === "object" && error !== null && "code" in error && error.code === "ENOENT") {
+      return null;
+    }
+    return null;
+  }
+}
+async function loadEnvIfPresent() {
+  const candidates = [
+    path.join(process.cwd(), ".env"),
+    path.join(process.cwd(), ".env.local"),
+    process.env.APP_ROOT ? path.join(process.env.APP_ROOT, ".env") : null,
+    process.env.APP_ROOT ? path.join(process.env.APP_ROOT, ".env.local") : null
+  ].filter((p) => Boolean(p));
+  for (const filePath of candidates) {
+    const parsed = await readEnvFileIfExists(filePath);
+    if (!parsed) continue;
+    for (const [key, value] of Object.entries(parsed)) {
+      if (!process.env[key]) process.env[key] = value;
+    }
+  }
 }
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
@@ -845,6 +923,7 @@ app.on("activate", () => {
   }
 });
 app.whenReady().then(() => {
+  void loadEnvIfPresent();
   registerIpcHandlers();
   createWindow();
 });

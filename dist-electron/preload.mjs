@@ -103,6 +103,11 @@ const windowControls = {
     return await electron.ipcRenderer.invoke("window-open-new", route);
   }
 };
+const chat = {
+  chatSend: async (messages) => {
+    return await electron.ipcRenderer.invoke("chatSend", messages);
+  }
+};
 const endpoints = Object.assign(
   {},
   translations,
@@ -111,7 +116,8 @@ const endpoints = Object.assign(
   graph,
   config,
   notes,
-  windowControls
+  windowControls,
+  chat
 );
 electron.contextBridge.exposeInMainWorld("ipcRenderer", {
   on(...args) {

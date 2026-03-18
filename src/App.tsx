@@ -9,7 +9,6 @@ import { useEffect, useMemo, useRef } from "react";
 import useThemeSync from "./hooks/useThemeSync";
 import NotesPage from "./pages/notes-page";
 import { Toaster } from "@/components/ui/sonner";
-import { ChatWidget } from "./components/chat/chat-widget";
 
 function InitialRouteFromHash() {
   const navigate = useNavigate();

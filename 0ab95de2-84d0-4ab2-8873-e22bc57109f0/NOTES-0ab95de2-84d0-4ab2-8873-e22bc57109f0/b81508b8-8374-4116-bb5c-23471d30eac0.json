@@ -213,6 +213,20 @@
       }
     },
     {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 2
+      }
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 1
+      }
+    },
+    {
       "type": "paragraph",
       "attrs": {
         "textAlign": null
