@@ -50,7 +50,7 @@ export default function useTranslationHooks({
 
   const [splitViewCollapsed, setSplitViewCollapsed] = useState<boolean>(() => {
     try {
-      const raw = localStorage.getItem("chat-sidebar");
+      const raw = localStorage.getItem("dictionary-sidebar");
       if (!raw) return false;
       const parsed = JSON.parse(raw);
       return Boolean(parsed?.collapsed);
@@ -61,7 +61,7 @@ export default function useTranslationHooks({
 
   const [splitViewWidth, setSplitViewWidth] = useState<number>(() => {
     try {
-      const raw = localStorage.getItem("chat-sidebar");
+      const raw = localStorage.getItem("dictionary-sidebar");
       if (!raw) return 392;
       const parsedJson = JSON.parse(raw);
       const parsed = Number(parsedJson?.width);
@@ -71,18 +71,61 @@ export default function useTranslationHooks({
     }
   });
 
-  // Refs so pointermove always reads fresh values without re-creating the handler
   const splitViewWidthRef = useRef(splitViewWidth);
   const splitViewCollapsedRef = useRef(splitViewCollapsed);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const alphabetRef = useRef<HTMLDivElement>(null);
   useEffect(() => { splitViewWidthRef.current = splitViewWidth; }, [splitViewWidth]);
   useEffect(() => { splitViewCollapsedRef.current = splitViewCollapsed; }, [splitViewCollapsed]);
 
+  const getMaxSplitWidth = useCallback(() => {
+    const containerWidth =
+      containerRef.current?.getBoundingClientRect().width ?? window.innerWidth;
+    const alphabetWidth = graphMode
+      ? 0
+      : (alphabetRef.current?.getBoundingClientRect().width ?? 40);
+    const minMainWidth = 360;
+    return Math.max(0, Math.floor(containerWidth - alphabetWidth - minMainWidth));
+  }, [graphMode]);
+
+  const expandSplitView = useCallback(() => {
+    const minWidth = 160;
+    const maxWidth = getMaxSplitWidth();
+    if (maxWidth < minWidth) {
+      setSplitViewCollapsed(true);
+      setSplitViewWidth(0);
+      return;
+    }
+    const target = Math.min(maxWidth, Math.floor(window.innerWidth / 1.6));
+    setSplitViewCollapsed(false);
+    setSplitViewWidth(Math.max(minWidth, target));
+  }, [getMaxSplitWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const minWidth = 160;
+      const maxWidth = getMaxSplitWidth();
+      if (!splitViewCollapsedRef.current) {
+        if (maxWidth < minWidth) {
+          setSplitViewCollapsed(true);
+          setSplitViewWidth(0);
+          return;
+        }
+        if (splitViewWidthRef.current > maxWidth) {
+          setSplitViewWidth(maxWidth);
+        }
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [getMaxSplitWidth]);
+
   useEffect(() => {
     if (selectedWord && splitViewCollapsedRef.current) {
-      setSplitViewCollapsed(false);
-      setSplitViewWidth(Math.floor(window.innerWidth / 1.6));
+      expandSplitView();
     }
-  }, [selectedWord]);
+  }, [selectedWord, expandSplitView]);
 
   const handleResizeSplitView = useCallback((e: ReactPointerEvent) => {
     e.preventDefault();
@@ -90,11 +133,16 @@ export default function useTranslationHooks({
 
     const startX = e.clientX;
     const startWidth = splitViewCollapsedRef.current ? 0 : splitViewWidthRef.current;
-    const minWidth = 260;
-    const maxWidth = Math.floor(window.innerWidth / 1.6);
+    const minWidth = 160;
 
     const onMove = (ev: PointerEvent) => {
       const rawNext = startWidth + (startX - ev.clientX);
+      const maxWidth = getMaxSplitWidth();
+      if (maxWidth < minWidth) {
+        setSplitViewCollapsed(true);
+        setSplitViewWidth(0);
+        return;
+      }
       if (rawNext < minWidth) {
         setSplitViewCollapsed(true);
         return;
@@ -110,7 +158,7 @@ export default function useTranslationHooks({
 
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", onUp);
-  }, []); // stable — reads live values via refs
+  }, [getMaxSplitWidth]);
 
   useEffect(() => {
     try {
@@ -304,5 +352,7 @@ export default function useTranslationHooks({
     splitViewWidth,
     splitViewCollapsed,
     handleResizeSplitView,
+    containerRef,
+    alphabetRef,
   };
 }

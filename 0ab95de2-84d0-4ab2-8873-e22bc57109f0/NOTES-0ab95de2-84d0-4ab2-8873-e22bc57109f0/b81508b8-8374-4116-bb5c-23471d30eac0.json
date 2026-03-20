@@ -29,7 +29,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Hallo! Ich bin Yassin, und jetzt spreche ich über meine Familie."
+          "text": "Hallo! Ich bin Yassin, und jetzt erzähle ich euch über meine Familie."
         }
       ]
     },
@@ -204,26 +204,6 @@
         "title": "",
         "doubleView": false,
         "word": "fami"
-      }
-    },
-    {
-      "type": "paragraph",
-      "attrs": {
-        "textAlign": null
-      }
-    },
-    {
-      "type": "heading",
-      "attrs": {
-        "textAlign": null,
-        "level": 2
-      }
-    },
-    {
-      "type": "heading",
-      "attrs": {
-        "textAlign": null,
-        "level": 1
       }
     },
     {

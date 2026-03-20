@@ -6,14 +6,15 @@ function coerceMessages(value: unknown): ChatMessage[] {
   return value
     .map((m) => {
       if (typeof m !== "object" || m === null) return null;
-      const role = "role" in m ? (m as { role?: unknown }).role : undefined;
-      const content =
-        "content" in m ? (m as { content?: unknown }).content : undefined;
+
+      const role = "role" in m ? (m as any).role : undefined;
+      const content = "content" in m ? (m as any).content : undefined;
+
       if (role !== "user" && role !== "assistant") return null;
-      if (typeof content !== "string") return null;
-      const trimmed = content.trim();
-      if (!trimmed) return null;
-      return { role, content: trimmed } satisfies ChatMessage;
+
+      if (typeof content !== "string" && typeof content !== "object") return null;
+
+      return { role, content };
     })
     .filter((m): m is ChatMessage => Boolean(m));
 }

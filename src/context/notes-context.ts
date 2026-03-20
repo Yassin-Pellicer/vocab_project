@@ -58,7 +58,7 @@ const findRouteRecursive = (
 const returnItemsFromRouteRecursive = (
   tree: SidebarTree,
   id: string,
-  path: SidebarNode [] = [],
+  path: SidebarNode[] = [],
 ): SidebarNode[] | null => {
   for (const node of tree) {
     const nextPath = [...path, node];
@@ -76,13 +76,13 @@ const returnItemsFromRouteRecursive = (
   return null;
 };
 
-
 interface NotesState {
   tree: SidebarTree;
 
   sidebarOpen: boolean;
 
   selectedNoteId: string | null;
+  selectedNoteContent: object;
 
   reloadToken: number;
 
@@ -119,6 +119,8 @@ interface NotesState {
   getRoute: (id: string) => string | null;
 
   itemsFromRouteRecursive: () => SidebarNode[] | [] | null;
+
+  setSelectedNoteContent: (content: any) => void;
 }
 
 const makeLeaf = (title: string, id?: string): SidebarNode => ({
@@ -160,6 +162,7 @@ export const useNotesStore = create<NotesState>((set, get) => ({
   sidebarOpen: true,
   selectedNoteId: null,
   reloadToken: 0,
+  selectedNoteContent: {},
 
   findById: (id) => {
     let found: SidebarNode | undefined;
@@ -185,7 +188,8 @@ export const useNotesStore = create<NotesState>((set, get) => ({
 
   setTree: (tree) => set({ tree }),
   setSidebarOpen: (open) => set({ sidebarOpen: open }),
-  bumpReloadToken: () => set((state) => ({ reloadToken: state.reloadToken + 1 })),
+  bumpReloadToken: () =>
+    set((state) => ({ reloadToken: state.reloadToken + 1 })),
   selectParent: (item: SidebarNode) => {
     let parentId: string | null = null;
     walk(get().tree, (n, _, parent) => {
@@ -255,7 +259,11 @@ export const useNotesStore = create<NotesState>((set, get) => ({
   },
 
   setSelectedNoteId: (id) => {
-    set({ selectedNoteId: id })
+    set({ selectedNoteId: id });
+  },
+
+  setSelectedNoteContent: (content) => {
+    set({ selectedNoteContent: content });
   },
 
   getRoute: (id: string) => {
@@ -265,6 +273,8 @@ export const useNotesStore = create<NotesState>((set, get) => ({
 
   itemsFromRouteRecursive: () => {
     const current = get().selectedNoteId;
-    return current ? returnItemsFromRouteRecursive(get().tree, current) ?? [] : [];
+    return current
+      ? (returnItemsFromRouteRecursive(get().tree, current) ?? [])
+      : [];
   },
 }));

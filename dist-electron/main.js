@@ -812,10 +812,8 @@ function coerceMessages(value) {
     const role = "role" in m ? m.role : void 0;
     const content = "content" in m ? m.content : void 0;
     if (role !== "user" && role !== "assistant") return null;
-    if (typeof content !== "string") return null;
-    const trimmed = content.trim();
-    if (!trimmed) return null;
-    return { role, content: trimmed };
+    if (typeof content !== "string" && typeof content !== "object") return null;
+    return { role, content };
   }).filter((m) => Boolean(m));
 }
 function sendChat() {

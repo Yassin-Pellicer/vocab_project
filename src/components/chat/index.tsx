@@ -1,4 +1,4 @@
-import { Send, Sparkles, Trash2, WholeWord, X } from "lucide-react";
+import { NotebookIcon, Send, Sparkles, Trash2, WholeWord } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +9,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { ContextType } from "@/types/chat";
+import { useNotesStore } from "@/context/notes-context";
 
 export function Chat({ startingInfo, route, name, context }: { startingInfo?: TranslationEntry | string | null, route?: string, name?: string | null, context?: ContextType }) {
   const {
@@ -22,6 +23,8 @@ export function Chat({ startingInfo, route, name, context }: { startingInfo?: Tr
     canSend,
     contextForChat,
   } = useChat({ startingInfo, context });
+
+  const { selectedNoteId, findById } = useNotesStore();
 
   return (
     <Card className="flex flex-col min-h-0 h-full">
@@ -46,7 +49,7 @@ export function Chat({ startingInfo, route, name, context }: { startingInfo?: Tr
             <div
               key={`${m.role}-${idx}`}
               className={cn(
-                "w-fit max-w-[65%] rounded-lg text-sm shadow-sm markdown",
+                "w-fit max-w-[85%] rounded-lg text-sm shadow-sm markdown",
                 m.role === "user"
                   ? "ml-auto bg-primary px-3 text-primary-foreground"
                   : "mr-auto bg-card px-5 py-4 text-card-foreground border"
@@ -56,7 +59,9 @@ export function Chat({ startingInfo, route, name, context }: { startingInfo?: Tr
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeHighlight]}
               >
-                {m.content}
+                {typeof m.content === "string"
+                  ? m.content
+                  : m.content.prompt}
               </ReactMarkdown>
             </div>
           ))}
@@ -65,10 +70,16 @@ export function Chat({ startingInfo, route, name, context }: { startingInfo?: Tr
       </div>
 
       <div className="border-t p-3 sticky bottom-0 z-10 bg-background rounded-xl">
-        {contextForChat && <div className="flex flex-row mb-2 items-center justify-between gap-4">
+        {contextForChat && context?.type == "word" && <div className="flex flex-row mb-2 items-center justify-between gap-4">
           <p className="text-xs">Loaded context <br></br>with word: </p>
           <Button className="h-fit">
-            <WholeWord size={32} strokeWidth={1.5} /> {(contextForChat?.elements as TranslationEntry)?.pair[0].original.word}
+            <WholeWord size={16} strokeWidth={1.5} /> {(contextForChat?.elements as TranslationEntry)?.pair[0].original.word}
+          </Button>
+        </div>}
+        {selectedNoteId && contextForChat && context?.type == "note" && <div className="flex flex-row mb-2 items-center justify-between gap-4">
+          <p className="text-xs">Loaded context <br></br> with note: </p>
+          <Button className="h-fit">
+            <NotebookIcon strokeWidth={1.5} /> {selectedNoteId && findById(selectedNoteId)?.title}
           </Button>
         </div>}
         <div className="flex gap-2">

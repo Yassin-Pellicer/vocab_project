@@ -2,13 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { ChatMessage, ContextType } from "@/types/chat";
 import { notifyError } from "@/services/notify";
 import { TranslationEntry } from "@/types/translation-entry";
-
-const STORAGE_KEY = "chatbot-widget";
-
-type PersistedChatState = {
-  open: boolean;
-  messages: ChatMessage[];
-};
+import { useConfigStore } from "@/context/preferences-context";
 
 export function useChat({ startingInfo, context }: { startingInfo?: TranslationEntry | string | null; context?: ContextType }) {
 
@@ -16,14 +10,11 @@ export function useChat({ startingInfo, context }: { startingInfo?: TranslationE
   const [draft, setDraft] = useState("");
   const [sending, setSending] = useState(false);
   const endRef = useRef<HTMLDivElement | null>(null);
+
   type ChatContext = { description: string; elements: object };
   const [contextForChat, setContextForChat] = useState<ChatContext | undefined>(undefined);
 
-  const saveState = (state: PersistedChatState) => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch { }
-  };
+  const { config } = useConfigStore();
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -34,13 +25,13 @@ export function useChat({ startingInfo, context }: { startingInfo?: TranslationE
     let contextObject = { description: "", elements: {} }
     if (context.type === "word") {
       contextObject.description = "This is the word that the user has selected from their dictionary. " +
-        "Do with it whatever the user asks you to. "
+        "Do with it whatever the user asks you to."
       contextObject.elements = context.content;
       setContextForChat(contextObject);
     }
     else if (context.type === "note") {
       contextObject.description = "This is the note that the user has selected from their note folders. " +
-        "Do with it whatever the user asks you to. "
+        "Do with it whatever the user asks you to."
       contextObject.elements = context.content;
       setContextForChat(contextObject);
     }
@@ -58,20 +49,35 @@ export function useChat({ startingInfo, context }: { startingInfo?: TranslationE
     const messageContent = content?.trim() || draft.trim();
     if (!messageContent) return;
 
-    let nextMessages: ChatMessage[] = [...messages, { role: "user", content: messageContent }];
+    const structuredMessage: ChatMessage = {
+      role: "user",
+      content: {
+        prompt: messageContent,
+        details: "",
+        context: contextForChat,
+        appLanguage: config.language!,
+      },
+    };
+
+    const nextMessages: ChatMessage[] = [...messages, structuredMessage];
+
     setMessages(nextMessages);
-    nextMessages = [...messages, { role: "user", content: messageContent + ". Content -> " + JSON.stringify(contextForChat) }];
     setDraft("");
     setSending(true);
 
     try {
       const result = await window.api.chatSend(nextMessages);
-      setMessages((prev) => [...prev, { role: "assistant", content: result.text }]);
+
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: result.text },
+      ]);
     } catch (error) {
       const message =
         typeof error === "object" && error !== null && "message" in error
           ? String((error as { message?: unknown }).message)
           : "Request failed.";
+
       notifyError("Chatbot error", message);
     } finally {
       setSending(false);
@@ -82,29 +88,38 @@ export function useChat({ startingInfo, context }: { startingInfo?: TranslationE
     if (startingInfo && Object.keys(startingInfo).length > 0) {
       const startingPrompt: ChatMessage = {
         role: "user",
-        content: "Give a fun fact about the word of the day today. " +
-          "You must always answer in the language of the app (english) and you must first say"
-          + "'The word of the Day is... {wordoftheday}! Here are some interesting facts about it!'" +
-          "Highlight three topics if u can 1. ethymology, 2.historical fact, 3.tips. The word is the following -> "
-          + startingInfo,
+        content: {
+          prompt:
+            "Give a fun fact about the word of the day today.",
+          details:
+            "You must say: 'The word of the Day is... {word}! Here are some interesting facts about it!' and include: 1. etymology, 2. historical fact, 3. tips.",
+          context: startingInfo,
+          appLanguage: "english",
+        },
       };
+
       const nextMessages = [...messages, startingPrompt];
       setSending(true);
 
       window.api
         ?.chatSend(nextMessages)
         .then((result) => {
-          setMessages((prev) => [...prev, { role: "assistant", content: result.text }]);
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: result.text },
+          ]);
         })
         .catch((err) => {
-          notifyError("Chatbot error", err instanceof Error ? err.message : String(err));
+          notifyError(
+            "Chatbot error",
+            err instanceof Error ? err.message : String(err)
+          );
         })
         .finally(() => setSending(false));
     }
   }, [startingInfo]);
 
   return {
-    saveState,
     clearChat,
     send,
     messages,

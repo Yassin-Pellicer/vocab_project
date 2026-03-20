@@ -13,6 +13,7 @@ import { Button } from "../ui/button.tsx";
 import AddNoteModal from "./add-note-modal/index.tsx";
 import NoteDisplay from "./note-display/index.tsx";
 import { Chat } from "../chat/index.tsx";
+import { useNotesStore } from "@/context/notes-context.ts";
 
 export default function Notes({
   route,
@@ -25,6 +26,7 @@ export default function Notes({
     searchField,
     setSearchField,
     searchRef,
+    containerRef,
     handleMenuItemClick,
     selectedNoteTitle,
     selectedNoteRoute,
@@ -34,9 +36,10 @@ export default function Notes({
     chatWidth,
     chatCollapsed,
     handleResizeChat,
-    setChatCollapsed,
-    setChatWidth,
+    expandChat,
   } = useNotesHooks();
+
+  const { selectedNoteContent } = useNotesStore();
 
   return (
     <div className="h-full flex flex-col">
@@ -67,7 +70,10 @@ export default function Notes({
         </div>
       </div>
 
-      <div className="flex flex-row overflow-hidden h-[calc(100vh-130px)]">
+      <div
+        ref={containerRef}
+        className="flex flex-row overflow-hidden h-[calc(100vh-130px)]"
+      >
         {sidebarCollapsed ? (
           <div className="shrink-0 relative" style={{ width: 8 }}>
             <div
@@ -123,7 +129,7 @@ export default function Notes({
             />
           </div>
         )}
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1 min-w-0 overflow-hidden">
           <div className="flex-1 min-w-0 overflow-y-auto border-r">
             {selectedNoteRoute && (
               <div className="flex flex-col gap-1 bg-background p-3 border-b">
@@ -142,7 +148,11 @@ export default function Notes({
 
           {chatCollapsed ? (
             <div className="flex items-center relative">
-              <div onPointerDown={handleResizeChat} onClick={() => {setChatCollapsed(false); setChatWidth(500)}} className="absolute -right-7.5 h-15 w-15 rounded-full bg-background border">
+              <div
+                onPointerDown={handleResizeChat}
+                onClick={expandChat}
+                className="absolute -right-7.5 h-15 w-15 rounded-full bg-background border"
+              >
                 <div className="absolute top-5 right-8.25">
                   <Sparkles size={18}></Sparkles>
                 </div>
@@ -162,7 +172,7 @@ export default function Notes({
               />
 
               <div className="flex-1 overflow-y-auto p-4">
-                <Chat />
+                <Chat context={{type: "note", content: selectedNoteContent}} />
               </div>
             </div>
           )}

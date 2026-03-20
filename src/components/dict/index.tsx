@@ -62,6 +62,8 @@ export default function DictionaryComponent({
     splitViewWidth,
     splitViewCollapsed,
     handleResizeSplitView,
+    containerRef,
+    alphabetRef,
   } = useTranslationHooks({ route, name });
 
   const selectedWord = useConfigStore((state) => state.selectedWord);
@@ -183,7 +185,10 @@ export default function DictionaryComponent({
         </div>
       </div>
 
-      <div className="flex flex-row-reverse overflow-hidden h-[calc(100vh-130px)]">
+      <div
+        ref={containerRef}
+        className="flex flex-row-reverse overflow-hidden h-[calc(100vh-130px)]"
+      >
         {splitViewCollapsed ? (
           <div className="shrink-0 relative" style={{ width: 8 }}>
             <div
@@ -196,7 +201,7 @@ export default function DictionaryComponent({
           </div>
         ) : (
           <div
-            className="flex flex-col relative min-w-100!"
+            className="flex flex-col relative shrink-0"
             style={{
               width: splitViewWidth,
             }}
@@ -285,7 +290,10 @@ export default function DictionaryComponent({
                 </div>
               )}
             </div>
-            <div className="flex flex-col border-r items-center divide-y overflow-y-auto hide-scrollbar h-full shrink-0">
+            <div
+              ref={alphabetRef}
+              className="flex flex-col border-r items-center divide-y overflow-y-auto hide-scrollbar h-full shrink-0"
+            >
               {alphabet.map((letter) => (
                 <button
                   key={letter}
@@ -302,7 +310,7 @@ export default function DictionaryComponent({
             </div>
           </>
         ) : (
-          <div className="border-r w-full">
+          <div className="border-r flex-1 min-w-0">
             <KnowledgeGraph
               route={route}
               name={name}

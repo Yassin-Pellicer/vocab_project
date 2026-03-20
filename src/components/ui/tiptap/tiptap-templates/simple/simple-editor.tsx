@@ -179,6 +179,8 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
 
   const selectedNoteIdFromStore = useNotesStore((s) => s.selectedNoteId)
   const reloadTokenFromStore = useNotesStore((s) => s.reloadToken)
+  const setSelectedNoteContent = useNotesStore((s) => s.setSelectedNoteContent)
+  
   const selectedNoteId = noteId ?? selectedNoteIdFromStore
   const reloadToken = noteId ? 0 : reloadTokenFromStore
 
@@ -258,7 +260,8 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
 
       if (editor && data) {
         isApplyingRemoteContent.current = true
-      editor.commands.setContent(data, { emitUpdate: false })
+        editor.commands.setContent(data, { emitUpdate: false })
+        setSelectedNoteContent(data)
         loadedNoteIdRef.current = id
         queueMicrotask(() => {
           isApplyingRemoteContent.current = false
@@ -271,7 +274,7 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
 
       if (editor && data) {
         isApplyingRemoteContent.current = true
-      editor.commands.setContent(data, { emitUpdate: false })
+        editor.commands.setContent(data, { emitUpdate: false })
         loadedWordIdRef.current = uuid
         queueMicrotask(() => {
           isApplyingRemoteContent.current = false

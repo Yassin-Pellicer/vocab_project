@@ -40,6 +40,7 @@ export default function useNotesHooks() {
   }, [selectedNoteId, tree, findById, getRoute]);
 
   const searchRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
     try {
@@ -87,6 +88,15 @@ export default function useNotesHooks() {
     }
   });
 
+  const sidebarWidthRef = useRef(sidebarWidth);
+  const sidebarCollapsedRef = useRef(sidebarCollapsed);
+  const chatWidthRef = useRef(chatWidth);
+  const chatCollapsedRef = useRef(chatCollapsed);
+  useEffect(() => { sidebarWidthRef.current = sidebarWidth; }, [sidebarWidth]);
+  useEffect(() => { sidebarCollapsedRef.current = sidebarCollapsed; }, [sidebarCollapsed]);
+  useEffect(() => { chatWidthRef.current = chatWidth; }, [chatWidth]);
+  useEffect(() => { chatCollapsedRef.current = chatCollapsed; }, [chatCollapsed]);
+
   useEffect(() => {
     try {
       localStorage.setItem(
@@ -99,7 +109,53 @@ export default function useNotesHooks() {
       );
     } catch {
     }
-  }, [sidebarWidth, sidebarCollapsed]);
+  }, [sidebarWidth, sidebarCollapsed, chatWidth, chatCollapsed]);
+
+  const getContainerWidth = useCallback(() => {
+    return (
+      containerRef.current?.getBoundingClientRect().width ?? window.innerWidth
+    );
+  }, []);
+
+  const getMaxSidebarWidth = useCallback(() => {
+    const containerWidth = getContainerWidth();
+    const minCenterWidth = 360;
+    const otherWidth = chatCollapsed ? 0 : chatWidth;
+    return Math.max(0, Math.floor(containerWidth - otherWidth - minCenterWidth));
+  }, [chatCollapsed, chatWidth, getContainerWidth]);
+
+  const getMaxChatWidth = useCallback(() => {
+    const containerWidth = getContainerWidth();
+    const minCenterWidth = 360;
+    const otherWidth = sidebarCollapsed ? 0 : sidebarWidth;
+    return Math.max(0, Math.floor(containerWidth - otherWidth - minCenterWidth));
+  }, [sidebarCollapsed, sidebarWidth, getContainerWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const minWidth = 260;
+      const maxSidebarWidth = Math.min(720, getMaxSidebarWidth());
+      if (!sidebarCollapsedRef.current) {
+        if (maxSidebarWidth < minWidth) {
+          setSidebarCollapsed(true);
+        } else if (sidebarWidthRef.current > maxSidebarWidth) {
+          setSidebarWidth(maxSidebarWidth);
+        }
+      }
+
+      const maxChatWidth = getMaxChatWidth();
+      if (!chatCollapsedRef.current) {
+        if (maxChatWidth < minWidth) {
+          setChatCollapsed(true);
+        } else if (chatWidthRef.current > maxChatWidth) {
+          setChatWidth(maxChatWidth);
+        }
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [getMaxSidebarWidth, getMaxChatWidth]);
 
   const handleResizeStart = useCallback(
     (e: ReactPointerEvent) => {
@@ -110,10 +166,15 @@ export default function useNotesHooks() {
       const startWidth = sidebarCollapsed ? 0 : sidebarWidth;
 
       const minWidth = 260;
-      const maxWidth = 720;
 
       const onMove = (ev: PointerEvent) => {
         const rawNext = startWidth + (ev.clientX - startX);
+        const maxWidth = Math.min(720, getMaxSidebarWidth());
+
+        if (maxWidth < minWidth) {
+          setSidebarCollapsed(true);
+          return;
+        }
 
         if (rawNext < minWidth) {
           setSidebarCollapsed(true);
@@ -132,7 +193,7 @@ export default function useNotesHooks() {
       window.addEventListener("pointermove", onMove);
       window.addEventListener("pointerup", onUp);
     },
-    [sidebarWidth, sidebarCollapsed],
+    [sidebarWidth, sidebarCollapsed, getMaxSidebarWidth],
   );
 
   const handleResizeChat = useCallback(
@@ -144,10 +205,14 @@ export default function useNotesHooks() {
       const startWidth = chatCollapsed ? 0 : chatWidth;
 
       const minWidth = 260;
-      const maxWidth = window.innerWidth/2.25;
 
       const onMove = (ev: PointerEvent) => {
         const rawNext = startWidth + (startX - ev.clientX);
+        const maxWidth = getMaxChatWidth();
+        if (maxWidth < minWidth) {
+          setChatCollapsed(true);
+          return;
+        }
         if (rawNext < minWidth) {
           setChatCollapsed(true);
           return;
@@ -165,13 +230,25 @@ export default function useNotesHooks() {
       window.addEventListener("pointermove", onMove);
       window.addEventListener("pointerup", onUp);
     },
-    [chatWidth, chatCollapsed],
+    [chatWidth, chatCollapsed, getMaxChatWidth],
   );
+
+  const expandChat = useCallback(() => {
+    const minWidth = 260;
+    const maxWidth = getMaxChatWidth();
+    if (maxWidth < minWidth) {
+      setChatCollapsed(true);
+      return;
+    }
+    setChatCollapsed(false);
+    setChatWidth(Math.max(minWidth, Math.min(500, maxWidth)));
+  }, [getMaxChatWidth]);
 
   return {
     searchField,
     setSearchField,
     searchRef,
+    containerRef,
     handleMenuItemClick,
     selectedNoteTitle,
     selectedNoteRoute,
@@ -183,5 +260,6 @@ export default function useNotesHooks() {
     handleResizeChat,
     setChatCollapsed,
     setChatWidth,
+    expandChat,
   };
 }
