@@ -37,8 +37,11 @@ export default defineConfig({
     watch: {
       ignored: [
         "**/0ab95de2-84d0-4ab2-8873-e22bc57109f0/**",
+        "**/GRAPH-*.json",
+        "**/MD-*/**",
+        "**/NOTES-*/**",
+        "**/*.json",
       ]
     }
   }
 })
-

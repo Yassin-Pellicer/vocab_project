@@ -108,5 +108,9 @@ export interface RendererApi {
   close: () => Promise<unknown>;
   openNewWindow: (route: string) => Promise<unknown>;
 
-  chatSend: (messages: ChatMessage[]) => Promise<{ text: string }>;
+  chatSend: (messages: ChatMessage[]) => Promise<{
+    text?: string;
+    tool_calls?: unknown[];
+    [key: string]: unknown;
+  }>;
 }

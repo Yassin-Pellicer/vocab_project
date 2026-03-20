@@ -834,7 +834,10 @@ function sendChat() {
       );
     }
     const payload = await response.json().catch(() => null);
-    return { text: payload.text };
+    if (!payload || typeof payload !== "object") {
+      throw new Error("Empty response from local API.");
+    }
+    return payload;
   });
 }
 function registerIpcHandlers() {

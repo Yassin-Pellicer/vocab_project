@@ -10,19 +10,36 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { ContextType } from "@/types/chat";
 import { useNotesStore } from "@/context/notes-context";
+import AddWordModal from "@/components/dict/add-word-modal";
+import EditWordModal from "@/components/dict/edit-word-modal";
 
-export function Chat({ startingInfo, route, name, context }: { startingInfo?: TranslationEntry | string | null, route?: string, name?: string | null, context?: ContextType }) {
+export function Chat({
+  startingInfo,
+  route,
+  name,
+  context,
+  autoStart,
+  autoStartKey,
+}: {
+  startingInfo?: TranslationEntry | string | null;
+  route?: string;
+  name?: string | null;
+  context?: ContextType;
+  autoStart?: boolean;
+  autoStartKey?: string;
+}) {
   const {
     clearChat,
     send,
-    messages,
     draft,
     endRef,
     setDraft,
     sending,
     canSend,
     contextForChat,
-  } = useChat({ startingInfo, context });
+    getWordLabel,
+    renderMessages,
+  } = useChat({ startingInfo, context, name, route, autoStart, autoStartKey });
 
   const { selectedNoteId, findById } = useNotesStore();
 
@@ -45,26 +62,67 @@ export function Chat({ startingInfo, route, name, context }: { startingInfo?: Tr
 
       <div className="flex-1 min-h-0 overflow-y-auto p-4">
         <div className="flex flex-col gap-2">
-          {messages.map((m, idx) => (
-            <div
-              key={`${m.role}-${idx}`}
-              className={cn(
-                "w-fit max-w-[85%] rounded-lg text-sm shadow-sm markdown",
-                m.role === "user"
-                  ? "ml-auto bg-primary px-3 text-primary-foreground"
-                  : "mr-auto bg-card px-5 py-4 text-card-foreground border"
-              )}
-            >
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeHighlight]}
-              >
-                {typeof m.content === "string"
-                  ? m.content
-                  : m.content.prompt}
-              </ReactMarkdown>
-            </div>
-          ))}
+          {renderMessages().map((m) => {
+            const canUseActions = Boolean(route && name);
+
+            return (
+              <div key={m.id} className="flex flex-col gap-2">
+                <div
+                  className={cn(
+                    "w-fit max-w-[85%] rounded-lg text-sm shadow-sm markdown",
+                    m.role === "user"
+                      ? "ml-auto bg-primary px-3 text-primary-foreground"
+                      : "mr-auto bg-card px-5 py-4 text-card-foreground border"
+                  )}
+                >
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeHighlight]}
+                  >
+                    {m.display}
+                  </ReactMarkdown>
+                </div>
+
+                {m.actions.length > 0 && canUseActions && name && route && (
+                  <div
+                    className={cn(
+                      "w-fit max-w-[85%] flex flex-col gap-2",
+                      m.role === "user" ? "ml-auto" : "mr-auto"
+                    )}
+                  >
+                    {m.actions.map((action, actionIndex) => {
+                      const label = getWordLabel(action.word);
+                      return action.kind === "add" ? (
+                        <AddWordModal
+                          key={`${m.id}-add-${actionIndex}`}
+                          route={route}
+                          name={name}
+                          prefill={action.word}
+                          trigger={
+                            <Button variant="outline" size="sm">
+                              Add {label}
+                            </Button>
+                          }
+                        />
+                      ) : (
+                        <EditWordModal
+                          key={`${m.id}-edit-${actionIndex}`}
+                          route={route}
+                          name={name}
+                          word={action.word}
+                          trigger={
+                            <Button variant="outline" size="sm">
+                              Edit {label}
+                            </Button>
+                          }
+                        />
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
           <div ref={endRef} />
         </div>
       </div>

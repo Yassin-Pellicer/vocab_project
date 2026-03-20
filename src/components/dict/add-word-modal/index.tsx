@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import type { ReactNode } from "react";
 import { Trash, WholeWord } from "lucide-react";
 import {
   Dialog,
@@ -22,12 +23,74 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OriginalTranslationPair } from "@/types/original-translation-pair";
+import { TranslationEntry } from "@/types/translation-entry";
 import { useConfigStore } from "@/context/dictionary-context";
+
+const buildDefaultEntry = (): TranslationEntry => {
+  const emptyPair: OriginalTranslationPair = {
+    original: {
+      word: "",
+      gender: "",
+      number: "",
+    },
+    translations: [
+      {
+        word: "",
+        gender: "",
+        number: "",
+      },
+    ],
+    definitions: [],
+  };
+
+  return {
+    pair: [emptyPair],
+    dateAdded: new Date().toISOString().split("T")[0],
+    type: "noun",
+  };
+};
+
+const normalizeEntry = (entry?: TranslationEntry): TranslationEntry => {
+  const fallback = buildDefaultEntry();
+  if (!entry) return fallback;
+
+  const pairs =
+    entry.pair && entry.pair.length > 0 ? entry.pair : fallback.pair;
+  const normalizedPairs = pairs.map((pair) => ({
+    original: {
+      word: pair.original?.word ?? "",
+      gender: pair.original?.gender ?? "",
+      number: pair.original?.number ?? "",
+    },
+    translations:
+      pair.translations && pair.translations.length > 0
+        ? pair.translations.map((t) => ({
+            word: t.word ?? "",
+            gender: t.gender ?? "",
+            number: t.number ?? "",
+          }))
+        : [{ word: "", gender: "", number: "" }],
+    definitions: Array.isArray(pair.definitions) ? pair.definitions : [],
+  }));
+
+  return {
+    ...fallback,
+    ...entry,
+    pair: normalizedPairs,
+    dateAdded: entry.dateAdded ?? fallback.dateAdded,
+    type: entry.type ?? fallback.type,
+  };
+};
 
 const AddTranslationModal = forwardRef<
   HTMLButtonElement,
-  { route: string; name: string }
->(({ route, name }, ref) => {
+  {
+    route: string;
+    name: string;
+    trigger?: ReactNode;
+    prefill?: TranslationEntry;
+  }
+>(({ route, name, trigger, prefill }, ref) => {
   const {
     open,
     setOpen,
@@ -46,20 +109,30 @@ const AddTranslationModal = forwardRef<
   const { dictionaryMetadata } = useConfigStore();
   const dict = dictionaryMetadata?.[name] ?? {};
 
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (nextOpen && prefill) {
+      setFormData(normalizeEntry(prefill));
+    }
+    setOpen(nextOpen);
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <form>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <div>
         <DialogTrigger asChild>
-          <button
-            ref={ref}
-            onClick={() => setOpen(true)}
-            className="bg-primary! rounded-xl! px-2! py-4.5 flex! h-8! items-center! justify-center! cursor-pointer! hover:bg-primary/90! transition-colors"
-          >
-            <WholeWord className="text-primary-foreground" size={18} />
-            <p className="text-lg text-primary-foreground leading-none pb-1">
-              +
-            </p>
-          </button>
+          {trigger ?? (
+            <button
+              ref={ref}
+              onClick={() => setOpen(true)}
+              type="button"
+              className="bg-primary! rounded-xl! px-2! py-4.5 flex! h-8! items-center! justify-center! cursor-pointer! hover:bg-primary/90! transition-colors"
+            >
+              <WholeWord className="text-primary-foreground" size={18} />
+              <p className="text-lg text-primary-foreground leading-none pb-1">
+                +
+              </p>
+            </button>
+          )}
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-162.5 overflow-y-scroll max-h-[80vh]">
@@ -286,6 +359,7 @@ const AddTranslationModal = forwardRef<
             <DialogClose asChild>
               <Button
                 onClick={handleSubmit}
+                type="button"
                 variant="default"
                 className="bg-primary! text-primary-foreground! hover:bg-primary/90!"
               >
@@ -293,11 +367,11 @@ const AddTranslationModal = forwardRef<
               </Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button type="button" variant="outline">Cancel</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
-      </form>
+      </div>
     </Dialog>
   );
 });

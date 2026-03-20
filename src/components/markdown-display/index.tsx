@@ -5,6 +5,7 @@ import {
   ChevronDown,
   ChevronUp,
   X,
+  Sparkles,
 } from "lucide-react";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useMarkdown } from "./hook";
@@ -83,16 +84,24 @@ export default function MarkdownEditor({
     return Math.max(0, Math.floor(containerWidth - MIN_MAIN_WIDTH));
   }, [getContainerWidth]);
 
+  const expandChat = useCallback(() => {
+    const maxWidth = getMaxChatWidth();
+    if (maxWidth < CHAT_MIN) {
+      setChatCollapsed(false);
+      setChatWidth(CHAT_MIN);
+      return;
+    }
+    setChatCollapsed(false);
+    setChatWidth(Math.max(CHAT_MIN, Math.min(CHAT_DEFAULT, maxWidth)));
+  }, [getMaxChatWidth]);
+
   useEffect(() => {
     const handleResize = () => {
       const maxWidth = getMaxChatWidth();
       if (!chatCollapsedRef.current) {
-        if (maxWidth < CHAT_MIN) {
-          setChatCollapsed(true);
-          return;
-        }
-        if (chatWidthRef.current > maxWidth) {
-          setChatWidth(maxWidth);
+        const clampedMax = Math.max(CHAT_MIN, maxWidth);
+        if (chatWidthRef.current > clampedMax) {
+          setChatWidth(clampedMax);
         }
       }
     };
@@ -111,15 +120,7 @@ export default function MarkdownEditor({
 
       const onMove = (ev: PointerEvent) => {
         const rawNext = startWidth + (startX - ev.clientX);
-        const maxWidth = getMaxChatWidth();
-        if (maxWidth < CHAT_MIN) {
-          setChatCollapsed(true);
-          localStorage.setItem(
-            "markdown-chat-sidebar",
-            JSON.stringify({ collapsed: true, width: chatWidth }),
-          );
-          return;
-        }
+        const maxWidth = Math.max(CHAT_MIN, getMaxChatWidth());
         if (rawNext < CHAT_MIN) {
           setChatCollapsed(true);
           localStorage.setItem(
@@ -275,7 +276,7 @@ export default function MarkdownEditor({
 
       {/* Chat panel — Notes-style drag-resize */}
       {chatCollapsed ? (
-        <div className="shrink-0 relative" style={{ width: 8 }}>
+        <div className="flex items-center relative">
           <div
             role="separator"
             aria-orientation="vertical"
@@ -283,6 +284,15 @@ export default function MarkdownEditor({
             onPointerDown={handleResizeChat}
             className="absolute left-0 top-0 h-full w-2 cursor-col-resize bg-muted/20 hover:bg-muted/40"
           />
+          <div
+            onPointerDown={handleResizeChat}
+            onClick={expandChat}
+            className="absolute -right-7.5 h-15 w-15 rounded-full bg-background border"
+          >
+            <div className="absolute top-5 right-8.25">
+              <Sparkles size={18}></Sparkles>
+            </div>
+          </div>
         </div>
       ) : (
         <div
@@ -297,7 +307,11 @@ export default function MarkdownEditor({
             className="absolute left-0 top-0 h-full w-1 cursor-col-resize bg-transparent hover:bg-muted/20 z-10"
           />
           <div className="flex-1 shrink-0 p-4 overflow-y-auto">
-            <Chat context={{type: "word", content: word}}/>
+            <Chat
+              route={route}
+              name={name}
+              context={{ type: "word", content: word }}
+            />
           </div>
         </div>
       )}

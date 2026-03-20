@@ -139,8 +139,14 @@ function DictRow({
         <div
           style={{ height: leftHeight ? `${leftHeight}px` : undefined }}
         >
-          <Chat route={dict.path} name={dict.id} 
-            startingInfo={dict.wordOfTheDay?.pair[0].original.word + `. Language of Dictionary is ${dict.name}.` }
+          <Chat
+            route={dict.path}
+            name={dict.id}
+            autoStartKey={dict.id}
+            startingInfo={
+              dict.wordOfTheDay?.pair[0].original.word +
+              `. Language of Dictionary is ${dict.name}.`
+            }
           />
         </div>
       </div>

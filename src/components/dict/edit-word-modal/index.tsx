@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -29,10 +30,12 @@ export default function EditTranslationModal({
   word,
   route,
   name,
+  trigger,
 }: {
   word: TranslationEntry;
   route: string;
   name: string;
+  trigger?: ReactNode;
 }) {
   const {
     handlePairChange,
@@ -52,11 +55,13 @@ export default function EditTranslationModal({
 
   return (
     <Dialog>
-      <form>
+      <div>
         <DialogTrigger asChild>
-          <div className="bg-accent rounded-full flex h-6 w-6 items-center justify-center cursor-pointer">
-            <Pencil size={14} />
-          </div>
+          {trigger ?? (
+            <div className="bg-accent rounded-full flex h-6 w-6 items-center justify-center cursor-pointer">
+              <Pencil size={14} />
+            </div>
+          )}
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-162.5 overflow-y-scroll max-h-[80vh]">
@@ -277,8 +282,9 @@ export default function EditTranslationModal({
             <DialogClose asChild>
               <Button
                 onClick={handleSubmit}
+                type="button"
                 variant="default"
-                className="!bg-primary !text-primary-foreground hover:!bg-primary/90"
+                className="bg-primary! text-primary-foreground! hover:bg-primary/90!"
               >
                 Save Entry
               </Button>
@@ -289,11 +295,11 @@ export default function EditTranslationModal({
               name={name}
             ></DeleteWordModal>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button type="button" variant="outline">Cancel</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
-      </form>
+      </div>
     </Dialog>
   );
 }

@@ -1,20 +1,166 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import type { ChatMessage, ContextType } from "@/types/chat";
 import { notifyError } from "@/services/notify";
 import { TranslationEntry } from "@/types/translation-entry";
-import { useConfigStore } from "@/context/preferences-context";
+import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
+import { useConfigStore as useDictionaryStore } from "@/context/dictionary-context";
 
-export function useChat({ startingInfo, context }: { startingInfo?: TranslationEntry | string | null; context?: ContextType }) {
+export function useChat({
+  startingInfo,
+  context,
+  name,
+  route,
+  autoStart = true,
+  autoStartKey,
+}: {
+  startingInfo?: TranslationEntry | string | null;
+  context?: ContextType;
+  name?: string | null;
+  route?: string;
+  autoStart?: boolean;
+  autoStartKey?: string;
+}) {
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
   const [sending, setSending] = useState(false);
   const endRef = useRef<HTMLDivElement | null>(null);
+  const didAutoStartRef = useRef(false);
+  const autoStartKeyRef = useRef<string | undefined>(autoStartKey);
 
   type ChatContext = { description: string; elements: object };
   const [contextForChat, setContextForChat] = useState<ChatContext | undefined>(undefined);
 
-  const { config } = useConfigStore();
+  const { config } = usePreferencesStore();
+  const { dictionaryMetadata } = useDictionaryStore();
+
+  const dictMeta = name ? dictionaryMetadata?.[name] ?? null : null;
+
+  type WordToolAction = {
+    kind: "add" | "edit";
+    word: TranslationEntry;
+  };
+
+  const DEFAULT_ENTRY: TranslationEntry = {
+    pair: [
+      {
+        original: { word: "", gender: "", number: "" },
+        translations: [{ word: "", gender: "", number: "" }],
+        definitions: [],
+      },
+    ],
+    dateAdded: new Date().toISOString().split("T")[0],
+    type: "noun",
+  };
+
+  const normalizeWordEntry = (value: unknown): TranslationEntry | null => {
+    if (!value || typeof value !== "object") return null;
+    const raw = value as Partial<TranslationEntry>;
+    const pairs = Array.isArray(raw.pair) && raw.pair.length > 0 ? raw.pair : null;
+    if (!pairs) return null;
+
+    const normalizedPairs = pairs.map((pair) => ({
+      original: {
+        word: pair.original?.word ?? "",
+        gender: pair.original?.gender ?? "",
+        number: pair.original?.number ?? "",
+      },
+      translations:
+        pair.translations && pair.translations.length > 0
+          ? pair.translations.map((t) => ({
+              word: t.word ?? "",
+              gender: t.gender ?? "",
+              number: t.number ?? "",
+            }))
+          : [{ word: "", gender: "", number: "" }],
+      definitions: Array.isArray(pair.definitions) ? pair.definitions : [],
+    }));
+
+    return {
+      ...DEFAULT_ENTRY,
+      ...raw,
+      pair: normalizedPairs,
+      dateAdded: raw.dateAdded ?? DEFAULT_ENTRY.dateAdded,
+      type: raw.type ?? DEFAULT_ENTRY.type,
+    } as TranslationEntry;
+  };
+
+  const getToolActions = useCallback((value: unknown): WordToolAction[] => {
+    if (typeof value === "object" && value !== null) {
+      const obj = value as { text?: unknown; tool_calls?: unknown };
+      const calls = Array.isArray(obj.tool_calls) ? obj.tool_calls : [];
+      const actions: WordToolAction[] = [];
+
+      for (const call of calls) {
+        const toolName =
+          call?.name ??
+          call?.tool ??
+          call?.function ??
+          call?.tool_name ??
+          (typeof call?.tool === "object" ? call?.tool?.name : undefined);
+        const args =
+          call?.arguments ??
+          call?.args ??
+          call?.parameters ??
+          call?.payload ??
+          call;
+        const tool =
+          toolName === "add_words" || toolName === "modify_words"
+            ? toolName
+            : undefined;
+        if (!tool || !args?.words || !Array.isArray(args.words)) continue;
+        for (const rawWord of args.words) {
+          const word = normalizeWordEntry(rawWord);
+          if (!word) continue;
+          if (tool === "modify_words" && !word.uuid) continue;
+          actions.push({ kind: tool === "add_words" ? "add" : "edit", word });
+        }
+      }
+      return actions;
+    }
+
+    return [];
+  }, []);
+
+  const getDisplayText = useCallback((value: unknown): string => {
+    if (typeof value === "string") return value;
+    if (typeof value === "object" && value !== null) {
+      const obj = value as { text?: unknown };
+      return typeof obj.text === "string" ? obj.text.trim() : "";
+    }
+    return "";
+  }, []);
+
+  const getWordLabel = useCallback((word: TranslationEntry) => {
+    return word.pair?.[0]?.original?.word?.trim() || "word";
+  }, []);
+
+  type RenderMessage = {
+    id: string;
+    role: ChatMessage["role"];
+    display: string;
+    actions: WordToolAction[];
+  };
+
+  const renderMessages = useCallback((): RenderMessage[] => {
+    return messages.map((m, idx) => {
+      const display =
+        m.role === "assistant" ? getDisplayText(m.content) : (
+          typeof m.content === "string"
+            ? m.content
+            : typeof m.content === "object" && m.content !== null
+              ? (m.content as { prompt?: string }).prompt ?? ""
+              : ""
+        );
+      const actions = m.role === "assistant" ? getToolActions(m.content) : [];
+      return {
+        id: `${m.role}-${idx}`,
+        role: m.role,
+        display,
+        actions,
+      };
+    });
+  }, [messages, getDisplayText, getToolActions]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -49,28 +195,61 @@ export function useChat({ startingInfo, context }: { startingInfo?: TranslationE
     const messageContent = content?.trim() || draft.trim();
     if (!messageContent) return;
 
+
+    const dictionaryContext = name
+      ? {
+          name,
+          route,
+          metadata: dictMeta,
+          typeWords: dictMeta?.typeWords ?? [],
+          genders: dictMeta?.genders ?? [],
+          numbers: dictMeta?.numbers ?? [],
+          articles: dictMeta?.articles ?? [],
+        }
+      : undefined;
+    const combinedContext =
+      dictionaryContext || contextForChat
+        ? {
+            ...(contextForChat ?? {}),
+            ...(dictionaryContext ? { dictionary: dictionaryContext } : {}),
+          }
+        : undefined;
+
     const structuredMessage: ChatMessage = {
       role: "user",
       content: {
         prompt: messageContent,
         details: "",
-        context: contextForChat,
+        context: combinedContext,
         appLanguage: config.language!,
       },
     };
 
     const nextMessages: ChatMessage[] = [...messages, structuredMessage];
+    const outboundMessages: ChatMessage[] = nextMessages.map((m) => {
+      if (m.role !== "assistant") return m;
+      if (typeof m.content === "string") return m;
+      const text =
+        typeof m.content === "object" && m.content !== null
+          ? (m.content as { text?: string }).text ?? ""
+          : "";
+      return { role: "assistant", content: text };
+    });
 
     setMessages(nextMessages);
     setDraft("");
     setSending(true);
 
     try {
-      const result = await window.api.chatSend(nextMessages);
+      const result = await window.api.chatSend(outboundMessages);
+      const assistantContent =
+        typeof result === "object" && result !== null && "text" in result
+          ? (result as { text?: string })
+          : result;
 
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: result.text },
+        { role: "assistant", content: assistantContent },
       ]);
     } catch (error) {
       const message =
@@ -86,6 +265,14 @@ export function useChat({ startingInfo, context }: { startingInfo?: TranslationE
 
   useEffect(() => {
     if (startingInfo && Object.keys(startingInfo).length > 0) {
+      if (!autoStart) return;
+      if (autoStartKeyRef.current !== autoStartKey) {
+        autoStartKeyRef.current = autoStartKey;
+        didAutoStartRef.current = false;
+      }
+      if (didAutoStartRef.current) return;
+      didAutoStartRef.current = true;
+
       const startingPrompt: ChatMessage = {
         role: "user",
         content: {
@@ -93,7 +280,20 @@ export function useChat({ startingInfo, context }: { startingInfo?: TranslationE
             "Give a fun fact about the word of the day today.",
           details:
             "You must say: 'The word of the Day is... {word}! Here are some interesting facts about it!' and include: 1. etymology, 2. historical fact, 3. tips.",
-          context: startingInfo,
+          context: {
+            startingInfo,
+            dictionary: name
+              ? {
+                  name,
+                  route,
+                  metadata: dictMeta,
+                  typeWords: dictMeta?.typeWords ?? [],
+                  genders: dictMeta?.genders ?? [],
+                  numbers: dictMeta?.numbers ?? [],
+                  articles: dictMeta?.articles ?? [],
+                }
+              : undefined,
+          },
           appLanguage: "english",
         },
       };
@@ -101,12 +301,26 @@ export function useChat({ startingInfo, context }: { startingInfo?: TranslationE
       const nextMessages = [...messages, startingPrompt];
       setSending(true);
 
+      const outboundMessages: ChatMessage[] = nextMessages.map((m) => {
+        if (m.role !== "assistant") return m;
+        if (typeof m.content === "string") return m;
+        const text =
+          typeof m.content === "object" && m.content !== null
+            ? (m.content as { text?: string }).text ?? ""
+            : "";
+        return { role: "assistant", content: text };
+      });
+
       window.api
-        ?.chatSend(nextMessages)
+        ?.chatSend(outboundMessages)
         .then((result) => {
+          const assistantContent =
+            typeof result === "object" && result !== null && "text" in result
+              ? (result as { text?: string })
+              : result;
           setMessages((prev) => [
             ...prev,
-            { role: "assistant", content: result.text },
+            { role: "assistant", content: assistantContent },
           ]);
         })
         .catch((err) => {
@@ -117,7 +331,7 @@ export function useChat({ startingInfo, context }: { startingInfo?: TranslationE
         })
         .finally(() => setSending(false));
     }
-  }, [startingInfo]);
+  }, [startingInfo, name, route, dictionaryMetadata, autoStart, autoStartKey]);
 
   return {
     clearChat,
@@ -130,6 +344,10 @@ export function useChat({ startingInfo, context }: { startingInfo?: TranslationE
     canSend,
     open,
     contextForChat,
-    setContextForChat
+    setContextForChat,
+    getToolActions,
+    getDisplayText,
+    getWordLabel,
+    renderMessages,
   };
 }

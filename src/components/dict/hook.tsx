@@ -35,7 +35,6 @@ export default function useTranslationHooks({
 
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
   const setSelectedWord = useConfigStore((state) => state.setSelectedWord);
-  const selectedWord = useConfigStore((state) => state.selectedWord);
   const [isAdditionOrder, setIsAdditionOrder] = useState(
     () => !useConfigStore.getState().selectedLetter,
   );
@@ -88,63 +87,25 @@ export default function useTranslationHooks({
     return Math.max(0, Math.floor(containerWidth - alphabetWidth - minMainWidth));
   }, [graphMode]);
 
-  const expandSplitView = useCallback(() => {
-    const minWidth = 160;
-    const maxWidth = getMaxSplitWidth();
-    if (maxWidth < minWidth) {
-      setSplitViewCollapsed(true);
-      setSplitViewWidth(0);
-      return;
-    }
-    const target = Math.min(maxWidth, Math.floor(window.innerWidth / 1.6));
-    setSplitViewCollapsed(false);
-    setSplitViewWidth(Math.max(minWidth, target));
-  }, [getMaxSplitWidth]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const minWidth = 160;
-      const maxWidth = getMaxSplitWidth();
-      if (!splitViewCollapsedRef.current) {
-        if (maxWidth < minWidth) {
-          setSplitViewCollapsed(true);
-          setSplitViewWidth(0);
-          return;
-        }
-        if (splitViewWidthRef.current > maxWidth) {
-          setSplitViewWidth(maxWidth);
-        }
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [getMaxSplitWidth]);
-
-  useEffect(() => {
-    if (selectedWord && splitViewCollapsedRef.current) {
-      expandSplitView();
-    }
-  }, [selectedWord, expandSplitView]);
-
   const handleResizeSplitView = useCallback((e: ReactPointerEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
     const startX = e.clientX;
     const startWidth = splitViewCollapsedRef.current ? 0 : splitViewWidthRef.current;
-    const minWidth = 160;
+    const minWidth = 600;
 
     const onMove = (ev: PointerEvent) => {
       const rawNext = startWidth + (startX - ev.clientX);
       const maxWidth = getMaxSplitWidth();
       if (maxWidth < minWidth) {
-        setSplitViewCollapsed(true);
-        setSplitViewWidth(0);
+        setSplitViewCollapsed(false);
+        setSplitViewWidth(minWidth);
         return;
       }
       if (rawNext < minWidth) {
-        setSplitViewCollapsed(true);
+        setSplitViewCollapsed(false);
+        setSplitViewWidth(minWidth);
         return;
       }
       setSplitViewCollapsed(false);
@@ -318,6 +279,19 @@ export default function useTranslationHooks({
     handleLetterClick,
   ]);
 
+
+  const expandSplitViewChat = useCallback(() => {
+    const minWidth = 260;
+    const maxWidth = getMaxSplitWidth();
+    if (maxWidth < minWidth) {
+      setSplitViewCollapsed(true);
+      return;
+    }
+    setSplitViewCollapsed(false);
+    setSplitViewWidth(Math.max(minWidth, Math.min(500, maxWidth)));
+  }, [getMaxSplitWidth]);
+
+
   useEffect(() => {
     void loadTranslations(route, name);
   }, [loadTranslations, route, name]);
@@ -354,5 +328,6 @@ export default function useTranslationHooks({
     handleResizeSplitView,
     containerRef,
     alphabetRef,
+    expandSplitViewChat
   };
 }

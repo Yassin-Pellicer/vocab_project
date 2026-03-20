@@ -2,6 +2,20 @@ import { TranslationEntry } from "./translation-entry";
 
 export type ChatRole = "user" | "assistant";
 
+export type ChatToolCall = {
+  name?: string;
+  arguments?: unknown;
+  [key: string]: unknown;
+};
+
+export type AssistantContent =
+  | string
+  | {
+      text?: string;
+      tool_calls?: ChatToolCall[];
+      [key: string]: unknown;
+    };
+
 export type OpenAIResponsesSuccess = {
   output_text?: string;
   output?: Array<{
@@ -27,4 +41,4 @@ export type StructuredUserMessage = {
 
 export type ChatMessage =
   | StructuredUserMessage
-  | { role: "assistant"; content: string };
+  | { role: "assistant"; content: AssistantContent };

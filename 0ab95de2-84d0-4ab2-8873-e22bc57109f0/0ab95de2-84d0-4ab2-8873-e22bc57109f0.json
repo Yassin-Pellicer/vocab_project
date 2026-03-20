@@ -6656,43 +6656,6 @@
     "pair": [
       {
         "original": {
-          "word": "Artz",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Médico",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      },
-      {
-        "original": {
-          "word": "Ärtzin",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Médica",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-10",
-    "type": "Nomen",
-    "uuid": "46767a3b-6adb-41f3-95ed-e0f84bb30513"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Beispiel",
           "gender": "Neutrum",
           "number": "Singular"
@@ -6897,30 +6860,6 @@
     "dateAdded": "2026-03-02",
     "type": "Adjektive",
     "uuid": "7561621e-0982-43f3-a074-9f0b65094827"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "anfang",
-          "gender": "",
-          "number": ""
-        },
-        "translations": [
-          {
-            "word": "principio",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "\"al final\" = \"am ende\""
-        ]
-      }
-    ],
-    "dateAdded": "2026-03-02",
-    "type": "Adjektive",
-    "uuid": "3dc87d1e-cfb6-48ed-bd84-65869d3b0d65"
   },
   {
     "pair": [
@@ -8675,5 +8614,288 @@
     "dateAdded": "2026-03-14",
     "type": "Nomen",
     "uuid": "84e1f4d4-ec69-4a1f-a2d4-e588c53f322f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "anfang",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "principio",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Adjektive",
+    "uuid": "3dc87d1e-cfb6-48ed-bd84-65869d3b0d65"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Artz",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Médico",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "doctor (a person who practices medicine)",
+          "medical professional; someone who treats illnesses and injuries"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ärtzin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Médica",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "doctor (woman who practices medicine)",
+          "medical professional; someone who treats illnesses and injuries"
+        ]
+      }
+    ],
+    "dateAdded": "2025-12-10",
+    "type": "Nomen",
+    "uuid": "46767a3b-6adb-41f3-95ed-e0f84bb30513"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schein",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "appearance",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "seeming",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "das äußere Bild; wirkt so, ist aber nicht unbedingt so -> What it looks like is not necessarily what it is."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Nomen",
+    "uuid": "176316c3-ea5e-4e45-9a10-c6ff48f7dc60"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Eindruck",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "impression",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "A first or overall feeling someone gets from something or someone."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Nomen",
+    "uuid": "5b9da43b-def5-443f-b45b-8b7aa1ca5cda"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Handtuch",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "toalla",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "A towel you use to dry your body or dishes"
+        ]
+      },
+      {
+        "original": {
+          "word": "Handtücher.",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "toallas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Nomen",
+    "uuid": "3b08b3b5-f1b5-4f13-bce9-3f3292edec41"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "gemütlich",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "cozy",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "comfortable",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Comfortable, cozy, pleasant (often describing a place or atmosphere).",
+          "Often used like “a nice, relaxed vibe.”"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Adjektive",
+    "uuid": "3395ea03-38de-41b2-8328-91c6de9830b6"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kann ich das bitte ausprobieren?",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Can I please try this on? / Can I try it?",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Ask to test/try an item (clothes, devices, etc.)."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Redewendungen",
+    "uuid": "fe085121-fc54-41cb-80ba-785dae2053f5"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Mit Karte, bitte.",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "By card, please.",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Useful when paying by credit/debit card."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Redewendungen",
+    "uuid": "66edaa0f-dedf-42b0-b55b-c7f58177d22a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ich hätte gern…",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "I would like…",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Polite way to order or ask for something."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Redewendungen",
+    "uuid": "482787bd-dfcb-4f94-bd16-2275435e3346"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Hallo",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "hello",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "A friendly greeting used in everyday situations."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Interjektionen",
+    "uuid": "0ef79662-a909-4031-95ac-40a134c20bfe"
   }
 ]
