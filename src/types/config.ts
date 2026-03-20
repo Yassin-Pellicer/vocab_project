@@ -21,9 +21,7 @@ export interface UserConfig {
 export type Keybind = { action: string; keys: string[] };
 
 export const PRESET_KEYBINDS: Keybind[] = [
-  { action: "New Word", keys: ["Ctrl", "N"] },
   { action: "Search", keys: ["Ctrl", "K"] },
-  { action: "Save", keys: ["Ctrl", "S"] },
   { action: "Quick Add", keys: ["Ctrl", "Shift", "A"] },
   { action: "Settings", keys: ["Ctrl", ","] },
   { action: "Toggle Sidebar", keys: ["Ctrl", "B"] },

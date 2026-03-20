@@ -1,4 +1,4 @@
-import { NotebookIcon, Send, Sparkles, Trash2, WholeWord } from "lucide-react";
+import { NotebookIcon, Pencil, Send, Sparkles, Trash2, WholeWord } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -69,10 +69,10 @@ export function Chat({
               <div key={m.id} className="flex flex-col gap-2">
                 <div
                   className={cn(
-                    "w-fit max-w-[85%] rounded-lg text-sm shadow-sm markdown",
+                    "w-fit! max-w-[85%]! rounded-lg text-sm shadow-sm markdown",
                     m.role === "user"
                       ? "ml-auto bg-primary px-3 text-primary-foreground"
-                      : "mr-auto bg-card px-5 py-4 text-card-foreground border"
+                      : "mr-auto bg-card px-4 py-2 text-card-foreground border"
                   )}
                 >
                   <ReactMarkdown
@@ -86,7 +86,7 @@ export function Chat({
                 {m.actions.length > 0 && canUseActions && name && route && (
                   <div
                     className={cn(
-                      "w-fit max-w-[85%] flex flex-col gap-2",
+                      "w-fit max-w-[85%]! flex flex-col gap-2",
                       m.role === "user" ? "ml-auto" : "mr-auto"
                     )}
                   >
@@ -100,7 +100,7 @@ export function Chat({
                           prefill={action.word}
                           trigger={
                             <Button variant="outline" size="sm">
-                              Add {label}
+                             + <WholeWord></WholeWord> Add {label}
                             </Button>
                           }
                         />
@@ -112,7 +112,7 @@ export function Chat({
                           word={action.word}
                           trigger={
                             <Button variant="outline" size="sm">
-                              Edit {label}
+                              <Pencil></Pencil> Edit {label}
                             </Button>
                           }
                         />

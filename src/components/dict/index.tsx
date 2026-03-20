@@ -20,6 +20,7 @@ import WordCard from "../word-card";
 import Markdown from "@/components/markdown-display";
 import { useConfigStore } from "@/context/dictionary-context";
 import KnowledgeGraph from "../knowledge-graph";
+import { useDictionaryKeybinds } from "./keybinds";
 
 const getGridClasses = (): string => {
   return `
@@ -43,6 +44,7 @@ export default function DictionaryComponent({
     setCurrentPage,
     alphabet,
     totalPages,
+    filteredWords,
     paginatedWords,
     handlePrevPage,
     handleNextPage,
@@ -65,6 +67,16 @@ export default function DictionaryComponent({
     containerRef,
     alphabetRef,
   } = useTranslationHooks({ route, name });
+
+  useDictionaryKeybinds({
+    searchField,
+    setSearchField,
+    searchRef,
+    addWordButtonRef,
+    filteredWords,
+    paginatedWords,
+    handleLetterClick,
+  });
 
   const selectedWord = useConfigStore((state) => state.selectedWord);
   const selectedTypes = useConfigStore((state) => state.selectedTypes);

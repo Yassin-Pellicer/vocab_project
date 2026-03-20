@@ -54,8 +54,8 @@ export default function ConfigureDictModal({
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="w-full p-0">
-        <div className="p-6 pb-2 overflow-auto max-h-[75vh]">
+      <DialogContent className="lg:max-w-2xl md:max-w-lg sm:max-w-md w-full p-0">
+        <div className="p-6 pb-2 overflow-auto max-h-[60vh]">
           <DialogHeader>
             <DialogTitle>
               <Settings className="h-6 w-6 inline-block mb-1.5 mr-2" />

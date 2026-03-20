@@ -63,13 +63,13 @@ export default function MarkdownEditor({
     tense: string
   ) => {
     return (
-      <div className="mb-2">
+      <div className="mb-2 flex flex-col gap-1">
         {Object.entries(conjugations).map(([person, form]) => (
           <div
             key={person}
-            className="flex justify-between flex-wrap hover:bg-muted/30 dark:hover:bg-muted/40 rounded px-4 py-1 transition-colors"
+            className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between hover:bg-muted/30 dark:hover:bg-muted/40 rounded px-4 py-1 transition-colors"
           >
-            <span className="text-muted-foreground text-sm mr-2">
+            <span className="text-muted-foreground text-sm">
               {person}
             </span>
             {isEditing ? (
@@ -79,10 +79,12 @@ export default function MarkdownEditor({
                 onChange={(e) =>
                   handleConjugationChange(mood, subCategory, tense, person, e.target.value)
                 }
-                className="text-foreground shrink-0! dark:text-foreground w-2/3 text-sm border border-gray-400! dark:border-input bg-background dark:bg-input/20 rounded-sm px-2 h-5"
+                className="h-6! text-foreground px-1!  dark:text-foreground w-full sm:w-2/3 text-sm border border-gray-400! dark:border-input bg-background dark:bg-input/20 rounded-sm"
               />
             ) : (
-              <span className="text-foreground shrink-0 h-5 dark:text-foreground w-2/3 text-sm border rounded-sm px-2">{form}</span>
+              <span className="h-6! text-foreground dark:text-foreground w-full sm:w-2/3 text-sm border rounded-sm px-1!  wrap-break-word">
+                {form}
+              </span>
             )}
           </div>
         ))}
@@ -97,7 +99,7 @@ export default function MarkdownEditor({
     subCategory: string
   ) => {
     return (
-      <div className="rounded-lg border-2 shadow-sm border-slate-300 dark:border-input bg-card dark:bg-card">
+      <div className="rounded-lg border-2 shadow-sm border-slate-300 dark:border-input bg-card dark:bg-card overflow-hidden">
         <div className="font-semibold border-b border-slate-300 dark:border-input p-2 mb-2 text-foreground dark:text-foreground">
           {tenseName}
         </div>
@@ -128,7 +130,7 @@ export default function MarkdownEditor({
           {moodName}
         </div>
         <div className="border-2 border-t-0 border-border dark:border-input p-4 bg-muted/5 dark:bg-muted/10">
-          <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4">
             {allTenses.map(({ name, value, subCategory }) => (
               <div key={name}>
                 {renderTenseCard(name, value, moodName, subCategory)}
@@ -141,13 +143,12 @@ export default function MarkdownEditor({
   };
 
   return (
-    <div className="flex-col items-center [scrollbar-gutter:stable] overflow-y-auto w-full px-4 pb-6 mt-4 mb-8">
+    <div className="flex-col items-center [scrollbar-gutter:stable] overflow-y-auto w-full px-4">
       <div
-        className={`flex-col items-center  overflow-y-auto w-full pb-6 ${collapsed ? "hidden" : ""
-          }`}
+        className={`flex-col items-center overflow-y-auto w-full pb-6 ${collapsed ? "hidden" : ""}`}
       >
         <div className="flex flex-col items-center">
-          <div className="max-w-200 w-full">
+          <div className="max-w-200 w-full min-w-0">
           {(Object.entries(conjugation) as Array<[string, MoodGroup]>).map(
             ([section, sectionValue]) =>
               renderMoodSection(section, sectionValue)

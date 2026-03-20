@@ -2,7 +2,6 @@ import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
 import type { TranslationEntry } from "@/types/translation-entry";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import type { PointerEvent as ReactPointerEvent } from "react";
 
 const EMPTY_TRANSLATIONS: TranslationEntry[] = [];
@@ -29,12 +28,10 @@ export default function useTranslationHooks({
     graphMode,
   } = useConfigStore();
 
-  const navigate = useNavigate();
   const list = dictionaries[name] ?? EMPTY_TRANSLATIONS;
   const [currentPage, setCurrentPage] = useState(1);
 
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
-  const setSelectedWord = useConfigStore((state) => state.setSelectedWord);
   const [isAdditionOrder, setIsAdditionOrder] = useState(
     () => !useConfigStore.getState().selectedLetter,
   );
@@ -211,74 +208,6 @@ export default function useTranslationHooks({
       setIsAdditionOrder(false);
     }
   }, [isAdditionOrder, setSelectedLetter]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const isLetter = /^[a-zA-Z]$/.test(e.key);
-      if (e.key === "F1") {
-        setSelectedWord(
-          filteredWords?.length ? filteredWords[0] : paginatedWords?.[0] || null
-        );
-      }
-
-      if (e.altKey && isLetter) {
-        e.preventDefault();
-        handleLetterClick(e.key.toUpperCase());
-        return;
-      }
-
-      if (e.key === "Enter" && !e.altKey && e.ctrlKey && !e.metaKey) {
-        e.preventDefault();
-        addWordButtonRef.current?.click();
-        return;
-      }
-
-      const dialogOpen = !!document.querySelector(
-        '[role="dialog"][data-state="open"]'
-      );
-      const active = document.activeElement;
-      const search = searchRef.current;
-
-      if (
-        isLetter &&
-        !e.altKey &&
-        !e.ctrlKey &&
-        !e.metaKey &&
-        !dialogOpen &&
-        active !== search &&
-        active?.tagName !== "INPUT" &&
-        active?.tagName !== "TEXTAREA" &&
-        active?.getAttribute("contenteditable") !== "true"
-      ) {
-        e.preventDefault();
-        search?.focus();
-        setSearchField(searchField + e.key);
-      }
-
-      if (e.key === "Escape") {
-        e.preventDefault();
-        setSearchField("");
-        if (document.activeElement instanceof HTMLElement) {
-          document.activeElement.blur();
-        }
-        return;
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [
-    searchField,
-    filteredWords,
-    paginatedWords,
-    route,
-    name,
-    setSelectedWord,
-    navigate,
-    setSearchField,
-    handleLetterClick,
-  ]);
-
 
   const expandSplitViewChat = useCallback(() => {
     const minWidth = 260;

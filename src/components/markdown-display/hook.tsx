@@ -1,6 +1,6 @@
 import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 const isRecord = (v: unknown): v is Record<string, unknown> =>
   typeof v === "object" && v !== null;
@@ -18,6 +18,113 @@ export function useMarkdown(
   const [isEditing, setIsEditing] = useState(false);
   const [linkedWordList, setLinkedWordList] = useState<Record<string, string>>({});
   const { selectedWord, dictionaryMetadata } = useConfigStore();
+
+  const CHAT_DEFAULT = 320;
+  const CHAT_MIN = 260;
+  const MIN_MAIN_WIDTH = 360;
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const [chatCollapsed, setChatCollapsed] = useState<boolean>(() => {
+    try {
+      const raw = localStorage.getItem("markdown-chat-sidebar");
+      if (!raw) return false;
+      return Boolean(JSON.parse(raw)?.collapsed);
+    } catch {
+      return false;
+    }
+  });
+
+  const [chatWidth, setChatWidth] = useState<number>(() => {
+    try {
+      const raw = localStorage.getItem("markdown-chat-sidebar");
+      if (!raw) return CHAT_DEFAULT;
+      const parsed = Number(JSON.parse(raw)?.width);
+      return Number.isFinite(parsed) ? parsed : CHAT_DEFAULT;
+    } catch {
+      return CHAT_DEFAULT;
+    }
+  });
+
+  const chatWidthRef = useRef(chatWidth);
+  const chatCollapsedRef = useRef(chatCollapsed);
+  useEffect(() => { chatWidthRef.current = chatWidth; }, [chatWidth]);
+  useEffect(() => { chatCollapsedRef.current = chatCollapsed; }, [chatCollapsed]);
+
+  const getContainerWidth = useCallback(() => {
+    return (
+      containerRef.current?.getBoundingClientRect().width ?? window.innerWidth
+    );
+  }, []);
+
+  const getMaxChatWidth = useCallback(() => {
+    const containerWidth = getContainerWidth();
+    return Math.max(0, Math.floor(containerWidth - MIN_MAIN_WIDTH));
+  }, [getContainerWidth]);
+
+  const expandChat = useCallback(() => {
+    const maxWidth = getMaxChatWidth();
+    if (maxWidth < CHAT_MIN) {
+      setChatCollapsed(false);
+      setChatWidth(CHAT_MIN);
+      return;
+    }
+    setChatCollapsed(false);
+    setChatWidth(Math.max(CHAT_MIN, Math.min(CHAT_DEFAULT, maxWidth)));
+  }, [getMaxChatWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const maxWidth = getMaxChatWidth();
+      if (!chatCollapsedRef.current) {
+        const clampedMax = Math.max(CHAT_MIN, maxWidth);
+        if (chatWidthRef.current > clampedMax) {
+          setChatWidth(clampedMax);
+        }
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [getMaxChatWidth]);
+
+  const handleResizeChat = useCallback(
+    (e: React.PointerEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const startX = e.clientX;
+      const startWidth = chatCollapsed ? 0 : chatWidth;
+
+      const onMove = (ev: PointerEvent) => {
+        const rawNext = startWidth + (startX - ev.clientX);
+        const maxWidth = Math.max(CHAT_MIN, getMaxChatWidth());
+        if (rawNext < CHAT_MIN) {
+          setChatCollapsed(true);
+          localStorage.setItem(
+            "markdown-chat-sidebar",
+            JSON.stringify({ collapsed: true, width: chatWidth }),
+          );
+          return;
+        }
+        const next = Math.min(maxWidth, Math.max(CHAT_MIN, rawNext));
+        setChatCollapsed(false);
+        setChatWidth(next);
+        localStorage.setItem(
+          "markdown-chat-sidebar",
+          JSON.stringify({ collapsed: false, width: next }),
+        );
+      };
+
+      const onUp = () => {
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("pointerup", onUp);
+      };
+
+      window.addEventListener("pointermove", onMove);
+      window.addEventListener("pointerup", onUp);
+    },
+    [chatWidth, chatCollapsed, getMaxChatWidth],
+  );
 
   const editorRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
@@ -111,5 +218,11 @@ export function useMarkdown(
     handleWordSelect,
     handleWordDelete,
     linkedWordList,
+    dictionaryMetadata,
+    containerRef,
+    chatCollapsed,
+    chatWidth,
+    expandChat,
+    handleResizeChat,
   };
 }

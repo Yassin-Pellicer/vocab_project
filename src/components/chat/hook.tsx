@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import type { ChatMessage, ContextType } from "@/types/chat";
 import { notifyError } from "@/services/notify";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
 import { useConfigStore as useDictionaryStore } from "@/context/dictionary-context";
+import { useChatStore } from "@/context/chat-context";
 
 export function useChat({
   startingInfo,
@@ -21,15 +22,41 @@ export function useChat({
   autoStartKey?: string;
 }) {
 
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [draft, setDraft] = useState("");
   const [sending, setSending] = useState(false);
   const endRef = useRef<HTMLDivElement | null>(null);
   const didAutoStartRef = useRef(false);
   const autoStartKeyRef = useRef<string | undefined>(autoStartKey);
+  const routeKeyRef = useRef<string | undefined>(route);
+  const nameKeyRef = useRef<string | null | undefined>(name);
 
   type ChatContext = { description: string; elements: object };
   const [contextForChat, setContextForChat] = useState<ChatContext | undefined>(undefined);
+
+  const chatKey = useMemo(() => {
+    return (
+      autoStartKey ??
+      `${route ?? ""}|${name ?? ""}|${context?.type ?? "none"}`
+    );
+  }, [autoStartKey, route, name, context?.type]);
+
+  const conversation = useChatStore(
+    useCallback((state) => state.conversations[chatKey], [chatKey]),
+  );
+  const setConversation = useChatStore((state) => state.setConversation);
+  const updateConversation = useChatStore((state) => state.updateConversation);
+  const clearConversation = useChatStore((state) => state.clearConversation);
+
+  const messages = conversation?.messages ?? [];
+  const draft = conversation?.draft ?? "";
+
+  const setMessages = useCallback(
+    (next: ChatMessage[]) => updateConversation(chatKey, { messages: next }),
+    [chatKey, updateConversation],
+  );
+  const setDraft = useCallback(
+    (next: string) => updateConversation(chatKey, { draft: next }),
+    [chatKey, updateConversation],
+  );
 
   const { config } = usePreferencesStore();
   const { dictionaryMetadata } = useDictionaryStore();
@@ -164,7 +191,21 @@ export function useChat({
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, open]);
+  }, [messages]);
+
+  useEffect(() => {
+    if (!conversation) {
+      setConversation(chatKey, { messages: [], draft: "" });
+    }
+  }, [chatKey, conversation, setConversation]);
+
+  useEffect(() => {
+    if (routeKeyRef.current !== route || nameKeyRef.current !== name) {
+      routeKeyRef.current = route;
+      nameKeyRef.current = name;
+      didAutoStartRef.current = false;
+    }
+  }, [route, name]);
 
   useEffect(() => {
     if (!context) { return }
@@ -187,8 +228,7 @@ export function useChat({
   const canSend = !sending && draft.trim().length > 0;
 
   const clearChat = () => {
-    setMessages([]);
-    setDraft("");
+    clearConversation(chatKey);
   };
 
   const send = async (content?: string) => {
@@ -247,10 +287,7 @@ export function useChat({
           ? (result as { text?: string })
           : result;
 
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: assistantContent },
-      ]);
+      setMessages([...nextMessages, { role: "assistant", content: assistantContent }]);
     } catch (error) {
       const message =
         typeof error === "object" && error !== null && "message" in error
@@ -318,10 +355,7 @@ export function useChat({
             typeof result === "object" && result !== null && "text" in result
               ? (result as { text?: string })
               : result;
-          setMessages((prev) => [
-            ...prev,
-            { role: "assistant", content: assistantContent },
-          ]);
+          setMessages([...nextMessages, { role: "assistant", content: assistantContent }]);
         })
         .catch((err) => {
           notifyError(
@@ -342,7 +376,6 @@ export function useChat({
     setDraft,
     sending,
     canSend,
-    open,
     contextForChat,
     setContextForChat,
     getToolActions,

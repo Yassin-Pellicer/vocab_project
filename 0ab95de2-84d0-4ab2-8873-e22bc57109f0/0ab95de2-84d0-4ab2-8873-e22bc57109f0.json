@@ -8897,5 +8897,125 @@
     "dateAdded": "2026-03-20",
     "type": "Interjektionen",
     "uuid": "0ef79662-a909-4031-95ac-40a134c20bfe"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Messer",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "knife",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "a tool with a sharp blade for cutting"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Nomen",
+    "uuid": "0011fd05-eddb-4499-a766-e574a92e5c64"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Herd",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "stove",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "a cooking device with burners/heating plates"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Nomen",
+    "uuid": "2badd310-b055-4148-be97-f4dd1cbf0d33"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Küche",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "kitchen",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "the room where you cook and eat"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Nomen",
+    "uuid": "75e7e874-7230-4608-8d23-60e3e52e77bb"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Löffel",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "spoon",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "a utensil used for eating and serving"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Nomen",
+    "uuid": "fb520520-12ae-46d1-9ccf-60df5b79054f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kühlschrank",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "refrigerator",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "an appliance that keeps food cold"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Nomen",
+    "uuid": "c9063997-8762-4161-9321-1d964e80b7f9"
   }
 ]
