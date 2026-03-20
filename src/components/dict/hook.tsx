@@ -84,7 +84,7 @@ export default function useTranslationHooks({
     const alphabetWidth = graphMode
       ? 0
       : (alphabetRef.current?.getBoundingClientRect().width ?? 40);
-    const minMainWidth = 360;
+    const minMainWidth = 500;
     return Math.max(0, Math.floor(containerWidth - alphabetWidth - minMainWidth));
   }, [graphMode]);
 

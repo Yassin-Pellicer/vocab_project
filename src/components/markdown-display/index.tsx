@@ -14,7 +14,7 @@ import SearchBar from "../word-link";
 import { useConfigStore } from "@/context/dictionary-context";
 import { SimpleEditor } from "../ui/tiptap/tiptap-templates/simple/simple-editor";
 import { Chat } from "../chat/index.tsx";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 export default function MarkdownEditor({
   route,
@@ -43,6 +43,8 @@ export default function MarkdownEditor({
 
   const CHAT_DEFAULT = 320;
   const CHAT_MIN = 260;
+  const MIN_MAIN_WIDTH = 360;
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const [chatCollapsed, setChatCollapsed] = useState<boolean>(() => {
     try {
@@ -65,6 +67,40 @@ export default function MarkdownEditor({
     }
   });
 
+  const chatWidthRef = useRef(chatWidth);
+  const chatCollapsedRef = useRef(chatCollapsed);
+  useEffect(() => { chatWidthRef.current = chatWidth; }, [chatWidth]);
+  useEffect(() => { chatCollapsedRef.current = chatCollapsed; }, [chatCollapsed]);
+
+  const getContainerWidth = useCallback(() => {
+    return (
+      containerRef.current?.getBoundingClientRect().width ?? window.innerWidth
+    );
+  }, []);
+
+  const getMaxChatWidth = useCallback(() => {
+    const containerWidth = getContainerWidth();
+    return Math.max(0, Math.floor(containerWidth - MIN_MAIN_WIDTH));
+  }, [getContainerWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const maxWidth = getMaxChatWidth();
+      if (!chatCollapsedRef.current) {
+        if (maxWidth < CHAT_MIN) {
+          setChatCollapsed(true);
+          return;
+        }
+        if (chatWidthRef.current > maxWidth) {
+          setChatWidth(maxWidth);
+        }
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [getMaxChatWidth]);
+
   const handleResizeChat = useCallback(
     (e: React.PointerEvent) => {
       e.preventDefault();
@@ -72,10 +108,18 @@ export default function MarkdownEditor({
 
       const startX = e.clientX;
       const startWidth = chatCollapsed ? 0 : chatWidth;
-      const maxWidth = Math.floor(window.innerWidth / 2);
 
       const onMove = (ev: PointerEvent) => {
         const rawNext = startWidth + (startX - ev.clientX);
+        const maxWidth = getMaxChatWidth();
+        if (maxWidth < CHAT_MIN) {
+          setChatCollapsed(true);
+          localStorage.setItem(
+            "markdown-chat-sidebar",
+            JSON.stringify({ collapsed: true, width: chatWidth }),
+          );
+          return;
+        }
         if (rawNext < CHAT_MIN) {
           setChatCollapsed(true);
           localStorage.setItem(
@@ -101,11 +145,11 @@ export default function MarkdownEditor({
       window.addEventListener("pointermove", onMove);
       window.addEventListener("pointerup", onUp);
     },
-    [chatWidth, chatCollapsed],
+    [chatWidth, chatCollapsed, getMaxChatWidth],
   );
 
   return (
-    <div className="flex flex-row overflow-hidden h-full w-full">
+    <div ref={containerRef} className="flex flex-row overflow-hidden h-full w-full min-w-0">
       <div className="flex-1 min-w-0 flex flex-col items-center overflow-hidden">
         <div
           className={`px-4 max-w-200 ${
