@@ -1,4 +1,4 @@
-import { NotebookIcon, Pencil, Send, Sparkles, Trash2, WholeWord } from "lucide-react";
+import { NotebookIcon, Pencil, Send, Sparkles, Trash2, User, WholeWord } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -69,20 +69,20 @@ export function Chat({
               <div key={m.id} className="flex flex-col gap-2">
                 <div
                   className={cn(
-                    "w-fit! max-w-[85%]! rounded-lg text-sm shadow-sm markdown",
+                    "w-fit! max-w-[85%]!",
                     m.role === "user"
-                      ? "ml-auto bg-primary px-3 text-primary-foreground"
-                      : "mr-auto bg-card px-4 py-2 text-card-foreground border"
+                      ? "ml-auto bg-primary/20 px-3 text-primary-background rounded-l-2xl rounded-t-2xl py-2"
+                      : "mr-auto bg-card px-4 py-2 text-card-foreground markdown"
                   )}
                 >
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeHighlight]}
-                  >
-                    {m.display}
-                  </ReactMarkdown>
+                  {m.role !== "user" && <div className="pb-4!"><Sparkles></Sparkles></div>}
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeHighlight]}
+                    >
+                      {m.display}
+                    </ReactMarkdown>
                 </div>
-
                 {m.actions.length > 0 && canUseActions && name && route && (
                   <div
                     className={cn(
@@ -100,7 +100,7 @@ export function Chat({
                           prefill={action.word}
                           trigger={
                             <Button variant="outline" size="sm">
-                             + <WholeWord></WholeWord> Add {label}
+                              + <WholeWord></WholeWord> Add {label}
                             </Button>
                           }
                         />
@@ -123,6 +123,25 @@ export function Chat({
               </div>
             );
           })}
+          {sending && (
+            <div className="flex flex-col gap-2">
+              <div className="mr-auto bg-card px-4 py-2 text-card-foreground markdown">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Sparkles size={14} />
+                  <div
+                    className="thinking-dots"
+                    role="status"
+                    aria-live="polite"
+                    aria-label="Assistant is thinking"
+                  >
+                    <span className="thinking-dot" />
+                    <span className="thinking-dot" />
+                    <span className="thinking-dot" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           <div ref={endRef} />
         </div>
       </div>
