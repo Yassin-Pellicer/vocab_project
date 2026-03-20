@@ -76,12 +76,12 @@ export function Chat({
                   )}
                 >
                   {m.role !== "user" && <div className="pb-4!"><Sparkles></Sparkles></div>}
-                    <ReactMarkdown
+                    {m.display !== "" && <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       rehypePlugins={[rehypeHighlight]}
                     >
                       {m.display}
-                    </ReactMarkdown>
+                    </ReactMarkdown>}
                 </div>
                 {m.actions.length > 0 && canUseActions && name && route && (
                   <div
