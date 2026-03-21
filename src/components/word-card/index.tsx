@@ -73,8 +73,8 @@ export default function WordCard({
           )}
         </div>
       </div>
-      <hr className="mb-2 border-border" />
-
+      {definitions.length != 0 && <hr className="mb-2 border-border" />}
+      
       {definitions?.map((definition: string, index: number) => (
         <div className="text-sm text-foreground" key={index}>
           <sup>{index + 1}</sup> {definition}

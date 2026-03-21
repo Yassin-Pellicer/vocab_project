@@ -335,21 +335,11 @@ export function useChat({
         },
       };
 
-      const nextMessages = [...messages, startingPrompt];
+      const nextMessages = [...messages];
       setSending(true);
 
-      const outboundMessages: ChatMessage[] = nextMessages.map((m) => {
-        if (m.role !== "assistant") return m;
-        if (typeof m.content === "string") return m;
-        const text =
-          typeof m.content === "object" && m.content !== null
-            ? (m.content as { text?: string }).text ?? ""
-            : "";
-        return { role: "assistant", content: text };
-      });
-
       window.api
-        ?.chatSend(outboundMessages)
+        ?.chatSend([startingPrompt])
         .then((result) => {
           const assistantContent =
             typeof result === "object" && result !== null && "text" in result

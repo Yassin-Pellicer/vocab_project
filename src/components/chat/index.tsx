@@ -100,7 +100,7 @@ export function Chat({
                           prefill={action.word}
                           trigger={
                             <Button variant="outline" size="sm">
-                              + <WholeWord></WholeWord> Add {label}
+                              + <WholeWord></WholeWord> {label}
                             </Button>
                           }
                         />

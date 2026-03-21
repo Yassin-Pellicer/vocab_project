@@ -9017,5 +9017,109 @@
     "dateAdded": "2026-03-20",
     "type": "Nomen",
     "uuid": "c9063997-8762-4161-9321-1d964e80b7f9"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "plötzlich",
+          "gender": "-",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "suddenly",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "happening unexpectedly and very fast",
+          "common adverb in stories and daily situations"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Adverbien",
+    "uuid": "e9522cd3-c18f-45ea-92cb-c6cf7cab1a12"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "gemütlich",
+          "gender": "-",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "cozy; pleasant; relaxed",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "comfortable, warm, and inviting—often about places or atmosphere",
+          "contrasts with “ungemütlich” (unpleasant, uncomfortable)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Adjektive",
+    "uuid": "60240c26-9ada-4f42-8c65-026842c2d205"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Bescheid",
+          "gender": "-",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "notification; update",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "(knowing / instructions)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "a short update or information; also used in phrases like “Bescheid wissen” (to know / be informed)",
+          "common in everyday speech to mean “tell me / let me know” or “be informed”"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-20",
+    "type": "Nomen",
+    "uuid": "18fb06f8-cd28-4034-8c6d-fa4dafd17c37"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Hätten Sie vielleicht…",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "Do you happen to have…",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Polite way to ask if someone has/does something (a bit softer than “Können Sie…?”)."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Redewendungen",
+    "uuid": "03a9193e-a383-4922-bc20-48c4cec60096"
   }
 ]
