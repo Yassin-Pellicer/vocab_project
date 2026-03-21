@@ -199,7 +199,7 @@ export default function DictionaryComponent({
 
       <div
         ref={containerRef}
-        className="flex flex-row-reverse overflow-hidden h-[calc(100vh-130px)]"
+        className="flex flex-row-reverse overflow-hidden h-[calc(100vh-130px)] min-h-0"
       >
         {splitViewCollapsed ? (
           <div className="shrink-0 relative" style={{ width: 8 }}>
@@ -213,7 +213,7 @@ export default function DictionaryComponent({
           </div>
         ) : (
           <div
-            className="flex flex-col relative shrink-0"
+            className="flex flex-col relative shrink-0 min-h-0"
             style={{
               width: splitViewWidth,
             }}
@@ -225,7 +225,7 @@ export default function DictionaryComponent({
               onPointerDown={handleResizeSplitView}
               className="absolute left-0 top-0 h-full w-1 cursor-col-resize bg-transparent hover:bg-muted/20 z-10"
             />
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto min-h-0">
               {selectedWord ? (
                 <Markdown
                   route={route}
@@ -244,9 +244,9 @@ export default function DictionaryComponent({
 
         {!graphMode ? (
           <>
-            <div className="flex-1 flex flex-col border-r min-w-0 h-full">
+            <div className="flex-1 flex flex-col border-r min-w-0 h-full min-h-0">
               <div
-                className="flex flex-col overflow-auto px-2 pt-4"
+                className="flex flex-col overflow-auto px-2 pt-4 min-h-0"
                 ref={scrollRef}
               >
                 {currentPage <= 1 && (

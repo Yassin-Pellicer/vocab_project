@@ -72,7 +72,7 @@ export default function Notes({
 
       <div
         ref={containerRef}
-        className="flex flex-row overflow-hidden h-[calc(100vh-130px)]"
+        className="flex flex-row overflow-hidden h-[calc(100vh-130px)] min-h-0"
       >
         {sidebarCollapsed ? (
           <div className="shrink-0 relative" style={{ width: 8 }}>
@@ -129,8 +129,8 @@ export default function Notes({
             />
           </div>
         )}
-        <div className="flex flex-1 min-w-0 overflow-hidden">
-          <div className="flex-1 min-w-0 overflow-y-auto border-r">
+        <div className="flex flex-1 min-w-0 overflow-hidden min-h-0">
+          <div className="flex-1 min-w-0 overflow-y-auto border-r min-h-0">
             {selectedNoteRoute && (
               <div className="flex flex-col gap-1 bg-background p-3 border-b">
                 <p className="flex flex-row items-center gap-2 text-xl font-semibold">
@@ -171,7 +171,7 @@ export default function Notes({
                 className="absolute left-0 top-0 h-full w-1 cursor-col-resize bg-transparent hover:bg-muted/20"
               />
 
-              <div className="flex-1 overflow-y-auto p-4">
+              <div className="flex-1 overflow-y-auto p-4 min-h-0">
                 <Chat context={{type: "note", content: selectedNoteContent}} />
               </div>
             </div>

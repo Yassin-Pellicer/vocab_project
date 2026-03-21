@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import {
   Breadcrumb,
@@ -20,8 +21,8 @@ export function BreadcrumbNavigation() {
     <Breadcrumb>
       <BreadcrumbList>
         {breadcrumbItems.map((item, index) => (
-          <>
-            <BreadcrumbItem key={item.label}>
+          <React.Fragment key={`${item.label}-${index}`}>
+            <BreadcrumbItem>
               {item.url ? (
                 <BreadcrumbLink asChild>
                   <Link to={item.url}>{item.label}</Link>
@@ -31,9 +32,9 @@ export function BreadcrumbNavigation() {
               )}
             </BreadcrumbItem>
             {index < breadcrumbItems.length - 1 && (
-              <BreadcrumbSeparator key={`sep-${index}`} />
+              <BreadcrumbSeparator />
             )}
-          </>
+          </React.Fragment>
         ))}
       </BreadcrumbList>
     </Breadcrumb>

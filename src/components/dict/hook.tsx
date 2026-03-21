@@ -58,7 +58,11 @@ export default function useTranslationHooks({
   const [splitViewWidth, setSplitViewWidth] = useState<number>(() => {
     try {
       const raw = localStorage.getItem("dictionary-sidebar");
-      if (!raw) return 392;
+      if (!raw) {
+        if (typeof window === "undefined") return 392;
+        const available = Math.max(0, window.innerWidth - 40);
+        return Math.max(280, Math.floor(available / 2));
+      }
       const parsedJson = JSON.parse(raw);
       const parsed = Number(parsedJson?.width);
       return Number.isFinite(parsed) ? parsed : 392;
@@ -69,6 +73,8 @@ export default function useTranslationHooks({
 
   const splitViewWidthRef = useRef(splitViewWidth);
   const splitViewCollapsedRef = useRef(splitViewCollapsed);
+  const didApplyInitialCenterRef = useRef(false);
+  const didUserResizeRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const alphabetRef = useRef<HTMLDivElement>(null);
   useEffect(() => { splitViewWidthRef.current = splitViewWidth; }, [splitViewWidth]);
@@ -80,33 +86,30 @@ export default function useTranslationHooks({
     const alphabetWidth = graphMode
       ? 0
       : (alphabetRef.current?.getBoundingClientRect().width ?? 40);
-    const minMainWidth = 500;
+    const minMainWidth = Math.min(500, Math.floor(containerWidth * 0.55));
     return Math.max(0, Math.floor(containerWidth - alphabetWidth - minMainWidth));
   }, [graphMode]);
+
+  const clampSplitWidth = useCallback((value: number) => {
+    const maxWidth = getMaxSplitWidth();
+    if (maxWidth <= 0) return 0;
+    const minWidth = Math.min(360, maxWidth);
+    return Math.min(maxWidth, Math.max(minWidth, value));
+  }, [getMaxSplitWidth]);
 
   const handleResizeSplitView = useCallback((e: ReactPointerEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
+    didUserResizeRef.current = true;
     const startX = e.clientX;
     const startWidth = splitViewCollapsedRef.current ? 0 : splitViewWidthRef.current;
-    const minWidth = 600;
 
     const onMove = (ev: PointerEvent) => {
       const rawNext = startWidth + (startX - ev.clientX);
-      const maxWidth = getMaxSplitWidth();
-      if (maxWidth < minWidth) {
-        setSplitViewCollapsed(false);
-        setSplitViewWidth(minWidth);
-        return;
-      }
-      if (rawNext < minWidth) {
-        setSplitViewCollapsed(false);
-        setSplitViewWidth(minWidth);
-        return;
-      }
+      const clamped = clampSplitWidth(rawNext);
       setSplitViewCollapsed(false);
-      setSplitViewWidth(Math.min(maxWidth, Math.max(minWidth, rawNext)));
+      setSplitViewWidth(clamped);
     };
 
     const onUp = () => {
@@ -116,7 +119,63 @@ export default function useTranslationHooks({
 
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", onUp);
-  }, [getMaxSplitWidth]);
+  }, [clampSplitWidth]);
+
+  useEffect(() => {
+    if (didApplyInitialCenterRef.current || didUserResizeRef.current) return;
+    try {
+      const raw = localStorage.getItem("dictionary-sidebar");
+      if (raw) return;
+    } catch {
+      // ignore
+    }
+    const next = clampSplitWidth(splitViewWidthRef.current);
+    if (next !== splitViewWidthRef.current) {
+      setSplitViewWidth(next);
+    }
+    if (splitViewCollapsedRef.current) return;
+    const containerWidth =
+      containerRef.current?.getBoundingClientRect().width ?? window.innerWidth;
+    const alphabetWidth = graphMode
+      ? 0
+      : (alphabetRef.current?.getBoundingClientRect().width ?? 40);
+    const available = Math.max(0, containerWidth - alphabetWidth);
+    const centered = clampSplitWidth(Math.floor(available / 2));
+    setSplitViewWidth(centered);
+    didApplyInitialCenterRef.current = true;
+  }, [clampSplitWidth, graphMode]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const next = clampSplitWidth(splitViewWidthRef.current);
+      if (next > 0 && next !== splitViewWidthRef.current) {
+        setSplitViewWidth(next);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [clampSplitWidth]);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver(() => {
+      const containerWidth = containerRef.current?.getBoundingClientRect().width ?? 0;
+      if (containerWidth <= 0) return;
+      const next = clampSplitWidth(splitViewWidthRef.current);
+      if (next > 0 && next !== splitViewWidthRef.current) {
+        setSplitViewWidth(next);
+      }
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [clampSplitWidth]);
+
+  useEffect(() => {
+    const next = clampSplitWidth(splitViewWidthRef.current);
+    if (next !== splitViewWidthRef.current) {
+      setSplitViewWidth(next);
+    }
+  }, [clampSplitWidth, graphMode]);
 
   useEffect(() => {
     try {

@@ -41,17 +41,7 @@ export default function useNotesHooks() {
 
   const searchRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
-    try {
-      const raw = localStorage.getItem("notes-sidebar");
-      if (!raw) return false;
-      const parsed = JSON.parse(raw);
-      return Boolean(parsed?.collapsed);
-    } catch {
-      return false;
-    }
-  });
+  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
 
   const [sidebarWidth, setSidebarWidth] = useState<number>(() => {
     try {
@@ -132,6 +122,15 @@ export default function useNotesHooks() {
   }, [sidebarCollapsed, sidebarWidth, getContainerWidth]);
 
   useEffect(() => {
+    const minWidth = 220;
+    const maxWidth = getMaxSidebarWidth();
+    setSidebarCollapsed(false);
+    if (maxWidth <= 0) return;
+    const next = Math.min(maxWidth, Math.max(minWidth, sidebarWidthRef.current));
+    setSidebarWidth(next);
+  }, [getMaxSidebarWidth]);
+
+  useEffect(() => {
     const handleResize = () => {
       const minWidth = 260;
       const maxSidebarWidth = Math.min(720, getMaxSidebarWidth());
@@ -156,6 +155,22 @@ export default function useNotesHooks() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [getMaxSidebarWidth, getMaxChatWidth]);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver(() => {
+      const minWidth = 220;
+      const maxWidth = Math.min(720, getMaxSidebarWidth());
+      if (maxWidth <= 0) return;
+      const next = Math.min(maxWidth, Math.max(minWidth, sidebarWidthRef.current));
+      if (next !== sidebarWidthRef.current) {
+        setSidebarWidth(next);
+      }
+      setSidebarCollapsed(false);
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [getMaxSidebarWidth]);
 
   const handleResizeStart = useCallback(
     (e: ReactPointerEvent) => {
