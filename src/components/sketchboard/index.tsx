@@ -15,6 +15,9 @@ export default function Sketchboard({
   const drawingRef = useRef(false);
   const lastPointRef = useRef<{ x: number; y: number } | null>(null);
   const [mode, setMode] = useState<"draw" | "erase">("draw");
+  const themeRef = useRef<"light" | "dark">(
+    document.documentElement.classList.contains("dark") ? "dark" : "light",
+  );
 
   const getCanvasPoint = (event: React.PointerEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
@@ -35,12 +38,31 @@ export default function Sketchboard({
       (styles.getPropertyValue("--color-foreground") || "#111827").trim();
   };
 
+  const invertCanvasColors = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
+    const { width, height } = canvas;
+    if (!width || !height) return;
+    const imageData = ctx.getImageData(0, 0, width, height);
+    const data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+      const alpha = data[i + 3];
+      if (alpha === 0) continue;
+      data[i] = 255 - data[i];
+      data[i + 1] = 255 - data[i + 1];
+      data[i + 2] = 255 - data[i + 2];
+    }
+    ctx.putImageData(imageData, 0, 0);
+  };
+
   const saveSketch = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     try {
       const dataUrl = canvas.toDataURL("image/png");
       localStorage.setItem(storageKey, dataUrl);
+      localStorage.setItem(storageKey + ":theme", themeRef.current);
     } catch {
     }
   };
@@ -84,12 +106,19 @@ export default function Sketchboard({
     const saved = localStorage.getItem(storageKey);
     if (saved) {
       const ctx = canvas.getContext("2d");
+      const savedTheme = localStorage.getItem(storageKey + ":theme");
       const rect = wrap.getBoundingClientRect();
       if (ctx && rect.width && rect.height) {
         const img = new Image();
         img.onload = () => {
           ctx.clearRect(0, 0, rect.width, rect.height);
           ctx.drawImage(img, 0, 0);
+          const currentTheme = document.documentElement.classList.contains("dark")
+            ? "dark"
+            : "light";
+          if (savedTheme && savedTheme !== currentTheme) {
+            invertCanvasColors();
+          }
         };
         img.src = saved;
       }
@@ -143,7 +172,27 @@ export default function Sketchboard({
     const rect = wrap.getBoundingClientRect();
     ctx.clearRect(0, 0, rect.width, rect.height);
     localStorage.removeItem(storageKey);
+    localStorage.removeItem(storageKey + ":theme");
   };
+
+  useEffect(() => {
+    const updateTheme = () => {
+      const nextTheme = document.documentElement.classList.contains("dark")
+        ? "dark"
+        : "light";
+      if (themeRef.current === nextTheme) return;
+      themeRef.current = nextTheme;
+      invertCanvasColors();
+    };
+
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="flex flex-col rounded-lg items-center border border-dashed border-border/70 bg-background/40 p-3 overflow-hidden">
