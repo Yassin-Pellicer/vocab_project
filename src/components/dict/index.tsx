@@ -109,7 +109,6 @@ export default function DictionaryComponent({
             />
           )}
         </div>
-        <div className="flex flex-row gap-4 items-center">
           <div className="flex flex-row items-center gap-2">
             <Popover>
               <PopoverTrigger asChild>
@@ -175,7 +174,6 @@ export default function DictionaryComponent({
             <AddWordModal ref={addWordButtonRef} route={route} name={name} />
           </div>
         </div>
-      </div>
       <div
         ref={containerRef}
         className="flex flex-row-reverse overflow-hidden h-[calc(100vh-130px)] min-h-0"
