@@ -316,7 +316,7 @@ export function useChat({
           prompt:
             "Give a fun fact about the word of the day today.",
           details:
-            "You must say: 'The word of the Day is... {word}! Here are some interesting facts about it!' and include: 1. etymology, 2. historical fact, 3. tips.",
+            "You must say: 'The Word of the Moment is... {word}! Here are some interesting facts about it!' and include: 1. etymology, 2. historical fact, 3. tips.",
           context: {
             startingInfo,
             dictionary: name

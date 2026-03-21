@@ -39,7 +39,7 @@
         {
           "type": "paragraph",
           "attrs": {
-            "textAlign": null
+            "textAlign": "left"
           },
           "content": [
             {
@@ -210,7 +210,7 @@
     {
       "type": "paragraph",
       "attrs": {
-        "textAlign": null
+        "textAlign": "left"
       }
     }
   ]
