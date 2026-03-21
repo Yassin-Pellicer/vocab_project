@@ -348,8 +348,17 @@ function deleteTranslation() {
           if (json2[_word]) {
             delete json2[_word];
           }
+          for (const [sourceId, targets] of Object.entries(json2)) {
+            if (targets && typeof targets === "object" && _word in targets) {
+              delete targets[_word];
+            }
+            if (targets && typeof targets === "object" && Object.keys(targets).length === 0) {
+              delete json2[sourceId];
+            }
+          }
           fs.writeFileSync(filePath2, JSON.stringify(json2, null, 2), "utf-8");
           console.log("Graph entry deleted successfully");
+          broadcastToAllWindows("graph-changed", { route: _route, name: _name });
         }
         fs.writeFileSync(
           filePath,
@@ -591,6 +600,7 @@ function saveGraph() {
         json[origin.uuid][destination.uuid] = destination.word;
         json[destination.uuid][origin.uuid] = origin.word;
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        broadcastToAllWindows("graph-changed", { route, name });
         console.log("Graph saved successfully");
         return { success: true };
       } catch (error) {
@@ -617,6 +627,7 @@ function deleteGraphEntry() {
           delete json[destination.uuid][origin.uuid];
         }
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        broadcastToAllWindows("graph-changed", { route, name });
         console.log("Graph entry deleted successfully");
         return { success: true };
       } catch (error) {

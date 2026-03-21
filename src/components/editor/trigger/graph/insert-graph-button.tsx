@@ -8,10 +8,12 @@ export function InsertGraphButton({
   editor,
   route,
   name,
+  doubleView = true,
 }: {
   editor: Editor | null
   route: string
   name: string
+  doubleView?: boolean
 }) {
   const [open, setOpen] = useState(false)
 
@@ -32,6 +34,7 @@ export function InsertGraphButton({
         name={name}
         open={open}
         setOpen={setOpen}
+        doubleView={doubleView}
       />
     </>
   )

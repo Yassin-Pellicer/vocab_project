@@ -916,28 +916,6 @@
     "pair": [
       {
         "original": {
-          "word": "günstig",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "barato",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-10",
-    "type": "Adjektive",
-    "uuid": "35aef121-9d26-420d-93d5-2ae09116d565"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "seife",
           "gender": "Feminin",
           "number": "Singular"
@@ -9121,5 +9099,226 @@
     "dateAdded": "2026-03-21",
     "type": "Redewendungen",
     "uuid": "03a9193e-a383-4922-bc20-48c4cec60096"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Rabatt",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "descuento",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Descuento en el precio."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Nomen",
+    "uuid": "66b07775-a601-4472-b7b9-28fdb5758696"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ausverkauf",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "sale (clearance)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Liquidación; venta con grandes descuentos.",
+          "A clearance sale."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Nomen",
+    "uuid": "6546009e-f106-45bd-8ea8-7e1a14eaa900"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "günstig",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "cheap; good value",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Barato o con buena relación calidad/precio; contrasta con *teuer*.",
+          "Low-priced; good value."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Adjektive",
+    "uuid": "13084348-0c6a-4070-8667-d1dfcebbfaf2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Preisgestaltung",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "pricing / pricing policy",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Forma en que una empresa fija o diseña los precios.",
+          "How prices are set/structured."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Nomen",
+    "uuid": "26eae192-540f-490c-857c-89d9b0fc30c9"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Preisnachlass",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "price reduction",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Reducción de precio; descuento.",
+          "A reduction in price."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Nomen",
+    "uuid": "70dd0731-dec2-4094-8708-815ba5e4d2fa"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kostenpunkt",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "item cost; cost point",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Partida o coste específico dentro de un presupuesto o documento.",
+          "A specific cost item in an overview/document."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Nomen",
+    "uuid": "7c5fcbd2-dd35-4bc4-9efb-54e48a5f9b86"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "die Rechnung",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "bill; receipt",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Document showing what you have to pay"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Nomen",
+    "uuid": "bba8d649-b036-4cf3-84d9-b1c8e7b2dc31"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "billig",
+          "gender": "",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "cheap",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Low price; günstig (often used in everyday speech)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Adjektive",
+    "uuid": "6f4a2e4c-e192-4fc8-92d1-0f2c1e5c2dd3"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Verkäufer",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "seller",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Person who sells something"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Nomen",
+    "uuid": "f9ed258e-d1ac-4073-a647-b41270898955"
   }
 ]

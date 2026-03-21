@@ -1,6 +1,7 @@
 import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
+import { broadcastToAllWindows } from "../../broadcast";
 
 export default function deleteGraphEntry() {
   ipcMain.handle(
@@ -24,6 +25,7 @@ export default function deleteGraphEntry() {
 
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
 
+        broadcastToAllWindows("graph-changed", { route, name });
         console.log("Graph entry deleted successfully");
         return { success: true };
       } catch (error) {

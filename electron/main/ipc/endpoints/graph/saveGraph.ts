@@ -1,6 +1,7 @@
 import { ipcMain } from "electron";
 import path from "path";
 import fs from "fs";
+import { broadcastToAllWindows } from "../../broadcast";
 
 export default function saveGraph() {
   ipcMain.handle(
@@ -27,6 +28,7 @@ export default function saveGraph() {
         
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
 
+        broadcastToAllWindows("graph-changed", { route, name });
         console.log("Graph saved successfully");
         return { success: true };
       } catch (error) {

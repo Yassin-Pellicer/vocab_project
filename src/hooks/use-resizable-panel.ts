@@ -146,7 +146,6 @@ export function useResizablePanel(options: ResizablePanelOptions): ResizablePane
         JSON.stringify({ width, collapsed }),
       );
     } catch {
-      // ignore
     }
   }, [collapsed, storageKey, width]);
 

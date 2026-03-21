@@ -68,8 +68,6 @@ export default function useNotesHooks() {
     width: sidebarWidth,
     collapsed: sidebarCollapsed,
     handleResizeStart,
-    setCollapsed: setSidebarCollapsed,
-    setWidth: setSidebarWidth,
   } = useResizablePanel({
     storageKey: "notes-sidebar",
     defaultWidth: 392,

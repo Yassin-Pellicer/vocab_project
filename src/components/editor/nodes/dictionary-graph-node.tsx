@@ -3,12 +3,13 @@ import { ReactNodeViewRenderer, NodeViewWrapper, type NodeViewProps } from "@tip
 import DictionaryGraph from "@/components/knowledge-graph"
 
 const DictionaryGraphView = ({ node }: NodeViewProps) => {
-  const { route, name, title, doubleView, word } = node.attrs as {
+  const { route, name, title, doubleView, word, directOnly } = node.attrs as {
     route: string
     name: string
     title: string
     doubleView: boolean
     word: string
+    directOnly: boolean
   }
 
   return (
@@ -20,6 +21,8 @@ const DictionaryGraphView = ({ node }: NodeViewProps) => {
           title={title}
           doubleView={doubleView}
           word={word}
+          showDirectToggle={false}
+          directOnlyOverride={directOnly}
         />
       </div>
     </NodeViewWrapper>
@@ -37,6 +40,7 @@ export const DictionaryGraphNode = Node.create({
       title: { default: "" },
       doubleView: { default: false },
       word: { default: "" },
+      directOnly: { default: false },
     }
   },
   parseHTML() {

@@ -244,6 +244,10 @@ a:hover {
   width: 100%;
 }
 
+.markdown hr {
+  border: 0px;
+}
+
 .markdown pre {
   overflow-x: auto;
   white-space: pre-wrap;

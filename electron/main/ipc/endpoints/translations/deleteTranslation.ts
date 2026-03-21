@@ -40,8 +40,18 @@ export default function deleteTranslation() {
             delete json[_word];
           }
 
+          for (const [sourceId, targets] of Object.entries(json)) {
+            if (targets && typeof targets === "object" && _word in targets) {
+              delete targets[_word];
+            }
+            if (targets && typeof targets === "object" && Object.keys(targets).length === 0) {
+              delete json[sourceId];
+            }
+          }
+
           fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
           console.log("Graph entry deleted successfully");
+          broadcastToAllWindows("graph-changed", { route: _route, name: _name });
         }
 
         fs.writeFileSync(

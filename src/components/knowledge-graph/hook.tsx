@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useConfigStore } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { GraphLink, GraphNode } from "@/types/graph-types";
@@ -11,13 +17,21 @@ interface GraphData {
   links: GraphLink[];
 }
 
-export function useKnowledgeGraph(route: string, name: string, title: string, word?: string) {
+export function useKnowledgeGraph(
+  route: string,
+  name: string,
+  title: string,
+  word?: string,
+  directOnly = false,
+) {
   const [graphData, setGraphData] = useState<GraphData | null>(null);
   const [showEmptyNodes, setShowEmptyNodes] = useState(false);
+  const graphDataRef = useRef<GraphData | null>(null);
 
   const dictionaries = useConfigStore((s) => s.dictionaries);
   const searchField = useConfigStore((s) => s.searchField);
   const selectedTypes = useConfigStore((s) => s.selectedTypes);
+  const selectedWord = useConfigStore((s) => s.selectedWord);
 
   const list = dictionaries[name] ?? EMPTY_TRANSLATIONS;
 
@@ -82,16 +96,8 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
         }
       });
 
-      Object.entries(response).forEach(([sourceId, targets]) => {
-        const isEmpty =
-          !targets ||
-          (typeof targets === "object" && Object.keys(targets).length === 0);
-        const isOrphan = isEmpty && !hasIncoming.has(sourceId);
-
-        if (isOrphan) {
-          links.push({ source: ROOT_ID, target: sourceId });
-        }
-      });
+      const prevNodes = graphDataRef.current?.nodes ?? [];
+      const prevNodeMap = new Map(prevNodes.map((node) => [node.id, node]));
 
       const nodes: GraphNode[] = Array.from(nodeIds).map((id) => {
         if (id === ROOT_ID) {
@@ -101,12 +107,20 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
         const wordData = list.find(
           (entry: TranslationEntry) => entry.uuid === id,
         );
-        return {
+        const next: GraphNode = {
           id,
           label: wordData?.pair[0]?.original?.word ?? id,
           parent: false,
           wordData,
         };
+        const prev = prevNodeMap.get(id);
+        if (prev) {
+          next.x = prev.x;
+          next.y = prev.y;
+          next.fx = prev.fx;
+          next.fy = prev.fy;
+        }
+        return next;
       });
 
       setGraphData({ nodes, links });
@@ -120,6 +134,26 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
     void fetchGraph();
   }, [fetchGraph, list.length, name, route]);
 
+  useEffect(() => {
+    graphDataRef.current = graphData;
+  }, [graphData]);
+
+  useEffect(() => {
+    const onGraphChanged = (
+      _event: unknown,
+      payload: { route?: string; name?: string } | undefined,
+    ) => {
+      if (!payload) return;
+      if (payload.route !== route || payload.name !== name) return;
+      void fetchGraph();
+    };
+
+    window.ipcRenderer.on("graph-changed", onGraphChanged);
+    return () => {
+      window.ipcRenderer.off("graph-changed", onGraphChanged);
+    };
+  }, [fetchGraph, name, route]);
+
   const filteredGraphData = useMemo(() => {
     if (!graphData) return null;
 
@@ -128,7 +162,8 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
     let filteredLinks = links;
     const activeSearch = word?.trim() || searchField.trim();
 
-    if (activeSearch !== "" || selectedTypes.length > 0) {
+    const selectedWordId = directOnly ? selectedWord?.uuid : undefined;
+    if (activeSearch !== "" || selectedTypes.length > 0 || (directOnly && selectedWordId)) {
       const adjacency = new Map<string, Set<string>>();
 
       links.forEach((link) => {
@@ -148,66 +183,101 @@ export function useKnowledgeGraph(route: string, name: string, title: string, wo
         adjacency.get(targetId)!.add(sourceId);
       });
 
-      const visited = new Set<string>(filteredNodeIds);
-      const queue = Array.from(filteredNodeIds);
+      const anchorIds =
+        activeSearch !== "" || selectedTypes.length > 0
+          ? new Set<string>(filteredNodeIds)
+          : selectedWordId
+            ? new Set<string>([selectedWordId])
+            : new Set<string>();
 
-      while (queue.length > 0) {
-        const currentId = queue.shift()!;
-        const neighbors = adjacency.get(currentId);
-        if (!neighbors) {
-          continue;
-        }
+      if (directOnly && anchorIds.size > 0) {
+        const directIds = new Set<string>(anchorIds);
+        anchorIds.forEach((anchorId) => {
+          const neighbors = adjacency.get(anchorId);
+          if (!neighbors) return;
+          neighbors.forEach((neighborId) => {
+            if (neighborId === ROOT_ID) return;
+            directIds.add(neighborId);
+          });
+        });
 
-        neighbors.forEach((neighborId) => {
-          if (neighborId === ROOT_ID || visited.has(neighborId)) {
-            return;
+        filteredNodes = nodes.filter((node) => directIds.has(node.id));
+        filteredLinks = links.filter((link) => {
+          const sourceId =
+            typeof link.source === "string" ? link.source : link.source.id;
+          const targetId =
+            typeof link.target === "string" ? link.target : link.target.id;
+          return anchorIds.has(sourceId) || anchorIds.has(targetId);
+        });
+      } else {
+        const visited = new Set<string>(filteredNodeIds);
+        const queue = Array.from(filteredNodeIds);
+
+        while (queue.length > 0) {
+          const currentId = queue.shift()!;
+          const neighbors = adjacency.get(currentId);
+          if (!neighbors) {
+            continue;
           }
 
-          visited.add(neighborId);
-          queue.push(neighborId);
+          neighbors.forEach((neighborId) => {
+            if (neighborId === ROOT_ID || visited.has(neighborId)) {
+              return;
+            }
+
+            visited.add(neighborId);
+            queue.push(neighborId);
+          });
+        }
+
+        const matchingNodeIds = new Set<string>([ROOT_ID, ...visited]);
+
+        filteredNodes = nodes.filter((node) => matchingNodeIds.has(node.id));
+
+        const validNodeIds = new Set(filteredNodes.map((n) => n.id));
+        filteredLinks = links.filter((link) => {
+          const sourceId =
+            typeof link.source === "string" ? link.source : link.source.id;
+          const targetId =
+            typeof link.target === "string" ? link.target : link.target.id;
+          return validNodeIds.has(sourceId) && validNodeIds.has(targetId);
         });
       }
-
-      const matchingNodeIds = new Set<string>([ROOT_ID, ...visited]);
-
-      filteredNodes = nodes.filter((node) => matchingNodeIds.has(node.id));
-
-      const validNodeIds = new Set(filteredNodes.map((n) => n.id));
-      filteredLinks = links.filter((link) => {
-        const sourceId =
-          typeof link.source === "string" ? link.source : link.source.id;
-        const targetId =
-          typeof link.target === "string" ? link.target : link.target.id;
-        return validNodeIds.has(sourceId) && validNodeIds.has(targetId);
-      });
     }
 
-    if (!showEmptyNodes) {
-      const emptyNodeIds = new Set(
-        filteredLinks
-          .filter((link) => {
-            const sourceId =
-              typeof link.source === "string" ? link.source : link.source.id;
-            return sourceId === ROOT_ID;
-          })
-          .map((link) =>
-            typeof link.target === "string" ? link.target : link.target.id,
-          ),
-      );
+    const connectedNodeIds = new Set<string>();
+    filteredLinks.forEach((link) => {
+      const sourceId =
+        typeof link.source === "string" ? link.source : link.source.id;
+      const targetId =
+        typeof link.target === "string" ? link.target : link.target.id;
+      connectedNodeIds.add(sourceId);
+      connectedNodeIds.add(targetId);
+    });
 
-      filteredNodes = filteredNodes.filter(
-        (node) => node.id === ROOT_ID || !emptyNodeIds.has(node.id),
-      );
+    filteredNodes = filteredNodes.filter((node) =>
+      connectedNodeIds.has(node.id),
+    );
 
-      filteredLinks = filteredLinks.filter((link) => {
-        const targetId =
-          typeof link.target === "string" ? link.target : link.target.id;
-        return !emptyNodeIds.has(targetId);
-      });
-    }
+    filteredLinks = filteredLinks.filter((link) => {
+      const sourceId =
+        typeof link.source === "string" ? link.source : link.source.id;
+      const targetId =
+        typeof link.target === "string" ? link.target : link.target.id;
+      return connectedNodeIds.has(sourceId) && connectedNodeIds.has(targetId);
+    });
 
     return { nodes: filteredNodes, links: filteredLinks };
-  }, [graphData, showEmptyNodes, searchField, selectedTypes, filteredNodeIds, word]);
+  }, [
+    graphData,
+    showEmptyNodes,
+    searchField,
+    selectedTypes,
+    filteredNodeIds,
+    word,
+    directOnly,
+    directOnly ? selectedWord?.uuid : undefined,
+  ]);
 
   return {
     graphData: filteredGraphData,

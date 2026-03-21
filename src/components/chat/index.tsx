@@ -1,4 +1,4 @@
-import { NotebookIcon, Pencil, Send, Sparkles, Trash2, User, WholeWord } from "lucide-react";
+import { NotebookIcon, Pencil, Send, Sparkles, Trash2, WholeWord } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";

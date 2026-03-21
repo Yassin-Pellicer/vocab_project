@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { DialogDescription } from "@radix-ui/react-dialog"
 import KnowledgeGraph from "@/components/knowledge-graph"
+import { Switch } from "@/components/ui/switch"
 
 export default function GraphInsertModal({
   editor,
@@ -20,14 +21,17 @@ export default function GraphInsertModal({
   name,
   open,
   setOpen,
+  doubleView = true,
 }: {
   editor: Editor | null
   route: string
   name: string
   open: boolean
   setOpen: (v: boolean) => void
+  doubleView?: boolean
 }) {
   const [word, setWord] = useState("")
+  const [directOnly, setDirectOnly] = useState(false)
 
   const insertGraph = () => {
     if (!editor || !word) return
@@ -38,8 +42,9 @@ export default function GraphInsertModal({
         route,
         name,
         title: "",
-        doubleView: false,
+        doubleView,
         word: word,
+        directOnly,
       },
     })
 
@@ -57,8 +62,25 @@ export default function GraphInsertModal({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="border h-100 w-full rounded-lg">        
-          <KnowledgeGraph route={route} name={name} title={""} doubleView={false} word={word}></KnowledgeGraph>
+        <div className="border h-100 w-full rounded-lg">
+          <KnowledgeGraph
+            route={route}
+            name={name}
+            title={""}
+            doubleView={doubleView}
+            word={word}
+            showDirectToggle={false}
+            directOnlyOverride={directOnly}
+          />
+        </div>
+        <div className="flex items-center justify-between gap-3">
+          <label className="text-sm text-foreground/80">
+            Direct relations only
+          </label>
+          <Switch
+            checked={directOnly}
+            onCheckedChange={(value) => setDirectOnly(Boolean(value))}
+          />
         </div>
         <Input
           placeholder="Word to search"
