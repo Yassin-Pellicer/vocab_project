@@ -358,7 +358,10 @@ function deleteTranslation() {
           }
           fs.writeFileSync(filePath2, JSON.stringify(json2, null, 2), "utf-8");
           console.log("Graph entry deleted successfully");
-          broadcastToAllWindows("graph-changed", { route: _route, name: _name });
+          broadcastToAllWindows("graph-changed", {
+            route: _route,
+            name: _name
+          });
         }
         fs.writeFileSync(
           filePath,

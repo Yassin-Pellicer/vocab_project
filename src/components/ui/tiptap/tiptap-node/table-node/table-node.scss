@@ -1,0 +1,23 @@
+.tiptap.ProseMirror {
+  .tableWrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--tt-border-color);
+    padding: 6px 8px;
+    vertical-align: top;
+  }
+
+  th {
+    background-color: var(--tt-card-bg-color);
+    font-weight: 600;
+  }
+}

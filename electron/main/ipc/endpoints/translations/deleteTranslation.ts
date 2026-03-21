@@ -18,7 +18,9 @@ export default function deleteTranslation() {
         const data = fs.readFileSync(filePath, "utf-8");
         const json = JSON.parse(data);
 
-        const translations: TranslationEntry[] = Array.isArray(json) ? (json as TranslationEntry[]) : [];
+        const translations: TranslationEntry[] = Array.isArray(json)
+          ? (json as TranslationEntry[])
+          : [];
         const nextTranslations = translations.filter((t) => t.uuid !== _word);
 
         {
@@ -27,7 +29,7 @@ export default function deleteTranslation() {
             "Deleting graph entry from",
             filePath,
             "for uuid:",
-            _word
+            _word,
           );
 
           let json: Record<string, Record<string, string>> = {};
@@ -44,20 +46,27 @@ export default function deleteTranslation() {
             if (targets && typeof targets === "object" && _word in targets) {
               delete targets[_word];
             }
-            if (targets && typeof targets === "object" && Object.keys(targets).length === 0) {
+            if (
+              targets &&
+              typeof targets === "object" &&
+              Object.keys(targets).length === 0
+            ) {
               delete json[sourceId];
             }
           }
 
           fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
           console.log("Graph entry deleted successfully");
-          broadcastToAllWindows("graph-changed", { route: _route, name: _name });
+          broadcastToAllWindows("graph-changed", {
+            route: _route,
+            name: _name,
+          });
         }
 
         fs.writeFileSync(
           filePath,
           JSON.stringify(nextTranslations, null, 2),
-          "utf-8"
+          "utf-8",
         );
 
         broadcastToAllWindows("app-data-changed");
@@ -66,6 +75,6 @@ export default function deleteTranslation() {
         console.error("Error adding translation:", error);
         throw new Error(`Failed to delete translation. ${error}`);
       }
-    }
+    },
   );
 }

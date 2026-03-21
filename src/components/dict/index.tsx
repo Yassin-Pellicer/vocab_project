@@ -14,6 +14,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from "@/lib/utils";
 import useTranslationHooks from "./hook";
 import AddWordModal from "./add-word-modal";
 import WordCard from "../word-card";
@@ -22,13 +23,16 @@ import { useConfigStore } from "@/context/dictionary-context";
 import KnowledgeGraph from "../knowledge-graph";
 import { useDictionaryKeybinds } from "./keybinds";
 
-const getGridClasses = (): string => {
-  return `
-    grid 
-    [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))]
-    pb-8 sm:pl-2 px-2 gap-4
-  `;
-};
+const getGridClasses = () =>
+  "grid [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))] pb-8 sm:pl-2 px-2 gap-4";
+
+const toolbarBtn = (active: boolean) =>
+  cn(
+    "p-2 rounded-2xl border transition-colors",
+    active
+      ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
+      : "bg-card text-card-foreground border-border hover:bg-popover"
+  );
 
 export default function DictionaryComponent({
   route,
@@ -85,43 +89,41 @@ export default function DictionaryComponent({
   return (
     <div>
       <div className="bg-background flex justify-between items-center h-16 border-b pr-4 pl-1">
-        <div className="flex flex-row gap-2 items-center">
-          <div className="relative w-full max-w-sm">
-            <Search
-              size={18}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+        <div className="relative w-full max-w-sm">
+          <Search
+            size={18}
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+          />
+          <input
+            ref={searchRef}
+            type="text"
+            value={searchField}
+            onChange={(e) => setSearchField(e.target.value)}
+            placeholder="Search for a word"
+            className="w-full text-sm pl-14 pr-14 bg-transparent h-9 focus:outline-none"
+          />
+          {searchField && (
+            <X
+              onClick={() => setSearchField("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground cursor-pointer"
             />
-            <input
-              ref={searchRef}
-              type="text"
-              value={searchField}
-              onChange={(e) => setSearchField(e.target.value)}
-              placeholder="Search for a word"
-              className="w-full text-sm pl-14 pr-14 bg-transparent h-9 focus:outline-none"
-            />
-            {searchField && (
-              <X
-                onClick={() => setSearchField("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground cursor-pointer"
-              />
-            )}
-          </div>
+          )}
         </div>
         <div className="flex flex-row gap-4 items-center">
           <div className="flex flex-row items-center gap-2">
             <Popover>
               <PopoverTrigger asChild>
                 <button
-                  className={`p-2 rounded-2xl border transition-colors relative ${
-                    selectedTypes.length > 0
-                      ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
-                      : "bg-card text-card-foreground border-border hover:bg-popover"
-                  }`}
                   title="Filter by type"
+                  className={cn(toolbarBtn(selectedTypes.length > 0), "relative")}
                 >
                   <Filter size={18} />
                   {selectedTypes.length > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-destructive text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    <span className={cn(
+                      "absolute -top-1 -right-1 rounded-full",
+                      "bg-destructive text-white text-xs w-5 h-5",
+                      "flex items-center justify-center"
+                    )}>
                       {selectedTypes.length}
                     </span>
                   )}
@@ -130,9 +132,7 @@ export default function DictionaryComponent({
               <PopoverContent align="end" className="w-fit p-1">
                 <div className="py-1">
                   {availableTypes.length === 0 ? (
-                    <div className="px-2 py-1 text-sm text-muted-foreground">
-                      No types available
-                    </div>
+                    <div className="px-2 py-1 text-sm text-muted-foreground">No types available</div>
                   ) : (
                     availableTypes.map((type) => (
                       <label
@@ -151,29 +151,15 @@ export default function DictionaryComponent({
                 </div>
               </PopoverContent>
             </Popover>
-            <button
-              onClick={() => setGraphMode(!graphMode)}
-              className={`p-2 rounded-2xl border transition-colors ${
-                graphMode
-                  ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
-                  : "bg-card text-card-foreground border-border hover:bg-popover"
-              }`}
-              title="Toggle graph mode"
-            >
+            <button onClick={() => setGraphMode(!graphMode)} title="Toggle graph mode" className={toolbarBtn(graphMode)}>
               <TreesIcon size={18} />
             </button>
-            <button
-              onClick={() => setIsFlipped(!isFlipped)}
-              className={`p-2 rounded-2xl border transition-colors ${
-                isFlipped
-                  ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
-                  : "bg-card text-card-foreground border-border hover:bg-popover"
-              }`}
-              title="Flip translations"
-            >
+            <button onClick={() => setIsFlipped(!isFlipped)} title="Flip translations" className={toolbarBtn(isFlipped)}>
               <ArrowLeftRight size={18} />
             </button>
             <button
+              title="Show in addition order"
+              className={toolbarBtn(isAdditionOrder)}
               onClick={() => {
                 setIsAdditionOrder(!isAdditionOrder);
                 if (!isAdditionOrder) {
@@ -183,12 +169,6 @@ export default function DictionaryComponent({
                 }
                 setCurrentPage(1);
               }}
-              className={`p-2 rounded-2xl border transition-colors ${
-                isAdditionOrder
-                  ? "bg-primary text-primary-foreground border-primary hover:opacity-90"
-                  : "bg-card text-card-foreground border-border hover:bg-popover"
-              }`}
-              title="Show in addition order"
             >
               <ListOrdered size={18} />
             </button>
@@ -196,7 +176,6 @@ export default function DictionaryComponent({
           </div>
         </div>
       </div>
-
       <div
         ref={containerRef}
         className="flex flex-row-reverse overflow-hidden h-[calc(100vh-130px)] min-h-0"
@@ -214,9 +193,7 @@ export default function DictionaryComponent({
         ) : (
           <div
             className="flex flex-col relative shrink-0 min-h-0"
-            style={{
-              width: splitViewWidth,
-            }}
+            style={{ width: splitViewWidth }}
           >
             <div
               role="separator"
@@ -227,12 +204,7 @@ export default function DictionaryComponent({
             />
             <div className="flex-1 overflow-y-auto min-h-0">
               {selectedWord ? (
-                <Markdown
-                  route={route}
-                  name={name}
-                  uuid={selectedWord.uuid}
-                  word={selectedWord}
-                />
+                <Markdown route={route} name={name} uuid={selectedWord.uuid} word={selectedWord} />
               ) : (
                 <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
                   Select a word to view details
@@ -241,7 +213,6 @@ export default function DictionaryComponent({
             </div>
           </div>
         )}
-
         {!graphMode ? (
           <>
             <div className="flex-1 flex flex-col border-r min-w-0 h-full min-h-0">
@@ -250,11 +221,10 @@ export default function DictionaryComponent({
                 ref={scrollRef}
               >
                 {currentPage <= 1 && (
-                  <div
-                    className={`mb-4 mx-2 shrink-0 ${
-                      searchField || isAdditionOrder ? "hidden" : ""
-                    }`}
-                  >
+                  <div className={cn(
+                    "mb-4 mx-2 shrink-0",
+                    (searchField || isAdditionOrder) && "hidden"
+                  )}>
                     <p className="text-8xl font-bold text-foreground mb-4">
                       {selectedLetter}
                     </p>
@@ -281,11 +251,18 @@ export default function DictionaryComponent({
                 )}
               </div>
               {totalPages > 1 && (
-                <div className="shrink-0 mt-auto mb-4 flex items-center justify-center gap-4 my-4 pt-4 border-t border-border bg-background">
+                <div className={cn(
+                  "shrink-0 mt-auto mb-4 my-4 pt-4",
+                  "flex items-center justify-center gap-4",
+                  "border-t border-border bg-background"
+                )}>
                   <button
                     onClick={handlePrevPage}
                     disabled={currentPage === 1}
-                    className="p-2 rounded-lg bg-card border border-border hover:bg-popover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className={cn(
+                      "p-2 rounded-lg bg-card border border-border",
+                      "hover:bg-popover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    )}
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
@@ -295,7 +272,10 @@ export default function DictionaryComponent({
                   <button
                     onClick={handleNextPage}
                     disabled={currentPage === totalPages}
-                    className="p-2 rounded-lg bg-card border border-border hover:bg-popover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className={cn(
+                      "p-2 rounded-lg bg-card border border-border",
+                      "hover:bg-popover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    )}
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>
@@ -310,11 +290,12 @@ export default function DictionaryComponent({
                 <button
                   key={letter}
                   onClick={() => handleLetterClick(letter)}
-                  className={`w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors shrink-0 ${
+                  className={cn(
+                    "w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors shrink-0",
                     selectedLetter === letter
                       ? "bg-primary text-primary-foreground"
                       : "text-muted-foreground hover:text-foreground hover:bg-popover"
-                  }`}
+                  )}
                 >
                   {letter}
                 </button>
@@ -323,12 +304,7 @@ export default function DictionaryComponent({
           </>
         ) : (
           <div className="border-r w-full">
-            <KnowledgeGraph
-              route={route}
-              name={name}
-              title={""}
-              doubleView={true}
-            />
+            <KnowledgeGraph route={route} name={name} title={""} doubleView={true} />
           </div>
         )}
       </div>

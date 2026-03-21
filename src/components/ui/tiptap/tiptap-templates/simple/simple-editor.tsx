@@ -12,10 +12,14 @@ import { Typography } from "@tiptap/extension-typography"
 import { Highlight } from "@tiptap/extension-highlight"
 import { Subscript } from "@tiptap/extension-subscript"
 import { Superscript } from "@tiptap/extension-superscript"
+import { Table } from "@tiptap/extension-table"
+import { TableRow } from "@tiptap/extension-table-row"
+import { TableHeader } from "@tiptap/extension-table-header"
+import { TableCell } from "@tiptap/extension-table-cell"
 import { Selection } from "@tiptap/extensions"
 
 // --- UI Primitives ---
-import { Button } from "@/components/ui/tiptap/tiptap-ui-primitive/button"
+import { Button, ButtonGroup } from "@/components/ui/tiptap/tiptap-ui-primitive/button"
 import { Spacer } from "@/components/ui/tiptap/tiptap-ui-primitive/spacer"
 import {
   Toolbar,
@@ -32,6 +36,7 @@ import "@/components/ui/tiptap/tiptap-node/list-node/list-node.scss"
 import "@/components/ui/tiptap/tiptap-node/image-node/image-node.scss"
 import "@/components/ui/tiptap/tiptap-node/heading-node/heading-node.scss"
 import "@/components/ui/tiptap/tiptap-node/paragraph-node/paragraph-node.scss"
+import "@/components/ui/tiptap/tiptap-node/table-node/table-node.scss"
 
 // --- Tiptap UI ---
 import { HeadingDropdownMenu } from "@/components/ui/tiptap/tiptap-ui/heading-dropdown-menu"
@@ -57,6 +62,7 @@ import { UndoRedoButton } from "@/components/ui/tiptap/tiptap-ui/undo-redo-butto
 import { ArrowLeftIcon } from "@/components/ui/tiptap/tiptap-icons/arrow-left-icon"
 import { HighlighterIcon } from "@/components/ui/tiptap/tiptap-icons/highlighter-icon"
 import { LinkIcon } from "@/components/ui/tiptap/tiptap-icons/link-icon"
+import { TableIcon } from "@/components/ui/tiptap/tiptap-icons/table-icon"
 
 // --- Hooks ---
 import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
@@ -75,6 +81,10 @@ import { InsertGraphButton } from "@/components/editor/trigger/graph/insert-grap
 import { ReferenceNoteButton } from "@/components/editor/trigger/note/reference-note-button"
 import { useNotesStore } from "@/context/notes-context"
 import { useConfigStore } from "@/context/dictionary-context"
+import { DropdownMenuContent, DropdownMenu, DropdownMenuTrigger } from "../../tiptap-ui-primitive/dropdown-menu"
+import { ChevronDownIcon, Columns, Icon, Rows, Table2 } from "lucide-react"
+import { ListButton } from "../../tiptap-ui/list-button"
+import { HeadingButton } from "../../tiptap-ui/heading-button"
 
 const MainToolbarContent = ({
   editor,
@@ -126,6 +136,84 @@ const MainToolbarContent = ({
         <TextAlignButton align="center" />
         <TextAlignButton align="right" />
         <TextAlignButton align="justify" />
+
+        <Button
+          type="button"
+          variant="ghost"
+          tabIndex={-1}
+          aria-label="Insert table"
+          tooltip="Insert table"
+          onClick={() => {
+            editor
+              ?.chain()
+              .focus()
+              .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+              .run()
+          }}
+          disabled={
+            !editor?.can().insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+          }
+        >
+          <TableIcon className="tiptap-button-icon" />
+        </Button>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              type="button"
+              variant="ghost"
+              className="flex items-center gap-1"
+              tabIndex={-1}
+              aria-label="Table options"
+            >
+              <Table2 size={15} />
+              <ChevronDownIcon className="tiptap-button-dropdown-small" />
+            </Button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent
+            align="start"
+            className="w-44 rounded-xl border bg-background p-1 text-foreground shadow-md"
+          >
+            <button
+              className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              onClick={() => editor?.chain().focus().addColumnAfter().run()}
+            >
+              <Columns size={16} />
+              Add column
+            </button>
+            <button
+              className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              onClick={() => editor?.chain().focus().deleteColumn().run()}
+            >
+              <Columns size={16} />
+              Remove column
+            </button>
+            <div className="my-1 h-px bg-border" />
+            <button
+              className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              onClick={() => editor?.chain().focus().addRowAfter().run()}
+            >
+              <Rows size={16} />
+              Add row
+            </button>
+            <button
+              className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              onClick={() => editor?.chain().focus().deleteRow().run()}
+            >
+              <Rows size={16} />
+              Remove row
+            </button>
+            <div className="my-1 h-px bg-border" />
+            <button
+              className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              onClick={() => editor?.chain().focus().deleteTable().run()}
+            >
+              <Rows size={16} />
+              Delete Table
+            </button>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <ImageUploadButton text="Add" />
         <InsertGraphButton editor={editor} route={route} name={name} />
@@ -180,7 +268,7 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
   const selectedNoteIdFromStore = useNotesStore((s) => s.selectedNoteId)
   const reloadTokenFromStore = useNotesStore((s) => s.reloadToken)
   const setSelectedNoteContent = useNotesStore((s) => s.setSelectedNoteContent)
-  
+
   const selectedNoteId = noteId ?? selectedNoteIdFromStore
   const reloadToken = noteId ? 0 : reloadTokenFromStore
 
@@ -216,6 +304,12 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
       Typography,
       Superscript,
       Subscript,
+      Table.configure({
+        resizable: true,
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
       Selection,
 
       ImageUploadNode.configure({
