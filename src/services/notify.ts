@@ -1,6 +1,7 @@
 import { toast } from "sonner";
 import { NOTIFICATIONS, type NotificationKey, type NotificationPayloads } from "@/notifications/registry";
 import { getNotificationSettings } from "@/services/notification-settings";
+import { pushNotificationHistory } from "@/context/notification-history-context";
 
 type ToastFn = (title: string, opts?: { id?: string; description?: string; duration?: number }) => string | number;
 
@@ -15,9 +16,6 @@ const toastByKind: Record<"success" | "info" | "warning" | "error" | "message", 
 const lastFiredAt = new Map<string, number>();
 
 export const notify = <K extends NotificationKey>(key: K, payload: NotificationPayloads[K]) => {
-  const { enabled, durationMs } = getNotificationSettings();
-  if (!enabled) return;
-
   const template = NOTIFICATIONS[key];
   const id = template.id?.(payload) ?? key;
   const now = Date.now();
@@ -31,6 +29,16 @@ export const notify = <K extends NotificationKey>(key: K, payload: NotificationP
   const title = template.title(payload);
   const description = template.description?.(payload);
 
+  pushNotificationHistory({
+    kind: template.kind,
+    sourceKey: key,
+    title,
+    description,
+  });
+
+  const { enabled, durationMs } = getNotificationSettings();
+  if (!enabled) return;
+
   return toastByKind[template.kind](title, {
     id,
     description,
@@ -39,6 +47,13 @@ export const notify = <K extends NotificationKey>(key: K, payload: NotificationP
 };
 
 export const notifyError = (title: string, description?: string) => {
+  pushNotificationHistory({
+    kind: "error",
+    sourceKey: "error",
+    title,
+    description,
+  });
+
   const { enabled, durationMs } = getNotificationSettings();
   if (!enabled) return;
   return toast.error(title, { description, duration: durationMs });

@@ -13,6 +13,7 @@ export default function useDeleteWordModalHooks({
 }) {
 
   const { loadTranslations, selectedWord, setSelectedWord } = DictionaryContext();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {

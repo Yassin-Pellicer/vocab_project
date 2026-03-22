@@ -9058,31 +9058,6 @@
     "pair": [
       {
         "original": {
-          "word": "Ausverkauf",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "sale (clearance)",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Liquidación; venta con grandes descuentos.",
-          "A clearance sale."
-        ]
-      }
-    ],
-    "dateAdded": "2026-03-21",
-    "type": "Nomen",
-    "uuid": "6546009e-f106-45bd-8ea8-7e1a14eaa900"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Kostenpunkt",
           "gender": "Maskulin",
           "number": "Singular"
@@ -9320,5 +9295,30 @@
     "dateAdded": "2026-03-21",
     "type": "Nomen",
     "uuid": "70dd0731-dec2-4094-8708-815ba5e4d2fa"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ausverkauf",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "sale (clearance)",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Liquidación; venta con grandes descuentos.",
+          "A clearance sale."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-21",
+    "type": "Nomen",
+    "uuid": "6546009e-f106-45bd-8ea8-7e1a14eaa900"
   }
 ]

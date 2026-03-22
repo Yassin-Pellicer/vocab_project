@@ -43,7 +43,7 @@ export function Chat({
 
   return (
     <Card className="flex flex-col min-h-0 h-full">
-      <div className="flex items-center justify-between gap-2 border-b px-3 py-2 sticky top-0 z-10 bg-background rounded-xl">
+      <div className="flex items-center justify-between gap-2 border-b px-3 py-2 sticky -top-1 z-10 bg-background rounded-xl">
         <div className="flex items-center gap-2 text-md font-semibold">
           <Sparkles size={16} /> Assistant
         </div>
@@ -59,7 +59,7 @@ export function Chat({
       </div>
 
       <div className="flex-1 min-h-0 overflow-y-auto p-4">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 ">
           {renderMessages().map((m) => {
             const canUseActions = Boolean(route && name);
 

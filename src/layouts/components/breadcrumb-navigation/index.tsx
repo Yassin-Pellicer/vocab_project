@@ -11,6 +11,7 @@ import {
 import { useBreadcrumbNavigation } from "./hook";
 
 export function BreadcrumbNavigation() {
+
   const { breadcrumbItems } = useBreadcrumbNavigation();
 
   if (breadcrumbItems.length === 0) {

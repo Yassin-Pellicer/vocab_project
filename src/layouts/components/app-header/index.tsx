@@ -1,5 +1,6 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { BreadcrumbNavigation } from "../breadcrumb-navigation";
+import { NotificationHistoryPopover } from "../notification-history-popover";
 import { ArrowLeft, ArrowRight, Maximize2, X, MoveDownLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +20,7 @@ export function AppHeader() {
         <BreadcrumbNavigation />
       </div>
       <div className="flex items-center gap-1" style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}>
+        <NotificationHistoryPopover />
         <div className="flex flex-row gap-2 mr-6">
           <button
             aria-label="Back"

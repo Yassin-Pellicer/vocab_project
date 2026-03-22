@@ -3,7 +3,7 @@ import { CreditCard, Crown, RefreshCw, Receipt, Bell, XCircle } from "lucide-rea
 
 export default function SubscriptionSection() {
   return (
-    <div className="mb-8 mt-2">
+    <div className="mb-8 mt-2 px-1.5">
       <div className="space-y-2">
         <div>
           <h2 className="text-xl font-semibold mb-2">Subscription</h2>

@@ -64,7 +64,7 @@ export default function EditTranslationModal({
         <DialogTrigger asChild>
           {trigger ?? (
             <div className="bg-accent rounded-full flex h-6 w-6 items-center justify-center cursor-pointer">
-              <Pencil size={14} />
+              <Pencil className="text-background/90!" size={14} />
             </div>
           )}
         </DialogTrigger>

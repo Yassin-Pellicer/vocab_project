@@ -9,10 +9,10 @@ import SettingsSidebar from "@/components/config/settings-sidebar";
 import GeneralSection from "@/components/config/sections/general";
 import KeybindsSection from "@/components/config/sections/keybinds";
 import DictionariesSection from "@/components/config/sections/dictionaries";
-import ProfileSection from "@/components/config/sections/profile";
 import SubscriptionSection from "@/components/config/sections/subscription";
 import AISection from "@/components/config/sections/ai";
 import AboutSection from "@/components/config/sections/about";
+import ProfileSection from "../sections/profile";
 
 export default function ConfigModal({ children }: { children?: React.ReactNode }) {
   const [activeSection, setActiveSection] = useState("general");

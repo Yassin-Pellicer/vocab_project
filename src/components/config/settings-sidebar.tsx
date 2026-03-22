@@ -5,7 +5,6 @@ import {
   Keyboard,
   User,
   CreditCard,
-  Sparkles
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
