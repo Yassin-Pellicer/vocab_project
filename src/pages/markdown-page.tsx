@@ -1,7 +1,7 @@
 "use client";
 
 import Markdown from "@/components/markdown-display";
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 
 export default function MarkdownPage({ _uuid }: { _uuid?: string }) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -12,8 +12,8 @@ export default function MarkdownPage({ _uuid }: { _uuid?: string }) {
   path = path.replace(/\\/g, "/");
   path = path.replace(/\/+/g, "/");
 
-  const selectedWord = useConfigStore((state) => state.selectedWord);
-  const dictionaries = useConfigStore((state) => state.dictionaries);
+  const selectedWord = DictionaryContext((state) => state.selectedWord);
+  const dictionaries = DictionaryContext((state) => state.dictionaries);
 
   const word =
     selectedWord ??

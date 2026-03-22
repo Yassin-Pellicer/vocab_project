@@ -5,29 +5,33 @@ import {
   OctagonXIcon,
   TriangleAlertIcon,
 } from "lucide-react"
+
 import { useEffect, useState } from "react"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
-import { useConfigStore as usePreferencesStore } from "@/context/preferences-context"
+import { PreferencesContext } from "@/context/preferences-context"
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const appearance = usePreferencesStore((s) => s.config.appearance || "system")
+
+  const appearance = PreferencesContext((s) => s.config.appearance || "system");
+
   const [isDark, setIsDark] = useState(() => {
-    if (typeof document === "undefined") return false
-    return document.documentElement.classList.contains("dark")
+    if (typeof document === "undefined") return false;
+    return document.documentElement.classList.contains("dark");
   })
 
   useEffect(() => {
-    if (typeof document === "undefined") return
+    if (typeof document === "undefined") return;
 
-    const el = document.documentElement
-    const sync = () => setIsDark(el.classList.contains("dark"))
-    sync()
+    let mql: MediaQueryList | null = null;
+    const el = document.documentElement;
+
+    const sync = () => setIsDark(el.classList.contains("dark")); sync();
 
     const obs = new MutationObserver(sync)
     obs.observe(el, { attributes: true, attributeFilter: ["class"] })
 
-    let mql: MediaQueryList | null = null
-    const onSystemChange = () => sync()
+    const onSystemChange = () => sync();
+    
     if (appearance === "system" && window.matchMedia) {
       mql = window.matchMedia("(prefers-color-scheme: dark)")
       if (mql.addEventListener) mql.addEventListener("change", onSystemChange)

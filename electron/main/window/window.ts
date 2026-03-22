@@ -16,7 +16,7 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
 
 export default function createWindow(
   initialRoute?: string,
-  options?: { hideSidebar?: boolean }
+  options?: { hideSidebar?: boolean },
 ) {
   const win = new BrowserWindow({
     width: 1200,
@@ -41,21 +41,21 @@ export default function createWindow(
   });
 
   win.webContents.on("before-input-event", (event, input) => {
-  if (!input.control) return;
+    if (!input.control) return;
 
-  if (input.key === "+") {
-    const current = win.webContents.getZoomFactor();
-    win.webContents.setZoomFactor(Math.min(current + 0.1, 5.0));
-    event.preventDefault();
-  } else if (input.key === "-") {
-    const current = win.webContents.getZoomFactor();
-    win.webContents.setZoomFactor(Math.max(current - 0.1, 0.5));
-    event.preventDefault();
-  } else if (input.key === "0") {
-    win.webContents.setZoomFactor(1.0);
-    event.preventDefault();
-  }
-});
+    if (input.key === "+") {
+      const current = win.webContents.getZoomFactor();
+      win.webContents.setZoomFactor(Math.min(current + 0.1, 5.0));
+      event.preventDefault();
+    } else if (input.key === "-") {
+      const current = win.webContents.getZoomFactor();
+      win.webContents.setZoomFactor(Math.max(current - 0.1, 0.5));
+      event.preventDefault();
+    } else if (input.key === "0") {
+      win.webContents.setZoomFactor(1.0);
+      event.preventDefault();
+    }
+  });
 
   const search =
     typeof options?.hideSidebar === "boolean"

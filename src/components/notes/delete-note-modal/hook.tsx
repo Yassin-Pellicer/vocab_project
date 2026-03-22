@@ -1,4 +1,4 @@
-import { useNotesStore } from "@/context/notes-context";
+import { NotesContext } from "@/context/notes-context";
 import { notify } from "@/services/notify";
 import { SidebarNode } from "@/types/sidebar-types";
 
@@ -7,7 +7,7 @@ export default function useDeleteNoteModalHooks(
   dictName: string,
   item: SidebarNode | null,
 ) {
-  const { removeById } = useNotesStore();
+  const { removeById } = NotesContext();
 
   const removeNote = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ export default function useDeleteNoteModalHooks(
       if (item) {
         const title = item.title;
         removeById(item.id);
-        await window.api.saveNoteIndex(dictRoute, dictName, useNotesStore.getState().tree);
+        await window.api.saveNoteIndex(dictRoute, dictName, NotesContext.getState().tree);
         notify("noteDeleted", { title, dictionary: dictName });
       }
     } catch (error) {

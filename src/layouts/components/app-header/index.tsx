@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Maximize2, X, MoveDownLeft } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 
 export function AppHeader() {
+  
   const navigate = useNavigate();
 
   return (

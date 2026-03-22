@@ -5,7 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { GraphLink, GraphNode } from "@/types/graph-types";
 
@@ -28,10 +28,10 @@ export function useKnowledgeGraph(
   const [showEmptyNodes, setShowEmptyNodes] = useState(false);
   const graphDataRef = useRef<GraphData | null>(null);
 
-  const dictionaries = useConfigStore((s) => s.dictionaries);
-  const searchField = useConfigStore((s) => s.searchField);
-  const selectedTypes = useConfigStore((s) => s.selectedTypes);
-  const selectedWord = useConfigStore((s) => s.selectedWord);
+  const dictionaries = DictionaryContext((s) => s.dictionaries);
+  const searchField = DictionaryContext((s) => s.searchField);
+  const selectedTypes = DictionaryContext((s) => s.selectedTypes);
+  const selectedWord = DictionaryContext((s) => s.selectedWord);
 
   const list = dictionaries[name] ?? EMPTY_TRANSLATIONS;
 

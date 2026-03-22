@@ -1,4 +1,4 @@
-import { useNotesStore } from '@/context/notes-context';
+import { NotesContext } from '@/context/notes-context';
 import { useEffect } from 'react';
 import type { SidebarTree } from "@/types/sidebar-types";
 
@@ -9,7 +9,7 @@ export default function useNoteMenu({
   route: string;
   name: string;
 }) {
-  const { setTree } = useNotesStore();
+  const { setTree } = NotesContext();
 
   useEffect(() => {
     const fetchIndex = async () => {

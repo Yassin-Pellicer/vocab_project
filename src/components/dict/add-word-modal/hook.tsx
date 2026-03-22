@@ -1,4 +1,4 @@
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { notify } from "@/services/notify";
 import { OriginalTranslationPair } from "@/types/original-translation-pair";
 import { TranslationEntry } from "@/types/translation-entry";
@@ -11,7 +11,7 @@ export default function useWordModalHooks({
   route: string;
   name: string;
 }) {
-  const { loadTranslations } = useConfigStore();
+  const { loadTranslations } = DictionaryContext();
   const [open, setOpen] = useState(false);
 
   const emptyPair: OriginalTranslationPair = {

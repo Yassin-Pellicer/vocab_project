@@ -14,6 +14,7 @@ export interface Dictionary {
   typeWordWithPrecededArticle: string;
   typeWordWithTenses: string;
 }
+
 export interface UserConfig {
   dictionaries?: Record<string, Dictionary>;
 }

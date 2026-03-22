@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { NoteSidebar } from "@/components/notes/note-menu";
 import { SidebarNode } from "@/types/sidebar-types";
-import { useNotesStore } from "@/context/notes-context";
+import { NotesContext } from "@/context/notes-context";
 
 export default function ReferenceNoteModal({
   editor,
@@ -30,7 +30,7 @@ export default function ReferenceNoteModal({
   setOpen: (v: boolean) => void;
 }) {
   const [selectedNode, setSelectedNode] = useState<SidebarNode | null>(null);
-  const { getRoute } = useNotesStore();
+  const { getRoute } = NotesContext();
 
   const insertReferenceNote = () => {
     if (!editor || !selectedNode) return;

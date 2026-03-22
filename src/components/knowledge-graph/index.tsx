@@ -1,8 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
-import WordCard from "../word-card";
 import { GraphLink, GraphNode } from "@/types/graph-types";
 import { useNavigate } from "react-router-dom";
 import {
@@ -11,16 +10,7 @@ import {
   buildConnectionCount,
 } from "./hook";
 
-interface DictionaryGraphProps {
-  route: string;
-  name: string;
-  title: string;
-  word?: string;
-  doubleView: boolean;
-  showDirectToggle?: boolean;
-  directOnlyOverride?: boolean;
-  onDirectOnlyChange?: (value: boolean) => void;
-}
+import WordCard from "../word-card";
 
 export default function DictionaryGraph({
   route,
@@ -31,14 +21,27 @@ export default function DictionaryGraph({
   showDirectToggle = true,
   directOnlyOverride,
   onDirectOnlyChange,
-}: DictionaryGraphProps) {
+}: {
+  route: string;
+  name: string;
+  title: string;
+  word?: string;
+  doubleView: boolean;
+  showDirectToggle?: boolean;
+  directOnlyOverride?: boolean;
+  onDirectOnlyChange?: (value: boolean) => void;
+}) {
+
   const navigate = useNavigate();
-  const [tooltipWord, setTooltipWord] = useState<TranslationEntry | null>(null);
   const isDirectOnlyControlled = typeof directOnlyOverride === "boolean";
+
+  const [tooltipWord, setTooltipWord] = useState<TranslationEntry | null>(null);
   const [directOnly, setDirectOnly] = useState(directOnlyOverride ?? false);
+
   const directOnlyValue = isDirectOnlyControlled
     ? (directOnlyOverride as boolean)
     : directOnly;
+
   const doubleViewRef = useRef(doubleView);
 
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -58,7 +61,7 @@ export default function DictionaryGraph({
     directOnlyValue,
   );
 
-  const setSelectedWord = useConfigStore((s) => s.setSelectedWord);
+  const setSelectedWord = DictionaryContext((s) => s.setSelectedWord);
 
   useEffect(() => {
     doubleViewRef.current = doubleView;

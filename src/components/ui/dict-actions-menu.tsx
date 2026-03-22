@@ -14,15 +14,15 @@ import ConfigureDictModal from "../dict/configure-dict-modal";
 type Props = {
   dictId: string;
   dictName: string;
-  currentRoute: string;
+  route: string;
 };
 
-export default function DictActionsMenu({ dictId, dictName, currentRoute }: Props) {
+export default function DictActionsMenu({ dictId, dictName, route }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="p-1 rounded-md hover:bg-accent transition-colors">
-          <EllipsisVertical className="h-4 w-4 text-muted-foreground" />
+        <button className="p-1 hover:text-background">
+          <EllipsisVertical className="h-4 w-4" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -32,7 +32,7 @@ export default function DictActionsMenu({ dictId, dictName, currentRoute }: Prop
             Configure
           </DropdownMenuItem>
         </ConfigureDictModal>
-        <ChangeRouteModal dictId={dictId} dictName={dictName} currentRoute={currentRoute}>
+        <ChangeRouteModal dictId={dictId} dictName={dictName} currentRoute={route}>
           <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
             <FolderSync className="h-4 w-4 mr-2" />
             Change Route

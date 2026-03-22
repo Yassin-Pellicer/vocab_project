@@ -13,7 +13,7 @@ import { Button } from "../ui/button.tsx";
 import AddNoteModal from "./add-note-modal/index.tsx";
 import NoteDisplay from "./note-display/index.tsx";
 import { Chat } from "../chat/index.tsx";
-import { useNotesStore } from "@/context/notes-context.ts";
+import { NotesContext } from "@/context/notes-context.ts";
 
 export default function Notes({
   route,
@@ -39,11 +39,11 @@ export default function Notes({
     expandChat,
   } = useNotesHooks();
 
-  const { selectedNoteContent } = useNotesStore();
+  const { selectedNoteContent } = NotesContext();
 
   return (
     <div className="h-full flex flex-col">
-      <div className="bg-background flex justify-between items-center h-16 border-b pr-4 pl-1 shrink-0">
+      <div className="bg-background flex justify-between items-center h-16 border-b pr-4 pl-1 shrink-0 shadow-sm z-10">
         <div className="flex flex-row gap-2 items-center">
           <div className="relative w-full max-w-sm">
             <Search

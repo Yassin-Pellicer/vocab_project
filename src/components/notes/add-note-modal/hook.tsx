@@ -1,4 +1,4 @@
-import { useNotesStore } from "@/context/notes-context";
+import { NotesContext } from "@/context/notes-context";
 import { notify } from "@/services/notify";
 import { SidebarNode } from "@/types/sidebar-types";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ export default function useAddNoteModalHooks(
   const [route, setRoute] = useState(item?.title || "");
   const [name, setName] = useState("");
   const [disableSetRouteInput, setDisableSetRouteInput] = useState(!!item || item === null);
-  const { appendChild } = useNotesStore();
+  const { appendChild } = NotesContext();
   const [selectedNode, setSelectedNode] = useState<SidebarNode | null>(item || null);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function useAddNoteModalHooks(
     await window.api.saveNoteIndex(
       dictRoute,
       dictName,
-      useNotesStore.getState().tree
+      NotesContext.getState().tree
     );
 
     await window.api.saveNotes(dictRoute, dictName, id, undefined);

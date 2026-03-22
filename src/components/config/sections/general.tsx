@@ -7,16 +7,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Bell, Moon, Brush } from "lucide-react";
-import useConfig from "../hooks";
+import { PreferencesContext } from "@/context/preferences-context";
 
 export default function GeneralSection() {
   const {
-    preferences,
+    config,
     setNotifications,
     setNotificationLifetime,
     setAccentColor,
     setAppearance,
-  } = useConfig();
+  } = PreferencesContext();
 
   return (
     <div className="mb-8 mt-2">
@@ -41,13 +41,13 @@ export default function GeneralSection() {
                 </div>
               </div>
             </div>
-            <Switch checked={preferences.notifications} onCheckedChange={setNotifications} />
+            <Switch checked={config.notifications} onCheckedChange={setNotifications} />
           </div>
           <div className="flex flex-row items-center mt-4">
             <div className="text-sm font-medium w-full">
               Notification lifetime
             </div>
-            <Select value={preferences.notificationLifetime} onValueChange={setNotificationLifetime}>
+            <Select value={config.notificationLifetime} onValueChange={setNotificationLifetime}>
               <SelectTrigger className="">
                 <SelectValue placeholder="Select duration" />
               </SelectTrigger>
@@ -80,7 +80,7 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Select value={preferences.accentColor} onValueChange={setAccentColor}>
+          <Select value={config.accentColor} onValueChange={setAccentColor}>
             <SelectTrigger className="">
               <SelectValue placeholder="Select color" />
             </SelectTrigger>
@@ -139,7 +139,7 @@ export default function GeneralSection() {
             </div>
           </div>
           <Select
-            value={preferences.appearance || "system"}
+            value={config.appearance || "system"}
             onValueChange={(v) => setAppearance(v as "light" | "dark" | "system")}
           >
             <SelectTrigger className="">

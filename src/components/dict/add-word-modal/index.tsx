@@ -11,10 +11,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
 import useWordModalHooks from "./hook";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+
 import {
   Select,
   SelectContent,
@@ -22,65 +24,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { OriginalTranslationPair } from "@/types/original-translation-pair";
 import { TranslationEntry } from "@/types/translation-entry";
-import { useConfigStore } from "@/context/dictionary-context";
-
-const buildDefaultEntry = (): TranslationEntry => {
-  const emptyPair: OriginalTranslationPair = {
-    original: {
-      word: "",
-      gender: "",
-      number: "",
-    },
-    translations: [
-      {
-        word: "",
-        gender: "",
-        number: "",
-      },
-    ],
-    definitions: [],
-  };
-
-  return {
-    pair: [emptyPair],
-    dateAdded: new Date().toISOString().split("T")[0],
-    type: "noun",
-  };
-};
-
-const normalizeEntry = (entry?: TranslationEntry): TranslationEntry => {
-  const fallback = buildDefaultEntry();
-  if (!entry) return fallback;
-
-  const pairs =
-    entry.pair && entry.pair.length > 0 ? entry.pair : fallback.pair;
-  const normalizedPairs = pairs.map((pair) => ({
-    original: {
-      word: pair.original?.word ?? "",
-      gender: pair.original?.gender ?? "",
-      number: pair.original?.number ?? "",
-    },
-    translations:
-      pair.translations && pair.translations.length > 0
-        ? pair.translations.map((t) => ({
-            word: t.word ?? "",
-            gender: t.gender ?? "",
-            number: t.number ?? "",
-          }))
-        : [{ word: "", gender: "", number: "" }],
-    definitions: Array.isArray(pair.definitions) ? pair.definitions : [],
-  }));
-
-  return {
-    ...fallback,
-    ...entry,
-    pair: normalizedPairs,
-    dateAdded: entry.dateAdded ?? fallback.dateAdded,
-    type: entry.type ?? fallback.type,
-  };
-};
+import { DictionaryContext } from "@/context/dictionary-context";
 
 const AddTranslationModal = forwardRef<
   HTMLButtonElement,
@@ -91,6 +38,7 @@ const AddTranslationModal = forwardRef<
     prefill?: TranslationEntry;
   }
 >(({ route, name, trigger, prefill }, ref) => {
+
   const {
     open,
     setOpen,
@@ -106,12 +54,13 @@ const AddTranslationModal = forwardRef<
     handleSubmit,
     setFormData,
   } = useWordModalHooks({ route, name });
-  const { dictionaryMetadata } = useConfigStore();
+
+  const { dictionaryMetadata } = DictionaryContext();
   const dict = dictionaryMetadata?.[name] ?? {};
 
   const handleOpenChange = (nextOpen: boolean) => {
     if (nextOpen && prefill) {
-      setFormData(normalizeEntry(prefill));
+      setFormData(prefill);
     }
     setOpen(nextOpen);
   };

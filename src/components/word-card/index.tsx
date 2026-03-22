@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 import useWordCard from "./hook";
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import EditWordModal from "../dict/edit-word-modal";
 import type { TranslationEntry } from "@/types/translation-entry";
 
@@ -24,8 +24,8 @@ export default function WordCard({
     originalWithArticle
   } = useWordCard(name, word);
 
-  const setSelectedWord = useConfigStore((state) => state.setSelectedWord);
-  const isFlipped = useConfigStore((state) => state.isFlipped);
+  const setSelectedWord = DictionaryContext((state) => state.setSelectedWord);
+  const isFlipped = DictionaryContext((state) => state.isFlipped);
 
   return (
     <div className="">

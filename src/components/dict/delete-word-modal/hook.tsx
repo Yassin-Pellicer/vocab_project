@@ -1,4 +1,4 @@
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { notify } from "@/services/notify";
 import { TranslationEntry } from "@/types/translation-entry";
 
@@ -11,7 +11,8 @@ export default function useDeleteWordModalHooks({
   route: string;
   name: string;
 }) {
-  const { loadTranslations } = useConfigStore();
+
+  const { loadTranslations } = DictionaryContext();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {

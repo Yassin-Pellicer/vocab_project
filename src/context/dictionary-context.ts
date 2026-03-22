@@ -5,9 +5,9 @@ import { BookAIcon, BookOpen } from "lucide-react";
 import { notify } from "@/services/notify";
 import type { NavItem } from "@/types/nav-item";
 
-interface ConfigState {
+interface DictionaryContext {
   dictionaryMetadata: Record<string, Dictionary>;
-  data: { navMain: NavItem[] };
+  sidebarNavigationData: { navMain: NavItem[] };
   dictionaries: Record<string, TranslationEntry[]>;
   selectedWord: TranslationEntry | null;
   selectedLetter: string;
@@ -53,7 +53,7 @@ interface ConfigState {
   loadAllTranslations: () => Promise<void>;
 }
 
-export const useConfigStore = create<ConfigState>((set, get) => {
+export const DictionaryContext = create<DictionaryContext>((set, get) => {
   const updateDictionary = (
     key: string,
     updater: (current: Dictionary) => Dictionary,
@@ -74,7 +74,10 @@ export const useConfigStore = create<ConfigState>((set, get) => {
   return {
     dictionaryMetadata: {},
     dictionaries: {},
-    data: { navMain: [{ title: "Home", url: "/" }] },
+    sidebarNavigationData: {
+      navMain: [{ title: "Home", url: "/" }],
+    },
+
     selectedWord: null,
     selectedLetter: "A",
     searchField: "",
@@ -143,14 +146,14 @@ export const useConfigStore = create<ConfigState>((set, get) => {
     loadConfig: async () => {
       try {
         const config = await window.api.loadConfig();
+
         const dictionaries: Record<string, Dictionary> =
           config.dictionaries ?? {};
 
-        const languageItems: NavItem[] = Object.entries(dictionaries).map(
+        const dictionaryNavEntry: NavItem[] = Object.entries(dictionaries).map(
           ([key, dict]) => ({
-            title: dict.name,
-            url: "",
             key,
+            title: dict.name,
             route: dict.route,
             items: [
               {
@@ -170,11 +173,10 @@ export const useConfigStore = create<ConfigState>((set, get) => {
             ],
           }),
         );
-
         set({
           dictionaryMetadata: dictionaries,
-          data: {
-            navMain: [{ title: "Home", url: "/" }, ...languageItems],
+          sidebarNavigationData: {
+            navMain: [{ title: "Home", url: "/" }, ...dictionaryNavEntry],
           },
         });
       } catch (error) {

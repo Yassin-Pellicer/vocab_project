@@ -4,7 +4,7 @@ import { notify } from "@/services/notify";
 import { setNotificationSettings } from "@/services/notification-settings";
 import { parseDurationMs } from "@/lib/parse-duration";
 
-interface ConfigState {
+interface PreferencesContext {
   config: UserPreferences;
 
   setConfig: (config: Partial<UserPreferences>) => void;
@@ -62,75 +62,75 @@ setNotificationSettings({
   durationMs: parseDurationMs(defaultConfig.notificationLifetime) ?? 5000,
 });
 
-export const useConfigStore = create<ConfigState>((set) => ({
+export const PreferencesContext = create<PreferencesContext>((set) => ({
   config: { ...defaultConfig },
 
   setConfig: (config: Partial<UserPreferences>) => {
     set((state) => ({ config: { ...state.config, ...config } }));
-    const next = useConfigStore.getState().config;
+    const next = PreferencesContext.getState().config;
     setNotificationSettings({
       enabled: next.notifications,
       durationMs: parseDurationMs(next.notificationLifetime) ?? 5000,
     });
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
 
   setNotifications: (v: boolean) => {
     set((state) => ({ config: { ...state.config, notifications: v } }));
     setNotificationSettings({ enabled: v });
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   setNotificationLifetime: (v: string) => {
     set((state) => ({ config: { ...state.config, notificationLifetime: v } }));
     setNotificationSettings({ durationMs: parseDurationMs(v) ?? 5000 });
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   setLanguage: (v: string) => {
     set((state) => ({ config: { ...state.config, language: v } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   setTimezone: (v: string) => {
     set((state) => ({ config: { ...state.config, timezone: v } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   setDateFormat: (v: string) => {
     set((state) => ({ config: { ...state.config, dateFormat: v } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
 
   setAnimations: (v: boolean) => {
     set((state) => ({ config: { ...state.config, animations: v } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   setAccentColor: (v: string) => {
     set((state) => ({ config: { ...state.config, accentColor: v } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   setAppearance: (v: "light" | "dark" | "system") => {
     set((state) => ({ config: { ...state.config, appearance: v } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
 
   setDisplayName: (v: string) => {
     set((state) => ({ config: { ...state.config, displayName: v } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   setEmail: (v: string) => {
     set((state) => ({ config: { ...state.config, email: v } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   setAvatarPath: (v?: string | null) => {
     set((state) => ({ config: { ...state.config, avatarPath: v ?? null } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   setOffline: (v: boolean) => {
     set((state) => ({ config: { ...state.config, offline: v } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
 
   setKeybinds: (kb: Keybind[]) => {
     set((state) => ({ config: { ...state.config, keybinds: kb } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   updateKeybind: (index: number, kb: Keybind) => {
     set((state) => {
@@ -139,7 +139,7 @@ export const useConfigStore = create<ConfigState>((set) => ({
       if (index >= 0 && index < next.length) next[index] = kb;
       return { config: { ...state.config, keybinds: next } };
     });
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   addKeybind: (kb: Keybind, index: number) => {
     set((state) => {
@@ -148,7 +148,7 @@ export const useConfigStore = create<ConfigState>((set) => ({
       if (index >= 0 && index < next.length) next[index] = kb;
       return { config: { ...state.config, keybinds: next } };
     });
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
   removeKeybind: (index: number) => {
     set((state) => {
@@ -164,12 +164,12 @@ export const useConfigStore = create<ConfigState>((set) => ({
         },
       };
     });
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
 
   setSubscriptionPlan: (plan: string) => {
     set((state) => ({ config: { ...state.config, subscriptionPlan: plan } }));
-    useConfigStore.getState().saveConfig();
+    PreferencesContext.getState().saveConfig();
   },
 
   loadConfig: () => {
@@ -185,7 +185,7 @@ export const useConfigStore = create<ConfigState>((set) => ({
   },
   saveConfig: () => {
     Promise.resolve(
-      window.api.saveUserPreferences(useConfigStore.getState().config),
+      window.api.saveUserPreferences(PreferencesContext.getState().config),
     )
       .then(() => notify("configSaved", { scope: "preferences" }))
       .catch((err) => console.error("Error saving user preferences:", err));

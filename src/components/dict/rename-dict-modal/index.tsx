@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+
 import {
   Dialog,
   DialogClose,
@@ -9,26 +10,27 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import useRenameDictModalHooks from "./hook";
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 
-interface RenameDictModalProps {
-  dictId: string;
-  dictName: string;
-  children: React.ReactNode;
-}
+import useRenameDictModalHooks from "./hook";
 
 export default function RenameDictModal({
   dictId,
   dictName,
   children,
-}: RenameDictModalProps) {
+}: {
+  dictId: string;
+  dictName: string;
+  children: React.ReactNode;
+}) {
+  
   const [open, setOpen] = useState(false);
   const hook = useRenameDictModalHooks();
-  const loadConfig = useConfigStore((state) => state.loadConfig);
+  const loadConfig = DictionaryContext((state) => state.loadConfig);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,8 +46,7 @@ export default function RenameDictModal({
       setOpen(isOpen);
     }}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-106.25">
         <form onSubmit={onSubmit}>
           <DialogHeader>
             <DialogTitle>Rename Dictionary</DialogTitle>

@@ -1,4 +1,4 @@
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 
 type TenseConjugations = Record<string, string>;
@@ -6,7 +6,6 @@ type TenseGroup = Record<string, TenseConjugations>;
 type MoodGroup = Record<string, TenseGroup>;
 type ConjugationTemplate = Record<string, MoodGroup>;
 
-// Helper: safe merge
 const getLeaf = (
   obj: unknown,
   mood: string,
@@ -14,15 +13,24 @@ const getLeaf = (
   tense: string,
   person: string,
 ): string | undefined => {
-  if (typeof obj !== "object" || obj === null) return undefined;
+  if (typeof obj !== "object" 
+    || obj === null) 
+      return undefined;
   const moodObj = (obj as any)[mood];
-  if (typeof moodObj !== "object" || moodObj === null) return undefined;
+  if (typeof moodObj !== "object" 
+    || moodObj === null) 
+      return undefined;
   const groupObj = moodObj[group];
-  if (typeof groupObj !== "object" || groupObj === null) return undefined;
+  if (typeof groupObj !== "object" 
+    || groupObj === null) 
+      return undefined;
   const tenseObj = groupObj[tense];
-  if (typeof tenseObj !== "object" || tenseObj === null) return undefined;
+  if (typeof tenseObj !== "object" 
+    || tenseObj === null) 
+      return undefined;
   const value = tenseObj[person];
-  return typeof value === "string" ? value : undefined;
+  return typeof value === "string" ? 
+    value : undefined;
 };
 
 const mergeConjugations = (
@@ -45,9 +53,13 @@ const mergeConjugations = (
 
   return next;
 };
+
 export function useVerbHooks(route: string, name?: string, isEditing?: boolean) {
-  const selectedWord = useConfigStore((s) => s.selectedWord);
-  const dictionaryMetadata = useConfigStore((s) => s.dictionaryMetadata);
+
+  const selectedWord = DictionaryContext((s) => s.selectedWord);
+  const selectedWordUuid = selectedWord?.uuid;
+
+  const dictionaryMetadata = DictionaryContext((s) => s.dictionaryMetadata);
 
   const template = useMemo(
     () => (dictionaryMetadata?.[name ?? ""]?.tenses ?? {}) as unknown as ConjugationTemplate,
@@ -56,8 +68,6 @@ export function useVerbHooks(route: string, name?: string, isEditing?: boolean) 
   const createTemplate = useCallback(() => structuredClone(template), [template]);
 
   const [conjugation, setConjugation] = useState<ConjugationTemplate>(createTemplate);
-  const [collapsed, setCollapsed] = useState(false);
-  const selectedWordUuid = selectedWord?.uuid;
 
   const saveConjugation = useCallback(() => {
     if (!route || !name || !selectedWordUuid) return;
@@ -97,5 +107,5 @@ export function useVerbHooks(route: string, name?: string, isEditing?: boolean) 
     }
   }, [isEditing, saveConjugation, conjugation]);
 
-  return { collapsed, setCollapsed, conjugation, setConjugation, saveConjugation };
+  return { conjugation, setConjugation, saveConjugation };
 }

@@ -1,15 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
-import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
+import { PreferencesContext } from "@/context/preferences-context";
 import type { Keybind } from "@/types/config";
-
-type KeybindHandler = (event: KeyboardEvent) => void;
-
-type KeybindOptions = {
-  actions: Record<string, KeybindHandler | undefined>;
-  enabled?: boolean;
-  allowInInput?: boolean;
-  onUnhandledKeyDown?: (event: KeyboardEvent) => void;
-};
 
 const isEditableTarget = (el: Element | null) => {
   if (!el) return false;
@@ -41,6 +32,7 @@ const normalizeEventKey = (key: string) =>
   key.length === 1 ? key.toUpperCase() : key;
 
 const matchesKeybind = (bind: Keybind, event: KeyboardEvent) => {
+
   const keys = bind.keys.map(normalizeKeyName);
   const expectsCtrl = keys.includes("Control");
   const expectsAlt = keys.includes("Alt");
@@ -50,6 +42,7 @@ const matchesKeybind = (bind: Keybind, event: KeyboardEvent) => {
   const nonModifiers = keys.filter(
     (k) => !["Control", "Alt", "Shift", "Meta"].includes(k),
   );
+
   if (nonModifiers.length === 0) return false;
   const expectedKey = nonModifiers[0];
   const actualKey = normalizeEventKey(event.key);
@@ -67,11 +60,19 @@ export function useKeybinds({
   enabled = true,
   allowInInput = false,
   onUnhandledKeyDown,
-}: KeybindOptions) {
-  const { config } = usePreferencesStore();
-  const keybinds = useMemo(() => config.keybinds ?? [], [config.keybinds]);
+}: {
+  actions: Record<string, (event: KeyboardEvent) => void | undefined>;
+  enabled?: boolean;
+  allowInInput?: boolean;
+  onUnhandledKeyDown?: (event: KeyboardEvent) => void;
+}) {
+
+  const { config } = PreferencesContext();
+
   const actionsRef = useRef(actions);
   const onUnhandledRef = useRef(onUnhandledKeyDown);
+
+  const keybinds = useMemo(() => config.keybinds ?? [], [config.keybinds]);
 
   useEffect(() => {
     actionsRef.current = actions;

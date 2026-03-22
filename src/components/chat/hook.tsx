@@ -1,10 +1,17 @@
-import { useEffect, useRef, useState, useCallback, useMemo } from "react";
-import type { ChatMessage, ContextType } from "@/types/chat";
+import { 
+  useEffect, 
+  useRef, 
+  useState, 
+  useCallback,
+  useMemo 
+} from "react";
+
+import type { ChatPrompContext, ChatMessage, ContextType, WordToolAction } from "@/types/chat";
 import { notifyError } from "@/services/notify";
 import { TranslationEntry } from "@/types/translation-entry";
-import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
-import { useConfigStore as useDictionaryStore } from "@/context/dictionary-context";
-import { useChatStore } from "@/context/chat-context";
+import { PreferencesContext } from "@/context/preferences-context";
+import { DictionaryContext } from "@/context/dictionary-context";
+import { ChatContext } from "@/context/chat-context";
 
 export function useChat({
   startingInfo,
@@ -12,39 +19,36 @@ export function useChat({
   name,
   route,
   autoStart = true,
-  autoStartKey,
 }: {
   startingInfo?: TranslationEntry | string | null;
   context?: ContextType;
   name?: string | null;
   route?: string;
   autoStart?: boolean;
-  autoStartKey?: string;
 }) {
 
   const [sending, setSending] = useState(false);
   const endRef = useRef<HTMLDivElement | null>(null);
   const didAutoStartRef = useRef(false);
-  const autoStartKeyRef = useRef<string | undefined>(autoStartKey);
   const routeKeyRef = useRef<string | undefined>(route);
   const nameKeyRef = useRef<string | null | undefined>(name);
+  
+  const setConversation = ChatContext((state) => state.setConversation);
+  const updateConversation = ChatContext((state) => state.updateConversation);
+  const clearConversation = ChatContext((state) => state.clearConversation);
 
-  type ChatContext = { description: string; elements: object };
-  const [contextForChat, setContextForChat] = useState<ChatContext | undefined>(undefined);
+  const [contextForChat, setContextForChat] = useState<ChatPrompContext | undefined>(undefined);
 
   const chatKey = useMemo(() => {
     return (
-      autoStartKey ??
       `${route ?? ""}|${name ?? ""}|${context?.type ?? "none"}`
     );
-  }, [autoStartKey, route, name, context?.type]);
+  }, [route, name, context?.type]);
 
-  const conversation = useChatStore(
+
+  const conversation = ChatContext(
     useCallback((state) => state.conversations[chatKey], [chatKey]),
   );
-  const setConversation = useChatStore((state) => state.setConversation);
-  const updateConversation = useChatStore((state) => state.updateConversation);
-  const clearConversation = useChatStore((state) => state.clearConversation);
 
   const messages = conversation?.messages ?? [];
   const draft = conversation?.draft ?? "";
@@ -58,62 +62,14 @@ export function useChat({
     [chatKey, updateConversation],
   );
 
-  const { config } = usePreferencesStore();
-  const { dictionaryMetadata } = useDictionaryStore();
+  const { config } = PreferencesContext();
+  const { dictionaryMetadata } = DictionaryContext();
 
   const dictMeta = name ? dictionaryMetadata?.[name] ?? null : null;
 
-  type WordToolAction = {
-    kind: "add" | "edit";
-    word: TranslationEntry;
-  };
-
-  const DEFAULT_ENTRY: TranslationEntry = {
-    pair: [
-      {
-        original: { word: "", gender: "", number: "" },
-        translations: [{ word: "", gender: "", number: "" }],
-        definitions: [],
-      },
-    ],
-    dateAdded: new Date().toISOString().split("T")[0],
-    type: "noun",
-  };
-
-  const normalizeWordEntry = (value: unknown): TranslationEntry | null => {
-    if (!value || typeof value !== "object") return null;
-    const raw = value as Partial<TranslationEntry>;
-    const pairs = Array.isArray(raw.pair) && raw.pair.length > 0 ? raw.pair : null;
-    if (!pairs) return null;
-
-    const normalizedPairs = pairs.map((pair) => ({
-      original: {
-        word: pair.original?.word ?? "",
-        gender: pair.original?.gender ?? "",
-        number: pair.original?.number ?? "",
-      },
-      translations:
-        pair.translations && pair.translations.length > 0
-          ? pair.translations.map((t) => ({
-              word: t.word ?? "",
-              gender: t.gender ?? "",
-              number: t.number ?? "",
-            }))
-          : [{ word: "", gender: "", number: "" }],
-      definitions: Array.isArray(pair.definitions) ? pair.definitions : [],
-    }));
-
-    return {
-      ...DEFAULT_ENTRY,
-      ...raw,
-      pair: normalizedPairs,
-      dateAdded: raw.dateAdded ?? DEFAULT_ENTRY.dateAdded,
-      type: raw.type ?? DEFAULT_ENTRY.type,
-    } as TranslationEntry;
-  };
-
   const getToolActions = useCallback((value: unknown): WordToolAction[] => {
     if (typeof value === "object" && value !== null) {
+
       const obj = value as { text?: unknown; tool_calls?: unknown };
       const calls = Array.isArray(obj.tool_calls) ? obj.tool_calls : [];
       const actions: WordToolAction[] = [];
@@ -137,7 +93,7 @@ export function useChat({
             : undefined;
         if (!tool || !args?.words || !Array.isArray(args.words)) continue;
         for (const rawWord of args.words) {
-          const word = normalizeWordEntry(rawWord);
+          const word = rawWord;
           if (!word) continue;
           if (tool === "modify_words" && !word.uuid) continue;
           actions.push({ kind: tool === "add_words" ? "add" : "edit", word });
@@ -303,10 +259,6 @@ export function useChat({
   useEffect(() => {
     if (startingInfo && Object.keys(startingInfo).length > 0) {
       if (!autoStart) return;
-      if (autoStartKeyRef.current !== autoStartKey) {
-        autoStartKeyRef.current = autoStartKey;
-        didAutoStartRef.current = false;
-      }
       if (didAutoStartRef.current) return;
       didAutoStartRef.current = true;
 
@@ -355,7 +307,7 @@ export function useChat({
         })
         .finally(() => setSending(false));
     }
-  }, [startingInfo, name, route, dictionaryMetadata, autoStart, autoStartKey]);
+  }, [startingInfo, name, route, dictionaryMetadata, autoStart]);
 
   return {
     clearChat,

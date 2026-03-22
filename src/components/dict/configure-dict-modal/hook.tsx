@@ -1,7 +1,8 @@
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { useState } from "react";
 
 export default function useChangeRouteModalHooks(dictId: string) {
+  
   const {
     dictionaryMetadata,
     setDictionaryTypeWords,
@@ -11,7 +12,7 @@ export default function useChangeRouteModalHooks(dictId: string) {
     setDictionaryUseTenses,
     setDictionaryUseArticles,
     setTypeWordWithPrecededArticle,
-  } = useConfigStore();
+  } = DictionaryContext();
 
   const [inputTypeWord, setInputTypeWord] = useState("");
   const [inputGender, setInputGender] = useState("");

@@ -1,68 +1,45 @@
-import DictionaryPage from "./pages/dictionary-page";
-import MarkdownPage from "./pages/markdown-page";
-import HomePage from "./pages/home-page";
-import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
-import { useConfigStore } from "./context/dictionary-context";
-import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
+import useThemeSync from "./hooks/useThemeSync";
+
+import { BrowserRouter } from "react-router-dom";
+import { DictionaryContext } from "./context/dictionary-context";
+import { PreferencesContext } from "@/context/preferences-context";
 import { MainLayout } from "./layouts";
 import { useEffect, useMemo, useRef } from "react";
-import useThemeSync from "./hooks/useThemeSync";
-import NotesPage from "./pages/notes-page";
 import { Toaster } from "@/components/ui/sonner";
-
-function InitialRouteFromHash() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (!hash) return;
-
-    const decoded = decodeURIComponent(hash.replace(/^#/, ""));
-    if (!decoded.startsWith("/")) return;
-
-    navigate(decoded, { replace: true });
-  }, [navigate]);
-
-  return null;
-}
-
-function Pages() {
-  const location = useLocation();
-  const path = location.pathname;
-  return (
-    <>
-      <div style={{ display: path === "/" ? "block" : "none" }}><HomePage /></div>
-      <div style={{ display: path === "/dictionary" ? "block" : "none" }}><DictionaryPage /></div>
-      <div style={{ display: path === "/markdown" ? "block" : "none" }}><MarkdownPage /></div>
-      <div style={{ display: path === "/notes" ? "block" : "none" }}><NotesPage /></div>
-    </>
-  );
-}
+import { InitialRouteFromHash, Pages } from "./hooks/use-page-memoization";
 
 export default function App() {
+
+  const hasLoadedTranslations = useRef(false);
+
+  const dictionaryContext = DictionaryContext();
+  const preferencesContext = PreferencesContext();
+
   const hideSidebar = useMemo(() => {
     const value = new URLSearchParams(window.location.search).get("hideSidebar");
     return value === "1" || value === "true";
   }, []);
 
-  const loadConfig = useConfigStore((state) => state.loadConfig);
-  const loadUserPreferences = usePreferencesStore((state) => state.loadConfig);
-  const loadAllTranslations = useConfigStore((state) => state.loadAllTranslations);
-  const dictionaryMetadata = useConfigStore((state) => state.dictionaryMetadata);
-  const hasLoadedTranslations = useRef(false);
-  useThemeSync();
   useEffect(() => {
-    void loadConfig();
-  }, [loadConfig]);
+    dictionaryContext.loadConfig();
+  }, []);
+
   useEffect(() => {
-    loadUserPreferences();
-  }, [loadUserPreferences]);
+    preferencesContext.loadConfig();
+  }, []);
+
   useEffect(() => {
-    if (Object.keys(dictionaryMetadata).length > 0 && !hasLoadedTranslations.current) {
+    if (
+      Object.keys(dictionaryContext.dictionaryMetadata).length > 0 &&
+      !hasLoadedTranslations.current
+    ) {
       hasLoadedTranslations.current = true;
-      void loadAllTranslations();
+      void dictionaryContext.loadAllTranslations();
     }
-  }, [dictionaryMetadata, loadAllTranslations]);
+  }, [dictionaryContext]);
+
+  useThemeSync();
+
   return (
     <BrowserRouter>
       <InitialRouteFromHash />

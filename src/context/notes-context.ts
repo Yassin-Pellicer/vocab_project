@@ -76,7 +76,7 @@ const returnItemsFromRouteRecursive = (
   return null;
 };
 
-interface NotesState {
+interface NotesContext {
   tree: SidebarTree;
 
   sidebarOpen: boolean;
@@ -157,7 +157,7 @@ const renameById = (
     return n;
   });
 
-export const useNotesStore = create<NotesState>((set, get) => ({
+export const NotesContext = create<NotesContext>((set, get) => ({
   tree: [],
   sidebarOpen: true,
   selectedNoteId: null,

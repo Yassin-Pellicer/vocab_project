@@ -1,5 +1,5 @@
 import { SimpleEditor } from "@/components/ui/tiptap/tiptap-templates/simple/simple-editor";
-import { useNotesStore } from "@/context/notes-context";
+import { NotesContext } from "@/context/notes-context";
 
 export default function NoteDisplay({
   route,
@@ -12,7 +12,7 @@ export default function NoteDisplay({
   noteId?: string;
   editMode?: boolean;
 }) {
-  const { selectedNoteId } = useNotesStore();
+  const { selectedNoteId } = NotesContext();
   return (
     <div className="flex justify-center align-center p-4">
       {route && name && (noteId || selectedNoteId) ? (

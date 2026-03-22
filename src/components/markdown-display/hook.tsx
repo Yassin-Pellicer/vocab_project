@@ -1,4 +1,4 @@
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useState, useEffect, useRef, useCallback } from "react";
 
@@ -11,13 +11,14 @@ export function useMarkdown(
   name: string,
   word: TranslationEntry,
 ) {
+
   const [markdown, setMarkdown] = useState<unknown>(null);
   const [mode, setMode] = useState<"edit" | "preview" | "split">("preview");
   const [collapsed, setCollapsed] = useState(false);
   const [selectOption, setSelectOption] = useState<"notes" | "conjugation">("notes");
   const [isEditing, setIsEditing] = useState(false);
   const [linkedWordList, setLinkedWordList] = useState<Record<string, string>>({});
-  const { selectedWord, dictionaryMetadata } = useConfigStore();
+  const { selectedWord, dictionaryMetadata } = DictionaryContext();
 
   const CHAT_DEFAULT = 320;
   const CHAT_MIN = 260;
@@ -47,6 +48,7 @@ export function useMarkdown(
 
   const chatWidthRef = useRef(chatWidth);
   const chatCollapsedRef = useRef(chatCollapsed);
+
   useEffect(() => { chatWidthRef.current = chatWidth; }, [chatWidth]);
   useEffect(() => { chatCollapsedRef.current = chatCollapsed; }, [chatCollapsed]);
 
@@ -176,7 +178,10 @@ export function useMarkdown(
       delete updated[id];
       return updated;
     });
-    window.api.deleteGraphEntry(route, name, { uuid, word: "" }, { uuid: id, word: linkedWordList[id] ?? "" });
+    window.api.deleteGraphEntry(route, name, 
+      { uuid, word: "" }, 
+      { uuid: id, word: linkedWordList[id] ?? "" }
+    );
   };
 
   useEffect(() => {

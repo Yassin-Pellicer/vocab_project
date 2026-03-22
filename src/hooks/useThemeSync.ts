@@ -1,127 +1,58 @@
 import { useEffect } from "react";
-import { useConfigStore } from "../context/preferences-context";
+import { PreferencesContext } from "../context/preferences-context";
 
 type AccentName = "blue" | "red" | "green" | "purple" | "orange" | "yellow";
 
-function hexToRgb(hex: string) {
-  const normalized = hex.replace("#", "").trim();
-  if (normalized.length !== 6) return null;
-  const r = Number.parseInt(normalized.slice(0, 2), 16);
-  const g = Number.parseInt(normalized.slice(2, 4), 16);
-  const b = Number.parseInt(normalized.slice(4, 6), 16);
-  if ([r, g, b].some((v) => Number.isNaN(v))) return null;
-  return { r, g, b };
-}
+const palettes: Record<AccentName, { light: [string, string]; dark: [string, string] }> = {
+  blue:   { light: ["#2563eb", "#ffffff"], dark: ["#60a5fa", "#ffffff"] },
+  red:    { light: ["#dc2626", "#ffffff"], dark: ["#f87171", "#ffffff"] },
+  green:  { light: ["#16a34a", "#ffffff"], dark: ["#4ade80", "#0f1724"] },
+  purple: { light: ["#7c3aed", "#ffffff"], dark: ["#a78bfa", "#0f1724"] },
+  orange: { light: ["#ea580c", "#ffffff"], dark: ["#fb923c", "#0f1724"] },
+  yellow: { light: ["#ca8a04", "#0f1724"], dark: ["#facc15", "#0f1724"] },
+};
 
-function getContrastingForeground(hex: string) {
-  const rgb = hexToRgb(hex);
-  if (!rgb) return "#ffffff";
-  const r = rgb.r / 255;
-  const g = rgb.g / 255;
-  const b = rgb.b / 255;
-
-  // Simple perceived luminance
-  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  return luminance > 0.6 ? "#0f1724" : "#ffffff";
-}
-
-function withAlpha(hex: string, alpha: number) {
-  const rgb = hexToRgb(hex);
-  if (!rgb) return `rgba(37,99,235,${alpha})`;
-  return `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
-}
-
-function getAccentPalette(accent: string, isDark: boolean) {
-  const key = (accent || "blue") as AccentName;
-  const palettes: Record<
-    AccentName,
-    { light: { primary: string; accent: string }; dark: { primary: string; accent: string } }
-  > = {
-    blue: { light: { primary: "#2563eb", accent: "#60a5fa" }, dark: { primary: "#60a5fa", accent: "#60a5fa" } },
-    red: { light: { primary: "#dc2626", accent: "#f87171" }, dark: { primary: "#f87171", accent: "#f87171" } },
-    green: { light: { primary: "#16a34a", accent: "#4ade80" }, dark: { primary: "#4ade80", accent: "#4ade80" } },
-    purple: { light: { primary: "#7c3aed", accent: "#a78bfa" }, dark: { primary: "#a78bfa", accent: "#a78bfa" } },
-    orange: { light: { primary: "#ea580c", accent: "#fb923c" }, dark: { primary: "#fb923c", accent: "#fb923c" } },
-    yellow: { light: { primary: "#ca8a04", accent: "#facc15" }, dark: { primary: "#facc15", accent: "#facc15" } },
-  };
-
-  const palette = palettes[key] ?? palettes.blue;
-  return isDark ? palette.dark : palette.light;
+function setDarkClass(el: HTMLElement, pref: string) {
+  const isDark =
+    pref === "dark" ||
+    (pref === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  el.classList.toggle("dark", isDark);
 }
 
 export default function useThemeSync() {
-  const appearance = useConfigStore((state) => state.config.appearance || "system");
-  const accentColor = useConfigStore((state) => state.config.accentColor || "blue");
+
+  const appearance = PreferencesContext((s) => s.config.appearance || "system");
+  const accentColor = PreferencesContext((s) => s.config.accentColor || "blue");
 
   useEffect(() => {
-    const el = typeof document !== "undefined" ? document.documentElement : null;
-    if (!el) return;
+    const el = document.documentElement;
 
-    const applyTheme = (pref: "light" | "dark" | "system") => {
-      if (pref === "system") {
-        const isDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-        if (isDark) el.classList.add("dark");
-        else el.classList.remove("dark");
-      } else if (pref === "dark") {
-        el.classList.add("dark");
-      } else {
-        el.classList.remove("dark");
-      }
-    };
+    setDarkClass(el, appearance);
 
-    const applyAccent = () => {
-      const isDark = el.classList.contains("dark");
-      const { primary, accent } = getAccentPalette(accentColor, isDark);
-      const isBlue = (accentColor || "blue") === "blue";
-      const primaryFg = isBlue ? "#ffffff" : getContrastingForeground(primary);
-      const accentFg = isBlue ? "#ffffff" : getContrastingForeground(accent);
+    const key = (accentColor as AccentName) in palettes ? (accentColor as AccentName) : "blue";
+    const isDark = el.classList.contains("dark");
 
-      el.style.setProperty("--primary", primary);
-      el.style.setProperty("--primary-foreground", primaryFg);
-      el.style.setProperty("--accent", accent);
-      el.style.setProperty("--accent-foreground", accentFg);
-      el.style.setProperty("--sidebar-primary", primary);
-      el.style.setProperty("--sidebar-primary-foreground", primaryFg);
-      el.style.setProperty("--sidebar-accent", accent);
-      el.style.setProperty("--sidebar-accent-foreground", accentFg);
-      el.style.setProperty("--chart-1", primary);
+    const [primary, fg] = palettes[key][isDark ? "dark" : "light"];
 
-      el.style.setProperty("--ring", withAlpha(primary, isDark ? 0.4 : 0.22));
-      el.style.setProperty("--sidebar-ring", withAlpha(primary, isDark ? 0.4 : 0.22));
-    };
+    el.style.setProperty("--primary", primary);
+    el.style.setProperty("--primary-foreground", fg);
+    el.style.setProperty("--accent", primary);
+    el.style.setProperty("--accent-foreground", fg);
+    el.style.setProperty("--sidebar-primary", primary);
+    el.style.setProperty("--sidebar-primary-foreground", fg);
+    el.style.setProperty("--sidebar-accent", primary);
+    el.style.setProperty("--sidebar-accent-foreground", fg);
+    el.style.setProperty("--chart-1", primary);
+    el.style.setProperty("--ring", primary);
+    el.style.setProperty("--sidebar-ring", primary);
 
-    applyTheme(appearance);
-    applyAccent();
+    if (appearance !== "system") return;
 
-    // If 'system', listen to changes
-    let mql: MediaQueryList | null = null;
-    const listener = (e: MediaQueryListEvent) => {
-      if (!el) return;
-      if (e.matches) el.classList.add("dark");
-      else el.classList.remove("dark");
-      applyAccent();
-    };
+    const mql = window.matchMedia("(prefers-color-scheme: dark)");
+    const listener = () => setDarkClass(el, "system");
 
-    type LegacyMediaQueryList = {
-      addListener: (listener: (e: MediaQueryListEvent) => void) => void;
-      removeListener: (listener: (e: MediaQueryListEvent) => void) => void;
-    };
-
-    if (appearance === "system" && window.matchMedia) {
-      mql = window.matchMedia("(prefers-color-scheme: dark)");
-      if (mql.addEventListener) mql.addEventListener("change", listener);
-      else if ("addListener" in mql) {
-        (mql as unknown as LegacyMediaQueryList).addListener(listener);
-      }
-    }
-
-    return () => {
-      if (mql) {
-        if (mql.removeEventListener) mql.removeEventListener("change", listener);
-        else if ("removeListener" in mql) {
-          (mql as unknown as LegacyMediaQueryList).removeListener(listener);
-        }
-      }
-    };
+    mql.addEventListener("change", listener);
+    return () => mql.removeEventListener("change", listener);
+    
   }, [appearance, accentColor]);
 }

@@ -13,7 +13,7 @@ export default function MarkdownEditor({
   isEditing: boolean;
   setIsEditing: (isEditing: boolean) => void;
 }) {
-  const { conjugation, setConjugation, collapsed } = useVerbHooks(route, name, isEditing);
+  const { conjugation, setConjugation } = useVerbHooks(route, name, isEditing);
 
   const getMoodColor = (moodName: string) => {
     switch (moodName) {
@@ -145,7 +145,7 @@ export default function MarkdownEditor({
   return (
     <div className="flex-col items-center [scrollbar-gutter:stable] overflow-y-auto w-full px-4">
       <div
-        className={`flex-col items-center overflow-y-auto w-full pb-6 ${collapsed ? "hidden" : ""}`}
+        className="flex-col items-center overflow-y-auto w-full pb-6"
       >
         <div className="flex flex-col items-center">
           <div className="max-w-200 w-full min-w-0">

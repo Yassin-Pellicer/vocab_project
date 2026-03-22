@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { TranslationEntry } from '@/types/translation-entry';
-import { useConfigStore } from '@/context/dictionary-context';
+import { DictionaryContext } from '@/context/dictionary-context';
 
 const EMPTY_TRANSLATIONS: TranslationEntry[] = [];
 
@@ -24,7 +24,7 @@ export const useSearchBar = ({
     selectedLetter,
     selectedTypes,
     setSelectedLetter,
-  } = useConfigStore();
+  } = DictionaryContext();
 
   const [localValue, setLocalValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);

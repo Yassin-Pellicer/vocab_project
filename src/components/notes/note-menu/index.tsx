@@ -6,7 +6,7 @@ import {
   SidebarItem,
 } from "@/components/ui/note-sidebar";
 import { SidebarNode } from "@/types/sidebar-types";
-import { useNotesStore } from "@/context/notes-context";
+import { NotesContext } from "@/context/notes-context";
 import useNoteMenu from "./hook";
 import type { ReactNode } from "react";
 import { filterTree } from "./utils";
@@ -43,7 +43,7 @@ export function NoteSidebar({
   element?: (item: SidebarNode) => ReactNode;
   query?: string;
 }) {
-  const { tree } = useNotesStore();
+  const { tree } = NotesContext();
   const safeTree = Array.isArray(tree) ? tree : [];
   const visibleTree = filterTree(safeTree, query);
   useNoteMenu({ route, name });

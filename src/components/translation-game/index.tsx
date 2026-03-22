@@ -1,5 +1,5 @@
 "use client";
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import useTranslationHooks from "./hook";
 import { ArrowLeftRight, BookCheck, Check } from "lucide-react";
 
@@ -18,7 +18,7 @@ export default function TranslationGame({ route, name }: { route: string, name: 
     showHint,
   } = useTranslationHooks({ route, name });
 
-  const { setIsFlipped, isFlipped } = useConfigStore();
+  const { setIsFlipped, isFlipped } = DictionaryContext();
 
   if (!word || Object.keys(list).length === 0) {
     return (

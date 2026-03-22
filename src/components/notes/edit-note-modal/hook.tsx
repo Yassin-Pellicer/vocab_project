@@ -1,4 +1,4 @@
-import { useNotesStore } from "@/context/notes-context";
+import { NotesContext } from "@/context/notes-context";
 import { notify } from "@/services/notify";
 import { SidebarNode } from "@/types/sidebar-types";
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ export default function useEditNoteModalHooks(
 ) {
   const [route, setRoute] = useState("Root");
   const [name, setName] = useState(item?.title || "");
-  const { selectParent, moveNode, isDescendantOrSelf, renameNode } = useNotesStore();
+  const { selectParent, moveNode, isDescendantOrSelf, renameNode } = NotesContext();
   const [selectedNode, setSelectedNode] = useState<SidebarNode | null>(null);
 
   const selectRoute = (n: SidebarNode | null) => {
@@ -46,7 +46,7 @@ export default function useEditNoteModalHooks(
     if (!name.trim()) return;
 
     const fromTitle = item?.title ?? "";
-    const fromPath = item ? useNotesStore.getState().getRoute(item.id) : null;
+    const fromPath = item ? NotesContext.getState().getRoute(item.id) : null;
     const beforeParent = item ? selectParent(item) : undefined;
     const beforeParentId =
       beforeParent && item && beforeParent.id !== item.id ? beforeParent.id : null;
@@ -54,9 +54,9 @@ export default function useEditNoteModalHooks(
     const toTitle = name.trim();
     moveNode(item.id, selectedNode?.id ?? null);
     renameNode(item.id, toTitle);
-    await window.api.saveNoteIndex(dictRoute, dictName, useNotesStore.getState().tree);
+    await window.api.saveNoteIndex(dictRoute, dictName, NotesContext.getState().tree);
 
-    const toPath = item ? useNotesStore.getState().getRoute(item.id) : null;
+    const toPath = item ? NotesContext.getState().getRoute(item.id) : null;
     const afterParent = item ? selectParent(item) : undefined;
     const afterParentId =
       afterParent && item && afterParent.id !== item.id ? afterParent.id : null;

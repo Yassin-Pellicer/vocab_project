@@ -1,10 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { defaultTenses } from "@/types/config";
 
 export default function useConfigureTenseModal(dictId: string) {
-  const { dictionaryMetadata, setDictionaryTenses, setTypeWordWithTenses } =
-    useConfigStore();
+
+  const { 
+    dictionaryMetadata,
+    setDictionaryTenses, 
+    setTypeWordWithTenses
+  } = DictionaryContext();
+
   const [
     selectTypeWordWithTenses,
     setSelectTypeWordWithTenses,

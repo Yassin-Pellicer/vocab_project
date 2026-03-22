@@ -162,7 +162,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Ich lade euch zu ein Familienfeier. Ich organisiere die Feier zusammen mit meine Mutter Soumya. Wir planen alles zusammen. Wir möchten ein schönes Familientreffen machen, weil meine Cousine zu Besuch in Spanien ist."
+              "text": "Ich lade euch zu ein Familienfeier. Ich organisiere die Feier zusammen mit meine Mutter Soumya. Wir planen alles zusammen. Wir möchten ein schönes Familientreffen machen, weil meine Cousine zu Besuch in Spanien ist.-"
             }
           ]
         },
@@ -217,7 +217,13 @@
       "type": "paragraph",
       "attrs": {
         "textAlign": null
-      }
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "-"
+        }
+      ]
     }
   ]
 }

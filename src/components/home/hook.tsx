@@ -1,4 +1,4 @@
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { DictionaryData } from "@/types/dictionary-data";
 import { SidebarNode, SidebarTree } from "@/types/sidebar-types";
 import { useEffect, useState } from "react";
@@ -21,11 +21,13 @@ const collectLeafNotes = (tree: SidebarTree): SidebarNode[] => {
 };
 
 export default function useHome() {
-  const dictionaryMetadata = useConfigStore(s => s.dictionaryMetadata);
-  const dictionariesMap = useConfigStore(s => s.dictionaries);
+  
   const [dictionaryCards, setDictionaryCards] = useState<DictionaryData[]>([]);
   const [totalWords, setTotalWords] = useState(0);
   const [totalDictionaries, setTotalDictionaries] = useState(0);
+
+  const dictionaryMetadata = DictionaryContext(s => s.dictionaryMetadata);
+  const dictionariesMap = DictionaryContext(s => s.dictionaries);
 
   useEffect(() => {
     let isCancelled = false;

@@ -9,7 +9,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { ContextType } from "@/types/chat";
-import { useNotesStore } from "@/context/notes-context";
+import { NotesContext } from "@/context/notes-context";
 import AddWordModal from "@/components/dict/add-word-modal";
 import EditWordModal from "@/components/dict/edit-word-modal";
 
@@ -19,14 +19,12 @@ export function Chat({
   name,
   context,
   autoStart,
-  autoStartKey,
 }: {
   startingInfo?: TranslationEntry | string | null;
   route?: string;
   name?: string | null;
   context?: ContextType;
   autoStart?: boolean;
-  autoStartKey?: string;
 }) {
   const {
     clearChat,
@@ -39,9 +37,9 @@ export function Chat({
     contextForChat,
     getWordLabel,
     renderMessages,
-  } = useChat({ startingInfo, context, name, route, autoStart, autoStartKey });
+  } = useChat({ startingInfo, context, name, route, autoStart });
 
-  const { selectedNoteId, findById } = useNotesStore();
+  const { selectedNoteId, findById } = NotesContext();
 
   return (
     <Card className="flex flex-col min-h-0 h-full">

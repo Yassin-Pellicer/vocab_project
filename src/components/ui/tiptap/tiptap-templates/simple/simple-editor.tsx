@@ -19,13 +19,14 @@ import { TableCell } from "@tiptap/extension-table-cell"
 import { Selection } from "@tiptap/extensions"
 
 // --- UI Primitives ---
-import { Button, ButtonGroup } from "@/components/ui/tiptap/tiptap-ui-primitive/button"
+import { Button } from "@/components/ui/tiptap/tiptap-ui-primitive/button"
 import { Spacer } from "@/components/ui/tiptap/tiptap-ui-primitive/spacer"
 import {
   Toolbar,
   ToolbarGroup,
   ToolbarSeparator,
 } from "@/components/ui/tiptap/tiptap-ui-primitive/toolbar"
+
 // --- Tiptap Node ---
 import { ImageUploadNode } from "@/components/ui/tiptap/tiptap-node/image-upload-node/image-upload-node-extension"
 import { HorizontalRule } from "@/components/ui/tiptap/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension"
@@ -79,12 +80,10 @@ import { DictionaryGraphNode } from "@/components/editor/nodes/dictionary-graph-
 import { ReferenceNoteNode } from "@/components/editor/nodes/reference-note-node"
 import { InsertGraphButton } from "@/components/editor/trigger/graph/insert-graph-button"
 import { ReferenceNoteButton } from "@/components/editor/trigger/note/reference-note-button"
-import { useNotesStore } from "@/context/notes-context"
-import { useConfigStore } from "@/context/dictionary-context"
+import { NotesContext } from "@/context/notes-context"
+import { DictionaryContext } from "@/context/dictionary-context"
 import { DropdownMenuContent, DropdownMenu, DropdownMenuTrigger } from "../../tiptap-ui-primitive/dropdown-menu"
-import { ChevronDownIcon, Columns, Icon, Rows, Table2 } from "lucide-react"
-import { ListButton } from "../../tiptap-ui/list-button"
-import { HeadingButton } from "../../tiptap-ui/heading-button"
+import { ChevronDownIcon, Columns, Rows, Table2 } from "lucide-react"
 
 const MainToolbarContent = ({
   editor,
@@ -265,14 +264,14 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
   const loadedNoteIdRef = useRef<string | null>(null)
   const loadedWordIdRef = useRef<string | null>(null)
 
-  const selectedNoteIdFromStore = useNotesStore((s) => s.selectedNoteId)
-  const reloadTokenFromStore = useNotesStore((s) => s.reloadToken)
-  const setSelectedNoteContent = useNotesStore((s) => s.setSelectedNoteContent)
+  const selectedNoteIdFromStore = NotesContext((s) => s.selectedNoteId)
+  const reloadTokenFromStore = NotesContext((s) => s.reloadToken)
+  const setSelectedNoteContent = NotesContext((s) => s.setSelectedNoteContent)
 
   const selectedNoteId = noteId ?? selectedNoteIdFromStore
   const reloadToken = noteId ? 0 : reloadTokenFromStore
 
-  const selectedWord = useConfigStore((s) => s.selectedWord)
+  const selectedWord = DictionaryContext((s) => s.selectedWord)
   const selectedWordUuid = selectedWord?.uuid ?? null
 
   const editor = useEditor({

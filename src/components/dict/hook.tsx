@@ -1,4 +1,4 @@
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
 import type { TranslationEntry } from "@/types/translation-entry";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -15,6 +15,7 @@ export default function useTranslationHooks({
 }) {
   const ITEMS_PER_PAGE = 50;
   const {
+    dictionaryMetadata,
     dictionaries,
     loadTranslations,
     selectedLetter,
@@ -26,21 +27,20 @@ export default function useTranslationHooks({
     selectedTypes,
     setGraphMode,
     graphMode,
-  } = useConfigStore();
+  } = DictionaryContext();
 
   const list = dictionaries[name] ?? EMPTY_TRANSLATIONS;
   const [currentPage, setCurrentPage] = useState(1);
 
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
   const [isAdditionOrder, setIsAdditionOrder] = useState(
-    () => !useConfigStore.getState().selectedLetter,
+    () => !DictionaryContext.getState().selectedLetter,
   );
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const addWordButtonRef = useRef<HTMLButtonElement>(null);
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  const { dictionaryMetadata } = useConfigStore();
 
   const availableTypes = dictionaryMetadata?.[name]?.typeWords ?? [];
 

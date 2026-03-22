@@ -1,4 +1,5 @@
-import * as React from "react"
+import { } from "react"
+
 import {
   Sidebar,
   SidebarContent,
@@ -10,7 +11,8 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
-import { useConfigStore } from "@/context/dictionary-context";
+
+import { DictionaryContext } from "@/context/dictionary-context";
 import { Link } from "react-router-dom";
 import DictActionsMenu from "./dict-actions-menu";
 import AddDictModal from "../dict/add-dict-modal";
@@ -20,28 +22,39 @@ import { ExternalLink } from "lucide-react";
 
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data } = useConfigStore();
+
+  const { sidebarNavigationData } = DictionaryContext();
 
   return (
     <Sidebar {...props}>
-      <NavUser/>
+      <NavUser />
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            {data.navMain.map((item) => (
+            {sidebarNavigationData.navMain.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild>
                   {item.url ? (
-                    <Link to={item.url} className="font-medium">
-                      <div className="flex items-center justify-between w-full font-medium hover:text-background!">
+                    <Link to={item.url} className="flex items-center justify-between w-full font-medium hover:text-background!">
                         {item.title}
-                        {item.key && item.route && <DictActionsMenu dictId={item.key} dictName={item.title} currentRoute={item.route} />}
-                      </div>
+                        {item.key && item.route &&
+                          <DictActionsMenu
+                            dictId={item.key}
+                            dictName={item.title}
+                            route={item.route}
+                          />
+                        }
                     </Link>
                   ) : (
                     <div className="flex items-center justify-between w-full font-medium hover:text-background!">
                       {item.title}
-                      {item.key && item.route && <DictActionsMenu dictId={item.key} dictName={item.title} currentRoute={item.route} />}
+                      {item.key && item.route &&
+                        <DictActionsMenu
+                          dictId={item.key}
+                          dictName={item.title}
+                          route={item.route} 
+                        />
+                      }
                     </div>
                   )}
                 </SidebarMenuButton>
@@ -52,10 +65,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
                             <div className="group/dict-subitem flex items-center justify-between">
-                              <Link to={subItem.url} className="group flex items-center gap-2 text-current hover:text-background!">
-                                {subItem.icon && <subItem.icon size={12} />}
-                                {subItem.title}
-                              </Link>
+                              {(subItem.url) &&
+                                <Link to={subItem.url} className="group flex items-center gap-2 text-current hover:text-background!">
+                                  {subItem.icon && <subItem.icon size={12} />}
+                                  {subItem.title}
+                                </Link>}
                               <Button
                                 type="button"
                                 variant="ghost"
@@ -66,7 +80,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 onClick={(e) => {
                                   e.preventDefault();
                                   e.stopPropagation();
-                                  window.api?.openNewWindow?.(subItem.url);
+                                  if (subItem.url) { window.api?.openNewWindow?.(subItem.url) };
                                 }}
                               >
                                 <ExternalLink className="size-3" />

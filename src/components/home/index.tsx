@@ -6,19 +6,22 @@ import {
   WholeWord,
   Notebook,
 } from "lucide-react";
+
 import WordCard from "../word-card";
-import { Link } from "react-router-dom";
-import useHome from "./hook";
 import DictionaryGraph from "../knowledge-graph";
-import { Button } from "../ui/button";
 import NoteDisplay from "../notes/note-display";
-import { useNotesStore } from "@/context/notes-context";
 import AddDictModal from "../dict/add-dict-modal";
 import ConfigureDictModal from "../dict/configure-dict-modal";
 import AddTranslationModal from "../dict/add-word-modal";
+import Sketchboard from "../sketchboard";
+
+import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 import { Chat } from "../chat";
 import { useRef, useState, useEffect } from "react";
-import Sketchboard from "../sketchboard";
+import { NotesContext } from "@/context/notes-context";
+
+import useHome from "./hook";
 
 function DictRow({
   dict,
@@ -27,6 +30,7 @@ function DictRow({
   dict: ReturnType<typeof useHome>["dictionaryCards"][number];
   setSelectedNoteId: (id: string) => void;
 }) {
+
   const leftRef = useRef<HTMLDivElement>(null);
   const [leftHeight, setLeftHeight] = useState<number | undefined>(undefined);
 
@@ -186,7 +190,6 @@ function DictRow({
           <Chat
             route={dict.path}
             name={dict.id}
-            autoStartKey={dict.id}
             startingInfo={
               dict.wordOfTheDay?.pair[0].original.word +
               `. Language of Dictionary is ${dict.name}.`
@@ -199,15 +202,18 @@ function DictRow({
 }
 
 export default function Home() {
+
   const { dictionaryCards, totalWords, totalDictionaries } = useHome();
-  const { setSelectedNoteId } = useNotesStore();
+  const { setSelectedNoteId } = NotesContext();
 
   if (
     totalWords <= 0 &&
     totalDictionaries === 1 &&
     dictionaryCards.length === 1
   ) {
+
     const dict = dictionaryCards[0];
+
     return (
       <div className="flex items-center justify-center h-[calc(100vh-64px)] px-4">
         <div className="flex flex-col w-100">
@@ -232,7 +238,10 @@ export default function Home() {
     );
   }
 
-  if (!dictionaryCards || dictionaryCards.length === 0) {
+  if (
+    !dictionaryCards || 
+    dictionaryCards.length === 0
+  ) {
     return (
       <div className="flex items-center justify-center h-[calc(100vh-64px)] px-4">
         <div className="flex flex-col w-100">

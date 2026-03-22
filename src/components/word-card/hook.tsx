@@ -1,4 +1,4 @@
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import type { OriginalTranslationPair } from "@/types/original-translation-pair";
 import type { TranslationEntry } from "@/types/translation-entry";
 import { useState } from "react";
@@ -14,7 +14,7 @@ export default function useWordCard(dictId: string, word: TranslationEntry) {
   const [pairIdx, setPairIdx] = useState(0);
 
   const currentPair = pairs[pairIdx] ?? EMPTY_PAIR;
-  const { dictionaryMetadata } = useConfigStore();
+  const { dictionaryMetadata } = DictionaryContext();
 
   const original = currentPair.original?.word || "";
 

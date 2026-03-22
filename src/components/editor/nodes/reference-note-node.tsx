@@ -1,4 +1,4 @@
-import { useNotesStore } from "@/context/notes-context"
+import { NotesContext } from "@/context/notes-context"
 import { Node, mergeAttributes } from "@tiptap/core"
 import { ReactNodeViewRenderer, NodeViewWrapper, type NodeViewProps } from "@tiptap/react"
 
@@ -8,7 +8,7 @@ const ReferenceNoteView = ({ node }: NodeViewProps) => {
     title: string | null
     route: string | null
   }
-  const { setSelectedNoteId } = useNotesStore();
+  const { setSelectedNoteId } = NotesContext();
   return (
     <NodeViewWrapper className="reference-note-node">
       <div 

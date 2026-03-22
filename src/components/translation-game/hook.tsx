@@ -1,4 +1,4 @@
-import { useConfigStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import { TranslationEntry } from "@/types/translation-entry";
 import { TranslationEntryResult } from "@/types/translation-entry-result";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -8,6 +8,7 @@ interface SelectedWord extends TranslationEntry {
 }
 
 export default function useTranslationHooks({ route, name }: { route: string, name: string }) {
+  
   const [list, setList] = useState<TranslationEntry[]>([]);
   const [word, setWord] = useState<SelectedWord | null>(null);
   const [history, setHistory] = useState<TranslationEntryResult[]>([]);
@@ -20,7 +21,7 @@ export default function useTranslationHooks({ route, name }: { route: string, na
   const buttonRef = useRef<HTMLButtonElement>(null);
   const lastHistoryRef = useRef<HTMLDivElement>(null);
 
-  const { isFlipped } = useConfigStore();
+  const { isFlipped } = DictionaryContext();
 
   const selectedPair = word?.pair[word.selectedPairIndex];
   const originalWord = selectedPair?.original.word || "";

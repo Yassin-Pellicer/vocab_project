@@ -10,13 +10,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
+import useEditWordModalHooks from "./hook";
+import DeleteWordModal from "../delete-word-modal";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Pencil, Trash, WholeWord } from "lucide-react";
-import useEditWordModalHooks from "./hook";
 import { TranslationEntry } from "@/types/translation-entry";
-import DeleteWordModal from "../delete-word-modal";
 import { OriginalTranslationPair } from "@/types/original-translation-pair";
+
 import {
   Select,
   SelectContent,
@@ -24,7 +27,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useConfigStore } from "@/context/dictionary-context";
+
+import { DictionaryContext } from "@/context/dictionary-context";
 
 export default function EditTranslationModal({
   word,
@@ -50,7 +54,8 @@ export default function EditTranslationModal({
     setFormData,
     formData,
   } = useEditWordModalHooks({ word, route, name });
-  const { dictionaryMetadata } = useConfigStore();
+
+  const { dictionaryMetadata } = DictionaryContext();
   const dict = dictionaryMetadata?.[name] ?? {};
 
   return (

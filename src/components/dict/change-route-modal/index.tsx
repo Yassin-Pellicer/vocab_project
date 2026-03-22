@@ -13,23 +13,22 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FolderOpen } from "lucide-react";
 import useChangeRouteModalHooks from "./hook";
-import { useConfigStore } from "@/context/dictionary-context";
-
-interface ChangeRouteModalProps {
-  dictId: string;
-  dictName: string;
-  currentRoute: string;
-  children: React.ReactNode;
-}
+import { DictionaryContext } from "@/context/dictionary-context";
 
 export default function ChangeRouteModal({
   dictId,
   dictName,
   currentRoute,
   children,
-}: ChangeRouteModalProps) {
+}: {
+  dictId: string;
+  dictName: string;
+  currentRoute: string;
+  children: React.ReactNode;
+}) {
+  
   const hook = useChangeRouteModalHooks();
-  const loadConfig = useConfigStore((state) => state.loadConfig);
+  const loadConfig = DictionaryContext((state) => state.loadConfig);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,8 +40,7 @@ export default function ChangeRouteModal({
   return (
     <Dialog onOpenChange={(open) => { if (!open) hook.reset(); }}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-106.25">
         <form onSubmit={onSubmit}>
           <DialogHeader>
             <DialogTitle>Change Dictionary Route</DialogTitle>

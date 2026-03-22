@@ -1,18 +1,21 @@
 import { useLocation, useSearchParams } from "react-router-dom";
-import { useConfigStore } from "@/context/dictionary-context";
-import { useNotesStore } from "@/context/notes-context";
+import { DictionaryContext } from "@/context/dictionary-context";
+import { NotesContext } from "@/context/notes-context";
 
 export function useBreadcrumbNavigation() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
-  const { data, selectedWord } = useConfigStore();
-  const { itemsFromRouteRecursive } = useNotesStore();
+  const { sidebarNavigationData, selectedWord } = DictionaryContext();
+  const { itemsFromRouteRecursive } = NotesContext();
 
   const name = searchParams.get("name") || "";
   const path = searchParams.get("path") || "";
 
-  const dictionaryName = data.navMain.find((item) =>
+  const dictionaryName = sidebarNavigationData.navMain.find((item) =>
     item.items?.some((subItem) => {
+      if(!subItem.url) {
+        return;
+      }
       const itemParams = new URLSearchParams(subItem.url.split("?")[1]);
       return itemParams.get("name") === name;
     }),

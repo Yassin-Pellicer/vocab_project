@@ -27,8 +27,8 @@ export type OpenAIResponsesSuccess = {
 
 export type ContextType = {
   type: "word" | "note";
-  content: TranslationEntry | object
-}
+  content: TranslationEntry | object;
+};
 export type StructuredUserMessage = {
   role: "user";
   content: {
@@ -42,3 +42,15 @@ export type StructuredUserMessage = {
 export type ChatMessage =
   | StructuredUserMessage
   | { role: "assistant"; content: AssistantContent };
+
+export type ChatPrompContext = { description: string; elements: object };
+
+export type WordToolAction = {
+  kind: "add" | "edit";
+  word: TranslationEntry;
+};
+
+export type Conversation = {
+  messages: ChatMessage[];
+  draft: string;
+};

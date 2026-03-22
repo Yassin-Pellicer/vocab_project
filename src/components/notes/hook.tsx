@@ -1,11 +1,11 @@
-import { useConfigStore } from "@/context/dictionary-context";
-import { useNotesStore } from "@/context/notes-context";
+import { DictionaryContext } from "@/context/dictionary-context";
+import { NotesContext } from "@/context/notes-context";
 import { SidebarNode } from "@/types/sidebar-types";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useResizablePanel } from "@/hooks/use-resizable-panel";
 
 export default function useNotesHooks() {
-  const { searchField, setSearchField } = useConfigStore();
+  const { searchField, setSearchField } = DictionaryContext();
 
   const {
     tree,
@@ -13,7 +13,8 @@ export default function useNotesHooks() {
     selectedNoteId,
     setSelectedNoteId,
     getRoute,
-  } = useNotesStore();
+  } = NotesContext();
+
   const [selectedNoteTitle, setSelectedNoteTitle] = useState<string | null>(
     null,
   );

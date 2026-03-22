@@ -1,11 +1,13 @@
 import { BookOpen, Plus } from "lucide-react";
+
 import AddDictModal from "@/components/dict/add-dict-modal";
 import DictActionsMenu from "@/components/ui/dict-actions-menu";
-import useConfig from "../hooks";
+
 import type { Dictionary } from "@/types/config";
+import { DictionaryContext } from "@/context/dictionary-context";
 
 export default function DictionariesSection() {
-  const { dictionaryMetadata } = useConfig();
+  const { dictionaryMetadata } = DictionaryContext();
 
   return (
     <div className="mb-8 mt-2">
@@ -49,7 +51,7 @@ export default function DictionariesSection() {
               <DictActionsMenu
                 dictId={id}
                 dictName={dict.name}
-                currentRoute={dict.route}
+                route={dict.route}
               />
             </div>
             ),

@@ -1,11 +1,11 @@
 
 import { Keyboard, Trash } from "lucide-react";
-import { useConfigStore as usePreferencesStore } from "@/context/preferences-context";
+import { PreferencesContext } from "@/context/preferences-context";
 import AddKeybindModal from "../add-keybind-modal";
 import { useState } from "react";
 
 export default function KeybindsSection() {
-  const { config, addKeybind, removeKeybind } = usePreferencesStore();
+  const { config, addKeybind, removeKeybind } = PreferencesContext();
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [index, setIndex] = useState<number | null>(null);
   const keybinds = config.keybinds || [];

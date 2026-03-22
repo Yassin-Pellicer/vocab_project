@@ -1,17 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useKeybinds } from "@/hooks/use-keybinds";
-import { useConfigStore as useDictionaryStore } from "@/context/dictionary-context";
+import { DictionaryContext } from "@/context/dictionary-context";
 import type { TranslationEntry } from "@/types/translation-entry";
-
-type Params = {
-  searchField: string;
-  setSearchField: (value: string) => void;
-  searchRef: React.RefObject<HTMLInputElement>;
-  addWordButtonRef: React.RefObject<HTMLButtonElement>;
-  filteredWords: TranslationEntry[];
-  paginatedWords: TranslationEntry[];
-  handleLetterClick: (letter: string) => void;
-};
 
 export function useDictionaryKeybinds({
   searchField,
@@ -21,8 +11,17 @@ export function useDictionaryKeybinds({
   filteredWords,
   paginatedWords,
   handleLetterClick,
-}: Params) {
-  const setSelectedWord = useDictionaryStore((state) => state.setSelectedWord);
+}: {
+  searchField: string;
+  setSearchField: (value: string) => void;
+  searchRef: React.RefObject<HTMLInputElement>;
+  addWordButtonRef: React.RefObject<HTMLButtonElement>;
+  filteredWords: TranslationEntry[];
+  paginatedWords: TranslationEntry[];
+  handleLetterClick: (letter: string) => void;
+}) {
+
+  const setSelectedWord = DictionaryContext((state) => state.setSelectedWord);
 
   const actions = useMemo(
     () => ({

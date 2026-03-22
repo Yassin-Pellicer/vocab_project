@@ -1,13 +1,30 @@
+import {
+  Camera, 
+  Mail, 
+  Trash2, 
+  UnplugIcon, 
+  Upload, 
+  User, 
+  WifiOff
+} from "lucide-react";
+
 import { Button } from "@/components/ui/button";
-import { useConfigStore } from "@/context/preferences-context";
-import { Camera, Mail, Trash2, UnplugIcon, Upload, User, WifiOff } from "lucide-react";
-import useConfig from "../hooks";
+import { PreferencesContext } from "@/context/preferences-context";
+
+import hooks from "../hooks";
 
 export default function ProfileSection() {
-  const { config, setDisplayName, setEmail, setAvatarPath, setOffline } =
-    useConfigStore();
+
+  const { 
+    config, 
+    setDisplayName, 
+    setEmail, 
+    setAvatarPath, 
+    setOffline 
+  } = PreferencesContext();
+
   const { displayName, email } = config;
-  const { signOut } =  useConfig();
+  const { signOut } =  hooks();
 
   return (
     <div className="mb-8 mt-2">

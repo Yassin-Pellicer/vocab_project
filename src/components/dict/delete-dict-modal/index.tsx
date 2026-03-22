@@ -10,21 +10,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import useDeleteDictModalHooks from "./hook";
-import { useConfigStore } from "@/context/dictionary-context";
-
-interface DeleteDictModalProps {
-  dictId: string;
-  dictName: string;
-  children: React.ReactNode;
-}
+import { DictionaryContext } from "@/context/dictionary-context";
 
 export default function DeleteDictModal({
   dictId,
   dictName,
   children,
-}: DeleteDictModalProps) {
+}: {
+  dictId: string;
+  dictName: string;
+  children: React.ReactNode;
+}) {
+
   const hook = useDeleteDictModalHooks();
-  const loadConfig = useConfigStore((state) => state.loadConfig);
+  const loadConfig = DictionaryContext((state) => state.loadConfig);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,8 +35,7 @@ export default function DeleteDictModal({
   return (
     <Dialog onOpenChange={(open) => { if (!open) hook.reset(); }}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-106.25">
         <form onSubmit={onSubmit}>
           <DialogHeader>
             <DialogTitle>Delete Dictionary</DialogTitle>
