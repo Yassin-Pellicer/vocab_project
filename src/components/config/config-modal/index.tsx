@@ -12,7 +12,7 @@ import DictionariesSection from "@/components/config/sections/dictionaries";
 import SubscriptionSection from "@/components/config/sections/subscription";
 import AISection from "@/components/config/sections/ai";
 import AboutSection from "@/components/config/sections/about";
-import ProfileSection from "../sections/profile";
+import { Button } from "@/components/ui/button";
 
 export default function ConfigModal({ children }: { children?: React.ReactNode }) {
   const [activeSection, setActiveSection] = useState("general");
@@ -26,8 +26,6 @@ export default function ConfigModal({ children }: { children?: React.ReactNode }
         return <KeybindsSection />;
       case "dictionaries":
         return <DictionariesSection />;
-      case "profile":
-        return <ProfileSection />;
       case "subscription":
         return <SubscriptionSection />;
       case "ai":
@@ -51,9 +49,9 @@ export default function ConfigModal({ children }: { children?: React.ReactNode }
           data-config-trigger="settings"
           style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
         >
-          <div className="rounded-xl px-2 border border-border flex h-8 items-center justify-center cursor-pointer hover:bg-popover text-popover-foreground">
+          <Button className="rounded-2xl" variant={"outline"}>
             <Settings size={18} />
-          </div>
+          </Button>
         </DialogTrigger>
       )}
       <DialogContent className="lg:max-w-5xl md:max-w-3xl sm:max-w-2xl w-full p-0">

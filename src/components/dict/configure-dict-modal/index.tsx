@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import useChangeRouteModalHooks from "./hook";
 import {
   Select,
   SelectContent,
@@ -19,20 +18,301 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import {
+  Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-  Table,
 } from "@/components/ui/table";
 import ConfigureTenseModal from "@/components/dict/configure-tense-modal";
 import { Settings, Trash } from "lucide-react";
+import useChangeRouteModalHooks from "./hook";
 
 interface ConfigureDictModalProps {
   dictId: string;
   dictName: string;
   children?: React.ReactNode;
+}
+
+interface DeleteButtonProps {
+  onClick: () => void;
+  disabled?: boolean;
+  title?: string;
+}
+
+function DeleteButton({ onClick, disabled, title = "Delete" }: DeleteButtonProps) {
+  return (
+    <button type="button" onClick={onClick} disabled={disabled} title={title}>
+      <Trash className="h-8 w-8 text-muted-foreground transition-colors rounded-full hover:bg-red-500 hover:text-white p-2 disabled:opacity-40" />
+    </button>
+  );
+}
+
+interface TypeWordSectionProps {
+  typeWords: string[];
+  inputValue: string;
+  selectedValue: string;
+  onInputChange: (value: string) => void;
+  onAdd: () => void;
+  onSelect: (value: string) => void;
+  onRemove: (value: string) => void;
+}
+
+function TypeWordSection({
+  typeWords,
+  inputValue,
+  selectedValue,
+  onInputChange,
+  onAdd,
+  onSelect,
+  onRemove,
+}: TypeWordSectionProps) {
+  return (
+    <div className="grid gap-4">
+      <Label>Types of word</Label>
+
+      {/* Input row */}
+      <div className="flex gap-2">
+        <Input
+          placeholder="Enter value"
+          value={inputValue}
+          onChange={(e) => onInputChange(e.target.value)}
+        />
+        <Button type="button" variant="outline" onClick={onAdd}>
+          Add
+        </Button>
+      </div>
+
+      {/* Select + delete row */}
+      <p className="text-xs">Added forms</p>
+      <div className="flex gap-2 mb-4">
+        <Select value={selectedValue ?? ""} onValueChange={onSelect}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select type" />
+          </SelectTrigger>
+          <SelectContent>
+            {typeWords.map((word) => (
+              <SelectItem key={word} value={word}>
+                {word}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <DeleteButton
+          disabled={!selectedValue}
+          onClick={() => selectedValue && onRemove(selectedValue)}
+          title="Delete type"
+        />
+      </div>
+    </div>
+  );
+}
+
+interface GenderNumberSectionProps {
+  genders: string[];
+  numbers: string[];
+  inputValue: string;
+  selectedForm: string;
+  selectedGender: string;
+  selectedNumber: string;
+  onInputChange: (value: string) => void;
+  onFormChange: (value: string) => void;
+  onAdd: () => void;
+  onGenderSelect: (value: string) => void;
+  onNumberSelect: (value: string) => void;
+  onRemoveGender: (value: string) => void;
+  onRemoveNumber: (value: string) => void;
+}
+
+function GenderNumberSection({
+  genders,
+  numbers,
+  inputValue,
+  selectedForm,
+  selectedGender,
+  selectedNumber,
+  onInputChange,
+  onFormChange,
+  onAdd,
+  onGenderSelect,
+  onNumberSelect,
+  onRemoveGender,
+  onRemoveNumber,
+}: GenderNumberSectionProps) {
+  return (
+    <div className="grid gap-4">
+      <Label>Gender and Number Forms</Label>
+
+      <div className="flex gap-2">
+        <Input
+          placeholder="Enter value"
+          value={inputValue}
+          onChange={(e) => onInputChange(e.target.value)}
+        />
+        <Select value={selectedForm} onValueChange={onFormChange}>
+          <SelectTrigger className="w-45">
+            <SelectValue placeholder="Select type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Gender">Gender</SelectItem>
+            <SelectItem value="Number">Number</SelectItem>
+          </SelectContent>
+        </Select>
+        <Button type="button" variant="outline" onClick={onAdd}>
+          Add
+        </Button>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <p className="text-xs">Genders</p>
+        <p className="text-xs">Numbers</p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <div className="flex gap-2">
+          <Select value={selectedGender} onValueChange={onGenderSelect}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select form" />
+            </SelectTrigger>
+            <SelectContent>
+              {genders.map((g) => (
+                <SelectItem key={g} value={g}>
+                  {g}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <DeleteButton onClick={() => onRemoveGender(selectedGender)} title="Delete gender" />
+        </div>
+
+        <div className="flex gap-2">
+          <Select value={selectedNumber} onValueChange={onNumberSelect}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select form" />
+            </SelectTrigger>
+            <SelectContent>
+              {numbers.map((n) => (
+                <SelectItem key={n} value={n}>
+                  {n}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <DeleteButton onClick={() => onRemoveNumber(selectedNumber)} title="Delete number" />
+        </div>
+      </div>
+    </div>
+  );
+}
+interface ArticlesSectionProps {
+  genders: string[];
+  numbers: string[];
+  typeWords: string[];
+  articles: Record<string, Record<string, string>>;
+  selectedTypeWord: string;
+  useArticles: boolean;
+  onUseArticlesChange: (value: boolean) => void;
+  onArticleChange: (gender: string, number: string, value: string) => void;
+  onTypeWordSelect: (value: string) => void;
+}
+
+function ArticlesSection({
+  genders,
+  numbers,
+  typeWords,
+  articles,
+  selectedTypeWord,
+  useArticles,
+  onUseArticlesChange,
+  onArticleChange,
+  onTypeWordSelect,
+}: ArticlesSectionProps) {
+  return (
+    <div className="grid gap-4">
+      {/* Toggle */}
+      <div className="flex justify-between items-center gap-2 mt-4">
+        <Label>Definite article precedes nouns in Dictionary</Label>
+        <Switch id="use-articles" checked={useArticles} onCheckedChange={onUseArticlesChange} />
+      </div>
+      <DialogDescription className="text-xs">
+        When enabled, the app will automatically add the appropriate definite
+        article before the type of word of your choosing based on their gender
+        and number.
+      </DialogDescription>
+
+      {useArticles && (
+        <div className="flex flex-col gap-2">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Gender \ Number</TableHead>
+                {numbers.map((number) => (
+                  <TableHead key={number}>{number}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {genders.map((gender) => (
+                <TableRow key={gender}>
+                  <TableCell>{gender}</TableCell>
+                  {numbers.map((number) => (
+                    <TableCell key={`${gender}-${number}`}>
+                      <Input
+                        placeholder={`${gender} ${number}`}
+                        value={articles?.[gender]?.[number] ?? ""}
+                        onChange={(e) => onArticleChange(gender, number, e.target.value)}
+                      />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+
+          <Select value={selectedTypeWord} onValueChange={onTypeWordSelect}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select form" />
+            </SelectTrigger>
+            <SelectContent>
+              {typeWords.map((form) => (
+                <SelectItem key={form} value={form}>
+                  {form}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+    </div>
+  );
+}
+
+interface TensesSectionProps {
+  dictId: string;
+  dictName: string;
+  useTenses: boolean;
+  onUseTensesChange: (value: boolean) => void;
+}
+
+function TensesSection({ dictId, dictName, useTenses, onUseTensesChange }: TensesSectionProps) {
+  return (
+    <div className="grid gap-4">
+      <div className="flex justify-between items-center gap-2 mt-4">
+        <Label>Enable Tenses</Label>
+        <Switch id="use-tenses" checked={useTenses} onCheckedChange={onUseTensesChange} />
+      </div>
+      <DialogDescription className="text-xs">
+        With tenses enabled you will be able to configure verbal tenses and
+        conjugations for your dictionary. You will need to configure which type
+        of word has its tenses enabled.
+      </DialogDescription>
+      <ConfigureTenseModal dictId={dictId} dictName={dictName}>
+        <Button disabled={!useTenses}>Configure Tenses</Button>
+      </ConfigureTenseModal>
+    </div>
+  );
 }
 
 export default function ConfigureDictModal({
@@ -41,7 +321,6 @@ export default function ConfigureDictModal({
   children,
 }: ConfigureDictModalProps) {
   const hook = useChangeRouteModalHooks(dictId);
-
   const metadata = hook.dictionaryMetadata?.[dictId];
 
   return (
@@ -49,248 +328,74 @@ export default function ConfigureDictModal({
       <DialogTrigger asChild>
         {children ?? (
           <Button className="flex items-center gap-2">
-            <Settings className="h-4 w-4" />
+            <Settings size={16} />
             Configure Dictionary
           </Button>
         )}
       </DialogTrigger>
+
       <DialogContent className="lg:max-w-2xl md:max-w-lg sm:max-w-md w-full p-0">
         <div className="p-6 pb-2 overflow-auto max-h-[60vh]">
           <DialogHeader>
             <DialogTitle>
-              <Settings className="h-6 w-6 inline-block mb-1.5 mr-2" />
-              Configure <b>{dictName}</b>
+              <div className="flex flex-row items-center gap-2 mb-2">
+              <Settings size={18}/>
+              <p>Configure <b>{dictName}</b></p>
+              </div>
             </DialogTitle>
             <DialogDescription>
               If the language of your dictionary is gendered and accounts for
               singular and plural forms, you can add the appropriate options
-              here. Edit the types of words, tenses and the definite articles
+              here. Edit the types of words, tenses, and the definite articles
               used in your dictionary.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 my-6">
-            <div className="grid gap-4">
-              <Label>Types of word</Label>
 
-              <div className="flex gap-2">
-                <Input
-                  placeholder="Enter value"
-                  value={hook.inputTypeWord}
-                  onChange={(e) => hook.setInputTypeWord(e.target.value)}
-                />
-                <Button
-                  type="button"
-                  onClick={hook.addTypeWord}
-                  variant="outline"
-                >
-                  Add
-                </Button>
-              </div>
-              <p className="text-xs -mb-[-2.5]">Added forms</p>
-              <div className="flex flex-row gap-2 mb-4">
-                <Select
-                  value={hook.selectedWordType ?? ""}
-                  onValueChange={hook.setSelectedWordType}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select type" />
-                  </SelectTrigger>
+          <div className="grid gap-6 my-6">
+            <TypeWordSection
+              typeWords={metadata?.typeWords ?? []}
+              inputValue={hook.inputTypeWord}
+              selectedValue={hook.selectedWordType}
+              onInputChange={hook.setInputTypeWord}
+              onAdd={hook.addTypeWord}
+              onSelect={hook.setSelectedWordType}
+              onRemove={hook.removeTypeWord}
+            />
 
-                  <SelectContent>
-                    {metadata?.typeWords?.map((word: string) => (
-                      <SelectItem key={word} value={word}>
-                        {word}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+            <GenderNumberSection
+              genders={metadata?.genders ?? []}
+              numbers={metadata?.numbers ?? []}
+              inputValue={hook.genderNumberInput}
+              selectedForm={hook.selectedForm}
+              selectedGender={hook.inputGender}
+              selectedNumber={hook.inputNumber}
+              onInputChange={hook.setGenderNumberInput}
+              onFormChange={hook.setSelectedForm}
+              onAdd={hook.handleFormAdd}
+              onGenderSelect={hook.setInputGender}
+              onNumberSelect={hook.setInputNumber}
+              onRemoveGender={hook.removeGender}
+              onRemoveNumber={hook.removeNumber}
+            />
 
-                <button
-                  type="button"
-                  disabled={!hook.selectedWordType}
-                  onClick={() =>
-                    hook.selectedWordType &&
-                    hook.removeTypeWord(hook.selectedWordType)
-                  }
-                  title="Delete type"
-                >
-                  <Trash className="h-8 w-8 text-muted-foreground transition-colors rounded-full hover:bg-red-500 hover:text-white p-2 disabled:opacity-40" />
-                </button>
-              </div>
+            <ArticlesSection
+              genders={metadata?.genders ?? []}
+              numbers={metadata?.numbers ?? []}
+              typeWords={metadata?.typeWords ?? []}
+              articles={metadata?.articles ?? {}}
+              selectedTypeWord={hook.selectTypeWordWithPrecededArticle}
+              useArticles={metadata?.useArticles ?? true}
+              onUseArticlesChange={hook.setUseArticles}
+              onArticleChange={hook.setArticleValue}
+              onTypeWordSelect={hook.setPrecededArticleTypeWord}
+            />
 
-              <Label>Gender and Number Forms</Label>
-              <div className="flex gap-2">
-                <Input
-                  placeholder="Enter value"
-                  value={hook.genderNumberInput}
-                  onChange={(e) => hook.setGenderNumberInput(e.target.value)}
-                />
-                <Select
-                  value={hook.selectedForm}
-                  onValueChange={hook.setSelectedForm}
-                >
-                  <SelectTrigger className="w-45">
-                    <SelectValue placeholder="Select type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Gender">Gender</SelectItem>
-                    <SelectItem value="Number">Number</SelectItem>
-                  </SelectContent>
-                </Select>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={hook.handleFormAdd}
-                >
-                  Add
-                </Button>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <p className="text-xs -mb-[-2.5]">Genders</p>
-                <p className="text-xs -mb-[-2.5]">Numbers</p>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="flex flex-row gap-2">
-                  <Select
-                    value={hook.inputGender}
-                    onValueChange={hook.setInputGender}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select form" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {metadata?.genders?.map((form: string) => (
-                        <SelectItem key={form} value={form}>
-                          {form}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      hook.removeGender(hook.inputGender);
-                    }}
-                    title="Delete form"
-                  >
-                    <Trash className="h-8 w-8 text-muted-foreground transition-colors rounded-full hover:bg-red-500 hover:text-white p-2" />
-                  </button>
-                </div>
-                <div className="flex flex-row gap-2">
-                  <Select
-                    value={hook.inputNumber}
-                    onValueChange={hook.setInputNumber}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select form" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {metadata?.numbers?.map((form: string) => (
-                        <SelectItem key={form} value={form}>
-                          {form}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      hook.removeNumber(hook.inputNumber);
-                    }}
-                    title="Delete form"
-                  >
-                    <Trash className="h-8 w-8 text-muted-foreground transition-colors rounded-full hover:bg-red-500 hover:text-white p-2" />
-                  </button>
-                </div>
-              </div>
-              <div className="flex justify-between items-center gap-2 mt-4">
-                <Label>
-                  Definite article precedes nouns in Dictionary
-                </Label>
-                <Switch
-                  id="use-articles"
-                  checked={metadata?.useArticles ?? true}
-                  onCheckedChange={hook.setUseArticles}
-                />
-              </div>
-              <DialogDescription className="text-xs">
-                When enabled, the app will automatically add the appropriate
-                definite article before the type of word of your choosing based on their gender and number.
-              </DialogDescription>
-              {metadata?.useArticles && (
-                <div className="flex flex-col gap-2">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Gender\Number</TableHead>
-
-                        {metadata?.numbers?.map((number: string) => (
-                          <TableHead key={number}>{number}</TableHead>
-                        ))}
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {metadata?.genders?.map((gender: string) => (
-                        <TableRow key={gender}>
-                          <TableCell>{gender}</TableCell>
-
-                          {metadata?.numbers?.map((number: string) => (
-                            <TableCell key={`${gender}-${number}`}>
-                              <Input
-                                placeholder={`${gender} ${number}`}
-                                value={
-                                  metadata?.articles?.[gender]?.[number] || ""
-                                }
-                                onChange={(e) =>
-                                  hook.setArticleValue(
-                                    gender,
-                                    number,
-                                    e.target.value,
-                                  )
-                                }
-                              />
-                            </TableCell>
-                          ))}
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                  <Select
-                    value={hook.selectTypeWordWithPrecededArticle}
-                    onValueChange={hook.setPrecededArticleTypeWord}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select form" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {metadata?.typeWords?.map((form: string) => (
-                        <SelectItem key={form} value={form}>
-                          {form}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              )}
-              <div className="flex justify-between items-center gap-2 mt-4">
-                <Label>Enable Tenses</Label>
-                <Switch
-                  id="use-tenses"
-                  checked={metadata?.useTenses ?? false}
-                  onCheckedChange={hook.setUseTenses}
-                />
-              </div>
-              <DialogDescription className="text-xs">
-                With tenses enabled you will be able to configure verbal tenses
-                and conjugations for your dictionary. You will need to configure
-                which type of word has its tenses enabled.
-              </DialogDescription>
-              <ConfigureTenseModal dictId={dictId} dictName={dictName}>
-                <Button disabled={!metadata?.useTenses}>
-                  Configure Tenses
-                </Button>
-              </ConfigureTenseModal>
-            </div>
+            <TensesSection
+              dictId={dictId}
+              dictName={dictName}
+              useTenses={metadata?.useTenses ?? false}
+              onUseTensesChange={hook.setUseTenses}
+            />
           </div>
         </div>
       </DialogContent>

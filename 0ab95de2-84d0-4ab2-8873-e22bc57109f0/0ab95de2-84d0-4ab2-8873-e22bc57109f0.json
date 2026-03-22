@@ -9253,28 +9253,6 @@
     "pair": [
       {
         "original": {
-          "word": "ab",
-          "gender": "-",
-          "number": "-"
-        },
-        "translations": [
-          {
-            "word": "a partir de",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2025-12-15",
-    "type": "Präpositionen",
-    "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Preisnachlass",
           "gender": "Maskulin",
           "number": "Singular"
@@ -9320,5 +9298,27 @@
     "dateAdded": "2026-03-21",
     "type": "Nomen",
     "uuid": "6546009e-f106-45bd-8ea8-7e1a14eaa900"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "ab",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "a partir de",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-12-15",
+    "type": "Präpositionen",
+    "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
   }
 ]

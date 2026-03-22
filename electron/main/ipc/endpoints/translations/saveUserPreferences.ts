@@ -13,6 +13,7 @@ export default function saveUserPreferences() {
       try {
         const current = await readUserPreferences();
         const merged: UserPreferences = { ...current, ..._config };
+        console.log(_config)
         await writeUserPreferences(merged);
         broadcastToAllWindows("app-data-changed");
         return merged;

@@ -23,7 +23,7 @@ export default function DeleteWordModal({
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-106.25">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>Delete Word</DialogTitle>

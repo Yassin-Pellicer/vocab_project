@@ -132,7 +132,7 @@ function DictRow({
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mt-4">
-            <div className="h-100 border rounded-xl 2xl:h-auto min-h-0">
+            <div className="h-full border rounded-xl 2xl:h-auto min-h-0">
               <DictionaryGraph
                 title={dict.name}
                 name={dict.id}

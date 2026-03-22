@@ -3,8 +3,6 @@ import {
   BookOpen, 
   Info, 
   Keyboard,
-  User,
-  CreditCard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -17,8 +15,6 @@ const menuItems = [
   { id: "general", label: "General", icon: Settings },
   { id: "dictionaries", label: "Dictionaries", icon: BookOpen },
   { id: "keybinds", label: "Keybinds", icon: Keyboard },
-  { id: "profile", label: "Your Profile", icon: User },
-  { id: "subscription", label: "Subscription", icon: CreditCard },
   { id: "about", label: "About", icon: Info },
 ];  
 
