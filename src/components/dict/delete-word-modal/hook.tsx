@@ -12,7 +12,7 @@ export default function useDeleteWordModalHooks({
   name: string;
 }) {
 
-  const { loadTranslations } = DictionaryContext();
+  const { loadTranslations, selectedWord, setSelectedWord } = DictionaryContext();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -21,6 +21,7 @@ export default function useDeleteWordModalHooks({
         word.pair.find((p) => p.original.word.trim())?.original.word.trim() ??
         "word";
       notify("wordDeleted", { word: label, dictionary: name });
+      if(word.uuid === selectedWord?.uuid) setSelectedWord(null) 
       loadTranslations(route, name);
     } catch (error) {
       console.error("Failed to delete translation:", error);

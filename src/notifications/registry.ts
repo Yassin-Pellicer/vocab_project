@@ -1,6 +1,3 @@
-// Central registry of every toast notification in the app.
-// Add new notification types here, then invoke via `notify(key, payload)`.
-
 export type NotificationPayloads = {
   wordAdded: { word: string; dictionary: string };
   wordEdited: { before: string; after: string; dictionary: string };
