@@ -1,4 +1,4 @@
-import { NotebookIcon, Pencil, Send, Sparkles, Trash2, WholeWord } from "lucide-react";
+import { Lock, NotebookIcon, Pencil, Send, Sparkles, Trash2, WholeWord } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,6 +12,8 @@ import { ContextType } from "@/types/chat";
 import { NotesContext } from "@/context/notes-context";
 import AddWordModal from "@/components/dict/add-word-modal";
 import EditWordModal from "@/components/dict/edit-word-modal";
+import { useEffect, useState } from "react";
+import { supabase } from "@/supabase/supabase-client";
 
 export function Chat({
   startingInfo,
@@ -41,8 +43,39 @@ export function Chat({
 
   const { selectedNoteId, findById } = NotesContext();
 
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const { data } = await supabase.auth.getSession();
+      setUser(data.session?.user ?? null);
+      setLoading(false);
+    }
+    fetchUser();
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
   return (
-    <Card className="flex flex-col min-h-0 h-full">
+    <Card className="relative flex flex-col min-h-0 h-full">
+
+      {!loading && !user && (
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 rounded-xl bg-background/60 backdrop-blur-sm">
+          <div className="flex flex-col items-center gap-3 text-center px-6">
+            <div className="rounded-full bg-muted p-4">
+              <Lock className="text-muted-foreground" size={24} />
+            </div>
+            <p className="font-semibold text-base">Sign in to use the Assistant</p>
+            <p className="text-sm text-muted-foreground">
+              You need to be logged in to access the AI assistant.
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="flex items-center justify-between gap-2 border-b px-3 py-2 sticky -top-1 z-10 bg-background rounded-xl">
         <div className="flex items-center gap-2 text-md font-semibold">
           <Sparkles size={16} /> Assistant
@@ -74,12 +107,12 @@ export function Chat({
                   )}
                 >
                   {m.role !== "user" && <div className="pb-4!"><Sparkles></Sparkles></div>}
-                    {m.display !== "" && <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeHighlight]}
-                    >
-                      {m.display}
-                    </ReactMarkdown>}
+                  {m.display !== "" && <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeHighlight]}
+                  >
+                    {m.display}
+                  </ReactMarkdown>}
                 </div>
                 {m.actions.length > 0 && canUseActions && name && route && (
                   <div

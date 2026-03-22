@@ -9320,5 +9320,30 @@
     "dateAdded": "2025-12-15",
     "type": "Präpositionen",
     "uuid": "6b6ce979-4eb2-41df-8273-ff809e25a34f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gemütlichkeit",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "coziness"
+          },
+          {
+            "word": "warm, comfortable atmosphere"
+          }
+        ],
+        "definitions": [
+          "A cozy, warm, comfortable atmosphere or feeling; “cozy comfort.”"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-22",
+    "type": "Nomen",
+    "uuid": "121f78da-5fb1-405e-b8ef-3def3f2eaa79"
   }
 ]

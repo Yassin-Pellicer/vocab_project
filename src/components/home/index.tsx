@@ -191,8 +191,8 @@ function DictRow({
             route={dict.path}
             name={dict.id}
             startingInfo={
-              dict.wordOfTheDay?.pair[0].original.word +
-              `. Language of Dictionary is ${dict.name}.`
+              "This is the word of the day: " +
+              dict.wordOfTheDay?.pair[0].original.word + ". "
             }
           />
         </div>
