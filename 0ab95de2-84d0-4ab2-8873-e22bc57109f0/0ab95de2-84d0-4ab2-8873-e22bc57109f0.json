@@ -9450,28 +9450,6 @@
     "pair": [
       {
         "original": {
-          "word": "gesund",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "saludable"
-          }
-        ],
-        "definitions": [
-          "healthy; in good health (context: food/people)"
-        ]
-      }
-    ],
-    "dateAdded": "2026-03-23",
-    "type": "Adjektive",
-    "uuid": "d66ff35e-95f9-48da-8a7e-aa72666b96f5"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "besonders",
           "gender": "Neutrum",
           "number": "Singular"
@@ -9849,5 +9827,189 @@
     "dateAdded": "2026-03-23",
     "type": "Nomen",
     "uuid": "d7195596-c8cb-49ef-bf47-4b49f26efc2d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Besenkehrer",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "barrendero"
+          }
+        ],
+        "definitions": [
+          "Person que barre (limpia con escoba) la calle o espacios públicos."
+        ]
+      },
+      {
+        "original": {
+          "word": "Besenkehrer",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "barrenderos"
+          }
+        ],
+        "definitions": [
+          "Personas que barrenderan (limpian con escoba) la calle o espacios públicos."
+        ]
+      },
+      {
+        "original": {
+          "word": "Besenkehrerin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "barrendera"
+          }
+        ],
+        "definitions": [
+          "Mujer que barre (limpia con escoba) la calle o espacios públicos."
+        ]
+      },
+      {
+        "original": {
+          "word": "Besenkehrerinnen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "barrenderas"
+          }
+        ],
+        "definitions": [
+          "Mujeres que barren (limpian con escoba) la calle o espacios públicos."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "5dd24f56-106d-44f7-878b-45c36651557f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Straßenkehrer",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "barrendero"
+          },
+          {
+            "word": "barrendero de calles"
+          }
+        ],
+        "definitions": [
+          "Persona que barre/limpia las calles.",
+          "Se usa especialmente para el trabajador de limpieza urbana."
+        ]
+      },
+      {
+        "original": {
+          "word": "Straßenkehrer",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "barrenderos"
+          },
+          {
+            "word": "barrenderos de calles"
+          }
+        ],
+        "definitions": [
+          "Personas que barren/limpian las calles."
+        ]
+      },
+      {
+        "original": {
+          "word": "Straßenkehrerin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "barrendera"
+          },
+          {
+            "word": "barrendera de calles"
+          }
+        ],
+        "definitions": [
+          "Mujer que barre/limpia las calles."
+        ]
+      },
+      {
+        "original": {
+          "word": "Straßenkehrerinnen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "barrenderas"
+          },
+          {
+            "word": "barrenderas de calles"
+          }
+        ],
+        "definitions": [
+          "Mujeres que barren/limpian las calles."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "ccf8460e-1b0b-4b65-a929-d5ffa0528520"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Zug",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "tren"
+          }
+        ],
+        "definitions": [
+          "Schienenfahrzeug für den Personen- oder Gütertransport."
+        ]
+      },
+      {
+        "original": {
+          "word": "Züge",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "trenes"
+          }
+        ],
+        "definitions": [
+          "Mehrere Schienenfahrzeuge oder Fahrten."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "f34e560f-e0de-4cb3-a7b6-737b8114a8d7"
   }
 ]

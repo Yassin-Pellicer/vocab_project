@@ -193,7 +193,7 @@ export function useChat({
 
     const dictionaryContext = name
       ? {
-          name: dictMeta?.name,
+          language: dictMeta?.name,
           typeWords: dictMeta?.typeWords ?? [],
           genders: dictMeta?.genders ?? [],
           numbers: dictMeta?.numbers ?? [],
@@ -265,12 +265,12 @@ export function useChat({
           prompt:
             "Give a fun fact about the word of the day today.",
           details:
-            "You must say: 'The Word of the Moment is... {word}! Here are some interesting facts about it!' and include: 1. etymology, 2. historical fact, 3. tips.",
+            "You must say: 'The Word of the Moment is... {word}! Here are some interesting facts about it!' and include: 1. etymology, 2. historical fact, 3. tips. NEVER return a TOOL.",
           context: {
             startingInfo,
             dictionary: name
               ? {
-                  name: dictMeta?.name,
+                  language: dictMeta?.name,
                   typeWords: dictMeta?.typeWords ?? [],
                   genders: dictMeta?.genders ?? [],
                   numbers: dictMeta?.numbers ?? [],
