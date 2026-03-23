@@ -62,15 +62,15 @@ export function NavUser() {
         >
           {user ? (
             <>
-              <Avatar className="h-8 w-8 rounded-lg">
+              <Avatar className="h-8 w-8 rounded-full shrink-0">
                 <AvatarImage src={avatarDataUrl ?? undefined} />
                 <AvatarFallback className="flex items-center justify-center rounded-full bg-accent">
-                  <User className="h-5 w-5 text-background" />
+                  <User className="h-5 w-5 text-background rounded-full shrink-0" />
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{displayName}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate text-xs text-muted">{user.email}</span>
               </div>
               <ConfigModal />
             </>

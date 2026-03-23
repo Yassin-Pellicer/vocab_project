@@ -215,7 +215,7 @@ export default function LoginDialog({ children }: LoginDialogProps) {
               />
             </div>
 
-            <div className="flex flex-col mt-2 gap-2 mb-8">
+            <div className="flex flex-col mt-2 gap-2 mb-2">
               <Label className="text-xs">Password</Label>
               <PasswordInput
                 placeholder="***"
@@ -243,7 +243,7 @@ export default function LoginDialog({ children }: LoginDialogProps) {
             </div>
 
             {error && (
-              <p className="text-sm text-destructive">{error}</p>
+              <p className="text-sm text-destructive mb-6!">{error}</p>
             )}
 
             <hr className="-mt-5 p-1"></hr>

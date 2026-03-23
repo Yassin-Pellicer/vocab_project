@@ -9345,5 +9345,52 @@
     "dateAdded": "2026-03-22",
     "type": "Nomen",
     "uuid": "121f78da-5fb1-405e-b8ef-3def3f2eaa79"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "erzählen",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "to tell"
+          },
+          {
+            "word": "to relate"
+          }
+        ],
+        "definitions": [
+          "to tell someone a story or information; to describe something"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Verben",
+    "uuid": "66fd6bbc-8af5-42c2-80c1-7e473ff30f9d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "behaglich",
+          "gender": "-",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "cozy; comfortable; snug"
+          }
+        ],
+        "definitions": [
+          "comfortable and pleasant—similar to gemütlich, often with a “warm, snug” feel"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Adjektive",
+    "uuid": "f02851ab-ca26-4f43-ba1b-1d6fc6db41d5"
   }
 ]

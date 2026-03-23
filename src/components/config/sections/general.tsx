@@ -62,41 +62,48 @@ export default function GeneralSection() {
           <hr />
         </div>
 
-        <div className="flex items-center gap-4 py-4">
-          <div className="relative group/avatar">
-            {avatarDataUrl ? (
-              <img
-                src={avatarDataUrl}
-                alt="Avatar"
-                className="h-16 w-16 rounded-full object-cover"
-              />
-            ) : (
-              <div className="h-16 w-16 rounded-full bg-linear-to-br from-primary to-primary/50 flex items-center justify-center">
-                <User className="h-8 w-8 text-primary-foreground" />
-              </div>
-            )}
-            <button
-              type="button"
-              className="absolute inset-0 flex items-center justify-center rounded-full bg-background/50 opacity-0 group-hover/avatar:opacity-100 transition-opacity cursor-pointer"
-              aria-label="Pick avatar image"
-              onClick={() => fileInputRef.current?.click()}
-            >
-              <Camera className="h-4 w-4 text-muted-foreground" />
-            </button>
+        <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-4">
+            <div className="relative group/avatar">
+              {avatarDataUrl ? (
+                <img
+                  src={avatarDataUrl}
+                  alt="Avatar"
+                  className="h-16 w-16 rounded-full object-cover"
+                />
+              ) : (
+                <div className="h-16 w-16 rounded-full bg-linear-to-br from-primary to-primary/50 flex items-center justify-center">
+                  <User className="h-8 w-8 text-primary-foreground" />
+                </div>
+              )}
+              <button
+                type="button"
+                className="absolute inset-0 flex items-center justify-center rounded-full bg-background/50 opacity-0 group-hover/avatar:opacity-100 transition-opacity cursor-pointer"
+                aria-label="Pick avatar image"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <Camera className="h-4 w-4 text-muted-foreground" />
+              </button>
+            </div>
+            <div>
+              <div className="text-sm font-semibold">{draftDisplayName || "No Name"}</div>
+              <div className="text-xs text-muted-foreground">{draftEmail || "No Email"}</div>
+              {avatarFile && !avatarRemoved ? (
+                <div className="text-xs text-muted-foreground mt-1">
+                  New image selected — save to apply
+                </div>
+              ) : null}
+              {avatarRemoved ? (
+                <div className="text-xs text-muted-foreground mt-1">
+                  Avatar will be removed — save to apply
+                </div>
+              ) : null}
+            </div>
           </div>
-          <div>
-            <div className="text-sm font-semibold">{draftDisplayName || "No Name"}</div>
-            <div className="text-xs text-muted-foreground">{draftEmail || "No Email"}</div>
-            {avatarFile && !avatarRemoved ? (
-              <div className="text-xs text-muted-foreground mt-1">
-                New image selected — save to apply
-              </div>
-            ) : null}
-            {avatarRemoved ? (
-              <div className="text-xs text-muted-foreground mt-1">
-                Avatar will be removed — save to apply
-              </div>
-            ) : null}
+          <div className="flex justify-end sm:justify-start">
+            <Button type="button" disabled={!dirty || saving} onClick={() => void handleConfirm()}>
+              {saving ? "Saving…" : "Save profile"}
+            </Button>
           </div>
         </div>
 
@@ -141,10 +148,10 @@ export default function GeneralSection() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between rounded-md group gap-4">
+        <div className="flex items-center justify-between rounded-md group">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
-              <div className="flex flex-row gap-2 items-center mb-1">
+              <div className="flex flex-row gap-2 items-center">
                 <User className="h-4 w-4 text-muted-foreground transition-colors" />
                 <div className="text-sm font-medium">Display Name</div>
               </div>
@@ -185,14 +192,8 @@ export default function GeneralSection() {
 
         {error ? <p className="text-xs text-destructive pt-1">{error}</p> : null}
 
-        <div className="flex justify-end pt-2">
-          <Button type="button" disabled={!dirty || saving} onClick={() => void handleConfirm()}>
-            {saving ? "Saving…" : "Save profile"}
-          </Button>
-        </div>
-
         <div>
-          <h2 className="text-xl font-semibold mb-2 mt-4">General</h2>
+          <h2 className="text-xl font-semibold mb-2 mt-6!">General</h2>
           <hr />
         </div>
 
@@ -212,7 +213,7 @@ export default function GeneralSection() {
             </div>
             <Switch checked={config.notifications} onCheckedChange={setNotifications} />
           </div>
-          <div className="flex flex-row items-center mt-4">
+          <div className="flex flex-row items-center">
             <div className="text-sm font-medium w-full">Notification lifetime</div>
             <Select value={config.notificationLifetime} onValueChange={setNotificationLifetime}>
               <SelectTrigger className="">
@@ -229,7 +230,7 @@ export default function GeneralSection() {
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mb-2 mt-4">Looks and Feel</h2>
+          <h2 className="text-xl font-semibold mb-2 mt-6!">Looks and Feel</h2>
           <hr />
         </div>
 
@@ -319,7 +320,7 @@ export default function GeneralSection() {
         </div>
 
         {user && <div>
-          <h2 className="text-xl font-semibold mb-2 mt-4">More Options</h2>
+          <h2 className="text-xl font-semibold mb-2 mt-6!">More Options</h2>
           <hr />
         </div>}
 

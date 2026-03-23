@@ -20,7 +20,7 @@ const menuItems = [
 
 export default function SettingsSidebar({ activeSection, onSectionChange }: SettingsSidebarProps) {
   return (
-    <div className="border-r bg-background/50 h-full pt-2 pr-2 md:w-48">
+    <div className="bg-sidebar h-full pt-2 px-2 md:w-48 bg-accent/10!">
         {menuItems.map((item) => {
           const Icon = item.icon;
           return (
