@@ -89,7 +89,7 @@ export default function Notes({
             className="shrink-0 flex flex-col border-r relative"
             style={{ width: sidebarWidth }}
           >
-            <div className="p-2 border-b">
+            <div className="p-2 border-b bg-accent/2.5!">
               <AddNoteModal route={route} name={name} item={null}>
                 <Button
                   variant="default"
@@ -110,6 +110,7 @@ export default function Notes({
                 name={name}
                 query={searchField}
                 action={handleMenuItemClick}
+                className="bg-accent/2.5!"
                 element={(item) => (
                   <NoteActionsMenu
                     route={route}

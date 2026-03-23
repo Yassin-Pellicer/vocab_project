@@ -49,8 +49,8 @@ export default function ConfigModal({ children }: { children?: React.ReactNode }
           data-config-trigger="settings"
           style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}
         >
-          <Button className="rounded-full!" variant={"outline"}>
-            <Settings size={24} />
+          <Button className="flex items-center justify-center rounded-full! h-8! w-8!" variant={"outline"}>
+            <Settings /> 
           </Button>
         </DialogTrigger>
       )}

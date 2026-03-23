@@ -56,13 +56,13 @@ export function NavUser() {
     <SidebarMenu>
       <SidebarMenuItem>
         <div
-          className="flex-row items-center mx-2 mt-2 border border-gray-200 dark:border-gray-700
+          className="flex-row items-center h-16 border-b border-gray-200 dark:border-gray-700
           data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground
-          flex gap-2 p-2 bg-gray-50 dark:bg-gray-900 rounded-2xl shadow-sm"
+          flex gap-2 px-4 bg-accent/5"
         >
           {user ? (
-            <>
-              <Avatar className="h-8 w-8 rounded-full shrink-0">
+            <div className="flex flex-row gap-2 text-center w-full items-center">
+              <Avatar className="h-10 w-10 rounded-full shrink-0">
                 <AvatarImage src={avatarDataUrl ?? undefined} />
                 <AvatarFallback className="flex items-center justify-center rounded-full bg-accent">
                   <User className="h-5 w-5 text-background rounded-full shrink-0" />
@@ -70,13 +70,13 @@ export function NavUser() {
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{displayName}</span>
-                <span className="truncate text-xs text-muted">{user.email}</span>
+                <span className="truncate text-xs text-foreground/80">{user.email}</span>
               </div>
               <ConfigModal />
-            </>
+            </div>
           ) : (
             <div className="flex flex-row justify-between items-center w-full">
-              <div className="flex flex-row text-center w-full items-center">
+              <div className="flex flex-row gap-2 text-center w-full items-center">
                 <LoginDialog />
                 <p className="text-xs mx-2"><b>Sign up</b> to enhance your experience!</p>
               </div>
