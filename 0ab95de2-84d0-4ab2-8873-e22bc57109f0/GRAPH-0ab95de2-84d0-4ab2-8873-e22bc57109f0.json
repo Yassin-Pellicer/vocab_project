@@ -1,9 +1,6 @@
 {
-  "f5e810bf-db62-41a3-a243-893272fc9f02": {
-    "bae45cdd-378f-4f05-95d7-3531742d7dad": "Gern"
-  },
   "bae45cdd-378f-4f05-95d7-3531742d7dad": {
-    "f5e810bf-db62-41a3-a243-893272fc9f02": "Gern"
+    "69572db1-100a-4672-a27a-c43b8e6a904c": "lieber"
   },
   "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2": {
     "3c9ee78e-976f-4625-9157-d0f5a7e1628f": "Montag",
@@ -114,7 +111,11 @@
   "adc29665-9e5a-4c58-985c-22e020ce362b": {
     "b244ff3e-2c16-488a-8892-e01e8cd7582a": "oft"
   },
-  "121f78da-5fb1-405e-b8ef-3def3f2eaa79": {},
-  "66fd6bbc-8af5-42c2-80c1-7e473ff30f9d": {},
-  "f02851ab-ca26-4f43-ba1b-1d6fc6db41d5": {}
+  "69572db1-100a-4672-a27a-c43b8e6a904c": {
+    "35e3ddc5-9bf7-4d31-9e91-2491c526ff41": "am liebsten",
+    "bae45cdd-378f-4f05-95d7-3531742d7dad": "Gern"
+  },
+  "35e3ddc5-9bf7-4d31-9e91-2491c526ff41": {
+    "69572db1-100a-4672-a27a-c43b8e6a904c": "lieber"
+  }
 }

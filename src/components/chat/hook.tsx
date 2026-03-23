@@ -191,12 +191,9 @@ export function useChat({
     const messageContent = content?.trim() || draft.trim();
     if (!messageContent) return;
 
-
     const dictionaryContext = name
       ? {
-          name,
-          route,
-          metadata: dictMeta,
+          name: dictMeta?.name,
           typeWords: dictMeta?.typeWords ?? [],
           genders: dictMeta?.genders ?? [],
           numbers: dictMeta?.numbers ?? [],
@@ -273,9 +270,7 @@ export function useChat({
             startingInfo,
             dictionary: name
               ? {
-                  name,
-                  route,
-                  metadata: dictMeta,
+                  name: dictMeta?.name,
                   typeWords: dictMeta?.typeWords ?? [],
                   genders: dictMeta?.genders ?? [],
                   numbers: dictMeta?.numbers ?? [],

@@ -9392,5 +9392,462 @@
     "dateAdded": "2026-03-23",
     "type": "Adjektive",
     "uuid": "f02851ab-ca26-4f43-ba1b-1d6fc6db41d5"
+  },
+  {
+    "uuid": "95cccb80-9449-455f-9b9d-048b7444ea10",
+    "pair": [
+      {
+        "original": {
+          "word": "gesund",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "healthy",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "in good health",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Healthy; in good health (adjective).",
+          "Used to describe a person’s or thing’s health or condition.",
+          "Used as a polite reaction after someone sneezes: “Gesund!”"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Adjektive"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "frisch",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "fresco"
+          }
+        ],
+        "definitions": [
+          "fresh (not old); also “fresher” in taste or condition"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Adjektive",
+    "uuid": "63456915-7f5b-4ee2-b2ac-e47dc70fc2d2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "gesund",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "saludable"
+          }
+        ],
+        "definitions": [
+          "healthy; in good health (context: food/people)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Adjektive",
+    "uuid": "d66ff35e-95f9-48da-8a7e-aa72666b96f5"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "besonders",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "especialmente bueno"
+          }
+        ],
+        "definitions": [
+          "especially; particularly (often used with emphasis)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Adverbien",
+    "uuid": "7df636c4-9ad5-4ea7-862e-889cbb4a7020"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "am liebsten",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "lo que más me gusta"
+          }
+        ],
+        "definitions": [
+          "my favorite; what I like best"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Redewendungen",
+    "uuid": "35e3ddc5-9bf7-4d31-9e91-2491c526ff41"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "klössen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "albóndigas"
+          }
+        ],
+        "definitions": [
+          "(regional) dumplings; meat dumplings/balls (as in “Königsberger Klopse” style)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "bd52a4e2-3698-42c0-a93d-2a1b6083d488"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gulash",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "sopa de carne"
+          }
+        ],
+        "definitions": [
+          "goulash (meat stew/soup)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "d67e7f09-724f-4d76-aa92-d288f4eaa28c"
+  },
+  {
+    "uuid": "0ab95de2-84d0-4ab2-8873-e22bc57109f0",
+    "pair": [
+      {
+        "original": {
+          "word": "Bein",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "pierna",
+            "gender": "Feminin",
+            "number": "Singular"
+          },
+          {
+            "word": "piernas",
+            "gender": "Feminin",
+            "number": "Plural"
+          }
+        ],
+        "definitions": [
+          "body part: a leg",
+          "plural: legs"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Spargel",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "espárragos"
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "d498faec-be50-449e-ba83-de7a1d838a57"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "lieber",
+          "gender": "",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "preferir (mejor)"
+          }
+        ],
+        "definitions": [
+          "Adverb/Steigerungsform: “preferred / rather” (used to express preference)."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Adverbien",
+    "uuid": "69572db1-100a-4672-a27a-c43b8e6a904c"
+  },
+  {
+    "uuid": "774772d5-2d74-44ac-91aa-ab5ce3aae5e7",
+    "pair": [
+      {
+        "original": {
+          "word": "Hähnchen",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "pollo",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "pollos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Small chicken; chicken meat (often used for roasted chicken).",
+          "Plural: Hähnchen (same form in German)."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "obst",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "fruit"
+          },
+          {
+            "word": "fruits"
+          }
+        ],
+        "definitions": [
+          "Fruit (collective); fruit in general.",
+          "Usually used without an article (collective noun)."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "42ddfdce-27c0-4395-983e-f69aa813fd6e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kellner",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "waiter (male)"
+          }
+        ],
+        "definitions": [
+          "a man who serves food and drinks in a restaurant or bar",
+          "common noun for someone working as service staff"
+        ]
+      },
+      {
+        "original": {
+          "word": "Kellner",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "waiters"
+          }
+        ],
+        "definitions": [
+          "people who serve food and drinks in restaurants or bars"
+        ]
+      },
+      {
+        "original": {
+          "word": "Kellnerin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "waitress"
+          }
+        ],
+        "definitions": [
+          "a woman who serves food and drinks in a restaurant or bar"
+        ]
+      },
+      {
+        "original": {
+          "word": "Kellnerin",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "waitresses"
+          }
+        ],
+        "definitions": [
+          "women who serve food and drinks in restaurants or bars"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "839bc401-4aac-44ff-a644-3f7b19e5adf4"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "deshalb",
+          "gender": "-",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "therefore"
+          },
+          {
+            "word": "because of that"
+          }
+        ],
+        "definitions": [
+          "used to introduce the result of something (reason → result)",
+          "similar to 'darum'"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Adverbien",
+    "uuid": "f2aac725-77e4-40bf-8af5-507be1a38fae"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "währendessen",
+          "gender": "-",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "meanwhile"
+          }
+        ],
+        "definitions": [
+          "during the same time; while something else happens",
+          "often used to contrast two actions happening at the same time"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Adverbien",
+    "uuid": "4ac05d6f-ccf7-4de4-8258-5c7728ca34fc"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "danach",
+          "gender": "-",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "after that"
+          },
+          {
+            "word": "afterwards"
+          }
+        ],
+        "definitions": [
+          "shows what happens next in time",
+          "often used to refer to a following action"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Adverbien",
+    "uuid": "c3ea1e48-1525-408d-a73d-a9366cea35f0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Reinigungskraft",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "janitor/cleaning staff"
+          }
+        ],
+        "definitions": [
+          "Person who cleans streets or public areas",
+          "Common term in everyday speech for cleaning workers"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "d7195596-c8cb-49ef-bf47-4b49f26efc2d"
   }
 ]
