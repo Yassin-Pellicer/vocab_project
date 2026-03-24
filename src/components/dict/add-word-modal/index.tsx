@@ -84,7 +84,7 @@ const AddTranslationModal = forwardRef<
           )}
         </DialogTrigger>
 
-        <DialogContent className="sm:max-w-162.5 overflow-y-scroll max-h-[80vh]">
+        <DialogContent className="sm:max-w-162.5 overflow-y-auto max-h-[80vh]">
           <DialogHeader>
             <DialogTitle>Add Translation Entry</DialogTitle>
             <DialogDescription>

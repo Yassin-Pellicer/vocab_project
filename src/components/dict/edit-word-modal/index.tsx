@@ -69,7 +69,7 @@ export default function EditTranslationModal({
           )}
         </DialogTrigger>
 
-        <DialogContent className="sm:max-w-162.5 overflow-y-scroll max-h-[80vh]">
+        <DialogContent className="sm:max-w-162.5 overflow-y-auto max-h-[80vh]">
           <DialogHeader>
             <DialogTitle>Edit Translation Entry</DialogTitle>
             <DialogDescription>

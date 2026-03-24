@@ -188,6 +188,7 @@ function DictRow({
           className="shadow-md rounded-2xl"
         >
           <Chat
+            conversationScope="home"
             route={dict.path}
             name={dict.id}
             startingInfo={

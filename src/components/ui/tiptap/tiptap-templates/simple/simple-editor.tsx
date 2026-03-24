@@ -265,11 +265,9 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
   const loadedWordIdRef = useRef<string | null>(null)
 
   const selectedNoteIdFromStore = NotesContext((s) => s.selectedNoteId)
-  const reloadTokenFromStore = NotesContext((s) => s.reloadToken)
   const setSelectedNoteContent = NotesContext((s) => s.setSelectedNoteContent)
 
   const selectedNoteId = noteId ?? selectedNoteIdFromStore
-  const reloadToken = noteId ? 0 : reloadTokenFromStore
 
   const selectedWord = DictionaryContext((s) => s.selectedWord)
   const selectedWordUuid = selectedWord?.uuid ?? null
@@ -378,7 +376,7 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
     if (type === "notes" && selectedNoteId) void loadNote(selectedNoteId)
     if (type === "words" && selectedWordUuid) void loadWord(selectedWordUuid)
 
-  }, [editor, name, reloadToken, route, selectedNoteId, selectedWordUuid, type])
+  }, [editor, name, route, selectedNoteId, selectedWordUuid, type])
 
   const rect = useCursorVisibility({
     editor,

@@ -2,6 +2,7 @@
 
 import Markdown from "@/components/markdown-display";
 import { DictionaryContext } from "@/context/dictionary-context";
+import { FloatingAssistantChat } from "@/components/chat/floating-assistant-chat";
 
 export default function MarkdownPage({ _uuid }: { _uuid?: string }) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -19,26 +20,21 @@ export default function MarkdownPage({ _uuid }: { _uuid?: string }) {
     selectedWord ??
     (_uuid ? dictionaries[name]?.find((w) => w.uuid === _uuid) : undefined);
 
-  if (!word?.uuid) {
-    return <p className="text-center text-gray-500 mt-4">No word selected.</p>;
-  }
-
   return (
-    <div className="flex flex-row-reverse overflow-hidden h-[calc(100vh-64px)]">
-      <div className="flex-1 overflow-y-auto">
-        {selectedWord ? (
-          <Markdown
-            route={path}
-            name={name}
-            uuid={selectedWord.uuid}
-            word={selectedWord}
-          />
+    <div className="relative flex h-[calc(100vh-64px)] flex-col overflow-hidden">
+      <div className="min-h-0 flex-1 overflow-y-auto">
+        {word?.uuid ? (
+          <Markdown route={path} name={name} uuid={word.uuid} word={word} />
         ) : (
-          <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-            Select a word to view details
-          </div>
+          <p className="p-4 text-center text-muted-foreground">No word selected.</p>
         )}
       </div>
+      <FloatingAssistantChat
+        route={path}
+        name={name}
+        context={word ? { type: "word", content: word } : undefined}
+        layoutStorageKey={`floating-assistant:dict:${name}`}
+      />
     </div>
   );
 }

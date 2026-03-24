@@ -62,12 +62,22 @@ export function NavUser() {
         >
           {user ? (
             <div className="flex flex-row gap-2 text-center w-full items-center">
-              <Avatar className="h-10 w-10 rounded-full shrink-0">
-                <AvatarImage src={avatarDataUrl ?? undefined} />
-                <AvatarFallback className="flex items-center justify-center rounded-full bg-accent">
-                  <User className="h-5 w-5 text-background rounded-full shrink-0" />
-                </AvatarFallback>
-              </Avatar>
+              <div className="relative group/avatar">
+                {avatarDataUrl && (
+                  <img
+                    src={avatarDataUrl}
+                    alt="Avatar"
+                    className="h-10 w-10 rounded-full object-cover"
+                  />
+                )}
+                {!avatarDataUrl && (
+                  <Avatar className="h-10 w-10 rounded-full shrink-0">
+                    <AvatarFallback className="flex items-center justify-center rounded-full bg-accent">
+                      <User className="h-5 w-5 text-background rounded-full shrink-0" />
+                    </AvatarFallback>
+                  </Avatar>
+                )}
+              </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{displayName}</span>
                 <span className="truncate text-xs text-foreground/80">{user.email}</span>

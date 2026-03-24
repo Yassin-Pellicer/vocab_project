@@ -166,18 +166,6 @@ export default function useTranslationHooks({
     }
   }, [isAdditionOrder, setSelectedLetter]);
 
-  const expandSplitViewChat = useCallback(() => {
-    const minWidth = 260;
-    const maxWidth = getMaxSplitWidth();
-    if (maxWidth < minWidth) {
-      setSplitViewCollapsed(true);
-      return;
-    }
-    setSplitViewCollapsed(false);
-    setSplitViewWidth(Math.max(minWidth, Math.min(500, maxWidth)));
-  }, [getMaxSplitWidth, setSplitViewCollapsed, setSplitViewWidth]);
-
-
   useEffect(() => {
     void loadTranslations(route, name);
   }, [loadTranslations, route, name]);
@@ -214,6 +202,5 @@ export default function useTranslationHooks({
     handleResizeSplitView,
     containerRef,
     alphabetRef,
-    expandSplitViewChat
   };
 }

@@ -13,18 +13,23 @@ import { PreferencesContext } from "@/context/preferences-context";
 import { DictionaryContext } from "@/context/dictionary-context";
 import { ChatContext } from "@/context/chat-context";
 
+export type ChatConversationScope = "home" | "assistant";
+
 export function useChat({
   startingInfo,
   context,
   name,
   route,
   autoStart = true,
+  conversationScope = "assistant",
 }: {
   startingInfo?: TranslationEntry | string | null;
   context?: ContextType;
   name?: string | null;
   route?: string;
   autoStart?: boolean;
+  /** Isolates stored thread; word-of-the-day auto-start runs only for `"home"`. */
+  conversationScope?: ChatConversationScope;
 }) {
 
   const [sending, setSending] = useState(false);
@@ -32,7 +37,7 @@ export function useChat({
   const didAutoStartRef = useRef(false);
   const routeKeyRef = useRef<string | undefined>(route);
   const nameKeyRef = useRef<string | null | undefined>(name);
-  
+  const scopeKeyRef = useRef<ChatConversationScope>(conversationScope);  
   const setConversation = ChatContext((state) => state.setConversation);
   const updateConversation = ChatContext((state) => state.updateConversation);
   const clearConversation = ChatContext((state) => state.clearConversation);
@@ -40,10 +45,8 @@ export function useChat({
   const [contextForChat, setContextForChat] = useState<ChatPrompContext | undefined>(undefined);
 
   const chatKey = useMemo(() => {
-    return (
-      `${route ?? ""}|${name ?? ""}|${context?.type ?? "none"}`
-    );
-  }, [route, name, context?.type]);
+    return `${route ?? ""}|${name ?? ""}|${context?.type ?? "none"}|${conversationScope}`;
+  }, [route, name, context?.type, conversationScope]);
 
 
   const conversation = ChatContext(
@@ -156,30 +159,38 @@ export function useChat({
   }, [chatKey, conversation, setConversation]);
 
   useEffect(() => {
-    if (routeKeyRef.current !== route || nameKeyRef.current !== name) {
+    if (
+      routeKeyRef.current !== route ||
+      nameKeyRef.current !== name ||
+      scopeKeyRef.current !== conversationScope
+    ) {
       routeKeyRef.current = route;
       nameKeyRef.current = name;
+      scopeKeyRef.current = conversationScope;
       didAutoStartRef.current = false;
     }
-  }, [route, name]);
+  }, [route, name, conversationScope]);
 
   useEffect(() => {
-    if (!context) { return }
-    let contextObject = { description: "", elements: {} }
+    if (!context) {
+      setContextForChat(undefined);
+      return;
+    }
+    const contextObject = { description: "", elements: {} as object };
     if (context.type === "word") {
-      contextObject.description = "This is the word that the user has selected from their dictionary. " +
-        "Do with it whatever the user asks you to."
+      contextObject.description =
+        "This is the word that the user has selected from their dictionary. " +
+        "Do with it whatever the user asks you to.";
+      contextObject.elements = context.content;
+      setContextForChat(contextObject);
+    } else if (context.type === "note") {
+      contextObject.description =
+        "This is the note that the user has selected from their note folders. " +
+        "Do with it whatever the user asks you to.";
       contextObject.elements = context.content;
       setContextForChat(contextObject);
     }
-    else if (context.type === "note") {
-      contextObject.description = "This is the note that the user has selected from their note folders. " +
-        "Do with it whatever the user asks you to."
-      contextObject.elements = context.content;
-      setContextForChat(contextObject);
-    }
-    else { return; }
-  }, [context])
+  }, [context]);
 
   const canSend = !sending && draft.trim().length > 0;
 
@@ -254,7 +265,8 @@ export function useChat({
   };
 
   useEffect(() => {
-    if (startingInfo && Object.keys(startingInfo).length > 0) {
+if (conversationScope !== "home") return;
+    if (startingInfo && Object.keys(startingInfo as object).length > 0) {
       if (!autoStart) return;
       if (didAutoStartRef.current) return;
       didAutoStartRef.current = true;
@@ -302,7 +314,14 @@ export function useChat({
         })
         .finally(() => setSending(false));
     }
-  }, [startingInfo, name, route, dictionaryMetadata, autoStart]);
+  }, [
+    conversationScope,
+    startingInfo,
+    name,
+    route,
+    dictionaryMetadata,
+    autoStart,
+  ]);
 
   return {
     clearChat,

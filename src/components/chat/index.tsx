@@ -1,9 +1,17 @@
-import { Lock, NotebookIcon, Pencil, Send, Sparkles, Trash2, WholeWord } from "lucide-react";
+import {
+  Lock,
+  NotebookIcon,
+  Pencil,
+  Send,
+  Sparkles,
+  Trash2,
+  WholeWord,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { useChat } from "./hook";
+import { useChat, type ChatConversationScope } from "./hook";
 import { TranslationEntry } from "@/types/translation-entry";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -12,22 +20,36 @@ import { ContextType } from "@/types/chat";
 import { NotesContext } from "@/context/notes-context";
 import AddWordModal from "@/components/dict/add-word-modal";
 import EditWordModal from "@/components/dict/edit-word-modal";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { supabase } from "@/supabase/supabase-client";
 
-export function Chat({
-  startingInfo,
-  route,
-  name,
-  context,
-  autoStart,
-}: {
+export type ChatHandle = {
+  clearChat: () => void;
+};
+
+export type ChatProps = {
   startingInfo?: TranslationEntry | string | null;
   route?: string;
   name?: string | null;
   context?: ContextType;
   autoStart?: boolean;
-}) {
+  /** Use `"home"` so word-of-the-day auto-start and thread are isolated from the floating assistant. */
+  conversationScope?: import("./hook").ChatConversationScope;  /** Hide top toolbar (used by floating assistant shell) */
+  hideToolbar?: boolean;
+};
+
+export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
+  {
+    startingInfo,
+    route,
+    name,
+    context,
+    autoStart,
+    conversationScope,
+    hideToolbar,
+  },
+  ref
+) {
   const {
     clearChat,
     send,
@@ -39,7 +61,17 @@ export function Chat({
     contextForChat,
     getWordLabel,
     renderMessages,
-  } = useChat({ startingInfo, context, name, route, autoStart });
+  } = useChat({
+    startingInfo,
+    context,
+    name,
+    route,
+    autoStart,
+    conversationScope,
+  });
+
+
+  useImperativeHandle(ref, () => ({ clearChat }), [clearChat]);
 
   const { selectedNoteId, findById } = NotesContext();
 
@@ -60,7 +92,7 @@ export function Chat({
   }, []);
 
   return (
-    <Card className="relative flex flex-col min-h-0 h-full">
+    <Card className="relative flex h-full min-h-0 flex-col border-0 shadow-none">
 
       {!loading && !user && (
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3 rounded-xl bg-background/60 backdrop-blur-sm">
@@ -76,22 +108,24 @@ export function Chat({
         </div>
       )}
 
-      <div className="flex items-center justify-between gap-2 border-b px-3 py-2 sticky -top-1 z-10 bg-background rounded-xl">
-        <div className="flex items-center gap-2 text-md font-semibold">
-          <Sparkles size={16} /> Assistant
+      {!hideToolbar && (
+        <div className="sticky -top-1 z-10 flex items-center justify-between gap-2 rounded-xl border-b bg-background px-3 py-2">
+          <div className="flex items-center gap-2 text-md font-semibold">
+            <Sparkles size={16} /> Assistant
+          </div>
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={clearChat}
+            aria-label="Clear chat"
+            title="Clear chat"
+          >
+            <Trash2 />
+          </Button>
         </div>
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          onClick={clearChat}
-          aria-label="Clear chat"
-          title="Clear chat"
-        >
-          <Trash2 />
-        </Button>
-      </div>
+      )}
 
-      <div className="flex-1 min-h-0 overflow-y-auto p-4">
+      <div className="min-h-0 flex-1 overflow-y-auto p-4">
         <div className="flex flex-col gap-2 ">
           {renderMessages().map((m) => {
             const canUseActions = Boolean(route && name);
@@ -106,13 +140,16 @@ export function Chat({
                       : "mr-auto bg-card px-4 py-2 text-card-foreground markdown"
                   )}
                 >
-                  {m.role !== "user" && <div className="pb-4!"><Sparkles></Sparkles></div>}
-                  {m.display !== "" && <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeHighlight]}
-                  >
-                    {m.display}
-                  </ReactMarkdown>}
+                  {m.role !== "user" && (
+                    <div className="mb-2!">
+                      <Sparkles></Sparkles>
+                    </div>
+                  )}
+                  {m.display !== "" && (
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
+                      {m.display}
+                    </ReactMarkdown>
+                  )}
                 </div>
                 {m.actions.length > 0 && canUseActions && name && route && (
                   <div
@@ -177,19 +214,26 @@ export function Chat({
         </div>
       </div>
 
-      <div className="border-t p-3 sticky bottom-0 z-10 bg-background rounded-xl">
-        {contextForChat && context?.type == "word" && <div className="flex flex-row mb-2 items-center justify-between gap-4">
-          <p className="text-xs">Loaded context <br></br>with word: </p>
-          <Button className="h-fit">
-            <WholeWord size={16} strokeWidth={1.5} /> {(contextForChat?.elements as TranslationEntry)?.pair[0].original.word}
-          </Button>
-        </div>}
-        {selectedNoteId && contextForChat && context?.type == "note" && <div className="flex flex-row mb-2 items-center justify-between gap-4">
-          <p className="text-xs">Loaded context <br></br> with note: </p>
-          <Button className="h-fit">
-            <NotebookIcon strokeWidth={1.5} /> {selectedNoteId && findById(selectedNoteId)?.title}
-          </Button>
-        </div>}
+      <div className="wrap sticky bottom-0 z-10 rounded-xl border-t bg-background p-3">
+        {contextForChat && context?.type == "word" && (
+          <div className="mb-2 flex flex-row items-center justify-between gap-4">
+            <p className="text-xs">
+              Loaded context <br></br>with word:{" "}
+            </p>
+            <Button className="h-fit text-xs!">
+              <WholeWord size={16} strokeWidth={1.5} />{" "}
+              {(contextForChat?.elements as TranslationEntry)?.pair[0].original.word}
+            </Button>
+          </div>
+        )}
+        {selectedNoteId && contextForChat && context?.type == "note" && (
+          <div className="mb-3! flex flex-col gap-2 wrap">
+            <p className="text-xs">Loaded context with note: </p>
+            <Button className="h-fit w-fit text-xs!">
+              <NotebookIcon strokeWidth={1.5} /> {selectedNoteId && findById(selectedNoteId)?.title}
+            </Button>
+          </div>
+        )}
         <div className="flex gap-2">
           <Textarea
             value={draft}
@@ -215,10 +259,10 @@ export function Chat({
             <Send />
           </Button>
         </div>
-        <div className="mt-2 text-xs text-muted-foreground">
-          Enter to send • Shift+Enter for newline
-        </div>
+        <div className="mt-2 text-xs text-muted-foreground">Enter to send • Shift+Enter for newline</div>
       </div>
     </Card>
   );
-}
+});
+
+Chat.displayName = "Chat";

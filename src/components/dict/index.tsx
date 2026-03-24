@@ -22,6 +22,7 @@ import Markdown from "@/components/markdown-display";
 import KnowledgeGraph from "../knowledge-graph";
 
 import { DictionaryContext } from "@/context/dictionary-context";
+import { FloatingAssistantChat } from "@/components/chat/floating-assistant-chat";
 import { useDictionaryKeybinds } from "./keybinds";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
@@ -314,6 +315,15 @@ export default function DictionaryComponent({
           </div>
         )}
       </div>
+
+      <FloatingAssistantChat
+        route={route}
+        name={name}
+        context={
+          selectedWord ? { type: "word", content: selectedWord } : undefined
+        }
+        layoutStorageKey={`floating-assistant:dict:${name}`}
+      />
     </div>
   );
 }

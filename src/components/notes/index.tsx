@@ -1,19 +1,12 @@
-import {
-  Folder,
-  Notebook,
-  NotebookIcon,
-  Search,
-  Sparkles,
-  X,
-} from "lucide-react";
+import { Folder, Notebook, NotebookIcon, Search, X } from "lucide-react";
 import useNotesHooks from "./hook";
 import { NoteSidebar } from "./note-menu/index.tsx";
 import NoteActionsMenu from "../ui/note-actions-menu.tsx";
 import { Button } from "../ui/button.tsx";
 import AddNoteModal from "./add-note-modal/index.tsx";
 import NoteDisplay from "./note-display/index.tsx";
-import { Chat } from "../chat/index.tsx";
-import { NotesContext } from "@/context/notes-context.ts";
+import { FloatingAssistantChat } from "../chat/floating-assistant-chat";
+import { NotesContext } from "@/context/notes-context";
 
 export default function Notes({
   route,
@@ -33,13 +26,9 @@ export default function Notes({
     sidebarWidth,
     sidebarCollapsed,
     handleResizeStart,
-    chatWidth,
-    chatCollapsed,
-    handleResizeChat,
-    expandChat,
   } = useNotesHooks();
 
-  const { selectedNoteContent } = NotesContext();
+  const { selectedNoteContent, selectedNoteId } = NotesContext();
 
   return (
     <div className="h-full flex flex-col">
@@ -130,8 +119,8 @@ export default function Notes({
             />
           </div>
         )}
-        <div className="flex flex-1 min-w-0 overflow-hidden min-h-0">
-          <div className="flex-1 min-w-0 overflow-y-auto border-r min-h-0">
+        <div className="flex min-h-0 min-w-0 flex-1 overflow-hidden">
+          <div className="min-h-0 min-w-0 flex-1 overflow-y-auto">
             {selectedNoteRoute && (
               <div className="flex flex-col gap-1 bg-background p-3 border-b">
                 <p className="flex flex-row items-center gap-2 text-xl font-semibold">
@@ -146,43 +135,19 @@ export default function Notes({
             )}
             <NoteDisplay route={route} name={name} />
           </div>
-
-          {chatCollapsed ? (
-            <div className="flex items-center relative">
-              <div
-                onPointerDown={handleResizeChat}
-                onClick={expandChat}
-                className="absolute -right-7.5 h-15 w-15 rounded-full bg-background border"
-              >
-                <div className="absolute top-5 right-8.25">
-                  <Sparkles size={18}></Sparkles>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div
-              className="shrink-0 flex flex-col relative"
-              style={{ width: chatWidth }}
-            >
-              <div
-                role="separator"
-                aria-orientation="vertical"
-                title="Drag to resize"
-                onPointerDown={handleResizeChat}
-                className="absolute left-0 top-0 h-full w-1 cursor-col-resize bg-transparent hover:bg-muted/20"
-              />
-
-              <div className="flex-1 overflow-y-auto p-4 min-h-0">
-                <Chat
-                  route={route}
-                  name={name}
-                  context={{ type: "note", content: selectedNoteContent }}
-                />
-              </div>
-            </div>
-          )}
         </div>
       </div>
+
+      <FloatingAssistantChat
+        route={route}
+        name={name}
+        context={
+          selectedNoteId
+            ? { type: "note", content: selectedNoteContent }
+            : undefined
+        }
+        layoutStorageKey={`floating-assistant:notes:${name}`}
+      />
     </div>
   );
 }

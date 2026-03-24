@@ -7,20 +7,10 @@ import { useResizablePanel } from "@/hooks/use-resizable-panel";
 export default function useNotesHooks() {
   const { searchField, setSearchField } = DictionaryContext();
 
-  const {
-    tree,
-    findById,
-    selectedNoteId,
-    setSelectedNoteId,
-    getRoute,
-  } = NotesContext();
+  const { tree, findById, selectedNoteId, setSelectedNoteId, getRoute } = NotesContext();
 
-  const [selectedNoteTitle, setSelectedNoteTitle] = useState<string | null>(
-    null,
-  );
-  const [selectedNoteRoute, setSelectedNoteRoute] = useState<string | null>(
-    null,
-  );
+  const [selectedNoteTitle, setSelectedNoteTitle] = useState<string | null>(null);
+  const [selectedNoteRoute, setSelectedNoteRoute] = useState<string | null>(null);
 
   const handleMenuItemClick = (item: SidebarNode) => {
     setSelectedNoteId(item.id);
@@ -42,27 +32,15 @@ export default function useNotesHooks() {
 
   const searchRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const sidebarStateRef = useRef({ width: 392, collapsed: false });
-  const chatStateRef = useRef({ width: 392, collapsed: false });
 
   const getContainerWidth = useCallback(() => {
-    return (
-      containerRef.current?.getBoundingClientRect().width ?? window.innerWidth
-    );
+    return containerRef.current?.getBoundingClientRect().width ?? window.innerWidth;
   }, []);
 
   const getMaxSidebarWidth = useCallback(() => {
     const containerWidth = getContainerWidth();
     const minCenterWidth = 360;
-    const otherWidth = chatStateRef.current.collapsed ? 0 : chatStateRef.current.width;
-    return Math.max(0, Math.floor(containerWidth - otherWidth - minCenterWidth));
-  }, [getContainerWidth]);
-
-  const getMaxChatWidth = useCallback(() => {
-    const containerWidth = getContainerWidth();
-    const minCenterWidth = 360;
-    const otherWidth = sidebarStateRef.current.collapsed ? 0 : sidebarStateRef.current.width;
-    return Math.max(0, Math.floor(containerWidth - otherWidth - minCenterWidth));
+    return Math.max(0, Math.floor(containerWidth - minCenterWidth));
   }, [getContainerWidth]);
 
   const {
@@ -82,42 +60,6 @@ export default function useNotesHooks() {
     forceVisibleOnInit: true,
   });
 
-  const {
-    width: chatWidth,
-    collapsed: chatCollapsed,
-    handleResizeStart: handleResizeChat,
-    setCollapsed: setChatCollapsed,
-    setWidth: setChatWidth,
-  } = useResizablePanel({
-    storageKey: "chat-sidebar",
-    defaultWidth: 392,
-    defaultCollapsed: false,
-    minWidth: 260,
-    maxWidth: getMaxChatWidth,
-    direction: "right",
-    containerRef,
-    collapseBelowMin: true,
-  });
-
-  useEffect(() => {
-    sidebarStateRef.current = { width: sidebarWidth, collapsed: sidebarCollapsed };
-  }, [sidebarWidth, sidebarCollapsed]);
-
-  useEffect(() => {
-    chatStateRef.current = { width: chatWidth, collapsed: chatCollapsed };
-  }, [chatWidth, chatCollapsed]);
-
-  const expandChat = useCallback(() => {
-    const minWidth = 260;
-    const maxWidth = getMaxChatWidth();
-    if (maxWidth < minWidth) {
-      setChatCollapsed(true);
-      return;
-    }
-    setChatCollapsed(false);
-    setChatWidth(Math.max(minWidth, Math.min(500, maxWidth)));
-  }, [getMaxChatWidth, setChatCollapsed, setChatWidth]);
-
   return {
     searchField,
     setSearchField,
@@ -129,11 +71,5 @@ export default function useNotesHooks() {
     sidebarWidth,
     sidebarCollapsed,
     handleResizeStart,
-    chatWidth,
-    chatCollapsed,
-    handleResizeChat,
-    setChatCollapsed,
-    setChatWidth,
-    expandChat,
   };
 }

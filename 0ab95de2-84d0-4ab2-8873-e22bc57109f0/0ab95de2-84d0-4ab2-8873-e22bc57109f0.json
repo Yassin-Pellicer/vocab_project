@@ -10011,5 +10011,315 @@
     "dateAdded": "2026-03-23",
     "type": "Nomen",
     "uuid": "f34e560f-e0de-4cb3-a7b6-737b8114a8d7"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Tastatur",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "teclado"
+          }
+        ],
+        "definitions": [
+          "Teclado; dispositivo con teclas para escribir o introducir datos."
+        ]
+      },
+      {
+        "original": {
+          "word": "Tastaturen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "teclados"
+          }
+        ],
+        "definitions": [
+          "Plurale de Tastatur: teclados (varios dispositivos con teclas)."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "e7f33ccc-7f65-4892-8516-0c18de42a936"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kassierer",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "cashier"
+          },
+          {
+            "word": "checkout clerk"
+          }
+        ],
+        "definitions": [
+          "Jemand, der an der Kasse arbeitet (z. B. im Laden)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Kassiererin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "cashier"
+          },
+          {
+            "word": "checkout clerk"
+          }
+        ],
+        "definitions": [
+          "Jemand, der an der Kasse arbeitet (z. B. im Laden)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Kassierer",
+          "gender": "-",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "cashiers"
+          },
+          {
+            "word": "checkout clerks"
+          }
+        ],
+        "definitions": [
+          "Mitarbeitende, die an der Kasse arbeiten."
+        ]
+      },
+      {
+        "original": {
+          "word": "Kassiererinnen",
+          "gender": "-",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "cashiers"
+          },
+          {
+            "word": "checkout clerks"
+          }
+        ],
+        "definitions": [
+          "Mitarbeitende, die an der Kasse arbeiten."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "62d8bf96-e66b-46e6-815c-6a625aefa99d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Politiker",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "politician"
+          }
+        ],
+        "definitions": [
+          "(m.) Politiker; Person, die politische Ämter hat oder sich politisch engagiert"
+        ]
+      },
+      {
+        "original": {
+          "word": "Politiker",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "politicians"
+          }
+        ],
+        "definitions": [
+          "Politiker; Personen, die politische Ämter haben oder sich politisch engagieren"
+        ]
+      },
+      {
+        "original": {
+          "word": "Politikerin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "politician"
+          }
+        ],
+        "definitions": [
+          "(f.) Politikerin; Frau, die politische Ämter hat oder sich politisch engagiert"
+        ]
+      },
+      {
+        "original": {
+          "word": "Politikerinnen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "politicians"
+          }
+        ],
+        "definitions": [
+          "Politikerinnen; mehrere Frauen, die politische Ämter haben oder sich politisch engagieren"
+        ]
+      },
+      {
+        "original": {
+          "word": "politisch",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "political"
+          }
+        ],
+        "definitions": [
+          "(Adj./Adv.) politisch; die Politik betreffend"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "bc085fe3-f8e0-450b-935f-57aee8b52174"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Physiotherapeut",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "physiotherapist"
+          }
+        ],
+        "definitions": [
+          "a person who treats patients’ movement and physical condition using physiotherapy"
+        ]
+      },
+      {
+        "original": {
+          "word": "Physiotherapeutin",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "physiotherapist"
+          }
+        ],
+        "definitions": [
+          "a female physiotherapist"
+        ]
+      },
+      {
+        "original": {
+          "word": "Physiotherapeuten",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "physiotherapists"
+          }
+        ],
+        "definitions": [
+          "plural of Physiotherapeut"
+        ]
+      },
+      {
+        "original": {
+          "word": "Physiotherapeutinnen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "physiotherapists"
+          }
+        ],
+        "definitions": [
+          "plural of Physiotherapeutin"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "96fb8b81-f88d-4dae-91fe-25784c818fc0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Geschmack",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "sabor"
+          }
+        ],
+        "definitions": [
+          "el sabor de la comida o de algo",
+          "man: der Geschmack (de algo)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Nomen",
+    "uuid": "ff0ae271-552f-4ac7-839c-5cc42a7dd9e1"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "dort",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "allí (ahí) / allí / allá (lugar)"
+          }
+        ],
+        "definitions": [
+          "Adv. de lugar: indica un lugar o punto distante del hablante."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-23",
+    "type": "Adverbien",
+    "uuid": "f497233e-e03d-4df9-9d5a-dd40dc2995d6"
   }
 ]

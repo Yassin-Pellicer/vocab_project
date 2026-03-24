@@ -197,6 +197,84 @@
       "type": "paragraph",
       "attrs": {
         "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Una versión un poco más mejorada del texto sería la siguiente →"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Ich esse "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "am liebsten "
+            },
+            {
+              "type": "text",
+              "text": "im Teppanyaki Zhen. Das ist ein japanisches Restaurant in Alzira. Die Atmosphäre ist angenehm und das Essen schmeckt jedes Mal sehr frisch. Auf der Karte gibt es viele Gerichte, die man ausprobieren kann."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Meine Lieblingsgerichte sind Sushi und eine Gemüsesuppe. Besonders gut schmeckt der Wasabi: Er ist scharf und gibt den Speisen einen besonderen Geschmack."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          }
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Wenn ich dort bin, bestelle ich meistens etwas mit Gemüse und dazu Reis oder Nudeln. Am Ende gönne ich mir oft noch ein Getränk und genieße die Zeit mit meinen Freunden."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
       }
     }
   ]

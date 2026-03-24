@@ -1,19 +1,11 @@
 import "highlight.js/styles/github.css";
-import {
-  Edit3,
-  Save,
-  ChevronDown,
-  ChevronUp,
-  X,
-  Sparkles,
-} from "lucide-react";
+import { Edit3, Save, ChevronDown, ChevronUp, X } from "lucide-react";
 import { TranslationEntry } from "@/types/translation-entry";
 import { useMarkdown } from "./hook";
 import WordCard from "../word-card";
 import VerboConjugation from "../verb-conjugation";
 import SearchBar from "../word-link";
 import { SimpleEditor } from "../ui/tiptap/tiptap-templates/simple/simple-editor";
-import { Chat } from "../chat/index.tsx";
 
 export default function MarkdownEditor({
   route,
@@ -39,14 +31,10 @@ export default function MarkdownEditor({
     linkedWordList,
     dictionaryMetadata,
     containerRef,
-    chatCollapsed,
-    chatWidth,
-    expandChat,
-    handleResizeChat,
   } = useMarkdown(route, uuid, name, word);
 
   return (
-    <div ref={containerRef} className="flex flex-row overflow-hidden h-full w-full min-w-0">
+    <div ref={containerRef} className="flex h-full min-h-0 w-full min-w-0 flex-col overflow-hidden">
       <div className="flex-1 min-w-0 flex flex-col items-center overflow-hidden">
         <div
           className={`px-4 max-w-200 ${
@@ -170,46 +158,6 @@ export default function MarkdownEditor({
         )}
       </div>
 
-      {chatCollapsed ? (
-        <div className="flex items-center relative">
-          <div
-            role="separator"
-            aria-orientation="vertical"
-            title="Drag to expand chat"
-            onPointerDown={handleResizeChat}
-            className="absolute left-0 top-0 h-full w-2 cursor-col-resize bg-muted/20 hover:bg-muted/40"
-          />
-          <div
-            onPointerDown={handleResizeChat}
-            onClick={expandChat}
-            className="absolute -right-7.5 h-15 w-15 rounded-full bg-background border"
-          >
-            <div className="absolute top-5 right-8.25">
-              <Sparkles size={18}></Sparkles>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div
-          className="shrink-0 flex flex-col border-l relative"
-          style={{ width: chatWidth }}
-        >
-          <div
-            role="separator"
-            aria-orientation="vertical"
-            title="Drag to resize chat"
-            onPointerDown={handleResizeChat}
-            className="absolute left-0 top-0 h-full w-1 cursor-col-resize bg-transparent hover:bg-muted/20 z-10"
-          />
-          <div className="flex-1 shrink-0 p-4 overflow-y-auto">
-            <Chat
-              route={route}
-              name={name}
-              context={{ type: "word", content: word }}
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 }
