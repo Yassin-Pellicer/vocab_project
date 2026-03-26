@@ -228,6 +228,34 @@ a:hover {
   width: 100%;
 }
 
+.markdown p {
+  width: 100%;
+  font-size: 0.9em;
+}
+
+.markdown h1 {
+  width: 100%;
+  font-size: 1.1em;
+}
+
+.markdown h2 {
+  width: 100%;
+  font-size: 1.05em;
+  margin-block: 0px ;
+  padding-block: 0px ;
+}
+
+.markdown h3 {
+  width: 100%;
+  font-size: 1em;
+}
+
+.markdown li {
+  width: 100%;
+  font-size: 0.9em;
+}
+
+
 .markdown hr {
   border: 0px;
 }

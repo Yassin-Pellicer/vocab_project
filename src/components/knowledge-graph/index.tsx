@@ -53,7 +53,7 @@ export default function DictionaryGraph({
   const hasInitializedViewRef = useRef(false);
   const lastGraphKeyRef = useRef<string>("");
 
-  const { graphData } = useKnowledgeGraph(
+  const { graphData, showEmptyNodes, setShowEmptyNodes } = useKnowledgeGraph(
     route,
     name,
     title,
@@ -62,6 +62,8 @@ export default function DictionaryGraph({
   );
 
   const setSelectedWord = DictionaryContext((s) => s.setSelectedWord);
+  const searchField = DictionaryContext((s) => s.searchField);
+  const selectedTypes = DictionaryContext((s) => s.selectedTypes);
 
   useEffect(() => {
     doubleViewRef.current = doubleView;
@@ -167,6 +169,7 @@ export default function DictionaryGraph({
     const nodeFill = (styles.getPropertyValue("--color-card") || "#d1d5db").trim();
     const nodeStroke = (styles.getPropertyValue("--color-border") || "#9ca3af").trim();
     const textFill = (styles.getPropertyValue("--color-muted-foreground") || "#6b7280").trim();
+    const emptyNodeStroke = (styles.getPropertyValue("--color-muted-foreground") || "#9ca3af").trim();
     const strokeOpacity = 0.6;
     const strokeWidth = 1.5;
 
@@ -175,6 +178,49 @@ export default function DictionaryGraph({
       const targetId = typeof d.target === "string" ? d.target : d.target.id;
       return `${sourceId}__${targetId}`;
     };
+
+    const activeSearch = (word ?? searchField).trim();
+    const hasFilter = activeSearch !== "" || selectedTypes.length > 0;
+
+    // Build connected set
+    const connectedIds = new Set<string>();
+    links.forEach((link) => {
+      const sourceId = typeof link.source === "string" ? link.source : (link.source as GraphNode).id;
+      const targetId = typeof link.target === "string" ? link.target : (link.target as GraphNode).id;
+      connectedIds.add(sourceId);
+      connectedIds.add(targetId);
+    });
+
+    // Pre-scatter connected nodes around (0,0) — the simulation's coordinate origin,
+    // which the zoom transform centers on screen.
+    const connectedNodeList = nodes.filter((n) => connectedIds.has(n.id) || n.parent);
+    connectedNodeList.forEach((node, i) => {
+      if (node.x === undefined || node.y === undefined) {
+        const cols = Math.ceil(Math.sqrt(connectedNodeList.length));
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const spread = Math.max(200, connectedNodeList.length * 12);
+        const cellW = spread / cols;
+        const cellH = spread / Math.ceil(connectedNodeList.length / cols);
+        node.x = -spread / 2 + cellW * col + cellW / 2 + (Math.random() - 0.5) * cellW * 0.6;
+        node.y = -spread / 2 + cellH * row + cellH / 2 + (Math.random() - 0.5) * cellH * 0.6;
+      }
+    });
+
+    // Place isolated nodes randomly across the full canvas on first appearance.
+    // When a search is active, start them near center so they pop in the middle.
+    const isolatedNodes = nodes.filter((n) => !connectedIds.has(n.id) && !n.parent);
+    isolatedNodes.forEach((node) => {
+      if (node.x === undefined || node.y === undefined) {
+        if (hasFilter) {
+          node.x = (Math.random() - 0.5) * 200;
+          node.y = (Math.random() - 0.5) * 200;
+        } else {
+          node.x = (Math.random() - 0.5) * width * 2;
+          node.y = (Math.random() - 0.5) * height * 2;
+        }
+      }
+    });
 
     const linkSelection = container
       .selectAll<SVGLineElement, GraphLink>("line")
@@ -237,7 +283,6 @@ export default function DictionaryGraph({
     nodeEnter
       .append("circle")
       .attr("fill", nodeFill)
-      .attr("stroke", nodeStroke)
       .attr("stroke-width", 2);
 
     nodeEnter
@@ -249,11 +294,24 @@ export default function DictionaryGraph({
 
     const node = nodeEnter.merge(nodeSelection);
 
-    node.select<SVGCircleElement>("circle").attr("r", (d) => getNodeRadius(d));
+    node.select<SVGCircleElement>("circle")
+      // Isolated nodes get a larger base radius so they're easier to see
+      .attr("r", (d) => {
+        if (connectedIds.has(d.id) || d.parent) return getNodeRadius(d);
+        return getNodeRadius(d) + 3;
+      })
+      .attr("stroke", (d) => connectedIds.has(d.id) || d.parent ? nodeStroke : emptyNodeStroke)
+      .attr("stroke-dasharray", (d) => connectedIds.has(d.id) || d.parent ? null : "3 2")
+      .attr("stroke-opacity", (d) => connectedIds.has(d.id) || d.parent ? 1 : 0.5);
+
     node
       .select<SVGTextElement>("text")
       .text((d) => d.label)
-      .attr("dy", (d) => (d.parent ? 6 : -getNodeRadius(d) - 4));
+      .attr("dy", (d) => {
+        const r = connectedIds.has(d.id) || d.parent ? getNodeRadius(d) : getNodeRadius(d) + 3;
+        return d.parent ? 6 : -r - 4;
+      })
+      .attr("opacity", (d) => connectedIds.has(d.id) || d.parent ? 1 : 0.6);
 
     link.lower();
     node.raise();
@@ -276,11 +334,35 @@ export default function DictionaryGraph({
         "collision",
         d3
           .forceCollide<GraphNode>()
-          .radius((d) => getNodeRadius(d) + 5)
-          .strength(1),
+          .radius((d) => {
+            const r = connectedIds.has(d.id) || d.parent ? getNodeRadius(d) : getNodeRadius(d) + 3;
+            return r + (connectedIds.has(d.id) || d.parent ? 8 : 50);
+          })
+          .strength(0.5),
       )
-      .force("center", d3.forceCenter(width / 2, height / 2).strength(0.05))
-      .alpha(0.6)
+      // Connected nodes repel each other so the cluster spreads out naturally
+      .force(
+        "charge",
+        d3.forceManyBody<GraphNode>()
+          .strength((d) => {
+            if (d.parent) return 0;
+            if (connectedIds.has(d.id)) return -120;
+            return -8; // isolated: just enough to avoid stacking
+          })
+          .distanceMax((d) => connectedIds.has(d.id) ? 400 : 80),
+      )
+      // Only pull isolated search-matched nodes toward center — connected nodes float freely
+      .force(
+        "centerPull",
+        d3.forceRadial<GraphNode>(0, 0, 0)
+          .strength((d) => {
+            if (d.parent || connectedIds.has(d.id)) return 0;
+            return hasFilter ? 0.08 : 0;
+          }),
+      )
+      .force("isolatedRadial", null)
+      .force("center", null)
+      .alpha(0.8)
       .restart();
 
     simulation.on("tick", () => {
@@ -315,7 +397,7 @@ export default function DictionaryGraph({
       event.subject.fy = null;
     }
 
-  }, [graphData, navigate, route, name, setSelectedWord]);
+  }, [graphData, navigate, route, name, setSelectedWord, searchField, selectedTypes, word]);
 
   return (
     <div ref={containerRef} className="relative w-full h-full">
@@ -325,20 +407,29 @@ export default function DictionaryGraph({
         </div>
       )}
 
-      {showDirectToggle && (
+      <div className="absolute bottom-4 right-4 flex flex-col gap-2 items-end z-10">
+        {showDirectToggle && (
+          <button
+            className="px-3 h-fit bg-popover text-popover-foreground rounded-lg hover:opacity-90 border border-border"
+            onClick={() => {
+              if (isDirectOnlyControlled) {
+                onDirectOnlyChange?.(!directOnlyValue);
+              } else {
+                setDirectOnly((prev) => !prev);
+              }
+            }}
+          >
+            {directOnlyValue ? "All Relations" : "Direct Relations"}
+          </button>
+        )}
+
         <button
-          className="px-3 h-fit bg-popover text-popover-foreground rounded-lg right-4 top-4 hover:opacity-90 absolute border border-border"
-          onClick={() => {
-            if (isDirectOnlyControlled) {
-              onDirectOnlyChange?.(!directOnlyValue);
-            } else {
-              setDirectOnly((prev) => !prev);
-            }
-          }}
+          className="px-3 h-fit bg-popover text-popover-foreground rounded-lg hover:opacity-90 border border-border"
+          onClick={() => setShowEmptyNodes((prev) => !prev)}
         >
-          {directOnlyValue ? "All Relations" : "Direct Relations"}
+          {showEmptyNodes ? "Hide Isolated" : "Show Isolated"}
         </button>
-      )}
+      </div>
 
       <svg
         ref={svgRef}

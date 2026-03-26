@@ -118,8 +118,74 @@
   "35e3ddc5-9bf7-4d31-9e91-2491c526ff41": {
     "69572db1-100a-4672-a27a-c43b8e6a904c": "lieber"
   },
-  "bc085fe3-f8e0-450b-935f-57aee8b52174": {},
-  "96fb8b81-f88d-4dae-91fe-25784c818fc0": {},
-  "ff0ae271-552f-4ac7-839c-5cc42a7dd9e1": {},
-  "f497233e-e03d-4df9-9d5a-dd40dc2995d6": {}
+  "5dbf0840-9cd9-45f5-85d5-20c2b5129d6a": {
+    "601a549b-7e4b-4745-a1e0-efefd6126ff7": "Haar",
+    "4720097d-7f1f-4d95-9483-43204f0be97d": "Hals",
+    "e13d75a9-5479-4078-a581-b42b5c5febe8": "Auge",
+    "fd41a633-631b-45e0-8317-28aeb85a5847": "Nase",
+    "ea767009-38c9-4cb6-bb0e-a0da2d27c0ce": "Mund",
+    "830f5f6c-b111-414a-bf5e-683c48fb9fff": "Ohr"
+  },
+  "601a549b-7e4b-4745-a1e0-efefd6126ff7": {
+    "5dbf0840-9cd9-45f5-85d5-20c2b5129d6a": "Kopf"
+  },
+  "4720097d-7f1f-4d95-9483-43204f0be97d": {
+    "5dbf0840-9cd9-45f5-85d5-20c2b5129d6a": "Kopf",
+    "89b9a56d-a117-4a8f-bba4-0a28a872164a": "Rumpf"
+  },
+  "89b9a56d-a117-4a8f-bba4-0a28a872164a": {
+    "4720097d-7f1f-4d95-9483-43204f0be97d": "Hals",
+    "0ab95de2-84d0-4ab2-8873-e22bc57109f0": "Bein",
+    "64db337e-4361-4a29-8bc7-44e8a2e89330": "Arm",
+    "9c9d9fa1-7bd9-4d2e-8146-ccc1b319eef0": "Bauch"
+  },
+  "476eedd8-7e24-4c33-9661-b2a8bfe3bdc8": {
+    "269e75f8-fe42-4f56-b65c-8e708a6c8f51": "Unterarm"
+  },
+  "0ab95de2-84d0-4ab2-8873-e22bc57109f0": {
+    "89b9a56d-a117-4a8f-bba4-0a28a872164a": "Rumpf",
+    "6fdab861-a202-492a-ac87-f7b6de7fd291": "Fuß"
+  },
+  "64db337e-4361-4a29-8bc7-44e8a2e89330": {
+    "89b9a56d-a117-4a8f-bba4-0a28a872164a": "Rumpf",
+    "84825185-ce34-4256-9aec-851b99ee77cd": "Ellbogen"
+  },
+  "84825185-ce34-4256-9aec-851b99ee77cd": {
+    "64db337e-4361-4a29-8bc7-44e8a2e89330": "Arm",
+    "269e75f8-fe42-4f56-b65c-8e708a6c8f51": "Unterarm"
+  },
+  "269e75f8-fe42-4f56-b65c-8e708a6c8f51": {
+    "84825185-ce34-4256-9aec-851b99ee77cd": "Ellbogen",
+    "476eedd8-7e24-4c33-9661-b2a8bfe3bdc8": "Hand"
+  },
+  "6fdab861-a202-492a-ac87-f7b6de7fd291": {
+    "0ab95de2-84d0-4ab2-8873-e22bc57109f0": "Bein"
+  },
+  "e13d75a9-5479-4078-a581-b42b5c5febe8": {
+    "5dbf0840-9cd9-45f5-85d5-20c2b5129d6a": "Kopf",
+    "037d5864-d4bd-4745-aa25-95ac0535ef7c": "Augenbrauen",
+    "d4a328f2-2068-49d4-8f3f-beccf919258a": "Wimper"
+  },
+  "fd41a633-631b-45e0-8317-28aeb85a5847": {
+    "5dbf0840-9cd9-45f5-85d5-20c2b5129d6a": "Kopf"
+  },
+  "ea767009-38c9-4cb6-bb0e-a0da2d27c0ce": {
+    "5dbf0840-9cd9-45f5-85d5-20c2b5129d6a": "Kopf"
+  },
+  "830f5f6c-b111-414a-bf5e-683c48fb9fff": {
+    "5dbf0840-9cd9-45f5-85d5-20c2b5129d6a": "Kopf"
+  },
+  "037d5864-d4bd-4745-aa25-95ac0535ef7c": {
+    "e13d75a9-5479-4078-a581-b42b5c5febe8": "Auge"
+  },
+  "d4a328f2-2068-49d4-8f3f-beccf919258a": {
+    "e13d75a9-5479-4078-a581-b42b5c5febe8": "Auge"
+  },
+  "9c9d9fa1-7bd9-4d2e-8146-ccc1b319eef0": {
+    "89b9a56d-a117-4a8f-bba4-0a28a872164a": "Rumpf"
+  },
+  "b0d8a005-6fdb-469c-9408-c85be1cb0ee3": {},
+  "78a80018-e9ea-420f-8f4c-db973d140bc8": {},
+  "96ae3f56-3412-4657-b794-654f7f4d54e2": {},
+  "51046784-f469-4a88-9c6f-2236867432af": {}
 }

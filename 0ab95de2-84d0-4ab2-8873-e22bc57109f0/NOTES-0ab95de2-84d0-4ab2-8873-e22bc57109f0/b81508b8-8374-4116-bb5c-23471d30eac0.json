@@ -202,15 +202,9 @@
         "route": "./0ab95de2-84d0-4ab2-8873-e22bc57109f0",
         "name": "0ab95de2-84d0-4ab2-8873-e22bc57109f0",
         "title": "",
-        "doubleView": false,
-        "word": "fami",
+        "doubleView": true,
+        "word": "familien",
         "directOnly": false
-      }
-    },
-    {
-      "type": "paragraph",
-      "attrs": {
-        "textAlign": null
       }
     },
     {

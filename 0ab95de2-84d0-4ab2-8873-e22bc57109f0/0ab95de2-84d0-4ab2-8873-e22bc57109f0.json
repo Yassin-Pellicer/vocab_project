@@ -1452,29 +1452,6 @@
     "pair": [
       {
         "original": {
-          "word": "Haar",
-          "gender": "Neutrum",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Pelo",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [],
-        "observations": "Forma plural con -e, Haare"
-      }
-    ],
-    "dateAdded": "2025-11-24",
-    "type": "Nomen",
-    "uuid": "e11ec06d-cc7e-4cc4-806c-c6ef8009666e"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Ferien",
           "gender": "Feminin",
           "number": "Singular"
@@ -5007,28 +4984,6 @@
     "pair": [
       {
         "original": {
-          "word": "Mittwoch",
-          "gender": "Maskulin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Miércoles",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2026-01-12",
-    "type": "Nomen",
-    "uuid": "b2a57a61-1374-4e03-a160-9987f29c9650"
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Donnerstag",
           "gender": "Maskulin",
           "number": "Singular"
@@ -5568,28 +5523,6 @@
     "dateAdded": "2026-01-14",
     "type": "Nomen",
     "uuid": "3a75ac1d-3910-4b20-b545-5cbbafd8336d"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "Eltern",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Eltern",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2026-01-14",
-    "type": "Nomen",
-    "uuid": "29622e93-73da-4f4d-aa0f-fe16a9d0138b"
   },
   {
     "pair": [
@@ -6882,28 +6815,6 @@
     "dateAdded": "2026-03-02",
     "type": "Adverbien",
     "uuid": "6e9a48e8-6386-474d-acfb-65ac0ad129db"
-  },
-  {
-    "pair": [
-      {
-        "original": {
-          "word": "ganze",
-          "gender": "Maskulin",
-          "number": "Plural"
-        },
-        "translations": [
-          {
-            "word": "todo",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": []
-      }
-    ],
-    "dateAdded": "2026-03-02",
-    "type": "Determiner",
-    "uuid": "6044d273-1b8f-439d-8541-5e481dc20231"
   },
   {
     "pair": [
@@ -10321,5 +10232,1332 @@
     "dateAdded": "2026-03-23",
     "type": "Adverbien",
     "uuid": "f497233e-e03d-4df9-9d5a-dd40dc2995d6"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "dazu",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "además"
+          },
+          {
+            "word": "junto con"
+          }
+        ],
+        "definitions": [
+          "indica que algo se suma a otra cosa; también puede significar “además de eso” o “como complemento”"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Adverbien",
+    "uuid": "45c9b596-ea07-47ed-8e90-7153eff53a63"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Messer",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "knife"
+          }
+        ],
+        "definitions": [
+          "Utensilio para cortar, normalmente de metal con mango."
+        ]
+      },
+      {
+        "original": {
+          "word": "Messer",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "knives"
+          }
+        ],
+        "definitions": [
+          "Utensilios para cortar, varios cuchillos."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "ac5233f5-c1b6-4558-ac91-5d70a7928652"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Gabel",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "fork"
+          }
+        ],
+        "definitions": [
+          "Utensilio con dientes para comer (o sujetar comida)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Gabeln",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "forks"
+          }
+        ],
+        "definitions": [
+          "Utensilios con dientes para comer, varias horquillas."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "0c4b7b1a-8ebd-4d16-be10-f4a5340b8767"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Pfanne",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "pan"
+          }
+        ],
+        "definitions": [
+          "Utensilio para cocinar y freír en la cocina."
+        ]
+      },
+      {
+        "original": {
+          "word": "Pfannen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "pans"
+          }
+        ],
+        "definitions": [
+          "Utensilios para cocinar y freír, varias sartenes."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "53b69e90-52d6-4ea4-a17a-2595f6fbb723"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Topf",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "pot"
+          }
+        ],
+        "definitions": [
+          "Utensilio para cocinar (hervir, guisar) con tapa o sin tapa."
+        ]
+      },
+      {
+        "original": {
+          "word": "Töpfe",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "pots"
+          }
+        ],
+        "definitions": [
+          "Utensilios para cocinar, varios recipientes de cocción."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "ad8ff357-9100-49fc-8962-6145ae6ba43e"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schüssel",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "bowl"
+          }
+        ],
+        "definitions": [
+          "Recipiente para mezclar, servir o preparar comida."
+        ]
+      },
+      {
+        "original": {
+          "word": "Schüsseln",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "bowls"
+          }
+        ],
+        "definitions": [
+          "Recipientes para mezclar o servir, varios cuencos."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "972c2630-65db-4577-a399-fe4df456e4fe"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schneebesen",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "whisk"
+          }
+        ],
+        "definitions": [
+          "Utensilio para batir (huevos, crema, masa)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Schneebesen",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "whisks"
+          }
+        ],
+        "definitions": [
+          "Utensilios para batir, varios batidores."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "0cf4f7e1-b43c-45be-8e6c-37ab572d32c5"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Teller",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "plato"
+          }
+        ],
+        "definitions": [
+          "Plato (para servir la comida)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Teller",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "platos"
+          }
+        ],
+        "definitions": [
+          "Platos (para servir)."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "6543cc6f-1c4a-4bba-9a25-fa154f83dd89"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Serviette",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "servilleta"
+          }
+        ],
+        "definitions": [
+          "Servilleta de mesa."
+        ]
+      },
+      {
+        "original": {
+          "word": "Servietten",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "servilletas"
+          }
+        ],
+        "definitions": [
+          "Servilletas de mesa."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "6ea2d6b2-e785-495c-9ecb-4b1e8c399ac1"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Weinglas",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "copa"
+          }
+        ],
+        "definitions": [
+          "Copa (por ejemplo, para vino)."
+        ]
+      },
+      {
+        "original": {
+          "word": "Weingläser",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "copas"
+          }
+        ],
+        "definitions": [
+          "Copas (por ejemplo, de vino)."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "12f5ef1a-58a6-4fb6-828c-f86302ab6985"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Dessert",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "postre"
+          }
+        ],
+        "definitions": [
+          "Postre."
+        ]
+      },
+      {
+        "original": {
+          "word": "Desserts",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "postres"
+          }
+        ],
+        "definitions": [
+          "Postres."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "e90f1819-48b7-4049-8a7b-cab85bcc1f59"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schöpflöffel",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "cucharón"
+          }
+        ],
+        "definitions": [
+          "Cuchara grande para servir sopas o guisos."
+        ]
+      },
+      {
+        "original": {
+          "word": "Schöpflöffel",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "cucharones"
+          }
+        ],
+        "definitions": [
+          "Cucharones grandes para servir, varios."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "9dc790f6-69d3-4620-a311-b5d992022b4f"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Mittwochh",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Miércoles",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-12",
+    "type": "Nomen",
+    "uuid": "b2a57a61-1374-4e03-a160-9987f29c9650"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kopf",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "cabeza"
+          }
+        ],
+        "definitions": [
+          "body part: the head"
+        ]
+      },
+      {
+        "original": {
+          "word": "Köpfe",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "cabezas"
+          }
+        ],
+        "definitions": [
+          "plural: heads"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "5dbf0840-9cd9-45f5-85d5-20c2b5129d6a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Auge",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "ojo"
+          }
+        ],
+        "definitions": [
+          "body part: an eye",
+          "plural: Augen"
+        ]
+      },
+      {
+        "original": {
+          "word": "Augen",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "ojos"
+          }
+        ],
+        "definitions": [
+          "plural of Auge: eyes"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "e13d75a9-5479-4078-a581-b42b5c5febe8"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ohr",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "oreja"
+          }
+        ],
+        "definitions": [
+          "body part: an ear",
+          "plural: Ohren"
+        ]
+      },
+      {
+        "original": {
+          "word": "Ohren",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "orejas"
+          }
+        ],
+        "definitions": [
+          "plural of Ohr: ears"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "830f5f6c-b111-414a-bf5e-683c48fb9fff"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Nase",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "nariz"
+          }
+        ],
+        "definitions": [
+          "body part: the nose"
+        ]
+      },
+      {
+        "original": {
+          "word": "Nasen",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "narices"
+          }
+        ],
+        "definitions": [
+          "plural: noses"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "fd41a633-631b-45e0-8317-28aeb85a5847"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Mund",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "boca"
+          }
+        ],
+        "definitions": [
+          "body part: the mouth",
+          "plural: Münder"
+        ]
+      },
+      {
+        "original": {
+          "word": "Münder",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "bocas"
+          }
+        ],
+        "definitions": [
+          "plural of Mund: mouths"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "ea767009-38c9-4cb6-bb0e-a0da2d27c0ce"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Arm",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "brazo"
+          }
+        ],
+        "definitions": [
+          "body part: an arm",
+          "plural: Arme"
+        ]
+      },
+      {
+        "original": {
+          "word": "Arme",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "brazos"
+          }
+        ],
+        "definitions": [
+          "plural of Arm: arms"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "64db337e-4361-4a29-8bc7-44e8a2e89330"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Hand",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "mano"
+          }
+        ],
+        "definitions": [
+          "body part: a hand",
+          "plural: Hände"
+        ]
+      },
+      {
+        "original": {
+          "word": "Hände",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "manos"
+          }
+        ],
+        "definitions": [
+          "plural of Hand: hands"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "476eedd8-7e24-4c33-9661-b2a8bfe3bdc8"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Fuß",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "pie"
+          }
+        ],
+        "definitions": [
+          "body part: a foot",
+          "plural: Füße"
+        ]
+      },
+      {
+        "original": {
+          "word": "Füße",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "pies"
+          }
+        ],
+        "definitions": [
+          "plural of Fuß: feet"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "6fdab861-a202-492a-ac87-f7b6de7fd291"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Brust",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "pecho"
+          }
+        ],
+        "definitions": [
+          "body part: the chest"
+        ]
+      },
+      {
+        "original": {
+          "word": "Brüste",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "pechos"
+          }
+        ],
+        "definitions": [
+          "plural: chests/breasts"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "5d7c6820-923a-4b06-bee6-3684b8bb1cfb"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Haar",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "cabello, pelo, hebra de pelo (singular)"
+          }
+        ],
+        "definitions": [
+          "body part: hair"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "601a549b-7e4b-4745-a1e0-efefd6126ff7"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wimper",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "pestaña"
+          }
+        ],
+        "definitions": [
+          "body part: an eyelash"
+        ]
+      },
+      {
+        "original": {
+          "word": "Wimpern",
+          "gender": "-",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "pestañas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "d4a328f2-2068-49d4-8f3f-beccf919258a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Knie",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "knee"
+          }
+        ],
+        "definitions": [
+          "knee (part of the leg)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "d76847d1-633f-42f2-b0b0-d8409fd292b9"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Schulter",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "shoulder"
+          }
+        ],
+        "definitions": [
+          "shoulder (upper part of the arm/torso)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "921d875a-4690-40e0-93d7-a37c0b4a0d03"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Ellbogen",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "elbow"
+          }
+        ],
+        "definitions": [
+          "elbow (joint between upper and lower arm)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "84825185-ce34-4256-9aec-851b99ee77cd"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Handgelenk",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "wrist"
+          }
+        ],
+        "definitions": [
+          "wrist (joint between hand and forearm)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "15d2d2ac-fb4c-4fb2-9e9d-a738b188a59b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Hals",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "neck"
+          }
+        ],
+        "definitions": [
+          "La parte del cuerpo que une la cabeza con el tronco."
+        ]
+      },
+      {
+        "original": {
+          "word": "Hälse",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "necks"
+          }
+        ],
+        "definitions": [
+          "Las partes del cuerpo que unen la cabeza con el tronco (plural)."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "4720097d-7f1f-4d95-9483-43204f0be97d"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Hintern",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "culo"
+          },
+          {
+            "word": "trasero"
+          }
+        ],
+        "definitions": [
+          "Parte del cuerpo entre la espalda y las piernas; coloquial: “culo / trasero”."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "16a5ec20-3748-40f1-90aa-dc21331f4dd5"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Rumpf",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "torso"
+          }
+        ],
+        "definitions": [
+          "body part: torso (upper body)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Rümpfe",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "torso"
+          }
+        ],
+        "definitions": [
+          "plural: torsos"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "89b9a56d-a117-4a8f-bba4-0a28a872164a"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Unterarm",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "forearm"
+          }
+        ],
+        "definitions": [
+          "anatomy: forearm"
+        ]
+      },
+      {
+        "original": {
+          "word": "Unterarme",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "forearms"
+          }
+        ],
+        "definitions": [
+          "plural of Unterarm: forearms"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "269e75f8-fe42-4f56-b65c-8e708a6c8f51"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Augenbrauen",
+          "gender": "Plural",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "cejas"
+          }
+        ],
+        "definitions": [
+          "plural: eyebrows"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "037d5864-d4bd-4745-aa25-95ac0535ef7c"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Bauch",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "vientre"
+          }
+        ],
+        "definitions": [
+          "body part: the belly/abdomen"
+        ]
+      },
+      {
+        "original": {
+          "word": "Bäuche",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "vientres"
+          }
+        ],
+        "definitions": [
+          "plural of Bauch: bellies"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "9c9d9fa1-7bd9-4d2e-8146-ccc1b319eef0"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kakerlake",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "cucaracha"
+          }
+        ],
+        "definitions": [
+          "insect: a cockroach"
+        ]
+      },
+      {
+        "original": {
+          "word": "Kakerlaken",
+          "gender": "Feminin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "cucarachas",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-03-24",
+    "type": "Nomen",
+    "uuid": "ee8adb38-c7f0-4141-9d61-a250f0f2a688"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "traurig",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "triste"
+          }
+        ],
+        "definitions": [
+          "Gefühl von Niedergeschlagenheit; nicht glücklich.",
+          "Synonym: unglücklich."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-26",
+    "type": "Adjektive",
+    "uuid": "b0d8a005-6fdb-469c-9408-c85be1cb0ee3"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Geburtstag",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "cumpleaños"
+          }
+        ],
+        "definitions": [
+          "Día especial en el que se celebra el nacimiento de alguien."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-26",
+    "type": "Nomen",
+    "uuid": "78a80018-e9ea-420f-8f4c-db973d140bc8"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "erinnern",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "recordar"
+          }
+        ],
+        "definitions": [
+          "To remember; to call someone/something to mind"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-26",
+    "type": "Verben",
+    "uuid": "96ae3f56-3412-4657-b794-654f7f4d54e2"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Eltern",
+          "gender": "Feminin",
+          "number": "plural"
+        },
+        "translations": [
+          {
+            "word": "Padres",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2026-01-14",
+    "type": "Nomen",
+    "uuid": "29622e93-73da-4f4d-aa0f-fe16a9d0138b"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "anrufen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "llamar por teléfono"
+          }
+        ],
+        "definitions": [
+          "To call (someone) by phone; to phone someone."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-26",
+    "type": "Verben",
+    "uuid": "51046784-f469-4a88-9c6f-2236867432af"
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "ganze",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "todo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      },
+      {
+        "original": {
+          "word": "ganz",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "completamente",
+            "gender": "",
+            "number": ""
+          },
+          {
+            "word": "del todo / muy",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "\"No está del todo desanimada\" -> Aber sie ist nicht ganz traurig."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-02",
+    "type": "Determiner",
+    "uuid": "6044d273-1b8f-439d-8541-5e481dc20231"
   }
 ]

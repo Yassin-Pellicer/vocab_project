@@ -60,7 +60,7 @@ export function FloatingAssistantChat({
     const ch = Math.min(Math.max(MIN_H, h), vh - 2 * MARGIN);
     return {
       x: Math.min(Math.max(MARGIN, x), Math.max(MARGIN, vw - cw - MARGIN)),
-      y: Math.min(Math.max(MARGIN, y), Math.max(MARGIN, vh - ch - MARGIN)),
+      y: Math.min(Math.max(60 + 8, y), Math.max(MARGIN, vh - ch - MARGIN)),
       width: cw,
       height: ch,
     };

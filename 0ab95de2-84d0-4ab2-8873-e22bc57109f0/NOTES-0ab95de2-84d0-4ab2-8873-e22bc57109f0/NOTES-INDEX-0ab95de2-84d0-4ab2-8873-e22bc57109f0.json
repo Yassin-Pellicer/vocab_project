@@ -11,6 +11,10 @@
             "id": "b81508b8-8374-4116-bb5c-23471d30eac0",
             "title": "Meine Familie",
             "children": []
+          },
+          {
+            "id": "bbba1c13-a553-47f6-ba32-405bb15d9afd",
+            "title": "Party"
           }
         ]
       }
@@ -27,7 +31,8 @@
       },
       {
         "id": "92982356-9bc0-4474-9303-5a75bdc431c3",
-        "title": "Sesión 23/03/2026"
+        "title": "Sesión 23/03/2026",
+        "children": []
       }
     ]
   }

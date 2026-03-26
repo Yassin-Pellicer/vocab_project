@@ -201,7 +201,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Una versión un poco más mejorada del texto sería la siguiente →"
+          "text": "Una versión un poco más mejorada del texto sería la siguiente:"
         }
       ]
     },
@@ -229,7 +229,7 @@
             },
             {
               "type": "text",
-              "text": "im Teppanyaki Zhen. Das ist ein japanisches Restaurant in Alzira. Die Atmosphäre ist angenehm und das Essen schmeckt jedes Mal sehr frisch. Auf der Karte gibt es viele Gerichte, die man ausprobieren kann."
+              "text": "im Teppanyaki Zhen. Das ist ein japanisches Restaurant in Alzira. Die Atmosphäre ist angenehm und das Essen schmeckt immer sehr frisch. Auf der Karte gibt es viele Gerichte, die man ausprobieren kann."
             }
           ]
         },

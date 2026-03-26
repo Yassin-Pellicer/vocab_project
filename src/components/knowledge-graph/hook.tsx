@@ -123,6 +123,26 @@ export function useKnowledgeGraph(
         return next;
       });
 
+      // Also add dictionary entries that have no graph entry at all (truly unconnected words)
+      list.forEach((entry: TranslationEntry) => {
+        if (!entry.uuid) return;
+        if (nodeIds.has(entry.uuid)) return;
+        const prev = prevNodeMap.get(entry.uuid);
+        const next: GraphNode = {
+          id: entry.uuid,
+          label: entry.pair[0]?.original?.word ?? entry.uuid,
+          parent: false,
+          wordData: entry,
+        };
+        if (prev) {
+          next.x = prev.x;
+          next.y = prev.y;
+          next.fx = prev.fx;
+          next.fy = prev.fy;
+        }
+        nodes.push(next);
+      });
+
       setGraphData({ nodes, links });
     } catch (error) {
       console.error("Error fetching graph:", error);
@@ -162,7 +182,7 @@ export function useKnowledgeGraph(
     let filteredLinks = links;
     const activeSearch = word?.trim() || searchField.trim();
 
-    const selectedWordId = directOnly ? selectedWord?.uuid : undefined;
+    const selectedWordId = selectedWord?.uuid;
     if (activeSearch !== "" || selectedTypes.length > 0 || (directOnly && selectedWordId)) {
       const adjacency = new Map<string, Set<string>>();
 
@@ -183,16 +203,21 @@ export function useKnowledgeGraph(
         adjacency.get(targetId)!.add(sourceId);
       });
 
-      const anchorIds =
-        activeSearch !== "" || selectedTypes.length > 0
-          ? new Set<string>(filteredNodeIds)
-          : selectedWordId
-            ? new Set<string>([selectedWordId])
-            : new Set<string>();
+      // When directOnly is on, always anchor on the selected word — never on search results.
+      // Search still applies to the non-direct (all-relations) branch below.
+      const directAnchor = directOnly && selectedWord?.uuid
+        ? new Set<string>([selectedWord.uuid])
+        : null;
 
-      if (directOnly && anchorIds.size > 0) {
-        const directIds = new Set<string>(anchorIds);
-        anchorIds.forEach((anchorId) => {
+      const anchorIds = directAnchor
+        ? directAnchor
+        : activeSearch !== "" || selectedTypes.length > 0
+          ? new Set<string>(filteredNodeIds)
+          : new Set<string>();
+
+      if (directOnly && directAnchor && directAnchor.size > 0) {
+        const directIds = new Set<string>(directAnchor);
+        directAnchor.forEach((anchorId) => {
           const neighbors = adjacency.get(anchorId);
           if (!neighbors) return;
           neighbors.forEach((neighborId) => {
@@ -207,7 +232,7 @@ export function useKnowledgeGraph(
             typeof link.source === "string" ? link.source : link.source.id;
           const targetId =
             typeof link.target === "string" ? link.target : link.target.id;
-          return anchorIds.has(sourceId) || anchorIds.has(targetId);
+          return directAnchor.has(sourceId) || directAnchor.has(targetId);
         });
       } else {
         const visited = new Set<string>(filteredNodeIds);
@@ -245,6 +270,7 @@ export function useKnowledgeGraph(
       }
     }
 
+    // Identify which nodes are connected (appear in at least one link)
     const connectedNodeIds = new Set<string>();
     filteredLinks.forEach((link) => {
       const sourceId =
@@ -255,9 +281,29 @@ export function useKnowledgeGraph(
       connectedNodeIds.add(targetId);
     });
 
-    filteredNodes = filteredNodes.filter((node) =>
-      connectedNodeIds.has(node.id),
-    );
+    // Show isolated nodes when:
+    //   - the user has explicitly toggled showEmptyNodes on, OR
+    //   - a search / type filter is active (auto-on so matches with no connections are visible)
+    const hasFilter = activeSearch !== "" || selectedTypes.length > 0;
+    const effectiveShowEmpty = showEmptyNodes || hasFilter;
+
+    if (effectiveShowEmpty) {
+      // Pull isolated candidates from the full node list (not just filteredNodes,
+      // which at this point only contains nodes reachable via links)
+      const isolatedCandidates = nodes.filter((node) => {
+        if (connectedNodeIds.has(node.id)) return false;
+        if (node.id === ROOT_ID) return false;
+        if (hasFilter) return filteredNodeIds.has(node.id);
+        return true; // showEmptyNodes with no filter → all disconnected
+      });
+
+      const connectedNodes = filteredNodes.filter((node) => connectedNodeIds.has(node.id));
+      filteredNodes = [...connectedNodes, ...isolatedCandidates];
+    } else {
+      filteredNodes = filteredNodes.filter((node) =>
+        connectedNodeIds.has(node.id),
+      );
+    }
 
     filteredLinks = filteredLinks.filter((link) => {
       const sourceId =
@@ -266,6 +312,58 @@ export function useKnowledgeGraph(
         typeof link.target === "string" ? link.target : link.target.id;
       return connectedNodeIds.has(sourceId) && connectedNodeIds.has(targetId);
     });
+
+    // Always show the selected word and its direct neighbors, even if filtered out.
+    // Build a full adjacency from the unfiltered links for this lookup.
+    const selectedId = selectedWord?.uuid;
+    if (selectedId) {
+      const fullAdjacency = new Map<string, Set<string>>();
+      links.forEach((link) => {
+        const sourceId = typeof link.source === "string" ? link.source : link.source.id;
+        const targetId = typeof link.target === "string" ? link.target : link.target.id;
+        if (!fullAdjacency.has(sourceId)) fullAdjacency.set(sourceId, new Set());
+        if (!fullAdjacency.has(targetId)) fullAdjacency.set(targetId, new Set());
+        fullAdjacency.get(sourceId)!.add(targetId);
+        fullAdjacency.get(targetId)!.add(sourceId);
+      });
+
+      const pinnedIds = new Set<string>([selectedId]);
+      fullAdjacency.get(selectedId)?.forEach((neighborId) => {
+        if (neighborId !== ROOT_ID) pinnedIds.add(neighborId);
+      });
+
+      const existingNodeIds = new Set(filteredNodes.map((n) => n.id));
+      const existingLinkKeys = new Set(
+        filteredLinks.map((l) => {
+          const s = typeof l.source === "string" ? l.source : l.source.id;
+          const t = typeof l.target === "string" ? l.target : l.target.id;
+          return `${s}__${t}`;
+        }),
+      );
+
+      // Add missing pinned nodes
+      nodes.forEach((node) => {
+        if (pinnedIds.has(node.id) && !existingNodeIds.has(node.id)) {
+          filteredNodes = [...filteredNodes, node];
+          existingNodeIds.add(node.id);
+        }
+      });
+
+      // Add missing links between pinned nodes
+      links.forEach((link) => {
+        const sourceId = typeof link.source === "string" ? link.source : link.source.id;
+        const targetId = typeof link.target === "string" ? link.target : link.target.id;
+        const key = `${sourceId}__${targetId}`;
+        if (
+          pinnedIds.has(sourceId) &&
+          pinnedIds.has(targetId) &&
+          !existingLinkKeys.has(key)
+        ) {
+          filteredLinks = [...filteredLinks, link];
+          existingLinkKeys.add(key);
+        }
+      });
+    }
 
     return { nodes: filteredNodes, links: filteredLinks };
   }, [
@@ -276,7 +374,7 @@ export function useKnowledgeGraph(
     filteredNodeIds,
     word,
     directOnly,
-    directOnly ? selectedWord?.uuid : undefined,
+    selectedWord?.uuid,
   ]);
 
   return {
