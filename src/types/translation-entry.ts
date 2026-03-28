@@ -5,5 +5,5 @@ export type TranslationEntry = {
   pair: OriginalTranslationPair[];
   dateAdded: string;
   type: string;
+  linkedWordIds?: string[];
 }
-

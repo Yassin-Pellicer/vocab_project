@@ -339,7 +339,6 @@ export default function ConfigureDictModal({
           <DialogHeader>
             <DialogTitle>
               <div className="flex flex-row items-center gap-2 mb-2">
-              <Settings size={18}/>
               <p>Configure <b>{dictName}</b></p>
               </div>
             </DialogTitle>

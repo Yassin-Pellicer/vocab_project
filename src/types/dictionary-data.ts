@@ -8,5 +8,7 @@ export interface DictionaryData {
   wordOfTheDay: TranslationEntry | null;
   recentWords: TranslationEntry[];
   totalWords: number;
+  knowledgeIndex: number;
+  typeCounts: Record<string, number>;
   randomNote: SidebarNode | null;
 }

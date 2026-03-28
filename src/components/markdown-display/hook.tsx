@@ -17,7 +17,7 @@ export function useMarkdown(
   const [selectOption, setSelectOption] = useState<"notes" | "conjugation">("notes");
   const [isEditing, setIsEditing] = useState(false);
   const [linkedWordList, setLinkedWordList] = useState<Record<string, string>>({});
-  const { selectedWord, dictionaryMetadata } = DictionaryContext();
+  const { selectedWord, dictionaryMetadata, dictionaries, setSelectedWord } = DictionaryContext();
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -44,23 +44,25 @@ export function useMarkdown(
 
   const handleWordSelect = (connection: TranslationEntry) => {
     const connectionUuid = connection.uuid;
-    if (!uuid || !connectionUuid) return;
+    if (!uuid || !connectionUuid || connectionUuid === uuid) return;
     const text = connection.pair[0].original.word;
-    const wordOfOrigin = word.pair[0].original.word || "";
-    setLinkedWordList((prev) => ({
-      ...prev,
-      [connectionUuid]: text,
-    }));
-    window.api.saveGraph(
+    setLinkedWordList((prev) => {
+      if (prev[connectionUuid]) {
+        return prev;
+      }
+      return {
+        ...prev,
+        [connectionUuid]: text,
+      };
+    });
+    void window.api.saveGraph(
       route,
       name,
       {
         uuid,
-        word: wordOfOrigin,
       },
       {
         uuid: connectionUuid,
-        word: text,
       }
     );
   };
@@ -72,12 +74,19 @@ export function useMarkdown(
       delete updated[id];
       return updated;
     });
-    window.api.deleteGraphEntry(
+    void window.api.deleteGraphEntry(
       route,
       name,
-      { uuid, word: "" },
-      { uuid: id, word: linkedWordList[id] ?? "" }
+      { uuid },
+      { uuid: id }
     );
+  };
+
+  const handleLinkedWordClick = (id: string) => {
+    if (!id || id === uuid) return;
+    const entry = dictionaries[name]?.find((item) => item.uuid === id);
+    if (!entry) return;
+    setSelectedWord(entry);
   };
 
   useEffect(() => {
@@ -118,6 +127,7 @@ export function useMarkdown(
     setIsEditing,
     handleWordSelect,
     handleWordDelete,
+    handleLinkedWordClick,
     linkedWordList,
     dictionaryMetadata,
     containerRef,

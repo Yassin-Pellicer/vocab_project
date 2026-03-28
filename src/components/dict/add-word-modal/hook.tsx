@@ -34,6 +34,7 @@ export default function useWordModalHooks({
     pair: [emptyPair],
     dateAdded: new Date().toISOString().split("T")[0],
     type: "noun",
+    linkedWordIds: [],
   };
 
   const [formData, setFormData] = useState<TranslationEntry>(template);

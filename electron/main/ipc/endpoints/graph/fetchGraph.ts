@@ -1,21 +1,39 @@
 import { ipcMain } from "electron";
-import path from "path";
 import fs from "fs";
+import {
+  buildGraphPayload,
+  getDictionaryFilePath,
+  loadTranslationsWithGraphLinks,
+  removeLegacyGraphFileIfExists,
+  writeTranslations,
+} from "./graph-storage";
 
 export default function fetchGraph() {
   ipcMain.handle("fetchGraph", async (_event, route, name, _uuid) => {
     try {
-      const filePath = path.join(route, `GRAPH-${name}.json`);
-      console.log("Fetching graph from", filePath, "for dictionary", name);
-      if (!fs.existsSync(filePath)) {
-        fs.writeFileSync(filePath, "{}", "utf-8");
+      const dictionaryFilePath = getDictionaryFilePath(route, name);
+      if (!fs.existsSync(dictionaryFilePath)) {
+        return _uuid ? {} : {};
       }
-      const data = fs.readFileSync(filePath, "utf-8");
-      const json = JSON.parse(data);
-      if(_uuid) {
-        return json[_uuid] || {};
+
+      const {
+        dictionaryFilePath: resolvedDictionaryPath,
+        legacyGraphFilePath,
+        translations,
+        changed,
+      } = loadTranslationsWithGraphLinks(route, name);
+
+      if (changed) {
+        writeTranslations(resolvedDictionaryPath, translations);
       }
-      return json || {};
+
+      removeLegacyGraphFileIfExists(legacyGraphFilePath);
+
+      const payload = buildGraphPayload(translations);
+      if (_uuid) {
+        return payload[_uuid] || {};
+      }
+      return payload;
     } catch (error) {
       console.error("Error reading JSON file:", error);
       throw new Error("Failed to load JSON file.");

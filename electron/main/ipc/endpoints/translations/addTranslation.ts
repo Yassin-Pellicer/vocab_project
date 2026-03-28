@@ -1,9 +1,14 @@
 import { ipcMain } from "electron";
-import path from "path";
 import fs from "fs";
 import { v4 as uuid } from "uuid";
 import type { TranslationEntry } from "@/types/translation-entry";
 import { broadcastToAllWindows } from "../../broadcast";
+import {
+  loadTranslationsWithGraphLinks,
+  normalizeTranslationGraphLinks,
+  removeLegacyGraphFileIfExists,
+  writeTranslations,
+} from "../graph/graph-storage";
 
 export default function addTranslation() {
   ipcMain.handle(
@@ -16,43 +21,55 @@ export default function addTranslation() {
       _name: string
     ) => {
       try {
-        const filePath = path.join(_route, `${_name}.json`);
+        const {
+          dictionaryFilePath,
+          legacyGraphFilePath,
+          translations: loadedTranslations,
+          changed: normalizedChanged,
+        } = loadTranslationsWithGraphLinks(_route, _name);
 
-        if (!fs.existsSync(filePath)) {
-          throw new Error(`The file ${filePath} does not exist.`);
-        }
+        let translations = [...loadedTranslations];
+        let changed = normalizedChanged;
 
-        const json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-
-        let translations = Array.isArray(json) ? json : [];
         if (_word) {
+          const existingEntry = translations.find(
+            (current: TranslationEntry) => current.uuid === _word,
+          );
           translations = translations.filter(
             (t: TranslationEntry) => t.uuid !== _word
           );
-        }
-        else {
+          entry.linkedWordIds = existingEntry?.linkedWordIds
+            ? [...existingEntry.linkedWordIds]
+            : [];
+        } else {
           const entryUuid = entry.uuid || uuid();
           entry.uuid = entryUuid;
-
-          const GraphfilePath = path.join(_route, `GRAPH-${_name}.json`);
-          console.log("Saving graph to", GraphfilePath, "for uuid:", entry.uuid);
-
-          let jsonGraph: Record<string, Record<string, string>> = {};
-
-          if (fs.existsSync(GraphfilePath)) {
-            jsonGraph = JSON.parse(fs.readFileSync(GraphfilePath, "utf-8"));
+          if (!Array.isArray(entry.linkedWordIds)) {
+            entry.linkedWordIds = [];
           }
-
-          jsonGraph[entryUuid] = {};
-          fs.writeFileSync(GraphfilePath, JSON.stringify(jsonGraph, null, 2), "utf-8");
         }
+
+        if (entry.uuid) {
+          const uniqueLinks = Array.from(
+            new Set(
+              (entry.linkedWordIds ?? []).filter(
+                (targetId): targetId is string =>
+                  typeof targetId === "string" && targetId !== entry.uuid,
+              ),
+            ),
+          ).sort();
+          entry.linkedWordIds = uniqueLinks;
+        }
+
         translations.push(entry);
 
-        fs.writeFileSync(
-          filePath,
-          JSON.stringify(translations, null, 2),
-          "utf-8"
-        );
+        const graphChanged = normalizeTranslationGraphLinks(translations);
+        changed = changed || graphChanged;
+
+        writeTranslations(dictionaryFilePath, translations);
+        if (changed || fs.existsSync(legacyGraphFilePath)) {
+          removeLegacyGraphFileIfExists(legacyGraphFilePath);
+        }
 
         broadcastToAllWindows("app-data-changed");
         return { success: true };

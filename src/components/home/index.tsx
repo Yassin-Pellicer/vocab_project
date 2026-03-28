@@ -5,6 +5,7 @@ import {
   Library,
   WholeWord,
   Notebook,
+  Settings,
 } from "lucide-react";
 
 import WordCard from "../word-card";
@@ -22,6 +23,7 @@ import { useRef, useState, useEffect } from "react";
 import { NotesContext } from "@/context/notes-context";
 
 import useHome from "./hook";
+import { FloatingAssistantChat } from "../chat/floating-assistant-chat";
 
 function DictRow({
   dict,
@@ -33,6 +35,11 @@ function DictRow({
 
   const leftRef = useRef<HTMLDivElement>(null);
   const [leftHeight, setLeftHeight] = useState<number | undefined>(undefined);
+  const chatRef = useRef<HTMLDivElement>(null);
+  const [chatHeight, setChatHeight] = useState<number | undefined>(undefined);
+  const typeEntries = Object.entries(dict.typeCounts ?? {}).sort((a, b) => b[1] - a[1]);
+  const topTypes = typeEntries.slice(0, 5);
+  const maxTypeCount = topTypes[0]?.[1] ?? 0;
 
   useEffect(() => {
     const el = leftRef.current;
@@ -43,6 +50,42 @@ function DictRow({
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const el = chatRef.current;
+    if (!el) return;
+
+    let rafId: number | null = null;
+    const bottomGap = 16;
+
+    const measure = () => {
+      rafId = null;
+      const rect = el.getBoundingClientRect();
+      if (rect.height === 0 && getComputedStyle(el).display === "none") return;
+      const available = window.innerHeight - rect.top - bottomGap;
+      if (available > 0) {
+        setChatHeight(Math.floor(available));
+      }
+    };
+
+    const schedule = () => {
+      if (rafId != null) return;
+      rafId = window.requestAnimationFrame(measure);
+    };
+
+    schedule();
+    const scrollContainer = el.closest<HTMLElement>("[data-home-scroll]");
+    scrollContainer?.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+
+    return () => {
+      if (rafId != null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      scrollContainer?.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [leftHeight]);
 
   return (
     <div className="flex flex-col w-full gap-4 p-4">
@@ -55,8 +98,8 @@ function DictRow({
           {dict.totalWords} words
         </span>
       </div>
-      <div className="grid lg:grid-cols-[65%_35%] grid-cols-1 gap-4 items-start ">
-        <div ref={leftRef} className="flex flex-col h-fit!">
+      <div className="flex xl:flex-row flex-col gap-4 items-start ">
+        <div ref={leftRef} className="flex flex-col h-fit! xl:w-2/3 w-full">
           <div className="grid grid-cols-1 2xl:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
             <div className="flex flex-col">
               {dict.wordOfTheDay ? (
@@ -66,7 +109,7 @@ function DictRow({
                   No word of the day.
                 </p>
               )}
-              <div className="flex justify-between flex-row w-full gap-2 mt-1">
+              <div className="flex justify-between flex-row w-full gap-2 mt-1 border rounded-2xl p-2">
                 <Link
                   to={`/dictionary?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
                   className="w-full!"
@@ -77,11 +120,17 @@ function DictRow({
                     <ArrowRight size={16} />
                   </Button>
                 </Link>
+                <ConfigureDictModal dictId={dict.id} dictName={dict.name}>
+                  <Button variant="outline" className="flex items-center gap-1">
+                    <Settings size={16} />
+                    Configure
+                  </Button>
+                </ConfigureDictModal>
               </div>
-              <h3 className="text-sm! tracking-tighter font-semibold italic text-muted-foreground mt-4!">
-                Recent words added to this dictionary
+              <h3 className="text-xs text-muted-foreground mt-3! uppercase">
+                Recent words added
               </h3>
-              <div className="flex flex-col gap-2 mt-1">
+              <div className="flex flex-col gap-2 border rounded-2xl p-3 mt-2">
                 {dict.recentWords.map((word) => (
                   <WordCard
                     key={word.uuid ?? `${dict.id}-${word.dateAdded}`}
@@ -97,33 +146,52 @@ function DictRow({
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">
                   Dictionary Snapshot
                 </p>
-                <div className="mt-3 space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Total words</span>
-                    <span className="font-semibold text-foreground">
+                <div className="mt-3 grid grid-cols-2 gap-3">
+                  <div className="rounded-2xl border border-border/60 bg-card/70 p-3 shadow-sm">
+                    <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                      Total Words
+                    </p>
+                    <p className="mt-1 text-2xl font-semibold text-foreground">
                       {dict.totalWords}
-                    </span>
+                    </p>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Recent additions</span>
-                    <span className="font-semibold text-foreground">
-                      {dict.recentWords.length}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Word of the day</span>
-                    <span className="font-semibold text-foreground truncate max-w-40 text-right">
-                      {dict.wordOfTheDay?.pair[0]?.original?.word ?? "—"}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Random note</span>
-                    <span className="font-semibold text-foreground truncate max-w-40 text-right">
-                      {dict.randomNote?.title ?? "—"}
-                    </span>
+                  <div className="rounded-2xl border border-border/60 bg-card/70 p-3 shadow-sm">
+                    <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                      Knowledge Index
+                    </p>
+                    <p className="mt-1 text-2xl font-semibold text-foreground">
+                      {dict.knowledgeIndex.toFixed(2)}%
+                    </p>
                   </div>
                 </div>
                 <hr className="my-4!"></hr>
+                <div className="space-y-2 mb-4">
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                    Word Types
+                  </p>
+                  {topTypes.length === 0 ? (
+                    <p className="text-xs text-muted-foreground">
+                      Add words to see type distribution.
+                    </p>
+                  ) : (
+                    topTypes.map(([type, count]) => (
+                      <div key={type} className="space-y-1">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-muted-foreground truncate">{type}</span>
+                          <span className="font-semibold text-foreground">{count}</span>
+                        </div>
+                        <div className="h-2 w-full rounded-full bg-muted/40">
+                          <div
+                            className="h-2 rounded-full bg-primary/70"
+                            style={{
+                              width: `${maxTypeCount ? (count / maxTypeCount) * 100 : 0}%`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
                 <Sketchboard storageKey={`sketchboard:${dict.id}`} />
               </div>
               <div className="mt-4 text-xs text-muted-foreground italic">
@@ -131,8 +199,8 @@ function DictRow({
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 mt-4">
-            <div className="h-full border rounded-xl 2xl:h-auto min-h-0">
+          <div className="grid xl:grid-cols-2 grid-cols-1 gap-4 mt-4">
+            <div className="xl:h-full border rounded-xl h-100 min-h-0 shadow-md">
               <DictionaryGraph
                 title={dict.name}
                 name={dict.id}
@@ -146,10 +214,7 @@ function DictRow({
               <p className="text-xs uppercase tracking-wide mb-1">Random Note</p>
               {dict.randomNote ? (
                 <div className="flex flex-col items-center bg-linear-to-b from-transparent via-to-background/70 to-background/90 justify-center overflow-hidden max-h-100">
-                  <p className="text-lg text-foreground float-left w-full mt-2">
-                    {dict.randomNote.title}
-                  </p>
-                  <div className="mt-2 overflow-y-hidden w-full relative">
+                  <div className="overflow-y-hidden w-full relative">
                     <NoteDisplay
                       route={dict.path}
                       name={dict.id}
@@ -184,8 +249,9 @@ function DictRow({
         </div>
 
         <div
-          style={{ height: leftHeight ? `${leftHeight}px` : undefined }}
-          className="shadow-md rounded-2xl"
+          ref={chatRef}
+          className="sticky shadow-md border xl:w-1/3 xl:flex hidden w-full rounded-2xl min-h-0 top-4 flex-col overflow-hidden h-[calc(100vh-96px)] h-[calc(100dvh-96px)] bg-card/60"
+          style={chatHeight ? { height: `${chatHeight}px` } : undefined}
         >
           <Chat
             conversationScope="home"
@@ -196,6 +262,16 @@ function DictRow({
               dict.wordOfTheDay?.pair[0].original.word + ". "
             }
           />
+        </div>
+
+        <div
+          className=" xl:hidden block"
+        >
+          <FloatingAssistantChat
+            route={dict.path}
+            name={dict.id}
+            startingInfo={"This is the word of the day: " +
+              dict.wordOfTheDay?.pair[0].original.word + ". "} layoutStorageKey={""} />
         </div>
       </div>
     </div>
@@ -240,7 +316,7 @@ export default function Home() {
   }
 
   if (
-    !dictionaryCards || 
+    !dictionaryCards ||
     dictionaryCards.length === 0
   ) {
     return (
@@ -261,46 +337,58 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col overflow-y-auto h-[calc(100vh-64px)] gap-8 bg-background">
+    <div
+      data-home-scroll
+      className="flex flex-col overflow-y-auto h-[calc(100vh-64px)] h-[calc(100dvh-64px)] gap-10 bg-background"
+    >
       <div className="flex flex-col w-full">
-        <div className="border-b border-border p-4">
-          <h2 className="text-3xl tracking-tighter font-bold text-foreground mb-3 flex items-center gap-2">
-            <WholeWord size={32} strokeWidth={1.5} />
-            Words of the Moment
-          </h2>
-          <p className="text-muted-foreground text-sm flex items-center gap-2">
-            <Calendar size={14} />
-            {new Date().toLocaleDateString("en-US", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 w-full divide-y divide-x border-b md:divide-y-0 md:divide-x divide-border">
-          <div className="p-3">
-            <p className="text-md tracking-tight font-semibold text-muted-foreground">
-              Total Words
-            </p>
-            <p className="text-2xl font-bold text-foreground">{totalWords}</p>
+        <div className="border-b border-border/60 px-6 py-6">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-sm text-muted-foreground">
+                Home
+              </p>
+              <h2 className="mt-2 text-4xl tracking-tight font-semibold text-foreground flex items-center gap-3">
+                <WholeWord size={34} strokeWidth={1.25} />
+                Words of the Moment
+              </h2>
+              <p className="text-muted-foreground text-sm mt-2 flex items-center gap-2">
+                <Calendar size={14} />
+                {new Date().toLocaleDateString("en-US", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+            </div>
           </div>
-          <div className="p-3">
-            <p className="text-md tracking-tight font-semibold text-muted-foreground">
-              Dictionaries
-            </p>
-            <p className="text-2xl font-bold text-foreground">
-              {totalDictionaries}
-            </p>
-          </div>
-          <div className="p-3">
-            <p className="text-md tracking-tight font-semibold text-muted-foreground">
-              Knowledge
-            </p>
-            <p className="text-2xl font-bold text-foreground">
-              {((totalWords / (totalDictionaries * 15000)) * 100).toFixed(3)}%
-            </p>
-          </div>
+          {/* <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="rounded-2xl border border-border/60 bg-card/70 p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                Total Words
+              </p>
+              <p className="mt-2 text-3xl font-semibold text-foreground">
+                {totalWords}
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border/60 bg-card/70 p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                Dictionaries
+              </p>
+              <p className="mt-2 text-3xl font-semibold text-foreground">
+                {totalDictionaries}
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border/60 bg-card/70 p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                Knowledge Index
+              </p>
+              <p className="mt-2 text-3xl font-semibold text-foreground">
+                {((totalWords / (totalDictionaries * 15000)) * 100).toFixed(3)}%
+              </p>
+            </div>
+          </div> */}
         </div>
         <div className="grid lg:grid-cols-1 grid-cols-1 w-full">
           {dictionaryCards.map((dict, dictIndex) => (

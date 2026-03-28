@@ -82,15 +82,22 @@ export function useKnowledgeGraph(
 
       const nodeIds = new Set<string>([ROOT_ID]);
       const links: GraphLink[] = [];
-      const hasIncoming = new Set<string>();
+      const seenLinkKeys = new Set<string>();
 
       Object.entries(response).forEach(([sourceId, targets]) => {
         nodeIds.add(sourceId);
 
         if (targets && typeof targets === "object") {
           Object.keys(targets).forEach((targetId) => {
+            if (sourceId === targetId) return;
+
             nodeIds.add(targetId);
-            hasIncoming.add(targetId);
+            const pairKey =
+              sourceId < targetId
+                ? `${sourceId}__${targetId}`
+                : `${targetId}__${sourceId}`;
+            if (seenLinkKeys.has(pairKey)) return;
+            seenLinkKeys.add(pairKey);
             links.push({ source: sourceId, target: targetId });
           });
         }
@@ -208,12 +215,6 @@ export function useKnowledgeGraph(
       const directAnchor = directOnly && selectedWord?.uuid
         ? new Set<string>([selectedWord.uuid])
         : null;
-
-      const anchorIds = directAnchor
-        ? directAnchor
-        : activeSearch !== "" || selectedTypes.length > 0
-          ? new Set<string>(filteredNodeIds)
-          : new Set<string>();
 
       if (directOnly && directAnchor && directAnchor.size > 0) {
         const directIds = new Set<string>(directAnchor);

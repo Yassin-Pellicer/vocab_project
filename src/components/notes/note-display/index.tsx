@@ -14,7 +14,7 @@ export default function NoteDisplay({
 }) {
   const { selectedNoteId } = NotesContext();
   return (
-    <div className="flex justify-center align-center p-4">
+    <div className="flex justify-center align-center p-2">
       {route && name && (noteId || selectedNoteId) ? (
         <SimpleEditor
           route={route}

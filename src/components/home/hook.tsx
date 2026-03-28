@@ -83,8 +83,17 @@ export default function useHome() {
                 new Date(b.dateAdded).getTime() -
                 new Date(a.dateAdded).getTime()
             )
-            .slice(0, 3);
+            .slice(0, 5);
         }
+
+        const typeCounts = translations.reduce<Record<string, number>>(
+          (acc, entry) => {
+            const key = entry.type?.trim() || "Uncategorized";
+            acc[key] = (acc[key] ?? 0) + 1;
+            return acc;
+          },
+          {},
+        );
 
         let randomNote: SidebarNode | null = null;
         try {
@@ -101,6 +110,7 @@ export default function useHome() {
         }
 
         wordCount += translations.length;
+        const knowledgeIndex = (translations.length / 15000) * 100;
 
         result.push({
           id,
@@ -109,6 +119,8 @@ export default function useHome() {
           wordOfTheDay,
           recentWords,
           totalWords: translations.length,
+          knowledgeIndex,
+          typeCounts,
           randomNote,
         });
       }

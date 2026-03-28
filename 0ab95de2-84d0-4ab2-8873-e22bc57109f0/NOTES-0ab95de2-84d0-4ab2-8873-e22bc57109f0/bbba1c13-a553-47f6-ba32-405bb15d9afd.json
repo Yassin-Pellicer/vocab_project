@@ -55,7 +55,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Maria ist gerade mit der Arbeit fertig, und sie kommt gerade zu Hause. Aber sie ist traurig… wie hast niemand ihr Gebürtstag erinnert? Jetzt ist es siebzehn Uhr, und ihre Eltern haben sie den ganzen Tag noch nicht angerufen. Genauso mit ihren besten Freunden…"
+          "text": "Maria ist gerade mit der Arbeit fertig, und sie kommt gerade zu Hause. Aber sie ist traurig… wie hast niemand ihr Gebürtstag erinnert? Jetzt ist es siebzehn Uhr, und ihre Eltern haben sie den ganzen Tag nicht angerufen. Genauso mit ihren besten Freunden…"
         }
       ]
     },
@@ -73,7 +73,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Aber sie ist nicht ganz so traurig, weil die einzige Person, die für sie am wichtigsten ist, hat sich an dieses Datum für sie erinnert! Ihre Freundin Martha erwartet si zu Hause für ein unvergesslich Abendessen."
+          "text": "Aber sie ist nicht ganz so traurig, weil die einzige Person, die für sie am wichtigsten ist, hat sich an dieses Datum für sie erinnert! Ihre Freundin Martha erwartet sie zu Hause für ein unvergesslich Abendessen."
         }
       ]
     },
@@ -145,6 +145,12 @@
           "text": "Ihre Lieben haben ihr eine Überraschungsfeier vorbereitet! Alle sind zusammengekommen und haben sie fest umarmt… Und Maria ist seit diesem Tag eine Sache klar: Menschen, die sie liebt, sind immer für sie da!"
         }
       ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      }
     }
   ]
 }

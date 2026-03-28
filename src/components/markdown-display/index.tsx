@@ -28,6 +28,7 @@ export default function MarkdownEditor({
     setIsEditing,
     handleWordSelect,
     handleWordDelete,
+    handleLinkedWordClick,
     linkedWordList,
     dictionaryMetadata,
     containerRef,
@@ -89,13 +90,25 @@ export default function MarkdownEditor({
                   {Object.entries(linkedWordList).map(([id, word]) => (
                     <div
                       key={id}
-                      className="flex items-center gap-1 bg-card text-card-foreground rounded-lg text-sm py-1 px-2 border border-border"
+                      onClick={() => handleLinkedWordClick(id)}
+                      className="flex items-center gap-1 bg-card text-card-foreground rounded-lg text-sm py-1 px-2 border border-border cursor-pointer hover:bg-popover transition"
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                          event.preventDefault();
+                          handleLinkedWordClick(id);
+                        }
+                      }}
                     >
                       <p>{word}</p>
                       <X
                         className="cursor-pointer"
                         size={14}
-                        onClick={() => handleWordDelete(id)}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleWordDelete(id);
+                        }}
                       />
                     </div>
                   ))}

@@ -149,8 +149,7 @@ export default function DictionaryGraph({
         const initialScale = 1;
         const initialTransform = d3.zoomIdentity
           .translate(width / 2, height / 2)
-          .scale(initialScale)
-          .translate(-width / 2, -height / 2);
+          .scale(initialScale);
         svg.call(zoom.transform, initialTransform);
         lastTransformRef.current = initialTransform;
         hasInitializedViewRef.current = true;
@@ -349,7 +348,7 @@ export default function DictionaryGraph({
             if (connectedIds.has(d.id)) return -120;
             return -8; // isolated: just enough to avoid stacking
           })
-          .distanceMax((d) => connectedIds.has(d.id) ? 400 : 80),
+          .distanceMax(400),
       )
       // Only pull isolated search-matched nodes toward center — connected nodes float freely
       .force(

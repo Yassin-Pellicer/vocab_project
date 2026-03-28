@@ -228,7 +228,7 @@ export default function Sketchboard({
       </div>
       <div
         ref={wrapRef}
-        className={`mt-2 h-50 w-125 rounded-md border border-border/60 bg-muted/20 ${heightClass}`}
+        className={`mt-2 h-60 w-125 rounded-md border border-border/60 bg-muted/20 ${heightClass}`}
       >
         <canvas
           ref={canvasRef}

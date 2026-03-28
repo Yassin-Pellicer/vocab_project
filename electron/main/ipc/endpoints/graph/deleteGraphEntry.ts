@@ -1,29 +1,56 @@
 import { ipcMain } from "electron";
-import path from "path";
-import fs from "fs";
 import { broadcastToAllWindows } from "../../broadcast";
+import {
+  loadTranslationsWithGraphLinks,
+  removeLegacyGraphFileIfExists,
+  writeTranslations,
+} from "./graph-storage";
 
 export default function deleteGraphEntry() {
   ipcMain.handle(
     "deleteGraphEntry",
     async (_event, route, name, origin, destination) => {
       try {
-        const filePath = path.join(route, `GRAPH-${name}.json`);
+        const {
+          dictionaryFilePath,
+          legacyGraphFilePath,
+          translations,
+          changed: normalizedChanged,
+        } = loadTranslationsWithGraphLinks(route, name);
 
-        let json: Record<string, Record<string, string>> = {};
+        const originId = origin?.uuid;
+        const destinationId = destination?.uuid;
 
-        if (fs.existsSync(filePath)) {
-          json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        if (!originId || !destinationId) {
+          throw new Error("Both origin and destination ids are required.");
         }
 
-        if (json[origin.uuid]) {
-          delete json[origin.uuid][destination.uuid];
-        }
-        if (json[destination.uuid]) {
-          delete json[destination.uuid][origin.uuid];
+        const originEntry = translations.find((entry) => entry.uuid === originId);
+        const destinationEntry = translations.find(
+          (entry) => entry.uuid === destinationId,
+        );
+
+        let changed = normalizedChanged;
+
+        if (originEntry?.linkedWordIds?.includes(destinationId)) {
+          originEntry.linkedWordIds = originEntry.linkedWordIds.filter(
+            (id) => id !== destinationId,
+          );
+          changed = true;
         }
 
-        fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        if (destinationEntry?.linkedWordIds?.includes(originId)) {
+          destinationEntry.linkedWordIds = destinationEntry.linkedWordIds.filter(
+            (id) => id !== originId,
+          );
+          changed = true;
+        }
+
+        if (changed) {
+          writeTranslations(dictionaryFilePath, translations);
+        }
+
+        removeLegacyGraphFileIfExists(legacyGraphFilePath);
 
         broadcastToAllWindows("graph-changed", { route, name });
         console.log("Graph entry deleted successfully");

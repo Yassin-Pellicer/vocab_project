@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 
-type GraphWordRef = { uuid: string; word: string };
+type GraphWordRef = { uuid: string; word?: string };
 
 export const graph = {
   fetchGraph: async (route: string, name: string, uuid?: string) => {

@@ -1,19 +1,26 @@
-import { 
-  useEffect, 
-  useRef, 
-  useState, 
+import {
+  useEffect,
+  useRef,
+  useState,
   useCallback,
-  useMemo 
+  useMemo
 } from "react";
 
-import type { ChatPrompContext, ChatMessage, ContextType, WordToolAction } from "@/types/chat";
+import type { 
+  ChatPrompContext, 
+  ChatMessage, 
+  ContextType, 
+  WordToolAction, 
+  ChatConversationScope,
+  RenderMessage 
+} from "@/types/chat";
+
 import { notifyError } from "@/services/notify";
 import { TranslationEntry } from "@/types/translation-entry";
 import { PreferencesContext } from "@/context/preferences-context";
 import { DictionaryContext } from "@/context/dictionary-context";
 import { ChatContext } from "@/context/chat-context";
-
-export type ChatConversationScope = "home" | "assistant";
+import { NotesContext } from "@/context/notes-context";
 
 export function useChat({
   startingInfo,
@@ -22,14 +29,15 @@ export function useChat({
   route,
   autoStart = true,
   conversationScope = "assistant",
+  sessionId = "default",
 }: {
   startingInfo?: TranslationEntry | string | null;
   context?: ContextType;
   name?: string | null;
   route?: string;
   autoStart?: boolean;
-  /** Isolates stored thread; word-of-the-day auto-start runs only for `"home"`. */
   conversationScope?: ChatConversationScope;
+  sessionId?: string;
 }) {
 
   const [sending, setSending] = useState(false);
@@ -37,7 +45,32 @@ export function useChat({
   const didAutoStartRef = useRef(false);
   const routeKeyRef = useRef<string | undefined>(route);
   const nameKeyRef = useRef<string | null | undefined>(name);
-  const scopeKeyRef = useRef<ChatConversationScope>(conversationScope);  
+  const scopeKeyRef = useRef<ChatConversationScope>(conversationScope);
+  const sessionKeyRef = useRef<string>(sessionId);
+  const runKeyRef = useRef<string>("");
+  if (!runKeyRef.current) {
+    if (typeof sessionStorage === "undefined") {
+      runKeyRef.current = "default";
+    } else {
+      const keyName = "chat:run";
+      const existing = sessionStorage.getItem(keyName);
+      if (existing) {
+        runKeyRef.current = existing;
+      } else {
+        const next =
+          typeof crypto !== "undefined" && "randomUUID" in crypto
+            ? crypto.randomUUID()
+            : `run-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        sessionStorage.setItem(keyName, next);
+        runKeyRef.current = next;
+      }
+    }
+  }
+  const startingInfoKeyRef = useRef<string>(
+    typeof startingInfo === "string"
+      ? startingInfo.trim()
+      : startingInfo?.pair?.[0]?.original?.word?.trim() ?? ""
+  );
   const setConversation = ChatContext((state) => state.setConversation);
   const updateConversation = ChatContext((state) => state.updateConversation);
   const clearConversation = ChatContext((state) => state.clearConversation);
@@ -45,9 +78,9 @@ export function useChat({
   const [contextForChat, setContextForChat] = useState<ChatPrompContext | undefined>(undefined);
 
   const chatKey = useMemo(() => {
-    return `${route ?? ""}|${name ?? ""}|${context?.type ?? "none"}|${conversationScope}`;
-  }, [route, name, context?.type, conversationScope]);
-
+    const key = sessionId || "default";
+    return `session:${key}`;
+  }, [sessionId]);
 
   const conversation = ChatContext(
     useCallback((state) => state.conversations[chatKey], [chatKey]),
@@ -60,6 +93,7 @@ export function useChat({
     (next: ChatMessage[]) => updateConversation(chatKey, { messages: next }),
     [chatKey, updateConversation],
   );
+
   const setDraft = useCallback(
     (next: string) => updateConversation(chatKey, { draft: next }),
     [chatKey, updateConversation],
@@ -67,6 +101,9 @@ export function useChat({
 
   const { config } = PreferencesContext();
   const { dictionaryMetadata } = DictionaryContext();
+  const selectedNoteId = NotesContext((state) => state.selectedNoteId);
+  const selectedNoteContent = NotesContext((state) => state.selectedNoteContent);
+  const notesTree = NotesContext((state) => state.tree);
 
   const dictMeta = name ? dictionaryMetadata?.[name] ?? null : null;
 
@@ -121,12 +158,6 @@ export function useChat({
     return word.pair?.[0]?.original?.word?.trim() || "word";
   }, []);
 
-  type RenderMessage = {
-    id: string;
-    role: ChatMessage["role"];
-    display: string;
-    actions: WordToolAction[];
-  };
 
   const renderMessages = useCallback((): RenderMessage[] => {
     return messages.map((m, idx) => {
@@ -159,17 +190,25 @@ export function useChat({
   }, [chatKey, conversation, setConversation]);
 
   useEffect(() => {
+    const startingInfoKey =
+      typeof startingInfo === "string"
+        ? startingInfo.trim()
+        : startingInfo?.pair?.[0]?.original?.word?.trim() ?? "";
     if (
       routeKeyRef.current !== route ||
       nameKeyRef.current !== name ||
-      scopeKeyRef.current !== conversationScope
+      scopeKeyRef.current !== conversationScope ||
+      sessionKeyRef.current !== sessionId ||
+      startingInfoKeyRef.current !== startingInfoKey
     ) {
       routeKeyRef.current = route;
       nameKeyRef.current = name;
       scopeKeyRef.current = conversationScope;
+      sessionKeyRef.current = sessionId;
+      startingInfoKeyRef.current = startingInfoKey;
       didAutoStartRef.current = false;
     }
-  }, [route, name, conversationScope]);
+  }, [route, name, conversationScope, sessionId, startingInfo]);
 
   useEffect(() => {
     if (!context) {
@@ -204,19 +243,25 @@ export function useChat({
 
     const dictionaryContext = name
       ? {
-          language: dictMeta?.name,
-          typeWords: dictMeta?.typeWords ?? [],
-          genders: dictMeta?.genders ?? [],
-          numbers: dictMeta?.numbers ?? [],
-          articles: dictMeta?.articles ?? [],
-        }
+        language: dictMeta?.name,
+        typeWords: dictMeta?.typeWords ?? [],
+        genders: dictMeta?.genders ?? [],
+        numbers: dictMeta?.numbers ?? [],
+        articles: dictMeta?.articles ?? [],
+      }
       : undefined;
+    const notesContext = {
+      selectedId: selectedNoteId,
+      selectedContent: selectedNoteId ? selectedNoteContent : undefined,
+      tree: notesTree,
+    };
     const combinedContext =
-      dictionaryContext || contextForChat
+      dictionaryContext || contextForChat || notesContext
         ? {
-            ...(contextForChat ?? {}),
-            ...(dictionaryContext ? { dictionary: dictionaryContext } : {}),
-          }
+          ...(contextForChat ?? {}),
+          ...(dictionaryContext ? { dictionary: dictionaryContext } : {}),
+          ...(notesContext ? { notes: notesContext } : {}),
+        }
         : undefined;
 
     const structuredMessage: ChatMessage = {
@@ -265,9 +310,20 @@ export function useChat({
   };
 
   useEffect(() => {
-if (conversationScope !== "home") return;
+    if (conversationScope !== "home") return;
     if (startingInfo && Object.keys(startingInfo as object).length > 0) {
       if (!autoStart) return;
+      if (messages.length > 0 && conversationScope !== "home") return;
+      if (route || name) {
+        const startingInfoKey =
+          typeof startingInfo === "string"
+            ? startingInfo.trim()
+            : startingInfo?.pair?.[0]?.original?.word?.trim() ?? "";
+        const runKey = runKeyRef.current;
+        const autoStartKey = `chat:wotd:home:${route ?? ""}|${name ?? ""}|${startingInfoKey}|${sessionId || "default"}|${runKey}`;
+        if (localStorage.getItem(autoStartKey)) return;
+        localStorage.setItem(autoStartKey, "1");
+      }
       if (didAutoStartRef.current) return;
       didAutoStartRef.current = true;
 
@@ -277,17 +333,19 @@ if (conversationScope !== "home") return;
           prompt:
             "Give a fun fact about the word of the day today.",
           details:
-            "You must say: 'The Word of the Moment is... {word}! Here are some interesting facts about it!' and include: 1. etymology, 2. historical fact, 3. tips. NEVER return a TOOL.",
+            "You must say: 'The Word of the Moment is... {word}! " +
+            "Here are some interesting facts about it!' and include: " +
+            "1. etymology, 2. historical fact, 3. tips. NEVER return a TOOL.",
           context: {
             startingInfo,
             dictionary: name
               ? {
-                  language: dictMeta?.name,
-                  typeWords: dictMeta?.typeWords ?? [],
-                  genders: dictMeta?.genders ?? [],
-                  numbers: dictMeta?.numbers ?? [],
-                  articles: dictMeta?.articles ?? [],
-                }
+                language: dictMeta?.name,
+                typeWords: dictMeta?.typeWords ?? [],
+                genders: dictMeta?.genders ?? [],
+                numbers: dictMeta?.numbers ?? [],
+                articles: dictMeta?.articles ?? [],
+              }
               : undefined,
           },
           appLanguage: config.language!,
@@ -321,6 +379,8 @@ if (conversationScope !== "home") return;
     route,
     dictionaryMetadata,
     autoStart,
+    sessionId,
+    messages.length,
   ]);
 
   return {
@@ -338,5 +398,6 @@ if (conversationScope !== "home") return;
     getDisplayText,
     getWordLabel,
     renderMessages,
+    chatKey,
   };
 }

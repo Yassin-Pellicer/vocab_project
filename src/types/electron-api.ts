@@ -2,7 +2,7 @@ import type { TranslationEntry } from "./translation-entry";
 import type { UserConfig, UserPreferences } from "./config";
 import type { ChatMessage } from "./chat";
 
-type GraphWordRef = { uuid: string; word: string };
+type GraphWordRef = { uuid: string; word?: string };
 
 export type IpcRendererListener = (
   event: unknown,

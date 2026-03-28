@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ArrowDownRight, GripVertical, Sparkles, Trash2, X } from "lucide-react";
+import { Sparkles, Trash2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Chat, type ChatHandle } from "./index";
@@ -44,6 +44,7 @@ export function FloatingAssistantChat({
   className,
 }: FloatingAssistantChatProps) {
   const [open, setOpen] = useState(false);
+  const hasInitializedLayoutRef = useRef(false);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [size, setSize] = useState({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
   const panelRef = useRef<HTMLDivElement>(null);
@@ -78,26 +79,39 @@ export function FloatingAssistantChat({
     [clampLayout, layoutStorageKey]
   );
 
+  const computeLayout = useCallback(() => {
+    const stored = readStoredLayout(layoutStorageKey);
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const w = stored?.width ?? DEFAULT_WIDTH;
+    const h = stored?.height ?? DEFAULT_HEIGHT;
+    if (stored && typeof stored.x === "number" && typeof stored.y === "number") {
+      return clampLayout(stored.x, stored.y, w, h);
+    }
+    return clampLayout(vw - w - FAB_OFFSET, vh - h - FAB_OFFSET, w, h);
+  }, [clampLayout, layoutStorageKey]);
+
+  const openAssistant = useCallback(() => {
+    const next = computeLayout();
+    hasInitializedLayoutRef.current = true;
+    setPos({ x: next.x, y: next.y });
+    setSize({ width: next.width, height: next.height });
+    setOpen(true);
+  }, [computeLayout]);
+
+  const closeAssistant = useCallback(() => {
+    setOpen(false);
+    hasInitializedLayoutRef.current = false;
+  }, []);
+
   useLayoutEffect(() => {
     if (!open) return;
-    const frame = requestAnimationFrame(() => {
-      const stored = readStoredLayout(layoutStorageKey);
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-      const w = stored?.width ?? DEFAULT_WIDTH;
-      const h = stored?.height ?? DEFAULT_HEIGHT;
-      if (stored && typeof stored.x === "number" && typeof stored.y === "number") {
-        const next = clampLayout(stored.x, stored.y, w, h);
-        setPos({ x: next.x, y: next.y });
-        setSize({ width: next.width, height: next.height });
-        return;
-      }
-      const next = clampLayout(vw - w - FAB_OFFSET, vh - h - FAB_OFFSET, w, h);
-      setPos({ x: next.x, y: next.y });
-      setSize({ width: next.width, height: next.height });
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [open, clampLayout, layoutStorageKey]);
+    if (hasInitializedLayoutRef.current) return;
+    const next = computeLayout();
+    hasInitializedLayoutRef.current = true;
+    setPos({ x: next.x, y: next.y });
+    setSize({ width: next.width, height: next.height });
+  }, [open, computeLayout]);
 
   useEffect(() => {
     if (!open) return;
@@ -149,7 +163,10 @@ export function FloatingAssistantChat({
   );
 
   const onResizePointerDown = useCallback(
-    (e: React.PointerEvent) => {
+    (
+      e: React.PointerEvent,
+      direction: "right" | "bottom" | "cornerTopLeft" | "left" | "top",
+    ) => {
       e.preventDefault();
       e.stopPropagation();
       (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
@@ -163,7 +180,27 @@ export function FloatingAssistantChat({
       const onMove = (ev: PointerEvent) => {
         const dw = ev.clientX - startX;
         const dh = ev.clientY - startY;
-        const next = clampLayout(origX, origY, origW + dw, origH + dh);
+        const nextWidth =
+          direction === "left" || direction === "cornerTopLeft"
+            ? origW - dw
+            : direction === "right"
+              ? origW + dw
+              : origW;
+        const nextHeight =
+          direction === "top" || direction === "cornerTopLeft"
+            ? origH - dh
+            : direction === "bottom"
+              ? origH + dh
+              : origH;
+        const nextX =
+          direction === "left" || direction === "cornerTopLeft"
+            ? origX + dw
+            : origX;
+        const nextY =
+          direction === "top" || direction === "cornerTopLeft"
+            ? origY + dh
+            : origY;
+        const next = clampLayout(nextX, nextY, nextWidth, nextHeight);
         setPos({ x: next.x, y: next.y });
         setSize({ width: next.width, height: next.height });
       };
@@ -174,11 +211,31 @@ export function FloatingAssistantChat({
         (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
         const dw = ev.clientX - startX;
         const dh = ev.clientY - startY;
+        const nextWidth =
+          direction === "left" || direction === "cornerTopLeft"
+            ? origW - dw
+            : direction === "right"
+              ? origW + dw
+              : origW;
+        const nextHeight =
+          direction === "top" || direction === "cornerTopLeft"
+            ? origH - dh
+            : direction === "bottom"
+              ? origH + dh
+              : origH;
+        const nextX =
+          direction === "left" || direction === "cornerTopLeft"
+            ? origX + dw
+            : origX;
+        const nextY =
+          direction === "top" || direction === "cornerTopLeft"
+            ? origY + dh
+            : origY;
         const next = persistLayout({
-          x: origX,
-          y: origY,
-          width: origW + dw,
-          height: origH + dh,
+          x: nextX,
+          y: nextY,
+          width: nextWidth,
+          height: nextHeight,
         });
         setPos({ x: next.x, y: next.y });
         setSize({ width: next.width, height: next.height });
@@ -195,8 +252,8 @@ export function FloatingAssistantChat({
       {!open ? (
         <button
           type="button"
-          onClick={() => setOpen(true)}
-          className="pointer-events-auto fixed z-50 flex size-14 items-center justify-center rounded-full border border-primary/25 bg-linear-to-br from-primary/15 via-background to-background text-primary shadow-lg shadow-primary/15 ring-2 ring-primary/10 transition-all hover:scale-105 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/20 active:scale-100"
+          onClick={openAssistant}
+          className="pointer-events-auto fixed z-50 flex size-14 items-center justify-center rounded-full border border-primary/30 bg-linear-to-br from-primary/20 via-background to-background text-primary shadow-xl shadow-primary/20 ring-2 ring-primary/10 transition-all hover:scale-105 hover:border-primary/45 hover:shadow-2xl hover:shadow-primary/25 active:scale-100"
           style={{ right: FAB_OFFSET, bottom: FAB_OFFSET }}
           aria-label="Open assistant"
           title="Assistant"
@@ -206,7 +263,7 @@ export function FloatingAssistantChat({
       ) : (
         <div
           ref={panelRef}
-          className="pointer-events-auto fixed z-50 flex flex-col overflow-hidden rounded-2xl border border-primary/15 bg-background shadow-sm"
+          className="pointer-events-auto fixed z-50 flex flex-col overflow-hidden rounded-2xl border border-primary/20 bg-card/95 shadow-2xl shadow-primary/10 backdrop-blur"
           style={{
             left: pos.x,
             top: pos.y,
@@ -220,10 +277,9 @@ export function FloatingAssistantChat({
             role="toolbar"
             aria-label="Assistant panel"
             onPointerDown={onHeaderPointerDown}
-            className="flex shrink-0 cursor-grab items-center justify-between gap-4 border-b border-primary/10 px-3 py-2.5 active:cursor-grabbing"
+            className="flex shrink-0 cursor-grab items-center justify-between gap-4 border-b border-primary/10 bg-linear-to-r from-primary/10 via-background to-background px-3 py-2.5 active:cursor-grabbing"
           >
             <div className="flex min-w-0 flex-1 items-center gap-4 text-sm font-semibold text-foreground">
-              <GripVertical className="size-5 shrink-0 text-muted-foreground" aria-hidden />
               <Sparkles className="size-4 shrink-0" />
               <span className="truncate">Assistant</span>
             </div>
@@ -244,7 +300,7 @@ export function FloatingAssistantChat({
                 size="icon-sm"
                 aria-label="Close assistant"
                 title="Close"
-                onClick={() => setOpen(false)}
+                onClick={closeAssistant}
               >
                 <X className="size-4" />
               </Button>
@@ -262,13 +318,48 @@ export function FloatingAssistantChat({
           </div>
           <div
             role="separator"
+            aria-label="Resize assistant panel (top)"
+            title="Drag to resize"
+            onPointerDown={(event) => onResizePointerDown(event, "top")}
+            className="pointer-events-auto absolute left-2 right-2 top-0 z-20 h-2 cursor-ns-resize touch-none"
+          />
+          <div
+            role="separator"
+            aria-label="Resize assistant panel (right)"
+            title="Drag to resize"
+            onPointerDown={(event) => onResizePointerDown(event, "right")}
+            className="pointer-events-auto absolute right-0 top-2 bottom-8 z-20 w-2 cursor-ew-resize touch-none"
+          />
+          <div
+            role="separator"
+            aria-label="Resize assistant panel (bottom)"
+            title="Drag to resize"
+            onPointerDown={(event) => onResizePointerDown(event, "bottom")}
+            className="pointer-events-auto absolute left-2 right-8 bottom-0 z-20 h-2 cursor-ns-resize touch-none"
+          />
+          <div
+            role="separator"
+            aria-label="Resize assistant panel (left)"
+            title="Drag to resize"
+            onPointerDown={(event) => onResizePointerDown(event, "left")}
+            className="pointer-events-auto absolute left-0 top-2 bottom-2 z-20 w-2 cursor-ew-resize touch-none"
+          />
+          <button
+            type="button"
+            aria-label="Close assistant"
+            title="Close"
+            onClick={closeAssistant}
+          className="pointer-events-auto absolute bottom-4 right-4 z-30 flex size-6 items-center justify-center rounded-full border border-border/60 bg-background/90 text-muted-foreground shadow-md transition hover:text-foreground hover:shadow-lg"
+          >
+            <X className="size-4" />
+          </button>
+          <div
+            role="separator"
             aria-label="Resize assistant panel"
             title="Drag to resize"
-            onPointerDown={onResizePointerDown}
-            className="flex flex-end pointer-events-auto absolute bottom-0 right-0 z-10 h-5 w-5 cursor-se-resize touch-none rounded-br-2xl"
-          >
-                      <ArrowDownRight size={16}></ArrowDownRight>
-            </div>
+            onPointerDown={(event) => onResizePointerDown(event, "cornerTopLeft")}
+            className="pointer-events-auto absolute left-0 top-0 z-20 h-8 w-8 cursor-nwse-resize touch-none rounded-tl-2xl"
+          />
         </div>
       )}
     </div>

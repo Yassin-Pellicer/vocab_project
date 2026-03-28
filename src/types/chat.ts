@@ -54,3 +54,22 @@ export type Conversation = {
   messages: ChatMessage[];
   draft: string;
 };
+
+export type ChatConversationScope = "home" | "assistant";
+
+export type ChatProps = {
+  startingInfo?: TranslationEntry | string | null;
+  route?: string;
+  name?: string | null;
+  context?: ContextType;
+  autoStart?: boolean;
+  conversationScope?: ChatConversationScope;
+  hideToolbar?: boolean;
+};
+
+export type RenderMessage = {
+  id: string;
+  role: ChatMessage["role"];
+  display: string;
+  actions: WordToolAction[];
+};

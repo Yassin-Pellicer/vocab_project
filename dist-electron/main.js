@@ -191,39 +191,171 @@ function broadcastToAllWindows(channel, payload) {
     win.webContents.send(channel, payload);
   }
 }
+const isRecord = (value) => typeof value === "object" && value !== null;
+const toUniqueSortedIds = (ids) => {
+  if (!Array.isArray(ids)) return [];
+  return Array.from(
+    new Set(ids.filter((id) => typeof id === "string"))
+  ).sort();
+};
+const arraysEqual = (left, right) => left.length === right.length && left.every((value, index) => value === right[index]);
+const getEntryLabel = (entry, fallback) => {
+  var _a, _b;
+  return ((_b = (_a = entry.pair[0]) == null ? void 0 : _a.original) == null ? void 0 : _b.word) || fallback;
+};
+const getDictionaryFilePath = (route, name) => path$1.join(route, `${name}.json`);
+const getLegacyGraphFilePath = (route, name) => path$1.join(route, `GRAPH-${name}.json`);
+const readTranslations = (filePath) => {
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const parsed = JSON.parse(raw || "[]");
+  return Array.isArray(parsed) ? parsed : [];
+};
+const writeTranslations = (filePath, translations) => {
+  fs.writeFileSync(filePath, JSON.stringify(translations, null, 2), "utf-8");
+};
+const readLegacyGraphPayload = (filePath) => {
+  if (!fs.existsSync(filePath)) return {};
+  try {
+    const raw = fs.readFileSync(filePath, "utf-8");
+    const parsed = JSON.parse(raw || "{}");
+    return isRecord(parsed) ? parsed : {};
+  } catch (error) {
+    console.error("Failed to read legacy graph payload:", error);
+    return {};
+  }
+};
+const normalizeTranslationGraphLinks = (translations, legacyGraph = {}) => {
+  const entryMap = /* @__PURE__ */ new Map();
+  translations.forEach((entry) => {
+    if (!entry.uuid) return;
+    entryMap.set(entry.uuid, entry);
+  });
+  const linkSets = /* @__PURE__ */ new Map();
+  entryMap.forEach((entry, entryId) => {
+    const existingIds = toUniqueSortedIds(entry.linkedWordIds).filter(
+      (targetId) => targetId !== entryId && entryMap.has(targetId)
+    );
+    linkSets.set(entryId, new Set(existingIds));
+  });
+  Object.entries(legacyGraph).forEach(([sourceId, targets]) => {
+    if (!entryMap.has(sourceId) || !isRecord(targets)) return;
+    Object.keys(targets).forEach((targetId) => {
+      var _a;
+      if (targetId === sourceId) return;
+      if (!entryMap.has(targetId)) return;
+      (_a = linkSets.get(sourceId)) == null ? void 0 : _a.add(targetId);
+    });
+  });
+  linkSets.forEach((targets, sourceId) => {
+    Array.from(targets).forEach((targetId) => {
+      var _a;
+      if (targetId === sourceId || !linkSets.has(targetId)) {
+        targets.delete(targetId);
+        return;
+      }
+      (_a = linkSets.get(targetId)) == null ? void 0 : _a.add(sourceId);
+    });
+  });
+  let changed = false;
+  entryMap.forEach((entry, entryId) => {
+    const nextIds = Array.from(linkSets.get(entryId) ?? []).sort();
+    const prevIds = toUniqueSortedIds(entry.linkedWordIds).filter(
+      (targetId) => targetId !== entryId && entryMap.has(targetId)
+    );
+    if (!arraysEqual(prevIds, nextIds)) {
+      changed = true;
+    }
+    entry.linkedWordIds = nextIds;
+  });
+  return changed;
+};
+const loadTranslationsWithGraphLinks = (route, name) => {
+  const dictionaryFilePath = getDictionaryFilePath(route, name);
+  const legacyGraphFilePath = getLegacyGraphFilePath(route, name);
+  if (!fs.existsSync(dictionaryFilePath)) {
+    throw new Error(`The file ${dictionaryFilePath} does not exist.`);
+  }
+  const translations = readTranslations(dictionaryFilePath);
+  const legacyGraph = readLegacyGraphPayload(legacyGraphFilePath);
+  const changed = normalizeTranslationGraphLinks(translations, legacyGraph);
+  return {
+    dictionaryFilePath,
+    legacyGraphFilePath,
+    translations,
+    changed
+  };
+};
+const buildGraphPayload = (translations) => {
+  const payload = {};
+  const entryMap = /* @__PURE__ */ new Map();
+  translations.forEach((entry) => {
+    if (!entry.uuid) return;
+    entryMap.set(entry.uuid, entry);
+    payload[entry.uuid] = {};
+  });
+  entryMap.forEach((entry, entryId) => {
+    const targets = entry.linkedWordIds ?? [];
+    targets.forEach((targetId) => {
+      const targetEntry = entryMap.get(targetId);
+      if (!targetEntry) return;
+      payload[entryId][targetId] = getEntryLabel(targetEntry, targetId);
+    });
+  });
+  return payload;
+};
+const removeLegacyGraphFileIfExists = (legacyGraphFilePath) => {
+  if (!fs.existsSync(legacyGraphFilePath)) return;
+  try {
+    fs.unlinkSync(legacyGraphFilePath);
+  } catch (error) {
+    console.error("Failed to remove legacy graph file:", error);
+  }
+};
 function addTranslation() {
   ipcMain.handle(
     "addTranslation",
     async (_event, entry, _word, _route, _name) => {
       try {
-        const filePath = path$1.join(_route, `${_name}.json`);
-        if (!fs.existsSync(filePath)) {
-          throw new Error(`The file ${filePath} does not exist.`);
-        }
-        const json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-        let translations = Array.isArray(json) ? json : [];
+        const {
+          dictionaryFilePath,
+          legacyGraphFilePath,
+          translations: loadedTranslations,
+          changed: normalizedChanged
+        } = loadTranslationsWithGraphLinks(_route, _name);
+        let translations = [...loadedTranslations];
+        let changed = normalizedChanged;
         if (_word) {
+          const existingEntry = translations.find(
+            (current) => current.uuid === _word
+          );
           translations = translations.filter(
             (t) => t.uuid !== _word
           );
+          entry.linkedWordIds = (existingEntry == null ? void 0 : existingEntry.linkedWordIds) ? [...existingEntry.linkedWordIds] : [];
         } else {
           const entryUuid = entry.uuid || v4();
           entry.uuid = entryUuid;
-          const GraphfilePath = path$1.join(_route, `GRAPH-${_name}.json`);
-          console.log("Saving graph to", GraphfilePath, "for uuid:", entry.uuid);
-          let jsonGraph = {};
-          if (fs.existsSync(GraphfilePath)) {
-            jsonGraph = JSON.parse(fs.readFileSync(GraphfilePath, "utf-8"));
+          if (!Array.isArray(entry.linkedWordIds)) {
+            entry.linkedWordIds = [];
           }
-          jsonGraph[entryUuid] = {};
-          fs.writeFileSync(GraphfilePath, JSON.stringify(jsonGraph, null, 2), "utf-8");
+        }
+        if (entry.uuid) {
+          const uniqueLinks = Array.from(
+            new Set(
+              (entry.linkedWordIds ?? []).filter(
+                (targetId) => typeof targetId === "string" && targetId !== entry.uuid
+              )
+            )
+          ).sort();
+          entry.linkedWordIds = uniqueLinks;
         }
         translations.push(entry);
-        fs.writeFileSync(
-          filePath,
-          JSON.stringify(translations, null, 2),
-          "utf-8"
-        );
+        const graphChanged = normalizeTranslationGraphLinks(translations);
+        changed = changed || graphChanged;
+        writeTranslations(dictionaryFilePath, translations);
+        if (changed || fs.existsSync(legacyGraphFilePath)) {
+          removeLegacyGraphFileIfExists(legacyGraphFilePath);
+        }
         broadcastToAllWindows("app-data-changed");
         return { success: true };
       } catch (error) {
@@ -325,53 +457,42 @@ function deleteTranslation() {
     "deleteTranslation",
     async (_event, _word, _route, _name) => {
       try {
-        const filePath = path$1.join(_route, `${_name}.json`);
-        if (!fs.existsSync(filePath)) {
-          throw new Error(`The file ${filePath} does not exist.`);
+        const dictionaryFilePath = path$1.join(_route, `${_name}.json`);
+        if (!fs.existsSync(dictionaryFilePath)) {
+          throw new Error(`The file ${dictionaryFilePath} does not exist.`);
         }
-        const data = fs.readFileSync(filePath, "utf-8");
-        const json = JSON.parse(data);
-        const translations = Array.isArray(json) ? json : [];
-        const nextTranslations = translations.filter((t) => t.uuid !== _word);
-        {
-          const filePath2 = path$1.join(_route, `GRAPH-${_name}.json`);
-          console.log(
-            "Deleting graph entry from",
-            filePath2,
-            "for uuid:",
-            _word
-          );
-          let json2 = {};
-          if (fs.existsSync(filePath2)) {
-            json2 = JSON.parse(fs.readFileSync(filePath2, "utf-8"));
-          }
-          if (json2[_word]) {
-            delete json2[_word];
-          }
-          for (const [sourceId, targets] of Object.entries(json2)) {
-            if (targets && typeof targets === "object" && _word in targets) {
-              delete targets[_word];
-            }
-            if (targets && typeof targets === "object" && Object.keys(targets).length === 0) {
-              delete json2[sourceId];
-            }
-          }
-          fs.writeFileSync(filePath2, JSON.stringify(json2, null, 2), "utf-8");
-          console.log("Graph entry deleted successfully");
-          broadcastToAllWindows("graph-changed", {
-            route: _route,
-            name: _name
-          });
+        const {
+          dictionaryFilePath: resolvedDictionaryFilePath,
+          legacyGraphFilePath,
+          translations,
+          changed: normalizedChanged
+        } = loadTranslationsWithGraphLinks(_route, _name);
+        let nextTranslations = translations.filter((t) => t.uuid !== _word);
+        let changed = normalizedChanged || nextTranslations.length !== translations.length;
+        nextTranslations = nextTranslations.map((entry) => {
+          var _a;
+          if (!((_a = entry.linkedWordIds) == null ? void 0 : _a.includes(_word))) return entry;
+          changed = true;
+          return {
+            ...entry,
+            linkedWordIds: entry.linkedWordIds.filter((id) => id !== _word)
+          };
+        });
+        if (normalizeTranslationGraphLinks(nextTranslations)) {
+          changed = true;
         }
-        fs.writeFileSync(
-          filePath,
-          JSON.stringify(nextTranslations, null, 2),
-          "utf-8"
-        );
+        if (changed) {
+          writeTranslations(resolvedDictionaryFilePath, nextTranslations);
+        }
+        removeLegacyGraphFileIfExists(legacyGraphFilePath);
+        broadcastToAllWindows("graph-changed", {
+          route: _route,
+          name: _name
+        });
         broadcastToAllWindows("app-data-changed");
-        return { success: true, message: "Translation added successfully." };
+        return { success: true, message: "Translation deleted successfully." };
       } catch (error) {
-        console.error("Error adding translation:", error);
+        console.error("Error deleting translation:", error);
         throw new Error(`Failed to delete translation. ${error}`);
       }
     }
@@ -567,17 +688,25 @@ function selectFolder() {
 function fetchGraph() {
   ipcMain.handle("fetchGraph", async (_event, route, name, _uuid) => {
     try {
-      const filePath = path$1.join(route, `GRAPH-${name}.json`);
-      console.log("Fetching graph from", filePath, "for dictionary", name);
-      if (!fs.existsSync(filePath)) {
-        fs.writeFileSync(filePath, "{}", "utf-8");
+      const dictionaryFilePath = getDictionaryFilePath(route, name);
+      if (!fs.existsSync(dictionaryFilePath)) {
+        return _uuid ? {} : {};
       }
-      const data = fs.readFileSync(filePath, "utf-8");
-      const json = JSON.parse(data);
+      const {
+        dictionaryFilePath: resolvedDictionaryPath,
+        legacyGraphFilePath,
+        translations,
+        changed
+      } = loadTranslationsWithGraphLinks(route, name);
+      if (changed) {
+        writeTranslations(resolvedDictionaryPath, translations);
+      }
+      removeLegacyGraphFileIfExists(legacyGraphFilePath);
+      const payload = buildGraphPayload(translations);
       if (_uuid) {
-        return json[_uuid] || {};
+        return payload[_uuid] || {};
       }
-      return json || {};
+      return payload;
     } catch (error) {
       console.error("Error reading JSON file:", error);
       throw new Error("Failed to load JSON file.");
@@ -589,20 +718,44 @@ function saveGraph() {
     "saveGraph",
     async (_event, route, name, origin, destination) => {
       try {
-        const filePath = path$1.join(route, `GRAPH-${name}.json`);
-        let json = {};
-        if (fs.existsSync(filePath)) {
-          json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        const {
+          dictionaryFilePath,
+          legacyGraphFilePath,
+          translations,
+          changed: normalizedChanged
+        } = loadTranslationsWithGraphLinks(route, name);
+        const originId = origin == null ? void 0 : origin.uuid;
+        const destinationId = destination == null ? void 0 : destination.uuid;
+        if (!originId || !destinationId) {
+          throw new Error("Both origin and destination ids are required.");
         }
-        if (!json[origin.uuid]) {
-          json[origin.uuid] = {};
+        if (originId === destinationId) {
+          if (normalizedChanged) {
+            writeTranslations(dictionaryFilePath, translations);
+          }
+          removeLegacyGraphFileIfExists(legacyGraphFilePath);
+          return { success: true };
         }
-        if (!json[destination.uuid]) {
-          json[destination.uuid] = {};
+        const originEntry = translations.find((entry) => entry.uuid === originId);
+        const destinationEntry = translations.find(
+          (entry) => entry.uuid === destinationId
+        );
+        if (!originEntry || !destinationEntry) {
+          throw new Error("Could not find one of the requested words.");
         }
-        json[origin.uuid][destination.uuid] = destination.word;
-        json[destination.uuid][origin.uuid] = origin.word;
-        fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        const originLinks = new Set(originEntry.linkedWordIds ?? []);
+        const destinationLinks = new Set(destinationEntry.linkedWordIds ?? []);
+        const addedToOrigin = !originLinks.has(destinationId);
+        const addedToDestination = !destinationLinks.has(originId);
+        originLinks.add(destinationId);
+        destinationLinks.add(originId);
+        originEntry.linkedWordIds = Array.from(originLinks).sort();
+        destinationEntry.linkedWordIds = Array.from(destinationLinks).sort();
+        const changed = normalizedChanged || addedToOrigin || addedToDestination;
+        if (changed) {
+          writeTranslations(dictionaryFilePath, translations);
+        }
+        removeLegacyGraphFileIfExists(legacyGraphFilePath);
         broadcastToAllWindows("graph-changed", { route, name });
         console.log("Graph saved successfully");
         return { success: true };
@@ -617,19 +770,40 @@ function deleteGraphEntry() {
   ipcMain.handle(
     "deleteGraphEntry",
     async (_event, route, name, origin, destination) => {
+      var _a, _b;
       try {
-        const filePath = path$1.join(route, `GRAPH-${name}.json`);
-        let json = {};
-        if (fs.existsSync(filePath)) {
-          json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        const {
+          dictionaryFilePath,
+          legacyGraphFilePath,
+          translations,
+          changed: normalizedChanged
+        } = loadTranslationsWithGraphLinks(route, name);
+        const originId = origin == null ? void 0 : origin.uuid;
+        const destinationId = destination == null ? void 0 : destination.uuid;
+        if (!originId || !destinationId) {
+          throw new Error("Both origin and destination ids are required.");
         }
-        if (json[origin.uuid]) {
-          delete json[origin.uuid][destination.uuid];
+        const originEntry = translations.find((entry) => entry.uuid === originId);
+        const destinationEntry = translations.find(
+          (entry) => entry.uuid === destinationId
+        );
+        let changed = normalizedChanged;
+        if ((_a = originEntry == null ? void 0 : originEntry.linkedWordIds) == null ? void 0 : _a.includes(destinationId)) {
+          originEntry.linkedWordIds = originEntry.linkedWordIds.filter(
+            (id) => id !== destinationId
+          );
+          changed = true;
         }
-        if (json[destination.uuid]) {
-          delete json[destination.uuid][origin.uuid];
+        if ((_b = destinationEntry == null ? void 0 : destinationEntry.linkedWordIds) == null ? void 0 : _b.includes(originId)) {
+          destinationEntry.linkedWordIds = destinationEntry.linkedWordIds.filter(
+            (id) => id !== originId
+          );
+          changed = true;
         }
-        fs.writeFileSync(filePath, JSON.stringify(json, null, 2), "utf-8");
+        if (changed) {
+          writeTranslations(dictionaryFilePath, translations);
+        }
+        removeLegacyGraphFileIfExists(legacyGraphFilePath);
         broadcastToAllWindows("graph-changed", { route, name });
         console.log("Graph entry deleted successfully");
         return { success: true };
