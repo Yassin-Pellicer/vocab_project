@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 import { TranslationEntry } from "@/types/translation-entry"
@@ -86,6 +87,8 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
     setDraft,
     sending,
     canSend,
+    useProvidedContext,
+    setUseProvidedContext,
     contextForChat,
     getWordLabel,
     renderMessages,
@@ -269,7 +272,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
         </div>
 
         <div className="mt-auto bg-background flex flex-col border rounded-2xl shadow-sm p-2 items-center gap-2 shrink-0">
-          {contextForChat && context?.type == "note" && (
+          {useProvidedContext && contextForChat && context?.type == "note" && (
             <div className="mb-2 flex flex-row justify-between gap-4 w-full">
               <p className="text-xs">Loaded context <br></br> with note: </p>
               <Button className="h-fit w-fit text-xs!">
@@ -277,7 +280,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
               </Button>
             </div>
           )}
-          {contextForChat && context?.type == "word" && (
+          {useProvidedContext && contextForChat && context?.type == "word" && (
             <div className="mb-2 flex flex-row justify-between gap-4 w-full">
               <p className="text-xs">
                 Loaded context <br></br>with word:{" "}
@@ -288,6 +291,14 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
               </Button>
             </div>
           )}
+          <div className="mb-1 flex w-full items-center justify-between rounded-lg border border-border/70 px-2 py-1.5">
+            <p className="text-xs text-muted-foreground">Use provided context</p>
+            <Switch
+              checked={useProvidedContext}
+              onCheckedChange={(value) => setUseProvidedContext(Boolean(value))}
+              aria-label="Toggle context usage"
+            />
+          </div>
           <div className="flex flex-row gap-2 w-full">
             <Textarea
               value={draft}

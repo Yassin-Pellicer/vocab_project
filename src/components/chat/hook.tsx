@@ -14,16 +14,12 @@ import type {
   RenderMessage,
 } from "@/types/chat"
 
-import { notifyError } from "@/services/notify"
 import { TranslationEntry } from "@/types/translation-entry"
 import { PreferencesContext } from "@/context/preferences-context"
 import { DictionaryContext } from "@/context/dictionary-context"
 import { ChatContext } from "@/context/chat-context"
 import { NotesContext } from "@/context/notes-context"
 import {
-  buildCombinedContext,
-  buildDictionaryContext,
-  buildNotesContext,
   buildSelectionContext,
   getStartingInfoKey,
 } from "@/components/chat/context-utils"
@@ -32,8 +28,8 @@ import {
   getToolActions,
   getWordLabel,
   renderChatMessages,
-  toOutboundMessages,
 } from "@/components/chat/message-utils"
+import { useChatSend } from "@/components/chat/hooks/use-chat-send"
 
 const EMPTY_MESSAGES: ChatMessage[] = []
 
@@ -55,6 +51,7 @@ export function useChat({
   sessionId?: string;
 }) {
   const [sending, setSending] = useState(false)
+  const [useProvidedContext, setUseProvidedContext] = useState(true)
   const endRef = useRef<HTMLDivElement | null>(null)
   const didAutoStartRef = useRef(false)
   const routeKeyRef = useRef<string | undefined>(route)
@@ -163,119 +160,28 @@ export function useChat({
     clearConversation(chatKey)
   }
 
-  const send = async (content?: string) => {
-    const messageContent = content?.trim() || draft.trim()
-    if (!messageContent) return
-
-    const dictionaryContext = buildDictionaryContext(name ? dictMeta : null)
-    const notesContext = buildNotesContext(selectedNoteId, selectedNoteContent, notesTree)
-    const combinedContext = buildCombinedContext({
-      selectionContext: contextForChat,
-      dictionaryContext,
-      notesContext,
-    })
-
-    const structuredMessage: ChatMessage = {
-      role: "user",
-      content: {
-        prompt: messageContent,
-        details: "",
-        context: combinedContext,
-        appLanguage: config.language!,
-      },
-    }
-
-    const nextMessages: ChatMessage[] = [...messages, structuredMessage]
-    const outboundMessages: ChatMessage[] = toOutboundMessages(nextMessages)
-
-    setMessages(nextMessages)
-    setDraft("")
-    setSending(true)
-
-    try {
-      const result = await window.api.chatSend(outboundMessages)
-      const assistantContent =
-        typeof result === "object" && result !== null && "text" in result
-          ? (result as { text?: string })
-          : result
-
-      setMessages([...nextMessages, { role: "assistant", content: assistantContent }])
-    } catch (error) {
-      const message =
-        typeof error === "object" && error !== null && "message" in error
-          ? String((error as { message?: unknown }).message)
-          : "Request failed."
-
-      notifyError("Chatbot error", message)
-    } finally {
-      setSending(false)
-    }
-  }
-
-  useEffect(() => {
-    if (conversationScope !== "home") return
-    if (startingInfo && Object.keys(startingInfo as object).length > 0) {
-      if (!autoStart) return
-      if (messages.length > 0 && conversationScope !== "home") return
-      if (route || name) {
-        const startingInfoKey = getStartingInfoKey(startingInfo)
-        const runKey = runKeyRef.current
-        const autoStartKey = `chat:wotd:home:${route ?? ""}|${name ?? ""}|${startingInfoKey}|${sessionId || "default"}|${runKey}`
-        if (localStorage.getItem(autoStartKey)) return
-        localStorage.setItem(autoStartKey, "1")
-      }
-      if (didAutoStartRef.current) return
-      didAutoStartRef.current = true
-
-      const startingPrompt: ChatMessage = {
-        role: "user",
-        content: {
-          prompt:
-            "Give a fun fact about the word of the day today.",
-          details:
-            "You must say: 'The Word of the Moment is... {word}! " +
-            "Here are some interesting facts about it!' and include: " +
-            "1. etymology, 2. historical fact, 3. tips. NEVER return a TOOL.",
-          context: {
-            startingInfo,
-            dictionary: buildDictionaryContext(name ? dictMeta : null),
-          },
-          appLanguage: config.language!,
-        },
-      }
-
-      const nextMessages = [...messages]
-      setSending(true)
-
-      window.api
-        ?.chatSend([startingPrompt])
-        .then((result) => {
-          const assistantContent =
-            typeof result === "object" && result !== null && "text" in result
-              ? (result as { text?: string })
-              : result
-          setMessages([...nextMessages, { role: "assistant", content: assistantContent }])
-        })
-        .catch((err) => {
-          notifyError(
-            "Chatbot error",
-            err instanceof Error ? err.message : String(err),
-          )
-        })
-        .finally(() => setSending(false))
-    }
-  }, [
-    autoStart,
-    config.language,
-    conversationScope,
-    dictMeta,
+  const { send } = useChatSend({
     messages,
+    draft,
+    setDraft,
+    setMessages,
+    setSending,
+    configLanguage: config.language!,
+    contextForChat,
     name,
+    dictMeta,
+    selectedNoteId,
+    selectedNoteContent,
+    notesTree,
     route,
     sessionId,
-    setMessages,
     startingInfo,
-  ])
+    autoStart,
+    conversationScope,
+    runKeyRef,
+    didAutoStartRef,
+    useProvidedContext,
+  })
 
   return {
     clearChat,
@@ -286,6 +192,8 @@ export function useChat({
     setDraft,
     sending,
     canSend,
+    useProvidedContext,
+    setUseProvidedContext,
     contextForChat,
     setContextForChat,
     getToolActions,
