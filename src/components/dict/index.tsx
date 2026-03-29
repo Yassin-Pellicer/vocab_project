@@ -185,6 +185,7 @@ export default function DictionaryComponent({
           <AddWordModal ref={addWordButtonRef} route={route} name={name} />
         </div>
       </div>
+
       <div
         ref={containerRef}
         className="flex flex-row-reverse overflow-hidden h-[calc(100vh-130px)] min-h-0"
@@ -222,98 +223,104 @@ export default function DictionaryComponent({
             </div>
           </div>
         )}
-        {!graphMode ? (
-          <>
-            <div className="flex-1 flex flex-col border-r min-w-0 h-full min-h-0">
-              <div className="flex flex-col overflow-auto px-2 pt-4 min-h-0"
-                ref={scrollRef}
-              >
-                {currentPage <= 1 && (
-                  <div className={cn(
-                    "mb-4 mx-2 shrink-0",
-                    (searchField || isAdditionOrder) && "hidden"
-                  )}>
-                    <p className="text-8xl font-bold text-foreground mb-4">
-                      {selectedLetter}
-                    </p>
-                    <hr className="border-border" />
-                  </div>
-                )}
-                {paginatedWords.length === 0 ? (
-                  <div className="py-12 text-gray-500 text-center">
-                    {searchField
-                      ? `No results found for "${searchField}"`
-                      : `No list found starting with ${selectedLetter}`}
-                  </div>
-                ) : (
-                  <div className={getGridClasses()}>
-                    {paginatedWords.map((word, idx) => (
-                      <div
-                        key={`left-${idx}-${word.uuid}`}
-                        className="shadow-md p-4 mb-4 rounded-2xl border bg-card text-card-foreground"
-                      >
-                        <WordCard word={word} route={route} name={name} />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-              {totalPages > 1 && (
-                <div className={cn(
-                  "shrink-0 mt-auto mb-4 my-4 pt-4",
-                  "flex items-center justify-center gap-4",
-                  "border-t border-border bg-background"
+
+        <div className="flex-1 flex flex-col border-r min-w-0 h-full min-h-0">
+          <div className="flex flex-col overflow-auto px-2 min-h-0 mt-4"
+            ref={scrollRef}
+          >
+            <div>
+              {graphMode && (
+                <div className={cn("flex flex-row h-[calc(100vh-140px)] border-b mb-4 w-full min-w-0", 
+                  (paginatedWords.length >= 50) && "h-[calc(100vh-220px)]!"
                 )}>
-                  <button
-                    onClick={handlePrevPage}
-                    disabled={currentPage === 1}
-                    className={cn(
-                      "p-2 rounded-lg bg-card border border-border",
-                      "hover:bg-popover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    )}
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <span className="text-sm text-muted-foreground font-medium">
-                    Page {currentPage} of {totalPages}
-                  </span>
-                  <button
-                    onClick={handleNextPage}
-                    disabled={currentPage === totalPages}
-                    className={cn(
-                      "p-2 rounded-lg bg-card border border-border",
-                      "hover:bg-popover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    )}
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
+                  <div className="flex-1 min-w-0 overflow-hidden">
+                    <KnowledgeGraph route={route} name={name} title={""} doubleView={true} />
+                  </div>
                 </div>
               )}
             </div>
-            <div className="flex flex-col border-r items-center divide-y overflow-y-auto hide-scrollbar h-full shrink-0"
-              ref={alphabetRef}
-            >
-              {alphabet.map((letter) => (
-                <button
-                  key={letter}
-                  onClick={() => handleLetterClick(letter)}
-                  className={cn(
-                    "w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors shrink-0",
-                    selectedLetter === letter
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-popover"
-                  )}
-                >
-                  {letter}
-                </button>
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="border-r w-full">
-            <KnowledgeGraph route={route} name={name} title={""} doubleView={true} />
+            {currentPage <= 1 && (
+              <div className={cn(
+                "mb-4 mx-2 shrink-0",
+                (searchField || isAdditionOrder) && "hidden"
+              )}>
+                <p className="text-8xl font-bold text-foreground mb-4">
+                  {selectedLetter}
+                </p>
+                <hr className="border-border" />
+              </div>
+            )}
+            {paginatedWords.length === 0 ? (
+              <div className="py-12 text-gray-500 text-center">
+                {searchField
+                  ? `No results found for "${searchField}"`
+                  : `No list found starting with ${selectedLetter}`}
+              </div>
+            ) : (
+              <div className={getGridClasses()}>
+                {paginatedWords.map((word, idx) => (
+                  <div
+                    key={`left-${idx}-${word.uuid}`}
+                    className="shadow-md p-4 mb-4 rounded-2xl border bg-card text-card-foreground"
+                  >
+                    <WordCard word={word} route={route} name={name} />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+          {totalPages > 1 && (
+            <div className={cn(
+              "shrink-0 mt-auto mb-4 my-4 pt-4",
+              "flex items-center justify-center gap-4",
+              "border-t border-border bg-background"
+            )}>
+              <button
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}
+                className={cn(
+                  "p-2 rounded-lg bg-card border border-border",
+                  "hover:bg-popover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                )}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <span className="text-sm text-muted-foreground font-medium">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+                className={cn(
+                  "p-2 rounded-lg bg-card border border-border",
+                  "hover:bg-popover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                )}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col border-r items-center divide-y overflow-y-auto hide-scrollbar h-full shrink-0"
+          ref={alphabetRef}
+        >
+          {alphabet.map((letter) => (
+            <button
+              key={letter}
+              onClick={() => handleLetterClick(letter)}
+              className={cn(
+                "w-8 h-8 flex items-center justify-center text-xs font-semibold transition-colors shrink-0",
+                selectedLetter === letter
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-popover"
+              )}
+            >
+              {letter}
+            </button>
+          ))}
+        </div>
+
+
       </div>
 
       <FloatingAssistantChat

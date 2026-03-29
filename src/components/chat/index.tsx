@@ -263,12 +263,15 @@ export const Chat = forwardRef<() => void, ChatProps>(function Chat(
     const prompt = getFirstUserPrompt(firstUser).trim();
     if (!prompt) return;
     setSessions((prev) => {
+      let changed = false;
       const next = prev.map((session) => {
         if (session.id !== sessionId) return session;
-        const title =
-          session.title === DEFAULT_SESSION_TITLE ? prompt.slice(0, 40) : session.title;
+        if (session.title !== DEFAULT_SESSION_TITLE) return session;
+        const title = prompt.slice(0, 40);
+        changed = true;
         return { ...session, title, updatedAt: Date.now() };
       });
+      if (!changed) return prev;
       writeSessions(next);
       return next;
     });

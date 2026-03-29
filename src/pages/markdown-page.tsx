@@ -9,14 +9,19 @@ export default function MarkdownPage({ _uuid }: { _uuid?: string }) {
 
   let path = urlParams.get("path") || "";
   const name = urlParams.get("name") || "";
+  const uuidFromQuery = urlParams.get("uuid") || undefined;
 
   path = path.replace(/\\/g, "/");
   path = path.replace(/\/+/g, "/");
 
   const selectedWord = DictionaryContext((state) => state.selectedWord);
   const dictionaries = DictionaryContext((state) => state.dictionaries);
+  const wordFromQuery = uuidFromQuery
+    ? dictionaries[name]?.find((w) => w.uuid === uuidFromQuery)
+    : undefined;
 
   const word =
+    wordFromQuery ??
     selectedWord ??
     (_uuid ? dictionaries[name]?.find((w) => w.uuid === _uuid) : undefined);
 

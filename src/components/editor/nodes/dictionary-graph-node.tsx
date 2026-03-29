@@ -2,13 +2,14 @@ import { Node, mergeAttributes } from "@tiptap/core"
 import { ReactNodeViewRenderer, NodeViewWrapper, type NodeViewProps } from "@tiptap/react"
 import DictionaryGraph from "@/components/knowledge-graph"
 
-const DictionaryGraphView = ({ node }: NodeViewProps) => {
-  const { route, name, title, doubleView, word, directOnly } = node.attrs as {
+const DictionaryGraphView = ({ node, updateAttributes }: NodeViewProps) => {
+  const { route, name, title, doubleView, word, wordId, directOnly } = node.attrs as {
     route: string
     name: string
     title: string
     doubleView: boolean
     word: string
+    wordId: string
     directOnly: boolean
   }
 
@@ -21,8 +22,20 @@ const DictionaryGraphView = ({ node }: NodeViewProps) => {
           title={title}
           doubleView={doubleView}
           word={word}
+          initialWordId={wordId}
           showDirectToggle={false}
+          showBottomSelector={false}
+          showGoBackButton={false}
+          autoSelectRandomWord={false}
+          selectionScope="local"
+          navigateOnWordClick={true}
           directOnlyOverride={directOnly}
+          onWordSelected={(selected) => {
+            updateAttributes({
+              word: selected.pair?.[0]?.original?.word ?? "",
+              wordId: selected.uuid ?? "",
+            })
+          }}
         />
       </div>
     </NodeViewWrapper>
@@ -40,6 +53,7 @@ export const DictionaryGraphNode = Node.create({
       title: { default: "" },
       doubleView: { default: false },
       word: { default: "" },
+      wordId: { default: "" },
       directOnly: { default: false },
     }
   },

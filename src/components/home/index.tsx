@@ -213,7 +213,7 @@ function DictRow({
             <div className=" p-3 rounded-xl border bg-linear-to-b from-transparent via-to-background/70 to-background/90 shadow-md">
               <p className="text-xs uppercase tracking-wide mb-1">Random Note</p>
               {dict.randomNote ? (
-                <div className="flex flex-col items-center bg-linear-to-b from-transparent via-to-background/70 to-background/90 justify-center overflow-hidden max-h-100">
+                <div className="flex flex-col items-center bg-linear-to-b from-transparent via-to-background/70 to-background/90 justify-center overflow-hidden max-h-150">
                   <div className="overflow-y-hidden w-full relative">
                     <NoteDisplay
                       route={dict.path}
@@ -250,7 +250,7 @@ function DictRow({
 
         <div
           ref={chatRef}
-          className="sticky shadow-md border xl:w-1/3 xl:flex hidden w-full rounded-2xl min-h-0 top-4 flex-col overflow-hidden h-[calc(100vh-96px)] h-[calc(100dvh-96px)] bg-card/60"
+          className="sticky shadow-md border xl:w-1/3 xl:flex hidden w-full rounded-2xl min-h-0 top-4 flex-col overflow-hidden h-[calc(100vh-96px)] bg-card/60"
           style={chatHeight ? { height: `${chatHeight}px` } : undefined}
         >
           <Chat
@@ -339,7 +339,7 @@ export default function Home() {
   return (
     <div
       data-home-scroll
-      className="flex flex-col overflow-y-auto h-[calc(100vh-64px)] h-[calc(100dvh-64px)] gap-10 bg-background"
+      className="flex flex-col overflow-y-auto h-[calc(100vh-64px)] gap-10 bg-background"
     >
       <div className="flex flex-col w-full">
         <div className="border-b border-border/60 px-6 py-6">

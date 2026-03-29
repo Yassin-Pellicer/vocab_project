@@ -23,6 +23,7 @@ export function useKnowledgeGraph(
   title: string,
   word?: string,
   directOnly = false,
+  selectedWordIdOverride?: string,
 ) {
   const [graphData, setGraphData] = useState<GraphData | null>(null);
   const [showEmptyNodes, setShowEmptyNodes] = useState(false);
@@ -189,7 +190,7 @@ export function useKnowledgeGraph(
     let filteredLinks = links;
     const activeSearch = word?.trim() || searchField.trim();
 
-    const selectedWordId = selectedWord?.uuid;
+    const selectedWordId = selectedWordIdOverride ?? selectedWord?.uuid;
     if (activeSearch !== "" || selectedTypes.length > 0 || (directOnly && selectedWordId)) {
       const adjacency = new Map<string, Set<string>>();
 
@@ -212,8 +213,8 @@ export function useKnowledgeGraph(
 
       // When directOnly is on, always anchor on the selected word — never on search results.
       // Search still applies to the non-direct (all-relations) branch below.
-      const directAnchor = directOnly && selectedWord?.uuid
-        ? new Set<string>([selectedWord.uuid])
+      const directAnchor = directOnly && selectedWordId
+        ? new Set<string>([selectedWordId])
         : null;
 
       if (directOnly && directAnchor && directAnchor.size > 0) {
@@ -316,7 +317,7 @@ export function useKnowledgeGraph(
 
     // Always show the selected word and its direct neighbors, even if filtered out.
     // Build a full adjacency from the unfiltered links for this lookup.
-    const selectedId = selectedWord?.uuid;
+    const selectedId = selectedWordId;
     if (selectedId) {
       const fullAdjacency = new Map<string, Set<string>>();
       links.forEach((link) => {
@@ -376,6 +377,7 @@ export function useKnowledgeGraph(
     word,
     directOnly,
     selectedWord?.uuid,
+    selectedWordIdOverride,
   ]);
 
   return {

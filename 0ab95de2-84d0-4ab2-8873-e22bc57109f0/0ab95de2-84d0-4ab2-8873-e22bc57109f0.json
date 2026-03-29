@@ -389,7 +389,9 @@
     "dateAdded": "2025-11-19",
     "type": "Nomen",
     "uuid": "13ecfd48-6e68-451e-a954-862a2b8ff26c",
-    "linkedWordIds": []
+    "linkedWordIds": [
+      "35e3ddc5-9bf7-4d31-9e91-2491c526ff41"
+    ]
   },
   {
     "pair": [
@@ -9764,6 +9766,7 @@
     "type": "Redewendungen",
     "uuid": "35e3ddc5-9bf7-4d31-9e91-2491c526ff41",
     "linkedWordIds": [
+      "13ecfd48-6e68-451e-a954-862a2b8ff26c",
       "69572db1-100a-4672-a27a-c43b8e6a904c"
     ]
   },
@@ -9843,7 +9846,7 @@
     "dateAdded": "2026-03-23",
     "type": "Nomen",
     "linkedWordIds": [
-      "6fdab861-a202-492a-ac87-f7b6de7fd291",
+      "18fbae6f-2ff0-4f12-b6ef-91d2ce89790e",
       "89b9a56d-a117-4a8f-bba4-0a28a872164a"
     ]
   },
@@ -11426,7 +11429,7 @@
     "type": "Nomen",
     "uuid": "6fdab861-a202-492a-ac87-f7b6de7fd291",
     "linkedWordIds": [
-      "0ab95de2-84d0-4ab2-8873-e22bc57109f0"
+      "18fbae6f-2ff0-4f12-b6ef-91d2ce89790e"
     ]
   },
   {
@@ -12074,5 +12077,80 @@
     "type": "Adjektive",
     "uuid": "ba2e2372-bf35-4334-95ae-0f704a457f38",
     "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "kaputt",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "broken"
+          },
+          {
+            "word": "ruined"
+          },
+          {
+            "word": "damaged"
+          }
+        ],
+        "definitions": [
+          "kaputt = in kaputt gehen / nicht mehr funktionsfähig sein",
+          "used to say something is broken, ruined, or beyond repair"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-29",
+    "type": "Adjektive",
+    "uuid": "654b64e4-c0c4-43af-89d5-d952b55963ac",
+    "linkedWordIds": []
+  },
+  {
+    "uuid": "18fbae6f-2ff0-4f12-b6ef-91d2ce89790e",
+    "pair": [
+      {
+        "original": {
+          "word": "Knöchel",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "tobillo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "body part: the ankle"
+        ]
+      },
+      {
+        "original": {
+          "word": "Knöchel",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "tobillos",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "plural: ankles (die Knöchel)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-29",
+    "type": "Nomen",
+    "linkedWordIds": [
+      "0ab95de2-84d0-4ab2-8873-e22bc57109f0",
+      "6fdab861-a202-492a-ac87-f7b6de7fd291"
+    ]
   }
 ]

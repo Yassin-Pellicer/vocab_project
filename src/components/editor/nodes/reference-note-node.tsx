@@ -11,9 +11,9 @@ const ReferenceNoteView = ({ node }: NodeViewProps) => {
   const { setSelectedNoteId } = NotesContext();
   return (
     <NodeViewWrapper className="reference-note-node">
-      <div 
-      onClick={() => setSelectedNoteId(selectedNoteId)}
-      className="w-full border rounded-xl p-4 cursor-pointer hover:bg-secondary/50">
+      <div
+        onClick={() => setSelectedNoteId(selectedNoteId)}
+        className="w-full border rounded-xl p-4 cursor-pointer hover:bg-secondary/50">
         <p>
           {title || "Reference Note"} (ID: {selectedNoteId})
         </p>

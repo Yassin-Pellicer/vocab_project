@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button"
 import { DialogDescription } from "@radix-ui/react-dialog"
 import KnowledgeGraph from "@/components/knowledge-graph"
 import { Switch } from "@/components/ui/switch"
+import { TranslationEntry } from "@/types/translation-entry"
 
 export default function GraphInsertModal({
   editor,
@@ -32,9 +33,10 @@ export default function GraphInsertModal({
 }) {
   const [word, setWord] = useState("")
   const [directOnly, setDirectOnly] = useState(false)
+  const [selectedGraphWord, setSelectedGraphWord] = useState<TranslationEntry | null>(null)
 
   const insertGraph = () => {
-    if (!editor || !word) return
+    if (!editor || !selectedGraphWord?.uuid) return
 
     editor.commands.insertContent({
       type: "dictionaryGraph",
@@ -43,12 +45,14 @@ export default function GraphInsertModal({
         name,
         title: "",
         doubleView,
-        word: word,
+        word: selectedGraphWord.pair?.[0]?.original?.word ?? word,
+        wordId: selectedGraphWord.uuid,
         directOnly,
       },
     })
 
     setWord("")
+    setSelectedGraphWord(null)
     setOpen(false)
   }
 
@@ -70,7 +74,20 @@ export default function GraphInsertModal({
             doubleView={doubleView}
             word={word}
             showDirectToggle={false}
+            showBottomSelector={false}
+            showGoBackButton={true}
+            autoSelectRandomWord={false}
+            selectionScope="local"
+            initialWordId={selectedGraphWord?.uuid}
             directOnlyOverride={directOnly}
+            onWordSelected={(selected) => {
+              setSelectedGraphWord(selected)
+              setWord(selected.pair?.[0]?.original?.word ?? "")
+            }}
+            onSelectionCleared={() => {
+              setSelectedGraphWord(null)
+              setWord("")
+            }}
           />
         </div>
         <div className="flex items-center justify-between gap-3">
@@ -92,7 +109,7 @@ export default function GraphInsertModal({
           <Button variant="outline" onClick={() => setOpen(false)}>
             Cancel
           </Button>
-          <Button onClick={insertGraph}>
+          <Button onClick={insertGraph} disabled={!selectedGraphWord?.uuid}>
             Insert
           </Button>
         </DialogFooter>
