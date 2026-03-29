@@ -28,7 +28,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 
 const getGridClasses = () =>
-  "grid [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))] pb-8 sm:pl-2 px-2 gap-4";
+  "grid mt-4 [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))] pb-8 sm:pl-2 px-2 gap-4";
 
 const toolbarBtn = (active: boolean) =>
   cn(
@@ -225,12 +225,12 @@ export default function DictionaryComponent({
         )}
 
         <div className="flex-1 flex flex-col border-r min-w-0 h-full min-h-0">
-          <div className="flex flex-col overflow-auto px-2 min-h-0 mt-4"
+          <div className="flex flex-col overflow-auto px-2 min-h-0"
             ref={scrollRef}
           >
             <div>
               {graphMode && (
-                <div className={cn("flex flex-row h-[calc(100vh-140px)] border-b mb-4 w-full min-w-0", 
+                <div className={cn("flex flex-row h-[calc(100vh-140px)] border-b w-full min-w-0", 
                   (paginatedWords.length >= 50) && "h-[calc(100vh-220px)]!"
                 )}>
                   <div className="flex-1 min-w-0 overflow-hidden">
@@ -244,7 +244,7 @@ export default function DictionaryComponent({
                 "mb-4 mx-2 shrink-0",
                 (searchField || isAdditionOrder) && "hidden"
               )}>
-                <p className="text-8xl font-bold text-foreground mb-4">
+                <p className="text-8xl font-bold text-foreground my-4">
                   {selectedLetter}
                 </p>
                 <hr className="border-border" />

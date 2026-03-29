@@ -78,8 +78,10 @@ import "@/components/ui/tiptap/tiptap-templates/simple/simple-editor.scss"
 
 import { DictionaryGraphNode } from "@/components/editor/nodes/dictionary-graph-node"
 import { ReferenceNoteNode } from "@/components/editor/nodes/reference-note-node"
+import { LinkedWordNoteNode } from "@/components/editor/nodes/linked-word-note-node"
 import { InsertGraphButton } from "@/components/editor/trigger/graph/insert-graph-button"
 import { ReferenceNoteButton } from "@/components/editor/trigger/note/reference-note-button"
+import { InsertLinkedWordButton } from "@/components/editor/trigger/word/insert-linked-word-button"
 import { NotesContext } from "@/context/notes-context"
 import { DictionaryContext } from "@/context/dictionary-context"
 import { DropdownMenuContent, DropdownMenu, DropdownMenuTrigger } from "../../tiptap-ui-primitive/dropdown-menu"
@@ -91,7 +93,8 @@ const MainToolbarContent = ({
   onLinkClick,
   isMobile,
   route,
-  name
+  name,
+  editorType,
 }: {
   editor: Editor | null,
   onHighlighterClick: () => void
@@ -99,6 +102,7 @@ const MainToolbarContent = ({
   isMobile: boolean,
   route: string,
   name: string
+  editorType: string
 }) => {
   return (
     <>
@@ -217,6 +221,9 @@ const MainToolbarContent = ({
         <ImageUploadButton text="Add" />
         <InsertGraphButton editor={editor} route={route} name={name} />
         <ReferenceNoteButton editor={editor} route={route} name={name} />
+        {editorType === "notes" && (
+          <InsertLinkedWordButton editor={editor} route={route} name={name} />
+        )}
       </ToolbarGroup>
 
       <Spacer />
@@ -318,6 +325,7 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
       }),
       DictionaryGraphNode,
       ReferenceNoteNode,
+      LinkedWordNoteNode,
 
     ],
     content: { type: "doc", content: [] },
@@ -411,6 +419,7 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
               isMobile={isMobile}
               route={route}
               name={name}
+              editorType={type}
             />
           ) : (
             <MobileToolbarContent

@@ -389,9 +389,7 @@
     "dateAdded": "2025-11-19",
     "type": "Nomen",
     "uuid": "13ecfd48-6e68-451e-a954-862a2b8ff26c",
-    "linkedWordIds": [
-      "35e3ddc5-9bf7-4d31-9e91-2491c526ff41"
-    ]
+    "linkedWordIds": []
   },
   {
     "pair": [
@@ -9470,31 +9468,6 @@
     "pair": [
       {
         "original": {
-          "word": "Rechnung",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "bill; receipt",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Document showing what you have to pay"
-        ]
-      }
-    ],
-    "dateAdded": "2026-03-21",
-    "type": "Nomen",
-    "uuid": "bba8d649-b036-4cf3-84d9-b1c8e7b2dc31",
-    "linkedWordIds": []
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Rabatt",
           "gender": "Maskulin",
           "number": "Singular"
@@ -9766,7 +9739,6 @@
     "type": "Redewendungen",
     "uuid": "35e3ddc5-9bf7-4d31-9e91-2491c526ff41",
     "linkedWordIds": [
-      "13ecfd48-6e68-451e-a954-862a2b8ff26c",
       "69572db1-100a-4672-a27a-c43b8e6a904c"
     ]
   },
@@ -9846,8 +9818,8 @@
     "dateAdded": "2026-03-23",
     "type": "Nomen",
     "linkedWordIds": [
-      "18fbae6f-2ff0-4f12-b6ef-91d2ce89790e",
-      "89b9a56d-a117-4a8f-bba4-0a28a872164a"
+      "89b9a56d-a117-4a8f-bba4-0a28a872164a",
+      "d76847d1-633f-42f2-b0b0-d8409fd292b9"
     ]
   },
   {
@@ -11388,7 +11360,8 @@
     "type": "Nomen",
     "uuid": "476eedd8-7e24-4c33-9661-b2a8bfe3bdc8",
     "linkedWordIds": [
-      "269e75f8-fe42-4f56-b65c-8e708a6c8f51"
+      "269e75f8-fe42-4f56-b65c-8e708a6c8f51",
+      "5ff58000-30d0-41f1-9fc1-7941e46535a8"
     ]
   },
   {
@@ -11556,7 +11529,10 @@
     "dateAdded": "2026-03-24",
     "type": "Nomen",
     "uuid": "d76847d1-633f-42f2-b0b0-d8409fd292b9",
-    "linkedWordIds": []
+    "linkedWordIds": [
+      "0ab95de2-84d0-4ab2-8873-e22bc57109f0",
+      "18fbae6f-2ff0-4f12-b6ef-91d2ce89790e"
+    ]
   },
   {
     "pair": [
@@ -12149,8 +12125,86 @@
     "dateAdded": "2026-03-29",
     "type": "Nomen",
     "linkedWordIds": [
-      "0ab95de2-84d0-4ab2-8873-e22bc57109f0",
-      "6fdab861-a202-492a-ac87-f7b6de7fd291"
+      "6fdab861-a202-492a-ac87-f7b6de7fd291",
+      "d76847d1-633f-42f2-b0b0-d8409fd292b9"
+    ]
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Organ",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "órgano"
+          }
+        ],
+        "definitions": [
+          "body organ (an organ in the body); also: music note (context-dependent)"
+        ]
+      },
+      {
+        "original": {
+          "word": "Organe",
+          "gender": "Neutrum",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "órganos"
+          }
+        ],
+        "definitions": [
+          "plural: organs"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-29",
+    "type": "Nomen",
+    "uuid": "ca018b9a-45c0-45ea-b42f-10a393e03cea",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Finger",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "finger"
+          }
+        ],
+        "definitions": [
+          "body part: a finger"
+        ]
+      },
+      {
+        "original": {
+          "word": "Finger",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "fingers"
+          }
+        ],
+        "definitions": [
+          "plural: fingers"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-29",
+    "type": "Nomen",
+    "uuid": "5ff58000-30d0-41f1-9fc1-7941e46535a8",
+    "linkedWordIds": [
+      "476eedd8-7e24-4c33-9661-b2a8bfe3bdc8"
     ]
   }
 ]

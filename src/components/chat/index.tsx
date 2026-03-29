@@ -10,93 +10,34 @@ import {
   Trash2,
   WholeWord,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
-import { TranslationEntry } from "@/types/translation-entry";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
-import { ContextType, ChatMessage, ChatProps, ChatConversationScope } from "@/types/chat";
-import { NotesContext } from "@/context/notes-context";
-import AddWordModal from "@/components/dict/add-word-modal";
-import EditWordModal from "@/components/dict/edit-word-modal";
-import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from "react";
-import { supabase } from "@/supabase/supabase-client";
-import { ChatContext } from "@/context/chat-context";
-import { useChat } from "./hook";
-
-type ChatSession = {
-  id: string;
-  title: string;
-  createdAt: number;
-  updatedAt: number;
-  kind?: "wotd";
-};
-
-const DEFAULT_SESSION_TITLE = "New chat";
-const WOTD_SESSION_TITLE = "Word of the Day";
-
-const buildBaseKey = (
-  route?: string,
-  name?: string | null,
-  contextType?: ContextType["type"],
-  conversationScope?: ChatConversationScope,
-) => `${route ?? ""}|${name ?? ""}|${contextType ?? "none"}|${conversationScope ?? "assistant"}`;
-
-const sessionsKey = () => "chat:sessions:global";
-const activeKey = (baseKey: string, instanceKey: string) =>
-  `chat:active:${baseKey}:${instanceKey}`;
-
-const readSessions = (): ChatSession[] => {
-  try {
-    const raw = localStorage.getItem(sessionsKey());
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as ChatSession[]) : [];
-  } catch {
-    return [];
-  }
-};
-
-const writeSessions = (sessions: ChatSession[]) => {
-  localStorage.setItem(sessionsKey(), JSON.stringify(sessions));
-  window.dispatchEvent(new CustomEvent("chat-sessions-updated"));
-};
-
-const readActiveSession = (baseKey: string, instanceKey: string) =>
-  localStorage.getItem(activeKey(baseKey, instanceKey));
-const writeActiveSession = (baseKey: string, sessionId: string, instanceKey: string) =>
-  localStorage.setItem(activeKey(baseKey, instanceKey), sessionId);
-
-const createSession = (overrides?: Partial<ChatSession>): ChatSession => ({
-  id: typeof crypto !== "undefined" && "randomUUID" in crypto
-    ? crypto.randomUUID()
-    : `session-${Date.now()}-${Math.random().toString(16).slice(2)}`,
-  title: DEFAULT_SESSION_TITLE,
-  createdAt: Date.now(),
-  updatedAt: Date.now(),
-  ...overrides,
-});
-
-const getFirstUserPrompt = (message: ChatMessage | undefined): string => {
-  if (!message || message.role !== "user") return "";
-  const content = message.content;
-  if (typeof content === "string") return content;
-  if (typeof content === "object" && content !== null) {
-    return (content as { prompt?: string }).prompt ?? "";
-  }
-  return "";
-};
-
-const sessionChatKey = (id: string) => `session:${id}`;
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Textarea } from "@/components/ui/textarea"
+import { cn } from "@/lib/utils"
+import { TranslationEntry } from "@/types/translation-entry"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
+import rehypeHighlight from "rehype-highlight"
+import { ChatProps } from "@/types/chat"
+import { NotesContext } from "@/context/notes-context"
+import AddWordModal from "@/components/dict/add-word-modal"
+import EditWordModal from "@/components/dict/edit-word-modal"
+import { forwardRef, useEffect, useImperativeHandle, useMemo } from "react"
+import { ChatContext } from "@/context/chat-context"
+import { useChat } from "./hook"
+import { useAuthSession } from "@/components/chat/hooks/use-auth-session"
+import { useChatSessions } from "@/components/chat/hooks/use-chat-sessions"
+import {
+  buildBaseKey,
+  getFirstUserPrompt,
+  sessionChatKey,
+} from "@/components/chat/session-utils"
 
 export type ChatHandle = {
+  clearChat: () => void
+}
 
-};
-
-export const Chat = forwardRef<() => void, ChatProps>(function Chat(
+export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
   {
     startingInfo,
     route,
@@ -108,37 +49,35 @@ export const Chat = forwardRef<() => void, ChatProps>(function Chat(
   },
   ref
 ) {
-  const instanceKeyRef = useMemo(() => {
-    if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
-      return crypto.randomUUID();
-    }
-    return `instance-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-  }, []);
-
   const baseKey = useMemo(
     () => buildBaseKey(route, name, context?.type, conversationScope),
     [route, name, context?.type, conversationScope],
-  );
-  const [sessions, setSessions] = useState<ChatSession[]>([]);
-  const [sessionId, setSessionId] = useState<string>("");
-  const [sessionsOpen, setSessionsOpen] = useState(false);
-  const conversations = ChatContext((state) => state.conversations);
-  const clearConversation = ChatContext((state) => state.clearConversation);
+  )
+  const conversations = ChatContext((state) => state.conversations)
+  const clearConversation = ChatContext((state) => state.clearConversation)
+  const {
+    sessions,
+    sessionId,
+    sessionsOpen,
+    setSessionsOpen,
+    wotdSessionId,
+    currentSessionTitle,
+    handleNewSession,
+    handleSelectSession,
+    handleDeleteSession,
+    updateDefaultTitleFromPrompt,
+  } = useChatSessions({
+    baseKey,
+    conversationScope,
+    startingInfo,
+    clearConversation,
+  })
 
-  const wotdSessionId = useMemo(
-    () => sessions.find((session) => session.kind === "wotd")?.id ?? "",
-    [sessions],
-  );
-  const currentSession = useMemo(
-    () => sessions.find((session) => session.id === sessionId),
-    [sessions, sessionId],
-  );
-  const currentSessionTitle = currentSession?.title ?? DEFAULT_SESSION_TITLE;
-  const autoStartFlag = autoStart ?? true;
+  const autoStartFlag = autoStart ?? true
   const effectiveAutoStart =
     conversationScope === "home"
       ? autoStartFlag && sessionId === wotdSessionId
-      : autoStartFlag;
+      : autoStartFlag
 
   const {
     clearChat,
@@ -159,172 +98,26 @@ export const Chat = forwardRef<() => void, ChatProps>(function Chat(
     autoStart: effectiveAutoStart,
     conversationScope,
     sessionId,
-  });
+  })
 
+  useImperativeHandle(
+    ref,
+    () => ({
+      clearChat,
+    }),
+    [clearChat],
+  )
 
-  useImperativeHandle(ref, () => (clearChat), [clearChat]);
+  const { selectedNoteId, findById } = NotesContext()
 
-  const { selectedNoteId, findById } = NotesContext();
-
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const storedSessions = readSessions();
-    let nextSessions = storedSessions;
-    if (storedSessions.length === 0) {
-      const initial = createSession();
-      nextSessions = [initial];
-      writeSessions(nextSessions);
-    }
-    const active = readActiveSession(baseKey, instanceKeyRef);
-    const activeId =
-      nextSessions.find((session) => session.id === active)?.id ??
-      nextSessions[0]?.id ??
-      "";
-
-    setSessions(nextSessions);
-    setSessionId(activeId);
-    if (activeId) {
-      writeActiveSession(baseKey, activeId, instanceKeyRef);
-    }
-  }, [baseKey]);
+  const { user, loading } = useAuthSession()
 
   useEffect(() => {
-    if (conversationScope !== "home") return;
-    if (!startingInfo) return;
-    if (!sessions.length) return;
-    if (sessions.some((session) => session.kind === "wotd")) return;
-
-    const wotdSession = createSession({
-      title: WOTD_SESSION_TITLE,
-      kind: "wotd",
-    });
-    const nextSessions = [wotdSession, ...sessions];
-    setSessions(nextSessions);
-    writeSessions(nextSessions);
-    setSessionId(wotdSession.id);
-    writeActiveSession(baseKey, wotdSession.id, instanceKeyRef);
-  }, [conversationScope, startingInfo, sessions, baseKey]);
-
-  useEffect(() => {
-    if (conversationScope !== "home") return;
-    if (!startingInfo) return;
-    if (!wotdSessionId) return;
-    if (typeof sessionStorage === "undefined") return;
-
-    const bootKey = `chat:wotd:boot:${baseKey}`;
-    if (sessionStorage.getItem(bootKey)) return;
-    sessionStorage.setItem(bootKey, "1");
-
-    clearConversation(sessionChatKey(wotdSessionId));
-    setSessionId(wotdSessionId);
-    writeActiveSession(baseKey, wotdSessionId, instanceKeyRef);
-  }, [conversationScope, startingInfo, wotdSessionId, baseKey]);
-
-  useEffect(() => {
-    const syncSessions = () => {
-      const latest = readSessions();
-      if (latest.length === 0) return;
-      setSessions(latest);
-      if (!latest.find((session) => session.id === sessionId)) {
-        const fallback = latest[0]?.id ?? "";
-        setSessionId(fallback);
-        if (fallback) {
-          writeActiveSession(baseKey, fallback, instanceKeyRef);
-        }
-      }
-    };
-
-    const onStorage = (event: StorageEvent) => {
-      if (event.key !== sessionsKey()) return;
-      syncSessions();
-    };
-
-    window.addEventListener("storage", onStorage);
-    window.addEventListener("chat-sessions-updated", syncSessions as EventListener);
-
-    return () => {
-      window.removeEventListener("storage", onStorage);
-      window.removeEventListener("chat-sessions-updated", syncSessions as EventListener);
-    };
-  }, [baseKey, sessionId]);
-
-  useEffect(() => {
-    if (!sessionId) return;
-    writeActiveSession(baseKey, sessionId, instanceKeyRef);
-  }, [baseKey, sessionId, instanceKeyRef]);
-
-  useEffect(() => {
-    if (!messages.length || !sessionId) return;
-    const currentSession = sessions.find((session) => session.id === sessionId);
-    if (currentSession?.kind === "wotd") return;
-    const firstUser = messages.find((m) => m.role === "user");
-    const prompt = getFirstUserPrompt(firstUser).trim();
-    if (!prompt) return;
-    setSessions((prev) => {
-      let changed = false;
-      const next = prev.map((session) => {
-        if (session.id !== sessionId) return session;
-        if (session.title !== DEFAULT_SESSION_TITLE) return session;
-        const title = prompt.slice(0, 40);
-        changed = true;
-        return { ...session, title, updatedAt: Date.now() };
-      });
-      if (!changed) return prev;
-      writeSessions(next);
-      return next;
-    });
-  }, [baseKey, messages, sessionId, sessions]);
-
-  const handleNewSession = () => {
-    const nextSession = createSession();
-    setSessions((prev) => {
-      const next = [nextSession, ...prev];
-      writeSessions(next);
-      return next;
-    });
-    setSessionId(nextSession.id);
-    writeActiveSession(baseKey, nextSession.id, instanceKeyRef);
-    setSessionsOpen(true);
-  };
-
-  const handleSelectSession = (id: string) => {
-    setSessionId(id);
-    writeActiveSession(baseKey, id, instanceKeyRef);
-    setSessionsOpen(false);
-  };
-
-  const handleDeleteSession = (id: string) => {
-    const target = sessions.find((session) => session.id === id);
-    if (target?.kind === "wotd") return;
-    setSessions((prev) => {
-      const next = prev.filter((session) => session.id !== id);
-      const fallback = next[0] ?? createSession();
-      if (next.length === 0) {
-        next.push(fallback);
-      }
-      writeSessions(next);
-      const nextActive = id === sessionId ? fallback.id : sessionId;
-      setSessionId(nextActive);
-      writeActiveSession(baseKey, nextActive, instanceKeyRef);
-      return next;
-    });
-    clearConversation(sessionChatKey(id));
-  };
-
-  useEffect(() => {
-    async function fetchUser() {
-      const { data } = await supabase.auth.getSession();
-      setUser(data.session?.user ?? null);
-      setLoading(false);
-    }
-    fetchUser();
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-    return () => listener.subscription.unsubscribe();
-  }, []);
+    if (!messages.length || !sessionId) return
+    const firstUser = messages.find((message) => message.role === "user")
+    const prompt = getFirstUserPrompt(firstUser)
+    updateDefaultTitleFromPrompt(prompt)
+  }, [messages, sessionId, updateDefaultTitleFromPrompt])
 
   return (
     <Card className="relative flex flex-row w-full h-full min-h-0 border-0">
