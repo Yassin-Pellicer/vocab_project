@@ -26,13 +26,6 @@ export function useChatSessions({
   startingInfo,
   clearConversation,
 }: UseChatSessionsArgs) {
-  const instanceKey = useMemo(() => {
-    if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
-      return crypto.randomUUID()
-    }
-    return `instance-${Date.now()}-${Math.random().toString(16).slice(2)}`
-  }, [])
-
   const [sessions, setSessions] = useState<ReturnType<typeof readSessions>>([])
   const [sessionId, setSessionId] = useState("")
   const [sessionsOpen, setSessionsOpen] = useState(false)
@@ -48,15 +41,15 @@ export function useChatSessions({
   const currentSessionTitle = currentSession?.title ?? DEFAULT_SESSION_TITLE
 
   useEffect(() => {
-    const storedSessions = readSessions()
+    const storedSessions = readSessions(baseKey)
     let nextSessions = storedSessions
     if (storedSessions.length === 0) {
       const initial = createSession()
       nextSessions = [initial]
-      writeSessions(nextSessions)
+      writeSessions(baseKey, nextSessions)
     }
 
-    const active = readActiveSession(baseKey, instanceKey)
+    const active = readActiveSession(baseKey)
     const activeId =
       nextSessions.find((session) => session.id === active)?.id ??
       nextSessions[0]?.id ??
@@ -65,9 +58,9 @@ export function useChatSessions({
     setSessions(nextSessions)
     setSessionId(activeId)
     if (activeId) {
-      writeActiveSession(baseKey, activeId, instanceKey)
+      writeActiveSession(baseKey, activeId)
     }
-  }, [baseKey, instanceKey])
+  }, [baseKey])
 
   useEffect(() => {
     if (conversationScope !== "home") return
@@ -81,10 +74,10 @@ export function useChatSessions({
     })
     const nextSessions = [wotdSession, ...sessions]
     setSessions(nextSessions)
-    writeSessions(nextSessions)
+    writeSessions(baseKey, nextSessions)
     setSessionId(wotdSession.id)
-    writeActiveSession(baseKey, wotdSession.id, instanceKey)
-  }, [conversationScope, startingInfo, sessions, baseKey, instanceKey])
+    writeActiveSession(baseKey, wotdSession.id)
+  }, [conversationScope, startingInfo, sessions, baseKey])
 
   useEffect(() => {
     if (conversationScope !== "home") return
@@ -96,27 +89,27 @@ export function useChatSessions({
     if (sessionStorage.getItem(bootKey)) return
     sessionStorage.setItem(bootKey, "1")
 
-    clearConversation(sessionChatKey(wotdSessionId))
+    clearConversation(sessionChatKey(baseKey, wotdSessionId))
     setSessionId(wotdSessionId)
-    writeActiveSession(baseKey, wotdSessionId, instanceKey)
-  }, [conversationScope, startingInfo, wotdSessionId, baseKey, instanceKey, clearConversation])
+    writeActiveSession(baseKey, wotdSessionId)
+  }, [conversationScope, startingInfo, wotdSessionId, baseKey, clearConversation])
 
   useEffect(() => {
     const syncSessions = () => {
-      const latest = readSessions()
+      const latest = readSessions(baseKey)
       if (latest.length === 0) return
       setSessions(latest)
       if (!latest.find((session) => session.id === sessionId)) {
         const fallback = latest[0]?.id ?? ""
         setSessionId(fallback)
         if (fallback) {
-          writeActiveSession(baseKey, fallback, instanceKey)
+          writeActiveSession(baseKey, fallback)
         }
       }
     }
 
     const onStorage = (event: StorageEvent) => {
-      if (event.key !== sessionsKey()) return
+      if (event.key !== sessionsKey(baseKey)) return
       syncSessions()
     }
 
@@ -127,32 +120,32 @@ export function useChatSessions({
       window.removeEventListener("storage", onStorage)
       window.removeEventListener("chat-sessions-updated", syncSessions as EventListener)
     }
-  }, [baseKey, instanceKey, sessionId])
+  }, [baseKey, sessionId])
 
   useEffect(() => {
     if (!sessionId) return
-    writeActiveSession(baseKey, sessionId, instanceKey)
-  }, [baseKey, sessionId, instanceKey])
+    writeActiveSession(baseKey, sessionId)
+  }, [baseKey, sessionId])
 
   const handleNewSession = useCallback(() => {
     const nextSession = createSession()
     setSessions((prev) => {
       const next = [nextSession, ...prev]
-      writeSessions(next)
+      writeSessions(baseKey, next)
       return next
     })
     setSessionId(nextSession.id)
-    writeActiveSession(baseKey, nextSession.id, instanceKey)
+    writeActiveSession(baseKey, nextSession.id)
     setSessionsOpen(true)
-  }, [baseKey, instanceKey])
+  }, [baseKey])
 
   const handleSelectSession = useCallback(
     (id: string) => {
       setSessionId(id)
-      writeActiveSession(baseKey, id, instanceKey)
+      writeActiveSession(baseKey, id)
       setSessionsOpen(false)
     },
-    [baseKey, instanceKey],
+    [baseKey],
   )
 
   const handleDeleteSession = useCallback(
@@ -166,15 +159,15 @@ export function useChatSessions({
         if (next.length === 0) {
           next.push(fallback)
         }
-        writeSessions(next)
+        writeSessions(baseKey, next)
         const nextActive = id === sessionId ? fallback.id : sessionId
         setSessionId(nextActive)
-        writeActiveSession(baseKey, nextActive, instanceKey)
+        writeActiveSession(baseKey, nextActive)
         return next
       })
-      clearConversation(sessionChatKey(id))
+      clearConversation(sessionChatKey(baseKey, id))
     },
-    [baseKey, clearConversation, instanceKey, sessionId, sessions],
+    [baseKey, clearConversation, sessionId, sessions],
   )
 
   const updateDefaultTitleFromPrompt = useCallback(
@@ -196,11 +189,11 @@ export function useChatSessions({
           }
         })
         if (!changed) return prev
-        writeSessions(next)
+        writeSessions(baseKey, next)
         return next
       })
     },
-    [sessionId],
+    [baseKey, sessionId],
   )
 
   return {
@@ -216,4 +209,3 @@ export function useChatSessions({
     updateDefaultTitleFromPrompt,
   }
 }
-

@@ -23,6 +23,7 @@ import {
   buildSelectionContext,
   getStartingInfoKey,
 } from "@/components/chat/context-utils"
+import { sessionChatKey } from "@/components/chat/session-utils"
 import {
   getDisplayText,
   getToolActions,
@@ -36,6 +37,7 @@ const EMPTY_MESSAGES: ChatMessage[] = []
 export function useChat({
   startingInfo,
   context,
+  baseKey,
   name,
   route,
   autoStart = true,
@@ -44,6 +46,7 @@ export function useChat({
 }: {
   startingInfo?: TranslationEntry | string | null;
   context?: ContextType;
+  baseKey: string;
   name?: string | null;
   route?: string;
   autoStart?: boolean;
@@ -90,8 +93,8 @@ export function useChat({
 
   const chatKey = useMemo(() => {
     const key = sessionId || "default"
-    return `session:${key}`
-  }, [sessionId])
+    return sessionChatKey(baseKey, key)
+  }, [baseKey, sessionId])
 
   const conversation = ChatContext(
     useCallback((state) => state.conversations[chatKey], [chatKey]),

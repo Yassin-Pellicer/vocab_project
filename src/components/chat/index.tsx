@@ -96,6 +96,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
   } = useChat({
     startingInfo,
     context,
+    baseKey,
     name,
     route,
     autoStart: effectiveAutoStart,
@@ -343,7 +344,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
               {sessions.map((session) => {
                 const isActive = session.id === sessionId;
                 const isWotd = session.kind === "wotd";
-                const key = sessionChatKey(session.id);
+                const key = sessionChatKey(baseKey, session.id);
                 const messageCount = conversations[key]?.messages?.length ?? 0;
                 return (
                   <button

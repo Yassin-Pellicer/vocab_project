@@ -18,14 +18,16 @@ export const buildBaseKey = (
   conversationScope?: ChatConversationScope,
 ) => `${route ?? ""}|${name ?? ""}|${contextType ?? "none"}|${conversationScope ?? "assistant"}`
 
-export const sessionsKey = () => "chat:sessions:global"
+const normalizeBaseKey = (baseKey: string) => encodeURIComponent(baseKey)
 
-export const activeKey = (baseKey: string, instanceKey: string) =>
-  `chat:active:${baseKey}:${instanceKey}`
+export const sessionsKey = (baseKey: string) => `chat:sessions:${normalizeBaseKey(baseKey)}`
 
-export const readSessions = (): ChatSession[] => {
+export const activeKey = (baseKey: string) =>
+  `chat:active:${normalizeBaseKey(baseKey)}`
+
+export const readSessions = (baseKey: string): ChatSession[] => {
   try {
-    const raw = localStorage.getItem(sessionsKey())
+    const raw = localStorage.getItem(sessionsKey(baseKey))
     if (!raw) return []
     const parsed = JSON.parse(raw)
     return Array.isArray(parsed) ? (parsed as ChatSession[]) : []
@@ -34,16 +36,16 @@ export const readSessions = (): ChatSession[] => {
   }
 }
 
-export const writeSessions = (sessions: ChatSession[]) => {
-  localStorage.setItem(sessionsKey(), JSON.stringify(sessions))
+export const writeSessions = (baseKey: string, sessions: ChatSession[]) => {
+  localStorage.setItem(sessionsKey(baseKey), JSON.stringify(sessions))
   window.dispatchEvent(new CustomEvent("chat-sessions-updated"))
 }
 
-export const readActiveSession = (baseKey: string, instanceKey: string) =>
-  localStorage.getItem(activeKey(baseKey, instanceKey))
+export const readActiveSession = (baseKey: string) =>
+  localStorage.getItem(activeKey(baseKey))
 
-export const writeActiveSession = (baseKey: string, sessionId: string, instanceKey: string) =>
-  localStorage.setItem(activeKey(baseKey, instanceKey), sessionId)
+export const writeActiveSession = (baseKey: string, sessionId: string) =>
+  localStorage.setItem(activeKey(baseKey), sessionId)
 
 export const createSession = (overrides?: Partial<ChatSession>): ChatSession => ({
   id:
@@ -66,5 +68,5 @@ export const getFirstUserPrompt = (message: ChatMessage | undefined): string => 
   return ""
 }
 
-export const sessionChatKey = (id: string) => `session:${id}`
-
+export const sessionChatKey = (baseKey: string, id: string) =>
+  `session:${normalizeBaseKey(baseKey)}:${id}`

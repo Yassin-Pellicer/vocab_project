@@ -106,6 +106,9 @@ const windowControls = {
 const chat = {
   chatSend: async (messages) => {
     return await electron.ipcRenderer.invoke("chatSend", messages);
+  },
+  chatConfig: async (language) => {
+    return await electron.ipcRenderer.invoke("chatConfig", language);
   }
 };
 const endpoints = Object.assign(
