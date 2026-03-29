@@ -50,6 +50,11 @@ const normalizeAssistantContent = (value: unknown): AssistantContent =>
     ? (value as { text?: string })
     : (value as AssistantContent)
 
+const buildOutboundMessagesWithSessionHistory = (
+  sessionMessages: ChatMessage[],
+  nextMessage: ChatMessage,
+): ChatMessage[] => toOutboundMessages([...sessionMessages, nextMessage])
+
 export const buildWotdStartingPrompt = ({
   startingInfo,
   name,
@@ -123,7 +128,12 @@ export function useChatSend({
       }
 
       const nextMessages: ChatMessage[] = [...messages, structuredMessage]
-      const outboundMessages: ChatMessage[] = toOutboundMessages(nextMessages)
+      // Session history is always preserved in outbound messages.
+      // The context toggle only affects injected app context on the latest user message.
+      const outboundMessages = buildOutboundMessagesWithSessionHistory(
+        messages,
+        structuredMessage,
+      )
 
       setMessages(nextMessages)
       setDraft("")

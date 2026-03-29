@@ -292,7 +292,9 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
             </div>
           )}
           <div className="mb-1 flex w-full items-center justify-between rounded-lg border border-border/70 px-2 py-1.5">
-            <p className="text-xs text-muted-foreground">Use provided context</p>
+            <p className="text-xs text-muted-foreground">
+              Use provided context (session history always on)
+            </p>
             <Switch
               checked={useProvidedContext}
               onCheckedChange={(value) => setUseProvidedContext(Boolean(value))}
