@@ -250,7 +250,7 @@ function DictRow({
 
         <div
           ref={chatRef}
-          className="sticky shadow-md border xl:w-1/3 xl:flex hidden w-full rounded-2xl min-h-0 top-4 flex-col overflow-hidden h-[calc(100vh-96px)] bg-card/60"
+          className="sticky shadow-md border xl:w-1/3 xl:flex hidden w-full rounded-2xl min-h-0 top-4 flex-col overflow-hidden h-[calc(100vh-96px)] bg-card/60 max-h-screen!"
           style={chatHeight ? { height: `${chatHeight}px` } : undefined}
         >
           <Chat
@@ -262,16 +262,6 @@ function DictRow({
               dict.wordOfTheDay?.pair[0].original.word + ". "
             }
           />
-        </div>
-
-        <div
-          className=" xl:hidden block"
-        >
-          <FloatingAssistantChat
-            route={dict.path}
-            name={dict.id}
-            startingInfo={"This is the word of the day: " +
-              dict.wordOfTheDay?.pair[0].original.word + ". "} layoutStorageKey={""} />
         </div>
       </div>
     </div>

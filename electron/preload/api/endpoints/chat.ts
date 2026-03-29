@@ -7,4 +7,10 @@ export const chat = {
   ): Promise<{ text?: string; tool_calls?: unknown[]; [key: string]: unknown }> => {
     return await ipcRenderer.invoke("chatSend", messages);
   },
+
+  chatConfig: async (
+    language: string,
+  ): Promise<Record<string, unknown>> => {
+    return await ipcRenderer.invoke("chatConfig", language);
+  },
 };

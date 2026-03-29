@@ -113,4 +113,6 @@ export interface RendererApi {
     tool_calls?: unknown[];
     [key: string]: unknown;
   }>;
+
+  chatConfig: (language: string) => Promise<Record<string, unknown>>;
 }

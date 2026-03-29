@@ -27,6 +27,7 @@ import maximizeWindow from "./endpoints/window/maximize";
 import closeWindow from "./endpoints/window/close";
 import openNewWindow from "./endpoints/window/openNewWindow";
 import sendChat from "./endpoints/chat/sendChat";
+import sendConfigChat from "./endpoints/chat/sendConfigChat";
 
 export default function registerIpcHandlers() {
   loadTranslations();
@@ -53,6 +54,7 @@ export default function registerIpcHandlers() {
   saveNotes()
   fetchNotes();
   sendChat();
+  sendConfigChat();
 
   // register window controls last
   minimizeWindow();

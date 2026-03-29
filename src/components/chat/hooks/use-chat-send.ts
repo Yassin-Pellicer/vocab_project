@@ -104,6 +104,7 @@ export function useChatSend({
   didAutoStartRef,
   useProvidedContext,
 }: UseChatSendArgs) {
+
   const send = useCallback(
     async (content?: string) => {
       const messageContent = content?.trim() || draft.trim()
@@ -128,8 +129,6 @@ export function useChatSend({
       }
 
       const nextMessages: ChatMessage[] = [...messages, structuredMessage]
-      // Session history is always preserved in outbound messages.
-      // The context toggle only affects injected app context on the latest user message.
       const outboundMessages = buildOutboundMessagesWithSessionHistory(
         messages,
         structuredMessage,

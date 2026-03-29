@@ -139,8 +139,6 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
         </div>
       )}
 
-
-
       {hideToolbar && (
         <button
           type="button"
@@ -293,7 +291,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
           )}
           <div className="mb-1 flex w-full items-center justify-between rounded-lg border border-border/70 px-2 py-1.5">
             <p className="text-xs text-muted-foreground">
-              Use provided context (session history always on)
+              Use provided context
             </p>
             <Switch
               checked={useProvidedContext}
@@ -332,71 +330,71 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
       {sessionsOpen && (
         <div className="absolute inset-0 flex flex-row bg-background/70 animate-in fade-in-0 duration-200">
           <div className="flex flex-col w-2/3 bg-background h-full border-r rounded-l-2xl animate-in slide-in-from-left-4 fade-in-0 duration-200 ease-out">
-          <div className="flex items-center justify-between px-4 py-3">
-            <p className="flex items-center gap-1 text-xs font-semibold">
-              <Archive size={14}></Archive>
-              Sessions
-            </p>
-            <Button size="sm" className="p-2! text-xs! gap-0.5" variant="outline" onClick={handleNewSession}>
-              <MessageSquare size={12}></MessageSquare> + New
-            </Button>
-          </div>
-          <div className="min-h-0 flex-1 overflow-y-auto divide-y border-t">
-            {sessions.map((session) => {
-              const isActive = session.id === sessionId;
-              const isWotd = session.kind === "wotd";
-              const key = sessionChatKey(session.id);
-              const messageCount = conversations[key]?.messages?.length ?? 0;
-              return (
-                <button
-                  key={session.id}
-                  type="button"
-                  onClick={() => handleSelectSession(session.id)}
-                  className={cn(
-                    "group w-full text-left transition",
-                    isActive
-                      ? "bg-primary/10 px-4 py-2"
-                      : "bg-background hover:bg-primary/5 px-4 py-2 cursor-pointer"
-                  )}
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <div>
-                      <p className="flex flex-row gap-1 items-center text-xs font-semibold text-foreground line-clamp-1">
-                        <MessageSquare size={12}></MessageSquare>{session.title}
-                      </p>
-                      <p className="text-xs tracking-tight text-muted-foreground">
-                        {messageCount} messages
-                      </p>
+            <div className="flex items-center justify-between px-4 py-3">
+              <p className="flex items-center gap-1 text-xs font-semibold">
+                <Archive size={14}></Archive>
+                Sessions
+              </p>
+              <Button size="sm" className="p-2! text-xs! gap-0.5" variant="outline" onClick={handleNewSession}>
+                <MessageSquare size={12}></MessageSquare> + New
+              </Button>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto divide-y border-t">
+              {sessions.map((session) => {
+                const isActive = session.id === sessionId;
+                const isWotd = session.kind === "wotd";
+                const key = sessionChatKey(session.id);
+                const messageCount = conversations[key]?.messages?.length ?? 0;
+                return (
+                  <button
+                    key={session.id}
+                    type="button"
+                    onClick={() => handleSelectSession(session.id)}
+                    className={cn(
+                      "group w-full text-left transition",
+                      isActive
+                        ? "bg-primary/10 px-4 py-2"
+                        : "bg-background hover:bg-primary/5 px-4 py-2 cursor-pointer"
+                    )}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div>
+                        <p className="flex flex-row gap-1 items-center text-xs font-semibold text-foreground line-clamp-1">
+                          <MessageSquare size={12}></MessageSquare>{session.title}
+                        </p>
+                        <p className="text-xs tracking-tight text-muted-foreground">
+                          {messageCount} messages
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          if (!isWotd) {
+                            handleDeleteSession(session.id);
+                          }
+                        }}
+                        className={cn(
+                          "rounded-full p-1 text-muted-foreground transition",
+                          isWotd ? "opacity-0 pointer-events-none" : "opacity-0 hover:text-foreground group-hover:opacity-100"
+                        )}
+                        aria-label="Delete session"
+                        title="Delete session"
+                      >
+                        <Trash2 size={14} />
+                      </button>
                     </div>
-                    <button
-                      type="button"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        if (!isWotd) {
-                          handleDeleteSession(session.id);
-                        }
-                      }}
-                      className={cn(
-                        "rounded-full p-1 text-muted-foreground transition",
-                        isWotd ? "opacity-0 pointer-events-none" : "opacity-0 hover:text-foreground group-hover:opacity-100"
-                      )}
-                      aria-label="Delete session"
-                      title="Delete session"
-                    >
-                      <Trash2 size={14} />
-                    </button>
-                  </div>
-                </button>
-              );
-            })}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          <div
+            onClick={() => setSessionsOpen((prev) => !prev)}
+            className="flex-1 w-full h-full flex items-center justify-center"
+          >
           </div>
         </div>
-        <div
-          onClick={() => setSessionsOpen((prev) => !prev)}
-          className="flex-1 w-full h-full flex items-center justify-center"
-        >
-        </div>
-      </div>
       )}
     </Card>
   );

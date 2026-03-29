@@ -72,8 +72,6 @@ export default function useTranslationHooks({
     width: splitViewWidth,
     collapsed: splitViewCollapsed,
     handleResizeStart: handleResizeSplitView,
-    setWidth: setSplitViewWidth,
-    setCollapsed: setSplitViewCollapsed,
   } = useResizablePanel({
     storageKey: "dictionary-sidebar",
     defaultWidth: 392,
