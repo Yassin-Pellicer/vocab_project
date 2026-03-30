@@ -78,6 +78,7 @@ export default function DictionaryComponent({
   } = useTranslationHooks({ route, name });
 
   useDictionaryKeybinds({
+    name,
     searchField,
     setSearchField,
     searchRef,
@@ -87,7 +88,7 @@ export default function DictionaryComponent({
     handleLetterClick,
   });
 
-  const selectedWord = DictionaryContext((state) => state.selectedWord);
+  const selectedWord = DictionaryContext((state) => state.selectedWordByDict[name] ?? null);
   const selectedTypes = DictionaryContext((state) => state.selectedTypes);
   const toggleType = DictionaryContext((state) => state.toggleType);
 

@@ -31,7 +31,7 @@ export default function WordCard({
     <div className="">
       <div className="flex items-start justify-between">
         <div
-          onClick={() => setSelectedWord(word)}
+          onClick={() => setSelectedWord(name, word)}
           className="flex flex-wrap gap-1 items-center">
           <h3 className={`text-xl cursor-pointer tracking-tight font-bold text-foreground ${name && route ? "cursor-pointer" : ""} `}>
             {isFlipped ? translations : originalWithArticle}

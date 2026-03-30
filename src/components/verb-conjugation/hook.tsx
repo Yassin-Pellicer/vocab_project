@@ -56,7 +56,7 @@ const mergeConjugations = (
 
 export function useVerbHooks(route: string, name?: string, isEditing?: boolean) {
 
-  const selectedWord = DictionaryContext((s) => s.selectedWord);
+  const selectedWord = DictionaryContext((s) => s.selectedWordByDict[name ?? ""] ?? null);
   const selectedWordUuid = selectedWord?.uuid;
 
   const dictionaryMetadata = DictionaryContext((s) => s.dictionaryMetadata);

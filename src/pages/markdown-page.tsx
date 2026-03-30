@@ -14,7 +14,7 @@ export default function MarkdownPage({ _uuid }: { _uuid?: string }) {
   path = path.replace(/\\/g, "/");
   path = path.replace(/\/+/g, "/");
 
-  const selectedWord = DictionaryContext((state) => state.selectedWord);
+  const selectedWord = DictionaryContext((state) => state.selectedWordByDict[name] ?? null);
   const dictionaries = DictionaryContext((state) => state.dictionaries);
   const wordFromQuery = uuidFromQuery
     ? dictionaries[name]?.find((w) => w.uuid === uuidFromQuery)

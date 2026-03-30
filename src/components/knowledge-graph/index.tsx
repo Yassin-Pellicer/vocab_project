@@ -48,7 +48,7 @@ export default function DictionaryGraph({
     : directOnly;
 
   const setSelectedWordGlobal = DictionaryContext((s) => s.setSelectedWord);
-  const selectedWordGlobal = DictionaryContext((s) => s.selectedWord);
+  const selectedWordGlobal = DictionaryContext((s) => s.selectedWordByDict[name] ?? null);
   const searchField = DictionaryContext((s) => s.searchField);
   const dictionaries = DictionaryContext((s) => s.dictionaries);
 
@@ -73,7 +73,7 @@ export default function DictionaryGraph({
         return next;
       });
     } else {
-      setSelectedWordGlobal(next);
+      setSelectedWordGlobal(name, next);
     }
 
     if (next) {
@@ -133,7 +133,6 @@ export default function DictionaryGraph({
 
     setForceMenu(false);
     setSelectedWord(node.wordData);
-    setSelectedWordGlobal(node.wordData);
     setContextMenu(null);
 
     if (navigateOnWordClick || !doubleView) {
@@ -141,14 +140,13 @@ export default function DictionaryGraph({
         `/markdown?path=${encodeURIComponent(route)}&name=${encodeURIComponent(name)}&uuid=${encodeURIComponent(node.wordData.uuid ?? "")}`,
       );
     }
-  }, [doubleView, name, navigate, navigateOnWordClick, route, setSelectedWord, setSelectedWordGlobal]);
+  }, [doubleView, name, navigate, navigateOnWordClick, route, setSelectedWord]);
 
   const handleNodeActivate = useCallback((wordData: TranslationEntry) => {
     if (!navigateOnWordClick) {
       setSelectedWord(wordData);
-      setSelectedWordGlobal(wordData);
     }
-  }, [navigateOnWordClick, setSelectedWord, setSelectedWordGlobal]);
+  }, [navigateOnWordClick, setSelectedWord]);
 
   const { svgRef, containerRef, topRef } = useKnowledgeGraphCanvas({
     graphData,

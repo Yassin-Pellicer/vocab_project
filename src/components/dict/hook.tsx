@@ -25,9 +25,9 @@ export default function useTranslationHooks({
     isFlipped,
     setIsFlipped,
     selectedTypes,
-    setGraphMode,
-    graphMode,
   } = DictionaryContext();
+
+  const [graphMode, setGraphMode] = useState(false);
 
   const list = dictionaries[name] ?? EMPTY_TRANSLATIONS;
   const [currentPage, setCurrentPage] = useState(1);

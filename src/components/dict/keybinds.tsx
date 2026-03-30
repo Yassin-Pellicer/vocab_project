@@ -4,6 +4,7 @@ import { DictionaryContext } from "@/context/dictionary-context";
 import type { TranslationEntry } from "@/types/translation-entry";
 
 export function useDictionaryKeybinds({
+  name,
   searchField,
   setSearchField,
   searchRef,
@@ -12,6 +13,7 @@ export function useDictionaryKeybinds({
   paginatedWords,
   handleLetterClick,
 }: {
+  name: string;
   searchField: string;
   setSearchField: (value: string) => void;
   searchRef: React.RefObject<HTMLInputElement>;
@@ -37,6 +39,7 @@ export function useDictionaryKeybinds({
       const isLetter = /^[a-zA-Z]$/.test(e.key);
       if (e.key === "F1") {
         setSelectedWord(
+          name,
           filteredWords?.length ? filteredWords[0] : paginatedWords?.[0] || null,
         );
         return;
@@ -72,6 +75,7 @@ export function useDictionaryKeybinds({
     [
       addWordButtonRef,
       filteredWords,
+      name,
       paginatedWords,
       handleLetterClick,
       searchField,

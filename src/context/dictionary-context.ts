@@ -8,21 +8,19 @@ interface DictionaryContext {
   dictionaryMetadata: Record<string, Dictionary>;
   sidebarNavigationData: { navMain: NavItem[] };
   dictionaries: Record<string, TranslationEntry[]>;
-  selectedWord: TranslationEntry | null;
+  selectedWordByDict: Record<string, TranslationEntry | null>;
   selectedLetter: string;
   searchField: string;
   isFlipped: boolean;
   selectedTypes: string[];
-  graphMode: boolean;
 
   setDictionaryMetadata: (metadata: Record<string, Dictionary>) => void;
   setDictionaries: (dictionaries: Record<string, TranslationEntry[]>) => void;
-  setSelectedWord: (word: TranslationEntry | null) => void;
+  setSelectedWord: (dictKey: string, word: TranslationEntry | null) => void;
   setSelectedLetter: (letter: string) => void;
   setSearchField: (field: string) => void;
   setIsFlipped: (flipped: boolean) => void;
   setSelectedTypes: (types: string[]) => void;
-  setGraphMode: (mode: boolean) => void;
 
   toggleType: (type: string) => void;
 
@@ -76,21 +74,21 @@ export const DictionaryContext = create<DictionaryContext>((set, get) => {
       navMain: [{ title: "Home", url: "/" }],
     },
 
-    selectedWord: null,
+    selectedWordByDict: {},
     selectedLetter: "A",
     searchField: "",
     isFlipped: false,
     selectedTypes: [],
-    graphMode: false,
 
     setDictionaryMetadata: (metadata) => set({ dictionaryMetadata: metadata }),
     setDictionaries: (dictionaries) => set({ dictionaries }),
-    setSelectedWord: (word) => set({ selectedWord: word }),
+    setSelectedWord: (dictKey, word) => set((state) => ({
+      selectedWordByDict: { ...state.selectedWordByDict, [dictKey]: word },
+    })),
     setSelectedLetter: (letter) => set({ selectedLetter: letter }),
     setSearchField: (field) => set({ searchField: field }),
     setIsFlipped: (flipped) => set({ isFlipped: flipped }),
     setSelectedTypes: (types) => set({ selectedTypes: types }),
-    setGraphMode: (mode) => set({ graphMode: mode }),
 
     toggleType: (type) => {
       const current = get().selectedTypes;

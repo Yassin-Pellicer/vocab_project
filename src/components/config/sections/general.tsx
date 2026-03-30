@@ -48,6 +48,7 @@ export default function GeneralSection() {
     fileInputRef,
     dirty,
     saving,
+    loading,
     error,
     handleConfirm,
     signOut,
@@ -65,6 +66,21 @@ export default function GeneralSection() {
         </div>
 
         <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+          {loading ? (
+            <>
+              <div className="flex items-center gap-4">
+                <div className="h-16 w-16 rounded-full bg-muted animate-pulse shrink-0" />
+                <div className="flex flex-col gap-2">
+                  <div className="h-4 w-32 rounded bg-muted animate-pulse" />
+                  <div className="h-3 w-48 rounded bg-muted animate-pulse" />
+                </div>
+              </div>
+              <div className="flex justify-end sm:justify-start">
+                <div className="h-9 w-28 rounded-md bg-muted animate-pulse" />
+              </div>
+            </>
+          ) : (
+            <>
           <div className="flex items-center gap-4">
             <div className="relative group/avatar shrink-0">
               {avatarDataUrl ? (
@@ -125,6 +141,8 @@ export default function GeneralSection() {
               )}
             </Button>
           </div>
+            </>
+          )}
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
@@ -141,6 +159,11 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
+          {loading ? (
+            <div className="flex items-center gap-2 shrink-0">
+              <div className="h-9 w-9 rounded-md bg-muted animate-pulse" />
+            </div>
+          ) : (
           <div className="flex items-center gap-2 shrink-0">
             {hasAvatar && (
               <button
@@ -166,6 +189,7 @@ export default function GeneralSection() {
               />
             </label>
           </div>
+          )}
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
@@ -181,12 +205,16 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
+          {loading ? (
+            <div className="h-9 w-full sm:w-48 rounded-md bg-muted animate-pulse" />
+          ) : (
           <input
             type="text"
             value={draftDisplayName}
             onChange={(e) => setDraftDisplayName(e.target.value)}
             className="h-9 w-full sm:w-48 rounded-md border bg-background px-3 text-sm"
           />
+          )}
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
@@ -202,12 +230,16 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
+          {loading ? (
+            <div className="h-9 w-full sm:w-48 rounded-md bg-muted animate-pulse" />
+          ) : (
           <input
             type="email"
             value={draftEmail}
             onChange={(e) => setDraftEmail(e.target.value)}
             className="h-9 w-full sm:w-48 rounded-md border bg-background px-3 text-sm"
           />
+          )}
         </div>
 
         {error ? <p className="text-xs text-destructive pt-1">{error}</p> : null}

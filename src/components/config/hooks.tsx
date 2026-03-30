@@ -18,12 +18,14 @@ export const useProfileSection = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchUser() {
       const { data } = await supabase.auth.getSession();
       const sessionUser = data.session?.user ?? null;
       setUser(sessionUser);
+      setLoading(false);
     }
 
     fetchUser();
@@ -159,6 +161,7 @@ export const useProfileSection = () => {
     fileInputRef,
     dirty,
     saving,
+    loading,
     error,
     handleConfirm,
     user
