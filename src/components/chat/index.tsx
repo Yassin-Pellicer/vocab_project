@@ -196,7 +196,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
                       "w-fit! max-w-[85%]!",
                       m.role === "user"
                         ? "ml-auto bg-primary/20 px-3 text-primary-background rounded-l-2xl rounded-t-2xl py-2"
-                        : "mr-auto bg-card px-4 py-2 text-card-foreground markdown"
+                        : "mr-auto bg-card px-4 pt-2 text-card-foreground markdown"
                     )}
                   >
                     {m.role !== "user" && (
@@ -213,7 +213,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
                   {m.actions.length > 0 && canUseActions && name && route && (
                     <div
                       className={cn(
-                        "w-fit max-w-[85%]! flex flex-col gap-2",
+                        "w-fit max-w-[85%]! flex flex-col gap-2 mb-6",
                         m.role === "user" ? "ml-auto" : "mr-auto"
                       )}
                     >

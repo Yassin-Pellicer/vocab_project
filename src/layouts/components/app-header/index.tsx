@@ -19,9 +19,9 @@ export function AppHeader() {
         <SidebarTrigger className="-ml-1" />
         <BreadcrumbNavigation />
       </div>
-      <div className="flex items-center gap-1" style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}>
+      <div className="flex items-center gap-2" style={{ WebkitAppRegion: "no-drag" } as React.CSSProperties}>
         <NotificationHistoryPopover />
-        <div className="flex flex-row gap-2 mr-6">
+        <div className="flex flex-row gap-2 mx-4">
           <button
             aria-label="Back"
             title="Back"
