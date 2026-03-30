@@ -483,32 +483,6 @@
     "pair": [
       {
         "original": {
-          "word": "Kugelschreiber",
-          "gender": "Feminin",
-          "number": "Singular"
-        },
-        "translations": [
-          {
-            "word": "Bolígrafo",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [
-          "Objeto con tinta y una bola en su punta que se utiliza para escribir sobre papel"
-        ],
-        "observations": "Utiliza la misma forma en plural"
-      }
-    ],
-    "dateAdded": "2025-11-19",
-    "type": "Nomen",
-    "uuid": "094b8016-d645-41ee-bf4b-9e2093cdc45c",
-    "linkedWordIds": []
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Freundschaft",
           "gender": "Feminin",
           "number": "Singular"
@@ -12206,5 +12180,797 @@
     "linkedWordIds": [
       "476eedd8-7e24-4c33-9661-b2a8bfe3bdc8"
     ]
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Termin",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "appointment"
+          }
+        ],
+        "definitions": [
+          "A planned time for a meeting or event"
+        ]
+      },
+      {
+        "original": {
+          "word": "Termine",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "appointments"
+          }
+        ],
+        "definitions": [
+          "Planned times for meetings or events"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "e5ca4fb4-31fb-41c1-a69c-5741030d2fc2",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "erst",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "only"
+          },
+          {
+            "word": "just"
+          },
+          {
+            "word": "only then"
+          }
+        ],
+        "definitions": [
+          "Used to say that something happens later or only at a certain time (often with “erst … am … / um …”).",
+          "Also used to emphasize that an action happens later than expected."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Partikeln",
+    "uuid": "c5da44e9-67c1-490b-b0da-4585cf6accfd",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "notwendig",
+          "gender": "—",
+          "number": "—"
+        },
+        "translations": [
+          {
+            "word": "necessary"
+          }
+        ],
+        "definitions": [
+          "necessary; required"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Adjektive",
+    "uuid": "1cec2679-af61-4415-a811-baba345a9873",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "möglich",
+          "gender": "—",
+          "number": "—"
+        },
+        "translations": [
+          {
+            "word": "possible"
+          }
+        ],
+        "definitions": [
+          "possible; can be done"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Adjektive",
+    "uuid": "2befa0ca-6050-4f2d-92e3-33d829d6d327",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "das macht doch nichts",
+          "gender": "Neutral",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "it doesn’t matter"
+          },
+          {
+            "word": "don’t worry about it"
+          },
+          {
+            "word": "nothing at all"
+          }
+        ],
+        "definitions": [
+          "Colloquial phrase used to say that something is no problem / it doesn’t matter."
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Redewendungen",
+    "uuid": "1732bdfa-a003-47b2-b33d-a02de14374bb",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "wollen",
+          "gender": "N/A",
+          "number": "N/A"
+        },
+        "translations": [
+          {
+            "word": "want to"
+          }
+        ],
+        "definitions": [
+          "to want; to wish"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Verben",
+    "uuid": "0837d906-f23a-41ce-947b-b1a145cbcb7f",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "müssen",
+          "gender": "N/A",
+          "number": "N/A"
+        },
+        "translations": [
+          {
+            "word": "must; have to"
+          }
+        ],
+        "definitions": [
+          "to have to (necessity); to must"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Verben",
+    "uuid": "b528ef72-9f3b-412c-a02c-81db7858ece4",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "können",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "to be able"
+          },
+          {
+            "word": "can"
+          }
+        ],
+        "definitions": [
+          "modal verb: to be able to; can"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Verben",
+    "uuid": "e44a3d6d-3c66-4577-9f3c-97bab79b951c",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "tun",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "to do"
+          },
+          {
+            "word": "to act"
+          },
+          {
+            "word": "to be (able to)"
+          }
+        ],
+        "definitions": [
+          "main verb: to do; to perform",
+          "used with nouns: to be (something) (e.g., Arbeit tun)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Verben",
+    "uuid": "bbbbdc2c-12ca-4899-9fe0-88847c5e8538",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "verlieren",
+          "gender": "",
+          "number": ""
+        },
+        "translations": [
+          {
+            "word": "to lose"
+          }
+        ],
+        "definitions": [
+          "to lose; to misplace"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Verben",
+    "uuid": "06dda356-2af2-4f3b-a63d-7a6ce50626be",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "lösen",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "to solve"
+          },
+          {
+            "word": "to loosen"
+          },
+          {
+            "word": "to release"
+          }
+        ],
+        "definitions": [
+          "verb: to solve; to loosen/release"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Verben",
+    "uuid": "880d6d32-3e3a-47d3-aa25-f2c5790e704f",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wäsche waschen",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "to do the laundry"
+          },
+          {
+            "word": "to wash the laundry"
+          }
+        ],
+        "definitions": [
+          "to do the laundry; wash clothes (phrase/infinitive)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Verben",
+    "uuid": "e4c21078-7a01-4786-aa5e-cc6cceb1e4b6",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "aufwachen",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "to wake up"
+          }
+        ],
+        "definitions": [
+          "to wake up"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Verben",
+    "uuid": "6fc298b5-42ec-454d-aa6e-e3a1f4d4e029",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "kennen",
+          "gender": "-",
+          "number": "-"
+        },
+        "translations": [
+          {
+            "word": "to know"
+          },
+          {
+            "word": "to be familiar with"
+          }
+        ],
+        "definitions": [
+          "to know (a person/thing); to be familiar with"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Verben",
+    "uuid": "3382357e-56bc-41d3-8db4-9dd4326b3ea7",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Januar",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "January"
+          }
+        ],
+        "definitions": [
+          "month: January"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "8cf1819b-baa1-4d2f-ba1e-1d4a3a3f1d4a",
+    "linkedWordIds": []
+  },
+  {
+    "uuid": "8b3f6f6e-6f9c-4c5d-b8a3-2f1a1e2b3c4d",
+    "pair": [
+      {
+        "original": {
+          "word": "Januar",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "January",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "month: January"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Februar",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "February"
+          }
+        ],
+        "definitions": [
+          "month: February"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "b74e428d-16fa-45a2-a18f-f3f96666dbad",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "März",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "March"
+          }
+        ],
+        "definitions": [
+          "month: March"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "c06550c0-2c22-4763-9844-6dbe781b3396",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "April",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "April"
+          }
+        ],
+        "definitions": [
+          "month: April"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "43b20988-7d3b-4021-87bd-52f98267ea03",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Mai",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "May"
+          }
+        ],
+        "definitions": [
+          "month: May"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "bea5212d-e278-4cb8-9aac-ba800970e538",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Juni",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "June"
+          }
+        ],
+        "definitions": [
+          "month: June"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "82241551-02d3-4cc3-bba6-c1be8efb92cc",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Juli",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "July"
+          }
+        ],
+        "definitions": [
+          "month: July"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "d9cd3406-8bfa-43f5-9ab5-709a6bb94e06",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "August",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "August"
+          }
+        ],
+        "definitions": [
+          "month: August"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "24d716ba-3788-41e1-b86f-f0718b182732",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "September",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "September"
+          }
+        ],
+        "definitions": [
+          "month: September"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "aadb2df3-4bc7-4f2e-995c-223acaa68466",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Oktober",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "October"
+          }
+        ],
+        "definitions": [
+          "month: October"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "7dfae160-4099-4080-bdc4-9cbb5a91eefc",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "November",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "November"
+          }
+        ],
+        "definitions": [
+          "month: November"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "e809f0fb-2cea-4ee7-b7c3-4062b059326d",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Dezember",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "December"
+          }
+        ],
+        "definitions": [
+          "month: December"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "9a18a598-0ec3-4389-bb4e-270fd055eed0",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Jahreszeit",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "season"
+          },
+          {
+            "word": "jasson"
+          }
+        ],
+        "definitions": [
+          "month/season: season (e.g., spring, summer, autumn, winter)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "558cc175-57df-4dbb-a360-aa36e8c694b9",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Kugelschreiber",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Bolígrafo",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [
+          "Objeto con tinta y una bola en su punta que se utiliza para escribir sobre papel"
+        ],
+        "observations": "Utiliza la misma forma en plural"
+      },
+      {
+        "original": {
+          "word": "Kuli",
+          "gender": "Maskulin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Boli",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": []
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "Nomen",
+    "uuid": "094b8016-d645-41ee-bf4b-9e2093cdc45c",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "letzte",
+          "gender": "Feminin",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "last"
+          },
+          {
+            "word": "último/última"
+          },
+          {
+            "word": ""
+          }
+        ],
+        "definitions": [
+          "last (feminine singular, adjective/pronoun form)"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Determiner",
+    "uuid": "dc0045ca-7316-4546-9cca-6b0fd7fd5c70",
+    "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Weihnachten",
+          "gender": "Neutrum",
+          "number": "Singular"
+        },
+        "translations": [
+          {
+            "word": "Christmas"
+          }
+        ],
+        "definitions": [
+          "holiday: Christmas"
+        ]
+      }
+    ],
+    "dateAdded": "2026-03-30",
+    "type": "Nomen",
+    "uuid": "9dc473d0-e385-4cd7-9fea-275e414e1786",
+    "linkedWordIds": []
   }
 ]

@@ -2739,5 +2739,123 @@
         }
       }
     }
+  },
+  "e44a3d6d-3c66-4577-9f3c-97bab79b951c": {
+    "Indicative": {
+      "Simple": {
+        "Präsens": {
+          "ich": "kann",
+          "du": "kannst",
+          "er/sie/es": "kann",
+          "wir": "können",
+          "ihr": "könnt",
+          "sie/Sie": "können"
+        },
+        "Präteritum": {
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
+        }
+      },
+      "Compound": {
+        "Perfekt": {
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
+        },
+        "Plusquamperfekt": {
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
+        },
+        "Futur I": {
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
+        },
+        "Futur II": {
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
+        }
+      }
+    },
+    "Subjunctive": {
+      "Konjunktiv I": {
+        "Präsens": {
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
+        },
+        "Perfekt": {
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
+        }
+      },
+      "Konjunktiv II": {
+        "Präteritum": {
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
+        },
+        "Plusquamperfekt": {
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
+        },
+        "Würde-Form": {
+          "ich": "",
+          "du": "",
+          "er/sie/es": "",
+          "wir": "",
+          "ihr": "",
+          "sie/Sie": ""
+        }
+      }
+    },
+    "Imperative": {
+      "Imperativ I": {
+        "Obligation": {
+          "du": "",
+          "ihr": "",
+          "sie/Sie": ""
+        }
+      }
+    },
+    "Andere Konjugations": {
+      "Partizip": {
+        "Partizip I": {
+          "-": ""
+        }
+      }
+    }
   }
 }
