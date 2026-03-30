@@ -33,7 +33,7 @@ export default function ConfigureTenseModal({
         <div className="p-6 pb-2 overflow-auto max-h-[80vh]">
           <DialogHeader>
             <DialogTitle>
-              Configure tenses for <b>{dictName ? `${dictName}` : ""}</b>
+              Configure tenses for {dictName}
             </DialogTitle>
             <DialogDescription>
               Tenses allow you to configure different verb forms for your dictionary.

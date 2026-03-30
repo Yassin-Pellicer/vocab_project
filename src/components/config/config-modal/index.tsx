@@ -54,14 +54,14 @@ export default function ConfigModal({ children }: { children?: React.ReactNode }
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="lg:max-w-5xl md:max-w-3xl sm:max-w-2xl w-full p-0">
+      <DialogContent className="lg:max-w-5xl md:max-w-3xl sm:max-w-2xl w-full p-0!">
         <div className="flex rounded-xl h-[70vh] max-h-200 overflow-hidden">
           <SettingsSidebar
             activeSection={activeSection}
             onSectionChange={setActiveSection}
           />
           <div className="flex-1 overflow-y-auto">
-            <div className="max-w-3xl mx-auto pt-4 px-2!">{renderSection()}</div>
+            <div className="max-w-3xl mx-auto pt-4 px-6!">{renderSection()}</div>
           </div>
         </div>
       </DialogContent>

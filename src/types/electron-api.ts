@@ -114,5 +114,6 @@ export interface RendererApi {
     [key: string]: unknown;
   }>;
 
-  chatConfig: (language: string) => Promise<Record<string, unknown>>;
+  chatConfig: (language: string) => any;
+  deleteAccount: () => Promise<unknown>;
 }

@@ -18,10 +18,12 @@ import {
   User,
   WifiOff,
   X,
+  Loader2,
 } from "lucide-react";
 import { PreferencesContext } from "@/context/preferences-context";
 import { Button } from "@/components/ui/button";
 import { useProfileSection } from "../hooks";
+import DeleteAccountModal from "@/components/config/delete-account-modal";
 
 export default function GeneralSection() {
   const {
@@ -64,7 +66,7 @@ export default function GeneralSection() {
 
         <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
-            <div className="relative group/avatar">
+            <div className="relative group/avatar shrink-0">
               {avatarDataUrl ? (
                 <img
                   src={avatarDataUrl}
@@ -81,19 +83,30 @@ export default function GeneralSection() {
                 className="absolute inset-0 flex items-center justify-center rounded-full bg-background/50 opacity-0 group-hover/avatar:opacity-100 transition-opacity cursor-pointer"
                 aria-label="Pick avatar image"
                 onClick={() => fileInputRef.current?.click()}
+                disabled={saving}
               >
-                <Camera className="h-4 w-4 text-muted-foreground" />
+                {saving ? (
+                  <Loader2 className="h-4 w-4 text-muted-foreground animate-spin" />
+                ) : (
+                  <Camera className="h-4 w-4 text-muted-foreground" />
+                )}
               </button>
             </div>
-            <div>
+            <div className="flex-1">
               <div className="text-sm font-semibold">{draftDisplayName || "No Name"}</div>
               <div className="text-xs text-muted-foreground">{draftEmail || "No Email"}</div>
-              {avatarFile && !avatarRemoved ? (
+              {saving ? (
+                <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                  Saving…
+                </div>
+              ) : null}
+              {!saving && avatarFile && !avatarRemoved ? (
                 <div className="text-xs text-muted-foreground mt-1">
                   New image selected — save to apply
                 </div>
               ) : null}
-              {avatarRemoved ? (
+              {!saving && avatarRemoved ? (
                 <div className="text-xs text-muted-foreground mt-1">
                   Avatar will be removed — save to apply
                 </div>
@@ -102,12 +115,19 @@ export default function GeneralSection() {
           </div>
           <div className="flex justify-end sm:justify-start">
             <Button type="button" disabled={!dirty || saving} onClick={() => void handleConfirm()}>
-              {saving ? "Saving…" : "Save profile"}
+              {saving ? (
+                <>
+                  <Loader2 className="animate-spin" />
+                  Saving…
+                </>
+              ) : (
+                "Save profile"
+              )}
             </Button>
           </div>
         </div>
 
-        <div className="flex items-center justify-between rounded-md group gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -148,7 +168,7 @@ export default function GeneralSection() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between rounded-md group">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center">
@@ -165,11 +185,11 @@ export default function GeneralSection() {
             type="text"
             value={draftDisplayName}
             onChange={(e) => setDraftDisplayName(e.target.value)}
-            className="h-9 w-48 rounded-md border bg-background px-3 text-sm"
+            className="h-9 w-full sm:w-48 rounded-md border bg-background px-3 text-sm"
           />
         </div>
 
-        <div className="flex items-center justify-between rounded-md group gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -186,7 +206,7 @@ export default function GeneralSection() {
             type="email"
             value={draftEmail}
             onChange={(e) => setDraftEmail(e.target.value)}
-            className="h-9 w-48 rounded-md border bg-background px-3 text-sm"
+            className="h-9 w-full sm:w-48 rounded-md border bg-background px-3 text-sm"
           />
         </div>
 
@@ -198,7 +218,7 @@ export default function GeneralSection() {
         </div>
 
         <div className="flex flex-col">
-          <div className="flex items-center justify-between rounded-md group gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
             <div className="flex py-2 items-center flex-1 gap-4">
               <div className="flex-1 gap-4">
                 <div className="flex flex-row gap-2 items-center mb-1">
@@ -213,10 +233,10 @@ export default function GeneralSection() {
             </div>
             <Switch checked={config.notifications} onCheckedChange={setNotifications} />
           </div>
-          <div className="flex flex-row items-center">
-            <div className="text-sm font-medium w-full">Notification lifetime</div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="text-sm font-medium">Notification lifetime</div>
             <Select value={config.notificationLifetime} onValueChange={setNotificationLifetime}>
-              <SelectTrigger className="">
+              <SelectTrigger className="w-full sm:w-auto">
                 <SelectValue placeholder="Select duration" />
               </SelectTrigger>
               <SelectContent>
@@ -234,7 +254,7 @@ export default function GeneralSection() {
           <hr />
         </div>
 
-        <div className="flex items-center justify-between rounded-md group gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -292,7 +312,7 @@ export default function GeneralSection() {
           </Select>
         </div>
 
-        <div className="flex items-center justify-between rounded-md group gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -324,7 +344,7 @@ export default function GeneralSection() {
           <hr />
         </div>}
 
-        {user && <div className="flex items-center justify-between rounded-md group gap-4">
+        {user && <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -338,12 +358,12 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Button onClick={() => { setOffline(true); void signOut(); }}>
+          <Button onClick={() => { setOffline(true); void signOut(); }} className="w-full sm:w-auto">
             <UnplugIcon /> Go Offline
           </Button>
         </div>}
 
-        {user && <div className="flex items-center justify-between rounded-md group gap-4">
+        {user && <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -358,9 +378,11 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Button variant={"destructive"}>
-            Delete
-          </Button>
+          <DeleteAccountModal onConfirm={() => { setOffline(true); void signOut(); }}>
+            <Button variant={"destructive"} className="w-full sm:w-auto">
+              Delete
+            </Button>
+          </DeleteAccountModal>
         </div>}     
       </div>
     </div>

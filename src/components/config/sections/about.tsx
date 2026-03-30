@@ -15,7 +15,7 @@ export default function AboutSection() {
           <hr />
         </div>
 
-        <div className="flex items-center justify-between rounded-md  group gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -30,7 +30,7 @@ export default function AboutSection() {
           <div className="text-xs text-muted-foreground font-medium shrink-0">v1.0.0</div>
         </div>
 
-        <div className="flex items-center justify-between rounded-md  group gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -45,7 +45,7 @@ export default function AboutSection() {
           <div className="text-xs text-muted-foreground font-mono shrink-0">2024.02.04</div>
         </div>
 
-        <div className="flex items-center justify-between rounded-md  group gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -60,7 +60,7 @@ export default function AboutSection() {
           <div className="text-xs text-muted-foreground font-medium shrink-0">Electron + React</div>
         </div>
 
-        <div className="flex items-center justify-between rounded-md  group gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
@@ -95,7 +95,7 @@ export default function AboutSection() {
           <hr />
         </div>
 
-        <div className="flex items-center justify-between rounded-md  group gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md  group gap-4">
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">

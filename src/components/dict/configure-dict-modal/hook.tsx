@@ -1,10 +1,14 @@
 import { DictionaryContext } from "@/context/dictionary-context";
+import { Dictionary } from "@/types/config";
 import { useState } from "react";
+import { notify } from "@/services/notify";
+import { notifyError } from "@/services/notify";
 
-export default function useChangeRouteModalHooks(dictId: string) {
+export default function useChangeRouteModalHooks(dictId: string, dictName: string) {
   
   const {
     dictionaryMetadata,
+    setDictionaryMetadata,
     setDictionaryTypeWords,
     setDictionaryGenders,
     setDictionaryNumbers,
@@ -12,6 +16,7 @@ export default function useChangeRouteModalHooks(dictId: string) {
     setDictionaryUseTenses,
     setDictionaryUseArticles,
     setTypeWordWithPrecededArticle,
+    editConfig,
   } = DictionaryContext();
 
   const [inputTypeWord, setInputTypeWord] = useState("");
@@ -19,6 +24,7 @@ export default function useChangeRouteModalHooks(dictId: string) {
   const [inputNumber, setInputNumber] = useState("");
   const [selectedForm, setSelectedForm] = useState("");
   const [genderNumberInput, setGenderNumberInput] = useState("");
+  const [isGeneratingConfig, setIsGeneratingConfig] = useState(false);
   const [
     selectTypeWordWithPrecededArticle,
     setSelectTypeWordWithPrecededArticle,
@@ -27,6 +33,29 @@ export default function useChangeRouteModalHooks(dictId: string) {
   const [selectedWordType, setSelectedWordType] = useState(
     dictionaryMetadata?.[dictId]?.typeWords?.[0] || "",
   );
+
+  const handleAutomaticConfiguration = async () => {
+    setIsGeneratingConfig(true);
+    try {
+      console.log("Requesting automatic configuration for language:", dictName);
+      const result: Dictionary = await window.api.chatConfig(dictName);
+      console.log("Received config from chat API:", result);
+      setDictionaryMetadata({
+        ...dictionaryMetadata,
+        [dictId]: {
+          ...dictionaryMetadata?.[dictId],
+          ...result,
+        },
+      });
+      notify("configGenerated", { language: dictName });
+    } catch (error) {
+      console.error("Error generating configuration:", error);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+      notifyError("Configuration generation failed", errorMessage);
+    } finally {
+      setIsGeneratingConfig(false);
+    }
+  };
 
   const addTypeWord = () => {
     const trimmed = inputTypeWord.trim();
@@ -127,6 +156,11 @@ export default function useChangeRouteModalHooks(dictId: string) {
     setTypeWordWithPrecededArticle(dictId, typeWord);
   }
 
+  const handleSaveConfiguration = async () => {
+    await editConfig();
+    notify("configSaved", { scope: "dictionary" });
+  };
+
   return {
     dictionaryMetadata,
 
@@ -157,7 +191,11 @@ export default function useChangeRouteModalHooks(dictId: string) {
     setUseTenses,
     setUseArticles,
 
+    handleAutomaticConfiguration,
+    isGeneratingConfig,
+
     selectTypeWordWithPrecededArticle,
     setPrecededArticleTypeWord,
+    handleSaveConfiguration,
   };
 }

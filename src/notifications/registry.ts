@@ -2,6 +2,7 @@ export type NotificationPayloads = {
   wordAdded: { word: string; dictionary: string };
   wordEdited: { before: string; after: string; dictionary: string };
   configSaved: { scope: "dictionary" | "preferences" };
+  configGenerated: { language: string };
   noteCreated: { title: string; dictionary: string };
   noteUpdated: {
     dictionary: string;
@@ -54,6 +55,13 @@ export const NOTIFICATIONS: { [K in NotificationKey]: NotificationTemplate<K> } 
       description: () => undefined,
       id: ({ scope }) => `config-saved:${scope}`,
       cooldownMs: 1500,
+    },
+
+    configGenerated: {
+      kind: "success",
+      title: ({ language }) => `Configuration generated for ${language}`,
+      description: () => "Dictionary automatically configured",
+      id: ({ language }) => `config-generated:${language}`,
     },
 
     noteCreated: {

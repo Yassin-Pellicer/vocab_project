@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { TranslationEntry } from "@/types/translation-entry";
 import { Dictionary } from "@/types/config";
 import { BookAIcon, BookOpen } from "lucide-react";
-import { notify } from "@/services/notify";
 import type { NavItem } from "@/types/nav-item";
 
 interface DictionaryContext {
@@ -68,7 +67,6 @@ export const DictionaryContext = create<DictionaryContext>((set, get) => {
         },
       };
     });
-    void get().editConfig();
   };
 
   return {
@@ -137,7 +135,6 @@ export const DictionaryContext = create<DictionaryContext>((set, get) => {
       const metadata = get().dictionaryMetadata;
       try {
         await window.api.editConfig({ dictionaries: metadata });
-        notify("configSaved", { scope: "dictionary" });
       } catch (error) {
         console.error("Error saving dictionary config:", error);
       }

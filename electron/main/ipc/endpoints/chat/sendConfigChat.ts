@@ -1,13 +1,13 @@
 import { ipcMain } from "electron";
 
-function coerceLanguage(value: unknown): string | null {
+function coerceLanguage(value: string) {
   if (typeof value !== "string") return null;
   const normalized = value.trim();
   return normalized.length > 0 ? normalized : null;
 }
 
-export default function sendConfigChat() {
-  ipcMain.handle("chatConfig", async (_event, rawLanguage: unknown) => {
+export default function registerSendConfigChat() {
+  ipcMain.handle("chatConfig", async (_event, rawLanguage) => {
     const language = coerceLanguage(rawLanguage);
 
     if (!language) {
@@ -18,11 +18,14 @@ export default function sendConfigChat() {
       {
         role: "user",
         content: {
-          prompt: `Generate dictionary configuration for language "${language}".`,
+          prompt: `Generate dictionary configuration for the language: "${language}".`,
           details:
-            "Return JSON only. Do not include route or name fields in the final config.",
-          context: { targetLanguage: language },
-          appLanguage: language,
+            "Return JSON only. " +
+            "All labels must be in the target language's autonym, never the label language. " +
+            "For articles: provide non-empty definite article for each gender × number pair.",
+          context: {
+            requestedLanguageLabel: language,
+          },
         },
       },
     ];
@@ -30,17 +33,13 @@ export default function sendConfigChat() {
     const response = await fetch("http://localhost:3000/api/chat/config", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        language,
-        targetLanguage: language,
-        messages,
-      }),
+      body: JSON.stringify({ messages }),
     });
 
     if (!response.ok) {
       const text = await response.text().catch(() => "");
       throw new Error(
-        `Local API request failed with status ${response.status}: ${text}`,
+        `Local API request failed with status ${response.status}: ${text}`
       );
     }
 

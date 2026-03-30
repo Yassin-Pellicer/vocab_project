@@ -23,7 +23,6 @@ import { useRef, useState, useEffect } from "react";
 import { NotesContext } from "@/context/notes-context";
 
 import useHome from "./hook";
-import { FloatingAssistantChat } from "../chat/floating-assistant-chat";
 
 function DictRow({
   dict,
