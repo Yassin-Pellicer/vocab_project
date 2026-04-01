@@ -388,7 +388,7 @@ export default function Home() {
             </div>
           </div> */}
         </div>
-        <div className="grid lg:grid-cols-1 grid-cols-1 w-full">
+        <div className="grid lg:grid-cols-1 grid-cols-1 max-w-7xl mx-auto 2xl:border-x">
           {dictionaryCards.map((dict, dictIndex) => (
             <DictRow
               key={dictIndex}

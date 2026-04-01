@@ -15,6 +15,8 @@ import type { TranslationEntry } from "@/types/translation-entry"
 
 type DisplayMode = "link" | "card"
 
+const EMPTY_TRANSLATIONS: TranslationEntry[] = []
+
 const getWordLabel = (entry: TranslationEntry) => entry.pair?.[0]?.original?.word ?? "Untitled word"
 
 const getWordTranslations = (entry: TranslationEntry) =>
@@ -37,7 +39,8 @@ export default function InsertLinkedWordModal({
   const [displayMode, setDisplayMode] = useState<DisplayMode>("link")
   const [selectedWord, setSelectedWord] = useState<TranslationEntry | null>(null)
 
-  const dictionaryEntries = DictionaryContext((state) => state.dictionaries[name] ?? [])
+  const storedDictionaryEntries = DictionaryContext((state) => state.dictionaries[name])
+  const dictionaryEntries = storedDictionaryEntries ?? EMPTY_TRANSLATIONS
 
   const sortedEntries = useMemo(() => {
     return [...dictionaryEntries].sort((left, right) =>

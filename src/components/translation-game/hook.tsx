@@ -33,6 +33,8 @@ export type TranslationGameHistoryEntry = {
   pointsEarned: number;
 };
 
+const EMPTY_TRANSLATIONS: TranslationEntry[] = [];
+
 const normalizeText = (value: string) =>
   value.trim().toLowerCase().replace(/\s+/g, " ");
 
@@ -100,8 +102,9 @@ export default function useTranslationGame({
   name: string;
 }) {
   const loadTranslations = DictionaryContext((state) => state.loadTranslations);
-  const list = DictionaryContext((state) => state.dictionaries[name] ?? []);
-  const metadata = DictionaryContext((state) => state.dictionaryMetadata[name] ?? null);
+  const storedList = DictionaryContext((state) => state.dictionaries[name]);
+  const metadata = DictionaryContext((state) => state.dictionaryMetadata[name]);
+  const list = storedList ?? EMPTY_TRANSLATIONS;
 
   const [stage, setStage] = useState<TranslationGameStage>("setup");
   const [direction, setDirection] = useState<GameDirection>("forward");
