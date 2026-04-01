@@ -6,8 +6,9 @@ import WordCard from "../word-card";
 import VerboConjugation from "../verb-conjugation";
 import SearchBar from "../word-link";
 import { SimpleEditor } from "../ui/tiptap/tiptap-templates/simple/simple-editor";
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import EditWordModal from "../dict/edit-word-modal";
+import { useNavigate } from "react-router-dom";
 
 export default function MarkdownEditor({
   route,
@@ -21,6 +22,7 @@ export default function MarkdownEditor({
   word: TranslationEntry;
   onSave?: (markdown: string) => void;
 }) {
+  const navigate = useNavigate();
   const [reloadToken, setReloadToken] = useState(0);
   const {
     collapsed,
@@ -42,6 +44,25 @@ export default function MarkdownEditor({
     setReloadToken((prev) => prev + 1);
   };
 
+  const handleClose = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    const shouldNavigateBack =
+      window.location.pathname === "/markdown" && Boolean(uuid);
+
+    if (shouldNavigateBack) {
+      if (window.history.length > 1) {
+        navigate(-1);
+      } else {
+        navigate(
+          `/dictionary?name=${encodeURIComponent(name)}&path=${encodeURIComponent(route)}`,
+        );
+      }
+      return;
+    }
+
+    clearSelectedWord();
+  };
+
   return (
     <div ref={containerRef} className="flex h-full min-h-0 w-full min-w-0 flex-col overflow-hidden">
       <div className="flex-1 min-w-0 flex flex-col items-center overflow-hidden">
@@ -57,10 +78,7 @@ export default function MarkdownEditor({
               type="button"
               aria-label="Close word details"
               title="Close word details"
-              onClick={(event) => {
-                event.stopPropagation();
-                clearSelectedWord();
-              }}
+              onClick={handleClose}
               className="h-7 w-7 rounded-full border border-border bg-card text-card-foreground hover:bg-popover transition"
             >
               <X size={14} className="mx-auto" />

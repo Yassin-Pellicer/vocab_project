@@ -389,7 +389,9 @@
     "dateAdded": "2025-11-19",
     "type": "Nomen",
     "uuid": "13ecfd48-6e68-451e-a954-862a2b8ff26c",
-    "linkedWordIds": []
+    "linkedWordIds": [
+      "69572db1-100a-4672-a27a-c43b8e6a904c"
+    ]
   },
   {
     "pair": [
@@ -5818,7 +5820,6 @@
     "type": "Nomen",
     "uuid": "045939f2-892d-47e7-95cb-4694d97899d2",
     "linkedWordIds": [
-      "1aa46516-940d-421d-b144-9eb5fb9e0f17",
       "29622e93-73da-4f4d-aa0f-fe16a9d0138b",
       "b9ad1f8e-2e66-4407-80c0-c30102468c7e"
     ]
@@ -5847,9 +5848,8 @@
     "type": "Nomen",
     "uuid": "1aa46516-940d-421d-b144-9eb5fb9e0f17",
     "linkedWordIds": [
-      "045939f2-892d-47e7-95cb-4694d97899d2",
       "1dfa9417-f54f-468e-b1af-923bf7e20f5b",
-      "29622e93-73da-4f4d-aa0f-fe16a9d0138b",
+      "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b",
       "72802a50-da42-4edd-b617-8e32d475ae5e"
     ]
   },
@@ -7255,6 +7255,7 @@
     "type": "Nomen",
     "uuid": "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b",
     "linkedWordIds": [
+      "1aa46516-940d-421d-b144-9eb5fb9e0f17",
       "1b93337d-fa7f-4ff0-929e-9cee084e70e5",
       "29622e93-73da-4f4d-aa0f-fe16a9d0138b",
       "5763a459-e776-4c77-977f-db5a00834230"
@@ -9804,6 +9805,7 @@
     "type": "Adverbien",
     "uuid": "69572db1-100a-4672-a27a-c43b8e6a904c",
     "linkedWordIds": [
+      "13ecfd48-6e68-451e-a954-862a2b8ff26c",
       "35e3ddc5-9bf7-4d31-9e91-2491c526ff41",
       "bae45cdd-378f-4f05-95d7-3531742d7dad"
     ]
@@ -11893,7 +11895,6 @@
     "linkedWordIds": [
       "045939f2-892d-47e7-95cb-4694d97899d2",
       "08abb7ab-1a54-45a7-bfdf-ddb36467d352",
-      "1aa46516-940d-421d-b144-9eb5fb9e0f17",
       "3a75ac1d-3910-4b20-b545-5cbbafd8336d",
       "3aeb9e07-5328-4a4e-a0a2-7164c04ff91b",
       "8a6a46bf-0a5e-41ce-9129-438d45346295"
