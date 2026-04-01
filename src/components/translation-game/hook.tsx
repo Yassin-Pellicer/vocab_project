@@ -105,6 +105,7 @@ export default function useTranslationGame({
   const storedList = DictionaryContext((state) => state.dictionaries[name]);
   const metadata = DictionaryContext((state) => state.dictionaryMetadata[name]);
   const list = storedList ?? EMPTY_TRANSLATIONS;
+  const dictionaryTitle = metadata?.name?.trim() || name;
 
   const [stage, setStage] = useState<TranslationGameStage>("setup");
   const [direction, setDirection] = useState<GameDirection>("forward");
@@ -157,8 +158,6 @@ export default function useTranslationGame({
         })),
     );
   }, [filteredWords]);
-
-  const previewWord = filteredWords[0] ?? null;
 
   const resetRoundState = useCallback(() => {
     setUserInput("");
@@ -406,10 +405,10 @@ export default function useTranslationGame({
     clearTypeFilters,
     direction,
     setDirection,
+    dictionaryTitle,
     searchQuery,
     setSearchQuery,
     filteredWords,
     filteredCandidates,
-    previewWord,
   };
 }

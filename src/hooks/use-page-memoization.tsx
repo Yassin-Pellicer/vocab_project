@@ -33,17 +33,21 @@ function Pages() {
   const dictionaryMetadata = DictionaryContext((s) => s.dictionaryMetadata);
 
   return (
-    <>
-      <div style={{ display: path === "/" ? "block" : "none" }}><HomePage /></div>
+    <div className="h-full min-h-0">
+      <div className="h-full min-h-0" style={{ display: path === "/" ? "block" : "none" }}><HomePage /></div>
       {Object.entries(dictionaryMetadata).map(([key, dict]) => (
-        <div key={key} style={{ display: path === "/dictionary" && currentName === key ? "block" : "none" }}>
+        <div
+          key={key}
+          className="h-full min-h-0"
+          style={{ display: path === "/dictionary" && currentName === key ? "block" : "none" }}
+        >
           <Dictionary route={dict.route} name={key} />
         </div>
       ))}
-      <div style={{ display: path === "/markdown" ? "block" : "none" }}><MarkdownPage /></div>
-      <div style={{ display: path === "/notes" ? "block" : "none" }}><NotesPage /></div>
-      <div style={{ display: path === "/translation" ? "block" : "none" }}><TranslationGamePage /></div>
-    </>
+      <div className="h-full min-h-0" style={{ display: path === "/markdown" ? "block" : "none" }}><MarkdownPage /></div>
+      <div className="h-full min-h-0" style={{ display: path === "/notes" ? "block" : "none" }}><NotesPage /></div>
+      <div className="h-full min-h-0" style={{ display: path === "/translation" ? "block" : "none" }}><TranslationGamePage /></div>
+    </div>
   );
 }
 
