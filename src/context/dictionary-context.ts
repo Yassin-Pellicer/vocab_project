@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { TranslationEntry } from "@/types/translation-entry";
 import { Dictionary } from "@/types/config";
-import { BookAIcon, BookOpen } from "lucide-react";
+import { BookAIcon, BookCheck, BookOpen } from "lucide-react";
 import type { NavItem } from "@/types/nav-item";
 
 interface DictionaryContext {
@@ -171,6 +171,13 @@ export const DictionaryContext = create<DictionaryContext>((set, get) => {
                 title: "Notes",
                 icon: BookAIcon,
                 url: `/notes?name=${encodeURIComponent(
+                  key,
+                )}&path=${encodeURIComponent(dict.route)}`,
+              },
+              {
+                title: "Translate",
+                icon: BookCheck,
+                url: `/translation?name=${encodeURIComponent(
                   key,
                 )}&path=${encodeURIComponent(dict.route)}`,
               },

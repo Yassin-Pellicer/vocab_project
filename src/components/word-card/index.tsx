@@ -8,10 +8,12 @@ export default function WordCard({
   word,
   route,
   name,
+  interactive = true,
 }: {
   word: TranslationEntry;
   route?: string;
   name: string;
+  interactive?: boolean;
 }) {
   const {
     pairs,
@@ -31,9 +33,9 @@ export default function WordCard({
     <div className="">
       <div className="flex items-start justify-between">
         <div
-          onClick={() => setSelectedWord(name, word)}
-          className="flex flex-wrap gap-1 items-center">
-          <h3 className={`text-xl cursor-pointer tracking-tight font-bold text-foreground ${name && route ? "cursor-pointer" : ""} `}>
+          onClick={interactive ? () => setSelectedWord(name, word) : undefined}
+          className={`flex flex-wrap gap-1 items-center ${interactive ? "cursor-pointer" : "cursor-default"}`}>
+          <h3 className={`text-xl tracking-tight font-bold text-foreground ${interactive ? "cursor-pointer" : "cursor-default"} `}>
             {isFlipped ? translations : originalWithArticle}
           </h3>
           <p className="text-2xl">⇔</p>

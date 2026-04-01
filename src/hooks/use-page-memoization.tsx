@@ -2,6 +2,7 @@ import Dictionary from "@/components/dict";
 import HomePage from "@/pages/home-page";
 import MarkdownPage from "@/pages/markdown-page";
 import NotesPage from "@/pages/notes-page";
+import TranslationGamePage from "@/pages/translation-game-page";
 import { DictionaryContext } from "@/context/dictionary-context";
 
 import { useEffect } from "react";
@@ -41,6 +42,7 @@ function Pages() {
       ))}
       <div style={{ display: path === "/markdown" ? "block" : "none" }}><MarkdownPage /></div>
       <div style={{ display: path === "/notes" ? "block" : "none" }}><NotesPage /></div>
+      <div style={{ display: path === "/translation" ? "block" : "none" }}><TranslationGamePage /></div>
     </>
   );
 }

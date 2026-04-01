@@ -4,6 +4,7 @@ import {
   Search,
   X,
   ArrowLeftRight,
+  BookCheck,
   ListOrdered,
   Filter,
   TreesIcon,
@@ -26,6 +27,7 @@ import { FloatingAssistantChat } from "@/components/chat/floating-assistant-chat
 import { useDictionaryKeybinds } from "./keybinds";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const getGridClasses = () =>
   "grid mt-4 [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))] pb-4 sm:pl-2 px-2 gap-4";
@@ -183,6 +185,13 @@ export default function DictionaryComponent({
           >
             <ListOrdered size={18} />
           </button>
+          <Link
+            to={`/translation?name=${encodeURIComponent(name)}&path=${encodeURIComponent(route)}`}
+            className={toolbarBtn(false)}
+            title="Open translation game"
+          >
+            <BookCheck size={18} />
+          </Link>
           <AddWordModal ref={addWordButtonRef} route={route} name={name} />
         </div>
       </div>
