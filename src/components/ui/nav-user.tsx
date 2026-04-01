@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/supabase/supabase-client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { SidebarMenu, SidebarMenuItem } from "@/components/ui/sidebar";
 import ConfigModal from "../config/config-modal";
 import { User } from "lucide-react";

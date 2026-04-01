@@ -25,6 +25,7 @@ export default function useHome() {
   const [dictionaryCards, setDictionaryCards] = useState<DictionaryData[]>([]);
   const [totalWords, setTotalWords] = useState(0);
   const [totalDictionaries, setTotalDictionaries] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const dictionaryMetadata = DictionaryContext(s => s.dictionaryMetadata);
   const dictionariesMap = DictionaryContext(s => s.dictionaries);
@@ -32,10 +33,16 @@ export default function useHome() {
   useEffect(() => {
     let isCancelled = false;
 
-    if (
-      Object.keys(dictionaryMetadata).length === 0 ||
-      Object.keys(dictionariesMap).length === 0
-    ) {
+    const metadataCount = Object.keys(dictionaryMetadata).length;
+    const loadedDictionaryCount = Object.keys(dictionariesMap).length;
+
+    if (metadataCount === 0) {
+      setLoading(false);
+      return;
+    }
+
+    if (loadedDictionaryCount === 0) {
+      setLoading(true);
       return;
     }
 
@@ -61,6 +68,7 @@ export default function useHome() {
     };
 
     const loadHome = async () => {
+      setLoading(true);
 
       const result: DictionaryData[] = [];
       let wordCount = 0;
@@ -130,6 +138,7 @@ export default function useHome() {
       setDictionaryCards(result);
       setTotalWords(wordCount);
       setTotalDictionaries(Object.keys(dictionaryMetadata).length);
+      setLoading(false);
     };
 
     loadHome();
@@ -143,5 +152,6 @@ export default function useHome() {
     dictionaryCards,
     totalWords,
     totalDictionaries,
+    loading,
   };
 }

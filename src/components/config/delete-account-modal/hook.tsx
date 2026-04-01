@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "@/supabase/supabase-client";
 
 export default function useDeleteAccountModalHooks() {
 
@@ -7,7 +8,9 @@ export default function useDeleteAccountModalHooks() {
   const [isHolding, setIsHolding] = useState(false);
   const [holdProgress, setHoldProgress] = useState(0);
 
-  const handleMouseDown = async (onConfirm?: () => void) => {
+  const handleMouseDown = async (
+    onConfirm?: () => void | Promise<void>,
+  ) => {
     setIsHolding(true);
     setHoldProgress(0);
 
@@ -19,19 +22,34 @@ export default function useDeleteAccountModalHooks() {
       if (progress >= 120) {
         clearInterval(interval);
         setIsHolding(false);
-        setLoading(true);
-        setError(null);
+        void (async () => {
+          setLoading(true);
+          setError(null);
 
-        try {
-          window.api.deleteAccount?.();
-          onConfirm?.();
-        } catch (error) {
-          setError(
-            error instanceof Error ? error.message : "Failed to delete account.",
-          );
-        } finally {
-          setLoading(false);
-        }
+          try {
+            const {
+              data: { session },
+            } = await supabase.auth.getSession();
+            const accessToken = session?.access_token;
+
+            if (!accessToken) {
+              throw new Error("You must be logged in to delete your account.");
+            }
+
+            if (!window.api?.deleteAccount) {
+              throw new Error("Delete account is not available in this build.");
+            }
+
+            await window.api.deleteAccount(accessToken);
+            await onConfirm?.();
+          } catch (error) {
+            setError(
+              error instanceof Error ? error.message : "Failed to delete account.",
+            );
+          } finally {
+            setLoading(false);
+          }
+        })();
       }
     }, 60);
 
@@ -41,7 +59,6 @@ export default function useDeleteAccountModalHooks() {
       setHoldProgress(0);
     };
 
-    // Cleanup on mouse/touch up
     const handleUp = () => {
       cleanup();
       document.removeEventListener("mouseup", handleUp);

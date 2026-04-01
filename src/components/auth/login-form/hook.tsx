@@ -21,6 +21,7 @@ type AuthHook = {
   signIn: (params: SignInParams) => Promise<void>
   signUp: (params: SignUpParams) => Promise<void>
   signInWithOAuth: (provider?: "google" | "github") => Promise<void>
+  resetPassword: (email: string) => Promise<boolean>
   signOut: () => Promise<void>
 }
 
@@ -113,6 +114,22 @@ export function useAuth(): AuthHook {
     setUser(null)
   }, [])
 
+  const resetPassword = useCallback(async (email: string) => {
+    setLoading(true)
+    setError(null)
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email)
+      if (error) throw error
+      return true
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Unknown error")
+      return false
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
   return {
     user,
     loading,
@@ -120,6 +137,7 @@ export function useAuth(): AuthHook {
     signIn,
     signUp,
     signInWithOAuth,
+    resetPassword,
     signOut
   }
 }

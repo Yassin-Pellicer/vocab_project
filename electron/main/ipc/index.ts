@@ -28,6 +28,7 @@ import closeWindow from "./endpoints/window/close";
 import openNewWindow from "./endpoints/window/openNewWindow";
 import sendChat from "./endpoints/chat/sendChat";
 import sendConfigChat from "./endpoints/chat/sendConfigChat";
+import deleteAccount from "./endpoints/auth/deleteAccount";
 
 export default function registerIpcHandlers() {
   loadTranslations();
@@ -55,6 +56,7 @@ export default function registerIpcHandlers() {
   fetchNotes();
   sendChat();
   sendConfigChat();
+  deleteAccount();
 
   // register window controls last
   minimizeWindow();

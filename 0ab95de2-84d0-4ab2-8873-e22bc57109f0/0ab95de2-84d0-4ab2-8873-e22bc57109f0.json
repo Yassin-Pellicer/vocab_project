@@ -1127,39 +1127,6 @@
     "pair": [
       {
         "original": {
-          "word": "Wochentage",
-          "gender": "Feminin",
-          "number": "plural"
-        },
-        "translations": [
-          {
-            "word": "Días de la Semana",
-            "gender": "",
-            "number": ""
-          }
-        ],
-        "definitions": [],
-        "observations": ""
-      }
-    ],
-    "dateAdded": "2025-11-19",
-    "type": "Nomen",
-    "uuid": "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2",
-    "linkedWordIds": [
-      "04afba97-eefe-4763-993f-1218f955e4ea",
-      "09291336-33e1-4321-be0a-3011dfadc1d0",
-      "34d797b4-ce98-47a5-abed-a3c7ff0cdae4",
-      "35c5b1b1-8260-4907-89a4-0c011f309679",
-      "3c9ee78e-976f-4625-9157-d0f5a7e1628f",
-      "82da61a6-775c-49eb-88f3-da1877420d7e",
-      "b2a57a61-1374-4e03-a160-9987f29c9650",
-      "bc10c1a1-83db-42e4-a738-cf926c51114b"
-    ]
-  },
-  {
-    "pair": [
-      {
-        "original": {
           "word": "Traurigkeit",
           "gender": "Feminin",
           "number": "Singular"
@@ -5726,7 +5693,6 @@
     "type": "Nomen",
     "uuid": "08abb7ab-1a54-45a7-bfdf-ddb36467d352",
     "linkedWordIds": [
-      "045939f2-892d-47e7-95cb-4694d97899d2",
       "29622e93-73da-4f4d-aa0f-fe16a9d0138b"
     ]
   },
@@ -5852,7 +5818,6 @@
     "type": "Nomen",
     "uuid": "045939f2-892d-47e7-95cb-4694d97899d2",
     "linkedWordIds": [
-      "08abb7ab-1a54-45a7-bfdf-ddb36467d352",
       "1aa46516-940d-421d-b144-9eb5fb9e0f17",
       "29622e93-73da-4f4d-aa0f-fe16a9d0138b",
       "b9ad1f8e-2e66-4407-80c0-c30102468c7e"
@@ -12972,5 +12937,38 @@
     "type": "Nomen",
     "uuid": "9dc473d0-e385-4cd7-9fea-275e414e1786",
     "linkedWordIds": []
+  },
+  {
+    "pair": [
+      {
+        "original": {
+          "word": "Wochentage",
+          "gender": "Maskulin",
+          "number": "Plural"
+        },
+        "translations": [
+          {
+            "word": "Días de la Semana",
+            "gender": "",
+            "number": ""
+          }
+        ],
+        "definitions": [],
+        "observations": ""
+      }
+    ],
+    "dateAdded": "2025-11-19",
+    "type": "Nomen",
+    "uuid": "2a15d49e-7fe4-4559-8a9a-a19fe769cfc2",
+    "linkedWordIds": [
+      "04afba97-eefe-4763-993f-1218f955e4ea",
+      "09291336-33e1-4321-be0a-3011dfadc1d0",
+      "34d797b4-ce98-47a5-abed-a3c7ff0cdae4",
+      "35c5b1b1-8260-4907-89a4-0c011f309679",
+      "3c9ee78e-976f-4625-9157-d0f5a7e1628f",
+      "82da61a6-775c-49eb-88f3-da1877420d7e",
+      "b2a57a61-1374-4e03-a160-9987f29c9650",
+      "bc10c1a1-83db-42e4-a738-cf926c51114b"
+    ]
   }
 ]

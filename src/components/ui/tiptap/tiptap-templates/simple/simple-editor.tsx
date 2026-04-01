@@ -18,7 +18,6 @@ import { TableHeader } from "@tiptap/extension-table-header"
 import { TableCell } from "@tiptap/extension-table-cell"
 import { Selection } from "@tiptap/extensions"
 
-// --- UI Primitives ---
 import { Button } from "@/components/ui/tiptap/tiptap-ui-primitive/button"
 import { Spacer } from "@/components/ui/tiptap/tiptap-ui-primitive/spacer"
 import {
@@ -27,7 +26,6 @@ import {
   ToolbarSeparator,
 } from "@/components/ui/tiptap/tiptap-ui-primitive/toolbar"
 
-// --- Tiptap Node ---
 import { ImageUploadNode } from "@/components/ui/tiptap/tiptap-node/image-upload-node/image-upload-node-extension"
 import { HorizontalRule } from "@/components/ui/tiptap/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension"
 import "@/components/ui/tiptap/tiptap-node/blockquote-node/blockquote-node.scss"
@@ -39,7 +37,6 @@ import "@/components/ui/tiptap/tiptap-node/heading-node/heading-node.scss"
 import "@/components/ui/tiptap/tiptap-node/paragraph-node/paragraph-node.scss"
 import "@/components/ui/tiptap/tiptap-node/table-node/table-node.scss"
 
-// --- Tiptap UI ---
 import { HeadingDropdownMenu } from "@/components/ui/tiptap/tiptap-ui/heading-dropdown-menu"
 import { ImageUploadButton } from "@/components/ui/tiptap/tiptap-ui/image-upload-button"
 import { ListDropdownMenu } from "@/components/ui/tiptap/tiptap-ui/list-dropdown-menu"
@@ -65,15 +62,12 @@ import { HighlighterIcon } from "@/components/ui/tiptap/tiptap-icons/highlighter
 import { LinkIcon } from "@/components/ui/tiptap/tiptap-icons/link-icon"
 import { TableIcon } from "@/components/ui/tiptap/tiptap-icons/table-icon"
 
-// --- Hooks ---
 import { useIsBreakpoint } from "@/hooks/use-is-breakpoint"
 import { useWindowSize } from "@/hooks/use-window-size"
 import { useCursorVisibility } from "@/hooks/use-cursor-visibility"
 
-// --- Lib ---
 import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils"
 
-// --- Styles ---
 import "@/components/ui/tiptap/tiptap-templates/simple/simple-editor.scss"
 
 import { DictionaryGraphNode } from "@/components/editor/nodes/dictionary-graph-node"
@@ -260,7 +254,21 @@ const MobileToolbarContent = ({
   </>
 )
 
-export function SimpleEditor({ route, name, type, noteId, editMode = true }: { route: string, name: string, type: string, noteId?: string, editMode?: boolean }) {
+export function SimpleEditor({
+  route,
+  name,
+  type,
+  noteId,
+  wordId,
+  editMode = true,
+}: {
+  route: string,
+  name: string,
+  type: string,
+  noteId?: string,
+  wordId?: string,
+  editMode?: boolean
+}) {
   const isMobile = useIsBreakpoint()
   const { height } = useWindowSize()
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
@@ -276,8 +284,8 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
 
   const selectedNoteId = noteId ?? selectedNoteIdFromStore
 
-  const selectedWord = DictionaryContext((s) => s.selectedWord)
-  const selectedWordUuid = selectedWord?.uuid ?? null
+  const selectedWord = DictionaryContext((s) => s.selectedWordByDict[name] ?? null)
+  const selectedWordUuid = wordId ?? selectedWord?.uuid ?? null
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -398,7 +406,7 @@ export function SimpleEditor({ route, name, type, noteId, editMode = true }: { r
   }, [isMobile, mobileView])
 
   return (
-    <div className="simple-editor-wrapper max-w-200!">
+    <div className="simple-editor-wrapper max-w-200! h-full min-h-0">
       <EditorContext.Provider value={{ editor }}>
         <Toolbar
           ref={toolbarRef}

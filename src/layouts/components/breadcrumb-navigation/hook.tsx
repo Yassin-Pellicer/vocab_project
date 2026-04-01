@@ -5,16 +5,17 @@ import { NotesContext } from "@/context/notes-context";
 export function useBreadcrumbNavigation() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
-  const { sidebarNavigationData, selectedWord } = DictionaryContext();
+  const { sidebarNavigationData, selectedWordByDict } = DictionaryContext();
   const { itemsFromRouteRecursive } = NotesContext();
 
   const name = searchParams.get("name") || "";
   const path = searchParams.get("path") || "";
+  const selectedWord = selectedWordByDict[name] ?? null;
 
   const dictionaryName = sidebarNavigationData.navMain.find((item) =>
     item.items?.some((subItem) => {
       if(!subItem.url) {
-        return;
+        return false;
       }
       const itemParams = new URLSearchParams(subItem.url.split("?")[1]);
       return itemParams.get("name") === name;

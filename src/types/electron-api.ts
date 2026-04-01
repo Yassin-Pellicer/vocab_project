@@ -115,5 +115,7 @@ export interface RendererApi {
   }>;
 
   chatConfig: (language: string) => any;
-  deleteAccount: () => Promise<unknown>;
+  deleteAccount: (
+    accessToken: string,
+  ) => Promise<{ success: boolean; [key: string]: unknown }>;
 }

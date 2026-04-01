@@ -10,6 +10,7 @@ export function useMarkdown(
   uuid: string | undefined,
   name: string,
   word: TranslationEntry,
+  reloadToken = 0,
 ) {
   const [markdown, setMarkdown] = useState<unknown>(null);
   const [mode, setMode] = useState<"edit" | "preview" | "split">("preview");
@@ -17,7 +18,13 @@ export function useMarkdown(
   const [selectOption, setSelectOption] = useState<"notes" | "conjugation">("notes");
   const [isEditing, setIsEditing] = useState(false);
   const [linkedWordList, setLinkedWordList] = useState<Record<string, string>>({});
-  const { selectedWord, dictionaryMetadata, dictionaries, setSelectedWord } = DictionaryContext();
+  const {
+    selectedWordByDict,
+    dictionaryMetadata,
+    dictionaries,
+    setSelectedWord,
+  } = DictionaryContext();
+  const selectedWord = selectedWordByDict[name] ?? null;
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +47,7 @@ export function useMarkdown(
     } else {
       setLinkedWordList({});
     }
-  }, [uuid, name, route]);
+  }, [uuid, name, route, reloadToken]);
 
   const handleWordSelect = (connection: TranslationEntry) => {
     const connectionUuid = connection.uuid;
@@ -86,7 +93,11 @@ export function useMarkdown(
     if (!id || id === uuid) return;
     const entry = dictionaries[name]?.find((item) => item.uuid === id);
     if (!entry) return;
-    setSelectedWord(entry);
+    setSelectedWord(name, entry);
+  };
+
+  const clearSelectedWord = () => {
+    setSelectedWord(name, null);
   };
 
   useEffect(() => {
@@ -97,11 +108,11 @@ export function useMarkdown(
     window.api.fetchMarkdown(route, name, uuid).then((response) => {
       setMarkdown(response);
     });
-  }, [route, name, uuid]);
+  }, [route, name, uuid, reloadToken]);
 
   useEffect(() => {
     setCollapsed(false);
-  }, [selectedWord, uuid]);
+  }, [selectedWord, uuid, reloadToken]);
 
   useEffect(() => {
     if (
@@ -128,6 +139,7 @@ export function useMarkdown(
     handleWordSelect,
     handleWordDelete,
     handleLinkedWordClick,
+    clearSelectedWord,
     linkedWordList,
     dictionaryMetadata,
     containerRef,

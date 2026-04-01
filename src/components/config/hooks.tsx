@@ -25,7 +25,6 @@ export const useProfileSection = () => {
       const { data } = await supabase.auth.getSession();
       const sessionUser = data.session?.user ?? null;
       setUser(sessionUser);
-      setLoading(false);
     }
 
     fetchUser();
@@ -43,18 +42,35 @@ export const useProfileSection = () => {
   useEffect(() => {
     let cancelled = false;
     async function load() {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user || cancelled) return;
-      const name = (user.user_metadata?.display_name as string) ?? "";
-      const email = user.email ?? "";
-      setDraftDisplayName(name);
-      setOriginalDisplayName(name);
-      setDraftEmail(email);
-      setOriginalEmail(email);
+      setLoading(true);
       try {
-        const stored = localStorage.getItem(`${AVATAR_STORAGE_KEY}_${user.id}`);
-        if (stored) setPersistedAvatarDataUrl(stored);
-      } catch { }
+        const { data: { user } } = await supabase.auth.getUser();
+        if (cancelled) return;
+
+        if (!user) {
+          setDraftDisplayName("");
+          setOriginalDisplayName("");
+          setDraftEmail("");
+          setOriginalEmail("");
+          setPersistedAvatarDataUrl(null);
+          return;
+        }
+
+        const name = (user.user_metadata?.display_name as string) ?? "";
+        const email = user.email ?? "";
+        setDraftDisplayName(name);
+        setOriginalDisplayName(name);
+        setDraftEmail(email);
+        setOriginalEmail(email);
+        try {
+          const stored = localStorage.getItem(`${AVATAR_STORAGE_KEY}_${user.id}`);
+          if (stored) setPersistedAvatarDataUrl(stored);
+        } catch { }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
     }
     void load();
     return () => { cancelled = true; };

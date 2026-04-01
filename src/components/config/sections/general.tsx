@@ -24,8 +24,11 @@ import { PreferencesContext } from "@/context/preferences-context";
 import { Button } from "@/components/ui/button";
 import { useProfileSection } from "../hooks";
 import DeleteAccountModal from "@/components/config/delete-account-modal";
+import LoadingOverlay from "@/components/ui/loading-overlay";
 
 export default function GeneralSection() {
+  const fixedActionButtonClass = "w-36 justify-center";
+
   const {
     config,
     setNotifications,
@@ -58,8 +61,20 @@ export default function GeneralSection() {
   const hasAvatar = !!avatarDataUrl || !!avatarFile;
 
   return (
+    <LoadingOverlay
+      loading={saving}
+      title="Loading"
+      subtitle="Saving your profile..."
+      overlayClassName="rounded-xl"
+    >
     <div className="mb-8 mt-2">
       <div className="space-y-2">
+        <LoadingOverlay
+          loading={loading}
+          title="Loading"
+          subtitle="Loading your profile..."
+          overlayClassName="rounded-xl"
+        >
         <div>
           <h2 className="text-xl font-semibold mb-2">Your Profile</h2>
           <hr />
@@ -130,7 +145,12 @@ export default function GeneralSection() {
             </div>
           </div>
           <div className="flex justify-end sm:justify-start">
-            <Button type="button" disabled={!dirty || saving} onClick={() => void handleConfirm()}>
+            <Button
+              type="button"
+              className={fixedActionButtonClass}
+              disabled={!dirty || saving}
+              onClick={() => void handleConfirm()}
+            >
               {saving ? (
                 <>
                   <Loader2 className="animate-spin" />
@@ -169,13 +189,13 @@ export default function GeneralSection() {
               <button
                 type="button"
                 onClick={removeAvatar}
-                className="h-9 px-2 rounded-md border bg-background text-sm hover:bg-destructive hover:text-destructive-foreground hover:border-destructive transition-colors flex items-center justify-center"
+                className="h-9 w-9 rounded-md border bg-background text-sm hover:bg-destructive hover:text-destructive-foreground hover:border-destructive transition-colors flex items-center justify-center"
                 aria-label="Remove avatar"
               >
                 <X className="h-4 w-4" />
               </button>
             )}
-            <label className="h-9 px-2 rounded-md border bg-background text-sm hover:bg-accent transition-colors cursor-pointer flex items-center justify-center">
+            <label className="h-9 w-9 rounded-md border bg-background text-sm hover:bg-accent transition-colors cursor-pointer flex items-center justify-center">
               <Upload className="h-4 w-4 text-muted-foreground" />
               <input
                 ref={fileInputRef}
@@ -243,6 +263,7 @@ export default function GeneralSection() {
         </div>
 
         {error ? <p className="text-xs text-destructive pt-1">{error}</p> : null}
+        </LoadingOverlay>
 
         <div>
           <h2 className="text-xl font-semibold mb-2 mt-6!">General</h2>
@@ -265,7 +286,7 @@ export default function GeneralSection() {
             </div>
             <Switch checked={config.notifications} onCheckedChange={setNotifications} />
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
             <div className="text-sm font-medium">Notification lifetime</div>
             <Select value={config.notificationLifetime} onValueChange={setNotificationLifetime}>
               <SelectTrigger className="w-full sm:w-auto">
@@ -390,7 +411,10 @@ export default function GeneralSection() {
               </div>
             </div>
           </div>
-          <Button onClick={() => { setOffline(true); void signOut(); }} className="w-full sm:w-auto">
+          <Button
+            onClick={() => { setOffline(true); void signOut(); }}
+            className={fixedActionButtonClass}
+          >
             <UnplugIcon /> Go Offline
           </Button>
         </div>}
@@ -411,12 +435,13 @@ export default function GeneralSection() {
             </div>
           </div>
           <DeleteAccountModal onConfirm={() => { setOffline(true); void signOut(); }}>
-            <Button variant={"destructive"} className="w-full sm:w-auto">
+            <Button variant={"destructive"} className={fixedActionButtonClass}>
               Delete
             </Button>
           </DeleteAccountModal>
         </div>}     
       </div>
     </div>
+    </LoadingOverlay>
   );
 }

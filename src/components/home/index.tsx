@@ -14,13 +14,13 @@ import NoteDisplay from "../notes/note-display";
 import AddDictModal from "../dict/add-dict-modal";
 import ConfigureDictModal from "../dict/configure-dict-modal";
 import AddTranslationModal from "../dict/add-word-modal";
-import Sketchboard from "../sketchboard";
 
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 import { Chat } from "../chat";
 import { useRef, useState, useEffect } from "react";
 import { NotesContext } from "@/context/notes-context";
+import LoadingOverlay from "@/components/ui/loading-overlay";
 
 import useHome from "./hook";
 
@@ -99,8 +99,8 @@ function DictRow({
       </div>
       <div className="flex xl:flex-row flex-col gap-4 items-start ">
         <div ref={leftRef} className="flex flex-col h-fit! xl:w-2/3 w-full">
-          <div className="grid grid-cols-1 2xl:grid-cols-2 gap-8 shadow-sm p-4 rounded-2xl border">
-            <div className="flex flex-col">
+          <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 rounded-2xl">
+            <div className="flex flex-col h-full">
               {dict.wordOfTheDay ? (
                 <WordCard name={dict.id} word={dict.wordOfTheDay} />
               ) : (
@@ -129,7 +129,7 @@ function DictRow({
               <h3 className="text-xs text-muted-foreground mt-3! uppercase">
                 Recent words added
               </h3>
-              <div className="flex flex-col gap-2 border rounded-2xl p-3 mt-2">
+              <div className="flex flex-col gap-2 border rounded-2xl p-3 mt-2 h-full">
                 {dict.recentWords.map((word) => (
                   <WordCard
                     key={word.uuid ?? `${dict.id}-${word.dateAdded}`}
@@ -140,66 +140,98 @@ function DictRow({
                 ))}
               </div>
             </div>
-            <div className="flex flex-col justify-between rounded-xl border border-border/60 bg-card/60 p-4">
-              <div>
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                  Dictionary Snapshot
-                </p>
-                <div className="mt-3 grid grid-cols-2 gap-3">
-                  <div className="rounded-2xl border border-border/60 bg-card/70 p-3 shadow-sm">
-                    <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
-                      Total Words
-                    </p>
-                    <p className="mt-1 text-2xl font-semibold text-foreground">
-                      {dict.totalWords}
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-border/60 bg-card/70 p-3 shadow-sm">
-                    <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
-                      Knowledge Index
-                    </p>
-                    <p className="mt-1 text-2xl font-semibold text-foreground">
-                      {dict.knowledgeIndex.toFixed(2)}%
-                    </p>
-                  </div>
-                </div>
-                <hr className="my-4!"></hr>
-                <div className="space-y-2 mb-4">
+            <div className="grid grid-rows-2 gap-4">
+              <div className="flex flex-col justify-between rounded-xl border border-border/60 bg-card/60 p-4">
+                <div>
                   <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                    Word Types
+                    Dictionary Snapshot
                   </p>
-                  {topTypes.length === 0 ? (
-                    <p className="text-xs text-muted-foreground">
-                      Add words to see type distribution.
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    <div className="rounded-2xl border border-border/60 bg-card/70 p-3 shadow-sm">
+                      <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                        Total Words
+                      </p>
+                      <p className="mt-1 text-2xl font-semibold text-foreground">
+                        {dict.totalWords}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-border/60 bg-card/70 p-3 shadow-sm">
+                      <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                        Knowledge Index
+                      </p>
+                      <p className="mt-1 text-2xl font-semibold text-foreground">
+                        {dict.knowledgeIndex.toFixed(2)}%
+                      </p>
+                    </div>
+                  </div>
+                  <hr className="my-4!"></hr>
+                  <div className="space-y-2 mb-4">
+                    <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                      Word Types
                     </p>
-                  ) : (
-                    topTypes.map(([type, count]) => (
-                      <div key={type} className="space-y-1">
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-muted-foreground truncate">{type}</span>
-                          <span className="font-semibold text-foreground">{count}</span>
+                    {topTypes.length === 0 ? (
+                      <p className="text-xs text-muted-foreground">
+                        Add words to see type distribution.
+                      </p>
+                    ) : (
+                      topTypes.map(([type, count]) => (
+                        <div key={type} className="space-y-1">
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="text-muted-foreground truncate">{type}</span>
+                            <span className="font-semibold text-foreground">{count}</span>
+                          </div>
+                          <div className="h-2 w-full rounded-full bg-muted/40">
+                            <div
+                              className="h-2 rounded-full bg-primary/70"
+                              style={{
+                                width: `${maxTypeCount ? (count / maxTypeCount) * 100 : 0}%`,
+                              }}
+                            />
+                          </div>
                         </div>
-                        <div className="h-2 w-full rounded-full bg-muted/40">
-                          <div
-                            className="h-2 rounded-full bg-primary/70"
-                            style={{
-                              width: `${maxTypeCount ? (count / maxTypeCount) * 100 : 0}%`,
-                            }}
-                          />
-                        </div>
-                      </div>
-                    ))
-                  )}
+                      ))
+                    )}
+                  </div>
                 </div>
-                <Sketchboard storageKey={`sketchboard:${dict.id}`} />
               </div>
-              <div className="mt-4 text-xs text-muted-foreground italic">
-                Tip: open the graph below to explore links between words.
+              <div className=" p-3 rounded-xl border bg-linear-to-b from-transparent via-to-background/70 to-background/90">
+                <p className="text-xs uppercase tracking-wide mb-1">Random Note</p>
+                {dict.randomNote ? (
+                  <div className="flex flex-col items-center bg-linear-to-b from-transparent via-to-background/70 to-background/90 justify-center overflow-hidden max-h-85">
+                    <div className="overflow-y-hidden w-full relative">
+                      <NoteDisplay
+                        route={dict.path}
+                        name={dict.id}
+                        noteId={dict.randomNote.id}
+                        editMode={false}
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-to-background/70 to-background/90" />
+                    </div>
+                    <Link
+                      to={`/notes?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
+                      onClick={() => setSelectedNoteId(dict.randomNote!.id!)}
+                    >
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="mt-2 px-2 h-8 flex items-center gap-1"
+                      >
+                        <Notebook size={14} />
+                        Open Notes
+                        <ArrowRight size={14} />
+                      </Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    No notes found for this dictionary yet.
+                  </p>
+                )}
               </div>
             </div>
           </div>
-          <div className="grid xl:grid-cols-2 grid-cols-1 gap-4 mt-4">
-            <div className="xl:h-full border rounded-xl h-100 min-h-0 shadow-md">
+          <div className="flex flex-col gap-4 h-160 mt-4 shadow-sm rounded-xl">
+            <div className="xl:h-full border min-h-0 rounded-xl bg-card/60 p-1">
               <DictionaryGraph
                 title={dict.name}
                 name={dict.id}
@@ -209,44 +241,8 @@ function DictRow({
                 showDirectToggle={false}
               />
             </div>
-            <div className=" p-3 rounded-xl border bg-linear-to-b from-transparent via-to-background/70 to-background/90 shadow-md">
-              <p className="text-xs uppercase tracking-wide mb-1">Random Note</p>
-              {dict.randomNote ? (
-                <div className="flex flex-col items-center bg-linear-to-b from-transparent via-to-background/70 to-background/90 justify-center overflow-hidden max-h-150">
-                  <div className="overflow-y-hidden w-full relative">
-                    <NoteDisplay
-                      route={dict.path}
-                      name={dict.id}
-                      noteId={dict.randomNote.id}
-                      editMode={false}
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-to-background/70 to-background/90" />
-                  </div>
-                  <Link
-                    to={`/notes?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
-                    onClick={() => setSelectedNoteId(dict.randomNote!.id!)}
-                  >
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="mt-2 px-2 h-8 flex items-center gap-1"
-                    >
-                      <Notebook size={14} />
-                      Open Notes
-                      <ArrowRight size={14} />
-                    </Button>
-                  </Link>
-                </div>
-              ) : (
-                <p className="text-sm text-muted-foreground">
-                  No notes found for this dictionary yet.
-                </p>
-              )}
-            </div>
           </div>
-
         </div>
-
         <div
           ref={chatRef}
           className="sticky shadow-md border xl:w-1/3 xl:flex hidden w-full rounded-2xl min-h-0 top-4 flex-col overflow-hidden h-[calc(100vh-96px)] bg-card/60 max-h-screen!"
@@ -269,8 +265,21 @@ function DictRow({
 
 export default function Home() {
 
-  const { dictionaryCards, totalWords, totalDictionaries } = useHome();
+  const { dictionaryCards, totalWords, totalDictionaries, loading } = useHome();
   const { setSelectedNoteId } = NotesContext();
+
+  if (loading) {
+    return (
+      <LoadingOverlay
+        loading
+        title="Loading"
+        subtitle="Preparing your dictionaries and notes..."
+        className="h-[calc(100vh-64px)]"
+      >
+        <div className="h-[calc(100vh-64px)]" />
+      </LoadingOverlay>
+    );
+  }
 
   if (
     totalWords <= 0 &&

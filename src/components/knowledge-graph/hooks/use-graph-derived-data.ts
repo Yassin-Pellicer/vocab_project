@@ -321,7 +321,9 @@ export function useGraphDerivedData({
   return {
     menuQuery,
     menuState,
-    showMenu: !menuState.anchorId,
+    // Only surface the explore menu when a word is selected but the anchor
+    // cannot be resolved in the current graph state.
+    showMenu: Boolean(selectedWordUuid) && !menuState.anchorId,
     connectedWordEntries,
     dictionaryEntries,
     linkedIdsByWord,

@@ -27,7 +27,7 @@ export default function AddDictModal({
         <DialogTrigger asChild>{children}</DialogTrigger>
       ) : (
         <DialogTrigger asChild>
-          <Button className="flex items-center gap-2">
+          <Button className="flex items-center gap-2 w-full">
             + Add Dictionary
             <FolderOpen size={14} />
           </Button>

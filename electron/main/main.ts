@@ -15,8 +15,8 @@ app.on('activate', () => {
   }
 })
 
-app.whenReady().then(() => {
-  void loadEnvIfPresent();
-  registerIpcHandlers()
-  createWindow()
-})
+app.whenReady().then(async () => {
+  await loadEnvIfPresent();
+  registerIpcHandlers();
+  createWindow();
+});

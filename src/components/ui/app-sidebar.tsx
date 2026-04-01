@@ -31,11 +31,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            {sidebarNavigationData.navMain.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild>
-                  {item.url ? (
-                    <Link to={item.url} className="flex items-center justify-between w-full font-medium hover:text-background!">
+            <div className="flex gap-1 flex-col">
+              {sidebarNavigationData.navMain.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    {item.url ? (
+                      <Link to={item.url} className="flex items-center justify-between w-full font-medium hover:text-background!">
                         {item.title}
                         {item.key && item.route &&
                           <DictActionsMenu
@@ -44,59 +45,62 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                             route={item.route}
                           />
                         }
-                    </Link>
-                  ) : (
-                    <div className="flex items-center justify-between w-full font-medium hover:text-background!">
-                      {item.title}
-                      {item.key && item.route &&
-                        <DictActionsMenu
-                          dictId={item.key}
-                          dictName={item.title}
-                          route={item.route} 
-                        />
-                      }
-                    </div>
-                  )}
-                </SidebarMenuButton>
-                {item.items?.length ? (
-                  <SidebarMenuSub>
-                    {item.items.map((subItem) => {
-                      return (
-                        <SidebarMenuSubItem key={subItem.title}>
-                          <SidebarMenuSubButton asChild>
-                            <div className="group/dict-subitem flex items-center justify-between">
-                              {(subItem.url) &&
-                                <Link to={subItem.url} className="group flex items-center gap-2 text-current hover:text-background!">
-                                  {subItem.icon && <subItem.icon size={12} />}
-                                  {subItem.title}
-                                </Link>}
-                              <Button
-                                type="button"
-                                variant="ghost"
-                                size="icon-sm"
-                                className="shrink-0 hidden cursor-pointer group-hover/dict-subitem:inline-flex"
-                                title="Open in new window"
-                                aria-label={`Open ${subItem.title} in a new window`}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                  if (subItem.url) { window.api?.openNewWindow?.(subItem.url) };
-                                }}
-                              >
-                                <ExternalLink className="size-3" />
-                              </Button>
-                            </div>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
-                      );
-                    })}
-                  </SidebarMenuSub>
-                ) : null}
-              </SidebarMenuItem>
-            ))}
-            <SidebarMenuSub>
+                      </Link>
+                    ) : (
+                      <div className="flex items-center mb-2 justify-between w-full font-medium hover:text-background!">
+                        {item.title}
+                        {item.key && item.route &&
+                          <DictActionsMenu
+                            dictId={item.key}
+                            dictName={item.title}
+                            route={item.route}
+                          />
+                        }
+                      </div>
+                    )}
+                  </SidebarMenuButton>
+                  {item.items?.length ? (
+                    <SidebarMenuSub>
+                      <div className="divide-y gap-2 border rounded-xl">
+                      {item.items.map((subItem) => {
+                        return (
+                          <SidebarMenuSubItem key={subItem.title}>
+                            <SidebarMenuSubButton asChild>
+                              <div className="group/dict-subitem flex items-center justify-between">
+                                {(subItem.url) &&
+                                  <Link to={subItem.url} className="group flex items-center gap-4 text-current hover:text-background!">
+                                    {subItem.icon && <subItem.icon size={12} />}
+                                    {subItem.title}
+                                  </Link>}
+                                <Button
+                                  type="button"
+                                  variant="ghost"
+                                  size="icon-sm"
+                                  className="shrink-0 hidden cursor-pointer group-hover/dict-subitem:inline-flex"
+                                  title="Open in new window"
+                                  aria-label={`Open ${subItem.title} in a new window`}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    if (subItem.url) { window.api?.openNewWindow?.(subItem.url) };
+                                  }}
+                                >
+                                  <ExternalLink className="size-3" />
+                                </Button>
+                              </div>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        );
+                      })}
+                      </div>
+                    </SidebarMenuSub>
+                  ) : null}
+                </SidebarMenuItem>
+              ))}
+            </div>
+            <div className="flex flex-row items-center px-4 mt-2">
               <AddDictModal></AddDictModal>
-            </SidebarMenuSub>
+            </div>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

@@ -35,11 +35,13 @@ export default function EditTranslationModal({
   route,
   name,
   trigger,
+  onSaved,
 }: {
   word: TranslationEntry;
   route: string;
   name: string;
   trigger?: ReactNode;
+  onSaved?: () => void;
 }) {
   const {
     handlePairChange,
@@ -286,7 +288,11 @@ export default function EditTranslationModal({
           <DialogFooter>
             <DialogClose asChild>
               <Button
-                onClick={handleSubmit}
+                onClick={() => {
+                  void handleSubmit().then((saved) => {
+                    if (saved) onSaved?.();
+                  });
+                }}
                 type="button"
                 variant="default"
                 className="bg-primary! text-primary-foreground! hover:bg-primary/90!"

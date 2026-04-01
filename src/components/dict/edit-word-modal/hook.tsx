@@ -13,7 +13,7 @@ export default function useEditWordModalHooks({
   route: string;
   name: string;
 }) {
-  const { loadTranslations } = DictionaryContext();
+  const { loadTranslations, setSelectedWord } = DictionaryContext();
   const [formData, setFormData] = useState<TranslationEntry>(
     structuredClone(word),
   );
@@ -98,7 +98,7 @@ export default function useEditWordModalHooks({
 
   const handleSubmit = async () => {
     try {
-      if (formData.pair.length === 0) return;
+      if (formData.pair.length === 0) return false;
       if (!word.uuid) throw new Error("Cannot edit word without uuid.");
 
       await window.api.addTranslation(formData, word.uuid, route, name);
@@ -109,9 +109,15 @@ export default function useEditWordModalHooks({
         formData.pair.find((p) => p.original.word.trim())?.original.word.trim() ??
         before;
       notify("wordEdited", { before, after, dictionary: name });
-      loadTranslations(route, name);
+      await loadTranslations(route, name);
+      const refreshedWord =
+        DictionaryContext.getState().dictionaries[name]?.find((entry) => entry.uuid === word.uuid) ??
+        formData;
+      setSelectedWord(name, refreshedWord);
+      return true;
     } catch (error) {
       console.error("Failed to add translation:", error);
+      return false;
     }
   };
 

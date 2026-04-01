@@ -6,6 +6,8 @@ import WordCard from "../word-card";
 import VerboConjugation from "../verb-conjugation";
 import SearchBar from "../word-link";
 import { SimpleEditor } from "../ui/tiptap/tiptap-templates/simple/simple-editor";
+import { useState } from "react";
+import EditWordModal from "../dict/edit-word-modal";
 
 export default function MarkdownEditor({
   route,
@@ -19,6 +21,7 @@ export default function MarkdownEditor({
   word: TranslationEntry;
   onSave?: (markdown: string) => void;
 }) {
+  const [reloadToken, setReloadToken] = useState(0);
   const {
     collapsed,
     setCollapsed,
@@ -29,43 +32,76 @@ export default function MarkdownEditor({
     handleWordSelect,
     handleWordDelete,
     handleLinkedWordClick,
+    clearSelectedWord,
     linkedWordList,
     dictionaryMetadata,
     containerRef,
-  } = useMarkdown(route, uuid, name, word);
+  } = useMarkdown(route, uuid, name, word, reloadToken);
+
+  const handleWordSaved = () => {
+    setReloadToken((prev) => prev + 1);
+  };
 
   return (
     <div ref={containerRef} className="flex h-full min-h-0 w-full min-w-0 flex-col overflow-hidden">
       <div className="flex-1 min-w-0 flex flex-col items-center overflow-hidden">
         <div
-          className={`px-4 max-w-200 ${
-            word.type == dictionaryMetadata?.[name]?.typeWordWithTenses &&
+          className={`relative px-4 max-w-200 ${word.type == dictionaryMetadata?.[name]?.typeWordWithTenses &&
             dictionaryMetadata?.[name]?.useTenses
-              ? "pb-6"
-              : ""
-          } w-full mt-4 ${collapsed ? "hidden" : ""}`}
+            ? "pb-6"
+            : ""
+            } w-full mt-4 ${collapsed ? "hidden" : ""}`}
         >
+          <div className="flex flex-row justify-between left-4 mb-2 top-2 z-10">
+            <button
+              type="button"
+              aria-label="Close word details"
+              title="Close word details"
+              onClick={(event) => {
+                event.stopPropagation();
+                clearSelectedWord();
+              }}
+              className="h-7 w-7 rounded-full border border-border bg-card text-card-foreground hover:bg-popover transition"
+            >
+              <X size={14} className="mx-auto" />
+            </button>
+            <EditWordModal
+              word={word}
+              route={route}
+              name={name}
+              onSaved={handleWordSaved}
+              trigger={
+                <button
+                  type="button"
+                  aria-label="Edit word"
+                  title="Edit word"
+                  className="h-7 w-7 rounded-full border border-border bg-card text-card-foreground hover:bg-popover transition"
+                >
+                  <Edit3 size={14} className="mx-auto" />
+                </button>
+              }
+            />
+          </div>
           <WordCard name={name} word={word} />
+
           {word.type == dictionaryMetadata?.[name]?.typeWordWithTenses &&
             dictionaryMetadata?.[name]?.useTenses && (
               <div className="flex flex-row mt-6 justify-around divide-x w-full">
                 <button
                   onClick={() => setSelectOption("notes")}
-                  className={`border-b w-full cursor-pointer border-r-0 text-sm pb-1 ${
-                    selectOption === "notes"
-                      ? "border-b-2 border-primary text-primary"
-                      : "text-muted-foreground"
-                  }`}
+                  className={`border-b w-full cursor-pointer border-r-0 text-sm pb-1 ${selectOption === "notes"
+                    ? "border-b-2 border-primary text-primary"
+                    : "text-muted-foreground"
+                    }`}
                 >
                   Notes
                 </button>
                 <button
                   onClick={() => setSelectOption("conjugation")}
-                  className={`border-b w-full cursor-pointer text-sm pb-1 ${
-                    selectOption === "conjugation"
-                      ? "border-b-2 border-primary text-primary"
-                      : "text-muted-foreground"
-                  }`}
+                  className={`border-b w-full cursor-pointer text-sm pb-1 ${selectOption === "conjugation"
+                    ? "border-b-2 border-primary text-primary"
+                    : "text-muted-foreground"
+                    }`}
                 >
                   Conjugation
                 </button>
@@ -157,7 +193,13 @@ export default function MarkdownEditor({
         {selectOption === "notes" && (
           <div className="flex-1 overflow-y-auto w-full">
             <div className="flex justify-center p-4">
-              <SimpleEditor route={route} name={name} type="words" />
+              <SimpleEditor
+                key={`word-editor-${uuid ?? "none"}-${reloadToken}`}
+                route={route}
+                name={name}
+                type="words"
+                wordId={uuid}
+              />
             </div>
           </div>
         )}

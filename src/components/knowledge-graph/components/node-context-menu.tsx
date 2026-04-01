@@ -33,7 +33,7 @@ export function NodeContextMenu({
       </button>
       <button
         onClick={() => onSelectWord(contextMenu)}
-        className="w-full px-2 py-2 text-left text-sm hover:bg-muted/40"
+        className="w-full px-2 py-2 text-left text-sm hover:bg-muted/40 rounded-b-xl"
       >
         Select word
       </button>

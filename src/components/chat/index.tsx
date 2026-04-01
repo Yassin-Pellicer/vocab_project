@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import LoadingOverlay from "@/components/ui/loading-overlay"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
@@ -124,6 +125,13 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
   }, [messages, sessionId, updateDefaultTitleFromPrompt])
 
   return (
+    <LoadingOverlay
+      loading={loading}
+      title="Loading"
+      subtitle="Checking your assistant session..."
+      className="h-full w-full"
+      overlayClassName="rounded-xl"
+    >
     <Card className="relative flex flex-row w-full h-full min-h-0 border-0">
 
       {!loading && !user && (
@@ -290,7 +298,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
               </Button>
             </div>
           )}
-          <div className="mb-1 flex w-full items-center justify-between rounded-lg border border-border/70 px-2 py-1.5">
+          <div className="mb-1 flex w-full items-center justify-between px-2 pt-1.5">
             <p className="text-xs text-muted-foreground">
               Use provided context
             </p>
@@ -305,7 +313,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               placeholder="Type a message…"
-              className="min-h-6 resize-none"
+              className="min-h-6 resize-none border-accent/20"
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
@@ -398,6 +406,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
         </div>
       )}
     </Card>
+    </LoadingOverlay>
   );
 });
 

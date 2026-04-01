@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DictionaryContext } from "@/context/dictionary-context";
 import type { GraphNode } from "@/types/graph-types";
@@ -42,6 +42,7 @@ export default function DictionaryGraph({
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
   const [forceMenu, setForceMenu] = useState(false);
   const [localSelectedWord, setLocalSelectedWord] = useState<TranslationEntry | null>(null);
+  const hasHadSelectionRef = useRef(false);
 
   const directOnlyValue = isDirectOnlyControlled
     ? (directOnlyOverride as boolean)
@@ -185,8 +186,15 @@ export default function DictionaryGraph({
   }, [connectedWordEntries, forceMenu, initialWordId, selectedWord?.uuid, setSelectedWord]);
 
   useEffect(() => {
+    if (selectedWord?.uuid) {
+      hasHadSelectionRef.current = true;
+    }
+  }, [selectedWord?.uuid]);
+
+  useEffect(() => {
     if (!autoSelectRandomWord) return;
     if (selectedWord?.uuid) return;
+    if (hasHadSelectionRef.current) return;
     if (connectedWordEntries.length === 0) return;
 
     const randomIndex = Math.floor(Math.random() * connectedWordEntries.length);
