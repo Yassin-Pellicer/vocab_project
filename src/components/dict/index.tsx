@@ -28,7 +28,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 
 const getGridClasses = () =>
-  "grid mt-4 [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))] pb-8 sm:pl-2 px-2 gap-4";
+  "grid mt-4 [grid-template-columns:repeat(auto-fit,minmax(340px,1fr))] pb-4 sm:pl-2 px-2 gap-4";
 
 const toolbarBtn = (active: boolean) =>
   cn(
@@ -262,7 +262,7 @@ export default function DictionaryComponent({
                 {paginatedWords.map((word, idx) => (
                   <div
                     key={`left-${idx}-${word.uuid}`}
-                    className="shadow-md p-4 mb-4 rounded-2xl border bg-card text-card-foreground"
+                    className="shadow-md p-4 rounded-2xl border bg-card text-card-foreground"
                   >
                     <WordCard word={word} route={route} name={name} />
                   </div>

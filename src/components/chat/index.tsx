@@ -52,8 +52,8 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
   ref
 ) {
   const baseKey = useMemo(
-    () => buildBaseKey(route, name, context?.type, conversationScope),
-    [route, name, context?.type, conversationScope],
+    () => buildBaseKey(route, name, conversationScope),
+    [route, name, conversationScope],
   )
   const conversations = ChatContext((state) => state.conversations)
   const clearConversation = ChatContext((state) => state.clearConversation)
@@ -116,6 +116,7 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
   const { selectedNoteId, findById } = NotesContext()
 
   const { user, loading } = useAuthSession()
+  const hasSelectedContext = Boolean(contextForChat && context)
 
   useEffect(() => {
     if (!messages.length || !sessionId) return
@@ -278,17 +279,17 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
           </div>
         </div>
 
-        <div className="mt-auto bg-background flex flex-col border rounded-2xl shadow-sm p-2 items-center gap-2 shrink-0">
-          {useProvidedContext && contextForChat && context?.type == "note" && (
-            <div className="mb-2 flex flex-row justify-between gap-4 w-full">
+        <div className="mt-auto bg-background flex flex-col border rounded-2xl shadow-sm py-2 items-center gap-2 shrink-0">
+          {hasSelectedContext && useProvidedContext && contextForChat && context?.type == "note" && (
+            <div className="flex flex-row justify-between gap-4 w-full border-b pb-2.5 px-2">
               <p className="text-xs">Loaded context <br></br> with note: </p>
               <Button className="h-fit w-fit text-xs!">
                 <NotebookIcon strokeWidth={1.5} /> {selectedNoteId && findById(selectedNoteId)?.title}
               </Button>
             </div>
           )}
-          {useProvidedContext && contextForChat && context?.type == "word" && (
-            <div className="mb-2 flex flex-row justify-between gap-4 w-full">
+          {hasSelectedContext && useProvidedContext && contextForChat && context?.type == "word" && (
+            <div className="flex flex-row justify-between gap-4 w-full border-b pb-2.5 px-2">
               <p className="text-xs">
                 Loaded context <br></br>with word:{" "}
               </p>
@@ -298,22 +299,24 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
               </Button>
             </div>
           )}
-          <div className="mb-1 flex w-full items-center justify-between px-2 pt-1.5">
-            <p className="text-xs text-muted-foreground">
-              Use provided context
-            </p>
-            <Switch
-              checked={useProvidedContext}
-              onCheckedChange={(value) => setUseProvidedContext(Boolean(value))}
-              aria-label="Toggle context usage"
-            />
-          </div>
-          <div className="flex flex-row gap-2 w-full">
+          {hasSelectedContext && (
+            <div className="mb-1 flex w-full items-center justify-between px-2 pt-1.5">
+              <p className="text-xs text-muted-foreground">
+                Use provided context
+              </p>
+              <Switch
+                checked={useProvidedContext}
+                onCheckedChange={(value) => setUseProvidedContext(Boolean(value))}
+                aria-label="Toggle context usage"
+              />
+            </div>
+          )}
+          <div className="flex flex-row gap-2 w-full px-2">
             <Textarea
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               placeholder="Type a message…"
-              className="min-h-6 resize-none border-accent/20"
+              className="min-h-6 resize-none border-accent/20 overflow-auto max-h-60"
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();

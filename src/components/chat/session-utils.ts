@@ -1,4 +1,4 @@
-import type { ChatConversationScope, ChatMessage, ContextType } from "@/types/chat"
+import type { ChatConversationScope, ChatMessage } from "@/types/chat"
 
 export type ChatSession = {
   id: string
@@ -14,9 +14,8 @@ export const WOTD_SESSION_TITLE = "Word of the Day"
 export const buildBaseKey = (
   route?: string,
   name?: string | null,
-  contextType?: ContextType["type"],
   conversationScope?: ChatConversationScope,
-) => `${route ?? ""}|${name ?? ""}|${contextType ?? "none"}|${conversationScope ?? "assistant"}`
+) => `${route ?? ""}|${name ?? ""}|${conversationScope ?? "assistant"}`
 
 const normalizeBaseKey = (baseKey: string) => encodeURIComponent(baseKey)
 

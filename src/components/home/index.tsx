@@ -120,7 +120,7 @@ function DictRow({
                   </Button>
                 </Link>
                 <ConfigureDictModal dictId={dict.id} dictName={dict.name}>
-                  <Button variant="outline" className="flex items-center gap-1">
+                  <Button type="button" variant="outline" className="flex items-center gap-1">
                     <Settings size={16} />
                     Configure
                   </Button>
@@ -230,8 +230,8 @@ function DictRow({
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-4 h-160 mt-4 shadow-sm rounded-xl">
-            <div className="xl:h-full border min-h-0 rounded-xl bg-card/60 p-1">
+          <div className="flex flex-col gap-4 h-160 md:h-160 mt-4 shadow-sm rounded-xl">
+            <div className="xl:h-full border h-160 md:h-160 min-h-0 rounded-xl bg-card/60 p-1">
               <DictionaryGraph
                 title={dict.name}
                 name={dict.id}

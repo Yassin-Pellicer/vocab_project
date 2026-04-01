@@ -60,24 +60,20 @@ export const buildWotdStartingPrompt = ({
   name,
   dictMeta,
   configLanguage,
-  includeContext,
 }: {
   startingInfo?: TranslationEntry | string | null
   name?: string | null
   dictMeta?: Dictionary | null
   configLanguage: string
-  includeContext: boolean
 }): ChatMessage => ({
   role: "user",
   content: {
     prompt: WOTD_PROMPT,
     details: WOTD_DETAILS,
-    context: includeContext
-      ? {
-          startingInfo,
-          dictionary: buildDictionaryContext(name ? dictMeta : null),
-        }
-      : undefined,
+    context: {
+      startingInfo,
+      dictionary: buildDictionaryContext(name ? dictMeta : null),
+    },
     appLanguage: configLanguage,
   },
 })
@@ -110,13 +106,11 @@ export function useChatSend({
       const messageContent = content?.trim() || draft.trim()
       if (!messageContent) return
 
-      const combinedContext = useProvidedContext
-        ? buildCombinedContext({
-            selectionContext: contextForChat,
-            dictionaryContext: buildDictionaryContext(name ? dictMeta : null),
-            notesContext: buildNotesContext(selectedNoteId, selectedNoteContent, notesTree),
-          })
-        : undefined
+      const combinedContext = buildCombinedContext({
+        selectionContext: useProvidedContext ? contextForChat : undefined,
+        dictionaryContext: buildDictionaryContext(name ? dictMeta : null),
+        notesContext: buildNotesContext(selectedNoteId, selectedNoteContent, notesTree),
+      })
 
       const structuredMessage: ChatMessage = {
         role: "user",
@@ -193,7 +187,6 @@ export function useChatSend({
       name,
       dictMeta,
       configLanguage,
-      includeContext: useProvidedContext,
     })
 
     const nextMessages = [...messages]

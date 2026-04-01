@@ -358,7 +358,7 @@ export default function ConfigureDictModal({
     >
       <DialogTrigger asChild>
         {children ?? (
-          <Button className="flex items-center gap-2">
+          <Button type="button" className="flex items-center gap-2">
             <Settings size={16} />
             Configure Dictionary
           </Button>

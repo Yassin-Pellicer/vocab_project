@@ -145,6 +145,11 @@ export const DictionaryContext = create<DictionaryContext>((set, get) => {
         const dictionaries: Record<string, Dictionary> =
           config.dictionaries ?? {};
 
+        const currentDictionaries = get().dictionaryMetadata;
+        if (JSON.stringify(currentDictionaries) === JSON.stringify(dictionaries)) {
+          return;
+        }
+
         const dictionaryNavEntry: NavItem[] = Object.entries(dictionaries).map(
           ([key, dict]) => ({
             key,

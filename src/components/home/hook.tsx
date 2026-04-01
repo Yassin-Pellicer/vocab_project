@@ -1,7 +1,7 @@
 import { DictionaryContext } from "@/context/dictionary-context";
 import { DictionaryData } from "@/types/dictionary-data";
 import { SidebarNode, SidebarTree } from "@/types/sidebar-types";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const collectLeafNotes = (tree: SidebarTree): SidebarNode[] => {
   const leaves: SidebarNode[] = [];
@@ -26,9 +26,18 @@ export default function useHome() {
   const [totalWords, setTotalWords] = useState(0);
   const [totalDictionaries, setTotalDictionaries] = useState(0);
   const [loading, setLoading] = useState(true);
+  const hasInitializedRef = useRef(false);
 
   const dictionaryMetadata = DictionaryContext(s => s.dictionaryMetadata);
   const dictionariesMap = DictionaryContext(s => s.dictionaries);
+  const metadataHomeSignature = useMemo(
+    () =>
+      Object.entries(dictionaryMetadata)
+        .map(([id, meta]) => `${id}|${meta.name}|${meta.route}`)
+        .sort()
+        .join("||"),
+    [dictionaryMetadata],
+  );
 
   useEffect(() => {
     let isCancelled = false;
@@ -38,11 +47,14 @@ export default function useHome() {
 
     if (metadataCount === 0) {
       setLoading(false);
+      hasInitializedRef.current = true;
       return;
     }
 
     if (loadedDictionaryCount === 0) {
-      setLoading(true);
+      if (!hasInitializedRef.current) {
+        setLoading(true);
+      }
       return;
     }
 
@@ -68,7 +80,9 @@ export default function useHome() {
     };
 
     const loadHome = async () => {
-      setLoading(true);
+      if (!hasInitializedRef.current) {
+        setLoading(true);
+      }
 
       const result: DictionaryData[] = [];
       let wordCount = 0;
@@ -139,6 +153,7 @@ export default function useHome() {
       setTotalWords(wordCount);
       setTotalDictionaries(Object.keys(dictionaryMetadata).length);
       setLoading(false);
+      hasInitializedRef.current = true;
     };
 
     loadHome();
@@ -146,7 +161,7 @@ export default function useHome() {
     return () => {
       isCancelled = true;
     };
-  }, [dictionaryMetadata, dictionariesMap]);
+  }, [metadataHomeSignature, dictionariesMap]);
 
   return {
     dictionaryCards,
