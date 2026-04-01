@@ -96,7 +96,7 @@ export function NotificationHistoryPopover() {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <Button
           type="button"
           variant="ghost"

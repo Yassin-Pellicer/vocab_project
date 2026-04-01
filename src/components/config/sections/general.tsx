@@ -73,7 +73,7 @@ export default function GeneralSection() {
             loading={loading}
             title="Loading"
             subtitle="Loading your profile..."
-            className={`${loading ? "pointer-events-none p-4" : ""}`}
+            className={`${loading ? "pointer-events-none px-4" : ""}`}
             overlayClassName="rounded-xl"
           >
             <div>
