@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 type LoadingOverlayProps = {
   loading: boolean;
-  children: ReactNode;
+  children?: ReactNode;
   title?: string;
   subtitle?: string;
   className?: string;

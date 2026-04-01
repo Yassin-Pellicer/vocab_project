@@ -67,381 +67,382 @@ export default function GeneralSection() {
       subtitle="Saving your profile..."
       overlayClassName="rounded-xl"
     >
-    <div className="mb-8 mt-2">
-      <div className="space-y-2">
-        <LoadingOverlay
-          loading={loading}
-          title="Loading"
-          subtitle="Loading your profile..."
-          overlayClassName="rounded-xl"
-        >
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Your Profile</h2>
-          <hr />
-        </div>
+      <div className="mb-8 mt-2">
+        <div className="space-y-2">
+          <LoadingOverlay
+            loading={loading}
+            title="Loading"
+            subtitle="Loading your profile..."
+            className={`${loading ? "pointer-events-none p-4" : ""}`}
+            overlayClassName="rounded-xl"
+          >
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Your Profile</h2>
+              <hr />
+            </div>
 
-        <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
-          {loading ? (
-            <>
-              <div className="flex items-center gap-4">
-                <div className="h-16 w-16 rounded-full bg-muted animate-pulse shrink-0" />
-                <div className="flex flex-col gap-2">
-                  <div className="h-4 w-32 rounded bg-muted animate-pulse" />
-                  <div className="h-3 w-48 rounded bg-muted animate-pulse" />
-                </div>
-              </div>
-              <div className="flex justify-end sm:justify-start">
-                <div className="h-9 w-28 rounded-md bg-muted animate-pulse" />
-              </div>
-            </>
-          ) : (
-            <>
-          <div className="flex items-center gap-4">
-            <div className="relative group/avatar shrink-0">
-              {avatarDataUrl ? (
-                <img
-                  src={avatarDataUrl}
-                  alt="Avatar"
-                  className="h-16 w-16 rounded-full object-cover"
-                />
-              ) : (
-                <div className="h-16 w-16 rounded-full bg-linear-to-br from-primary to-primary/50 flex items-center justify-center">
-                  <User className="h-8 w-8 text-primary-foreground" />
-                </div>
-              )}
-              <button
-                type="button"
-                className="absolute inset-0 flex items-center justify-center rounded-full bg-background/50 opacity-0 group-hover/avatar:opacity-100 transition-opacity cursor-pointer"
-                aria-label="Pick avatar image"
-                onClick={() => fileInputRef.current?.click()}
-                disabled={saving}
-              >
-                {saving ? (
-                  <Loader2 className="h-4 w-4 text-muted-foreground animate-spin" />
-                ) : (
-                  <Camera className="h-4 w-4 text-muted-foreground" />
-                )}
-              </button>
-            </div>
-            <div className="flex-1">
-              <div className="text-sm font-semibold">{draftDisplayName || "No Name"}</div>
-              <div className="text-xs text-muted-foreground">{draftEmail || "No Email"}</div>
-              {saving ? (
-                <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
-                  <Loader2 className="h-3 w-3 animate-spin" />
-                  Saving…
-                </div>
-              ) : null}
-              {!saving && avatarFile && !avatarRemoved ? (
-                <div className="text-xs text-muted-foreground mt-1">
-                  New image selected — save to apply
-                </div>
-              ) : null}
-              {!saving && avatarRemoved ? (
-                <div className="text-xs text-muted-foreground mt-1">
-                  Avatar will be removed — save to apply
-                </div>
-              ) : null}
-            </div>
-          </div>
-          <div className="flex justify-end sm:justify-start">
-            <Button
-              type="button"
-              className={fixedActionButtonClass}
-              disabled={!dirty || saving}
-              onClick={() => void handleConfirm()}
-            >
-              {saving ? (
+            <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+              {loading ? (
                 <>
-                  <Loader2 className="animate-spin" />
-                  Saving…
+                  <div className="flex items-center gap-4">
+                    <div className="h-16 w-16 rounded-full bg-muted animate-pulse shrink-0" />
+                    <div className="flex flex-col gap-2">
+                      <div className="h-4 w-32 rounded bg-muted animate-pulse" />
+                      <div className="h-3 w-48 rounded bg-muted animate-pulse" />
+                    </div>
+                  </div>
+                  <div className="flex justify-end sm:justify-start">
+                    <div className="h-9 w-28 rounded-md bg-muted animate-pulse" />
+                  </div>
                 </>
               ) : (
-                "Save profile"
+                <>
+                  <div className="flex items-center gap-4">
+                    <div className="relative group/avatar shrink-0">
+                      {avatarDataUrl ? (
+                        <img
+                          src={avatarDataUrl}
+                          alt="Avatar"
+                          className="h-16 w-16 rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="h-16 w-16 rounded-full bg-linear-to-br from-primary to-primary/50 flex items-center justify-center">
+                          <User className="h-8 w-8 text-primary-foreground" />
+                        </div>
+                      )}
+                      <button
+                        type="button"
+                        className="absolute inset-0 flex items-center justify-center rounded-full bg-background/50 opacity-0 group-hover/avatar:opacity-100 transition-opacity cursor-pointer"
+                        aria-label="Pick avatar image"
+                        onClick={() => fileInputRef.current?.click()}
+                        disabled={saving}
+                      >
+                        {saving ? (
+                          <Loader2 className="h-4 w-4 text-muted-foreground animate-spin" />
+                        ) : (
+                          <Camera className="h-4 w-4 text-muted-foreground" />
+                        )}
+                      </button>
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-semibold">{draftDisplayName || "No Name"}</div>
+                      <div className="text-xs text-muted-foreground">{draftEmail || "No Email"}</div>
+                      {saving ? (
+                        <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+                          <Loader2 className="h-3 w-3 animate-spin" />
+                          Saving…
+                        </div>
+                      ) : null}
+                      {!saving && avatarFile && !avatarRemoved ? (
+                        <div className="text-xs text-muted-foreground mt-1">
+                          New image selected — save to apply
+                        </div>
+                      ) : null}
+                      {!saving && avatarRemoved ? (
+                        <div className="text-xs text-muted-foreground mt-1">
+                          Avatar will be removed — save to apply
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="flex justify-end sm:justify-start">
+                    <Button
+                      type="button"
+                      className={fixedActionButtonClass}
+                      disabled={!dirty || saving}
+                      onClick={() => void handleConfirm()}
+                    >
+                      {saving ? (
+                        <>
+                          <Loader2 className="animate-spin" />
+                          Saving…
+                        </>
+                      ) : (
+                        "Save profile"
+                      )}
+                    </Button>
+                  </div>
+                </>
               )}
-            </Button>
-          </div>
-            </>
-          )}
-        </div>
+            </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
-          <div className="flex py-2 items-center flex-1 gap-4">
-            <div className="flex-1 gap-4">
-              <div className="flex flex-row gap-2 items-center mb-1">
-                <Camera className="h-4 w-4 text-muted-foreground transition-colors" />
-                <div className="text-sm font-medium">Avatar</div>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
+              <div className="flex py-2 items-center flex-1 gap-4">
+                <div className="flex-1 gap-4">
+                  <div className="flex flex-row gap-2 items-center mb-1">
+                    <Camera className="h-4 w-4 text-muted-foreground transition-colors" />
+                    <div className="text-sm font-medium">Avatar</div>
+                  </div>
+                  <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
+                    Upload a custom avatar image to personalize your profile. Supported formats are
+                    JPEG, PNG, and WebP with a maximum size of 2 MB. The image is stored only on this
+                    device with your preferences.
+                  </div>
+                </div>
               </div>
-              <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                Upload a custom avatar image to personalize your profile. Supported formats are
-                JPEG, PNG, and WebP with a maximum size of 2 MB. The image is stored only on this
-                device with your preferences.
+              {loading ? (
+                <div className="flex items-center gap-2 shrink-0">
+                  <div className="h-9 w-9 rounded-md bg-muted animate-pulse" />
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 shrink-0">
+                  {hasAvatar && (
+                    <button
+                      type="button"
+                      onClick={removeAvatar}
+                      className="h-9 w-9 rounded-md border bg-background text-sm hover:bg-destructive hover:text-destructive-foreground hover:border-destructive transition-colors flex items-center justify-center"
+                      aria-label="Remove avatar"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  )}
+                  <label className="h-9 w-9 rounded-md border bg-background text-sm hover:bg-accent transition-colors cursor-pointer flex items-center justify-center">
+                    <Upload className="h-4 w-4 text-muted-foreground" />
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      className="hidden"
+                      onChange={(e) => {
+                        onAvatarFile(e.target.files?.[0]);
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
+              <div className="flex py-2 items-center flex-1 gap-4">
+                <div className="flex-1 gap-4">
+                  <div className="flex flex-row gap-2 items-center">
+                    <User className="h-4 w-4 text-muted-foreground transition-colors" />
+                    <div className="text-sm font-medium">Display Name</div>
+                  </div>
+                  <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
+                    Set the name displayed across the application. This name is visible on your profile
+                    and in any shared content or activity.
+                  </div>
+                </div>
               </div>
+              {loading ? (
+                <div className="h-9 w-full sm:w-48 rounded-md bg-muted animate-pulse" />
+              ) : (
+                <input
+                  type="text"
+                  value={draftDisplayName}
+                  onChange={(e) => setDraftDisplayName(e.target.value)}
+                  className="h-9 w-full sm:w-48 rounded-md border bg-background px-3 text-sm"
+                />
+              )}
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
+              <div className="flex py-2 items-center flex-1 gap-4">
+                <div className="flex-1 gap-4">
+                  <div className="flex flex-row gap-2 items-center mb-1">
+                    <Mail className="h-4 w-4 text-muted-foreground transition-colors" />
+                    <div className="text-sm font-medium">Email Address</div>
+                  </div>
+                  <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
+                    Your email address is used for account recovery, notifications, and login. Changing
+                    your email will require verification through a confirmation link.
+                  </div>
+                </div>
+              </div>
+              {loading ? (
+                <div className="h-9 w-full sm:w-48 rounded-md bg-muted animate-pulse" />
+              ) : (
+                <input
+                  type="email"
+                  value={draftEmail}
+                  onChange={(e) => setDraftEmail(e.target.value)}
+                  className="h-9 w-full sm:w-48 rounded-md border bg-background px-3 text-sm"
+                />
+              )}
+            </div>
+
+            {error ? <p className="text-xs text-destructive pt-1">{error}</p> : null}
+          </LoadingOverlay>
+
+          <div>
+            <h2 className="text-xl font-semibold mb-2 mt-6!">General</h2>
+            <hr />
+          </div>
+
+          <div className="flex flex-col">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
+              <div className="flex py-2 items-center flex-1 gap-4">
+                <div className="flex-1 gap-4">
+                  <div className="flex flex-row gap-2 items-center mb-1">
+                    <Bell className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                    <div className="text-sm font-medium">Notifications</div>
+                  </div>
+                  <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
+                    Get notified about your progress. Notifications will appear on the edges of the
+                    application. Desktop notifications are not supported yet.
+                  </div>
+                </div>
+              </div>
+              <Switch checked={config.notifications} onCheckedChange={setNotifications} />
+            </div>
+            <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+              <div className="text-sm font-medium">Notification lifetime</div>
+              <Select value={config.notificationLifetime} onValueChange={setNotificationLifetime}>
+                <SelectTrigger className="w-full sm:w-auto">
+                  <SelectValue placeholder="Select duration" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="3s">3 seconds</SelectItem>
+                  <SelectItem value="5s">5 seconds</SelectItem>
+                  <SelectItem value="7s">7 seconds</SelectItem>
+                  <SelectItem value="10s">10 seconds</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
-          {loading ? (
-            <div className="flex items-center gap-2 shrink-0">
-              <div className="h-9 w-9 rounded-md bg-muted animate-pulse" />
-            </div>
-          ) : (
-          <div className="flex items-center gap-2 shrink-0">
-            {hasAvatar && (
-              <button
-                type="button"
-                onClick={removeAvatar}
-                className="h-9 w-9 rounded-md border bg-background text-sm hover:bg-destructive hover:text-destructive-foreground hover:border-destructive transition-colors flex items-center justify-center"
-                aria-label="Remove avatar"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            )}
-            <label className="h-9 w-9 rounded-md border bg-background text-sm hover:bg-accent transition-colors cursor-pointer flex items-center justify-center">
-              <Upload className="h-4 w-4 text-muted-foreground" />
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
-                className="hidden"
-                onChange={(e) => {
-                  onAvatarFile(e.target.files?.[0]);
-                  e.target.value = "";
-                }}
-              />
-            </label>
+
+          <div>
+            <h2 className="text-xl font-semibold mb-2 mt-6!">Looks and Feel</h2>
+            <hr />
           </div>
-          )}
-        </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
-          <div className="flex py-2 items-center flex-1 gap-4">
-            <div className="flex-1 gap-4">
-              <div className="flex flex-row gap-2 items-center">
-                <User className="h-4 w-4 text-muted-foreground transition-colors" />
-                <div className="text-sm font-medium">Display Name</div>
-              </div>
-              <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                Set the name displayed across the application. This name is visible on your profile
-                and in any shared content or activity.
-              </div>
-            </div>
-          </div>
-          {loading ? (
-            <div className="h-9 w-full sm:w-48 rounded-md bg-muted animate-pulse" />
-          ) : (
-          <input
-            type="text"
-            value={draftDisplayName}
-            onChange={(e) => setDraftDisplayName(e.target.value)}
-            className="h-9 w-full sm:w-48 rounded-md border bg-background px-3 text-sm"
-          />
-          )}
-        </div>
-
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
-          <div className="flex py-2 items-center flex-1 gap-4">
-            <div className="flex-1 gap-4">
-              <div className="flex flex-row gap-2 items-center mb-1">
-                <Mail className="h-4 w-4 text-muted-foreground transition-colors" />
-                <div className="text-sm font-medium">Email Address</div>
-              </div>
-              <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                Your email address is used for account recovery, notifications, and login. Changing
-                your email will require verification through a confirmation link.
-              </div>
-            </div>
-          </div>
-          {loading ? (
-            <div className="h-9 w-full sm:w-48 rounded-md bg-muted animate-pulse" />
-          ) : (
-          <input
-            type="email"
-            value={draftEmail}
-            onChange={(e) => setDraftEmail(e.target.value)}
-            className="h-9 w-full sm:w-48 rounded-md border bg-background px-3 text-sm"
-          />
-          )}
-        </div>
-
-        {error ? <p className="text-xs text-destructive pt-1">{error}</p> : null}
-        </LoadingOverlay>
-
-        <div>
-          <h2 className="text-xl font-semibold mb-2 mt-6!">General</h2>
-          <hr />
-        </div>
-
-        <div className="flex flex-col">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
             <div className="flex py-2 items-center flex-1 gap-4">
               <div className="flex-1 gap-4">
                 <div className="flex flex-row gap-2 items-center mb-1">
-                  <Bell className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  <div className="text-sm font-medium">Notifications</div>
+                  <Brush className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  <div className="text-sm font-medium">Accent color</div>
                 </div>
                 <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                  Get notified about your progress. Notifications will appear on the edges of the
-                  application. Desktop notifications are not supported yet.
+                  Choose the accent color used throughout the application to match your personal
+                  style. This will affect buttons, highlights, and other UI elements.
                 </div>
               </div>
             </div>
-            <Switch checked={config.notifications} onCheckedChange={setNotifications} />
-          </div>
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
-            <div className="text-sm font-medium">Notification lifetime</div>
-            <Select value={config.notificationLifetime} onValueChange={setNotificationLifetime}>
-              <SelectTrigger className="w-full sm:w-auto">
-                <SelectValue placeholder="Select duration" />
+            <Select value={config.accentColor} onValueChange={setAccentColor}>
+              <SelectTrigger className="">
+                <SelectValue placeholder="Select color" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="3s">3 seconds</SelectItem>
-                <SelectItem value="5s">5 seconds</SelectItem>
-                <SelectItem value="7s">7 seconds</SelectItem>
-                <SelectItem value="10s">10 seconds</SelectItem>
+                <SelectItem value="blue">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 rounded-full bg-blue-500" />
+                    <span>Blue</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="red">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 rounded-full bg-red-500" />
+                    <span>Red</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="green">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 rounded-full bg-green-500" />
+                    <span>Green</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="purple">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 rounded-full bg-purple-500" />
+                    <span>Purple</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="orange">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 rounded-full bg-orange-500" />
+                    <span>Orange</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="yellow">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 rounded-full bg-yellow-500" />
+                    <span>Yellow</span>
+                  </div>
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
-        </div>
 
-        <div>
-          <h2 className="text-xl font-semibold mb-2 mt-6!">Looks and Feel</h2>
-          <hr />
-        </div>
-
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
-          <div className="flex py-2 items-center flex-1 gap-4">
-            <div className="flex-1 gap-4">
-              <div className="flex flex-row gap-2 items-center mb-1">
-                <Brush className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-                <div className="text-sm font-medium">Accent color</div>
-              </div>
-              <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                Choose the accent color used throughout the application to match your personal
-                style. This will affect buttons, highlights, and other UI elements.
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
+            <div className="flex py-2 items-center flex-1 gap-4">
+              <div className="flex-1 gap-4">
+                <div className="flex flex-row gap-2 items-center mb-1">
+                  <Moon className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  <div className="text-sm font-medium">Appearance</div>
+                </div>
+                <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
+                  Customize the look and feel of the application. Choose between light and dark modes.
+                </div>
               </div>
             </div>
+            <Select
+              value={config.appearance || "system"}
+              onValueChange={(v) => setAppearance(v as "light" | "dark" | "system")}
+            >
+              <SelectTrigger className="">
+                <SelectValue placeholder="Select appearance" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="light">Light</SelectItem>
+                <SelectItem value="dark">Dark</SelectItem>
+                <SelectItem value="system">System default</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-          <Select value={config.accentColor} onValueChange={setAccentColor}>
-            <SelectTrigger className="">
-              <SelectValue placeholder="Select color" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="blue">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded-full bg-blue-500" />
-                  <span>Blue</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="red">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded-full bg-red-500" />
-                  <span>Red</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="green">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded-full bg-green-500" />
-                  <span>Green</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="purple">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded-full bg-purple-500" />
-                  <span>Purple</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="orange">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded-full bg-orange-500" />
-                  <span>Orange</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="yellow">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 rounded-full bg-yellow-500" />
-                  <span>Yellow</span>
-                </div>
-              </SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
-          <div className="flex py-2 items-center flex-1 gap-4">
-            <div className="flex-1 gap-4">
-              <div className="flex flex-row gap-2 items-center mb-1">
-                <Moon className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-                <div className="text-sm font-medium">Appearance</div>
-              </div>
-              <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                Customize the look and feel of the application. Choose between light and dark modes.
+          {user && <div>
+            <h2 className="text-xl font-semibold mb-2 mt-6!">More Options</h2>
+            <hr />
+          </div>}
+
+          {user && <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
+            <div className="flex py-2 items-center flex-1 gap-4">
+              <div className="flex-1 gap-4">
+                <div className="flex flex-row gap-2 items-center mb-1">
+                  <WifiOff className="h-4 w-4 text-muted-foreground transition-colors" />
+                  <div className="text-sm font-medium">Go Offline</div>
+                </div>
+                <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
+                  Switch to offline mode to use the application without an internet connection. Note
+                  that subscription features require being logged in and connected to the internet —
+                  they will be unavailable while offline.
+                </div>
               </div>
             </div>
-          </div>
-          <Select
-            value={config.appearance || "system"}
-            onValueChange={(v) => setAppearance(v as "light" | "dark" | "system")}
-          >
-            <SelectTrigger className="">
-              <SelectValue placeholder="Select appearance" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System default</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {user && <div>
-          <h2 className="text-xl font-semibold mb-2 mt-6!">More Options</h2>
-          <hr />
-        </div>}
-
-        {user && <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
-          <div className="flex py-2 items-center flex-1 gap-4">
-            <div className="flex-1 gap-4">
-              <div className="flex flex-row gap-2 items-center mb-1">
-                <WifiOff className="h-4 w-4 text-muted-foreground transition-colors" />
-                <div className="text-sm font-medium">Go Offline</div>
-              </div>
-              <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                Switch to offline mode to use the application without an internet connection. Note
-                that subscription features require being logged in and connected to the internet —
-                they will be unavailable while offline.
-              </div>
-            </div>
-          </div>
-          <Button
-            onClick={() => { setOffline(true); void signOut(); }}
-            className={fixedActionButtonClass}
-          >
-            <UnplugIcon /> Go Offline
-          </Button>
-        </div>}
-
-        {user && <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
-          <div className="flex py-2 items-center flex-1 gap-4">
-            <div className="flex-1 gap-4">
-              <div className="flex flex-row gap-2 items-center mb-1">
-                <Trash2 className="h-4 w-4 text-destructive transition-colors" />
-                <div className="text-sm font-medium text-destructive">Delete Account</div>
-              </div>
-              <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
-                This action cannot be undone. All your dictionaries, progress, and active
-                subscriptions will be immediately cancelled and removed from our servers. Your
-                dictionaries and all local data will still be available though, and you will go
-                offline after deletion.
-              </div>
-            </div>
-          </div>
-          <DeleteAccountModal onConfirm={() => { setOffline(true); void signOut(); }}>
-            <Button variant={"destructive"} className={fixedActionButtonClass}>
-              Delete
+            <Button
+              onClick={() => { setOffline(true); void signOut(); }}
+              className={fixedActionButtonClass}
+            >
+              <UnplugIcon /> Go Offline
             </Button>
-          </DeleteAccountModal>
-        </div>}     
+          </div>}
+
+          {user && <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-md group gap-4">
+            <div className="flex py-2 items-center flex-1 gap-4">
+              <div className="flex-1 gap-4">
+                <div className="flex flex-row gap-2 items-center mb-1">
+                  <Trash2 className="h-4 w-4 text-destructive transition-colors" />
+                  <div className="text-sm font-medium text-destructive">Delete Account</div>
+                </div>
+                <div className="text-xs text-muted-foreground lg:w-3/4 w-full">
+                  This action cannot be undone. All your dictionaries, progress, and active
+                  subscriptions will be immediately cancelled and removed from our servers. Your
+                  dictionaries and all local data will still be available though, and you will go
+                  offline after deletion.
+                </div>
+              </div>
+            </div>
+            <DeleteAccountModal onConfirm={() => { setOffline(true); void signOut(); }}>
+              <Button variant={"destructive"} className={fixedActionButtonClass}>
+                Delete
+              </Button>
+            </DeleteAccountModal>
+          </div>}
+        </div>
       </div>
-    </div>
     </LoadingOverlay>
   );
 }
