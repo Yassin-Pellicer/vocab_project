@@ -11,6 +11,7 @@ interface DictionaryContext {
   selectedWordByDict: Record<string, TranslationEntry | null>;
   selectedLetter: string;
   searchField: string;
+  notesSearchField: string;
   isFlipped: boolean;
   selectedTypes: string[];
 
@@ -19,6 +20,7 @@ interface DictionaryContext {
   setSelectedWord: (dictKey: string, word: TranslationEntry | null) => void;
   setSelectedLetter: (letter: string) => void;
   setSearchField: (field: string) => void;
+  setNotesSearchField: (field: string) => void;
   setIsFlipped: (flipped: boolean) => void;
   setSelectedTypes: (types: string[]) => void;
 
@@ -77,6 +79,7 @@ export const DictionaryContext = create<DictionaryContext>((set, get) => {
     selectedWordByDict: {},
     selectedLetter: "A",
     searchField: "",
+    notesSearchField: "",
     isFlipped: false,
     selectedTypes: [],
 
@@ -87,6 +90,7 @@ export const DictionaryContext = create<DictionaryContext>((set, get) => {
     })),
     setSelectedLetter: (letter) => set({ selectedLetter: letter }),
     setSearchField: (field) => set({ searchField: field }),
+    setNotesSearchField: (field) => set({ notesSearchField: field }),
     setIsFlipped: (flipped) => set({ isFlipped: flipped }),
     setSelectedTypes: (types) => set({ selectedTypes: types }),
 

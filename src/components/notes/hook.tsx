@@ -5,7 +5,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useResizablePanel } from "@/hooks/use-resizable-panel";
 
 export default function useNotesHooks() {
-  const { searchField, setSearchField } = DictionaryContext();
+  const {
+    notesSearchField: searchField,
+    setNotesSearchField: setSearchField,
+  } = DictionaryContext();
 
   const { tree, findById, selectedNoteId, setSelectedNoteId, getRoute } = NotesContext();
 
