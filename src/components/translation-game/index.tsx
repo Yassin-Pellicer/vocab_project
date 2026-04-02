@@ -147,10 +147,7 @@ export default function TranslationGame({
     <div className="flex min-h-0 h-[calc(100vh-64px)] flex-col bg-background">
       <div className="flex min-h-0 flex-1 flex-col p-4">
         <div className="mb-4 flex flex-wrap items-start justify-between gap-4 rounded-2xl border border-border/60 bg-card/70 px-4 py-3 shadow-sm">
-          <div className="space-y-1">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Translation Game
-            </p>
+          <div className=" my-auto flex flex-col align-center">
             <h1 className="text-2xl font-semibold tracking-tight text-foreground">
               Train with {dictionaryTitle}
             </h1>
@@ -159,12 +156,12 @@ export default function TranslationGame({
               on the right. Drag the divider to resize both sides.
             </p>
           </div>
-          <div className="grid min-w-56 grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             <div className="rounded-2xl border border-border/60 bg-background/70 p-3">
               <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
                 Dictionary Words
               </p>
-              <p className="mt-1 text-2xl font-semibold text-foreground">
+              <p className="mt-1 text-xl font-semibold text-foreground">
                 {list.length}
               </p>
             </div>
@@ -172,7 +169,7 @@ export default function TranslationGame({
               <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
                 Prompt Pool
               </p>
-              <p className="mt-1 text-2xl font-semibold text-foreground">
+              <p className="mt-1 text-xl font-semibold text-foreground">
                 {filteredCandidates.length}
               </p>
             </div>
@@ -184,19 +181,10 @@ export default function TranslationGame({
           className="flex min-h-0 flex-1 overflow-hidden rounded-2xl border border-border/60 bg-card/35 shadow-sm"
         >
           <aside
-            className="shrink-0 border-r border-border/60 bg-card/70"
+            className="shrink-0 border-r border-border/60 bg-accent/5 transition-colors"
             style={{ width: configPanelWidth }}
           >
             <div className="flex h-full min-h-0 flex-col">
-              <div className="border-b border-border/60 px-4 py-3">
-                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Session Config
-                </p>
-                <p className="mt-1 text-sm text-foreground">
-                  Direction, filters, and launch controls.
-                </p>
-              </div>
-
               <div className="min-h-0 flex-1 space-y-5 overflow-y-auto px-4 py-4">
                 <div className="space-y-2">
                   <p className="text-sm font-medium text-foreground">Search scope</p>
@@ -533,7 +521,7 @@ export default function TranslationGame({
                           Answer a few prompts and they will stack up here.
                         </div>
                       ) : (
-                        <div className="grid gap-4">
+                        <div className="grid xl:grid-cols-2 grid-rows-1 gap-4">
                           {history.map((entry) => (
                             <div
                               key={`history-${entry.question.key}-${entry.submittedAnswer}-${entry.hintsUsed}`}
