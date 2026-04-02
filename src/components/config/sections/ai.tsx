@@ -21,7 +21,7 @@ export default function AISection() {
           <div className="flex py-2 items-center flex-1 gap-4">
             <div className="flex-1 gap-4">
               <div className="flex flex-row gap-2 items-center mb-1">
-                <Sparkles className="h-4 w-4 text-muted-foreground group gap-4-hover:text-foreground transition-colors" />
+                <Sparkles strokeWidth={1.1}  className="h-4 w-4 text-muted-foreground group gap-4-hover:text-foreground transition-colors" />
                 <div className="text-sm font-medium">AI Suggestions</div>
               </div>
               <div className="text-xs text-muted-foreground lg:w-3/4 w-full">

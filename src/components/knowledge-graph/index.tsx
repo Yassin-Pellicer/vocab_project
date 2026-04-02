@@ -337,7 +337,7 @@ export default function DictionaryGraph({
       </div>
 
       {showBottomSelector && (
-        <div className="relative w-full border-t border-border/60 bg-background/70 px-3 py-3 h-fit" style={{ flexBasis: "15%" }}>
+        <div className="relative w-full rounded-b-xl border-t border-border/60 bg-background/70 px-3 py-2 h-fit">
           <div className="mb-2 text-sm font-semibold text-foreground">
             Connected components
           </div>

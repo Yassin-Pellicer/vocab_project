@@ -41,9 +41,9 @@ body,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --radius: 0.625rem;
-  --background: #eef3f8;
+  --background: #effdff;
   --foreground: #0f1724;
-  --card: #f4f7fb; 
+  --card: #fffffb; 
   --card-foreground: #0f1724;
   --popover: #f6f9fc;
   --popover-foreground: #0f1724;

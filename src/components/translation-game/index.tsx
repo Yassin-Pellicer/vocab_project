@@ -118,7 +118,7 @@ export default function TranslationGame({
   return (
     <div className="flex min-h-0 h-[calc(100vh-64px)] flex-col bg-background">
       <div className="min-h-0 flex-1 h-full overflow-y-auto">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 pb-6">
+        <div className="mx-auto flex w-full flex-col gap-6 p-4 pb-6">
           <div className="border-border/60 ">
             <CardHeader className="gap-4 p-0! pt-4!">
               <div className="flex flex-wrap items-start justify-between gap-4 shrink-0 ">
@@ -349,7 +349,7 @@ export default function TranslationGame({
                           onClick={showHint}
                           disabled={!currentQuestion || currentQuestion.definitions.length === 0}
                         >
-                          <Sparkles className="size-4" />
+                          <Sparkles strokeWidth={1.1}  className="size-4" />
                           Show Hint
                         </Button>
                         <p className="text-xs text-muted-foreground">

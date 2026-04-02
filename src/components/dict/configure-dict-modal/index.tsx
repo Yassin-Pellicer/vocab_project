@@ -391,7 +391,7 @@ export default function ConfigureDictModal({
               {hook.isGeneratingConfig ? (
                 <Loader2 className="animate-spin" />
               ) : (
-                <Sparkles />
+                <Sparkles strokeWidth={1.1}  />
               )}
               {hook.isGeneratingConfig
                 ? "Generating..."

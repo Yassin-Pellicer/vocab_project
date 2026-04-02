@@ -97,39 +97,39 @@ function DictRow({
           {dict.totalWords} words
         </span>
       </div>
-      <div className="flex xl:flex-row flex-col gap-4 items-start ">
+      <div className="flex xl:flex-row flex-col gap-4 items-start">
         <div ref={leftRef} className="flex flex-col h-fit! xl:w-2/3 w-full">
           <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 rounded-2xl">
-            <div className="flex flex-col h-full">
-              {dict.wordOfTheDay ? (
-                <WordCard name={dict.id} word={dict.wordOfTheDay} />
-              ) : (
-                <p className="text-sm text-muted-foreground">
-                  No word of the day.
-                </p>
-              )}
-              <div className="flex justify-between flex-row w-full gap-2 mt-1 border rounded-2xl p-2">
-                <Link
-                  to={`/dictionary?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
-                  className="w-full!"
-                >
-                  <Button className="flex items-center gap-1 w-full!">
-                    <BookOpen size={16} />
-                    View Dictionary
-                    <ArrowRight size={16} />
-                  </Button>
-                </Link>
-                <ConfigureDictModal dictId={dict.id} dictName={dict.name}>
-                  <Button type="button" variant="outline" className="flex items-center gap-1">
-                    <Settings size={16} />
-                    Configure
-                  </Button>
-                </ConfigureDictModal>
-              </div>
-              <h3 className="text-xs text-muted-foreground mt-3! uppercase">
-                Recent words added
-              </h3>
-              <div className="flex flex-col gap-2 border rounded-2xl p-3 mt-2 h-full">
+            <div className="flex flex-col h-full ">
+              <div className="flex flex-col border rounded-2xl p-4 gap-4 h-full bg-card">
+                {dict.wordOfTheDay ? (
+                  <WordCard name={dict.id} word={dict.wordOfTheDay} />
+                ) : (
+                  <p className="text-sm text-muted-foreground">
+                    No word of the day.
+                  </p>
+                )}
+                <div className="flex justify-between flex-row w-full gap-2 mt-1 border rounded-2xl p-2">
+                  <Link
+                    to={`/dictionary?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}
+                    className="w-full!"
+                  >
+                    <Button className="flex items-center gap-1 w-full!">
+                      <BookOpen size={16} />
+                      View Dictionary
+                      <ArrowRight size={16} />
+                    </Button>
+                  </Link>
+                  <ConfigureDictModal dictId={dict.id} dictName={dict.name}>
+                    <Button type="button" variant="outline" className="flex items-center gap-1">
+                      <Settings size={16} />
+                      Configure
+                    </Button>
+                  </ConfigureDictModal>
+                </div>
+                <h3 className="text-xs text-muted-foreground uppercase">
+                  Recent words added
+                </h3>
                 {dict.recentWords.map((word) => (
                   <WordCard
                     key={word.uuid ?? `${dict.id}-${word.dateAdded}`}
@@ -141,7 +141,7 @@ function DictRow({
               </div>
             </div>
             <div className="grid grid-rows-2 gap-4">
-              <div className="flex flex-col justify-between rounded-xl border border-border/60 bg-card/60 p-4">
+              <div className="flex flex-col justify-between rounded-xl border bg-card p-4">
                 <div>
                   <p className="text-xs uppercase tracking-wide text-muted-foreground">
                     Dictionary Snapshot
@@ -194,10 +194,10 @@ function DictRow({
                   </div>
                 </div>
               </div>
-              <div className=" p-3 rounded-xl border bg-linear-to-b from-transparent via-to-background/70 to-background/90">
+              <div className="p-3 rounded-xl border bg-card">
                 <p className="text-xs uppercase tracking-wide mb-1">Random Note</p>
                 {dict.randomNote ? (
-                  <div className="flex flex-col items-center bg-linear-to-b from-transparent via-to-background/70 to-background/90 justify-center overflow-hidden max-h-85">
+                  <div className="flex flex-col items-center justify-center overflow-hidden max-h-85 bg-card">
                     <div className="overflow-y-hidden w-full relative">
                       <NoteDisplay
                         route={dict.path}
@@ -205,7 +205,7 @@ function DictRow({
                         noteId={dict.randomNote.id}
                         editMode={false}
                       />
-                      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-to-background/70 to-background/90" />
+                      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-card/70 to-card/90" />
                     </div>
                     <Link
                       to={`/notes?name=${encodeURIComponent(dict.id)}&path=${encodeURIComponent(dict.path)}`}

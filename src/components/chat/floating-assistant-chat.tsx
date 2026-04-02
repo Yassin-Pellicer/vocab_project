@@ -51,7 +51,7 @@ export function FloatingAssistantChat({
           aria-label="Open assistant"
           title="Assistant"
         >
-          <Sparkles className="size-6 drop-shadow-sm" strokeWidth={2} />
+          <Sparkles strokeWidth={1.1}  className="size-6 drop-shadow-sm" strokeWidth={2} />
         </button>
       ) : (
         <div
@@ -73,7 +73,7 @@ export function FloatingAssistantChat({
             className="flex shrink-0 cursor-grab items-center justify-between gap-4 border-b border-primary/10 bg-linear-to-r from-primary/10 via-background to-background px-3 py-2.5 active:cursor-grabbing"
           >
             <div className="flex min-w-0 flex-1 items-center gap-4 text-sm font-semibold text-foreground">
-              <Sparkles className="size-4 shrink-0" />
+              <Sparkles strokeWidth={1.1}  className="size-4 shrink-0" />
               <span className="truncate">Assistant</span>
             </div>
             <div className="flex shrink-0 items-center gap-0.5" onPointerDown={(e) => e.stopPropagation()}>
