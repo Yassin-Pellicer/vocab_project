@@ -131,12 +131,14 @@ function DictRow({
                   Recent words added
                 </h3>
                 {dict.recentWords.map((word) => (
+                  <div className="flex flex-col border p-4 rounded-2xl" key={word.uuid ?? `${dict.id}-${word.dateAdded}`}>
                   <WordCard
                     key={word.uuid ?? `${dict.id}-${word.dateAdded}`}
                     word={word}
                     route={dict.path}
                     name={dict.id}
                   />
+                  </div>
                 ))}
               </div>
             </div>
