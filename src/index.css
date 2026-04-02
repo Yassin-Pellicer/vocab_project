@@ -255,11 +255,6 @@ a:hover {
   font-size: 0.9em;
 }
 
-
-.markdown hr {
-  border: 0px;
-}
-
 .markdown pre {
   overflow-x: auto;
   white-space: pre-wrap;
