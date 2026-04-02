@@ -81,6 +81,8 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
       ? autoStartFlag && sessionId === wotdSessionId
       : autoStartFlag
 
+  const { user, loading, sessionInfo, accessToken } = useAuthSession()
+
   const {
     clearChat,
     send,
@@ -103,6 +105,8 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
     autoStart: effectiveAutoStart,
     conversationScope,
     sessionId,
+    authSession: sessionInfo,
+    authAccessToken: accessToken,
   })
 
   useImperativeHandle(
@@ -114,8 +118,6 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
   )
 
   const { selectedNoteId, findById } = NotesContext()
-
-  const { user, loading } = useAuthSession()
   const hasSelectedContext = Boolean(contextForChat && context)
 
   useEffect(() => {

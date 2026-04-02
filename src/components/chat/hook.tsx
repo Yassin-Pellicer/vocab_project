@@ -11,6 +11,7 @@ import type {
   ChatMessage, 
   ContextType, 
   ChatConversationScope,
+  ChatUserSession,
   RenderMessage,
 } from "@/types/chat"
 
@@ -43,6 +44,8 @@ export function useChat({
   autoStart = true,
   conversationScope = "assistant",
   sessionId = "default",
+  authSession,
+  authAccessToken,
 }: {
   startingInfo?: TranslationEntry | string | null;
   context?: ContextType;
@@ -52,6 +55,8 @@ export function useChat({
   autoStart?: boolean;
   conversationScope?: ChatConversationScope;
   sessionId?: string;
+  authSession?: ChatUserSession | null;
+  authAccessToken?: string | null;
 }) {
   const [sending, setSending] = useState(false)
   const [useProvidedContext, setUseProvidedContext] = useState(true)
@@ -184,6 +189,8 @@ export function useChat({
     runKeyRef,
     didAutoStartRef,
     useProvidedContext,
+    authSession,
+    authAccessToken,
   })
 
   return {

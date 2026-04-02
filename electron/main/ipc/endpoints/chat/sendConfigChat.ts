@@ -6,12 +6,22 @@ function coerceLanguage(value: string) {
   return normalized.length > 0 ? normalized : null;
 }
 
+function coerceAccessToken(value: unknown) {
+  if (typeof value !== "string") return null;
+  const normalized = value.trim();
+  return normalized.length > 0 ? normalized : null;
+}
+
 export default function registerSendConfigChat() {
-  ipcMain.handle("chatConfig", async (_event, rawLanguage) => {
+  ipcMain.handle("chatConfig", async (_event, rawLanguage, rawAccessToken) => {
     const language = coerceLanguage(rawLanguage);
+    const accessToken = coerceAccessToken(rawAccessToken);
 
     if (!language) {
       throw new Error("A dictionary language is required.");
+    }
+    if (!accessToken) {
+      throw new Error("Unauthorized: missing access token.");
     }
 
     const messages = [
@@ -32,7 +42,10 @@ export default function registerSendConfigChat() {
 
     const response = await fetch("http://localhost:3000/api/chat/config", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
       body: JSON.stringify({ messages }),
     });
 

@@ -3,6 +3,7 @@ import { Dictionary } from "@/types/config";
 import { useState } from "react";
 import { notify } from "@/services/notify";
 import { notifyError } from "@/services/notify";
+import { supabase } from "@/supabase/supabase-client";
 
 export default function useChangeRouteModalHooks(dictId: string, dictName: string) {
   
@@ -37,8 +38,13 @@ export default function useChangeRouteModalHooks(dictId: string, dictName: strin
   const handleAutomaticConfiguration = async () => {
     setIsGeneratingConfig(true);
     try {
+      const { data } = await supabase.auth.getSession();
+      const accessToken = data.session?.access_token;
+      if (!accessToken) {
+        throw new Error("You must be signed in with a valid session to generate configuration.");
+      }
       console.log("Requesting automatic configuration for language:", dictName);
-      const result: Dictionary = await window.api.chatConfig(dictName);
+      const result: Dictionary = await window.api.chatConfig(dictName, accessToken);
       console.log("Received config from chat API:", result);
       setDictionaryMetadata({
         ...dictionaryMetadata,

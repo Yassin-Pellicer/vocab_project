@@ -1,6 +1,7 @@
 import { TranslationEntry } from "./translation-entry";
 
 export type ChatRole = "user" | "assistant";
+export type ChatConversationScope = "home" | "assistant";
 
 export type ChatToolCall = {
   name?: string;
@@ -29,6 +30,21 @@ export type ContextType = {
   type: "word" | "note";
   content: TranslationEntry | object;
 };
+
+export type ChatUserSession = {
+  id: string;
+  email?: string | null;
+  displayName?: string | null;
+  provider?: string | null;
+  lastSignInAt?: string | null;
+};
+
+export type ChatMessageSession = {
+  assistantSessionId?: string;
+  conversationScope?: ChatConversationScope;
+  user?: ChatUserSession | null;
+};
+
 export type StructuredUserMessage = {
   role: "user";
   content: {
@@ -36,6 +52,7 @@ export type StructuredUserMessage = {
     details?: string;
     context?: unknown;
     appLanguage: string;
+    session?: ChatMessageSession;
   };
 };
 
@@ -54,8 +71,6 @@ export type Conversation = {
   messages: ChatMessage[];
   draft: string;
 };
-
-export type ChatConversationScope = "home" | "assistant";
 
 export type ChatProps = {
   startingInfo?: TranslationEntry | string | null;

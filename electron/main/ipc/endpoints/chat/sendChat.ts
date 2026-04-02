@@ -19,16 +19,29 @@ function coerceMessages(value: unknown): ChatMessage[] {
     .filter((m): m is ChatMessage => Boolean(m));
 }
 
+function coerceAccessToken(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const normalized = value.trim();
+  return normalized.length > 0 ? normalized : null;
+}
+
 export default function sendChat() {
-  ipcMain.handle("chatSend", async (_event, rawMessages: unknown) => {
+  ipcMain.handle("chatSend", async (_event, rawMessages: unknown, rawAccessToken: unknown) => {
     const messages = coerceMessages(rawMessages);
+    const accessToken = coerceAccessToken(rawAccessToken);
     if (messages.length === 0) {
       throw new Error("No messages provided.");
+    }
+    if (!accessToken) {
+      throw new Error("Unauthorized: missing access token.");
     }
 
     const response = await fetch("http://localhost:3000/api/chat", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
       body: JSON.stringify({ messages }),
     });
 

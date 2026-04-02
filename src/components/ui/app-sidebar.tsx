@@ -47,7 +47,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         }
                       </Link>
                     ) : (
-                      <div className="flex items-center mb-2 justify-between w-full font-medium hover:text-background!">
+                      <div className="flex items-center mb-1 justify-between w-full font-medium hover:text-background!">
                         {item.title}
                         {item.key && item.route &&
                           <DictActionsMenu
@@ -61,7 +61,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </SidebarMenuButton>
                   {item.items?.length ? (
                     <SidebarMenuSub>
-                      <div className="divide-y gap-2 border rounded-xl">
+                      <div className="gap-2">
                       {item.items.map((subItem) => {
                         return (
                           <SidebarMenuSubItem key={subItem.title}>

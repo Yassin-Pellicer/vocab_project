@@ -4,7 +4,9 @@ import type {
   AssistantContent,
   ChatConversationScope,
   ChatMessage,
+  ChatMessageSession,
   ChatPrompContext,
+  ChatUserSession,
 } from "@/types/chat"
 import type { Dictionary } from "@/types/config"
 import type { TranslationEntry } from "@/types/translation-entry"
@@ -43,6 +45,8 @@ type UseChatSendArgs = {
   runKeyRef: MutableRefObject<string>
   didAutoStartRef: MutableRefObject<boolean>
   useProvidedContext: boolean
+  authSession?: ChatUserSession | null
+  authAccessToken?: string | null
 }
 
 const normalizeAssistantContent = (value: unknown): AssistantContent =>
@@ -55,16 +59,36 @@ const buildOutboundMessagesWithSessionHistory = (
   nextMessage: ChatMessage,
 ): ChatMessage[] => toOutboundMessages([...sessionMessages, nextMessage])
 
+const buildMessageSession = ({
+  assistantSessionId,
+  conversationScope,
+  authSession,
+}: {
+  assistantSessionId?: string
+  conversationScope?: ChatConversationScope
+  authSession?: ChatUserSession | null
+}): ChatMessageSession => ({
+  assistantSessionId: assistantSessionId || "default",
+  conversationScope: conversationScope ?? "assistant",
+  user: authSession ?? null,
+})
+
 export const buildWotdStartingPrompt = ({
   startingInfo,
   name,
   dictMeta,
   configLanguage,
+  assistantSessionId,
+  conversationScope,
+  authSession,
 }: {
   startingInfo?: TranslationEntry | string | null
   name?: string | null
   dictMeta?: Dictionary | null
   configLanguage: string
+  assistantSessionId?: string
+  conversationScope?: ChatConversationScope
+  authSession?: ChatUserSession | null
 }): ChatMessage => ({
   role: "user",
   content: {
@@ -75,6 +99,11 @@ export const buildWotdStartingPrompt = ({
       dictionary: buildDictionaryContext(name ? dictMeta : null),
     },
     appLanguage: configLanguage,
+    session: buildMessageSession({
+      assistantSessionId,
+      conversationScope,
+      authSession,
+    }),
   },
 })
 
@@ -99,12 +128,18 @@ export function useChatSend({
   runKeyRef,
   didAutoStartRef,
   useProvidedContext,
+  authSession,
+  authAccessToken,
 }: UseChatSendArgs) {
 
   const send = useCallback(
     async (content?: string) => {
       const messageContent = content?.trim() || draft.trim()
       if (!messageContent) return
+      if (!authAccessToken) {
+        notifyError("Chatbot error", "You must be signed in with a valid session to send chat messages.")
+        return
+      }
 
       const combinedContext = buildCombinedContext({
         selectionContext: useProvidedContext ? contextForChat : undefined,
@@ -119,6 +154,11 @@ export function useChatSend({
           details: "",
           context: combinedContext,
           appLanguage: configLanguage,
+          session: buildMessageSession({
+            assistantSessionId: sessionId,
+            conversationScope,
+            authSession,
+          }),
         },
       }
 
@@ -133,7 +173,7 @@ export function useChatSend({
       setSending(true)
 
       try {
-        const result = await window.api.chatSend(outboundMessages)
+        const result = await window.api.chatSend(outboundMessages, authAccessToken)
         setMessages([
           ...nextMessages,
           { role: "assistant", content: normalizeAssistantContent(result) },
@@ -161,7 +201,11 @@ export function useChatSend({
       setDraft,
       setMessages,
       setSending,
+      sessionId,
+      conversationScope,
       useProvidedContext,
+      authSession,
+      authAccessToken,
     ],
   )
 
@@ -170,6 +214,7 @@ export function useChatSend({
     if (!startingInfo || Object.keys(startingInfo as object).length === 0) return
     if (!autoStart) return
     if (messages.length > 0) return
+    if (!authAccessToken) return
 
     if (route || name) {
       const startingInfoKey = getStartingInfoKey(startingInfo)
@@ -187,13 +232,16 @@ export function useChatSend({
       name,
       dictMeta,
       configLanguage,
+      assistantSessionId: sessionId,
+      conversationScope,
+      authSession,
     })
 
     const nextMessages = [...messages]
     setSending(true)
 
     window.api
-      .chatSend([startingPrompt])
+      .chatSend([startingPrompt], authAccessToken)
       .then((result) => {
         setMessages([
           ...nextMessages,
@@ -221,7 +269,8 @@ export function useChatSend({
     setMessages,
     setSending,
     startingInfo,
-    useProvidedContext,
+    authSession,
+    authAccessToken,
   ])
 
   return { send }

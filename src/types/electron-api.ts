@@ -108,13 +108,13 @@ export interface RendererApi {
   close: () => Promise<unknown>;
   openNewWindow: (route: string) => Promise<unknown>;
 
-  chatSend: (messages: ChatMessage[]) => Promise<{
+  chatSend: (messages: ChatMessage[], accessToken: string) => Promise<{
     text?: string;
     tool_calls?: unknown[];
     [key: string]: unknown;
   }>;
 
-  chatConfig: (language: string) => any;
+  chatConfig: (language: string, accessToken: string) => any;
   deleteAccount: (
     accessToken: string,
   ) => Promise<{ success: boolean; [key: string]: unknown }>;
