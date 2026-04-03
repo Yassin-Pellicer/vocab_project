@@ -1,7 +1,7 @@
 import type { TranslationEntry } from "@/types/translation-entry";
 import { useMemo } from "react";
+import { useConnectedComponents } from "@/hooks/use-connected-components";
 import { ALL_COMPONENTS_VALUE } from "./constants";
-import { buildConnectedComponents } from "./connected-components";
 import { entryMatchesSearch, isPairTrainable } from "./game-utils";
 import type {
   GameCandidate,
@@ -44,7 +44,7 @@ export function useTranslationGameFilters({
     ];
   }, [list, metadataTypes]);
 
-  const connectedComponents = useMemo(() => buildConnectedComponents(list), [list]);
+  const connectedComponents = useConnectedComponents(list);
 
   const selectedComponent = useMemo(() => {
     if (selectedComponentId === ALL_COMPONENTS_VALUE) return null;

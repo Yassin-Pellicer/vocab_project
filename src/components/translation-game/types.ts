@@ -1,16 +1,11 @@
 import type { TranslationEntry } from "@/types/translation-entry";
+import type { DictionaryConnectedComponent } from "@/types/connected-components";
 
 export type GameDirection = "forward" | "reverse" | "mixed";
 export type EffectiveGameDirection = "forward" | "reverse";
 export type TranslationGameStage = "setup" | "playing";
 
-export type TranslationGameConnectedComponent = {
-  id: string;
-  nodeIds: string[];
-  wordCount: number;
-  connectionCount: number;
-  representativeLabel: string;
-};
+export type TranslationGameConnectedComponent = DictionaryConnectedComponent;
 
 export type GameCandidate = {
   key: string;

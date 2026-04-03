@@ -9,17 +9,20 @@ export const DIRECTION_OPTIONS: DirectionOption[] = [
   {
     value: "forward",
     title: "Original to translation",
-    description: "Show the source word first and type one of its translations.",
+    description:
+      "Show the source word first, then type one valid translation from your target language list.",
   },
   {
     value: "reverse",
     title: "Translation to original",
-    description: "See a translation prompt and answer with the original word.",
+    description:
+      "See a translated prompt first, then answer with the original source word that matches it.",
   },
   {
     value: "mixed",
     title: "Mixed round",
-    description: "Blend both directions while avoiding the same prompts too often.",
+    description:
+      "Alternate between both directions in one session for balanced practice, while reducing repeated prompts.",
   },
 ];
 
@@ -29,8 +32,8 @@ export const DIRECTION_LABELS: Record<GameDirection, string> = {
   mixed: "Mixed session",
 };
 
-export const CONFIG_PANEL_DEFAULT_WIDTH = 380;
-export const CONFIG_PANEL_MIN_WIDTH = 310;
+export const CONFIG_PANEL_DEFAULT_WIDTH = 400;
+export const CONFIG_PANEL_MIN_WIDTH = 380;
 export const SESSION_PANEL_MIN_WIDTH = 460;
 
 export const QUESTION_ADVANCE_DELAYS = {

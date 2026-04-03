@@ -113,8 +113,8 @@ export default function TranslationGame({
       : connectedComponents.findIndex((component) => component.id === selectedComponentId);
   const componentFilterSummary =
     selectedComponent && selectedComponentIndex >= 0
-      ? `Component ${selectedComponentIndex + 1} (${selectedComponent.wordCount} words)`
-      : "All connected components";
+      ? `Component ${selectedComponentIndex + 1} (${selectedComponent.words.length} words)`
+      : "No component filter";
   const activeFilterSummary = `${typeFilterSummary} · ${componentFilterSummary}`;
 
   const sessionButtonLabel = isSessionActive
@@ -124,7 +124,7 @@ export default function TranslationGame({
   return (
     <div className="flex min-h-0 h-[calc(100vh-64px)] flex-col bg-background">
       <div className="flex min-h-0 flex-1 flex-col">
-        <div className="flex flex-wrap items-start justify-between gap-4 p-4 shadow-sm border-b">
+        <div className="flex flex-row items-start justify-between gap-4 p-4 shadow-sm border-b">
           <div className="my-auto flex flex-col align-center">
             <h1 className="text-2xl font-semibold tracking-tight text-foreground">
               Train with {dictionaryTitle}

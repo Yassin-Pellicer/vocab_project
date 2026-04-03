@@ -1,10 +1,23 @@
 import type { TranslationEntry } from "@/types/translation-entry";
-import { getEdgeKey, getEntryLabel } from "./game-utils";
-import type { TranslationGameConnectedComponent } from "./types";
+import type { DictionaryConnectedComponent } from "@/types/connected-components";
+import { useMemo } from "react";
+
+const getEdgeKey = (sourceId: string, targetId: string) =>
+  sourceId < targetId ? `${sourceId}__${targetId}` : `${targetId}__${sourceId}`;
+
+const getEntryLabel = (entry: TranslationEntry) =>
+  entry.pair[0]?.original?.word?.trim() || entry.uuid || "Unknown word";
+
+const sortEntriesByPrimaryWord = (entries: TranslationEntry[]) =>
+  [...entries].sort((a, b) =>
+    getEntryLabel(a).localeCompare(getEntryLabel(b), undefined, {
+      sensitivity: "base",
+    }),
+  );
 
 export const buildConnectedComponents = (
   entries: TranslationEntry[],
-): TranslationGameConnectedComponent[] => {
+): DictionaryConnectedComponent[] => {
   const entryById = new Map<string, TranslationEntry>();
   entries.forEach((entry) => {
     if (!entry.uuid) return;
@@ -39,7 +52,7 @@ export const buildConnectedComponents = (
   });
 
   const visited = new Set<string>();
-  const components: TranslationGameConnectedComponent[] = [];
+  const components: DictionaryConnectedComponent[] = [];
 
   orderedIds.forEach((startId) => {
     if (visited.has(startId)) return;
@@ -72,6 +85,12 @@ export const buildConnectedComponents = (
     }
 
     const componentIdSet = new Set(componentIds);
+    const words = sortEntriesByPrimaryWord(
+      componentIds
+        .map((id) => entryById.get(id))
+        .filter((entry): entry is TranslationEntry => !!entry),
+    );
+
     const edgeKeys = new Set<string>();
     componentIds.forEach((nodeId) => {
       const neighbors = adjacency.get(nodeId);
@@ -84,38 +103,43 @@ export const buildConnectedComponents = (
 
     const connectionCount = edgeKeys.size;
     if (connectionCount === 0) return;
+    if (words.length === 0) return;
 
-    const representativeId = [...componentIds].sort((leftId, rightId) => {
+    const representative = [...words].sort((leftEntry, rightEntry) => {
+      const leftId = leftEntry.uuid ?? "";
+      const rightId = rightEntry.uuid ?? "";
       const leftDegree = adjacency.get(leftId)?.size ?? 0;
       const rightDegree = adjacency.get(rightId)?.size ?? 0;
       if (leftDegree !== rightDegree) return rightDegree - leftDegree;
-      return getEntryLabel(entryById.get(leftId)!).localeCompare(
-        getEntryLabel(entryById.get(rightId)!),
-        undefined,
-        { sensitivity: "base" },
-      );
+      return getEntryLabel(leftEntry).localeCompare(getEntryLabel(rightEntry), undefined, {
+        sensitivity: "base",
+      });
     })[0];
 
     components.push({
       id: `component-${componentIds.slice().sort().join("-")}`,
       nodeIds: componentIds,
-      wordCount: componentIds.length,
+      words,
+      representative,
       connectionCount,
-      representativeLabel: representativeId
-        ? getEntryLabel(entryById.get(representativeId)!)
-        : getEntryLabel(entryById.get(startId)!),
     });
   });
 
   return components.sort((left, right) => {
-    if (left.wordCount !== right.wordCount) {
-      return right.wordCount - left.wordCount;
+    if (left.words.length !== right.words.length) {
+      return right.words.length - left.words.length;
     }
     if (left.connectionCount !== right.connectionCount) {
       return right.connectionCount - left.connectionCount;
     }
-    return left.representativeLabel.localeCompare(right.representativeLabel, undefined, {
-      sensitivity: "base",
-    });
+    return getEntryLabel(left.representative).localeCompare(
+      getEntryLabel(right.representative),
+      undefined,
+      { sensitivity: "base" },
+    );
   });
 };
+
+export function useConnectedComponents(entries: TranslationEntry[]) {
+  return useMemo(() => buildConnectedComponents(entries), [entries]);
+}

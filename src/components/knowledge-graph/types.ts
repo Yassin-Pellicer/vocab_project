@@ -1,4 +1,5 @@
 import type { GraphLink, GraphNode } from "@/types/graph-types";
+import type { DictionaryConnectedComponent } from "@/types/connected-components";
 import type { TranslationEntry } from "@/types/translation-entry";
 
 export interface GraphData {
@@ -51,10 +52,4 @@ export type GraphMenuState = {
   menuQuery: string;
 };
 
-export type ConnectedComponentSummary = {
-  id: string;
-  nodeIds: string[];
-  words: TranslationEntry[];
-  representative: TranslationEntry;
-  connectionCount: number;
-};
+export type ConnectedComponentSummary = DictionaryConnectedComponent;
