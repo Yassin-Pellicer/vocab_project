@@ -107,7 +107,9 @@ export function useFloatingChatLayout(layoutStorageKey: string) {
     (event: React.PointerEvent) => {
       if ((event.target as HTMLElement).closest("button")) return
       event.preventDefault()
-      ;(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId)
+      const dragHandle = event.currentTarget as HTMLElement
+      const pointerId = event.pointerId
+      dragHandle.setPointerCapture(pointerId)
       const startX = event.clientX
       const startY = event.clientY
       const origX = pos.x
@@ -125,7 +127,9 @@ export function useFloatingChatLayout(layoutStorageKey: string) {
       const onUp = (upEvent: PointerEvent) => {
         window.removeEventListener("pointermove", onMove)
         window.removeEventListener("pointerup", onUp)
-        ;(event.currentTarget as HTMLElement).releasePointerCapture(event.pointerId)
+        if (dragHandle.isConnected && dragHandle.hasPointerCapture(pointerId)) {
+          dragHandle.releasePointerCapture(pointerId)
+        }
         const nextX = origX + (upEvent.clientX - startX)
         const nextY = origY + (upEvent.clientY - startY)
         const next = persistLayout({ x: nextX, y: nextY, width, height })
@@ -143,7 +147,9 @@ export function useFloatingChatLayout(layoutStorageKey: string) {
     (event: React.PointerEvent, direction: ResizeDirection) => {
       event.preventDefault()
       event.stopPropagation()
-      ;(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId)
+      const resizeHandle = event.currentTarget as HTMLElement
+      const pointerId = event.pointerId
+      resizeHandle.setPointerCapture(pointerId)
       const startX = event.clientX
       const startY = event.clientY
       const origW = size.width
@@ -182,7 +188,9 @@ export function useFloatingChatLayout(layoutStorageKey: string) {
       const onUp = (upEvent: PointerEvent) => {
         window.removeEventListener("pointermove", onMove)
         window.removeEventListener("pointerup", onUp)
-        ;(event.currentTarget as HTMLElement).releasePointerCapture(event.pointerId)
+        if (resizeHandle.isConnected && resizeHandle.hasPointerCapture(pointerId)) {
+          resizeHandle.releasePointerCapture(pointerId)
+        }
         const dw = upEvent.clientX - startX
         const dh = upEvent.clientY - startY
         const nextWidth =
@@ -231,4 +239,3 @@ export function useFloatingChatLayout(layoutStorageKey: string) {
     onResizePointerDown,
   }
 }
-

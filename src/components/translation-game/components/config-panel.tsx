@@ -436,17 +436,15 @@ export function TranslationGameConfigPanel({
           )}
         </div>
 
-        <div className="space-y-2 rounded-2xl border border-border/60 bg-background p-3">
+        <div className="space-y-2 rounded-2xl border border-border/60 bg-background shadow-xs">
           <div className="flex items-center justify-between gap-2">
-            <p className="flex flex-row items-center gap-2 text-sm font-medium text-foreground">
-              <Filter size={18} />
-              Word type Filters
-            </p>
+            <div className="flex flex-row justify-between border-b w-full p-3">
+              <p className="flex flex-row items-center gap-2 text-sm font-medium text-foreground">
+                <Filter size={18} />
+                Word type Filters
+              </p>
+
             <div className="flex items-center gap-2">
-              <SectionInfoTooltip
-                label="Word type filters"
-                description="Limit prompts to one or more grammatical or custom word types; this works together with search and component scope to refine practice, and you can clear filters anytime to use all types again."
-              />
               {selectedTypes.length > 0 && (
                 <button
                   type="button"
@@ -456,9 +454,14 @@ export function TranslationGameConfigPanel({
                   Clear
                 </button>
               )}
+              <SectionInfoTooltip
+                label="Word type filters"
+                description="Limit prompts to one or more grammatical or custom word types; this works together with search and component scope to refine practice, and you can clear filters anytime to use all types again."
+              />
+            </div>
             </div>
           </div>
-          <p className="text-xs text-muted-foreground">{typeFilterSummary}</p>
+          <p className="text-xs text-muted-foreground ml-3">{typeFilterSummary}</p>
 
           {availableTypes.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-border/60 bg-muted/20 px-4 py-6 text-sm text-muted-foreground">
@@ -466,14 +469,14 @@ export function TranslationGameConfigPanel({
               words.
             </div>
           ) : (
-            <div className="grid gap-2 grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
+            <div className="grid gap-2 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] px-3 pb-3">
               {availableTypes.map((type) => {
                 const checked = selectedTypes.includes(type);
                 return (
                   <label
                     key={type}
                     className={cn(
-                      "flex items-center gap-3 rounded-lg border px-3 py-2 transition-colors",
+                      "flex items-center gap-3 rounded-lg border px-3 py-2 transition-colors select-none",
                       checked
                         ? "border-primary bg-primary/10"
                         : "border-border/60 bg-background hover:bg-accent/20",

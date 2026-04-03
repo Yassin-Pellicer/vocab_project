@@ -157,13 +157,18 @@ export const Chat = forwardRef<ChatHandle, ChatProps>(function Chat(
             onClick={() => setSessionsOpen((prev) => !prev)}
             aria-label="Open chat sessions"
             title="Chat sessions"
-            className="absolute right-3 top-3 z-20 rounded-full border border-border/60 bg-background/90 p-2 text-muted-foreground shadow-sm transition hover:text-foreground"
+            className="absolute right-3 -top-1 z-20 rounded-full border border-border/60 bg-background/90 p-2 text-muted-foreground shadow-sm transition hover:text-foreground"
           >
             <PanelRight size={16} />
           </button>
         )}
 
-        <div className="relative flex flex-col min-h-0 p-4 flex-1 h-full">
+        <div
+          className={cn(
+            "relative flex flex-col min-h-0 p-4 flex-1 h-full",
+            hideToolbar && "pt-0",
+          )}
+        >
           {!hideToolbar && (
             <div className="flex items-center justify-between gap-2 rounded-xl border shadow-sm mb-2 bg-background px-3 py-2">
               <div className="flex items-center gap-2 text-md font-semibold">

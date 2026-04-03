@@ -51,7 +51,7 @@ export function FloatingAssistantChat({
           aria-label="Open assistant"
           title="Assistant"
         >
-          <Sparkles strokeWidth={1.1}  className="size-6 drop-shadow-sm" strokeWidth={2} />
+          <Sparkles className="size-6 drop-shadow-sm" strokeWidth={2} />
         </button>
       ) : (
         <div
