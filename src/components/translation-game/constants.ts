@@ -32,8 +32,8 @@ export const DIRECTION_LABELS: Record<GameDirection, string> = {
   mixed: "Mixed session",
 };
 
-export const CONFIG_PANEL_DEFAULT_WIDTH = 600;
-export const CONFIG_PANEL_MIN_WIDTH = 380;
+export const CONFIG_PANEL_DEFAULT_WIDTH = 500;
+export const CONFIG_PANEL_MIN_WIDTH = 500;
 export const SESSION_PANEL_MIN_WIDTH = 460;
 
 export const QUESTION_ADVANCE_DELAYS = {

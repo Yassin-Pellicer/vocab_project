@@ -135,8 +135,8 @@ export function TranslationGameConfigPanel({
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <div className="min-h-0 flex-1 space-y-5 overflow-y-auto px-4 py-4">
-        <div className="space-y-2">
+      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-4">
+        <div className="space-y-2 border p-3 rounded-xl bg-card">
           <div className="flex items-center justify-between gap-2">
             <p className="flex flex-row items-center gap-2 text-sm font-medium text-foreground">
               <Search size={18} />
@@ -156,7 +156,7 @@ export function TranslationGameConfigPanel({
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 border p-3 rounded-xl bg-card">
           <div className="flex items-center justify-between gap-2">
             <p className="flex flex-row items-center gap-2 text-sm font-medium text-foreground">
               <GitGraph size={18} />
@@ -392,7 +392,7 @@ export function TranslationGameConfigPanel({
           )}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2 border p-3 rounded-xl bg-card">
           <div className="flex items-center justify-between gap-2">
             <p className="flex flex-row items-center gap-2 text-sm font-medium text-foreground">
               <ArrowLeftRight size={18} />
@@ -436,7 +436,7 @@ export function TranslationGameConfigPanel({
           )}
         </div>
 
-        <div className="space-y-2 rounded-2xl border border-border/60 bg-background shadow-xs">
+        <div className="space-y-2 rounded-2xl border border-border/60 shadow-xs bg-card">
           <div className="flex items-center justify-between gap-2">
             <div className="flex flex-row justify-between border-b w-full p-3">
               <p className="flex flex-row items-center gap-2 text-sm font-medium text-foreground">
